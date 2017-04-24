@@ -8,7 +8,8 @@ import org.uqbar.commons.utils.Observable;
 public class SnapshotEmpresa {
 
 	private String nombre ;
-	private Date fecha;
+	private int año ;
+	private int semestre ;
 	private int ebitda ;
 	private int fds;
 	private int freeCashFlow;

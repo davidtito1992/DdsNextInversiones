@@ -28,7 +28,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 		this.setTitle("Bienvenido al Sistema ");
 		
 		mainPanel.setLayout(new VerticalLayout());
-
+		
 		new Label(mainPanel).setText("\nNext-Inversiones\n").setBackground(Color.LIGHT_GRAY).setWidth(500);
 		
 		new Button(mainPanel).setCaption("Ver Empresas").onClick(
