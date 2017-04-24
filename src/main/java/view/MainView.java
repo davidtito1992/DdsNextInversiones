@@ -35,19 +35,16 @@ public class MainView extends SimpleWindow<MainViewM> {
 				() -> this.verEmpresas());
 		new Button(mainPanel).setCaption("Ver algo").onClick(
 				() -> verAlgo());
-		new Button(mainPanel).setCaption("Ver algo mas").onClick(
+		new Button(mainPanel).setCaption("Ver algo mas?").onClick(
 				() -> verAlgo());
 	}
 	/*****************buttons adicionales: podemos colocarlos horizontales a diferencia de los demas*************/
 	@Override
 	protected void addActions(Panel actionsPanel) {
 		// TODO Auto-generated method stub
-		
-		new Button(actionsPanel).setCaption("Reiniciar").onClick(
-				() -> this.verAlgo());
-		
+
 		new Button(actionsPanel).setCaption("Cerrar").onClick(
-				() -> cerrar());
+				() -> cerrar()).setWidth(200);;
 	}
 	
 /*************metodos para los buttons***************************/
