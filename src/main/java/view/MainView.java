@@ -2,10 +2,12 @@ package view;
 
 import java.awt.Color;
 
+import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
+import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
@@ -30,13 +32,17 @@ public class MainView extends SimpleWindow<MainViewM> {
 		mainPanel.setLayout(new VerticalLayout());
 		
 		new Label(mainPanel).setText("\nNext-Inversiones\n").setBackground(Color.LIGHT_GRAY).setWidth(500);
-		
+				
 		new Button(mainPanel).setCaption("Ver Empresas").onClick(
 				() -> this.verEmpresas());
-		new Button(mainPanel).setCaption("Ver algo").onClick(
+		new Button(mainPanel).setCaption("Ver Indicadores").onClick(
 				() -> verAlgo());
-		new Button(mainPanel).setCaption("Ver algo mas?").onClick(
+		new Button(mainPanel).setCaption("Ver Metodologias").onClick(
 				() -> verAlgo());
+		
+//		Selector<String> comboBox = new Selector<String>(mainPanel);
+//		comboBox.allowNull(false);
+//		("Indicadores","Metodologias","Graficos");
 	}
 	/*****************buttons adicionales: podemos colocarlos horizontales a diferencia de los demas*************/
 	@Override

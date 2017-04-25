@@ -81,7 +81,13 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		Column<SnapshotEmpresa> columnaFreeCashFlow = new Column<SnapshotEmpresa>(tableEmpresas);
 		columnaFreeCashFlow.setTitle("FreeCashFlow");
 //		columnaDescripcion.bindContentsToProperty("freeCashFlow");
-
+		
+		Column<SnapshotEmpresa> columnaNetoDiscontinuas = new Column<SnapshotEmpresa>(tableEmpresas);
+		columnaNetoDiscontinuas.setTitle("NetoDiscontinuas");
+		
+		Column<SnapshotEmpresa> columnaNetoContinuas = new Column<SnapshotEmpresa>(tableEmpresas);
+		columnaNetoContinuas.setTitle("NetoContinuas");
+		
 	}
 
 	@Override

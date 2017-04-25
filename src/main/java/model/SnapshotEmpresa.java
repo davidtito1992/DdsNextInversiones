@@ -13,5 +13,8 @@ public class SnapshotEmpresa {
 	private int ebitda ;
 	private int fds;
 	private int freeCashFlow;
+	private int netoDiscontinuas;
+	private int netoContinuas;
+
 
 }
