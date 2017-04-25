@@ -1,11 +1,16 @@
 package viewmodel;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.uqbar.commons.utils.Observable;
+
 
 @Observable
 public class EmpresaViewM {
@@ -21,9 +26,14 @@ public class EmpresaViewM {
 /***************A modo de prueba***************************/
 	
 	public EmpresaViewM(){
+		//cargarArchivoEmpresas();
 		generarPeridos();
 	}	
 	
+//	public void cargarArchivoEmpresas(){
+//		SAXBuilder builder = new SAXBuilder();
+//		File file = new File("empresas.xml");	
+//	}
 
 	public Collection<Integer> getAños() {
 		return años;
@@ -82,6 +92,13 @@ public class EmpresaViewM {
 	 System.out.printf("año: " + anio + "\n"); 
  }
 }
+	
+	
+	
+	
+	
+	
+	
 //
 //    private Collection<java.sql.Date> fechas ;	
 //	private java.sql.Date fechaSeleccionada ;
