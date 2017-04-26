@@ -2,8 +2,9 @@ package viewmodel;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import org.uqbar.commons.utils.Observable;
 
-
+@Observable
 public class MainViewM {
 	
 	private Collection<String> tipoConsultas = new ArrayList<String>();	
