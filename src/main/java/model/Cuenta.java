@@ -1,7 +1,6 @@
 package model;
 
 
-// no seria mejor ponerle periodo a esto?
 public class Cuenta {
 	private int año ;
 	private int semestre ;

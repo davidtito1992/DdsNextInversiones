@@ -39,10 +39,17 @@ public class MainView extends SimpleWindow<MainViewM> {
 				() -> verAlgo());
 		new Button(mainPanel).setCaption("Ver Metodologias").onClick(
 				() -> verAlgo());
+
 		
-//		Selector<String> comboBox = new Selector<String>(mainPanel);
-//		comboBox.allowNull(false);
-//		("Indicadores","Metodologias","Graficos");
+		new Label(mainPanel).setText("\t\tSeleccione tipo de consulta a realizar: ");
+		Selector<String> selectorSemestre = new Selector<String>(mainPanel).allowNull(false);
+		selectorSemestre.setWidth(150);
+		selectorSemestre.bindItemsToProperty("tipoConsultas");
+		selectorSemestre.bindValueToProperty("consultaSeleccionada");
+		
+		new Label(mainPanel).setText("");
+		new Button(mainPanel).setCaption("IR").onClick(this::abrirConsulta).setWidth(140);
+
 	}
 	/*****************buttons adicionales: podemos colocarlos horizontales a diferencia de los demas*************/
 	@Override
@@ -73,6 +80,24 @@ public class MainView extends SimpleWindow<MainViewM> {
 		dialog.onAccept(() -> {});
 		
 	}	
+	
+	public void abrirConsulta(){
+		
+		String seleccionado = this.getModelObject().getConsultaSeleccionada();
+		
+		if (seleccionado == "Indicadores") {
+			System.out
+					.println("aca se abre la ventana de consulta indicadores");
+		} else {
+			if (seleccionado == "Metodologias") {
+				System.out
+						.println("aca se abre la ventana de consulta Metodologias");
+			} else {
+				System.out
+						.println("aca se abre la ventana de consulta Graficos");
+			}
+		}
+	}
 /*************************************/
 	
 	

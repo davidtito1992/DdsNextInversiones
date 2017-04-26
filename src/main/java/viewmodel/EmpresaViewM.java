@@ -86,12 +86,12 @@ public class EmpresaViewM {
 	public void generarPeridos() {
 		semestre.add(1);
 		semestre.add(2);
- for (Integer anio=2010;anio <= 2017; anio++){
-	 años.add(anio);
-//	 System.out.printf("fecha: " + fechas.get(i).toString()+ "\n");
-	 System.out.printf("año: " + anio + "\n"); 
- }
-}
+		for (Integer anio = 2010; anio <= 2017; anio++) {
+			años.add(anio);
+			// System.out.printf("fecha: " + fechas.get(i).toString()+ "\n");
+			System.out.printf("año: " + anio + "\n");
+		}
+	}
 	
 	
 	
