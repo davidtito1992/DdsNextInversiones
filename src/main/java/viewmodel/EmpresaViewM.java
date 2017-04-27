@@ -16,9 +16,28 @@ import org.uqbar.commons.utils.Observable;
 public class EmpresaViewM {
 	
 	private String nombre ;
+	private String nombreSeleccionado;
 	private String cuenta ;
+	private String cuentaSeleccionada;
 
-    private Collection<Integer> años = new ArrayList<Integer>();	
+    public String getNombreSeleccionado() {
+		return nombreSeleccionado;
+	}
+
+	public void setNombreSeleccionado(String nombreSeleccionado) {
+		this.nombreSeleccionado = nombreSeleccionado;
+	}
+
+	public String getCuentaSeleccionada() {
+		return cuentaSeleccionada;
+	}
+
+	public void setCuentaSeleccionada(String cuentaSeleccionada) {
+		this.cuentaSeleccionada = cuentaSeleccionada;
+	}
+
+
+	private Collection<Integer> años = new ArrayList<Integer>();	
 	private Integer añoSeleccionado ;
 
     private Collection<Integer> semestre = new ArrayList<Integer>();	
