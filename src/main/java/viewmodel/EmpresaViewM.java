@@ -15,12 +15,31 @@ import org.uqbar.commons.utils.Observable;
 @Observable
 public class EmpresaViewM {
 	
-	private String nombre ;
 	private String nombreSeleccionado;
-	private String cuenta ;
 	private String cuentaSeleccionada;
+	private Collection<String> cuentas = new ArrayList<String>();
+	private Collection<String> nombres = new ArrayList<String>();	
+	private Collection<Integer> años = new ArrayList<Integer>();	
+	private Integer añoSeleccionado ;
+    private Collection<Integer> semestre = new ArrayList<Integer>();	
+	private Integer semestreSeleccionado ;
+/***************A modo de prueba***************************/
+	
+	public EmpresaViewM(){
+		generarPeridos();
+		generarCuentas();
+		generarNombres();
+	}	
 
-    public String getNombreSeleccionado() {
+	public Collection<Integer> getAños() {
+		return años;
+	}
+
+	public void setAños(Collection<Integer> años) {
+		this.años = años;
+	}
+	
+	public String getNombreSeleccionado() {
 		return nombreSeleccionado;
 	}
 
@@ -32,34 +51,24 @@ public class EmpresaViewM {
 		return cuentaSeleccionada;
 	}
 
+	public Collection<String> getCuentas() {
+		return cuentas;
+	}
+
+	public void setCuentas(Collection<String> cuentas) {
+		this.cuentas = cuentas;
+	}
+
+	public Collection<String> getNombres() {
+		return nombres;
+	}
+
+	public void setNombres(Collection<String> nombres) {
+		this.nombres = nombres;
+	}
+
 	public void setCuentaSeleccionada(String cuentaSeleccionada) {
 		this.cuentaSeleccionada = cuentaSeleccionada;
-	}
-
-
-	private Collection<Integer> años = new ArrayList<Integer>();	
-	private Integer añoSeleccionado ;
-
-    private Collection<Integer> semestre = new ArrayList<Integer>();	
-	private Integer semestreSeleccionado ;
-/***************A modo de prueba***************************/
-	
-	public EmpresaViewM(){
-		//cargarArchivoEmpresas();
-		generarPeridos();
-	}	
-	
-//	public void cargarArchivoEmpresas(){
-//		SAXBuilder builder = new SAXBuilder();
-//		File file = new File("empresas.xml");	
-//	}
-
-	public Collection<Integer> getAños() {
-		return años;
-	}
-
-	public void setAños(Collection<Integer> años) {
-		this.años = años;
 	}
 	
 	public Integer getAñoSeleccionado() {
@@ -85,21 +94,6 @@ public class EmpresaViewM {
 	public void setSemestreSeleccionado(Integer semestreSeleccionado) {
 		this.semestreSeleccionado = semestreSeleccionado;
 	}
-   
-	public String getCuenta() {
-		return cuenta;
-	}
-
-	public void setCuenta(String cuenta) {
-		this.cuenta = cuenta;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 	
 
 	public void generarPeridos() {
@@ -112,8 +106,21 @@ public class EmpresaViewM {
 		}
 	}
 	
-	
-	
+	public void generarCuentas(){
+		cuentas.add("EBITDA");
+		cuentas.add("FDS");
+		cuentas.add("FreeCashFlow");
+		cuentas.add("Neto Discontinuas");
+		cuentas.add("Neto Continuas");
+	}
+	 
+	public void generarNombres(){
+		nombres.add("Facebook");
+		nombres.add("McDonald's");
+		nombres.add("GitHub");
+		nombres.add("Nutella");
+		nombres.add("Jorgito");
+	}
 	
 	
 	
