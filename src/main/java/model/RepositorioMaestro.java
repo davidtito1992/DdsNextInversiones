@@ -15,11 +15,11 @@ public class RepositorioMaestro {
    empresas.add(new Empresa("Next")) ;
    empresas.add(new Empresa("Apple")) ;
    empresas.add(new Empresa("Google")) ;
-		
+
+   //probando
+   
     empresas.forEach(name-> (nombreEmpresas.add(name.getNombre()))) ;
-    nombreEmpresas.forEach(empresa -> System.out.printf(empresa + '\n'));
     
-    //probando
 		return nombreEmpresas;
 }
 

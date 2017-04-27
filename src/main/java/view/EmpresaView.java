@@ -33,19 +33,19 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		
 		//new Label(form).setText("\nFILTROS\n").setBackground(Color.LIGHT_GRAY).setWidth(300);
 		
-		new Label(form).setText("Seleccione Empresa");
+		new Label(form).setText("\t\tSeleccione Empresa");
 		Selector<String> selectorNombre = new Selector<String>(form).allowNull(true);
 		selectorNombre.setWidth(150) ;
 		selectorNombre.bindItemsToProperty("nombres");
 		selectorNombre.bindValueToProperty("nombreSeleccionado");
 		
-		new Label(form).setText("\t\t\tSeleccione Cuenta");
+		new Label(form).setText("\t\tSeleccione Cuenta");
 		Selector<String> selectorCuenta = new Selector<String>(form).allowNull(true);
 		selectorCuenta.setWidth(150) ;
 		selectorCuenta.bindItemsToProperty("cuentas");
 		selectorCuenta.bindValueToProperty("cuentaSeleccionada");
 		
-		new Label(form).setText("Seleccione Año");
+		new Label(form).setText("\t\tSeleccione Año");
 		Selector<Integer> selectorAño = new Selector<Integer>(form).allowNull(true);
 		selectorAño.setWidth(150) ;
 		selectorAño.bindItemsToProperty("años");
