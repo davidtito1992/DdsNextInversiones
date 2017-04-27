@@ -2,34 +2,70 @@
 	"empresas": [
 		{
 			"nombre": "Facebook",
-			"periodos": [
+			"cuentas": [
 				{
-					"anio": "2016"
+					"año": "2016"
 					"semestre": "1"
-					"cuentas": [
-						{
-							"nombre": "EDITBA"
-							"valor": "10000"
-						},
-						{
-							"nombre": "neto discontinuo"
-							"valor": "123456"
-						}
-					]
+					"ebitda":"1"
+					"fds":"2"
+					"freeCashFlow":"3"
+					"netoDiscontinuas":"4"
+					"netoContinuas":"5"
 				},
 	  			{
-					"anio": "2016"
+					"año": "2016"
 					"semestre": "2"
-					"cuentas": [
-						{
-							"nombre": "EDITBA"
-							"valor": "1454560"
-						},
-						{
-							"nombre": "neto discontinuo"
-							"valor": "654321"
-						}
-					]
+					"ebitda":"6"
+					"fds":"7"
+					"freeCashFlow":"8"
+					"netoDiscontinuas":"9"
+					"netoContinuas":"10"
+				}
+			]
+		},
+		{
+			"nombre": "Twitter",
+			"cuentas": [
+				{
+					"año": "2015"
+					"semestre": "1"
+					"ebitda":"123"
+					"fds":"456"
+					"freeCashFlow":"789"
+					"netoDiscontinuas":"0"
+					"netoContinuas":"0"
+				},
+	  			{
+					"año": "2015"
+					"semestre": "2"
+					"ebitda":"789"
+					"fds":"456"
+					"freeCashFlow":"123"
+					"netoDiscontinuas":"0"
+					"netoContinuas":"0"
+				}
+			]
+		},
+				{
+			"nombre": "Google",
+			"cuentas": [
+				{
+					"año": "2014"
+					"semestre": "1"
+					"ebitda":"99999"
+					"fds":"99999"
+					"freeCashFlow":"99999"
+					"netoDiscontinuas":"99999"
+					"netoContinuas":"99999"
+				},
+	  			{
+					"año": "2014"
+					"semestre": "2"
+					"ebitda":"99999"
+					"fds":"99999"
+					"freeCashFlow":"99999"
+					"netoDiscontinuas":"99999"
+					"netoContinuas":"99999"
 				}
 			]
 		}

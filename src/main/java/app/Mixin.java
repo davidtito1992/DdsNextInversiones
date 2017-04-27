@@ -25,10 +25,7 @@ public class Mixin {
             
             for (int i = 0; i < arrayDeEmpresas.size(); i++) {
 				RepositorioMaestro.empresas.add(JsonAdapter.adaptarEmpresa((JSONObject) arrayDeEmpresas.get(i)));
-			}
-            
-            System.out.println(RepositorioMaestro.empresas.toArray()[0].toString());
-            
+			}    
         } catch (Exception e) {
             e.printStackTrace();
         }
