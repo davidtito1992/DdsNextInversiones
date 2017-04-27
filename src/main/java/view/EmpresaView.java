@@ -2,8 +2,9 @@ package view;
 
 import java.awt.Color;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import model.SnapshotEmpresa;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -16,6 +17,7 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 
+import model.*;
 import viewmodel.*;
 
 public class EmpresaView extends Dialog<EmpresaViewM> {
@@ -111,6 +113,8 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 	public void buscar(){
 		
 	}
+	
+
 
 
 }
