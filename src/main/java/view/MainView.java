@@ -25,18 +25,18 @@ public class MainView extends SimpleWindow<MainViewM> {
 	protected void createFormPanel(Panel mainPanel) {
 		// TODO Auto-generated method stub
 
-		this.setTitle("Bienvenido al Sistema ");
+		this.setTitle("Next-Inversiones");
 		
 		mainPanel.setLayout(new VerticalLayout());
 		
-		new Label(mainPanel).setText("\nNext-Inversiones\n").setBackground(Color.LIGHT_GRAY).setWidth(500);
+		new Label(mainPanel).setText("Bienvenido al Sistema \n").setBackground(Color.WHITE).setWidth(500);
 				
-		new Button(mainPanel).setCaption("Ver Empresas").onClick(
-				() -> this.verEmpresas());
-		new Button(mainPanel).setCaption("Ver Indicadores").onClick(
-				() -> verAlgo());
-		new Button(mainPanel).setCaption("Ver Metodologias").onClick(
-				() -> verAlgo());
+		new Button(mainPanel).setCaption("ABM Empresas").onClick(
+				() -> this.verEmpresas()).setWidth(60).setHeight(80);
+		new Button(mainPanel).setCaption("ABM Indicadores").onClick(
+				() -> verAlgo()).setWidth(60).setHeight(80);
+		new Button(mainPanel).setCaption("ABM Metodologias").onClick(
+				() -> verAlgo()).setWidth(60).setHeight(80);
 
 		
 		new Label(mainPanel).setText("\t\tSeleccione tipo de consulta a realizar: ");
@@ -47,7 +47,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 		
 		new Label(mainPanel).setText("");
 		new Button(mainPanel).setCaption("IR").onClick(this::abrirConsulta).setWidth(140);
-
+		mainPanel.setWidth(10);
 	}
 	/*****************buttons adicionales: podemos colocarlos horizontales a diferencia de los demas*************/
 	@Override

@@ -153,19 +153,11 @@ public class EmpresaViewM {
 	public void generarPeridos() {
 		semestre.add(1);
 		semestre.add(2);
-		for (Integer anio = 2010; anio <= 2017; anio++) {
-			años.add(anio);
-			// System.out.printf("fecha: " + fechas.get(i).toString()+ "\n");
-			System.out.printf("año: " + anio + "\n");
-		}
+		this.años = RepositorioMaestro.dameAniosPeriodos();
 	}
 	
 	public void generarCuentas(){
-		cuentas.add("EBITDA");
-		cuentas.add("FDS");
-		cuentas.add("FreeCashFlow");
-		cuentas.add("Neto Discontinuas");
-		cuentas.add("Neto Continuas");
+		this.cuentas= RepositorioMaestro.dameCuentasEmpresas();
 	}
 	 
 	public void generarNombres(){
@@ -189,54 +181,5 @@ public class EmpresaViewM {
 		this.snapshotEmpresaSeleccionada = snapshotEmpresaSeleccionada;
 	}
 	
-	
-	
-	
-//
-//    private Collection<java.sql.Date> fechas ;	
-//	private java.sql.Date fechaSeleccionada ;
-//	
-//	public java.sql.Date getFechaSeleccionada() {
-//		return fechaSeleccionada;
-//	}
-//	public void setFechaSeleccionada(java.sql.Date fechaSeleccionada) {
-//		this.fechaSeleccionada = fechaSeleccionada;
-//	}
-//	public Collection<java.sql.Date> getFechas() {
-//		return fechas;
-//	}
-//	public void setFechas(Collection<java.sql.Date> fechas) {
-//		this.fechas = fechas;
-//	}
-//
 
-//
-//	public void generarfechas(){
-//		java.sql.Date ahora = new java.sql.Date(2016-00-01);
-//				//Calendar.getInstance().getTimeInMillis());
-//		 System.out.printf("fecha: " + ahora.toString()+ "\n");
-//
-//		 ArrayList<java.sql.Date> fechas2= new ArrayList<java.sql.Date>();
-//		 fechas2.add(ahora);
-//		 for (int i =1 ;i <= 5; i++){
-//			 ahora= sumarFechasDias(ahora,180);
-//			 fechas2.add(ahora);
-////			 System.out.printf("fecha: " + fechas.get(i).toString()+ "\n");
-//			 System.out.printf("fecha: " + ahora.toString()+ "\n");
-//		 
-//		 }
-//		 
-//		 this.fechas = fechas2 ;
-//	}
-//	
-//	
-//	/******hardcode fechas***********/
-//	public static java.sql.Date sumarFechasDias(java.sql.Date fch, int dias) {
-//        Calendar cal = new GregorianCalendar();
-//        cal.setTimeInMillis(fch.getTime());
-//        cal.add(Calendar.DATE, dias);
-//        return new java.sql.Date(cal.getTimeInMillis());
-//    }
-
-	
 }
