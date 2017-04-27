@@ -10,7 +10,7 @@ import view.MainView;
 public class NextInversiones extends Application{
 
 	public static void main(String[] args) {
-		
+		Mixin.cargarEmpresas();
 		new NextInversiones().start();
 	}
 	

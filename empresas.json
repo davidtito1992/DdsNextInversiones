@@ -1,23 +1,37 @@
 {
-	"empresas": {
-		"empresa": {
+	"empresas": [
+		{
 			"nombre": "Facebook",
-			"cuenta1": {
-				"anio": "2016",
-				"semestre": "1",
-				"ebitda": "499999",
-				"fds": "222",
-				"netoDiscontinuas": "222",
-				"netoContinuas": "0"
-			},
-			"cuenta2": {
-				"anio": "2015",
-				"semestre": "2",
-				"ebitda": "44",
-				"fds": "0",
-				"netoDiscontinuas": "10000",
-				"netoContinuas": "0"
-			}
+			"periodos": [
+				{
+					"anio": "2016"
+					"semestre": "1"
+					"cuentas": [
+						{
+							"nombre": "EDITBA"
+							"valor": "10000"
+						},
+						{
+							"nombre": "neto discontinuo"
+							"valor": "123456"
+						}
+					]
+				},
+	  			{
+					"anio": "2016"
+					"semestre": "2"
+					"cuentas": [
+						{
+							"nombre": "EDITBA"
+							"valor": "1454560"
+						},
+						{
+							"nombre": "neto discontinuo"
+							"valor": "654321"
+						}
+					]
+				}
+			]
 		}
-	}
+	]
 }
