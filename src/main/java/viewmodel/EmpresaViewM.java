@@ -30,6 +30,10 @@ public class EmpresaViewM {
 		generarPeridos();
 		generarCuentas();
 		generarNombres();
+		setCuentaSeleccionada((String) cuentas.toArray()[0]);
+		setNombreSeleccionado((String) nombres.toArray()[0]);
+		setAñoSeleccionado((Integer) años.toArray()[0]);
+		setSemestreSeleccionado((Integer) semestre.toArray()[0]);
 	}	
 	
 	public boolean condicionFiltrado(SnapshotEmpresa snapshot){
