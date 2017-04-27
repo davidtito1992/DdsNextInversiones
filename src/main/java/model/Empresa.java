@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -9,10 +8,6 @@ public class Empresa {
 	private String nombre;
 	private Collection<Periodo> periodos;
 	
-	public Empresa (String nombre){
-		
-		this.setNombre(nombre);
-	}
 	/*****/
 	
 	public String getNombre() {

@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.Color;
-
-import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;

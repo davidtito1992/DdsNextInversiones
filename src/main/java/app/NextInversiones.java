@@ -1,10 +1,7 @@
 package app;
 
-import model.RepositorioMaestro;
-
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
-
 import view.MainView;
 
 public class NextInversiones extends Application{

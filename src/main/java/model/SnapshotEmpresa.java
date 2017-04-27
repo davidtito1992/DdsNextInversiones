@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.Date;
-
 import org.uqbar.commons.utils.Observable;
 
 @Observable

@@ -3,10 +3,8 @@ package viewmodel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
-
 import model.RepositorioMaestro;
 import model.SnapshotEmpresa;
-import app.Mixin;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -24,7 +22,8 @@ public class EmpresaViewM {
 	private Integer semestreSeleccionado ;
 	private Collection<SnapshotEmpresa> snapshotEmpresas;
 	private SnapshotEmpresa snapshotEmpresaSeleccionada;
-/***************A modo de prueba***************************/
+	
+/***************Comentemos el codigo..please!***************************/
 	
 	public EmpresaViewM(){
 		generarPeridos();
@@ -75,9 +74,17 @@ public class EmpresaViewM {
 	}
 	
 	public void llenarTablas(){
-		this.setSnapshotEmpresas(Mixin.llenarTabla());
+		this.setSnapshotEmpresas(RepositorioMaestro.dameSnapshotEmpresas());
 	}
 
+
+	public void reiniciar(){
+		this.limpiarFiltros();
+		this.llenarTablas();
+		this.snapshotEmpresaSeleccionada= null ;
+		
+	}
+	
 	public Collection<Integer> getAños() {
 		return años;
 	}

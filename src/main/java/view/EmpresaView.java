@@ -1,17 +1,10 @@
 package view;
 
-import java.awt.Color;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
-import org.uqbar.arena.widgets.NumericField;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
-import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
@@ -20,8 +13,10 @@ import org.uqbar.arena.windows.SimpleWindow;
 import model.*;
 import viewmodel.*;
 
+@SuppressWarnings("serial")
 public class EmpresaView extends Dialog<EmpresaViewM> {
 
+	@SuppressWarnings("rawtypes")
 	public EmpresaView(SimpleWindow owner) {
 		
 			super(owner, new EmpresaViewM());
@@ -62,7 +57,8 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		
 		new Label(form).setText("");
 		new Button(form).setCaption("Buscar").onClick(this::buscar).setWidth(140);
-		new Button(form).setCaption("Limpiar filtros").onClick(this::limpiarFiltros).setWidth(140);
+		new Label(form).setText("");
+		new Button(form).setCaption("Reiniciar").onClick(this::reiniciar).setWidth(140);
 		
 		Table<SnapshotEmpresa> tableEmpresas = new Table<SnapshotEmpresa>(mainPanel, SnapshotEmpresa.class);
 
@@ -117,8 +113,8 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		getModelObject().filtrar();
 	}
 	
-	public void limpiarFiltros(){
-		getModelObject().limpiarFiltros();
+	public void reiniciar(){
+		getModelObject().reiniciar();
 	}
 	
 
