@@ -30,19 +30,39 @@ public class EmpresaViewM {
 		generarPeridos();
 		generarCuentas();
 		generarNombres();
-		setCuentaSeleccionada((String) cuentas.toArray()[0]);
-		setNombreSeleccionado((String) nombres.toArray()[0]);
-		setAñoSeleccionado((Integer) años.toArray()[0]);
-		setSemestreSeleccionado((Integer) semestre.toArray()[0]);
 	}	
 	
 	public boolean condicionFiltrado(SnapshotEmpresa snapshot){
 		SnapshotEmpresa filtro = new SnapshotEmpresa();
-		filtro.setCuenta(cuentaSeleccionada);
-		filtro.setNombre(nombreSeleccionado);
-		filtro.setSemestre(semestreSeleccionado);
-		filtro.setAño(añoSeleccionado);
+		if(cuentaSeleccionada == null){
+			filtro.setCuenta(snapshot.getCuenta()); 
+		}else {
+			filtro.setCuenta(cuentaSeleccionada);
+		}
+		if(nombreSeleccionado == null){
+			filtro.setNombre(snapshot.getCuenta()); 
+		}else {
+			filtro.setNombre(nombreSeleccionado);
+		}
+		if(semestreSeleccionado == null){
+			filtro.setSemestre(snapshot.getSemestre()); 
+		}else {
+			filtro.setSemestre(semestreSeleccionado);
+		}
+		if(añoSeleccionado == null){
+			filtro.setAño(snapshot.getAño()); 
+		}else {
+			filtro.setAño(añoSeleccionado);
+		}
 		return snapshot.equals(filtro);
+	}
+	
+	public void limpiarFiltros(){
+		cuentaSeleccionada = null;
+		nombreSeleccionado = null;
+		semestreSeleccionado = null;
+		añoSeleccionado = null;
+		
 	}
 	
 	public void filtrar(){

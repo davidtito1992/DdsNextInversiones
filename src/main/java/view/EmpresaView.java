@@ -62,6 +62,7 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		
 		new Label(form).setText("");
 		new Button(form).setCaption("Buscar").onClick(this::buscar).setWidth(140);
+		new Button(form).setCaption("Limpiar filtros").onClick(this::limpiarFiltros).setWidth(140);
 		
 		Table<SnapshotEmpresa> tableEmpresas = new Table<SnapshotEmpresa>(mainPanel, SnapshotEmpresa.class);
 
@@ -116,7 +117,10 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		getModelObject().filtrar();
 	}
 	
-
+	public void limpiarFiltros(){
+		getModelObject().limpiarFiltros();
+	}
+	
 
 
 }
