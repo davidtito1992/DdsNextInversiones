@@ -9,7 +9,7 @@ public class RepositorioMaestro {
 	
 	static ArrayList<String> nombreEmpresas = new ArrayList<String>()  ;
 	
-	public static ArrayList<String> dameEmpresas(){
+	public static ArrayList<String> dameNombresEmpresas(){
 		///esto no tiene q ser asi
    empresas.add(new Empresa("Facebook")) ;
    empresas.add(new Empresa("Next")) ;

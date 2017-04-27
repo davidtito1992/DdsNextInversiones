@@ -33,25 +33,25 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		
 		//new Label(form).setText("\nFILTROS\n").setBackground(Color.LIGHT_GRAY).setWidth(300);
 		
-		new Label(form).setText("Nombre de Empresa");
+		new Label(form).setText("Seleccione Empresa");
 		Selector<String> selectorNombre = new Selector<String>(form).allowNull(true);
 		selectorNombre.setWidth(150) ;
 		selectorNombre.bindItemsToProperty("nombres");
 		selectorNombre.bindValueToProperty("nombreSeleccionado");
 		
-		new Label(form).setText("\t\t\t\tCuenta");
+		new Label(form).setText("\t\t\tSeleccione Cuenta");
 		Selector<String> selectorCuenta = new Selector<String>(form).allowNull(true);
 		selectorCuenta.setWidth(150) ;
 		selectorCuenta.bindItemsToProperty("cuentas");
 		selectorCuenta.bindValueToProperty("cuentaSeleccionada");
 		
-		new Label(form).setText("Año");
+		new Label(form).setText("Seleccione Año");
 		Selector<Integer> selectorAño = new Selector<Integer>(form).allowNull(true);
 		selectorAño.setWidth(150) ;
 		selectorAño.bindItemsToProperty("años");
 		selectorAño.bindValueToProperty("añoSeleccionado");
 
-		new Label(form).setText("\t\tSemestre");
+		new Label(form).setText("\t\tSeleccione Semestre");
 		Selector<Integer> selectorSemestre = new Selector<Integer>(form).allowNull(true);
 		selectorSemestre.setWidth(150) ;
 		selectorSemestre.bindItemsToProperty("semestre");

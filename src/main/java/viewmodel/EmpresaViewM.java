@@ -9,16 +9,18 @@ import java.util.GregorianCalendar;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import model.RepositorioMaestro;
+
 import org.uqbar.commons.utils.Observable;
 
 
 @Observable
 public class EmpresaViewM {
 	
-	private String nombreSeleccionado;
 	private String cuentaSeleccionada;
 	private Collection<String> cuentas = new ArrayList<String>();
 	private Collection<String> nombres = new ArrayList<String>();	
+	private String nombreSeleccionado;
 	private Collection<Integer> años = new ArrayList<Integer>();	
 	private Integer añoSeleccionado ;
     private Collection<Integer> semestre = new ArrayList<Integer>();	
@@ -115,11 +117,7 @@ public class EmpresaViewM {
 	}
 	 
 	public void generarNombres(){
-		nombres.add("Facebook");
-		nombres.add("McDonald's");
-		nombres.add("GitHub");
-		nombres.add("Nutella");
-		nombres.add("Jorgito");
+		this.nombres= RepositorioMaestro.dameNombresEmpresas(); 
 	}
 	
 	
