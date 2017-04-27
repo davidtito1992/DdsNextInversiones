@@ -1,15 +1,12 @@
 package viewmodel;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.GregorianCalendar;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import java.util.stream.Collectors;
 
 import model.RepositorioMaestro;
+import model.SnapshotEmpresa;
+import app.Mixin;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -25,6 +22,8 @@ public class EmpresaViewM {
 	private Integer añoSeleccionado ;
     private Collection<Integer> semestre = new ArrayList<Integer>();	
 	private Integer semestreSeleccionado ;
+	private Collection<SnapshotEmpresa> snapshotEmpresas;
+	private SnapshotEmpresa snapshotEmpresaSeleccionada;
 /***************A modo de prueba***************************/
 	
 	public EmpresaViewM(){
@@ -32,6 +31,28 @@ public class EmpresaViewM {
 		generarCuentas();
 		generarNombres();
 	}	
+	
+	public boolean condicionFiltrado(SnapshotEmpresa snapshot){
+		SnapshotEmpresa filtro = new SnapshotEmpresa();
+		filtro.setCuenta(cuentaSeleccionada);
+		filtro.setNombre(nombreSeleccionado);
+		filtro.setSemestre(semestreSeleccionado);
+		filtro.setAño(añoSeleccionado);
+		return snapshot.equals(filtro);
+	}
+	
+	public void filtrar(){
+		this.llenarTablas();
+		Collection<SnapshotEmpresa> snapshotFiltrado = this.snapshotEmpresas
+			.stream()
+			.filter( snapshot -> condicionFiltrado(snapshot))
+			.collect( Collectors.toList());
+		setSnapshotEmpresas(snapshotFiltrado);
+	}
+	
+	public void llenarTablas(){
+		this.setSnapshotEmpresas(Mixin.llenarTabla());
+	}
 
 	public Collection<Integer> getAños() {
 		return años;
@@ -118,6 +139,23 @@ public class EmpresaViewM {
 	 
 	public void generarNombres(){
 		this.nombres= RepositorioMaestro.dameNombresEmpresas(); 
+	}
+
+	public Collection<SnapshotEmpresa> getSnapshotEmpresas() {
+		return snapshotEmpresas;
+	}
+
+	public void setSnapshotEmpresas(Collection<SnapshotEmpresa> snapshotEmpresas) {
+		this.snapshotEmpresas = snapshotEmpresas;
+	}
+
+	public SnapshotEmpresa getSnapshotEmpresaSeleccionada() {
+		return snapshotEmpresaSeleccionada;
+	}
+
+	public void setSnapshotEmpresaSeleccionada(
+			SnapshotEmpresa snapshotEmpresaSeleccionada) {
+		this.snapshotEmpresaSeleccionada = snapshotEmpresaSeleccionada;
 	}
 	
 	

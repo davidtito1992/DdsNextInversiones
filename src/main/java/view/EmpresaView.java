@@ -32,6 +32,7 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		Panel form = new Panel(mainPanel);
 		this.setTitle("Empresas");
 		form.setLayout(new ColumnLayout(4));
+		getModelObject().llenarTablas();
 		
 		//new Label(form).setText("\nFILTROS\n").setBackground(Color.LIGHT_GRAY).setWidth(300);
 		
@@ -66,28 +67,29 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 
 		tableEmpresas.setHeight(600);
 		tableEmpresas.setWidth(200);
-//
-//		tableTarea.bindItemsToProperty("empresa");
-//		tableTarea.bindValueToProperty("empresaSeleccionada");
+
+		tableEmpresas.bindItemsToProperty("snapshotEmpresas");
+		tableEmpresas.bindValueToProperty("snapshotEmpresaSeleccionada");
 
 		Column<SnapshotEmpresa> columnaNombre = new Column<SnapshotEmpresa>(tableEmpresas);
 		columnaNombre.setTitle("Nombre");
-//		columnaId.bindContentsToProperty("nombre");
+		columnaNombre.bindContentsToProperty("nombre");
 		
 		Column<SnapshotEmpresa> columnaAño = new Column<SnapshotEmpresa>(tableEmpresas);
 		columnaAño.setTitle("Año");
-//		columnaTitulo.bindContentsToProperty("fecha");
+		columnaAño.bindContentsToProperty("año");
 		
 		Column<SnapshotEmpresa> columnaSemestre = new Column<SnapshotEmpresa>(tableEmpresas);
 		columnaSemestre.setTitle("Semestre");
+		columnaSemestre.bindContentsToProperty("semestre");
 		
-		Column<SnapshotEmpresa> columnaEbitda = new Column<SnapshotEmpresa>(tableEmpresas);
-		columnaEbitda.setTitle("Cuenta");
-//		columnaDescripcion.bindContentsToProperty("cuenta");
+		Column<SnapshotEmpresa> columnaCuenta = new Column<SnapshotEmpresa>(tableEmpresas);
+		columnaCuenta.setTitle("Cuenta");
+		columnaCuenta.bindContentsToProperty("cuenta");
 
-		Column<SnapshotEmpresa> columnaFDS = new Column<SnapshotEmpresa>(tableEmpresas);
-		columnaFDS.setTitle("Valor") ;
-//		columnaDescripcion.bindContentsToProperty("valor");
+		Column<SnapshotEmpresa> columnaValor = new Column<SnapshotEmpresa>(tableEmpresas);
+		columnaValor.setTitle("Valor") ;
+		columnaValor.bindContentsToProperty("valor");
 
 	}
 
@@ -111,7 +113,7 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 	}
 	
 	public void buscar(){
-		
+		getModelObject().filtrar();
 	}
 	
 

@@ -8,21 +8,21 @@
 					"semestre": "1"
 					"cuentas": [
 						{
-							"nombre":"ebitda"
+							"nombre":"EBITDA"
 							"valor":"1"
 						},
 						{
-							"nombre":"fds"
+							"nombre":"FDS"
 							"valor":"2"
 						},
 						{
-							"nombre":"freeCashFlow"
+							"nombre":"FreeCashFlow"
 							"valor":"3"
 						},						{
-							"nombre":"netoDiscontinuas"
+							"nombre":"Neto Discontinuas"
 							"valor":"5"
 						},						{
-							"nombre":"netoContinuas"
+							"nombre":"Neto Continuas"
 							"valor":"6"
 						}
 					]
@@ -32,21 +32,21 @@
 					"semestre": "2"
 					"cuentas": [
 						{
-							"nombre":"ebitda"
+							"nombre":"EBITDA"
 							"valor":"6"
 						},
 						{
-							"nombre":"fds"
+							"nombre":"FDS"
 							"valor":"7"
 						},
 						{
-							"nombre":"freeCashFlow"
+							"nombre":"FreeCashFlow"
 							"valor":"8"
 						},						{
-							"nombre":"netoDiscontinuas"
+							"nombre":"Neto Discontinuas"
 							"valor":"9"
 						},						{
-							"nombre":"netoContinuas"
+							"nombre":"Neto Continuas"
 							"valor":"10"
 						}
 					]
@@ -61,15 +61,15 @@
 					"semestre": "1"
 					"cuentas": [
 						{
-							"nombre":"ebitda"
+							"nombre":"EBITDA"
 							"valor":"123"
 						},
 						{
-							"nombre":"fds"
+							"nombre":"FDS"
 							"valor":"456"
 						},
 						{
-							"nombre":"freeCashFlow"
+							"nombre":"FreeCashFlow"
 							"valor":"789"
 						}
 					]
@@ -79,15 +79,15 @@
 					"semestre": "2"
 					"cuentas": [
 						{
-							"nombre":"ebitda"
+							"nombre":"EBITDA"
 							"valor":"789"
 						},
 						{
-							"nombre":"fds"
+							"nombre":"FDS"
 							"valor":"456"
 						},
 						{
-							"nombre":"freeCashFlow"
+							"nombre":"FreeCashFlow"
 							"valor":"123"
 						}
 					]
@@ -102,21 +102,21 @@
 					"semestre": "1"
 					"cuentas": [
 						{
-							"nombre":"ebitda"
+							"nombre":"EBITDA"
 							"valor":"99999"
 						},
 						{
-							"nombre":"fds"
+							"nombre":"FDS"
 							"valor":"99999"
 						},
 						{
-							"nombre":"freeCashFlow"
+							"nombre":"FreeCashFlow"
 							"valor":"99999"
 						},						{
-							"nombre":"netoDiscontinuas"
+							"nombre":"Neto Discontinuas"
 							"valor":"99999"
 						},						{
-							"nombre":"netoContinuas"
+							"nombre":"Neto Continuas"
 							"valor":"99999"
 						}
 					]
@@ -126,21 +126,21 @@
 					"semestre": "2"
 					"cuentas": [
 						{
-							"nombre":"ebitda"
+							"nombre":"EBITDA"
 							"valor":"99999"
 						},
 						{
-							"nombre":"fds"
+							"nombre":"FDS"
 							"valor":"99999"
 						},
 						{
-							"nombre":"freeCashFlow"
+							"nombre":"FreeCashFlow"
 							"valor":"99999"
 						},						{
-							"nombre":"netoDiscontinuas"
+							"nombre":"Neto Discontinuas"
 							"valor":"99999"
 						},						{
-							"nombre":"netoContinuas"
+							"nombre":"Neto Continuas"
 							"valor":"99999"
 						}
 					]

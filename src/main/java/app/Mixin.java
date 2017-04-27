@@ -35,7 +35,7 @@ public class Mixin {
 
 	}
 	
-	public Collection<SnapshotEmpresa> llenarTabla(){
+	public static Collection<SnapshotEmpresa> llenarTabla(){
 		Collection<SnapshotEmpresa> listSnap = new ArrayList<SnapshotEmpresa>() ;
 		RepositorioMaestro.empresas.forEach(e->{
 			e.getPeriodos().forEach(p->{
