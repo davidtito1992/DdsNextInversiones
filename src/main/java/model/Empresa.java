@@ -22,5 +22,4 @@ public class Empresa {
 		this.nombre = nombre;
 	}
 	private Collection<Cuenta> cuentas;
-
 }

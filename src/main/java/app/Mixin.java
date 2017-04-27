@@ -3,6 +3,9 @@ package app;
 import java.io.File;
 import java.io.FileReader;
 
+import model.RepositorioMaestro;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -18,7 +21,13 @@ public class Mixin {
  
             JSONObject jsonObject = (JSONObject) obj;
             
-            System.out.println(jsonObject.get("empresas"));
+            JSONArray arrayDeEmpresas = (JSONArray) jsonObject.get("empresas");
+            
+            for (int i = 0; i < arrayDeEmpresas.size(); i++) {
+				RepositorioMaestro.empresas.add(JsonAdapter.adaptarEmpresa((JSONObject) arrayDeEmpresas.get(i)));
+			}
+            
+            System.out.println(RepositorioMaestro.empresas.toArray()[0].toString());
             
         } catch (Exception e) {
             e.printStackTrace();
