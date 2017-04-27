@@ -31,27 +31,27 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		this.setTitle("Empresas");
 		form.setLayout(new ColumnLayout(4));
 		
-		//new Label(form).setText("\nFILTROS\n").setBackground(Color.LIGHT_GRAY).setWidth(150);
+		//new Label(form).setText("\nFILTROS\n").setBackground(Color.LIGHT_GRAY).setWidth(300);
 		
 		new Label(form).setText("Nombre de Empresa");
 		Selector<String> selectorNombre = new Selector<String>(form).allowNull(true);
 		selectorNombre.setWidth(150) ;
-		selectorNombre.bindItemsToProperty("nombre");
+		selectorNombre.bindItemsToProperty("nombres");
 		selectorNombre.bindValueToProperty("nombreSeleccionado");
 		
 		new Label(form).setText("\t\t\t\tCuenta");
 		Selector<String> selectorCuenta = new Selector<String>(form).allowNull(true);
 		selectorCuenta.setWidth(150) ;
-		selectorCuenta.bindItemsToProperty("cuenta");
+		selectorCuenta.bindItemsToProperty("cuentas");
 		selectorCuenta.bindValueToProperty("cuentaSeleccionada");
 		
-		new Label(form).setText("Seleccione Año");
+		new Label(form).setText("Año");
 		Selector<Integer> selectorAño = new Selector<Integer>(form).allowNull(true);
 		selectorAño.setWidth(150) ;
 		selectorAño.bindItemsToProperty("años");
 		selectorAño.bindValueToProperty("añoSeleccionado");
 
-		new Label(form).setText("\t\tSeleccione Semestre");
+		new Label(form).setText("\t\tSemestre");
 		Selector<Integer> selectorSemestre = new Selector<Integer>(form).allowNull(true);
 		selectorSemestre.setWidth(150) ;
 		selectorSemestre.bindItemsToProperty("semestre");
@@ -72,30 +72,21 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		columnaNombre.setTitle("Nombre");
 //		columnaId.bindContentsToProperty("nombre");
 		
-
 		Column<SnapshotEmpresa> columnaAño = new Column<SnapshotEmpresa>(tableEmpresas);
 		columnaAño.setTitle("Año");
 //		columnaTitulo.bindContentsToProperty("fecha");
+		
 		Column<SnapshotEmpresa> columnaSemestre = new Column<SnapshotEmpresa>(tableEmpresas);
 		columnaSemestre.setTitle("Semestre");
+		
 		Column<SnapshotEmpresa> columnaEbitda = new Column<SnapshotEmpresa>(tableEmpresas);
-		columnaEbitda.setTitle("Ebitda");
-//		columnaDescripcion.bindContentsToProperty("ebitda");
+		columnaEbitda.setTitle("Cuenta");
+//		columnaDescripcion.bindContentsToProperty("cuenta");
 
 		Column<SnapshotEmpresa> columnaFDS = new Column<SnapshotEmpresa>(tableEmpresas);
-		columnaFDS.setTitle("FDS") ;
-//		columnaDescripcion.bindContentsToProperty("fds");
-		
-		Column<SnapshotEmpresa> columnaFreeCashFlow = new Column<SnapshotEmpresa>(tableEmpresas);
-		columnaFreeCashFlow.setTitle("FreeCashFlow");
-//		columnaDescripcion.bindContentsToProperty("freeCashFlow");
-		
-		Column<SnapshotEmpresa> columnaNetoDiscontinuas = new Column<SnapshotEmpresa>(tableEmpresas);
-		columnaNetoDiscontinuas.setTitle("NetoDiscontinuas");
-		
-		Column<SnapshotEmpresa> columnaNetoContinuas = new Column<SnapshotEmpresa>(tableEmpresas);
-		columnaNetoContinuas.setTitle("NetoContinuas");
-		
+		columnaFDS.setTitle("Valor") ;
+//		columnaDescripcion.bindContentsToProperty("valor");
+
 	}
 
 	@Override
