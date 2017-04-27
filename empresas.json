@@ -2,70 +2,148 @@
 	"empresas": [
 		{
 			"nombre": "Facebook",
-			"cuentas": [
+			"periodos": [
 				{
 					"año": "2016"
 					"semestre": "1"
-					"ebitda":"1"
-					"fds":"2"
-					"freeCashFlow":"3"
-					"netoDiscontinuas":"4"
-					"netoContinuas":"5"
+					"cuentas": [
+						{
+							"nombre":"ebitda"
+							"valor":"1"
+						},
+						{
+							"nombre":"fds"
+							"valor":"2"
+						},
+						{
+							"nombre":"freeCashFlow"
+							"valor":"3"
+						},						{
+							"nombre":"netoDiscontinuas"
+							"valor":"5"
+						},						{
+							"nombre":"netoContinuas"
+							"valor":"6"
+						}
+					]
 				},
 	  			{
 					"año": "2016"
 					"semestre": "2"
-					"ebitda":"6"
-					"fds":"7"
-					"freeCashFlow":"8"
-					"netoDiscontinuas":"9"
-					"netoContinuas":"10"
+					"cuentas": [
+						{
+							"nombre":"ebitda"
+							"valor":"6"
+						},
+						{
+							"nombre":"fds"
+							"valor":"7"
+						},
+						{
+							"nombre":"freeCashFlow"
+							"valor":"8"
+						},						{
+							"nombre":"netoDiscontinuas"
+							"valor":"9"
+						},						{
+							"nombre":"netoContinuas"
+							"valor":"10"
+						}
+					]
 				}
 			]
 		},
 		{
 			"nombre": "Twitter",
-			"cuentas": [
+			"periodos": [
 				{
 					"año": "2015"
 					"semestre": "1"
-					"ebitda":"123"
-					"fds":"456"
-					"freeCashFlow":"789"
-					"netoDiscontinuas":"0"
-					"netoContinuas":"0"
+					"cuentas": [
+						{
+							"nombre":"ebitda"
+							"valor":"123"
+						},
+						{
+							"nombre":"fds"
+							"valor":"456"
+						},
+						{
+							"nombre":"freeCashFlow"
+							"valor":"789"
+						}
+					]
 				},
 	  			{
 					"año": "2015"
 					"semestre": "2"
-					"ebitda":"789"
-					"fds":"456"
-					"freeCashFlow":"123"
-					"netoDiscontinuas":"0"
-					"netoContinuas":"0"
+					"cuentas": [
+						{
+							"nombre":"ebitda"
+							"valor":"789"
+						},
+						{
+							"nombre":"fds"
+							"valor":"456"
+						},
+						{
+							"nombre":"freeCashFlow"
+							"valor":"123"
+						}
+					]
 				}
 			]
 		},
 				{
 			"nombre": "Google",
-			"cuentas": [
+			"periodos": [
 				{
 					"año": "2014"
 					"semestre": "1"
-					"ebitda":"99999"
-					"fds":"99999"
-					"freeCashFlow":"99999"
-					"netoDiscontinuas":"99999"
-					"netoContinuas":"99999"
+					"cuentas": [
+						{
+							"nombre":"ebitda"
+							"valor":"99999"
+						},
+						{
+							"nombre":"fds"
+							"valor":"99999"
+						},
+						{
+							"nombre":"freeCashFlow"
+							"valor":"99999"
+						},						{
+							"nombre":"netoDiscontinuas"
+							"valor":"99999"
+						},						{
+							"nombre":"netoContinuas"
+							"valor":"99999"
+						}
+					]
 				},
 	  			{
 					"año": "2014"
 					"semestre": "2"
-					"ebitda":"99999"
-					"fds":"99999"
-					"freeCashFlow":"99999"
-					"netoDiscontinuas":"99999"
-					"netoContinuas":"99999"
+					"cuentas": [
+						{
+							"nombre":"ebitda"
+							"valor":"99999"
+						},
+						{
+							"nombre":"fds"
+							"valor":"99999"
+						},
+						{
+							"nombre":"freeCashFlow"
+							"valor":"99999"
+						},						{
+							"nombre":"netoDiscontinuas"
+							"valor":"99999"
+						},						{
+							"nombre":"netoContinuas"
+							"valor":"99999"
+						}
+					]
 				}
 			]
 		}
