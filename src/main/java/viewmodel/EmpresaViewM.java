@@ -22,6 +22,7 @@ public class EmpresaViewM {
 	private Integer semestreSeleccionado ;
 	private Collection<SnapshotEmpresa> snapshotEmpresas;
 	private SnapshotEmpresa snapshotEmpresaSeleccionada;
+	private SnapshotEmpresa filtro = new SnapshotEmpresa();
 	
 /***************Comentemos el codigo..please!***************************/
 	
@@ -32,27 +33,10 @@ public class EmpresaViewM {
 	}	
 	
 	public boolean condicionFiltrado(SnapshotEmpresa snapshot){
-		SnapshotEmpresa filtro = new SnapshotEmpresa();
-		if(cuentaSeleccionada == null){
-			filtro.setCuenta(snapshot.getCuenta()); 
-		}else {
-			filtro.setCuenta(cuentaSeleccionada);
-		}
-		if(nombreSeleccionado == null){
-			filtro.setNombre(snapshot.getCuenta()); 
-		}else {
-			filtro.setNombre(nombreSeleccionado);
-		}
-		if(semestreSeleccionado == null){
-			filtro.setSemestre(snapshot.getSemestre()); 
-		}else {
-			filtro.setSemestre(semestreSeleccionado);
-		}
-		if(añoSeleccionado == null){
-			filtro.setAño(snapshot.getAño()); 
-		}else {
-			filtro.setAño(añoSeleccionado);
-		}
+		filtro.setCuenta((cuentaSeleccionada == null) ? snapshot.getCuenta() : cuentaSeleccionada); 
+		filtro.setNombre((nombreSeleccionado == null) ? snapshot.getNombre() : nombreSeleccionado); 
+		filtro.setSemestre((semestreSeleccionado == null) ? snapshot.getSemestre() : semestreSeleccionado); 
+		filtro.setAño((añoSeleccionado == null) ? snapshot.getAño() : añoSeleccionado); 
 		return snapshot.equals(filtro);
 	}
 	
