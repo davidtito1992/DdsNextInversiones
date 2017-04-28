@@ -27,8 +27,8 @@ public class EmpresaViewM {
 /***************Comentemos el codigo..please!***************************/
 	
 	public EmpresaViewM(){
-//		generarPeridos();
-//		generarCuentas();
+		generarAnios();
+		generarCuentas();
 		generarNombres();
 	}	
 	
@@ -66,10 +66,10 @@ public class EmpresaViewM {
 		this.limpiarFiltros();
 		this.llenarTablas();
 		this.snapshotEmpresaSeleccionada= null ;
-		this.años= null ;
-		this.cuentas= null ;
-		this.semestre=null ;
-		this.generarNombres();
+//		this.años= null ;
+//		this.cuentas= null ;
+//		this.semestre=null ;
+//		this.generarNombres();
 	}
 	
 	public Collection<Integer> getAños() {
@@ -88,7 +88,7 @@ public class EmpresaViewM {
 		this.nombreSeleccionado = nombreSeleccionado;
 		//Seleccionamos un nombre de una empresa y deberia buscar las cuentas de esa empresa
 		//parametro :nombreempresa
-		this.generarCuentas();
+//		this.generarCuentas();
 	}
 
 	public String getCuentaSeleccionada() {
@@ -119,7 +119,7 @@ public class EmpresaViewM {
 
 		//Seleccionamos un nombre de una empresa,cuenta y deberia buscar los anios 
 		//parametros :nombreempresa :nombrecuenta
-		this.generarAnios();
+//		this.generarAnios();
 	}
 	
 	public Integer getAñoSeleccionado() {
@@ -131,8 +131,8 @@ public class EmpresaViewM {
 		
 		//Seleccionamos un nombre de una empresa, cuenta,anio y deberia buscar los semestres  
 		//parametros :nombreempresa :nombrecuenta :anio		
-		semestre.add(1);
-		semestre.add(2);
+//		semestre.add(1);
+//		semestre.add(2);
 	}
 
 	public Collection<Integer> getSemestre() {
@@ -155,6 +155,8 @@ public class EmpresaViewM {
 	public void generarAnios() {
 		
 		this.años = RepositorioMaestro.dameAniosPeriodos();
+		semestre.add(1);
+    	semestre.add(2);
 	}
 	
 	public void generarCuentas(){
