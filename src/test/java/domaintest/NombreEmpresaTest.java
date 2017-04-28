@@ -20,41 +20,41 @@ public class NombreEmpresaTest {
 	
 	@Before
 	public void generarNombresEsperados(){
+		
 		nombresEsperados.add("Facebook");
 		nombresEsperados.add("Google");
 		nombresEsperados.add("Twitter");
 		
-	}
-	
-	public void generarNombresTodasLasCuentas(){
 		nombresTodasLasCuentas.add("EBITDA");
 		nombresTodasLasCuentas.add("FDS");
 		nombresTodasLasCuentas.add("FreeCashFlow");
 		nombresTodasLasCuentas.add("Neto Continuas");
 		nombresTodasLasCuentas.add("Neto Discontinuas");
-	}
-	public void generarCantidadDeTodasAnios(){
+		
 		CantidadTodosLosAnios.add(2014);
 		CantidadTodosLosAnios.add(2015);
 		CantidadTodosLosAnios.add(2016);
-		
+
+		Mixin.cargarEmpresas();
+	}
+
+	@Test
+	public void NombresDeTodasLasCuentasTest() {
+		assertEquals(nombresTodasLasCuentas, RepositorioMaestro.dameCuentasEmpresas());
 	}
 	
+	@Test
+	public void CantidadDeTodosLosAniosTest() {
+		assertEquals(CantidadTodosLosAnios, RepositorioMaestro.dameAniosPeriodos());
+	}
+
+
 	@Test	
-	public void NombreEmpresaTest() {
-		Mixin.cargarEmpresas();
+	public void NombreDeTodasLasEmpresaTest() {
+		
 		assertEquals(nombresEsperados, RepositorioMaestro.dameNombresEmpresas());
 	}
 	
-	public void NombresDeTodasLasCuentasTest() {
-		Mixin.cargarEmpresas();
-		assertEquals(nombresTodasLasCuentas, RepositorioMaestro.dameCuentasEmpresas());
-	}
-	
-	public void CantidadDeTodosLosAniosTest() {
-		Mixin.cargarEmpresas();
-		assertEquals(nombresTodasLasCuentas, RepositorioMaestro.dameCuentasEmpresas());
-	}
 
 }
 
