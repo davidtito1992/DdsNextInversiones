@@ -18,8 +18,8 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 
 	@SuppressWarnings("rawtypes")
 	public EmpresaView(SimpleWindow owner) {
-		
-			super(owner, new EmpresaViewM());
+
+		super(owner, new EmpresaViewM());
 	}
 
 	@Override
@@ -28,40 +28,48 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		this.setTitle("Empresas");
 		form.setLayout(new ColumnLayout(4));
 		getModelObject().llenarTablas();
-		
-		//new Label(form).setText("\nFILTROS\n").setBackground(Color.LIGHT_GRAY).setWidth(300);
-		
+
+		// new
+		// Label(form).setText("\nFILTROS\n").setBackground(Color.LIGHT_GRAY).setWidth(300);
+
 		new Label(form).setText("\t\tSeleccione Empresa");
-		Selector<String> selectorNombre = new Selector<String>(form).allowNull(true);
-		selectorNombre.setWidth(150) ;
+		Selector<String> selectorNombre = new Selector<String>(form)
+				.allowNull(true);
+		selectorNombre.setWidth(150);
 		selectorNombre.bindItemsToProperty("nombres");
 		selectorNombre.bindValueToProperty("nombreSeleccionado");
-		
+
 		new Label(form).setText("\t\tSeleccione Cuenta");
-		Selector<String> selectorCuenta = new Selector<String>(form).allowNull(true);
-		selectorCuenta.setWidth(150) ;
-		
+		Selector<String> selectorCuenta = new Selector<String>(form)
+				.allowNull(true);
+		selectorCuenta.setWidth(150);
+
 		selectorCuenta.bindItemsToProperty("cuentas");
 		selectorCuenta.bindValueToProperty("cuentaSeleccionada");
-		
+
 		new Label(form).setText("\t\tSeleccione Año");
-		Selector<Integer> selectorAño = new Selector<Integer>(form).allowNull(true);
-		selectorAño.setWidth(150) ;
+		Selector<Integer> selectorAño = new Selector<Integer>(form)
+				.allowNull(true);
+		selectorAño.setWidth(150);
 		selectorAño.bindItemsToProperty("años");
 		selectorAño.bindValueToProperty("añoSeleccionado");
 
 		new Label(form).setText("\t\tSeleccione Semestre");
-		Selector<Integer> selectorSemestre = new Selector<Integer>(form).allowNull(true);
-		selectorSemestre.setWidth(150) ;
+		Selector<Integer> selectorSemestre = new Selector<Integer>(form)
+				.allowNull(true);
+		selectorSemestre.setWidth(150);
 		selectorSemestre.bindItemsToProperty("semestre");
 		selectorSemestre.bindValueToProperty("semestreSeleccionado");
-		
+
 		new Label(form).setText("");
-		new Button(form).setCaption("Buscar").onClick(this::buscar).setWidth(140);
+		new Button(form).setCaption("Buscar").onClick(this::buscar)
+				.setWidth(140);
 		new Label(form).setText("");
-		new Button(form).setCaption("Reiniciar").onClick(this::reiniciar).setWidth(140);
-		
-		Table<SnapshotEmpresa> tableEmpresas = new Table<SnapshotEmpresa>(mainPanel, SnapshotEmpresa.class);
+		new Button(form).setCaption("Reiniciar").onClick(this::reiniciar)
+				.setWidth(140);
+
+		Table<SnapshotEmpresa> tableEmpresas = new Table<SnapshotEmpresa>(
+				mainPanel, SnapshotEmpresa.class);
 
 		tableEmpresas.setHeight(600);
 		tableEmpresas.setWidth(200);
@@ -69,37 +77,42 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		tableEmpresas.bindItemsToProperty("snapshotEmpresas");
 		tableEmpresas.bindValueToProperty("snapshotEmpresaSeleccionada");
 
-		Column<SnapshotEmpresa> columnaNombre = new Column<SnapshotEmpresa>(tableEmpresas);
+		Column<SnapshotEmpresa> columnaNombre = new Column<SnapshotEmpresa>(
+				tableEmpresas);
 		columnaNombre.setTitle("Nombre");
 		columnaNombre.bindContentsToProperty("nombre");
-		
-		Column<SnapshotEmpresa> columnaAño = new Column<SnapshotEmpresa>(tableEmpresas);
+
+		Column<SnapshotEmpresa> columnaAño = new Column<SnapshotEmpresa>(
+				tableEmpresas);
 		columnaAño.setTitle("Año");
 		columnaAño.bindContentsToProperty("año");
-		
-		Column<SnapshotEmpresa> columnaSemestre = new Column<SnapshotEmpresa>(tableEmpresas);
+
+		Column<SnapshotEmpresa> columnaSemestre = new Column<SnapshotEmpresa>(
+				tableEmpresas);
 		columnaSemestre.setTitle("Semestre");
 		columnaSemestre.bindContentsToProperty("semestre");
-		
-		Column<SnapshotEmpresa> columnaCuenta = new Column<SnapshotEmpresa>(tableEmpresas);
+
+		Column<SnapshotEmpresa> columnaCuenta = new Column<SnapshotEmpresa>(
+				tableEmpresas);
 		columnaCuenta.setTitle("Cuenta");
 		columnaCuenta.bindContentsToProperty("cuenta");
 
-		Column<SnapshotEmpresa> columnaValor = new Column<SnapshotEmpresa>(tableEmpresas);
-		columnaValor.setTitle("Valor") ;
+		Column<SnapshotEmpresa> columnaValor = new Column<SnapshotEmpresa>(
+				tableEmpresas);
+		columnaValor.setTitle("Valor");
 		columnaValor.bindContentsToProperty("valor");
 
 	}
 
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Aceptar").onClick(this::accept).setAsDefault();
+		new Button(actions).setCaption("Aceptar").onClick(this::accept)
+				.setAsDefault();
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
 	}
 
 	@Override
 	protected void executeTask() {
-
 		System.out.println("Que hacemos?:/");
 		super.executeTask();
 	}
@@ -107,18 +120,14 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 	@Override
 	public void cancel() {
 		this.close();
-		
 	}
-	
-	public void buscar(){
+
+	public void buscar() {
 		getModelObject().filtrar();
 	}
-	
-	public void reiniciar(){
+
+	public void reiniciar() {
 		getModelObject().reiniciar();
 	}
-	
-
 
 }
-

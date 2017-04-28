@@ -11,7 +11,7 @@ import org.uqbar.commons.utils.Observable;
 @Observable
 public class EmpresaViewM {
 
-/********* ATRIBUTOS *********/
+	/********* ATRIBUTOS *********/
 
 	private String cuentaSeleccionada;
 	private Collection<String> cuentas = new ArrayList<String>();
@@ -27,7 +27,7 @@ public class EmpresaViewM {
 
 	/*************** Comentemos el codigo..please! ***************************/
 
-/********* GETTERS/SETTERS *********/
+	/********* GETTERS/SETTERS *********/
 
 	public Collection<Integer> getAños() {
 		return años;
@@ -128,7 +128,7 @@ public class EmpresaViewM {
 		this.snapshotEmpresaSeleccionada = snapshotEmpresaSeleccionada;
 	}
 
-/********* METODOS *********/
+	/********* METODOS *********/
 
 	public EmpresaViewM() {
 		generarAnios();
