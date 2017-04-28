@@ -5,11 +5,16 @@ import org.uqbar.commons.utils.Observable;
 @Observable
 public class SnapshotEmpresa {
 
+/********* ATRIBUTOS *********/	
+	
 	private String nombre ;
 	private int año ;
 	private int semestre ;
 	private String cuenta ;
 	private int valor;
+	
+/********* GETTERS/SETTERS *********/	
+	
 	public int getAño() {
 		return año;
 	}
@@ -40,6 +45,9 @@ public class SnapshotEmpresa {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
+	
+/********* METODOS *********/	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
