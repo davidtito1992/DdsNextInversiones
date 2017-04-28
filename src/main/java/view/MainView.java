@@ -5,7 +5,6 @@ import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
@@ -38,7 +37,12 @@ public class MainView extends SimpleWindow<MainViewM> {
 		new Button(mainPanel).setCaption("ABM Metodologias").onClick(
 				() -> verAlgo()).setWidth(60).setHeight(80);
 
+		new Label(mainPanel).setText("\n\n\n");
 		
+
+		new Button(mainPanel).setCaption("Cerrar").onClick(
+				() -> cerrar()).setHeight(50);
+		/*
 		new Label(mainPanel).setText("\t\tSeleccione tipo de consulta a realizar: ");
 		Selector<String> selectorSemestre = new Selector<String>(mainPanel).allowNull(false);
 		selectorSemestre.setWidth(150);
@@ -47,15 +51,14 @@ public class MainView extends SimpleWindow<MainViewM> {
 		
 		new Label(mainPanel).setText("");
 		new Button(mainPanel).setCaption("IR").onClick(this::abrirConsulta).setWidth(140);
-		mainPanel.setWidth(10);
+		mainPanel.setWidth(10);*/
 	}
 	/*****************buttons adicionales: podemos colocarlos horizontales a diferencia de los demas*************/
 	@Override
 	protected void addActions(Panel actionsPanel) {
 		// TODO Auto-generated method stub
 
-		new Button(actionsPanel).setCaption("Cerrar").onClick(
-				() -> cerrar()).setWidth(200);;
+		
 	}
 	
 /*************metodos para los buttons***************************/
@@ -78,7 +81,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 		dialog.onAccept(() -> {});
 		
 	}	
-	
+	/*
 	public void abrirConsulta(){
 		
 		String seleccionado = this.getModelObject().getConsultaSeleccionada();
@@ -95,7 +98,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 						.println("aca se abre la ventana de consulta Graficos");
 			}
 		}
-	}
+	}*/
 /*************************************/
 	
 	

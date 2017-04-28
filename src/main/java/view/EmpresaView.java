@@ -40,6 +40,7 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		new Label(form).setText("\t\tSeleccione Cuenta");
 		Selector<String> selectorCuenta = new Selector<String>(form).allowNull(true);
 		selectorCuenta.setWidth(150) ;
+		
 		selectorCuenta.bindItemsToProperty("cuentas");
 		selectorCuenta.bindValueToProperty("cuentaSeleccionada");
 		

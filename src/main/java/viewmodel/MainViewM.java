@@ -6,7 +6,7 @@ import org.uqbar.commons.utils.Observable;
 
 @Observable
 public class MainViewM {
-	
+	/*
 	private Collection<String> tipoConsultas = new ArrayList<String>();	
 	private String consultaSeleccionada ;
 	
@@ -35,6 +35,6 @@ public class MainViewM {
 		tipoConsultas.add("Metodologias");
 		tipoConsultas.add("Graficos");
 	}
-	 
+	 */
 
 }
