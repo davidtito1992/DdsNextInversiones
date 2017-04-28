@@ -7,7 +7,12 @@ import java.util.HashSet;
 
 public class RepositorioMaestro {
 
+
+	/********* ATRIBUTOS *********/
+	
 	public static Collection<Empresa> empresas = new ArrayList<Empresa>();
+	
+	/********* METODOS *********/
 
 	// **********Aca deberia ir un parametro para filtrar?*************/
 

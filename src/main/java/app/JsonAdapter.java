@@ -8,7 +8,7 @@ import model.Empresa;
 
 public class JsonAdapter {
 
-	public static Empresa adaptarEmpresa(JSONObject jsonObject){
+	public static Empresa adaptarEmpresa(JSONObject jsonObject) {
 		Gson gson = new Gson();
 		return gson.fromJson(jsonObject.toJSONString(), Empresa.class);
 	}
