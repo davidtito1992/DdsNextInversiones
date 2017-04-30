@@ -1,5 +1,11 @@
 package model;
 
+import org.uqbar.commons.utils.Observable;
+import org.uqbar.commons.utils.Transactional;
+
+@SuppressWarnings("serial")
+@Transactional
+@Observable
 public class Cuenta {
 
 	/********* ATRIBUTOS *********/

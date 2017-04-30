@@ -3,9 +3,12 @@ package viewmodel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import model.Empresa;
 import model.RepositorioMaestro;
 import model.SnapshotEmpresa;
 
+import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
 @Observable
@@ -43,10 +46,12 @@ public class EmpresaViewM {
 
 	public void setNombreSeleccionado(String nombreSeleccionado) {
 		this.nombreSeleccionado = nombreSeleccionado;
-		// Seleccionamos un nombre de una empresa y deberia buscar las cuentas
-		// de esa empresa
-		// parametro :nombreempresa
-		// this.generarCuentas();
+		// Seleccionamos un nombreempresa y si la cuenta==null cargar en base a lo demas seleccionado 
+		//sino lo dejamos como esta
+		//si la anio==null cargar en base a lo demas seleccionado 
+		// sino lo dejamos como esta
+		//si la semestre==null cargar en base a lo demas seleccionado 
+		// sino lo dejamos como esta
 	}
 
 	public String getCuentaSeleccionada() {
@@ -75,10 +80,12 @@ public class EmpresaViewM {
 
 		this.cuentaSeleccionada = cuentaSeleccionada;
 
-		// Seleccionamos un nombre de una empresa,cuenta y deberia buscar los
-		// anios
-		// parametros :nombreempresa :nombrecuenta
-		// this.generarAnios();
+		// Seleccionamos un nombredecuenta y si la empresa==null cargar en base a lo demas seleccionado 
+		//sino lo dejamos como esta
+		//si la anio==null cargar en base a lo demas seleccionado 
+		// sino lo dejamos como esta
+		//si la semestre==null cargar en base a lo demas seleccionado 
+		// sino lo dejamos como esta
 	}
 
 	public Integer getAñoSeleccionado() {
@@ -88,9 +95,13 @@ public class EmpresaViewM {
 	public void setAñoSeleccionado(Integer añoSeleccionado) {
 		this.añoSeleccionado = añoSeleccionado;
 
-		// Seleccionamos un nombre de una empresa, cuenta,anio y deberia buscar
-		// los semestres
-		// parametros :nombreempresa :nombrecuenta :anio
+		// Seleccionamos un anio y si la empresa==null cargar en base a lo demas seleccionado 
+		//sino lo dejamos como esta
+		//si la cuenta==null cargar en base a lo demas seleccionado 
+		// sino lo dejamos como esta
+		//si la semestre==null cargar en base a lo demas seleccionado 
+		// sino lo dejamos como esta
+		
 		// semestre.add(1);
 		// semestre.add(2);
 	}
@@ -105,6 +116,12 @@ public class EmpresaViewM {
 
 	public Integer getSemestreSeleccionado() {
 		return semestreSeleccionado;
+		// Seleccionamos un semestre y si la empresa==null cargar en base a lo demas seleccionado 
+		//sino lo dejamos como esta
+		//si la anio==null cargar en base a lo demas seleccionado 
+		// sino lo dejamos como esta
+		//si la cuenta==null cargar en base a lo demas seleccionado 
+		// sino lo dejamos como esta
 	}
 
 	public void setSemestreSeleccionado(Integer semestreSeleccionado) {
@@ -164,7 +181,7 @@ public class EmpresaViewM {
 	}
 
 	public void llenarTablas() {
-		this.setSnapshotEmpresas(RepositorioMaestro.dameSnapshotEmpresas());
+		this.setSnapshotEmpresas(this.dameSnapshotEmpresas());
 	}
 
 	public void reiniciar() {
@@ -178,17 +195,40 @@ public class EmpresaViewM {
 	}
 
 	public void generarAnios() {
-		this.años = RepositorioMaestro.dameAniosPeriodos();
+		this.años = getRepoEmpresas().dameAniosPeriodos();
 		semestre.add(1);
 		semestre.add(2);
 	}
 
 	public void generarCuentas() {
-		this.cuentas = RepositorioMaestro.dameCuentasEmpresas();
+		this.cuentas = getRepoEmpresas().dameCuentasEmpresas();
 	}
 
 	public void generarNombres() {
-		this.nombres = RepositorioMaestro.dameNombresEmpresas();
+		this.nombres = getRepoEmpresas().dameNombresEmpresas();
+	}
+	
+
+	public RepositorioMaestro getRepoEmpresas() {
+		return (RepositorioMaestro) ApplicationContext.getInstance().getSingleton(Empresa.class);
+	}
+	
+	public ArrayList<SnapshotEmpresa> dameSnapshotEmpresas() {
+		ArrayList<SnapshotEmpresa> listSnapshot = new ArrayList<SnapshotEmpresa>();
+		getRepoEmpresas().allInstances().forEach(empresa -> {
+			empresa.getPeriodos().forEach(periodo -> {
+				periodo.getCuentas().forEach(cuenta -> {
+					SnapshotEmpresa snapshotempresa = new SnapshotEmpresa();
+					snapshotempresa.setCuenta(cuenta.getNombre());
+					snapshotempresa.setValor(cuenta.getValor());
+					snapshotempresa.setNombre(empresa.getNombre());
+					snapshotempresa.setSemestre(periodo.getSemestre());
+					snapshotempresa.setAño(periodo.getAño());
+					listSnapshot.add(snapshotempresa);
+				});
+			});
+		});
+		return listSnapshot;
 	}
 
 }

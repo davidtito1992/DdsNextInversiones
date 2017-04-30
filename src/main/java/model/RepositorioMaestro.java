@@ -1,51 +1,65 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 
-public class RepositorioMaestro {
+import org.apache.commons.collections15.Predicate;
+import org.uqbar.commons.model.CollectionBasedRepo;
+import org.uqbar.commons.utils.Observable;
+
+@Observable
+public class RepositorioMaestro extends CollectionBasedRepo<Empresa> {
 
 
 	/********* ATRIBUTOS *********/
 	
-	public static Collection<Empresa> empresas = new ArrayList<Empresa>();
+	private static RepositorioMaestro instance = new RepositorioMaestro();
+
 	
 	/********* METODOS *********/
-
-	// **********Aca deberia ir un parametro para filtrar?*************/
-
-	public static ArrayList<String> dameNombresEmpresas() {
-		ArrayList<String> nombreEmpresas = new ArrayList<String>();
-		empresas.forEach(name -> (nombreEmpresas.add(name.getNombre())));
-		Collections.sort(nombreEmpresas);
-		return nombreEmpresas;
+	
+	public static RepositorioMaestro repositorioMaestro() {
+		return instance;
+	}
+	
+	@Override
+	public Class<Empresa> getEntityType() {
+		// TODO Auto-generated method stub
+		return Empresa.class;
 	}
 
-	public static ArrayList<SnapshotEmpresa> dameSnapshotEmpresas() {
-		ArrayList<SnapshotEmpresa> listSnapshot = new ArrayList<SnapshotEmpresa>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				periodo.getCuentas().forEach(cuenta -> {
-					SnapshotEmpresa snapshotempresa = new SnapshotEmpresa();
-					snapshotempresa.setCuenta(cuenta.getNombre());
-					snapshotempresa.setValor(cuenta.getValor());
-					snapshotempresa.setNombre(empresa.getNombre());
-					snapshotempresa.setSemestre(periodo.getSemestre());
-					snapshotempresa.setAño(periodo.getAño());
-					listSnapshot.add(snapshotempresa);
-				});
-			});
-		});
-		return listSnapshot;
+	@Override
+	public Empresa createExample() {
+		// TODO Auto-generated method stub
+		return new Empresa();
+	}
+
+	@Override
+	protected Predicate getCriterio(Empresa example) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// **********Aca deberia ir un parametro para filtrar?*************/
-	public static ArrayList<String> dameCuentasEmpresas() {
+    //Estos metodos son los que ya estaban...el framework ya tiene metodos 
+	//para filtrar..despues ver..
+	public ArrayList<String> dameNombresEmpresas() {
+
+		HashSet<String> nombreEmpresas = new HashSet<String>();
+		this.allInstances().forEach(name -> (nombreEmpresas.add(name.getNombre())));
+		ArrayList<String> nombreEmpresasFinal = new ArrayList<String>(nombreEmpresas);
+		Collections.sort(nombreEmpresasFinal);
+		return nombreEmpresasFinal;
+	}
+
+	// **********Aca deberia ir un parametro para filtrar?*************/
+	 //Estos metodos son los que ya estaban...el framework ya tiene metodos 
+		//para filtrar..despues ver..
+	public ArrayList<String> dameCuentasEmpresas() {
 
 		HashSet<String> nombreCuentas = new HashSet<String>();
-		empresas.forEach(empresa -> {
+		this.allInstances().forEach(empresa -> {
 			empresa.getPeriodos().forEach(
 					periodo -> {
 						periodo.getCuentas()
@@ -62,10 +76,12 @@ public class RepositorioMaestro {
 	}
 
 	// **********Aca deberia ir un parametro para filtrar?*************/
-	public static ArrayList<Integer> dameAniosPeriodos() {
+	 //Estos metodos son los que ya estaban...el framework ya tiene metodos 
+		//para filtrar..despues ver..
+	public  ArrayList<Integer> dameAniosPeriodos() {
 
 		HashSet<Integer> cantidadAnios = new HashSet<Integer>();
-		empresas.forEach(empresa -> {
+		this.allInstances().forEach(empresa -> {
 			empresa.getPeriodos().forEach(periodo -> {
 				cantidadAnios.add(periodo.getAño());
 			});

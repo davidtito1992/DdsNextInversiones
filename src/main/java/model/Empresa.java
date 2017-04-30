@@ -2,11 +2,18 @@ package model;
 
 import java.util.Collection;
 
+import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.Observable;
+import org.uqbar.commons.utils.Transactional;
 
+@SuppressWarnings("serial")
+@Transactional
 @Observable
-public class Empresa {
+public class Empresa extends Entity {
 
+	/**
+	 * 
+	 */
 	/********* ATRIBUTOS *********/
 	
 	private String nombre;
