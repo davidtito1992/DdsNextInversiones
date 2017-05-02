@@ -5,11 +5,12 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import model.Empresa;
-import model.RepositorioMaestro;
 import model.SnapshotEmpresa;
 
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
+
+import repositories.RepositorioEmpresa;
 
 @Observable
 public class EmpresaViewM {
@@ -27,8 +28,6 @@ public class EmpresaViewM {
 	private Collection<SnapshotEmpresa> snapshotEmpresas;
 	private SnapshotEmpresa snapshotEmpresaSeleccionada;
 	private SnapshotEmpresa filtro = new SnapshotEmpresa();
-
-	/*************** Comentemos el codigo..please! ***************************/
 
 	/********* GETTERS/SETTERS *********/
 
@@ -209,8 +208,8 @@ public class EmpresaViewM {
 	}
 	
 
-	public RepositorioMaestro getRepoEmpresas() {
-		return (RepositorioMaestro) ApplicationContext.getInstance().getSingleton(Empresa.class);
+	public RepositorioEmpresa getRepoEmpresas() {
+		return (RepositorioEmpresa) ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 	
 	public ArrayList<SnapshotEmpresa> dameSnapshotEmpresas() {

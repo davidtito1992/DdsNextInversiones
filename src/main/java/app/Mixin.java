@@ -4,16 +4,16 @@ import java.io.File;
 import java.io.FileReader;
 
 import model.Empresa;
-import model.RepositorioMaestro;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.uqbar.commons.utils.ApplicationContext;
 
+import repositories.RepositorioEmpresa;
+
 public class Mixin {
-    
-	
+
 	public Mixin (){
 		//a modo de prueba del repo de arena
 		cargarEmpresas();
@@ -40,8 +40,8 @@ public class Mixin {
 		}
 	}
 	
-	public RepositorioMaestro getRepoEmpresas() {
-		return (RepositorioMaestro) ApplicationContext.getInstance().getSingleton(Empresa.class);
+	public RepositorioEmpresa getRepoEmpresas() {
+		return (RepositorioEmpresa) ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 	
 }

@@ -11,9 +11,6 @@ import org.uqbar.commons.utils.Transactional;
 @Observable
 public class Empresa extends Entity {
 
-	/**
-	 * 
-	 */
 	/********* ATRIBUTOS *********/
 	
 	private String nombre;
