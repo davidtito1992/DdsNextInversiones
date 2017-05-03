@@ -1,151 +1,139 @@
-{
-	"empresas": [
-		{
-			"nombre": "Facebook",
-			"periodos": [
-				{
-					"año": "2016"
-					"semestre": "1"
-					"cuentas": [
-						{
-							"nombre":"EBITDA"
-							"valor":"1"
-						},
-						{
-							"nombre":"FDS"
-							"valor":"2"
-						},
-						{
-							"nombre":"FreeCashFlow"
-							"valor":"3"
-						},						{
-							"nombre":"Neto Discontinuas"
-							"valor":"5"
-						},						{
-							"nombre":"Neto Continuas"
-							"valor":"6"
-						}
-					]
-				},
-	  			{
-					"año": "2016"
-					"semestre": "2"
-					"cuentas": [
-						{
-							"nombre":"EBITDA"
-							"valor":"6"
-						},
-						{
-							"nombre":"FDS"
-							"valor":"7"
-						},
-						{
-							"nombre":"FreeCashFlow"
-							"valor":"8"
-						},						{
-							"nombre":"Neto Discontinuas"
-							"valor":"9"
-						},						{
-							"nombre":"Neto Continuas"
-							"valor":"10"
-						}
-					]
-				}
-			]
-		},
-		{
-			"nombre": "Twitter",
-			"periodos": [
-				{
-					"año": "2015"
-					"semestre": "1"
-					"cuentas": [
-						{
-							"nombre":"EBITDA"
-							"valor":"123"
-						},
-						{
-							"nombre":"FDS"
-							"valor":"456"
-						},
-						{
-							"nombre":"FreeCashFlow"
-							"valor":"789"
-						}
-					]
-				},
-	  			{
-					"año": "2015"
-					"semestre": "2"
-					"cuentas": [
-						{
-							"nombre":"EBITDA"
-							"valor":"789"
-						},
-						{
-							"nombre":"FDS"
-							"valor":"456"
-						},
-						{
-							"nombre":"FreeCashFlow"
-							"valor":"123"
-						}
-					]
-				}
-			]
-		},
-				{
-			"nombre": "Google",
-			"periodos": [
-				{
-					"año": "2014"
-					"semestre": "1"
-					"cuentas": [
-						{
-							"nombre":"EBITDA"
-							"valor":"99999"
-						},
-						{
-							"nombre":"FDS"
-							"valor":"99999"
-						},
-						{
-							"nombre":"FreeCashFlow"
-							"valor":"99999"
-						},						{
-							"nombre":"Neto Discontinuas"
-							"valor":"99999"
-						},						{
-							"nombre":"Neto Continuas"
-							"valor":"99999"
-						}
-					]
-				},
-	  			{
-					"año": "2014"
-					"semestre": "2"
-					"cuentas": [
-						{
-							"nombre":"EBITDA"
-							"valor":"99999"
-						},
-						{
-							"nombre":"FDS"
-							"valor":"99999"
-						},
-						{
-							"nombre":"FreeCashFlow"
-							"valor":"99999"
-						},						{
-							"nombre":"Neto Discontinuas"
-							"valor":"99999"
-						},						{
-							"nombre":"Neto Continuas"
-							"valor":"99999"
-						}
-					]
-				}
-			]
-		}
-	]
-}
+[{
+		"nombre": "Facebook",
+		"periodos": [{
+				"año": "2016",
+				"semestre": "1",
+				"cuentas": [{
+						"nombre": "EBITDA",
+						"valor": "1"
+					},
+					{
+						"nombre": "FDS",
+						"valor": "2"
+					},
+					{
+						"nombre": "FreeCashFlow",
+						"valor": "3"
+					}, {
+						"nombre": "Neto Discontinuas",
+						"valor": "5"
+					}, {
+						"nombre": "Neto Continuas",
+						"valor": "6"
+					}
+				]
+			},
+			{
+				"año": "2016",
+				"semestre": "2",
+				"cuentas": [{
+						"nombre": "EBITDA",
+						"valor": "6"
+					},
+					{
+						"nombre": "FDS",
+						"valor": "7"
+					},
+					{
+						"nombre": "FreeCashFlow",
+						"valor": "8"
+					}, {
+						"nombre": "Neto Discontinuas",
+						"valor": "9"
+					}, {
+						"nombre": "Neto Continuas",
+						"valor": "10"
+					}
+				]
+			}
+		]
+	},
+	{
+		"nombre": "Twitter",
+		"periodos": [{
+				"año": "2015",
+				"semestre": "1",
+				"cuentas": [{
+						"nombre": "EBITDA",
+						"valor": "123"
+					},
+					{
+						"nombre": "FDS",
+						"valor": "456"
+					},
+					{
+						"nombre": "FreeCashFlow",
+						"valor": "789"
+					}
+				]
+			},
+			{
+				"año": "2015",
+				"semestre": "2",
+				"cuentas": [{
+						"nombre": "EBITDA",
+						"valor": "789"
+					},
+					{
+						"nombre": "FDS",
+						"valor": "456"
+					},
+					{
+						"nombre": "FreeCashFlow",
+						"valor": "123"
+					}
+				]
+			}
+		]
+	},
+	{
+		"nombre": "Google",
+		"periodos": [{
+				"año": "2014",
+				"semestre": "1",
+				"cuentas": [{
+						"nombre": "EBITDA",
+						"valor": "99999"
+					},
+					{
+						"nombre": "FDS",
+						"valor": "99999"
+					},
+					{
+						"nombre": "FreeCashFlow",
+						"valor": "99999"
+					}, {
+						"nombre": "Neto Discontinuas",
+						"valor": "99999"
+					}, {
+						"nombre": "Neto Continuas",
+						"valor": "99999"
+					}
+				]
+			},
+			{
+				"año": "2014",
+				"semestre": "2",
+				"cuentas": [{
+						"nombre": "EBITDA",
+						"valor": "99999"
+					},
+					{
+						"nombre": "FDS",
+						"valor": "99999"
+					},
+					{
+						"nombre": "FreeCashFlow",
+						"valor": "99999"
+					}, {
+						"nombre": "Neto Discontinuas",
+						"valor": "99999"
+					}, {
+						"nombre": "Neto Continuas",
+						"valor": "99999"
+					}
+				]
+			}
+		]
+	}
+]

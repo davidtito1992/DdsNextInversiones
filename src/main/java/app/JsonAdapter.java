@@ -1,15 +1,18 @@
 package app;
 
-import org.json.simple.JSONObject;
+import java.lang.reflect.Type;
+import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import model.Empresa;
 
 public class JsonAdapter {
 
-	public static Empresa adaptarEmpresa(JSONObject jsonObject) {
-		Gson gson = new Gson();
-		return gson.fromJson(jsonObject.toJSONString(), Empresa.class);
+	public List<Empresa> adaptarEmpresas(String empresas) {
+		Type listType = new TypeToken<List<Empresa>>() {}.getType();
+		List<Empresa> lista = new Gson().fromJson(empresas, listType);
+		return lista;
 	}
 }

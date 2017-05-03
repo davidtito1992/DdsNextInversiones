@@ -1,5 +1,7 @@
 package app;
 
+import java.io.IOException;
+
 import model.Empresa;
 
 import org.uqbar.arena.Application;
@@ -18,7 +20,12 @@ public class NextInversiones extends Application {
 	@Override
 	protected Window<?> createMainWindow() {
 		ApplicationContext.getInstance().configureSingleton(Empresa.class, new RepositorioEmpresa());
-		new Mixin().cargarEmpresas();
+		try {
+			new Inicializador().cargarEmpresas();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return new MainView(this);
 	}
 }
