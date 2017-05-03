@@ -2,6 +2,7 @@ package viewmodel;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import model.Empresa;
@@ -18,24 +19,24 @@ public class EmpresaViewM {
 	/********* ATRIBUTOS *********/
 
 	private String cuentaSeleccionada;
-	private Collection<String> cuentas = new ArrayList<String>();
-	private Collection<String> nombres = new ArrayList<String>();
+	private List<String> cuentas = new ArrayList<String>();
+	private List<String> nombres = new ArrayList<String>();
 	private String nombreSeleccionado;
-	private Collection<Integer> años = new ArrayList<Integer>();
+	private List<Integer> años = new ArrayList<Integer>();
 	private Integer añoSeleccionado;
-	private Collection<Integer> semestre = new ArrayList<Integer>();
+	private List<Integer> semestre = new ArrayList<Integer>();
 	private Integer semestreSeleccionado;
-	private Collection<SnapshotEmpresa> snapshotEmpresas;
+	private List<SnapshotEmpresa> snapshotEmpresas;
 	private SnapshotEmpresa snapshotEmpresaSeleccionada;
 	private SnapshotEmpresa filtro = new SnapshotEmpresa();
 
 	/********* GETTERS/SETTERS *********/
 
-	public Collection<Integer> getAños() {
+	public List<Integer> getAños() {
 		return años;
 	}
 
-	public void setAños(Collection<Integer> años) {
+	public void setAños(List<Integer> años) {
 		this.años = años;
 	}
 
@@ -58,20 +59,20 @@ public class EmpresaViewM {
 		return cuentaSeleccionada;
 	}
 
-	public Collection<String> getCuentas() {
+	public List<String> getCuentas() {
 		return cuentas;
 	}
 
-	public void setCuentas(Collection<String> cuentas) {
+	public void setCuentas(List<String> cuentas) {
 
 		this.cuentas = cuentas;
 	}
 
-	public Collection<String> getNombres() {
+	public List<String> getNombres() {
 		return nombres;
 	}
 
-	public void setNombres(Collection<String> nombres) {
+	public void setNombres(List<String> nombres) {
 		this.nombres = nombres;
 	}
 
@@ -105,11 +106,11 @@ public class EmpresaViewM {
 		// semestre.add(2);
 	}
 
-	public Collection<Integer> getSemestre() {
+	public List<Integer> getSemestre() {
 		return semestre;
 	}
 
-	public void setSemestre(Collection<Integer> semestre) {
+	public void setSemestre(List<Integer> semestre) {
 		this.semestre = semestre;
 	}
 
@@ -127,11 +128,11 @@ public class EmpresaViewM {
 		this.semestreSeleccionado = semestreSeleccionado;
 	}
 
-	public Collection<SnapshotEmpresa> getSnapshotEmpresas() {
+	public List<SnapshotEmpresa> getSnapshotEmpresas() {
 		return snapshotEmpresas;
 	}
 
-	public void setSnapshotEmpresas(Collection<SnapshotEmpresa> snapshotEmpresas) {
+	public void setSnapshotEmpresas(List<SnapshotEmpresa> snapshotEmpresas) {
 		this.snapshotEmpresas = snapshotEmpresas;
 	}
 
@@ -173,7 +174,7 @@ public class EmpresaViewM {
 
 	public void filtrar() {
 		this.llenarTablas();
-		Collection<SnapshotEmpresa> snapshotFiltrado = this.snapshotEmpresas
+		List<SnapshotEmpresa> snapshotFiltrado = this.snapshotEmpresas
 				.stream().filter(snapshot -> condicionFiltrado(snapshot))
 				.collect(Collectors.toList());
 		setSnapshotEmpresas(snapshotFiltrado);

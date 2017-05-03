@@ -1,7 +1,6 @@
 package model;
 
-import java.util.Collection;
-
+import java.util.List;
 import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
@@ -14,7 +13,7 @@ public class Empresa extends Entity {
 	/********* ATRIBUTOS *********/
 	
 	private String nombre;
-	private Collection<Periodo> periodos;
+	private List<Periodo> periodos;
 
 	/********* GETTERS/SETTERS *********/	
 
@@ -26,11 +25,11 @@ public class Empresa extends Entity {
 		this.nombre = nombre;
 	}
 
-	public Collection<Periodo> getPeriodos() {
+	public List<Periodo> getPeriodos() {
 		return periodos;
 	}
 
-	public void setPeriodos(Collection<Periodo> periodos) {
+	public void setPeriodos(List<Periodo> periodos) {
 		this.periodos = periodos;
 	}
 

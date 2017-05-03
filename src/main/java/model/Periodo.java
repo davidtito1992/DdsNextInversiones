@@ -1,11 +1,8 @@
 package model;
 
-import java.util.Collection;
-
+import java.util.List;
 import org.uqbar.commons.utils.Observable;
-import org.uqbar.commons.utils.Transactional;
-@SuppressWarnings("serial")
-@Transactional
+
 @Observable
 public class Periodo {
 
@@ -13,7 +10,7 @@ public class Periodo {
 	
 	private int año;
 	private int semestre;
-	private Collection<Cuenta> cuentas;
+	private List<Cuenta> cuentas;
 
 	/********* GETTERS/SETTERS *********/
 	
@@ -33,11 +30,11 @@ public class Periodo {
 		this.año = año;
 	}
 
-	public Collection<Cuenta> getCuentas() {
+	public List<Cuenta> getCuentas() {
 		return cuentas;
 	}
 
-	public void setCuentas(Collection<Cuenta> cuentas) {
+	public void setCuentas(List<Cuenta> cuentas) {
 		this.cuentas = cuentas;
 	}
 }
