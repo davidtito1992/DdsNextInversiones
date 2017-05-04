@@ -6,11 +6,17 @@ import java.util.Scanner;
 
 public class FileLoader {
 
-	public String readFile(String pathname) throws IOException {
-
-	    File file = new File(pathname);
-	    StringBuilder fileContents = new StringBuilder((int)file.length());
-	    Scanner scanner = new Scanner(file);
+	public String readFile(String pathname) throws Exception {
+	    File file;
+	    StringBuilder fileContents;
+	    Scanner scanner;
+		try {
+		    file = new File(pathname);
+			fileContents = new StringBuilder((int)file.length());
+		    scanner = new Scanner(file);
+		} catch (Exception e) {
+			throw new Exception("Archivo no encontrado, pongalo en el directorio de la aplicación y vuelva a intentarlo.");
+		}
 	    String lineSeparator = System.getProperty("line.separator");
 
 	    try {

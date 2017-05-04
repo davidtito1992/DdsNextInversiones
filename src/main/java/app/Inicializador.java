@@ -12,12 +12,12 @@ import repositories.RepositorioEmpresa;
 
 public class Inicializador {
 
-	public Inicializador () throws IOException{
+	public Inicializador () throws Exception{
 		//a modo de prueba del repo de arena
 		cargarEmpresas();
 	}
 	
-	public  void cargarEmpresas() throws IOException {
+	public  void cargarEmpresas() throws Exception {
 
 		FileLoader cargadorDeArchivos = new FileLoader();
 
