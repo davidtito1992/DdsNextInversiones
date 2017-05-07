@@ -5,7 +5,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import model.Cuenta;
 import model.Empresa;
+import model.Periodo;
 import model.SnapshotEmpresa;
 
 import org.uqbar.commons.utils.ApplicationContext;
@@ -28,7 +30,6 @@ public class EmpresaViewM {
 	private Integer semestreSeleccionado;
 	private List<SnapshotEmpresa> snapshotEmpresas;
 	private SnapshotEmpresa snapshotEmpresaSeleccionada;
-	private SnapshotEmpresa filtro = new SnapshotEmpresa();
 
 	/********* GETTERS/SETTERS *********/
 
@@ -153,45 +154,14 @@ public class EmpresaViewM {
 		generarNombres();
 	}
 
-	public boolean condicionFiltrado(SnapshotEmpresa snapshot) {
-		filtro.setCuenta((cuentaSeleccionada == null) ? snapshot.getCuenta()
-				: cuentaSeleccionada);
-		filtro.setNombre((nombreSeleccionado == null) ? snapshot.getNombre()
-				: nombreSeleccionado);
-		filtro.setSemestre((semestreSeleccionado == null) ? snapshot
-				.getSemestre() : semestreSeleccionado);
-		filtro.setAño((añoSeleccionado == null) ? snapshot.getAño()
-				: añoSeleccionado);
-		return snapshot.equals(filtro);
-	}
-
-	public void limpiarFiltros() {
-		cuentaSeleccionada = null;
-		nombreSeleccionado = null;
-		semestreSeleccionado = null;
-		añoSeleccionado = null;
-	}
-
-	public void filtrar() {
-		this.llenarTablas();
-		List<SnapshotEmpresa> snapshotFiltrado = this.snapshotEmpresas
-				.stream().filter(snapshot -> condicionFiltrado(snapshot))
-				.collect(Collectors.toList());
-		setSnapshotEmpresas(snapshotFiltrado);
-	}
-
 	public void llenarTablas() {
-		this.setSnapshotEmpresas(this.dameSnapshotEmpresas());
+		this.setSnapshotEmpresas(this.dameSnapshotEmpresas(getRepoEmpresas().allInstances()));
 	}
 
 	public void reiniciar() {
 		this.limpiarFiltros();
 		this.llenarTablas();
 		this.snapshotEmpresaSeleccionada = null;
-		// this.años= null ;
-		// this.cuentas= null ;
-		// this.semestre=null ;
-		// this.generarNombres();
 	}
 
 	public void generarAnios() {
@@ -207,15 +177,29 @@ public class EmpresaViewM {
 	public void generarNombres() {
 		this.nombres = getRepoEmpresas().dameNombresEmpresas();
 	}
-	
 
 	public RepositorioEmpresa getRepoEmpresas() {
 		return (RepositorioEmpresa) ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
+		
+	public void limpiarFiltros() {
+		cuentaSeleccionada = null;
+		nombreSeleccionado = null;
+		semestreSeleccionado = null;
+		añoSeleccionado = null;
+	}
+
+	public void filtrar() {
+		ArrayList<SnapshotEmpresa> empresitas = (this.dameSnapshotEmpresas(getRepoEmpresas()
+				.filtrar(cuentaSeleccionada, nombreSeleccionado,
+						semestreSeleccionado, añoSeleccionado)));
+		this.setSnapshotEmpresas(empresitas);
+	}
 	
-	public ArrayList<SnapshotEmpresa> dameSnapshotEmpresas() {
+	public ArrayList<SnapshotEmpresa> dameSnapshotEmpresas(
+			List<Empresa> empresasASnap) {
 		ArrayList<SnapshotEmpresa> listSnapshot = new ArrayList<SnapshotEmpresa>();
-		getRepoEmpresas().allInstances().forEach(empresa -> {
+		empresasASnap.forEach(empresa -> {
 			empresa.getPeriodos().forEach(periodo -> {
 				periodo.getCuentas().forEach(cuenta -> {
 					SnapshotEmpresa snapshotempresa = new SnapshotEmpresa();
@@ -224,11 +208,49 @@ public class EmpresaViewM {
 					snapshotempresa.setNombre(empresa.getNombre());
 					snapshotempresa.setSemestre(periodo.getSemestre());
 					snapshotempresa.setAño(periodo.getAño());
-					listSnapshot.add(snapshotempresa);
+
+					if (agregarALista(empresa, periodo, cuenta)) {
+						listSnapshot.add(snapshotempresa);
+					}
 				});
 			});
 		});
 		return listSnapshot;
+	}
+
+	private boolean agregarALista(Empresa empresa, Periodo periodo,
+			Cuenta cuenta) {
+		boolean agregarALista = true;
+
+		if (nombreSeleccionado == null) {
+			agregarALista = agregarALista && true;
+		} else {
+			agregarALista = agregarALista
+					&& empresa.getNombre().equals(nombreSeleccionado);
+		}
+
+		if (añoSeleccionado == null) {
+			agregarALista = agregarALista && true;
+		} else {
+			agregarALista = agregarALista
+					&& periodo.getAño() == añoSeleccionado;
+		}
+
+		if (semestreSeleccionado == null) {
+			agregarALista = agregarALista && true;
+		} else {
+			agregarALista = agregarALista
+					&& periodo.getSemestre() == semestreSeleccionado;
+		}
+
+		if (cuentaSeleccionada == null) {
+			agregarALista = agregarALista && true;
+		} else {
+			agregarALista = agregarALista
+					&& cuenta.getNombre().equals(cuentaSeleccionada);
+		}
+
+		return agregarALista;
 	}
 
 }

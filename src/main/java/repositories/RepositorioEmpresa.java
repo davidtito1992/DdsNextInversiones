@@ -3,8 +3,12 @@ package repositories;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import model.Empresa;
+import model.Periodo;
+import model.SnapshotEmpresa;
 
 import org.apache.commons.collections15.Predicate;
 import org.uqbar.commons.model.CollectionBasedRepo;
@@ -17,7 +21,6 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	/********* ATRIBUTOS *********/
 	
 	private static RepositorioEmpresa instance = new RepositorioEmpresa();
-
 	
 	/********* METODOS *********/
 	
@@ -93,5 +96,63 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		Collections.sort(nombreCuentasfinal);
 		return nombreCuentasfinal;
 	}
+	
+	public List<Empresa> filtrar(String cuentaSeleccionada,
+			String nombreSeleccionado, Integer semestreSeleccionado,
+			Integer añoSeleccionado) {
+		return this
+				.allInstances()
+				.stream()
+				.filter(empresa -> filtroCuenta(cuentaSeleccionada, empresa)
+						&& filtroNombre(nombreSeleccionado, empresa)
+						&& filtroSemestre(semestreSeleccionado, empresa)
+						&& filtroAnio(añoSeleccionado, empresa))
+				.collect(Collectors.toList());
+	}
 
+	private boolean filtroAnio(Integer añoSeleccionado, Empresa empresa) {
+		if (añoSeleccionado == null) {
+			return true;
+		} else {
+			return empresa.getPeriodos().stream()
+					.anyMatch(periodo -> periodo.getAño() == añoSeleccionado);
+		}
+	}
+
+	private boolean filtroSemestre(Integer semestreSeleccionado, Empresa empresa) {
+		if (semestreSeleccionado == null) {
+			return true;
+		} else {
+			return empresa
+					.getPeriodos()
+					.stream()
+					.anyMatch(
+							periodo -> periodo.getSemestre() == semestreSeleccionado);
+		}
+	}
+	
+	private boolean filtroNombre(String nombreSeleccionado, Empresa empresa) {
+		if(nombreSeleccionado == null){
+			return true;
+		} else {
+			return empresa.getNombre().equals(nombreSeleccionado);
+		}
+	}
+
+	private boolean filtroCuenta(String cuentaSeleccionada, Empresa empresa) {
+		if (cuentaSeleccionada == null) {
+			return true;
+		} else {
+			return empresa
+					.getPeriodos()
+					.stream()
+					.anyMatch(
+							periodo -> periodo
+									.getCuentas()
+									.stream()
+									.anyMatch(
+											cuenta -> cuenta.getNombre()
+													.equals(cuentaSeleccionada)));
+		}
+	}
 }
