@@ -24,6 +24,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	
 	/********* METODOS *********/
 	
+	// LO LLAMA EL INICIALIZADOR 
 	public void cargarListaEmpresas (List<Empresa> empresas){
 		for (int i = 0; i < empresas.size(); i++) {
 			create(empresas.get(i));
@@ -103,6 +104,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		return nombreCuentasfinal;
 	}
 	
+	// METODO PARA FILTRAR UNA LISTA DE EMPRESAS
 	public List<Empresa> filtrar(String cuentaSeleccionada,
 			String nombreSeleccionado, Integer semestreSeleccionado,
 			Integer añoSeleccionado) {

@@ -196,6 +196,7 @@ public class EmpresaViewM {
 		this.setSnapshotEmpresas(empresitas);
 	}
 	
+	// TRANSFORMA EMPRESA EN SNAPSHOT, MOSTRANDO SOLO SNAPSHOTS QUE INTERESAN 
 	public ArrayList<SnapshotEmpresa> dameSnapshotEmpresas(
 			List<Empresa> empresasASnap) {
 		ArrayList<SnapshotEmpresa> listSnapshot = new ArrayList<SnapshotEmpresa>();
@@ -218,6 +219,7 @@ public class EmpresaViewM {
 		return listSnapshot;
 	}
 
+	// FILTRA EMPRESA PARA NO MOSTRAR TODOS SUS DATOS SEGUN FILTROS
 	private boolean agregarALista(Empresa empresa, Periodo periodo,
 			Cuenta cuenta) {
 		boolean agregarALista = true;
