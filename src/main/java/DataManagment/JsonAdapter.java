@@ -1,4 +1,4 @@
-package app;
+package DataManagment;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import com.google.gson.reflect.TypeToken;
 
 import model.Empresa;
 
-public class JsonAdapter {
+public class JsonAdapter implements DataAdapter {
 
 	public List<Empresa> adaptarEmpresas(String empresas) throws Exception {
 		List<Empresa> lista = new ArrayList<Empresa>();

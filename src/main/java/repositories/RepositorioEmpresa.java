@@ -24,6 +24,12 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	
 	/********* METODOS *********/
 	
+	public void cargarListaEmpresas (List<Empresa> empresas){
+		for (int i = 0; i < empresas.size(); i++) {
+			create(empresas.get(i));
+		}
+	}
+	
 	public static RepositorioEmpresa repositorioMaestro() {
 		return instance;
 	}

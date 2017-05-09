@@ -21,7 +21,7 @@ public class NextInversiones extends Application {
 	protected Window<?> createMainWindow() {
 		ApplicationContext.getInstance().configureSingleton(Empresa.class, new RepositorioEmpresa());
 		try {
-			new Inicializador().cargarEmpresas();
+			new InicializadorDeData().cargarEmpresas();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
