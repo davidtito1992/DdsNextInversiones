@@ -4,6 +4,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jface.bindings.keys.ParseException;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -18,7 +20,7 @@ public class JsonAdapter implements DataAdapter {
 			lista = new Gson().fromJson(empresas, listType);
 
 		} catch (Exception e) {
-			throw new Exception("El archivo no pudo ser leido correctamente, verifique la sintaxis y vuelva a intentarlo.");
+			throw new ParseException("El archivo no pudo ser leido correctamente, verifique la sintaxis y vuelva a intentarlo.");
 		}
 		return lista;
 	}

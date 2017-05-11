@@ -1,6 +1,7 @@
 package DataManagment;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -15,8 +16,7 @@ public class FileLoader implements DataLoader {
 			fileContents = new StringBuilder((int) file.length());
 			scanner = new Scanner(file);
 		} catch (Exception e) {
-			throw new Exception(
-					"Archivo no encontrado, pongalo en el directorio de la aplicación y vuelva a intentarlo.");
+			throw new FileNotFoundException("Archivo no encontrado, pongalo en el directorio de la aplicación y vuelva a intentarlo.");
 		}
 		String lineSeparator = System.getProperty("line.separator");
 
