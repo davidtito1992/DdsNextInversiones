@@ -20,7 +20,7 @@ public class NextInversiones extends Application {
 		ApplicationContext.getInstance().configureSingleton(Empresa.class, new RepositorioEmpresa());
 
 			try {
-				new InicializadorDeData().cargarEmpresas();
+				new AppData().cargarEmpresas();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

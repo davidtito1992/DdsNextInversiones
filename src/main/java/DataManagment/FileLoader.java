@@ -3,7 +3,10 @@ package DataManagment;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
+
+import model.Empresa;
 
 public class FileLoader implements DataLoader {
 
@@ -30,9 +33,11 @@ public class FileLoader implements DataLoader {
 		}
 	}
 	
-	public String getData() throws Exception{
+	public List<Empresa> getData() throws Exception{
 		String AbsolutePath = new File(".").getAbsolutePath();
-		return readFile(AbsolutePath + "/empresas.json");
-	}
-	
+		String archivoEmpresas = readFile(AbsolutePath + "/empresas.json");
+		
+		DataAdapter adaptador = DataAdapterFactory.adaptarData("json");
+		return adaptador.adaptarEmpresas(archivoEmpresas);
+	}	
 }
