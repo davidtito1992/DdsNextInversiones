@@ -22,7 +22,7 @@ public class AppData {
 	public void cargarEmpresas() throws Exception {
 		
 		// LEO ARCHIVO YA ADAPTADO
-		DataLoader cargador = DataLoaderFactory.cargarData("archivo"); //segun criterio
+		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.archivo); 
 		List<Empresa> empresas = cargador.getData();	
 		
 		// CARGO EN REPO
