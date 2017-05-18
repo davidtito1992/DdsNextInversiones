@@ -1,12 +1,9 @@
 package viewmodel;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import org.uqbar.commons.utils.Observable;
 
 @Observable
-public class MainViewM {
-
+public class MainViewM  {
 	// COMBOBOX CONSULTAS A REALIZAR
 	
 //	  private Collection<String> tipoConsultas = new ArrayList<String>();
@@ -26,6 +23,4 @@ public class MainViewM {
 //	  
 //	  public void agregarConsultas(){ tipoConsultas.add("Indicadores");
 //	  tipoConsultas.add("Metodologias"); tipoConsultas.add("Graficos"); }
-	 
-
 }

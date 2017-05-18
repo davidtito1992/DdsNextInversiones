@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
+
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -8,7 +10,9 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
+import org.uqbar.ui.view.ErrorViewer;
 
+import app.AppData;
 import viewmodel.MainViewM;
 
 @SuppressWarnings("serial")
@@ -22,8 +26,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 	/***************************** panel maestro:label , tablas , buttons, etc ************************/
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
-		// TODO Auto-generated method stub
-
+		// TODO Auto-generated method stub	
 		this.setTitle("Next-Inversiones");
 
 		mainPanel.setLayout(new VerticalLayout());
@@ -81,13 +84,16 @@ public class MainView extends SimpleWindow<MainViewM> {
 	}
 
 	public void verEmpresas() {
-
-		System.out.println("Accediendo para...");
-		Dialog<?> dialog = new EmpresaView(this);
-		dialog.open();
-		dialog.onAccept(() -> {
-		});
-
+		try {
+			new AppData().cargarEmpresas();
+			System.out.println("Accediendo para...");
+			Dialog<?> dialog = new EmpresaView(this);
+			dialog.open();
+			dialog.onAccept(() -> {
+			});
+		} catch (Exception e) {
+			showInfo(e.getMessage());
+		}
 	}
 	/*
 	 * public void abrirConsulta(){

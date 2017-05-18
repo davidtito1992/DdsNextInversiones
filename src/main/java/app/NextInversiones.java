@@ -19,12 +19,7 @@ public class NextInversiones extends Application {
 	protected Window<?> createMainWindow() {
 		ApplicationContext.getInstance().configureSingleton(Empresa.class, new RepositorioEmpresa());
 
-			try {
-				new AppData().cargarEmpresas();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
 
 		return new MainView(this);
 	}
