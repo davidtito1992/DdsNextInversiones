@@ -9,6 +9,7 @@ import java.util.Scanner;
 import model.Empresa;
 
 public class FileLoader implements DataLoader {
+	private String nombreArchivo = "empresas.json";
 
 	public String readFile(String pathname) throws Exception {
 		File file;
@@ -35,9 +36,14 @@ public class FileLoader implements DataLoader {
 	
 	public List<Empresa> getData() throws Exception{
 		String AbsolutePath = new File(".").getAbsolutePath();
-		String archivoEmpresas = readFile(AbsolutePath + "/empresas.json");
+		String archivoEmpresas = readFile(AbsolutePath + "/" + nombreArchivo);
 		
 		DataAdapter adaptador = DataAdapterFactory.adaptarData("json");
 		return adaptador.adaptarEmpresas(archivoEmpresas);
 	}	
+	
+	public FileLoader setNombreArchivo(String nombre){
+		this.nombreArchivo = nombre;
+		return this;
+	}
 }
