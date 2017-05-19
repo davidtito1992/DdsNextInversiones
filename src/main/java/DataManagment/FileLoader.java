@@ -38,7 +38,7 @@ public class FileLoader implements DataLoader {
 		String AbsolutePath = new File(".").getAbsolutePath();
 		String archivoEmpresas = readFile(AbsolutePath + "/" + nombreArchivo);
 		
-		DataAdapter adaptador = DataAdapterFactory.adaptarData("json");
+		DataAdapter adaptador = DataAdapterFactory.adaptarData(DataAdapterFactory.json);
 		return adaptador.adaptarEmpresas(archivoEmpresas);
 	}	
 	
