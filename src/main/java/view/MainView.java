@@ -92,6 +92,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 			dialog.onAccept(() -> {
 			});
 		} catch (Exception e) {
+			
 			showInfo(e.getMessage());
 		}
 	}

@@ -13,12 +13,6 @@ import DataManagment.DataLoaderFactory;
 import repositories.RepositorioEmpresa;
 
 public class AppData {
-
-	public AppData () throws Exception{
-		//a modo de prueba del repo de arena
-		cargarEmpresas();
-	}
-	
 	public void cargarEmpresas() throws Exception {
 		
 		// LEO ARCHIVO YA ADAPTADO

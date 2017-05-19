@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import model.Empresa;
-import model.Periodo;
-import model.SnapshotEmpresa;
-
 import org.apache.commons.collections15.Predicate;
 import org.uqbar.commons.model.CollectionBasedRepo;
 import org.uqbar.commons.utils.Observable;
