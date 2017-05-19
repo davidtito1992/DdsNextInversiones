@@ -10,6 +10,7 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 
+import repositories.RepositorioEmpresa;
 import model.*;
 import viewmodel.*;
 
@@ -17,9 +18,9 @@ import viewmodel.*;
 public class EmpresaView extends Dialog<EmpresaViewM> {
 
 	@SuppressWarnings("rawtypes")
-	public EmpresaView(SimpleWindow owner) {
+	public EmpresaView(SimpleWindow owner,RepositorioEmpresa repoEmpresa) {
 
-		super(owner, new EmpresaViewM());
+		super(owner, new EmpresaViewM(repoEmpresa));
 	}
 
 	@Override

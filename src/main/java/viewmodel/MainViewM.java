@@ -2,8 +2,21 @@ package viewmodel;
 
 import org.uqbar.commons.utils.Observable;
 
+import repositories.RepositorioEmpresa;
+
 @Observable
 public class MainViewM  {
+	
+	RepositorioEmpresa repoEmpresa;
+	
+	public MainViewM (RepositorioEmpresa repoEmpresa){
+		this.repoEmpresa= repoEmpresa;
+	}
+	
+	public RepositorioEmpresa damerepoEmpresas(){
+		return this.repoEmpresa ;
+	}
+	
 	// COMBOBOX CONSULTAS A REALIZAR
 	
 //	  private Collection<String> tipoConsultas = new ArrayList<String>();

@@ -12,14 +12,15 @@ import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.ui.view.ErrorViewer;
 
+import repositories.RepositorioEmpresa;
 import app.AppData;
 import viewmodel.MainViewM;
 
 @SuppressWarnings("serial")
 public class MainView extends SimpleWindow<MainViewM> {
 
-	public MainView(WindowOwner parent) {
-		super(parent, new MainViewM());
+	public MainView(WindowOwner parent,RepositorioEmpresa repoEmpresa) {
+		super(parent, new MainViewM(repoEmpresa));
 
 	}
 
@@ -85,9 +86,9 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 	public void verEmpresas() {
 		try {
-			new AppData().cargarEmpresas();
-			System.out.println("Accediendo para...");
-			Dialog<?> dialog = new EmpresaView(this);
+			new AppData(this.getModelObject().damerepoEmpresas()).cargarEmpresas();
+			System.out.println("Accediendo para ver las empresas...");
+			Dialog<?> dialog = new EmpresaView(this, this.getModelObject().damerepoEmpresas());
 			dialog.open();
 			dialog.onAccept(() -> {
 			});

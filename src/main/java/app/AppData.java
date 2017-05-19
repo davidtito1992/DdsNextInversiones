@@ -4,8 +4,6 @@ import java.util.List;
 
 import model.Empresa;
 
-import org.uqbar.commons.utils.ApplicationContext;
-
 import DataManagment.DataAdapter;
 import DataManagment.DataAdapterFactory;
 import DataManagment.DataLoader;
@@ -13,6 +11,12 @@ import DataManagment.DataLoaderFactory;
 import repositories.RepositorioEmpresa;
 
 public class AppData {
+	private RepositorioEmpresa repositorioEmpresa ;
+	
+	public AppData(RepositorioEmpresa repositorioEmpresa ){
+		this.repositorioEmpresa = repositorioEmpresa ;
+		
+	}
 	public void cargarEmpresas() throws Exception {
 		
 		// LEO ARCHIVO YA ADAPTADO
@@ -25,7 +29,7 @@ public class AppData {
 	}
 
 	public RepositorioEmpresa getRepoEmpresas() {
-		return (RepositorioEmpresa) ApplicationContext.getInstance().getSingleton(Empresa.class);
+		return this.repositorioEmpresa ;
 	}
 	
 }

@@ -30,6 +30,15 @@ public class EmpresaViewM {
 	private Integer semestreSeleccionado;
 	private List<SnapshotEmpresa> snapshotEmpresas;
 	private SnapshotEmpresa snapshotEmpresaSeleccionada;
+	private RepositorioEmpresa repositorioEmpresa;
+	
+
+	public EmpresaViewM(RepositorioEmpresa repoEmpresa) {
+		this.repositorioEmpresa= repoEmpresa ;
+		generarAnios();
+		generarCuentas();
+		generarNombres();
+	}
 
 	/********* GETTERS/SETTERS *********/
 
@@ -148,12 +157,6 @@ public class EmpresaViewM {
 
 	/********* METODOS *********/
 
-	public EmpresaViewM() {
-		generarAnios();
-		generarCuentas();
-		generarNombres();
-	}
-
 	public void llenarTablas() {
 		this.setSnapshotEmpresas(this.dameSnapshotEmpresas(getRepoEmpresas().allInstances()));
 	}
@@ -179,7 +182,8 @@ public class EmpresaViewM {
 	}
 
 	public RepositorioEmpresa getRepoEmpresas() {
-		return (RepositorioEmpresa) ApplicationContext.getInstance().getSingleton(Empresa.class);
+    return this.repositorioEmpresa;
+		//return (RepositorioEmpresa) ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 		
 	public void limpiarFiltros() {
