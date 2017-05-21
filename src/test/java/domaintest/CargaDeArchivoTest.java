@@ -9,12 +9,12 @@ import DataManagment.FileLoader;
 public class CargaDeArchivoTest {
 	@Test(expected = FileNotFoundException.class)
 	public void cargarArchivoInexistente() throws Exception {
-		new FileLoader().setNombreArchivo("NombreQueNoExiste.json").getData();
+		new FileLoader("NombreQueNoExiste.json").getData();
     }
 	
 	@Test
 	public void cargaExistosaDeArchivo() throws Exception{
-		new FileLoader().getData();
+		new FileLoader("empresas.json").getData();
 		//No rompe el codigo si carga una empresa correcta		
 	}
 

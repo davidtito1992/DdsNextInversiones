@@ -2,14 +2,20 @@ package DataManagment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 import model.Empresa;
 
 public class FileLoader implements DataLoader {
-	private String nombreArchivo = "empresas.json";
+	private String nombreArchivo ;
+
+//Al construir objetos con los elementos necesarios para su utilidad, desacoplamos...
+	
+	public FileLoader(String unNombreDeArchivo){
+		
+		this.nombreArchivo = unNombreDeArchivo ;
+	}
 
 	public String readFile(String pathname) throws Exception {
 		File file;
@@ -38,12 +44,8 @@ public class FileLoader implements DataLoader {
 		String AbsolutePath = new File(".").getAbsolutePath();
 		String archivoEmpresas = readFile(AbsolutePath + "/" + nombreArchivo);
 		
-		DataAdapter adaptador = DataAdapterFactory.adaptarData(DataAdapterFactory.json);
+		DataAdapter adaptador =  DataAdapterFactory.adaptarData(DataAdapterFactory.JSON);
 		return adaptador.adaptarEmpresas(archivoEmpresas);
 	}	
-	
-	public FileLoader setNombreArchivo(String nombre){
-		this.nombreArchivo = nombre;
-		return this;
-	}
+
 }

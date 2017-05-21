@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.Color;
-import java.io.FileNotFoundException;
-
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -10,8 +8,6 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
-import org.uqbar.ui.view.ErrorViewer;
-
 import repositories.RepositorioEmpresa;
 import app.AppData;
 import viewmodel.MainViewM;
@@ -86,8 +82,9 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 	public void verEmpresas() {
 		try {
-			new AppData(this.getModelObject().damerepoEmpresas()).cargarEmpresas();
+			new AppData().cargarEmpresasEn(this.getModelObject().damerepoEmpresas());
 			System.out.println("Accediendo para ver las empresas...");
+			
 			Dialog<?> dialog = new EmpresaView(this, this.getModelObject().damerepoEmpresas());
 			dialog.open();
 			dialog.onAccept(() -> {

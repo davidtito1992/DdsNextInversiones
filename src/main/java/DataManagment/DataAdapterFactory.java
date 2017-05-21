@@ -4,7 +4,7 @@ public class DataAdapterFactory {
 	
 	/********* ATRIBUTOS *********/
 	
-	public static final String json = "json";
+	public static final String JSON = "json";
 
 	/********* METODOS *********/
 
