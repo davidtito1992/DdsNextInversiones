@@ -18,7 +18,7 @@ public class FactoryTests {
 	
 	@Test(expected = Exception.class)
 	public void noCreoUnFileLoaderTest() throws Exception{
-		assertEquals(DataLoaderFactory.cargarData("tipo inexistente").getClass(),null);
+		DataLoaderFactory.cargarData("tipo inexistente");
 	}
 	
 	@Test
@@ -28,6 +28,6 @@ public class FactoryTests {
 	
 	@Test(expected = Exception.class)
 	public void noCreoUnJsonAdapterTest() throws Exception{
-		assertEquals(DataAdapterFactory.adaptarData("tipo inexistente").getClass(),null);
+		DataAdapterFactory.adaptarData("tipo inexistente");
 	}
 }
