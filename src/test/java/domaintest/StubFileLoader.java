@@ -1,45 +1,41 @@
-package DataManagment;
+package domaintest;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
+import DataManagment.DataAdapter;
+import DataManagment.DataAdapterFactory;
+import DataManagment.DataLoader;
 import model.Empresa;
 
-public class FileLoader implements DataLoader {
-
-//Al construir objetos con los elementos necesarios para su utilidad, desacoplamos...
-
+public class StubFileLoader implements DataLoader{
+	
 	public String readFile(String pathname) throws Exception {
 		File file;
 		StringBuilder fileContents;
-		Scanner scanner;
+		Scanner scanner = null;
 		try {
 			file = new File(pathname);
 			fileContents = new StringBuilder((int) file.length());
 			scanner = new Scanner(file);
+			scanner.close();
+			return fileContents.toString();
 		} catch (Exception e) {
 			throw new FileNotFoundException("Archivo no encontrado, pongalo en el directorio de la aplicación y vuelva a intentarlo.");
 		}
-		String lineSeparator = System.getProperty("line.separator");
-
-		try {
-			while (scanner.hasNextLine()) {
-				fileContents.append(scanner.nextLine() + lineSeparator);
-			}
-			scanner.close();//No puede estar en el finally, porque si no hay archivo, rompe la sentencia close.
-			return fileContents.toString();
-		} finally {
+		finally {
 		}
 	}
 	
-	public List<Empresa> getData() throws Exception{
+	public List<Empresa> getData() throws Exception {
 		String AbsolutePath = new File(".").getAbsolutePath();
-		String archivoEmpresas = readFile(AbsolutePath + "/empresas.json");
+		String archivoEmpresas = readFile(AbsolutePath + "/archivoInexistente.json");
 		
 		DataAdapter adaptador =  DataAdapterFactory.adaptarData(DataAdapterFactory.JSON);
 		return adaptador.adaptarEmpresas(archivoEmpresas);
-	}	
-
+               
+		
+	}
 }

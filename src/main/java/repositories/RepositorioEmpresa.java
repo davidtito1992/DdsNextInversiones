@@ -61,7 +61,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 				.collect(Collectors.toList());
 	}
 
-	private boolean filtroAnio(Integer añoSeleccionado, Empresa empresa) {
+	public boolean filtroAnio(Integer añoSeleccionado, Empresa empresa) {
 		if (añoSeleccionado == null) {
 			return true;
 		} else {
@@ -70,7 +70,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		}
 	}
 
-	private boolean filtroSemestre(Integer semestreSeleccionado, Empresa empresa) {
+	public boolean filtroSemestre(Integer semestreSeleccionado, Empresa empresa) {
 		if (semestreSeleccionado == null) {
 			return true;
 		} else {
@@ -82,7 +82,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		}
 	}
 	
-	private boolean filtroNombre(String nombreSeleccionado, Empresa empresa) {
+	public boolean filtroNombre(String nombreSeleccionado, Empresa empresa) {
 		if(nombreSeleccionado == null){
 			return true;
 		} else {
@@ -90,7 +90,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		}
 	}
 
-	private boolean filtroCuenta(String cuentaSeleccionada, Empresa empresa) {
+	public boolean filtroCuenta(String cuentaSeleccionada, Empresa empresa) {
 		if (cuentaSeleccionada == null) {
 			return true;
 		} else {

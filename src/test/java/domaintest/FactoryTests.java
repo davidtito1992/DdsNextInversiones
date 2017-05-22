@@ -13,7 +13,7 @@ public class FactoryTests {
 
 	@Test
 	public void creoUnFileLoaderTest(){
-		assertEquals(DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO).getClass(),new FileLoader("empresas.json").getClass());
+		assertEquals(DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO).getClass(),new FileLoader().getClass());
 	}
 	
 	@Test
