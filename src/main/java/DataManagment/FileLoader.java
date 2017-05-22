@@ -9,7 +9,8 @@ import model.Empresa;
 
 public class FileLoader implements DataLoader {
 
-//Al construir objetos con los elementos necesarios para su utilidad, desacoplamos...
+	// Al construir objetos con los elementos necesarios para su utilidad,
+	// desacoplamos...
 
 	public String readFile(String pathname) throws Exception {
 		File file;
@@ -20,7 +21,8 @@ public class FileLoader implements DataLoader {
 			fileContents = new StringBuilder((int) file.length());
 			scanner = new Scanner(file);
 		} catch (Exception e) {
-			throw new FileNotFoundException("Archivo no encontrado, pongalo en el directorio de la aplicación y vuelva a intentarlo.");
+			throw new FileNotFoundException(
+					"Archivo no encontrado, pongalo en el directorio de la aplicación y vuelva a intentarlo.");
 		}
 		String lineSeparator = System.getProperty("line.separator");
 
@@ -28,18 +30,20 @@ public class FileLoader implements DataLoader {
 			while (scanner.hasNextLine()) {
 				fileContents.append(scanner.nextLine() + lineSeparator);
 			}
-			scanner.close();//No puede estar en el finally, porque si no hay archivo, rompe la sentencia close.
+			scanner.close();// No puede estar en el finally, porque si no hay
+							// archivo, rompe la sentencia close.
 			return fileContents.toString();
 		} finally {
 		}
 	}
-	
-	public List<Empresa> getData() throws Exception{
+
+	public List<Empresa> getData() throws Exception {
 		String AbsolutePath = new File(".").getAbsolutePath();
 		String archivoEmpresas = readFile(AbsolutePath + "/empresas.json");
-		
-		DataAdapter adaptador =  DataAdapterFactory.adaptarData(DataAdapterFactory.JSON);
+
+		DataAdapter adaptador = DataAdapterFactory
+				.adaptarData(DataAdapterFactory.JSON);
 		return adaptador.adaptarEmpresas(archivoEmpresas);
-	}	
+	}
 
 }

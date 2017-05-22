@@ -18,7 +18,7 @@ import viewmodel.*;
 public class EmpresaView extends Dialog<EmpresaViewM> {
 
 	@SuppressWarnings("rawtypes")
-	public EmpresaView(SimpleWindow owner,RepositorioEmpresa repoEmpresa) {
+	public EmpresaView(SimpleWindow owner, RepositorioEmpresa repoEmpresa) {
 
 		super(owner, new EmpresaViewM(repoEmpresa));
 	}

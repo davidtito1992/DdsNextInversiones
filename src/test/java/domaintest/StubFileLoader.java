@@ -10,8 +10,8 @@ import DataManagment.DataAdapterFactory;
 import DataManagment.DataLoader;
 import model.Empresa;
 
-public class StubFileLoader implements DataLoader{
-	
+public class StubFileLoader implements DataLoader {
+
 	public String readFile(String pathname) throws Exception {
 		File file;
 		StringBuilder fileContents;
@@ -23,19 +23,20 @@ public class StubFileLoader implements DataLoader{
 			scanner.close();
 			return fileContents.toString();
 		} catch (Exception e) {
-			throw new FileNotFoundException("Archivo no encontrado, pongalo en el directorio de la aplicación y vuelva a intentarlo.");
-		}
-		finally {
+			throw new FileNotFoundException(
+					"Archivo no encontrado, pongalo en el directorio de la aplicación y vuelva a intentarlo.");
+		} finally {
 		}
 	}
-	
+
 	public List<Empresa> getData() throws Exception {
 		String AbsolutePath = new File(".").getAbsolutePath();
-		String archivoEmpresas = readFile(AbsolutePath + "/archivoInexistente.json");
-		
-		DataAdapter adaptador =  DataAdapterFactory.adaptarData(DataAdapterFactory.JSON);
+		String archivoEmpresas = readFile(AbsolutePath
+				+ "/archivoInexistente.json");
+
+		DataAdapter adaptador = DataAdapterFactory
+				.adaptarData(DataAdapterFactory.JSON);
 		return adaptador.adaptarEmpresas(archivoEmpresas);
-               
-		
+
 	}
 }

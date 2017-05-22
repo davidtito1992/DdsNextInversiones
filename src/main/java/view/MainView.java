@@ -15,7 +15,7 @@ import viewmodel.MainViewM;
 @SuppressWarnings("serial")
 public class MainView extends SimpleWindow<MainViewM> {
 
-	public MainView(WindowOwner parent,RepositorioEmpresa repoEmpresa) {
+	public MainView(WindowOwner parent, RepositorioEmpresa repoEmpresa) {
 		super(parent, new MainViewM(repoEmpresa));
 
 	}
@@ -23,7 +23,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 	/***************************** panel maestro:label , tablas , buttons, etc ************************/
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
 		this.setTitle("Next-Inversiones");
 
 		mainPanel.setLayout(new VerticalLayout());
@@ -82,15 +82,17 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 	public void verEmpresas() {
 		try {
-			new AppData().cargarEmpresasEn(this.getModelObject().damerepoEmpresas());
+			new AppData().cargarEmpresasEn(this.getModelObject()
+					.damerepoEmpresas());
 			System.out.println("Accediendo para ver las empresas...");
-			
-			Dialog<?> dialog = new EmpresaView(this, this.getModelObject().damerepoEmpresas());
+
+			Dialog<?> dialog = new EmpresaView(this, this.getModelObject()
+					.damerepoEmpresas());
 			dialog.open();
 			dialog.onAccept(() -> {
 			});
 		} catch (Exception e) {
-			
+
 			showInfo(e.getMessage());
 		}
 	}

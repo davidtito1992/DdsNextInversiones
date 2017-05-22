@@ -16,11 +16,13 @@ public class JsonAdapter implements DataAdapter {
 	public List<Empresa> adaptarEmpresas(String empresas) throws Exception {
 		List<Empresa> lista = new ArrayList<Empresa>();
 		try {
-			Type listType = new TypeToken<List<Empresa>>() {}.getType();
+			Type listType = new TypeToken<List<Empresa>>() {
+			}.getType();
 			lista = new Gson().fromJson(empresas, listType);
 
 		} catch (Exception e) {
-			throw new ParseException("El archivo no pudo ser leido correctamente, verifique la sintaxis y vuelva a intentarlo.");
+			throw new ParseException(
+					"El archivo no pudo ser leido correctamente, verifique la sintaxis y vuelva a intentarlo.");
 		}
 		return lista;
 	}

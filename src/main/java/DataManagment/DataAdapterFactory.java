@@ -1,13 +1,12 @@
 package DataManagment;
 
 public class DataAdapterFactory {
-	
+
 	/********* ATRIBUTOS *********/
-	
+
 	public static final String JSON = "json";
 
-	/********* METODOS 
-	 * @throws Exception *********/
+	/********* METODOS **********/
 
 	public static DataAdapter adaptarData(String criteria) throws Exception {
 
@@ -15,7 +14,7 @@ public class DataAdapterFactory {
 			return new JsonAdapter();
 		}
 
-		throw new Exception ("Tipo de DataAdapter inexistente");
+		throw new Exception("Tipo de DataAdapter inexistente");
 
 	}
 

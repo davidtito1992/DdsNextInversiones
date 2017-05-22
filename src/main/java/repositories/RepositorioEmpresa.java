@@ -10,24 +10,23 @@ import org.uqbar.commons.utils.Observable;
 @Observable
 public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 
-
 	/********* ATRIBUTOS *********/
-	
+
 	private static RepositorioEmpresa instance = new RepositorioEmpresa();
-	
+
 	/********* METODOS *********/
-	
-	// LO LLAMA EL INICIALIZADOR 
-	public void cargarListaEmpresas (List<Empresa> empresas){
+
+	// LO LLAMA EL INICIALIZADOR
+	public void cargarListaEmpresas(List<Empresa> empresas) {
 		for (int i = 0; i < empresas.size(); i++) {
 			create(empresas.get(i));
 		}
 	}
-	
+
 	public static RepositorioEmpresa repositorioMaestro() {
 		return instance;
 	}
-	
+
 	@Override
 	public Class<Empresa> getEntityType() {
 		// TODO Auto-generated method stub
@@ -46,7 +45,6 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		return null;
 	}
 
-	
 	// METODO PARA FILTRAR UNA LISTA DE EMPRESAS
 	public List<Empresa> filtrar(String cuentaSeleccionada,
 			String nombreSeleccionado, Integer semestreSeleccionado,
@@ -81,9 +79,9 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 							periodo -> periodo.getSemestre() == semestreSeleccionado);
 		}
 	}
-	
+
 	public boolean filtroNombre(String nombreSeleccionado, Empresa empresa) {
-		if(nombreSeleccionado == null){
+		if (nombreSeleccionado == null) {
 			return true;
 		} else {
 			return empresa.getNombre().equals(nombreSeleccionado);
