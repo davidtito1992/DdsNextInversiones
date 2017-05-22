@@ -6,15 +6,16 @@ public class DataAdapterFactory {
 	
 	public static final String JSON = "json";
 
-	/********* METODOS *********/
+	/********* METODOS 
+	 * @throws Exception *********/
 
-	public static DataAdapter adaptarData(String criteria) {
+	public static DataAdapter adaptarData(String criteria) throws Exception {
 
 		if (criteria.equals("json")) {
 			return new JsonAdapter();
 		}
 
-		return null;
+		throw new Exception ("Tipo de DataAdapter inexistente");
 
 	}
 

@@ -6,15 +6,18 @@ public class DataLoaderFactory {
 	
 	public static final String ARCHIVO = "archivo";
     private static final String NOMBREDEARCHIVO = "empresas.json";
-	/********* METODOS *********/
+	/********* METODOS 
+	 * @throws Exception *********/
 	
-	public static DataLoader cargarData(String criteria){
+	public static DataLoader cargarData(String criteria) throws Exception{
 		
+
 		if (criteria.equals("archivo")){
 			return new FileLoader();
-		}
+		}	
 		
-		return null;
+		throw new Exception("tipo de DataLoader inexistente");
+
 		
 	}
 	
