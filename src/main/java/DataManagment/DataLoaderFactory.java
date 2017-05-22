@@ -5,7 +5,6 @@ public class DataLoaderFactory {
 	/********* ATRIBUTOS *********/
 	
 	public static final String ARCHIVO = "archivo";
-    private static final String NOMBREDEARCHIVO = "empresas.json";
 	/********* METODOS 
 	 * @throws Exception *********/
 	
