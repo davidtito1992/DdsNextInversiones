@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+
 import model.Cuenta;
 import model.Empresa;
 import model.Periodo;
 import model.SnapshotEmpresa;
+
+import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
+
 import repositories.RepositorioEmpresa;
 
 @Observable
@@ -26,7 +30,6 @@ public class EmpresaViewM {
 	private Integer semestreSeleccionado;
 	private List<SnapshotEmpresa> snapshotEmpresas;
 	private SnapshotEmpresa snapshotEmpresaSeleccionada;
-	private RepositorioEmpresa repositorioEmpresa;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -161,9 +164,8 @@ public class EmpresaViewM {
 
 	/********* METODOS *********/
 
-	public EmpresaViewM(RepositorioEmpresa repoEmpresa) {
+	public EmpresaViewM() {
 
-		this.repositorioEmpresa = repoEmpresa;
 		this.generarTodosLosCBox(null, null, null, null);
 
 	}
@@ -185,7 +187,7 @@ public class EmpresaViewM {
 			Integer anio, Integer semestre) {
 
 		List<Empresa> repoEmpresa2 = new ArrayList<Empresa>();
-		repoEmpresa2 = this.repositorioEmpresa.filtrar(cuenta, empresa,
+		repoEmpresa2 = this.getRepoEmpresas().filtrar(cuenta, empresa,
 				semestre, anio);
 
 		generarCBoxNombresEmpresas(repoEmpresa2);
@@ -267,7 +269,8 @@ public class EmpresaViewM {
 	}
 
 	public RepositorioEmpresa getRepoEmpresas() {
-		return this.repositorioEmpresa;
+	 
+		return  ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 
 	public void limpiarFiltros() {

@@ -15,10 +15,8 @@ public class NextInversiones extends Application {
 
 	@Override
 	protected Window<?> createMainWindow() {
-		ApplicationContext.getInstance().configureSingleton(Empresa.class,
-				new RepositorioEmpresa());
+		ApplicationContext.getInstance().configureSingleton(Empresa.class,new RepositorioEmpresa());
 
-		return new MainView(this, ApplicationContext.getInstance()
-				.getSingleton(Empresa.class));
+		return new MainView(this);
 	}
 }

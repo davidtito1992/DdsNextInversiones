@@ -9,12 +9,8 @@ public class MainViewM {
 
 	RepositorioEmpresa repoEmpresa;
 
-	public MainViewM(RepositorioEmpresa repoEmpresa) {
-		this.repoEmpresa = repoEmpresa;
-	}
-
-	public RepositorioEmpresa dameRepoEmpresas() {
-		return this.repoEmpresa;
+	public MainViewM( ) {
+		
 	}
 
 	// COMBOBOX CONSULTAS A REALIZAR
