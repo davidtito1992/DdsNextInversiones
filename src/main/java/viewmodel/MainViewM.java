@@ -13,7 +13,7 @@ public class MainViewM {
 		this.repoEmpresa = repoEmpresa;
 	}
 
-	public RepositorioEmpresa damerepoEmpresas() {
+	public RepositorioEmpresa dameRepoEmpresas() {
 		return this.repoEmpresa;
 	}
 

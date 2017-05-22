@@ -83,11 +83,11 @@ public class MainView extends SimpleWindow<MainViewM> {
 	public void verEmpresas() {
 		try {
 			new AppData().cargarEmpresasEn(this.getModelObject()
-					.damerepoEmpresas());
+					.dameRepoEmpresas());
 			System.out.println("Accediendo para ver las empresas...");
 
 			Dialog<?> dialog = new EmpresaView(this, this.getModelObject()
-					.damerepoEmpresas());
+					.dameRepoEmpresas());
 			dialog.open();
 			dialog.onAccept(() -> {
 			});

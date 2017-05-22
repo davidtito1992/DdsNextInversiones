@@ -13,7 +13,7 @@ public class FiltrosUnitariosTest {
 
 	RepositorioEmpresa repo = new RepositorioEmpresa();
 
-	public Empresa CrearEmpresaTest() {
+	public Empresa crearEmpresaTest() {
 		Empresa emp = new Empresa();
 		Periodo per = new Periodo();
 		Cuenta cue = new Cuenta();
@@ -34,56 +34,56 @@ public class FiltrosUnitariosTest {
 
 	@Test
 	public void filtroNombreCorrecto() {
-		Empresa emp = CrearEmpresaTest();
+		Empresa emp = crearEmpresaTest();
 		assertEquals(true, repo.filtroNombre("Google", emp));
 	}
 
 	@Test
 	public void filtroNombreIncorrecto() {
-		Empresa emp = CrearEmpresaTest();
+		Empresa emp = crearEmpresaTest();
 		assertEquals(false, repo.filtroNombre("NombreIncorrecto", emp));
 	}
 
 	@Test
 	public void filtroAnioCorrecto() {
-		Empresa emp = CrearEmpresaTest();
+		Empresa emp = crearEmpresaTest();
 		assertEquals(true, repo.filtroAnio(2017, emp));
 	}
 
 	@Test
 	public void filtroAnioIncorrecto() {
-		Empresa emp = CrearEmpresaTest();
+		Empresa emp = crearEmpresaTest();
 		assertEquals(false, repo.filtroAnio(1810, emp));
 	}
 
 	@Test
 	public void filtroSemestreCorrecto() {
-		Empresa emp = CrearEmpresaTest();
+		Empresa emp = crearEmpresaTest();
 		assertEquals(true, repo.filtroSemestre(2, emp));
 	}
 
 	@Test
 	public void filtroSemestreIncorrecto() {
-		Empresa emp = CrearEmpresaTest();
+		Empresa emp = crearEmpresaTest();
 		assertEquals(false, repo.filtroSemestre(97979, emp));
 	}
 
 	@Test
 	public void filtroCuentaCorrecto() {
-		Empresa emp = CrearEmpresaTest();
+		Empresa emp = crearEmpresaTest();
 		assertEquals(true, repo.filtroCuenta("CTest", emp));
 	}
 
 	@Test
 	public void filtroCuentaIncorrecto() {
-		Empresa emp = CrearEmpresaTest();
+		Empresa emp = crearEmpresaTest();
 		assertEquals(false, repo.filtroCuenta("CuentaIncorrecta", emp));
 	}
 
 	@Test
 	public void filtradoGeneralCorrecto() {
 		List<Empresa> lEmp = new ArrayList<Empresa>();
-		lEmp.add(CrearEmpresaTest());
+		lEmp.add(crearEmpresaTest());
 		repo.cargarListaEmpresas(lEmp);
 		assertEquals(lEmp, repo.filtrar("CTest", "Google", 2, 2017));
 	}
@@ -92,7 +92,7 @@ public class FiltrosUnitariosTest {
 	public void filtradoGeneralIncorrectoCuenta() {
 		List<Empresa> lEmp = new ArrayList<Empresa>();
 		List<Empresa> lEmpVacia = new ArrayList<Empresa>();
-		lEmp.add(CrearEmpresaTest());
+		lEmp.add(crearEmpresaTest());
 		repo.cargarListaEmpresas(lEmp);
 		assertEquals(lEmpVacia,
 				repo.filtrar("CuentaIncorrecta", "Google", 2, 2017));
@@ -102,7 +102,7 @@ public class FiltrosUnitariosTest {
 	public void filtradoGeneralIncorrectoNombre() {
 		List<Empresa> lEmp = new ArrayList<Empresa>();
 		List<Empresa> lEmpVacia = new ArrayList<Empresa>();
-		lEmp.add(CrearEmpresaTest());
+		lEmp.add(crearEmpresaTest());
 		repo.cargarListaEmpresas(lEmp);
 		assertEquals(lEmpVacia,
 				repo.filtrar("CTest", "NombreIncorrecto", 2, 2017));
@@ -112,7 +112,7 @@ public class FiltrosUnitariosTest {
 	public void filtradoGeneralIncorrectoSemestre() {
 		List<Empresa> lEmp = new ArrayList<Empresa>();
 		List<Empresa> lEmpVacia = new ArrayList<Empresa>();
-		lEmp.add(CrearEmpresaTest());
+		lEmp.add(crearEmpresaTest());
 		repo.cargarListaEmpresas(lEmp);
 		assertEquals(lEmpVacia, repo.filtrar("CTest", "Google", 1, 2017));
 	}
@@ -121,7 +121,7 @@ public class FiltrosUnitariosTest {
 	public void filtradoGeneralIncorrectoAño() {
 		List<Empresa> lEmp = new ArrayList<Empresa>();
 		List<Empresa> lEmpVacia = new ArrayList<Empresa>();
-		lEmp.add(CrearEmpresaTest());
+		lEmp.add(crearEmpresaTest());
 		repo.cargarListaEmpresas(lEmp);
 		assertEquals(lEmpVacia, repo.filtrar("CTest", "Google", 2, 1810));
 	}
