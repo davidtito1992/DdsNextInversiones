@@ -57,7 +57,6 @@ public class EmpresaViewM {
 	public void setNombreSeleccionado(String nombreSeleccionado) {
 
 		this.nombreSeleccionado = nombreSeleccionado;
-
 		this.generarTodosLosCBox(this.nombreSeleccionado,
 				this.cuentaSeleccionada, this.añoSeleccionado,
 				this.semestreSeleccionado);
@@ -93,14 +92,12 @@ public class EmpresaViewM {
 	// sino lo dejamos como esta
 	// si la semestre==null cargar en base a lo demas seleccionado
 	// sino lo dejamos como esta
+
 	public void setCuentaSeleccionada(String cuentaSeleccionada) {
-
 		this.cuentaSeleccionada = cuentaSeleccionada;
-
 		this.generarTodosLosCBox(this.nombreSeleccionado,
 				this.cuentaSeleccionada, this.añoSeleccionado,
 				this.semestreSeleccionado);
-
 	}
 
 	public Integer getAñoSeleccionado() {
@@ -269,8 +266,8 @@ public class EmpresaViewM {
 	}
 
 	public RepositorioEmpresa getRepoEmpresas() {
-	 
-		return  ApplicationContext.getInstance().getSingleton(Empresa.class);
+
+		return ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 
 	public void limpiarFiltros() {

@@ -11,8 +11,7 @@ import repositories.RepositorioEmpresa;
 
 public class AppData {
 
-	public void cargarEmpresasEn()
-			throws Exception {
+	public void cargarEmpresas() throws Exception {
 
 		// LEO ARCHIVO YA ADAPTADO
 		DataLoader cargador = DataLoaderFactory
@@ -24,10 +23,9 @@ public class AppData {
 
 	}
 
-
 	public RepositorioEmpresa getRepoEmpresas() {
-	 
-		return  ApplicationContext.getInstance().getSingleton(Empresa.class);
-	}	
-	
+
+		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+	}
+
 }

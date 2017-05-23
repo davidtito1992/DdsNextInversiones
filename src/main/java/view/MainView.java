@@ -3,7 +3,6 @@ package view;
 import java.awt.Color;
 
 import model.Empresa;
-
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -12,7 +11,6 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.commons.utils.ApplicationContext;
-
 import repositories.RepositorioEmpresa;
 import app.AppData;
 import viewmodel.MainViewM;
@@ -87,7 +85,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 	public void verEmpresas() {
 		try {
-			new AppData().cargarEmpresasEn();
+			new AppData().cargarEmpresas();
 			System.out.println("Accediendo para ver las empresas...");
 
 			Dialog<?> dialog = new EmpresaView(this);
@@ -99,8 +97,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 			showInfo(e.getMessage());
 		}
 	}
-	
-	
+
 	/*
 	 * public void abrirConsulta(){
 	 * 

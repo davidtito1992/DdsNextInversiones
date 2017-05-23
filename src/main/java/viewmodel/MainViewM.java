@@ -9,8 +9,8 @@ public class MainViewM {
 
 	RepositorioEmpresa repoEmpresa;
 
-	public MainViewM( ) {
-		
+	public MainViewM() {
+
 	}
 
 	// COMBOBOX CONSULTAS A REALIZAR
