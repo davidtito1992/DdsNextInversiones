@@ -1,6 +1,7 @@
 package view;
 
 import model.Indicador;
+
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -10,6 +11,7 @@ import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
+
 import viewmodel.IndicadorViewM;
 
 @SuppressWarnings("serial")
@@ -27,12 +29,12 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 		form.setLayout(new ColumnLayout(4));
 		getModelObject().llenarTablas();
 
-		new Label(form).setText("");
 		new Button(form).setCaption("Agregar").onClick(this::agregarIndicador)
 				.setWidth(140);
-		new Label(form).setText("");
 		new Button(form).setCaption("Consultar").onClick(this::consultar)
 				.setWidth(140);
+		new Button(form).setCaption("Borrar").onClick(this::borrar)
+		.setWidth(140);
 
 		Table<Indicador> tableIndicadores = new Table<Indicador>(
 				mainPanel, Indicador.class);
@@ -74,9 +76,25 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 	}
 
 	public void agregarIndicador() {
+		//abrir ventana AgregarIndicadorView
+		try {
+			System.out.println("Accediendo para ver las indicadores...");
+
+			Dialog<?> dialog = new AgregarIndicadorView(this);
+			dialog.open();
+			dialog.onAccept(() -> {
+			});
+		} catch (Exception e) {
+			showInfo(e.getMessage());
+		}
 	}
 
 	public void consultar() {
+		//abrir ventana ConsultarIndicadorView
+	}
+	
+	public void borrar(){
+		//borrar indicador seleccionado del archivo y del repositorioIndicadores
 	}
 
 	
