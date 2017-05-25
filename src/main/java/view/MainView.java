@@ -37,7 +37,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 		new Button(mainPanel).setCaption("ABM Empresas")
 				.onClick(() -> this.verEmpresas()).setWidth(60).setHeight(80);
 		new Button(mainPanel).setCaption("ABM Indicadores")
-				.onClick(() -> verAlgo()).setWidth(60).setHeight(80);
+				.onClick(() -> this.verIndicadores()).setWidth(60).setHeight(80);
 		new Button(mainPanel).setCaption("ABM Metodologias")
 				.onClick(() -> verAlgo()).setWidth(60).setHeight(80);
 
@@ -81,6 +81,20 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 	public void cerrar() {
 		close();
+	}
+	
+	public void verIndicadores(){
+		try {
+			//new AppData().cargarIndicadores();
+			System.out.println("Accediendo para ver las indicadores...");
+
+			Dialog<?> dialog = new IndicadorView(this);
+			dialog.open();
+			dialog.onAccept(() -> {
+			});
+		} catch (Exception e) {
+			showInfo(e.getMessage());
+		}
 	}
 
 	public void verEmpresas() {
