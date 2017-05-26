@@ -1,12 +1,8 @@
 package viewmodel;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-
 import model.Indicador;
-
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 import repositories.RepositorioIndicadores;
