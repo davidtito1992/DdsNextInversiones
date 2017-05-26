@@ -85,7 +85,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 	
 	public void verIndicadores(){
 		try {
-			//new AppData().cargarIndicadores();
+			new AppData().cargarIndicadores();
 			System.out.println("Accediendo para ver las indicadores...");
 
 			Dialog<?> dialog = new IndicadorView(this);

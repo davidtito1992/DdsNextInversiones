@@ -58,7 +58,7 @@ public class IndicadorViewM {
 	}
 
 	public void llenarTablas() {
-		
+		this.setIndicadores(getRepoIndicadores().allInstances());
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {

@@ -1,0 +1,4 @@
+[{
+	"nombre": "Ingreso Neto",
+	"formula": "NetoContinuas + NetoDiscontinuas"
+}]

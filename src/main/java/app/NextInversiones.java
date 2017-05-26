@@ -1,10 +1,12 @@
 package app;
 
 import model.Empresa;
+import model.Indicador;
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
 import org.uqbar.commons.utils.ApplicationContext;
 import repositories.RepositorioEmpresa;
+import repositories.RepositorioIndicadores;
 import view.MainView;
 
 public class NextInversiones extends Application {
@@ -17,6 +19,9 @@ public class NextInversiones extends Application {
 	protected Window<?> createMainWindow() {
 		ApplicationContext.getInstance().configureSingleton(Empresa.class,
 				new RepositorioEmpresa());
+
+		ApplicationContext.getInstance().configureSingleton(Indicador.class,
+				new RepositorioIndicadores());
 
 		return new MainView(this);
 	}
