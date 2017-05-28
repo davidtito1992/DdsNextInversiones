@@ -31,10 +31,10 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 		new Button(form).setCaption("Consultar").onClick(this::consultar)
 				.setWidth(140);
 		new Button(form).setCaption("Borrar").onClick(this::borrar)
-		.setWidth(140);
+				.setWidth(140);
 
-		Table<Indicador> tableIndicadores = new Table<Indicador>(
-				mainPanel, Indicador.class);
+		Table<Indicador> tableIndicadores = new Table<Indicador>(mainPanel,
+				Indicador.class);
 
 		tableIndicadores.setHeight(600);
 		tableIndicadores.setWidth(200);
@@ -73,7 +73,7 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 	}
 
 	public void agregarIndicador() {
-		//abrir ventana AgregarIndicadorView
+		// abrir ventana AgregarIndicadorView
 		try {
 			System.out.println("Accediendo para ver las indicadores...");
 
@@ -87,12 +87,22 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 	}
 
 	public void consultar() {
-		//abrir ventana ConsultarIndicadorView
-	}
-	
-	public void borrar(){
-		//borrar indicador seleccionado del archivo y del repositorioIndicadores
+		// abrir ventana ConsultarIndicadorView
+		try {
+			System.out.println("Accediendo para consultar los indicadores...");
+
+			Dialog<?> dialog = new ConsultarIndicadorView(this);
+			dialog.open();
+			dialog.onAccept(() -> {
+			});
+		} catch (Exception e) {
+			showInfo(e.getMessage());
+		}
 	}
 
-	
+	public void borrar() {
+		// borrar indicador seleccionado del archivo y del
+		// repositorioIndicadores
+	}
+
 }

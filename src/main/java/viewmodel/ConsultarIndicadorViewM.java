@@ -4,24 +4,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-
-import model.Cuenta;
 import model.Empresa;
 import model.Periodo;
 import model.SnapshotEmpresa;
-
+import model.SnapshotIndicador;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
 import repositories.RepositorioEmpresa;
 
 @Observable
-public class EmpresaViewM {
+public class ConsultarIndicadorViewM {
 
 	/********* ATRIBUTOS *********/
 
-	private String cuentaSeleccionada;
-	private List<String> cuentas = new ArrayList<String>();
 	private List<String> nombres = new ArrayList<String>();
 	private String nombreSeleccionado;
 	private List<Integer> años = new ArrayList<Integer>();
@@ -30,91 +26,22 @@ public class EmpresaViewM {
 	private Integer semestreSeleccionado;
 	private List<SnapshotEmpresa> snapshotEmpresas;
 	private SnapshotEmpresa snapshotEmpresaSeleccionada;
+	private List<SnapshotIndicador> snapshotIndicadores;
+	private SnapshotIndicador snapshotIndicadorSeleccionado;
+	private double resultado;
 
 	/********* GETTERS/SETTERS *********/
-
-	public List<Integer> getAños() {
-		return años;
-	}
-
-	public void setAños(List<Integer> años) {
-		this.años = años;
-	}
-
-	public String getNombreSeleccionado() {
-		return nombreSeleccionado;
-	}
-
-	public void setNombreSeleccionado(String nombreSeleccionado) {
-
-		this.nombreSeleccionado = nombreSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.añoSeleccionado,
-				this.semestreSeleccionado);
-
-	}
-
-	public String getCuentaSeleccionada() {
-
-		return cuentaSeleccionada;
-	}
-
-	public List<String> getCuentas() {
-		return cuentas;
-	}
-
-	public void setCuentas(List<String> cuentas) {
-
-		this.cuentas = cuentas;
-	}
 
 	public List<String> getNombres() {
 		return nombres;
 	}
 
-	public void setNombres(List<String> nombres) {
-		this.nombres = nombres;
+	public double getResultado() {
+		return resultado;
 	}
 
-	public void setCuentaSeleccionada(String cuentaSeleccionada) {
-		this.cuentaSeleccionada = cuentaSeleccionada;
-		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.añoSeleccionado,
-				this.semestreSeleccionado);
-	}
-
-	public Integer getAñoSeleccionado() {
-		return añoSeleccionado;
-	}
-
-	public void setAñoSeleccionado(Integer añoSeleccionado) {
-		this.añoSeleccionado = añoSeleccionado;
-
-		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.añoSeleccionado,
-				this.semestreSeleccionado);
-
-	}
-
-	public void setSemestreSeleccionado(Integer semestreSeleccionado) {
-		this.semestreSeleccionado = semestreSeleccionado;
-
-		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.añoSeleccionado,
-				this.semestreSeleccionado);
-
-	}
-
-	public List<Integer> getSemestre() {
-		return semestre;
-	}
-
-	public void setSemestre(List<Integer> semestre) {
-		this.semestre = semestre;
-	}
-
-	public Integer getSemestreSeleccionado() {
-		return semestreSeleccionado;
+	public void setResultado(double resultado) {
+		this.resultado = resultado;
 	}
 
 	public List<SnapshotEmpresa> getSnapshotEmpresas() {
@@ -134,39 +61,95 @@ public class EmpresaViewM {
 		this.snapshotEmpresaSeleccionada = snapshotEmpresaSeleccionada;
 	}
 
+	public List<SnapshotIndicador> getSnapshotIndicadores() {
+		return snapshotIndicadores;
+	}
+
+	public void setSnapshotIndicadores(
+			List<SnapshotIndicador> snapshotIndicadores) {
+		this.snapshotIndicadores = snapshotIndicadores;
+	}
+
+	public SnapshotIndicador getSnapshotIndicadorSeleccionado() {
+		return snapshotIndicadorSeleccionado;
+	}
+
+	public void setSnapshotIndicadorSeleccionado(
+			SnapshotIndicador snapshotIndicadorSeleccionado) {
+		this.snapshotIndicadorSeleccionado = snapshotIndicadorSeleccionado;
+	}
+
+	public void setNombres(List<String> nombres) {
+		this.nombres = nombres;
+	}
+
+	public String getNombreSeleccionado() {
+		return nombreSeleccionado;
+	}
+
+	public void setNombreSeleccionado(String nombreSeleccionado) {
+		this.nombreSeleccionado = nombreSeleccionado;
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.añoSeleccionado,
+				this.semestreSeleccionado);
+	}
+
+	public List<Integer> getAños() {
+		return años;
+	}
+
+	public void setAños(List<Integer> años) {
+		this.años = años;
+	}
+
+	public Integer getAñoSeleccionado() {
+		return añoSeleccionado;
+	}
+
+	public void setAñoSeleccionado(Integer añoSeleccionado) {
+		this.añoSeleccionado = añoSeleccionado;
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.añoSeleccionado,
+				this.semestreSeleccionado);
+	}
+
+	public List<Integer> getSemestre() {
+		return semestre;
+	}
+
+	public void setSemestre(List<Integer> semestre) {
+		this.semestre = semestre;
+	}
+
+	public Integer getSemestreSeleccionado() {
+		return semestreSeleccionado;
+	}
+
+	public void setSemestreSeleccionado(Integer semestreSeleccionado) {
+		this.semestreSeleccionado = semestreSeleccionado;
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.añoSeleccionado,
+				this.semestreSeleccionado);
+	}
+
 	/********* METODOS *********/
 
-	public EmpresaViewM() {
-
-		this.generarTodosLosCBox(null, null, null, null);
+	public ConsultarIndicadorViewM() {
 
 	}
 
-	public void llenarTablas() {
-		this.setSnapshotEmpresas(this.dameSnapshotEmpresas(getRepoEmpresas()
-				.allInstances()));
-	}
-
-	public void reiniciar() {
-		this.limpiarFiltros();
-		this.generarTodosLosCBox(null, null, null, null);
-		this.llenarTablas();
-		this.snapshotEmpresaSeleccionada = null;
-	}
-
-	// Genera todos los combobox en base a la seleccion de cada uno de ellos
-	public void generarTodosLosCBox(String empresa, String cuenta,
-			Integer anio, Integer semestre) {
+	public void generarTodosLosCBox(String empresa, Integer anio,
+			Integer semestre) {
 
 		List<Empresa> repoEmpresa2 = new ArrayList<Empresa>();
-		repoEmpresa2 = this.getRepoEmpresas().filtrar(cuenta, empresa,
-				semestre, anio);
+		repoEmpresa2 = this.getRepoEmpresas().filtrar(null, empresa, semestre,
+				anio);
 
 		generarCBoxNombresEmpresas(repoEmpresa2);
-		generarCBoxCuentas(repoEmpresa2);
 		generarCBoxAnios(repoEmpresa2);
 		generarCBoxSemestre(repoEmpresa2);
 
+	}
+
+	public RepositorioEmpresa getRepoEmpresas() {
+		return ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 
 	public void generarCBoxAnios(List<Empresa> empresas) {
@@ -182,8 +165,6 @@ public class EmpresaViewM {
 		Collections.sort(CantidadesAniosFinal);
 
 		this.años = CantidadesAniosFinal;
-
-		// CantidadesAniosFinal.forEach(name ->(System.out.println(name)));
 	}
 
 	public void generarCBoxSemestre(List<Empresa> empresas) {
@@ -199,32 +180,6 @@ public class EmpresaViewM {
 		Collections.sort(cantidadSemestresFinal);
 
 		this.semestre = cantidadSemestresFinal;
-
-		// cantidadSemestresFinal.forEach(name ->(System.out.println(name)));
-
-	}
-
-	public void generarCBoxCuentas(List<Empresa> empresas) {
-
-		HashSet<String> nombreCuentas = new HashSet<String>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(
-					periodo -> {
-						periodo.getCuentas()
-								.forEach(
-										cuenta -> nombreCuentas.add(cuenta
-												.getNombre()));
-					});
-		});
-
-		ArrayList<String> nombreCuentasfinal = new ArrayList<String>(
-				nombreCuentas);
-		Collections.sort(nombreCuentasfinal);
-
-		this.cuentas = nombreCuentasfinal;
-
-		// nombreCuentasfinal.forEach(name ->(System.out.println(name)));
-
 	}
 
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
@@ -236,26 +191,30 @@ public class EmpresaViewM {
 		Collections.sort(nombreEmpresasFinal);
 		this.nombres = nombreEmpresasFinal;
 
-		// nombreEmpresasFinal.forEach(name ->(System.out.println(name)));
-
 	}
 
-	public RepositorioEmpresa getRepoEmpresas() {
-		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+	public void reiniciar() {
+		this.limpiarComboBox();
+		this.generarTodosLosCBox(null, null, null);
+		this.snapshotEmpresaSeleccionada = null;
 	}
 
-	public void limpiarFiltros() {
-		cuentaSeleccionada = null;
+	public void limpiarComboBox() {
 		nombreSeleccionado = null;
 		semestreSeleccionado = null;
 		añoSeleccionado = null;
 	}
 
+	public void llenarTablas() {
+		// con los resultados del indicador seleccionado.
+		// lo llamo cuando hago click en consultar
+	}
+
 	public void filtrar() {
 		ArrayList<SnapshotEmpresa> empresitas = (this
-				.dameSnapshotEmpresas(getRepoEmpresas().filtrar(
-						cuentaSeleccionada, nombreSeleccionado,
-						semestreSeleccionado, añoSeleccionado)));
+				.dameSnapshotEmpresas(getRepoEmpresas().filtrar(null,
+						nombreSeleccionado, semestreSeleccionado,
+						añoSeleccionado)));
 		this.setSnapshotEmpresas(empresitas);
 	}
 
@@ -273,7 +232,7 @@ public class EmpresaViewM {
 					snapshotempresa.setSemestre(periodo.getSemestre());
 					snapshotempresa.setAño(periodo.getAño());
 
-					if (agregarALista(empresa, periodo, cuenta)) {
+					if (agregarALista(empresa, periodo)) {
 						listSnapshot.add(snapshotempresa);
 					}
 				});
@@ -283,8 +242,7 @@ public class EmpresaViewM {
 	}
 
 	// FILTRA EMPRESA PARA NO MOSTRAR TODOS SUS DATOS SEGUN FILTROS
-	private boolean agregarALista(Empresa empresa, Periodo periodo,
-			Cuenta cuenta) {
+	private boolean agregarALista(Empresa empresa, Periodo periodo) {
 		boolean agregarALista = true;
 
 		if (nombreSeleccionado == null) {
@@ -306,13 +264,6 @@ public class EmpresaViewM {
 		} else {
 			agregarALista = agregarALista
 					&& periodo.getSemestre() == semestreSeleccionado;
-		}
-
-		if (cuentaSeleccionada == null) {
-			agregarALista = agregarALista && true;
-		} else {
-			agregarALista = agregarALista
-					&& cuenta.getNombre().equals(cuentaSeleccionada);
 		}
 
 		return agregarALista;
