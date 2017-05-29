@@ -194,20 +194,27 @@ public class ConsultarIndicadorViewM {
 	}
 
 	public void reiniciar() {
-		this.limpiarComboBox();
 		this.generarTodosLosCBox(null, null, null);
 		this.snapshotEmpresaSeleccionada = null;
+		this.limpiarFiltros();
+		this.llenarTablas();
 	}
 
-	public void limpiarComboBox() {
+	public void limpiarFiltros() {
 		nombreSeleccionado = null;
 		semestreSeleccionado = null;
 		añoSeleccionado = null;
 	}
 
 	public void llenarTablas() {
-		// con los resultados del indicador seleccionado.
-		// lo llamo cuando hago click en consultar
+		this.setSnapshotIndicadores(this.dameSnapshotIndicadores(getRepoEmpresas()
+				.allInstances()));
+	}
+
+	private List<SnapshotIndicador> dameSnapshotIndicadores(
+			List<Empresa> allInstances) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public void filtrar() {

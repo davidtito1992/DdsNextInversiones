@@ -1,6 +1,14 @@
 package model;
 
+import java.util.List;
+import javaccCalculator.ArithmeticParser;
+import javaccCalculator.ParseException;
+import model.Indicador;
+import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
+import repositories.RepositorioEmpresa;
+import repositories.RepositorioIndicadores;
+import calculator.Value;
 
 @Observable
 public class SnapshotIndicador {
@@ -10,7 +18,7 @@ public class SnapshotIndicador {
 	private String nombre;
 	private int año;
 	private int semestre;
-	private double resultado;
+	private Value resultado;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -38,12 +46,97 @@ public class SnapshotIndicador {
 		this.semestre = semestre;
 	}
 
-	public double getResultado() {
+	public Value getResultado() {
 		return resultado;
 	}
 
-	public void setResultado(double resultado) {
+	public void setResultado(Value resultado) {
 		this.resultado = resultado;
+	}
+
+	/********* METODOS *********/
+
+	public Value analizarResultado(Indicador elIndicador) {
+
+		String formulaSinIndicadores = transformIndicadores(elIndicador
+				.getFormula());
+		String formulaACalcular = transformValores(formulaSinIndicadores);
+
+		ArithmeticParser parser = new ArithmeticParser(formulaACalcular);
+		try {
+			parser.parse();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return parser.evaluate();
+
+	}
+
+	public String transformIndicadores(String formulaConIndicadores) {
+		String devolverEsto = formulaConIndicadores;
+		if (contieneIndicadores(formulaConIndicadores)) {
+			String[] componentes = formulaConIndicadores.split(" ");
+
+			for (int i = 1; i <= componentes.length; i++) {
+
+				if (esIndicador(componentes[i])) {
+					componentes[i] = transformIndicadores(getIndicador(
+							componentes[i]).getFormula());
+				}
+
+			}
+			devolverEsto = String.join(" ", componentes);
+		}
+		return devolverEsto;
+	}
+
+	public String transformValores(String formulaConCuentas) {
+		String[] componentes = formulaConCuentas.split(" ");
+
+		for (int i = 1; i <= componentes.length; i++) {
+			// ARREGLAR
+		}
+		return String.join(" ", componentes);
+	}
+
+	public Indicador getIndicador(String nombre) {
+		List<Indicador> indicadoresConEseNombre = getRepoIndicadores().filtrar(
+				nombre);
+		if (indicadoresConEseNombre.isEmpty()) {
+			return null;
+		}
+		return indicadoresConEseNombre.get(0);
+	}
+
+	public boolean esIndicador(String nombre) {
+
+		List<Indicador> indicadoresConEseNombre = getRepoIndicadores().filtrar(
+				nombre);
+		if (indicadoresConEseNombre.isEmpty()) {
+			return false;
+		}
+		return true;
+
+	}
+
+	public boolean contieneIndicadores(String formula) {
+		boolean flag = false;
+		String[] componentes = formula.split(" ");
+		for (int i = 1; i <= componentes.length; i++) {
+			if (esIndicador(componentes[i])) {
+				flag = true;
+			}
+		}
+		return flag;
+	}
+
+	public RepositorioIndicadores getRepoIndicadores() {
+		return ApplicationContext.getInstance().getSingleton(Indicador.class);
+	}
+
+	public RepositorioEmpresa getRepoEmpresas() {
+		return ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 
 }

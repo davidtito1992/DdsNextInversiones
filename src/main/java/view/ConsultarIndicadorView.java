@@ -25,6 +25,7 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 		Panel form = new Panel(mainPanel);
 		this.setTitle("Consultar Indicador");
 		form.setLayout(new ColumnLayout(4));
+		this.getModelObject().llenarTablas();
 		
 		new Label(form).setText("\t\tSeleccione Empresa");
 		Selector<String> selectorNombre = new Selector<String>(form)
@@ -91,7 +92,7 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 
 	public void consultarIndicador() {
 		//hacer las cuentas
-		this.getModelObject().llenarTablas();
+		
 	}
 
 	@Override
