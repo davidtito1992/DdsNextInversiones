@@ -1,0 +1,86 @@
+PARSER_BEGIN(ParserIndicador)
+public class ParserIndicador{
+public static void main(String args[]) throws ParseException {
+new ParserIndicador(System.in).gramatica();
+}
+}
+PARSER_END(ParserIndicador)
+SKIP : {
+" "
+| "\t"
+| "\n"
+| "\r"
+}
+TOKEN [IGNORE_CASE] :
+{
+<NUMERO: (["0"-"9"])+> 
+|<PUNTOYCOMA: ";"> 
+}
+/*
+gramatica ::= ( exprFinalizada )+
+*/
+void gramatica():{}{
+( exprFinalizada() )+
+}
+/*
+exprFinalizada ::= expr ";"
+*/
+void exprFinalizada():{
+int resultado;
+}{
+try{
+resultado=expr() <PUNTOYCOMA> {System.out.println(resultado); }
+}catch(ParseException x){
+System.out.println(x.toString());
+Token t;
+do {
+t = getNextToken();
+} while (t.kind != PUNTOYCOMA);
+}
+}
+/*
+expr ::= term ( ( "+" | "-" ) term )*
+*/
+int expr():{
+int acum1=0,
+acum2=0;
+}{
+acum1=term() ( ("+" acum2=term() {acum1+=acum2;} )
+| ("-" acum2=term() {acum1-=acum2;} )
+)*
+{ return acum1; }
+}
+/*
+term ::= fact ( ( "*" | "/" ) fact )*
+*/
+int term():{
+int acum1=0,
+acum2=0;
+}{
+acum1=fact() ( ("*" acum2=fact() {acum1*=acum2;} )
+| ("/" acum2=fact() {acum1/=acum2;} )
+)*
+{ return acum1; }
+}
+/*
+fact ::= NUMERO | "(" expr ")"
+*/
+int fact():{
+int acum=0,
+uMenos=1;
+}{
+("-" { uMenos = -1; } )?
+
+( <NUMERO> { return Integer.parseInt(token.image)*uMenos; }
+   | "(" acum=expr() ")" { return acum*uMenos; }
+)
+
+
+( <CUENTA> { return -50; }
+
+)
+
+}
+SKIP : {
+<ILEGAL: (~[])> { System.out.println("Carácter: "+image+" no esperado.");}
+}
