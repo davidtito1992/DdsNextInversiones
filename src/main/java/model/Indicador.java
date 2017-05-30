@@ -81,7 +81,7 @@ public class Indicador extends Entity{
 			List<Cuenta> cuentasUnaEmpresa) {
 		String[] componentes = formulaConCuentas.split(" ");
 		for (int i = 1; i <= componentes.length; i++) {
-			if (esCuenta(componentes[i])) {
+			if (esCuenta(componentes[i],cuentasUnaEmpresa)) {				
 				componentes[i] = String.valueOf(getValorCuenta(componentes[i],
 						cuentasUnaEmpresa)); 
 			}
@@ -96,9 +96,8 @@ public class Indicador extends Entity{
 		return cuentaADevolver.get(0).getValor();
 	}
 
-	private boolean esCuenta(String string) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean esCuenta(String componente, List<Cuenta> cuentasUnaEmpresa) {
+		return cuentasUnaEmpresa.stream().map(cuenta -> cuenta.getNombre()).anyMatch(cuenta -> cuenta.equals(componente));
 	}
 
 	public Indicador getIndicador(String nombre) {
