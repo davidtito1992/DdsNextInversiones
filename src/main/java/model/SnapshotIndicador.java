@@ -102,8 +102,8 @@ public class SnapshotIndicador {
 		String[] componentes = formulaConCuentas.split(" ");
 		for (int i = 1; i <= componentes.length; i++) {
 			if (esCuenta(componentes[i])) {
-//				componentes[i] = getValorCuenta(componentes[i],
-//						cuentasUnaEmpresa); CASTEAR A STRING
+				componentes[i] = String.valueOf(getValorCuenta(componentes[i],
+						cuentasUnaEmpresa)); 
 			}
 		}
 		return String.join(" ", componentes);
