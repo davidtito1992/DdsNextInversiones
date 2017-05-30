@@ -209,8 +209,8 @@ public class ConsultarIndicadorViewM {
 					snapshotIndicador.setNombre(empresa.getNombre());
 					snapshotIndicador.setSemestre(periodo.getSemestre());
 					snapshotIndicador.setAño(periodo.getAño());
-					snapshotIndicador.setResultado(snapshotIndicador
-							.analizarResultado(getIndicadorElegido(), periodo.getCuentas()));
+					snapshotIndicador.setResultado(getIndicadorElegido()
+							.analizarResultado(periodo.getCuentas()));
 
 					listSnapshot.add(snapshotIndicador);
 
