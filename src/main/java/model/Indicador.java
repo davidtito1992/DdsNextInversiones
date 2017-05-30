@@ -47,7 +47,6 @@ public class Indicador extends Entity{
 	/********* METODOS *********/
 	
 	public Value analizarResultado(List<Cuenta> cuentasUnaEmpresa) {
-
 		String formulaSinIndicadores = transformIndicadores(getFormula());
 		String formulaACalcular = transformValores(formulaSinIndicadores,
 				cuentasUnaEmpresa);
@@ -60,7 +59,21 @@ public class Indicador extends Entity{
 			e.printStackTrace();
 		}
 		return parser.evaluate();
+	}
+	
+	public Value analizarResultadoTest(List<Cuenta> cuentasUnaEmpresa, List<Indicador> repoIndicadores){
+		String formulaSinIndicadores = transformIndicadoresTest(getFormula(),repoIndicadores);
+		String formulaACalcular = transformValores(formulaSinIndicadores,
+				cuentasUnaEmpresa);
 
+		ArithmeticParser parser = new ArithmeticParser(formulaACalcular);
+		try {
+			parser.parse();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return parser.evaluate();
 	}
 
 	public String transformIndicadores(String formulaConIndicadores) {
@@ -73,6 +86,24 @@ public class Indicador extends Entity{
 				if (esIndicador(componentes[i])) {
 					componentes[i] = transformIndicadores(getIndicador(
 							componentes[i]).getFormula());
+				}
+
+			}
+			devolverEsto = String.join(" ", componentes);
+		}
+		return devolverEsto;
+	}
+	
+	public String transformIndicadoresTest(String formulaConIndicadores,  List<Indicador> repoIndicadores) {
+		String devolverEsto = formulaConIndicadores;
+		if (contieneIndicadoresTest(formulaConIndicadores, repoIndicadores)) {
+			String[] componentes = formulaConIndicadores.split(" ");
+
+			for (int i = 0; i < componentes.length; i++) {
+
+				if (esIndicadorTest(componentes[i], repoIndicadores)) {
+					componentes[i] = transformIndicadoresTest(getIndicadorTest(
+							componentes[i],repoIndicadores).getFormula(),repoIndicadores);
 				}
 
 			}
@@ -113,23 +144,52 @@ public class Indicador extends Entity{
 		}
 		return indicadoresConEseNombre.get(0);
 	}
+	
+	public Indicador getIndicadorTest(String nombre, List<Indicador> repoIndicadores) {
+		List<Indicador> indicadoresConEseNombre = repoIndicadores.stream().filter(indicador -> indicador.getNombre().equals(nombre)).collect(Collectors.toList());
+		if (indicadoresConEseNombre.isEmpty()) {
+			return null;
+		}
+		return indicadoresConEseNombre.get(0);
+	}
+
 
 	public boolean esIndicador(String nombre) {
-		return false;
-		/*List<Indicador> indicadoresConEseNombre = getRepoIndicadores().filtrar(
+		List<Indicador> indicadoresConEseNombre = getRepoIndicadores().filtrar(
 				nombre);
 		if (indicadoresConEseNombre.isEmpty()) {
 			return false;
 		}
-		return true;*/
+		return true;
 
 	}
+	
+	public boolean esIndicadorTest(String nombre, List<Indicador> repoIndicadores) {
+		List<Indicador> indicadoresConEseNombre = repoIndicadores.stream().filter(indicador -> indicador.getNombre().equals(nombre)).collect(Collectors.toList());
+		if (indicadoresConEseNombre.isEmpty()) {
+			return false;
+		}
+		return true;
+
+	}
+
 
 	public boolean contieneIndicadores(String formula) {
 		boolean flag = false;
 		String[] componentes = formula.split(" ");
 		for (int i = 0; i < componentes.length; i++) {
 			if (esIndicador(componentes[i])) {
+				flag = true;
+			}
+		}
+		return flag;
+	}
+	
+	public boolean contieneIndicadoresTest(String formula, List<Indicador> repoIndicadores) {
+		boolean flag = false;
+		String[] componentes = formula.split(" ");
+		for (int i = 0; i < componentes.length; i++) {
+			if (esIndicadorTest(componentes[i], repoIndicadores)) {
 				flag = true;
 			}
 		}
