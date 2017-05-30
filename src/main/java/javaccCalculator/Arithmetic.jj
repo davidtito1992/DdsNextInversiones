@@ -60,12 +60,12 @@ void calculation():
     Operator operator = null;
 }
 {
-    (tOperandLeft = <VALUE>)
-    (<MULTIPLY> {operator = new Multiply();}|
+    <VALUE> 
+    {(<MULTIPLY> {operator = new Multiply();}|
      <DIVIDE> {operator = new Divide();}|
      <ADD> {operator = new Add();}|
      <SUBTRACT> {operator = new Subtract();})
-    (tOperandRight = <VALUE>)
+    (tOperandRight = <VALUE>)}*
     {
         System.out.println("Calculation: " + tOperandLeft.image + operator + tOperandRight.image);
         expression = new Expression(new Value(tOperandLeft.image), new Value(tOperandRight.image), operator);
