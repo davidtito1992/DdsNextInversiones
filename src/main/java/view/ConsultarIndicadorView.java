@@ -84,16 +84,16 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Consultar")
-				.onClick(this::consultarIndicador).setAsDefault().setWidth(140);
+//		new Button(actions).setCaption("Consultar")
+//				.onClick(this::consultarIndicador).setAsDefault().setWidth(140);
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel)
 				.setWidth(140);
 	}
 
-	public void consultarIndicador() {
-		//hacer las cuentas
-		
-	}
+//	public void consultarIndicador() {
+//		//hacer las cuentas
+//		
+//	}
 
 	@Override
 	public void cancel() {

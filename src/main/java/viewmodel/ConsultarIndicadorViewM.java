@@ -5,12 +5,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import model.Empresa;
-import model.Periodo;
-import model.SnapshotEmpresa;
+import model.Indicador;
 import model.SnapshotIndicador;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
-
 import repositories.RepositorioEmpresa;
 
 @Observable
@@ -24,16 +22,23 @@ public class ConsultarIndicadorViewM {
 	private Integer añoSeleccionado;
 	private List<Integer> semestre = new ArrayList<Integer>();
 	private Integer semestreSeleccionado;
-	private List<SnapshotEmpresa> snapshotEmpresas;
-	private SnapshotEmpresa snapshotEmpresaSeleccionada;
 	private List<SnapshotIndicador> snapshotIndicadores;
 	private SnapshotIndicador snapshotIndicadorSeleccionado;
 	private double resultado;
+	private Indicador indicadorElegido;
 
 	/********* GETTERS/SETTERS *********/
 
 	public List<String> getNombres() {
 		return nombres;
+	}
+
+	public Indicador getIndicadorElegido() {
+		return indicadorElegido;
+	}
+
+	public void setIndicadorElegido(Indicador indicadorElegido) {
+		this.indicadorElegido = indicadorElegido;
 	}
 
 	public double getResultado() {
@@ -42,23 +47,6 @@ public class ConsultarIndicadorViewM {
 
 	public void setResultado(double resultado) {
 		this.resultado = resultado;
-	}
-
-	public List<SnapshotEmpresa> getSnapshotEmpresas() {
-		return snapshotEmpresas;
-	}
-
-	public void setSnapshotEmpresas(List<SnapshotEmpresa> snapshotEmpresas) {
-		this.snapshotEmpresas = snapshotEmpresas;
-	}
-
-	public SnapshotEmpresa getSnapshotEmpresaSeleccionada() {
-		return snapshotEmpresaSeleccionada;
-	}
-
-	public void setSnapshotEmpresaSeleccionada(
-			SnapshotEmpresa snapshotEmpresaSeleccionada) {
-		this.snapshotEmpresaSeleccionada = snapshotEmpresaSeleccionada;
 	}
 
 	public List<SnapshotIndicador> getSnapshotIndicadores() {
@@ -195,7 +183,7 @@ public class ConsultarIndicadorViewM {
 
 	public void reiniciar() {
 		this.generarTodosLosCBox(null, null, null);
-		this.snapshotEmpresaSeleccionada = null;
+		this.snapshotIndicadorSeleccionado = null;
 		this.limpiarFiltros();
 		this.llenarTablas();
 	}
@@ -207,73 +195,27 @@ public class ConsultarIndicadorViewM {
 	}
 
 	public void llenarTablas() {
-		this.setSnapshotIndicadores(this.dameSnapshotIndicadores(getRepoEmpresas()
-				.allInstances()));
+		this.setSnapshotIndicadores(this
+				.dameSnapshotIndicadores(getRepoEmpresas().allInstances()));
 	}
 
+	// CREA FILAS DE LA TABLA
 	private List<SnapshotIndicador> dameSnapshotIndicadores(
-			List<Empresa> allInstances) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void filtrar() {
-		ArrayList<SnapshotEmpresa> empresitas = (this
-				.dameSnapshotEmpresas(getRepoEmpresas().filtrar(null,
-						nombreSeleccionado, semestreSeleccionado,
-						añoSeleccionado)));
-		this.setSnapshotEmpresas(empresitas);
-	}
-
-	// TRANSFORMA EMPRESA EN SNAPSHOT, MOSTRANDO SOLO SNAPSHOTS QUE INTERESAN
-	public ArrayList<SnapshotEmpresa> dameSnapshotEmpresas(
 			List<Empresa> empresasASnap) {
-		ArrayList<SnapshotEmpresa> listSnapshot = new ArrayList<SnapshotEmpresa>();
+		ArrayList<SnapshotIndicador> listSnapshot = new ArrayList<SnapshotIndicador>();
 		empresasASnap.forEach(empresa -> {
 			empresa.getPeriodos().forEach(periodo -> {
-				periodo.getCuentas().forEach(cuenta -> {
-					SnapshotEmpresa snapshotempresa = new SnapshotEmpresa();
-					snapshotempresa.setCuenta(cuenta.getNombre());
-					snapshotempresa.setValor(cuenta.getValor());
-					snapshotempresa.setNombre(empresa.getNombre());
-					snapshotempresa.setSemestre(periodo.getSemestre());
-					snapshotempresa.setAño(periodo.getAño());
+				SnapshotIndicador snapshotIndicador = new SnapshotIndicador();
+					snapshotIndicador.setNombre(empresa.getNombre());
+					snapshotIndicador.setSemestre(periodo.getSemestre());
+					snapshotIndicador.setAño(periodo.getAño());
+					snapshotIndicador.setResultado(snapshotIndicador
+							.analizarResultado(getIndicadorElegido(), periodo.getCuentas()));
 
-					if (agregarALista(empresa, periodo)) {
-						listSnapshot.add(snapshotempresa);
-					}
+					listSnapshot.add(snapshotIndicador);
+
 				});
-			});
 		});
 		return listSnapshot;
 	}
-
-	// FILTRA EMPRESA PARA NO MOSTRAR TODOS SUS DATOS SEGUN FILTROS
-	private boolean agregarALista(Empresa empresa, Periodo periodo) {
-		boolean agregarALista = true;
-
-		if (nombreSeleccionado == null) {
-			agregarALista = agregarALista && true;
-		} else {
-			agregarALista = agregarALista
-					&& empresa.getNombre().equals(nombreSeleccionado);
-		}
-
-		if (añoSeleccionado == null) {
-			agregarALista = agregarALista && true;
-		} else {
-			agregarALista = agregarALista
-					&& periodo.getAño() == añoSeleccionado;
-		}
-
-		if (semestreSeleccionado == null) {
-			agregarALista = agregarALista && true;
-		} else {
-			agregarALista = agregarALista
-					&& periodo.getSemestre() == semestreSeleccionado;
-		}
-
-		return agregarALista;
-	}
-
 }

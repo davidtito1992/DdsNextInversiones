@@ -1,11 +1,15 @@
 package model;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javaccCalculator.ArithmeticParser;
 import javaccCalculator.ParseException;
 import model.Indicador;
+
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
+
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
 import calculator.Value;
@@ -56,11 +60,13 @@ public class SnapshotIndicador {
 
 	/********* METODOS *********/
 
-	public Value analizarResultado(Indicador elIndicador) {
+	public Value analizarResultado(Indicador elIndicador,
+			List<Cuenta> cuentasUnaEmpresa) {
 
 		String formulaSinIndicadores = transformIndicadores(elIndicador
 				.getFormula());
-		String formulaACalcular = transformValores(formulaSinIndicadores);
+		String formulaACalcular = transformValores(formulaSinIndicadores,
+				cuentasUnaEmpresa);
 
 		ArithmeticParser parser = new ArithmeticParser(formulaACalcular);
 		try {
@@ -91,13 +97,28 @@ public class SnapshotIndicador {
 		return devolverEsto;
 	}
 
-	public String transformValores(String formulaConCuentas) {
+	public String transformValores(String formulaConCuentas,
+			List<Cuenta> cuentasUnaEmpresa) {
 		String[] componentes = formulaConCuentas.split(" ");
-
 		for (int i = 1; i <= componentes.length; i++) {
-			// ARREGLAR
+			if (esCuenta(componentes[i])) {
+//				componentes[i] = getValorCuenta(componentes[i],
+//						cuentasUnaEmpresa); CASTEAR A STRING
+			}
 		}
 		return String.join(" ", componentes);
+	}
+
+	private int getValorCuenta(String string, List<Cuenta> cuentasUnaEmpresa) {
+		List<Cuenta> cuentaADevolver = cuentasUnaEmpresa.stream()
+				.filter(cuenta -> cuenta.getNombre().equals(nombre))
+				.collect(Collectors.toList());
+		return cuentaADevolver.get(0).getValor();
+	}
+
+	private boolean esCuenta(String string) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	public Indicador getIndicador(String nombre) {
