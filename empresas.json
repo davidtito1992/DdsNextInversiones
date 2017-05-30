@@ -15,10 +15,10 @@
 						"nombre": "FreeCashFlow",
 						"valor": "3"
 					}, {
-						"nombre": "Neto Discontinuas",
+						"nombre": "NetoDiscontinuas",
 						"valor": "5"
 					}, {
-						"nombre": "Neto Continuas",
+						"nombre": "NetoContinuas",
 						"valor": "6"
 					}
 				]
@@ -38,10 +38,10 @@
 						"nombre": "FreeCashFlow",
 						"valor": "8"
 					}, {
-						"nombre": "Neto Discontinuas",
+						"nombre": "NetoDiscontinuas",
 						"valor": "9"
 					}, {
-						"nombre": "Neto Continuas",
+						"nombre": "NetoContinuas",
 						"valor": "10"
 					}
 				]
@@ -103,10 +103,10 @@
 						"nombre": "FreeCashFlow",
 						"valor": "99999"
 					}, {
-						"nombre": "Neto Discontinuas",
+						"nombre": "NetoDiscontinuas",
 						"valor": "99999"
 					}, {
-						"nombre": "Neto Continuas",
+						"nombre": "NetoContinuas",
 						"valor": "99999"
 					}
 				]
@@ -126,10 +126,10 @@
 						"nombre": "FreeCashFlow",
 						"valor": "99999"
 					}, {
-						"nombre": "Neto Discontinuas",
+						"nombre": "NetoDiscontinuas",
 						"valor": "99999"
 					}, {
-						"nombre": "Neto Continuas",
+						"nombre": "NetoContinuas",
 						"valor": "99999"
 					}
 				]

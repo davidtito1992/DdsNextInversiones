@@ -25,6 +25,10 @@ public class Indicador extends Entity{
 	private String nombre;
 	private String formula;
 	
+	public Indicador(String nombre, String formula){
+		this.nombre = nombre;
+		this.formula = formula;
+	}
 	/********* GETTERS/SETTERS *********/	
 	
 	public String getNombre() {
@@ -64,7 +68,7 @@ public class Indicador extends Entity{
 		if (contieneIndicadores(formulaConIndicadores)) {
 			String[] componentes = formulaConIndicadores.split(" ");
 
-			for (int i = 1; i <= componentes.length; i++) {
+			for (int i = 0; i < componentes.length; i++) {
 
 				if (esIndicador(componentes[i])) {
 					componentes[i] = transformIndicadores(getIndicador(
@@ -80,16 +84,15 @@ public class Indicador extends Entity{
 	public String transformValores(String formulaConCuentas,
 			List<Cuenta> cuentasUnaEmpresa) {
 		String[] componentes = formulaConCuentas.split(" ");
-		for (int i = 1; i <= componentes.length; i++) {
+		for (int i = 0; i < componentes.length; i++) {
 			if (esCuenta(componentes[i],cuentasUnaEmpresa)) {				
-				componentes[i] = String.valueOf(getValorCuenta(componentes[i],
-						cuentasUnaEmpresa)); 
+				componentes[i] = String.valueOf(getValorCuenta(componentes[i], cuentasUnaEmpresa)); 
 			}
 		}
 		return String.join(" ", componentes);
 	}
 
-	private int getValorCuenta(String string, List<Cuenta> cuentasUnaEmpresa) {
+	private int getValorCuenta(String nombre, List<Cuenta> cuentasUnaEmpresa) {
 		List<Cuenta> cuentaADevolver = cuentasUnaEmpresa.stream()
 				.filter(cuenta -> cuenta.getNombre().equals(nombre))
 				.collect(Collectors.toList());
@@ -97,7 +100,9 @@ public class Indicador extends Entity{
 	}
 
 	private boolean esCuenta(String componente, List<Cuenta> cuentasUnaEmpresa) {
-		return cuentasUnaEmpresa.stream().map(cuenta -> cuenta.getNombre()).anyMatch(cuenta -> cuenta.equals(componente));
+		return cuentasUnaEmpresa.stream()
+				.map(cuenta -> cuenta.getNombre())
+				.anyMatch(cuenta -> cuenta.equals(componente));
 	}
 
 	public Indicador getIndicador(String nombre) {
@@ -110,20 +115,20 @@ public class Indicador extends Entity{
 	}
 
 	public boolean esIndicador(String nombre) {
-
-		List<Indicador> indicadoresConEseNombre = getRepoIndicadores().filtrar(
+		return false;
+		/*List<Indicador> indicadoresConEseNombre = getRepoIndicadores().filtrar(
 				nombre);
 		if (indicadoresConEseNombre.isEmpty()) {
 			return false;
 		}
-		return true;
+		return true;*/
 
 	}
 
 	public boolean contieneIndicadores(String formula) {
 		boolean flag = false;
 		String[] componentes = formula.split(" ");
-		for (int i = 1; i <= componentes.length; i++) {
+		for (int i = 0; i < componentes.length; i++) {
 			if (esIndicador(componentes[i])) {
 				flag = true;
 			}

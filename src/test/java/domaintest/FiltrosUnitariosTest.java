@@ -16,11 +16,9 @@ public class FiltrosUnitariosTest {
 	public Empresa crearEmpresaTest() {
 		Empresa emp = new Empresa();
 		Periodo per = new Periodo();
-		Cuenta cue = new Cuenta();
+		Cuenta cue = new Cuenta("CTest",10);
 		List<Cuenta> lCue = new ArrayList<Cuenta>();
 		List<Periodo> lPer = new ArrayList<Periodo>();
-		cue.setNombre("CTest");
-		cue.setValor(10);
 		lCue.add(cue);
 
 		per.setAño(2017);

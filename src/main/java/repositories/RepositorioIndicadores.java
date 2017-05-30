@@ -55,7 +55,7 @@ public class RepositorioIndicadores extends CollectionBasedRepo<Indicador> {
 	@Override
 	public Indicador createExample() {
 		// TODO Auto-generated method stub
-		return new Indicador();
+		return new Indicador("","");
 	}
 
 	@Override
