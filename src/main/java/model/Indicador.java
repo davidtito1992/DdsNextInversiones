@@ -72,8 +72,8 @@ public class Indicador extends Entity{
 			for (int i = 0; i < componentes.length; i++) {
 
 				if (esIndicador(componentes[i])) {
-					componentes[i] = transformIndicadores(getIndicador(
-							componentes[i]).getFormula());
+					componentes[i] = "( "+transformIndicadores(getIndicador(
+							componentes[i]).getFormula())+" )";
 				}
 
 			}
@@ -170,8 +170,8 @@ public class Indicador extends Entity{
 			for (int i = 0; i < componentes.length; i++) {
 
 				if (esIndicadorTest(componentes[i], repoIndicadores)) {
-					componentes[i] = transformIndicadoresTest(getIndicadorTest(
-							componentes[i],repoIndicadores).getFormula(),repoIndicadores);
+					componentes[i] = "( "+transformIndicadoresTest(getIndicadorTest(
+							componentes[i],repoIndicadores).getFormula(),repoIndicadores)+" )";
 				}
 
 			}
