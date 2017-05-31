@@ -19,7 +19,7 @@ public class SnapshotIndicador {
 	private String nombre;
 	private int año;
 	private int semestre;
-	private int resultado;
+	private double resultado;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -47,11 +47,11 @@ public class SnapshotIndicador {
 		this.semestre = semestre;
 	}
 
-	public int getResultado() {
+	public double getResultado() {
 		return resultado;
 	}
 
-	public void setResultado(int resultado) {
+	public void setResultado(double resultado) {
 		this.resultado = resultado;
 	}
 }

@@ -2,17 +2,17 @@
 package calculator;
 public class Calculator implements CalculatorConstants {
 
-  final public int calculate() throws ParseException {
-  int result;
+  final public double calculate() throws ParseException {
+  double result;
     result = expr();
     {if (true) return result;}
     throw new Error("Missing return statement in function");
   }
 
-  final public int expr() throws ParseException {
-  int a;
-  int b;
-  int result = 0;
+  final public double expr() throws ParseException {
+  double a;
+  double b;
+  double result = 0;
     a = term();
     result+=a;
     label_1:
@@ -47,10 +47,10 @@ public class Calculator implements CalculatorConstants {
     throw new Error("Missing return statement in function");
   }
 
-  final public int term() throws ParseException {
-  int a;
-  int b;
-  int result = 0;
+  final public double term() throws ParseException {
+  double a;
+  double b;
+  double result = 0;
     a = factor();
     result = a;
     label_2:
@@ -85,13 +85,13 @@ public class Calculator implements CalculatorConstants {
     throw new Error("Missing return statement in function");
   }
 
-  final public int factor() throws ParseException {
+  final public double factor() throws ParseException {
   Token t;
-  int result;
+  double result;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case INT:
-      t = jj_consume_token(INT);
-    {if (true) return Integer.parseInt(t.image);}
+    case DOUBLE:
+      t = jj_consume_token(DOUBLE);
+    {if (true) return Double.parseDouble(t.image);}
       break;
     case LBR:
       jj_consume_token(LBR);

@@ -23,7 +23,7 @@ public interface CalculatorConstants {
   /** RegularExpression Id. */
   int RBR = 10;
   /** RegularExpression Id. */
-  int INT = 11;
+  int DOUBLE = 11;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -41,7 +41,7 @@ public interface CalculatorConstants {
     "\"/\"",
     "\"(\"",
     "\")\"",
-    "<INT>",
+    "<DOUBLE>",
   };
 
 }

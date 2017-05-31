@@ -50,7 +50,7 @@ private int jjMoveStringLiteralDfa0_0()
 private int jjMoveNfa_0(int startState, int curPos)
 {
    int startsAt = 0;
-   jjnewStateCnt = 1;
+   jjnewStateCnt = 3;
    int i = 1;
    jjstateSet[0] = startState;
    int kind = 0x7fffffff;
@@ -68,8 +68,20 @@ private int jjMoveNfa_0(int startState, int curPos)
                case 0:
                   if ((0x3ff000000000000L & l) == 0L)
                      break;
-                  kind = 11;
-                  jjstateSet[jjnewStateCnt++] = 0;
+                  if (kind > 11)
+                     kind = 11;
+                  jjAddStates(0, 1);
+                  break;
+               case 1:
+                  if (curChar == 46)
+                     jjCheckNAdd(2);
+                  break;
+               case 2:
+                  if ((0x3ff000000000000L & l) == 0L)
+                     break;
+                  if (kind > 11)
+                     kind = 11;
+                  jjCheckNAdd(2);
                   break;
                default : break;
             }
@@ -105,13 +117,14 @@ private int jjMoveNfa_0(int startState, int curPos)
          kind = 0x7fffffff;
       }
       ++curPos;
-      if ((i = jjnewStateCnt) == (startsAt = 1 - (jjnewStateCnt = startsAt)))
+      if ((i = jjnewStateCnt) == (startsAt = 3 - (jjnewStateCnt = startsAt)))
          return curPos;
       try { curChar = input_stream.readChar(); }
       catch(java.io.IOException e) { return curPos; }
    }
 }
 static final int[] jjnextStates = {
+   0, 1, 
 };
 
 /** Token literal values. */
@@ -129,8 +142,8 @@ static final long[] jjtoSkip = {
    0x1eL, 
 };
 protected SimpleCharStream input_stream;
-private final int[] jjrounds = new int[1];
-private final int[] jjstateSet = new int[2];
+private final int[] jjrounds = new int[3];
+private final int[] jjstateSet = new int[6];
 protected char curChar;
 /** Constructor. */
 public CalculatorTokenManager(SimpleCharStream stream){
@@ -157,7 +170,7 @@ private void ReInitRounds()
 {
    int i;
    jjround = 0x80000001;
-   for (i = 1; i-- > 0;)
+   for (i = 3; i-- > 0;)
       jjrounds[i] = 0x80000000;
 }
 

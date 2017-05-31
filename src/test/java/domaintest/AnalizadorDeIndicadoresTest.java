@@ -36,8 +36,8 @@ public class AnalizadorDeIndicadoresTest {
 		List<Cuenta> listaDeCuentas = new ArrayList<Cuenta>();
 		listaDeCuentas.add(new Cuenta("EBITDA", 10));
 		listaDeCuentas.add(new Cuenta("FDS", 20));
-		assertEquals("30.00", indicadorSimple.analizarResultadoTest(
-				listaDeCuentas, repoIndicadores));
+		assertEquals("30.0", String.valueOf(indicadorSimple.analizarResultadoTest(
+				listaDeCuentas, repoIndicadores)));
 	}
 
 	@Test
@@ -45,8 +45,8 @@ public class AnalizadorDeIndicadoresTest {
 		List<Cuenta> listaDeCuentas = new ArrayList<Cuenta>();
 		listaDeCuentas.add(new Cuenta("EBITDA", 10));
 		listaDeCuentas.add(new Cuenta("FDS", 20));
-		assertEquals("30.00", indicadorComplejo.analizarResultadoTest(
-				listaDeCuentas, repoIndicadores));
+		assertEquals("30.0", String.valueOf(indicadorComplejo.analizarResultadoTest(
+				listaDeCuentas, repoIndicadores)));
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class AnalizadorDeIndicadoresTest {
 
 		Calculator calculator = new Calculator(new StringReader("1/2"));
 		try {
-			assertEquals("0.5", calculator.calculate());
+			assertEquals("0.5", String.valueOf(calculator.calculate()));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

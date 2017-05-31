@@ -46,12 +46,12 @@ public class Indicador extends Entity{
 	
 	/********* METODOS *********/
 	
-	public int analizarResultado(List<Cuenta> cuentasUnaEmpresa) {
+	public double analizarResultado(List<Cuenta> cuentasUnaEmpresa) {
 		String formulaSinIndicadores = transformIndicadores(getFormula());
 		String formulaACalcular = transformValores(formulaSinIndicadores,
 				cuentasUnaEmpresa);
 		
-		int resultado = 0;
+		double resultado = 0;
 		Calculator calculator = new Calculator(new StringReader(formulaACalcular));
 		try {
 			resultado = calculator.calculate();
@@ -146,11 +146,11 @@ public class Indicador extends Entity{
 	
 	/********* METODOS TEST*********/
 	
-	public int analizarResultadoTest(List<Cuenta> cuentasUnaEmpresa, List<Indicador> repoIndicadores){
+	public double analizarResultadoTest(List<Cuenta> cuentasUnaEmpresa, List<Indicador> repoIndicadores){
 		String formulaSinIndicadores = transformIndicadoresTest(getFormula(),repoIndicadores);
 		String formulaACalcular = transformValores(formulaSinIndicadores,
 				cuentasUnaEmpresa);
-		int resultado = 0;
+		double resultado = 0.0;
 		Calculator calculator = new Calculator(new StringReader(formulaACalcular));
 		try {
 			resultado = calculator.calculate();

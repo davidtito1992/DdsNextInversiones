@@ -3,7 +3,7 @@ options{
   JDK_VERSION = "1.5";
 }
 PARSER_BEGIN(Calculator)
-package com.test.parser;
+package calculator;
 public class Calculator{}PARSER_END(Calculator)
 SKIP:{
   " "
@@ -18,20 +18,20 @@ TOKEN:{
   | <DIV:("/")>
   | <LBR:("(")>
   | <RBR:(")")>
-  | <INT:(["0"-"9"])+>
+  | <DOUBLE:(["0"-"9"])+ ("." (["0"-"9"])+)?>
 }
-int calculate():{
-  int result;
+double calculate():{
+  double result;
 }
 {
   result = expr(){
     return result;
   }
 }
-int expr():{
-  int a;
-  int b;
-  int result = 0;
+double expr():{
+  double a;
+  double b;
+  double result = 0;
 }
 {
   a = term(){
@@ -47,10 +47,10 @@ int expr():{
     return result;
   }
 }
-int term():{
-  int a;
-  int b;
-  int result = 0;
+double term():{
+  double a;
+  double b;
+  double result = 0;
 }
 {
   a = factor(){
@@ -66,13 +66,13 @@ int term():{
     return result;
   }
 }
-int factor():{
+double factor():{
   Token t;
-  int result;
+  double result;
 }
 {
-  t = <INT>{
-    return Integer.parseInt(t.image);
+  t = <DOUBLE>{
+    return Double.parseDouble(t.image);
   }
   | <LBR>result = expr()<RBR>{
     return result;
