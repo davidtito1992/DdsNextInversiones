@@ -2,9 +2,6 @@ package model;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javaccCalculator.ArithmeticParser;
-import javaccCalculator.ParseException;
 import model.Indicador;
 
 import org.uqbar.commons.utils.ApplicationContext;
@@ -12,7 +9,7 @@ import org.uqbar.commons.utils.Observable;
 
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
-import calculator.Value;
+
 
 @Observable
 public class SnapshotIndicador {
@@ -22,7 +19,7 @@ public class SnapshotIndicador {
 	private String nombre;
 	private int año;
 	private int semestre;
-	private Value resultado;
+	private int resultado;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -50,11 +47,11 @@ public class SnapshotIndicador {
 		this.semestre = semestre;
 	}
 
-	public Value getResultado() {
+	public int getResultado() {
 		return resultado;
 	}
 
-	public void setResultado(Value resultado) {
+	public void setResultado(int resultado) {
 		this.resultado = resultado;
 	}
 }

@@ -1,10 +1,8 @@
 package model;
 
+import java.io.StringReader;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javaccCalculator.ArithmeticParser;
-import javaccCalculator.ParseException;
 
 import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.ApplicationContext;
@@ -13,7 +11,9 @@ import org.uqbar.commons.utils.Transactional;
 
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
-import calculator.Value;
+import calculator.Calculator;
+import calculator.ParseException;
+
 
 @SuppressWarnings("serial") 
 @Transactional
@@ -46,19 +46,22 @@ public class Indicador extends Entity{
 	
 	/********* METODOS *********/
 	
-	public Value analizarResultado(List<Cuenta> cuentasUnaEmpresa) {
+	public int analizarResultado(List<Cuenta> cuentasUnaEmpresa) {
 		String formulaSinIndicadores = transformIndicadores(getFormula());
 		String formulaACalcular = transformValores(formulaSinIndicadores,
 				cuentasUnaEmpresa);
-
-		ArithmeticParser parser = new ArithmeticParser(formulaACalcular);
+		
+		int resultado = 0;
+		Calculator calculator = new Calculator(new StringReader(formulaACalcular));
 		try {
-			parser.parse();
+			resultado = calculator.calculate();
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return parser.evaluate();
+		return resultado;
+		
 	}
 	
 	public String transformIndicadores(String formulaConIndicadores) {
@@ -143,19 +146,20 @@ public class Indicador extends Entity{
 	
 	/********* METODOS TEST*********/
 	
-	public Value analizarResultadoTest(List<Cuenta> cuentasUnaEmpresa, List<Indicador> repoIndicadores){
+	public int analizarResultadoTest(List<Cuenta> cuentasUnaEmpresa, List<Indicador> repoIndicadores){
 		String formulaSinIndicadores = transformIndicadoresTest(getFormula(),repoIndicadores);
 		String formulaACalcular = transformValores(formulaSinIndicadores,
 				cuentasUnaEmpresa);
-
-		ArithmeticParser parser = new ArithmeticParser(formulaACalcular);
+		int resultado = 0;
+		Calculator calculator = new Calculator(new StringReader(formulaACalcular));
 		try {
-			parser.parse();
+			resultado = calculator.calculate();
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return parser.evaluate();
+		return resultado;
 	}
 	
 	public String transformIndicadoresTest(String formulaConIndicadores,  List<Indicador> repoIndicadores) {
