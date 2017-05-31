@@ -27,6 +27,10 @@ public class MainView extends SimpleWindow<MainViewM> {
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		// TODO Auto-generated method stub
+
+		this.cargarEmpresas();
+		this.cargarIndicadores();
+
 		this.setTitle("Next-Inversiones");
 
 		mainPanel.setLayout(new VerticalLayout());
@@ -34,10 +38,19 @@ public class MainView extends SimpleWindow<MainViewM> {
 		new Label(mainPanel).setText("Bienvenido al Sistema \n")
 				.setBackground(Color.WHITE).setWidth(500);
 
+		new Button(mainPanel).setCaption("Cargar Empresas")
+				.onClick(() -> this.cargarEmpresas())
+				.bindVisibleToProperty("empresasSinCargar");
+
+		new Button(mainPanel).setCaption("Cargar Indicadores")
+				.onClick(() -> this.cargarIndicadores())
+				.bindVisibleToProperty("indicadoresSinCargar");
+
 		new Button(mainPanel).setCaption("ABM Empresas")
 				.onClick(() -> this.verEmpresas()).setWidth(60).setHeight(80);
 		new Button(mainPanel).setCaption("ABM Indicadores")
-				.onClick(() -> this.verIndicadores()).setWidth(60).setHeight(80);
+				.onClick(() -> this.verIndicadores()).setWidth(60)
+				.setHeight(80);
 		new Button(mainPanel).setCaption("ABM Metodologias")
 				.onClick(() -> verAlgo()).setWidth(60).setHeight(80);
 
@@ -67,12 +80,10 @@ public class MainView extends SimpleWindow<MainViewM> {
 	@Override
 	protected void addActions(Panel actionsPanel) {
 		// TODO Auto-generated method stub
-
 	}
 
 	/************* metodos para los buttons ***************************/
 	public void verAlgo() {
-
 		System.out.println("Accediendo para...");
 		// Dialog<?> dialog = new ddd(ventanita);
 		// dialog.open();
@@ -82,32 +93,37 @@ public class MainView extends SimpleWindow<MainViewM> {
 	public void cerrar() {
 		close();
 	}
-	
-	public void verIndicadores(){
-		try {
-			new AppData().cargarIndicadores();
-			System.out.println("Accediendo para ver las indicadores...");
 
-			Dialog<?> dialog = new IndicadorView(this);
-			dialog.open();
-			dialog.onAccept(() -> {
-			});
+	public void verIndicadores() {
+		Dialog<?> dialog = new IndicadorView(this);
+		dialog.open();
+		dialog.onAccept(() -> {
+		});
+	}
+
+	public void verEmpresas() {
+		Dialog<?> dialog = new EmpresaView(this);
+		dialog.open();
+		dialog.onAccept(() -> {
+		});
+	}
+
+	public void cargarEmpresas() {
+		try {
+			new AppData().cargarEmpresas();
+			System.out.println("Accediendo para ver las empresas...");
+			getModelObject().setEmpresasSinCargar(false);
 		} catch (Exception e) {
 			showInfo(e.getMessage());
 		}
 	}
 
-	public void verEmpresas() {
+	private void cargarIndicadores() {
 		try {
-			new AppData().cargarEmpresas();
-			System.out.println("Accediendo para ver las empresas...");
-
-			Dialog<?> dialog = new EmpresaView(this);
-			dialog.open();
-			dialog.onAccept(() -> {
-			});
+			new AppData().cargarIndicadores();
+			System.out.println("Accediendo para ver las indicadores...");
+			getModelObject().setIndicadoresSinCargar(false);
 		} catch (Exception e) {
-
 			showInfo(e.getMessage());
 		}
 	}

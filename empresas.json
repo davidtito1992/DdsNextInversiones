@@ -92,7 +92,7 @@
 				"año": "2014",
 				"semestre": "1",
 				"cuentas": [{
-						"nombre": "EBITDA",
+						"nombr": "EBITDA",
 						"valor": "99999"
 					},
 					{

@@ -48,7 +48,13 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 		selectorSemestre.bindItemsToProperty("semestre");
 		selectorSemestre.bindValueToProperty("semestreSeleccionado");
 		
-		new Label(form).setText("");
+		new Label(form).setText("\t");
+		new Label(form).setText("\t\t");
+		new Label(form).setText("\t\t");
+		
+		new Button(form).setCaption("Buscar").onClick(this::buscar)
+				.setWidth(140);
+		new Label(form).setText("\t");
 		new Button(form).setCaption("Reiniciar").onClick(this::reiniciar)
 				.setWidth(140);
 		
@@ -89,19 +95,13 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel)
 				.setWidth(140);
 	}
-
-//	public void consultarIndicador() {
-//		//hacer las cuentas
-//		
-//	}
-
-	@Override
-	public void cancel() {
-		this.close();
-	}
 	
 	public void reiniciar() {
 		getModelObject().reiniciar();
 	}
 
+	public void buscar() {
+		
+	}
+	
 }
