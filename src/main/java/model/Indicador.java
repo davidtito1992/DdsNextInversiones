@@ -63,6 +63,7 @@ public class Indicador extends Entity {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 		return resultado;
 

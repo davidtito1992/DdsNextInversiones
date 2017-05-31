@@ -128,6 +128,16 @@ public class AgregarIndicadorViewM {
 					"Debe ingresar los campos obligatorios para guardar correctamente, Intentelo nuevamente");
 		}
 
+		if (this.nombre.contains(" ")) {
+			throw new Exception(
+					"Favor de ingresar un nombre que no contenga espacios");
+		}
+
+		if (this.formula.contains(this.nombre)) {
+			throw new Exception(
+					"No puede usar ese nombre porque se encuentra dentro de la formula del mismo");
+		}
+
 		if (this.getRepoIndicadores().filtrar(nombre).size() == 0) {
 			List<Indicador> list = new ArrayList<Indicador>();
 			list.add(new Indicador(nombre, formula));
@@ -144,13 +154,21 @@ public class AgregarIndicadorViewM {
 	}
 
 	public void agregarCuentaALaFormula() {
-		this.setFormula(this.getFormula() + " "
-				+ this.getAgregarCuentaSeleccionado());
+		if (this.getFormula() != null) {
+			this.setFormula(this.getFormula() + " "
+					+ this.getAgregarCuentaSeleccionado());
+		} else {
+			this.setFormula(this.getAgregarCuentaSeleccionado());
+		}
 	}
 
 	public void agregarIndicadorALaFormula() {
-		this.setFormula(this.getFormula() + " "
-				+ this.getAgregarIndicadorSeleccionado());
+		if (this.getFormula() != null) {
+			this.setFormula(this.getFormula() + " "
+					+ this.getAgregarIndicadorSeleccionado());
+		} else {
+			this.setFormula(this.getAgregarIndicadorSeleccionado());
+		}
 	}
 
 	public RepositorioEmpresa getRepoEmpresas() {

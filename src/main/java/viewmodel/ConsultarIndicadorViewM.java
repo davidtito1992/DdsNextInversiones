@@ -1,9 +1,11 @@
 package viewmodel;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import model.Cuenta;
 import model.Empresa;
@@ -13,7 +15,10 @@ import model.SnapshotIndicador;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
+import calculator.Calculator;
+import calculator.ParseException;
 import repositories.RepositorioEmpresa;
+import repositories.RepositorioIndicadores;
 
 @Observable
 public class ConsultarIndicadorViewM {
