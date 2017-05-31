@@ -136,7 +136,7 @@ public class AgregarIndicadorViewM {
 					"Favor de ingresar un nombre que no contenga espacios");
 		}
 
-		if (this.formula.contains(this.nombre)) {
+		if (formulaContieneNombre(this.nombre, this.formula)) {
 			throw new Exception(
 					"No puede usar ese nombre porque se encuentra dentro de la formula del mismo");
 		}
@@ -155,6 +155,16 @@ public class AgregarIndicadorViewM {
 		
 		list.add(nuevoIndicador);
 		this.getRepoIndicadores().cargarListaIndicadores(list);
+	}
+	
+	public boolean formulaContieneNombre(String nombre, String formula){
+		String[] componentes = formula.split(" ");
+		for (int i = 0; i < componentes.length; i++) {
+				if (nombre == componentes[i]){
+					return true;
+			}
+		}
+		return false;
 	}
 	
 	public List<Cuenta> todasLasCuentas(){
