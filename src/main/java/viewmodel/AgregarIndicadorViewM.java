@@ -1,16 +1,20 @@
 package viewmodel;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
+import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
 
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
+import calculator.Calculator;
+import calculator.ParseException;
 import app.AppData;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
@@ -121,9 +125,7 @@ public class AgregarIndicadorViewM {
 	}
 
 	public void guardarIndicador() throws Exception {
-		// if (this.getNombre().isEmpty() || this.getFormula().isEmpty()){
-		// throw new Exception("No puede dejar campos vacios");
-		// }
+
 		if (this.nombre == null || this.formula == null) {
 			throw new Exception(
 					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
@@ -147,10 +149,45 @@ public class AgregarIndicadorViewM {
 		List<Indicador> list = new ArrayList<Indicador>();
 		
 		Indicador nuevoIndicador = new Indicador(nombre,formula);
+		revisarSintaxis(nuevoIndicador);
+		
 		new AppData().guardarIndicador(nuevoIndicador) ;
 		
 		list.add(nuevoIndicador);
 		this.getRepoIndicadores().cargarListaIndicadores(list);
+	}
+	
+	public List<Cuenta> todasLasCuentas(){
+		List<Empresa> empresas = this.getRepoEmpresas().filtrar(null, null,null, null);
+		HashSet<Cuenta> cuentas = new HashSet<Cuenta>();
+		empresas.forEach(empresa -> {
+			empresa.getPeriodos().forEach(
+					periodo -> {
+						periodo.getCuentas()
+								.forEach(
+										cuenta -> cuentas.add(cuenta));
+					});
+		});
+
+		return new ArrayList<Cuenta>(cuentas);
+	}
+	
+	public void revisarSintaxis(Indicador indicador) throws Exception{
+		
+		String[] componentes = indicador.getFormula().split(" ");
+		for (int i = 0; i < componentes.length; i++) {
+			if (indicador.esIndicador(componentes[i]) || indicador.esCuenta(componentes[i], todasLasCuentas())) {
+				componentes[i] = "2";
+			}
+		}
+		String formulaReemplazada = String.join(" ", componentes);
+		Calculator calculator = new Calculator(new StringReader(
+				formulaReemplazada));
+		try {
+			calculator.calculate();
+		} catch (ParseException e) {
+			throw new Exception("La sintaxis es incorrecta");
+		}
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {

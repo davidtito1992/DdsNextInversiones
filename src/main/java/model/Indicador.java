@@ -107,7 +107,7 @@ public class Indicador extends Entity {
 		return cuentaADevolver.get(0).getValor();
 	}
 
-	private boolean esCuenta(String componente, List<Cuenta> cuentasUnaEmpresa) {
+	public boolean esCuenta(String componente, List<Cuenta> cuentasUnaEmpresa) {
 		return cuentasUnaEmpresa.stream().map(cuenta -> cuenta.getNombre())
 				.anyMatch(cuenta -> cuenta.equals(componente));
 	}
