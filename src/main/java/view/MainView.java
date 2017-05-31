@@ -9,6 +9,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
+
 import app.AppData;
 import viewmodel.MainViewM;
 
@@ -81,11 +82,20 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 	public void verIndicadores() {
 		if (this.getModelObject().isIndicadoresSinCargar()){
-			this.cargarIndicadores();
+			try {
+				this.cargarIndicadores();
+			} catch (Exception e) {
+				showInfo(e.getMessage());
+			}
 		}
 		
 		if (this.getModelObject().isEmpresasSinCargar()){
-			this.cargarEmpresas();
+			try {
+				this.cargarEmpresas();
+				
+			} catch (Exception e) {
+					showInfo(e.getMessage());
+			}
 		}
 		Dialog<?> dialog = new IndicadorView(this);
 		dialog.open();
@@ -95,7 +105,12 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 	public void verEmpresas() {
 		if (this.getModelObject().isEmpresasSinCargar()){
-			this.cargarEmpresas();
+			try {
+				this.cargarEmpresas();
+			} catch (Exception e) {
+				
+					showInfo(e.getMessage());
+			}
 		}
 		
 		Dialog<?> dialog = new EmpresaView(this);
@@ -104,24 +119,20 @@ public class MainView extends SimpleWindow<MainViewM> {
 		});
 	}
 
-	public void cargarEmpresas() {
-		try {
+	public void cargarEmpresas() throws Exception {
+
 			new AppData().cargarEmpresas();
 			System.out.println("Accediendo para ver las empresas...");
 			getModelObject().setEmpresasSinCargar(false);
-		} catch (Exception e) {
-			showInfo(e.getMessage());
-		}
+
 	}
 
-	private void cargarIndicadores() {
-		try {
+	private void cargarIndicadores() throws Exception {
+		
 			new AppData().cargarIndicadores();
 			System.out.println("Accediendo para ver las indicadores...");
 			getModelObject().setIndicadoresSinCargar(false);
-		} catch (Exception e) {
-			showInfo(e.getMessage());
-		}
+	
 	}
 
 	/*
