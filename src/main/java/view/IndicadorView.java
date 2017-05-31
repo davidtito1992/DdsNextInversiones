@@ -24,7 +24,6 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 		Panel form = new Panel(mainPanel);
 		this.setTitle("Indicador");
 		form.setLayout(new ColumnLayout(4));
-		getModelObject().llenarTablas();
 
 		new Button(form).setCaption("Agregar").onClick(this::agregarIndicador)
 				.setWidth(140);
@@ -79,8 +78,9 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 
 			Dialog<?> dialog = new AgregarIndicadorView(this);
 			dialog.open();
-			dialog.onAccept(() -> {
-			});
+			dialog.onAccept(() -> {	});
+
+			this.getModelObject().llenarTablas();
 		} catch (Exception e) {
 			showInfo(e.getMessage());
 		}

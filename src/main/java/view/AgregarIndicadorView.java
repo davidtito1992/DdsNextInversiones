@@ -36,22 +36,12 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 	protected void addActions(Panel actions) {
 
 		new Label(actions).setText("\t\t\t\t\t");
-		new Button(actions).setCaption("Guardar")
-				.onClick(this::guardarIndicador).setAsDefault().setWidth(140);
+
+		new Button(actions).setCaption("Guardar").onClick(this::accept).setAsDefault().setWidth(140);
+
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel)
 				.setWidth(140);
-	}
 
-	public void guardarIndicador() {
-		try {
-			getModelObject().guardarIndicador();
-			this.close();
-		} 
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 
 	@Override
@@ -59,4 +49,24 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 		this.close();
 	}
 
+
+	@Override
+	protected void executeTask() {
+
+			try {
+				getModelObject().guardarIndicador();
+				super.executeTask();
+				this.close();
+			} 
+			catch (Exception e) {
+				// TODO Auto-generated catch block
+				this.showError(e.getMessage());
+			}
+
+	}
+
+	
+	
+	
+	
 }

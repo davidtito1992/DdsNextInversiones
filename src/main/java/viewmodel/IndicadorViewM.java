@@ -54,13 +54,14 @@ public class IndicadorViewM {
 	/********* METODOS *********/
 
 	public IndicadorViewM() {
-
+    this.llenarTablas();
 	}
 
 	public void llenarTablas() {
+		this.setIndicadores(null);
 		this.setIndicadores(getRepoIndicadores().allInstances());
 	}
-
+	
 	public RepositorioIndicadores getRepoIndicadores() {
 		return ApplicationContext.getInstance().getSingleton(Indicador.class);
 	}

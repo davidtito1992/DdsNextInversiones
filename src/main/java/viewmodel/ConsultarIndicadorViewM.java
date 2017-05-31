@@ -194,10 +194,8 @@ public class ConsultarIndicadorViewM {
 		List<Empresa> empresas=	this.getRepoEmpresas().filtrar(null, nombreSeleccionado, semestreSeleccionado, añoSeleccionado) ;
 		
 		List<Cuenta> cuentas= empresas.get(0).getPeriodos().get(0).getCuentas();
-		//empresa.forEach(unaEmpresa-> unaEmpresa.getPeriodos().forEach(unPeriodo->cuentas =unPeriodo.getCuentas()));
-		
+	
 		this.resultado= getIndicadorElegido().analizarResultado(cuentas);
-		cuentas.forEach(cuenta-> System.out.println(cuenta.getNombre()));
 	}
 	public void reiniciar() {
 		this.generarTodosLosCBox(null,null,null);

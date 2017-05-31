@@ -139,7 +139,7 @@ public class EmpresaViewM {
 	public EmpresaViewM() {
 
 		this.generarTodosLosCBox(null, null, null, null);
-
+        this.llenarTablas();
 	}
 
 	public void llenarTablas() {

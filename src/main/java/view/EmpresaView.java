@@ -26,7 +26,7 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		Panel form = new Panel(mainPanel);
 		this.setTitle("Empresas");
 		form.setLayout(new ColumnLayout(4));
-		getModelObject().llenarTablas();
+		//getModelObject().llenarTablas();
 
 		// new
 		// Label(form).setText("\nFILTROS\n").setBackground(Color.LIGHT_GRAY).setWidth(300);
