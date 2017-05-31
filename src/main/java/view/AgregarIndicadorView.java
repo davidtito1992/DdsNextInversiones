@@ -60,7 +60,7 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 
 		new Label(actions).setText("\t\t\t\t\t");
 
-		new Button(actions).setCaption("Guardar").onClick(this::accept)
+		new Button(actions).setCaption("Guardar").onClick(this::guardar)
 				.setAsDefault().setWidth(140);
 
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel)
@@ -81,8 +81,8 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 		getModelObject().agregarCuentaALaFormula();
 	}
 
-	@Override
-	protected void executeTask() {
+	//@Override
+	protected void guardar() {
 
 		try {
 			getModelObject().guardarIndicador();

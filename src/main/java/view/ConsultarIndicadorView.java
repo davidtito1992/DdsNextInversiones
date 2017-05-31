@@ -46,8 +46,7 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 		selectorSemestre.setWidth(150);
 		selectorSemestre.bindItemsToProperty("semestre");
 		selectorSemestre.bindValueToProperty("semestreSeleccionado");
-//		
-//		new Label(form).setText("\t");
+
 		new Label(form).setText("\t\t");
 		new Label(form).setText("\t\t");
 		new Label(form).setText("\t\tResultado: \t\t\t\t") ;
@@ -64,43 +63,10 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 		new Label(form).setText("\t\t");
         new Button(form).setCaption("Cancelar").onClick(this::cancel)
         .setWidth(140);
-//		Table<SnapshotIndicador> tableResultadoIndicador = new Table<SnapshotIndicador>(
-//				mainPanel, SnapshotIndicador.class);
-//
-//		tableResultadoIndicador.setHeight(600);
-//		tableResultadoIndicador.setWidth(200);
-//
-//		tableResultadoIndicador.bindItemsToProperty("snapshotIndicadores");
-//		tableResultadoIndicador.bindValueToProperty("snapshotIndicadorSeleccionado");
-//
-//		Column<SnapshotIndicador> columnaNombre = new Column<SnapshotIndicador>(
-//				tableResultadoIndicador);
-//		columnaNombre.setTitle("Nombre");
-//		columnaNombre.bindContentsToProperty("nombre");
-//
-//		Column<SnapshotIndicador> columnaAño = new Column<SnapshotIndicador>(
-//				tableResultadoIndicador);
-//		columnaAño.setTitle("Año");
-//		columnaAño.bindContentsToProperty("año");
-//
-//		Column<SnapshotIndicador> columnaSemestre = new Column<SnapshotIndicador>(
-//				tableResultadoIndicador);
-//		columnaSemestre.setTitle("Semestre");
-//		columnaSemestre.bindContentsToProperty("semestre");
-//
-//		Column<SnapshotIndicador> columnaValor = new Column<SnapshotIndicador>(
-//				tableResultadoIndicador);
-//		columnaValor.setTitle("Resultado");
-//		columnaValor.bindContentsToProperty("resultado");
 	}
 
 	@Override
 	protected void addActions(Panel actions) {
-//		new Button(actions).setCaption("Consultar")
-//				.onClick(this::consultarIndicador).setAsDefault().setWidth(140);
-	
-	
-		
 	}
 	
 	public void reiniciar() {

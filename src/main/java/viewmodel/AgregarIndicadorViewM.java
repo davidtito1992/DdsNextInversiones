@@ -11,6 +11,7 @@ import model.Indicador;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
+import app.AppData;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
 
@@ -125,7 +126,7 @@ public class AgregarIndicadorViewM {
 		// }
 		if (this.nombre == null || this.formula == null) {
 			throw new Exception(
-					"Debe ingresar los campos obligatorios para guardar correctamente, Intentelo nuevamente");
+					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
 		}
 
 		if (this.nombre.contains(" ")) {
@@ -138,15 +139,18 @@ public class AgregarIndicadorViewM {
 					"No puede usar ese nombre porque se encuentra dentro de la formula del mismo");
 		}
 
-		if (this.getRepoIndicadores().filtrar(nombre).size() == 0) {
-			List<Indicador> list = new ArrayList<Indicador>();
-			list.add(new Indicador(nombre, formula));
-			this.getRepoIndicadores().cargarListaIndicadores(list);
-			// Resta guardarlo en el archivo
-		} else {
+		if (this.getRepoIndicadores().filtrar(nombre).size() > 0) {
 			throw new Exception(
-					"Un indicador con ese nombre ya se encuentra cargado en el sistema, Intentelo nuevamente");
-		}
+					"Un indicador con ese nombre ya se encuentra cargado en el sistema, Intentelo nuevamente");		
+		} 
+		
+		List<Indicador> list = new ArrayList<Indicador>();
+		
+		Indicador nuevoIndicador = new Indicador(nombre,formula);
+		new AppData().guardarIndicador(nuevoIndicador) ;
+		
+		list.add(nuevoIndicador);
+		this.getRepoIndicadores().cargarListaIndicadores(list);
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {
