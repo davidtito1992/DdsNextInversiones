@@ -7,13 +7,14 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
+
 import viewmodel.AgregarIndicadorViewM;
 
 
 public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 
 	@SuppressWarnings("rawtypes")
-	public AgregarIndicadorView(SimpleWindow owner) {
+	public AgregarIndicadorView(SimpleWindow owner) throws Exception {
 		super(owner, new AgregarIndicadorViewM());
 	}
 
@@ -42,8 +43,15 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 	}
 
 	public void guardarIndicador() {
-		// guardar el indicador en el archivo y agregarlo en el
-		// repositorioIndicadores
+		try {
+			getModelObject().guardarIndicador();
+			this.close();
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override

@@ -1,7 +1,13 @@
 package viewmodel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Indicador;
+
 import org.uqbar.commons.utils.Observable;
+
+import repositories.RepositorioIndicadores;
 
 @Observable
 public class AgregarIndicadorViewM {
@@ -32,6 +38,23 @@ public class AgregarIndicadorViewM {
 	/********* METODOS *********/
 
 	public AgregarIndicadorViewM() {
-
+		
+	}
+	
+	public void guardarIndicador() throws Exception{
+		//if (this.getNombre().isEmpty() || this.getFormula().isEmpty()){
+		//	throw new Exception("No puede dejar campos vacios");
+		//}
+		
+		if (RepositorioIndicadores.repositorioMaestro().filtrar(nombre).size() == 0){
+			List<Indicador> list = new ArrayList<Indicador>();
+			list.add(new Indicador(nombre,formula));
+			RepositorioIndicadores.repositorioMaestro().cargarListaIndicadores(list);
+			//new IndicadorViewM().llenarTablas();
+			//Resta guardarlo en el archivo y llenar las tablas del ABM indicadores
+		}
+		else{
+			throw new Exception("Un indicador con ese nombre ya se encuentra cargado en el sistema");
+		}
 	}
 }
