@@ -18,7 +18,6 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 	public MainView(WindowOwner parent) {
 		super(parent, new MainViewM());
-
 	}
 
 	/***************************** panel maestro:label , tablas , buttons, etc ************************/
@@ -31,7 +30,12 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 		new Label(mainPanel).setText("Bienvenido al Sistema \n")
 				.setBackground(Color.WHITE).setWidth(500);
-		
+		new Button(mainPanel).setCaption("Cargar Empresas")
+				.onClick(() -> this.cargarEmpresas())
+				.bindVisibleToProperty("empresasSinCargar");
+		new Button(mainPanel).setCaption("Cargar Indicadores")
+				.onClick(() -> this.cargarIndicadores())
+				.bindVisibleToProperty("indicadoresSinCargar");
 		new Button(mainPanel).setCaption("ABM Empresas")
 				.onClick(() -> this.verEmpresas()).setWidth(60).setHeight(80);
 		new Button(mainPanel).setCaption("ABM Indicadores")
@@ -81,22 +85,6 @@ public class MainView extends SimpleWindow<MainViewM> {
 	}
 
 	public void verIndicadores() {
-		if (this.getModelObject().isIndicadoresSinCargar()){
-			try {
-				this.cargarIndicadores();
-			} catch (Exception e) {
-				showInfo(e.getMessage());
-			}
-		}
-		
-		if (this.getModelObject().isEmpresasSinCargar()){
-			try {
-				this.cargarEmpresas();
-				
-			} catch (Exception e) {
-					showInfo(e.getMessage());
-			}
-		}
 		Dialog<?> dialog = new IndicadorView(this);
 		dialog.open();
 		dialog.onAccept(() -> {
@@ -104,35 +92,32 @@ public class MainView extends SimpleWindow<MainViewM> {
 	}
 
 	public void verEmpresas() {
-		if (this.getModelObject().isEmpresasSinCargar()){
-			try {
-				this.cargarEmpresas();
-			} catch (Exception e) {
-				
-					showInfo(e.getMessage());
-			}
-		}
-		
 		Dialog<?> dialog = new EmpresaView(this);
 		dialog.open();
 		dialog.onAccept(() -> {
 		});
 	}
 
-	public void cargarEmpresas() throws Exception {
-
+	private void cargarEmpresas() {
+		try {
 			new AppData().cargarEmpresas();
 			System.out.println("Accediendo para ver las empresas...");
 			getModelObject().setEmpresasSinCargar(false);
+		} catch (Exception e) {
+			showInfo(e.getMessage());
+		}
 
 	}
 
-	private void cargarIndicadores() throws Exception {
-		
+	private void cargarIndicadores() {
+		try {
 			new AppData().cargarIndicadores();
 			System.out.println("Accediendo para ver las indicadores...");
 			getModelObject().setIndicadoresSinCargar(false);
-	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			showInfo(e.getMessage());
+		}
 	}
 
 	/*
