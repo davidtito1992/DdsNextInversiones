@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+
 import model.Empresa;
 import model.Indicador;
 import model.SnapshotIndicador;
+
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
+
 import repositories.RepositorioEmpresa;
 
 @Observable
@@ -26,7 +29,9 @@ public class ConsultarIndicadorViewM {
 	private SnapshotIndicador snapshotIndicadorSeleccionado;
 	private double resultado;
 	private Indicador indicadorElegido;
-
+	private List<String> cuentas = new ArrayList<String>();	
+	private String cuentaSeleccionada;
+	
 	/********* GETTERS/SETTERS *********/
 
 	public List<String> getNombres() {
@@ -113,7 +118,7 @@ public class ConsultarIndicadorViewM {
 
 	public void setSemestreSeleccionado(Integer semestreSeleccionado) {
 		this.semestreSeleccionado = semestreSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado, this.añoSeleccionado,
+		this.generarTodosLosCBox(this.nombreSeleccionado,this.añoSeleccionado,
 				this.semestreSeleccionado);
 	}
 
@@ -121,9 +126,13 @@ public class ConsultarIndicadorViewM {
 
 	public ConsultarIndicadorViewM() {
 
+
+			this.generarTodosLosCBox(null, null, null);
+
+		
 	}
 
-	public void generarTodosLosCBox(String empresa, Integer anio,
+	public void generarTodosLosCBox(String empresa,Integer anio,
 			Integer semestre) {
 
 		List<Empresa> repoEmpresa2 = new ArrayList<Empresa>();
@@ -179,10 +188,12 @@ public class ConsultarIndicadorViewM {
 		Collections.sort(nombreEmpresasFinal);
 		this.nombres = nombreEmpresasFinal;
 
+		nombreEmpresasFinal.forEach(name ->(System.out.println(name)));
+
 	}
 
 	public void reiniciar() {
-		this.generarTodosLosCBox(null, null, null);
+		this.generarTodosLosCBox(null,null,null);
 		this.snapshotIndicadorSeleccionado = null;
 		this.limpiarFiltros();
 		this.llenarTablas();
@@ -192,11 +203,12 @@ public class ConsultarIndicadorViewM {
 		nombreSeleccionado = null;
 		semestreSeleccionado = null;
 		añoSeleccionado = null;
+	//	cuentaSeleccionada = null ;
 	}
 
 	public void llenarTablas() {
-		this.setSnapshotIndicadores(this
-				.dameSnapshotIndicadores(getRepoEmpresas().allInstances()));
+//		this.setSnapshotIndicadores(this
+//				.dameSnapshotIndicadores(getRepoEmpresas().allInstances()));
 	}
 
 	// CREA FILAS DE LA TABLA
