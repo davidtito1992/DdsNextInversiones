@@ -7,8 +7,6 @@ import repositories.RepositorioEmpresa;
 @Observable
 public class MainViewM {
 
-	RepositorioEmpresa repoEmpresa;
-
 	private boolean empresasSinCargar = true;
 	private boolean indicadoresSinCargar = true;
 	
