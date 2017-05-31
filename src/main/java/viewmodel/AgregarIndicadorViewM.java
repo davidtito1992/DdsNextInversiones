@@ -11,6 +11,7 @@ import model.Indicador;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
+import app.AppData;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
 
@@ -140,9 +141,13 @@ public class AgregarIndicadorViewM {
 
 		if (this.getRepoIndicadores().filtrar(nombre).size() == 0) {
 			List<Indicador> list = new ArrayList<Indicador>();
-			list.add(new Indicador(nombre, formula));
+			
+			Indicador nuevoIndicador = new Indicador(nombre,formula);
+			new AppData().guardarIndicador(nuevoIndicador) ;
+			
+			list.add(nuevoIndicador);
 			this.getRepoIndicadores().cargarListaIndicadores(list);
-			// Resta guardarlo en el archivo
+			
 		} else {
 			throw new Exception(
 					"Un indicador con ese nombre ya se encuentra cargado en el sistema, Intentelo nuevamente");
