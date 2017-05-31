@@ -29,8 +29,6 @@ public class ConsultarIndicadorViewM {
 	private SnapshotIndicador snapshotIndicadorSeleccionado;
 	private double resultado;
 	private Indicador indicadorElegido;
-	private List<String> cuentas = new ArrayList<String>();	
-	private String cuentaSeleccionada;
 	
 	/********* GETTERS/SETTERS *********/
 
@@ -188,7 +186,7 @@ public class ConsultarIndicadorViewM {
 		Collections.sort(nombreEmpresasFinal);
 		this.nombres = nombreEmpresasFinal;
 
-		nombreEmpresasFinal.forEach(name ->(System.out.println(name)));
+//		nombreEmpresasFinal.forEach(name ->(System.out.println(name)));
 
 	}
 

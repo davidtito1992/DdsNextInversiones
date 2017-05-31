@@ -84,6 +84,9 @@ public class MainView extends SimpleWindow<MainViewM> {
 			this.cargarIndicadores();
 		}
 		
+		if (this.getModelObject().isEmpresasSinCargar()){
+			this.cargarEmpresas();
+		}
 		Dialog<?> dialog = new IndicadorView(this);
 		dialog.open();
 		dialog.onAccept(() -> {
