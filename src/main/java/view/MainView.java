@@ -85,17 +85,25 @@ public class MainView extends SimpleWindow<MainViewM> {
 	}
 
 	public void verIndicadores() {
+		if(getModelObject().isIndicadoresSinCargar()){
+			showInfo("Cargue los indicadores primero.");
+		}else {
 		Dialog<?> dialog = new IndicadorView(this);
 		dialog.open();
 		dialog.onAccept(() -> {
 		});
+		}
 	}
 
 	public void verEmpresas() {
+		if(getModelObject().isIndicadoresSinCargar()){
+			showInfo("Cargue las empresas primero.");
+		}else {
 		Dialog<?> dialog = new EmpresaView(this);
 		dialog.open();
 		dialog.onAccept(() -> {
 		});
+		}
 	}
 
 	private void cargarEmpresas() {
