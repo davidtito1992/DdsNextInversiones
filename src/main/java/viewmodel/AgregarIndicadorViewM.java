@@ -187,7 +187,10 @@ public class AgregarIndicadorViewM {
 			calculator.calculate();
 		} catch (ParseException e) {
 			throw new Exception("La sintaxis es incorrecta");
+		} catch (Error e){
+			throw new Exception("Ingresó una cuenta o un indicador inexistente");
 		}
+		
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {
