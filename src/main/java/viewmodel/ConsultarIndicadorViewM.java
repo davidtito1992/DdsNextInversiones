@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
+import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
 import model.SnapshotIndicador;
@@ -122,10 +123,10 @@ public class ConsultarIndicadorViewM {
 
 	/********* METODOS *********/
 
-	public ConsultarIndicadorViewM() {
+	public ConsultarIndicadorViewM(Indicador unIndicador) {
 
-
-			this.generarTodosLosCBox(null, null, null);
+	this.indicadorElegido= unIndicador ;
+	  this.generarTodosLosCBox(null, null, null);
 
 		
 	}
@@ -189,12 +190,21 @@ public class ConsultarIndicadorViewM {
 //		nombreEmpresasFinal.forEach(name ->(System.out.println(name)));
 
 	}
-
+	public void consultar() {
+		List<Empresa> empresas=	this.getRepoEmpresas().filtrar(null, nombreSeleccionado, semestreSeleccionado, añoSeleccionado) ;
+		
+		List<Cuenta> cuentas= empresas.get(0).getPeriodos().get(0).getCuentas();
+		//empresa.forEach(unaEmpresa-> unaEmpresa.getPeriodos().forEach(unPeriodo->cuentas =unPeriodo.getCuentas()));
+		
+		this.resultado= getIndicadorElegido().analizarResultado(cuentas);
+		cuentas.forEach(cuenta-> System.out.println(cuenta.getNombre()));
+	}
 	public void reiniciar() {
 		this.generarTodosLosCBox(null,null,null);
 		this.snapshotIndicadorSeleccionado = null;
 		this.limpiarFiltros();
-		this.llenarTablas();
+		//this.llenarTablas();
+		this.resultado= 0 ;
 	}
 
 	public void limpiarFiltros() {

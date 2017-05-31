@@ -88,15 +88,17 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 
 	public void consultar() {
 		// abrir ventana ConsultarIndicadorView
-		try {
+	 
+		if (this.getModelObject().getIndicadorSeleccionado()!= null){
 			System.out.println("Accediendo para consultar los indicadores...");
 
-			Dialog<?> dialog = new ConsultarIndicadorView(this);
+			Dialog<?> dialog = new ConsultarIndicadorView(this,this.getModelObject().getIndicadorSeleccionado());
 			dialog.open();
 			dialog.onAccept(() -> {
 			});
-		} catch (Exception e) {
-			showInfo(e.getMessage());
+		}else {
+	
+		this.showError("Seleccione un Indicador, por favor");		
 		}
 	}
 
