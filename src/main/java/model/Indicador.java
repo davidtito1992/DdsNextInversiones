@@ -49,7 +49,7 @@ public class Indicador extends Entity {
 
 	/********* METODOS *********/
 
-	public double analizarResultado(List<Cuenta> cuentasUnaEmpresa) {
+	public double analizarResultado(List<Cuenta> cuentasUnaEmpresa) throws Exception {
 		String formulaSinIndicadores = transformIndicadores(getFormula());
 		String formulaACalcular = transformValores(formulaSinIndicadores,
 				cuentasUnaEmpresa);
@@ -61,9 +61,9 @@ public class Indicador extends Entity {
 			resultado = calculator.calculate();
 
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
+			throw new Exception("Este indicador utiliza una cuenta que no esta disponible en este periodo");
+			// e.printStackTrace();
+
 		}
 		return resultado;
 
@@ -165,7 +165,6 @@ public class Indicador extends Entity {
 			resultado = calculator.calculate();
 
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return resultado;

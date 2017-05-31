@@ -195,7 +195,7 @@ public class ConsultarIndicadorViewM {
 
 	}
 
-	public void consultar() {
+	public void consultar() throws Exception {
 		List<Empresa> empresas = this.getRepoEmpresas().filtrar(null,
 				nombreSeleccionado, semestreSeleccionado, añoSeleccionado);
 
@@ -209,7 +209,6 @@ public class ConsultarIndicadorViewM {
 		this.generarTodosLosCBox(null, null, null);
 		this.snapshotIndicadorSeleccionado = null;
 		this.limpiarFiltros();
-		// this.llenarTablas();
 		this.resultado = 0;
 	}
 
@@ -217,39 +216,5 @@ public class ConsultarIndicadorViewM {
 		nombreSeleccionado = null;
 		semestreSeleccionado = null;
 		añoSeleccionado = null;
-		// cuentaSeleccionada = null ;
-	}
-
-	public void llenarTablas() {
-		// this.setSnapshotIndicadores(this
-		// .dameSnapshotIndicadores(getRepoEmpresas().allInstances()));
-	}
-
-	// CREA FILAS DE LA TABLA
-	private List<SnapshotIndicador> dameSnapshotIndicadores(
-			List<Empresa> empresasASnap) {
-		ArrayList<SnapshotIndicador> listSnapshot = new ArrayList<SnapshotIndicador>();
-		empresasASnap
-				.forEach(empresa -> {
-					empresa.getPeriodos()
-							.forEach(
-									periodo -> {
-										SnapshotIndicador snapshotIndicador = new SnapshotIndicador();
-										snapshotIndicador.setNombre(empresa
-												.getNombre());
-										snapshotIndicador.setSemestre(periodo
-												.getSemestre());
-										snapshotIndicador.setAño(periodo
-												.getAño());
-										snapshotIndicador
-												.setResultado(getIndicadorElegido()
-														.analizarResultado(
-																periodo.getCuentas()));
-
-										listSnapshot.add(snapshotIndicador);
-
-									});
-				});
-		return listSnapshot;
 	}
 }

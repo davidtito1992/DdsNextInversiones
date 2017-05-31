@@ -1,6 +1,7 @@
 package view;
 
 import model.Indicador;
+
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -23,7 +24,7 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 		Panel form = new Panel(mainPanel);
 		this.setTitle("Consultar Indicador");
 		form.setLayout(new ColumnLayout(2));
-		this.getModelObject().llenarTablas();
+		//this.getModelObject().llenarTablas();
 		
 		new Label(form).setText("\t\tSeleccione Empresa");
 		Selector<String> selectorNombre = new Selector<String>(form)
@@ -108,7 +109,13 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 
 	public void consultar() {
 		if (this.getModelObject().getNombreSeleccionado()!=null && this.getModelObject().getSemestreSeleccionado() !=null && this.getModelObject().getAñoSeleccionado()!=null){
-			this.getModelObject().consultar();
+			try {
+				this.getModelObject().consultar();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				showInfo(e.getMessage());
+			}
 		}else {
 			this.showError("Selecciones todos los campos, por favor");
 		}
