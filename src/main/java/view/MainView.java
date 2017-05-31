@@ -96,7 +96,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 	}
 
 	public void verEmpresas() {
-		if(getModelObject().isIndicadoresSinCargar()){
+		if(getModelObject().isEmpresasSinCargar()){
 			showInfo("Cargue las empresas primero.");
 		}else {
 		Dialog<?> dialog = new EmpresaView(this);
