@@ -46,7 +46,10 @@ public class AgregarIndicadorViewM {
 		// if (this.getNombre().isEmpty() || this.getFormula().isEmpty()){
 		// throw new Exception("No puede dejar campos vacios");
 		// }
-
+		if (this.nombre==null || this.formula==null){ 
+			throw new Exception("Debe ingresar los campos obligatorios para guardar correctamente, Intentelo nuevamente");
+			}
+		
 		if (this.getRepoIndicadores().filtrar(nombre).size() == 0) {
 			List<Indicador> list = new ArrayList<Indicador>();
 			list.add(new Indicador(nombre, formula));
@@ -55,7 +58,7 @@ public class AgregarIndicadorViewM {
 			// indicadores
 		} else {
 			throw new Exception(
-					"Un indicador con ese nombre ya se encuentra cargado en el sistema");
+					"Un indicador con ese nombre ya se encuentra cargado en el sistema, Intentelo nuevamente");
 		}
 	}
 
