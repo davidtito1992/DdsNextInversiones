@@ -11,11 +11,11 @@ import org.uqbar.commons.utils.Transactional;
 public class Empresa extends Entity {
 
 	/********* ATRIBUTOS *********/
-	
+
 	private String nombre;
 	private List<Periodo> periodos;
 
-	/********* GETTERS/SETTERS *********/	
+	/********* GETTERS/SETTERS *********/
 
 	public String getNombre() {
 		return nombre;

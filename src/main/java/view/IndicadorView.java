@@ -78,7 +78,8 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 
 			Dialog<?> dialog = new AgregarIndicadorView(this);
 			dialog.open();
-			dialog.onAccept(() -> {	});
+			dialog.onAccept(() -> {
+			});
 
 			this.getModelObject().llenarTablas();
 		} catch (Exception e) {
@@ -88,17 +89,18 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 
 	public void consultar() {
 		// abrir ventana ConsultarIndicadorView
-	 
-		if (this.getModelObject().getIndicadorSeleccionado()!= null){
+
+		if (this.getModelObject().getIndicadorSeleccionado() != null) {
 			System.out.println("Accediendo para consultar los indicadores...");
 
-			Dialog<?> dialog = new ConsultarIndicadorView(this,this.getModelObject().getIndicadorSeleccionado());
+			Dialog<?> dialog = new ConsultarIndicadorView(this, this
+					.getModelObject().getIndicadorSeleccionado());
 			dialog.open();
 			dialog.onAccept(() -> {
 			});
-		}else {
-	
-		this.showError("Seleccione un Indicador, por favor");		
+		} else {
+
+			this.showError("Seleccione un Indicador, por favor");
 		}
 	}
 

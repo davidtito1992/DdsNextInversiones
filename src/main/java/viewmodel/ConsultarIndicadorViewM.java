@@ -30,7 +30,7 @@ public class ConsultarIndicadorViewM {
 	private SnapshotIndicador snapshotIndicadorSeleccionado;
 	private double resultado;
 	private Indicador indicadorElegido;
-	
+
 	/********* GETTERS/SETTERS *********/
 
 	public List<String> getNombres() {
@@ -117,7 +117,7 @@ public class ConsultarIndicadorViewM {
 
 	public void setSemestreSeleccionado(Integer semestreSeleccionado) {
 		this.semestreSeleccionado = semestreSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado,this.añoSeleccionado,
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.añoSeleccionado,
 				this.semestreSeleccionado);
 	}
 
@@ -125,13 +125,12 @@ public class ConsultarIndicadorViewM {
 
 	public ConsultarIndicadorViewM(Indicador unIndicador) {
 
-	this.indicadorElegido= unIndicador ;
-	  this.generarTodosLosCBox(null, null, null);
+		this.indicadorElegido = unIndicador;
+		this.generarTodosLosCBox(null, null, null);
 
-		
 	}
 
-	public void generarTodosLosCBox(String empresa,Integer anio,
+	public void generarTodosLosCBox(String empresa, Integer anio,
 			Integer semestre) {
 
 		List<Empresa> repoEmpresa2 = new ArrayList<Empresa>();
@@ -187,53 +186,65 @@ public class ConsultarIndicadorViewM {
 		Collections.sort(nombreEmpresasFinal);
 		this.nombres = nombreEmpresasFinal;
 
-//		nombreEmpresasFinal.forEach(name ->(System.out.println(name)));
+		// nombreEmpresasFinal.forEach(name ->(System.out.println(name)));
 
 	}
+
 	public void consultar() {
-		List<Empresa> empresas=	this.getRepoEmpresas().filtrar(null, nombreSeleccionado, semestreSeleccionado, añoSeleccionado) ;
-		
-		List<Cuenta> cuentas= empresas.get(0).getPeriodos().get(0).getCuentas();
-	
-		this.resultado= getIndicadorElegido().analizarResultado(cuentas);
+		List<Empresa> empresas = this.getRepoEmpresas().filtrar(null,
+				nombreSeleccionado, semestreSeleccionado, añoSeleccionado);
+
+		List<Cuenta> cuentas = empresas.get(0).getPeriodos().get(0)
+				.getCuentas();
+
+		this.resultado = getIndicadorElegido().analizarResultado(cuentas);
 	}
+
 	public void reiniciar() {
-		this.generarTodosLosCBox(null,null,null);
+		this.generarTodosLosCBox(null, null, null);
 		this.snapshotIndicadorSeleccionado = null;
 		this.limpiarFiltros();
-		//this.llenarTablas();
-		this.resultado= 0 ;
+		// this.llenarTablas();
+		this.resultado = 0;
 	}
 
 	public void limpiarFiltros() {
 		nombreSeleccionado = null;
 		semestreSeleccionado = null;
 		añoSeleccionado = null;
-	//	cuentaSeleccionada = null ;
+		// cuentaSeleccionada = null ;
 	}
 
 	public void llenarTablas() {
-//		this.setSnapshotIndicadores(this
-//				.dameSnapshotIndicadores(getRepoEmpresas().allInstances()));
+		// this.setSnapshotIndicadores(this
+		// .dameSnapshotIndicadores(getRepoEmpresas().allInstances()));
 	}
 
 	// CREA FILAS DE LA TABLA
 	private List<SnapshotIndicador> dameSnapshotIndicadores(
 			List<Empresa> empresasASnap) {
 		ArrayList<SnapshotIndicador> listSnapshot = new ArrayList<SnapshotIndicador>();
-		empresasASnap.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				SnapshotIndicador snapshotIndicador = new SnapshotIndicador();
-					snapshotIndicador.setNombre(empresa.getNombre());
-					snapshotIndicador.setSemestre(periodo.getSemestre());
-					snapshotIndicador.setAño(periodo.getAño());
-					snapshotIndicador.setResultado(getIndicadorElegido()
-							.analizarResultado(periodo.getCuentas()));
+		empresasASnap
+				.forEach(empresa -> {
+					empresa.getPeriodos()
+							.forEach(
+									periodo -> {
+										SnapshotIndicador snapshotIndicador = new SnapshotIndicador();
+										snapshotIndicador.setNombre(empresa
+												.getNombre());
+										snapshotIndicador.setSemestre(periodo
+												.getSemestre());
+										snapshotIndicador.setAño(periodo
+												.getAño());
+										snapshotIndicador
+												.setResultado(getIndicadorElegido()
+														.analizarResultado(
+																periodo.getCuentas()));
 
-					listSnapshot.add(snapshotIndicador);
+										listSnapshot.add(snapshotIndicador);
 
+									});
 				});
-		});
 		return listSnapshot;
 	}
 }

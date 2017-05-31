@@ -2,14 +2,12 @@ package viewmodel;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioEmpresa;
-
 @Observable
 public class MainViewM {
 
 	private boolean empresasSinCargar = true;
 	private boolean indicadoresSinCargar = true;
-	
+
 	public MainViewM() {
 
 	}

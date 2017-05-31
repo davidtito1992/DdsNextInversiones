@@ -39,22 +39,23 @@ public class AgregarIndicadorViewM {
 	/********* METODOS *********/
 
 	public AgregarIndicadorViewM() {
-		
+
 	}
-	
-	public void guardarIndicador() throws Exception{
-		//if (this.getNombre().isEmpty() || this.getFormula().isEmpty()){
-		//	throw new Exception("No puede dejar campos vacios");
-		//}
-		
-		if (this.getRepoIndicadores().filtrar(nombre).size() == 0){
+
+	public void guardarIndicador() throws Exception {
+		// if (this.getNombre().isEmpty() || this.getFormula().isEmpty()){
+		// throw new Exception("No puede dejar campos vacios");
+		// }
+
+		if (this.getRepoIndicadores().filtrar(nombre).size() == 0) {
 			List<Indicador> list = new ArrayList<Indicador>();
-			list.add(new Indicador(nombre,formula));
+			list.add(new Indicador(nombre, formula));
 			this.getRepoIndicadores().cargarListaIndicadores(list);
-			//Resta guardarlo en el archivo y llenar las tablas del ABM indicadores
-		}
-		else{
-			throw new Exception("Un indicador con ese nombre ya se encuentra cargado en el sistema");
+			// Resta guardarlo en el archivo y llenar las tablas del ABM
+			// indicadores
+		} else {
+			throw new Exception(
+					"Un indicador con ese nombre ya se encuentra cargado en el sistema");
 		}
 	}
 
@@ -62,5 +63,4 @@ public class AgregarIndicadorViewM {
 		return ApplicationContext.getInstance().getSingleton(Indicador.class);
 	}
 
-	
 }

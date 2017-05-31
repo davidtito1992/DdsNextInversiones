@@ -8,8 +8,8 @@ public class Cuenta {
 	/********* ATRIBUTOS *********/
 	private String nombre;
 	private int valor;
-	
-	public Cuenta(String nombre,int valor){
+
+	public Cuenta(String nombre, int valor) {
 		this.nombre = nombre;
 		this.valor = valor;
 	}

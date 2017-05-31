@@ -1,15 +1,6 @@
 package model;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import model.Indicador;
-
-import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
-
-import repositories.RepositorioEmpresa;
-import repositories.RepositorioIndicadores;
-
 
 @Observable
 public class SnapshotIndicador {

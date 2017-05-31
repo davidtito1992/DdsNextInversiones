@@ -43,7 +43,8 @@ public class StubFileLoader implements DataLoader {
 
 	public List<Indicador> getDataIndicadores() throws Exception {
 		String AbsolutePath = new File(".").getAbsolutePath();
-		String archivoIndicadores = readFile(AbsolutePath + "/archivoInexistente.json");
+		String archivoIndicadores = readFile(AbsolutePath
+				+ "/archivoInexistente.json");
 
 		DataAdapter adaptador = DataAdapterFactory
 				.adaptarData(DataAdapterFactory.JSON);

@@ -10,7 +10,6 @@ import org.uqbar.arena.windows.SimpleWindow;
 
 import viewmodel.AgregarIndicadorViewM;
 
-
 public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 
 	@SuppressWarnings("rawtypes")
@@ -37,7 +36,8 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 
 		new Label(actions).setText("\t\t\t\t\t");
 
-		new Button(actions).setCaption("Guardar").onClick(this::accept).setAsDefault().setWidth(140);
+		new Button(actions).setCaption("Guardar").onClick(this::accept)
+				.setAsDefault().setWidth(140);
 
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel)
 				.setWidth(140);
@@ -49,24 +49,18 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 		this.close();
 	}
 
-
 	@Override
 	protected void executeTask() {
 
-			try {
-				getModelObject().guardarIndicador();
-				super.executeTask();
-				this.close();
-			} 
-			catch (Exception e) {
-				// TODO Auto-generated catch block
-				this.showError(e.getMessage());
-			}
+		try {
+			getModelObject().guardarIndicador();
+			super.executeTask();
+			this.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			this.showError(e.getMessage());
+		}
 
 	}
 
-	
-	
-	
-	
 }
