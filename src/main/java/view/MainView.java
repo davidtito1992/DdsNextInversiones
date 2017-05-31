@@ -25,16 +25,16 @@ public class MainView extends SimpleWindow<MainViewM> {
 	protected void createFormPanel(Panel mainPanel) {
 		// TODO Auto-generated method stub
 		this.setTitle("Next-Inversiones");
-
+		
 		mainPanel.setLayout(new VerticalLayout());
 
 		new Label(mainPanel).setText("Bienvenido al Sistema \n")
 				.setBackground(Color.WHITE).setWidth(500);
 		new Button(mainPanel).setCaption("Cargar Empresas")
-				.onClick(() -> this.cargarEmpresas())
+				.onClick(this::cargarEmpresas)
 				.bindVisibleToProperty("empresasSinCargar");
 		new Button(mainPanel).setCaption("Cargar Indicadores")
-				.onClick(() -> this.cargarIndicadores())
+				.onClick(this::cargarIndicadores)
 				.bindVisibleToProperty("indicadoresSinCargar");
 		new Button(mainPanel).setCaption("ABM Empresas")
 				.onClick(() -> this.verEmpresas()).setWidth(60).setHeight(80);
@@ -62,6 +62,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 		 * ).onClick(this::abrirConsulta).setWidth(140); mainPanel.setWidth(10);
 		 */
 	}
+	
 
 	/*****************
 	 * buttons adicionales: podemos colocarlos horizontales a diferencia de los
