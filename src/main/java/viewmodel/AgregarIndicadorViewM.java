@@ -130,6 +130,11 @@ public class AgregarIndicadorViewM {
 			throw new Exception(
 					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
 		}
+		
+		if (esNumero(this.formula.replace(" ", ""))){
+			throw new Exception(
+					"La formula no puede estar compuesta por numeros unicamente");
+		}
 
 		if (this.nombre.contains(" ")) {
 			throw new Exception(
@@ -147,7 +152,6 @@ public class AgregarIndicadorViewM {
 		} 
 		
 		List<Indicador> list = new ArrayList<Indicador>();
-		
 		Indicador nuevoIndicador = new Indicador(nombre,formula);
 		revisarSintaxis(nuevoIndicador);
 		
@@ -183,7 +187,7 @@ public class AgregarIndicadorViewM {
 	}
 	
 	public void revisarSintaxis(Indicador indicador) throws Exception{
-		
+			
 		String[] componentes = indicador.getFormula().split(" ");
 		for (int i = 0; i < componentes.length; i++) {
 			if (indicador.esIndicador(componentes[i]) || indicador.esCuenta(componentes[i], todasLasCuentas())) {
@@ -201,6 +205,15 @@ public class AgregarIndicadorViewM {
 			throw new Exception("Ingresó una cuenta o un indicador inexistente");
 		}
 		
+	}
+	
+	public boolean esNumero(String num){
+			try{
+			Double.parseDouble(num);
+			return true;
+			}catch (NumberFormatException e){
+				return false;
+			}	
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {
