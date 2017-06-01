@@ -327,7 +327,8 @@ public class Indicador extends Entity {
 		}
 		if (cuentaOIndicador == false) {
 			throw new Exception(
-					"Debe ingresar una formula que contenga al menos una cuenta o un indicador existente.");
+					"Debe ingresar una formula que contenga al menos una cuenta o un indicador existente"
+					+ ", o no se encuentra todo separado por espacios");
 		}
 		String formulaReemplazada = String.join(" ", componentes);
 		Calculator calculator = new Calculator(new StringReader(
