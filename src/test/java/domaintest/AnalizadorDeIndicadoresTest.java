@@ -1,6 +1,6 @@
 package domaintest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,16 @@ import model.Indicador;
 import org.junit.Before;
 import org.junit.Test;
 
+import calculator.ParseException;
+import calculator.TokenMgrError;
+
 public class AnalizadorDeIndicadoresTest {
 	ArrayList<Indicador> repoIndicadores;
 	Indicador indicadorSimple;
 	Indicador indicadorComplejo;
 	Indicador indicadorIngresoNeto;
+	Indicador indicadorConSintaxisErronea;
+	
 
 	@Before
 	public void initialize() {
@@ -25,13 +30,15 @@ public class AnalizadorDeIndicadoresTest {
 				"NetoContinuas + NetoDiscontinuas");
 		indicadorComplejo = new Indicador("IndicadorComplejo",
 				"IndicadorSimple * 3");
+		indicadorConSintaxisErronea = new Indicador("IndicadorConSintaxisErronea",
+				"2 +");
 		repoIndicadores.add(indicadorSimple);
 		repoIndicadores.add(indicadorComplejo);
 		repoIndicadores.add(indicadorIngresoNeto);
 	}
 
 	@Test
-	public void CalculoIndicadorSimpleTest() {
+	public void CalculoIndicadorSimpleTest() throws ParseException {
 
 		List<Cuenta> listaDeCuentas = new ArrayList<Cuenta>();
 		listaDeCuentas.add(new Cuenta("EBITDA", 10));
@@ -41,7 +48,7 @@ public class AnalizadorDeIndicadoresTest {
 	}
 
 	@Test
-	public void CalculoIndicadorComplejoTest() {
+	public void CalculoIndicadorComplejoTest() throws ParseException {
 		List<Cuenta> listaDeCuentas = new ArrayList<Cuenta>();
 		listaDeCuentas.add(new Cuenta("EBITDA", 10));
 		listaDeCuentas.add(new Cuenta("FDS", 20));
@@ -50,7 +57,7 @@ public class AnalizadorDeIndicadoresTest {
 	}
 
 	@Test
-	public void CalculoIndicadorIngresoNeto() {
+	public void CalculoIndicadorIngresoNeto() throws ParseException {
 
 		List<Cuenta> listaDeCuentas = new ArrayList<Cuenta>();
 		listaDeCuentas.add(new Cuenta("NetoDiscontinuas", 10));
@@ -58,5 +65,18 @@ public class AnalizadorDeIndicadoresTest {
 		assertEquals("30.0", String.valueOf(indicadorIngresoNeto
 				.analizarResultadoTest(listaDeCuentas, repoIndicadores)));
 	}
-
+	
+	@Test(expected = TokenMgrError.class) 
+	public void CalculoIndicadorCuentaFaltante() throws ParseException {
+		List<Cuenta> listaDeCuentas = new ArrayList<Cuenta>();
+		listaDeCuentas.add(new Cuenta("FDS", 20));
+		indicadorSimple.analizarResultadoTest(listaDeCuentas, repoIndicadores);
+	}
+	
+	@Test(expected = ParseException.class) 
+	public void CalculoIndicadorConSintaxisErronea() throws ParseException{
+		List<Cuenta> listaDeCuentas = new ArrayList<Cuenta>();
+		indicadorConSintaxisErronea.analizarResultadoTest(listaDeCuentas, repoIndicadores);
+	}
+	
 }

@@ -49,7 +49,7 @@ public class Indicador extends Entity {
 
 	/********* METODOS *********/
 
-	public double analizarResultado(List<Cuenta> cuentasUnaEmpresa) throws Exception {
+	public double analizarResultado(List<Cuenta> cuentasUnaEmpresa) throws ParseException {
 		String formulaSinIndicadores = transformIndicadores(getFormula());
 		String formulaACalcular = transformValores(formulaSinIndicadores,
 				cuentasUnaEmpresa);
@@ -61,7 +61,7 @@ public class Indicador extends Entity {
 			resultado = calculator.calculate();
 
 		} catch (ParseException e) {
-			throw new Exception("Este indicador utiliza una cuenta que no esta disponible en este periodo");
+			throw new ParseException("Este indicador utiliza una cuenta que no esta disponible en este periodo");
 			// e.printStackTrace();
 
 		}
@@ -150,10 +150,11 @@ public class Indicador extends Entity {
 		return ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 
-	/********* METODOS TEST *********/
+	/********* METODOS TEST 
+	 * @throws ParseException *********/
 
 	public double analizarResultadoTest(List<Cuenta> cuentasUnaEmpresa,
-			List<Indicador> repoIndicadores) {
+			List<Indicador> repoIndicadores) throws ParseException {
 		String formulaSinIndicadores = transformIndicadoresTest(getFormula(),
 				repoIndicadores);
 		String formulaACalcular = transformValores(formulaSinIndicadores,
@@ -165,7 +166,7 @@ public class Indicador extends Entity {
 			resultado = calculator.calculate();
 
 		} catch (ParseException e) {
-			e.printStackTrace();
+			throw new ParseException("Este indicador utiliza una cuenta que no esta disponible en este periodo");
 		}
 		return resultado;
 	}

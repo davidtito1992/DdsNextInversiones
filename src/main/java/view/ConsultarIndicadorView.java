@@ -85,7 +85,7 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 				showInfo("Hubo un error al consultar las cuentas en el período deseado, por favor verificar que las cuentas que utiliza el indicador sean validas.");
 			}			
 		}else {
-			this.showError("Selecciones todos los campos, por favor");
+			this.showError("Seleccione todos los campos, por favor");
 		}
 
 	}
