@@ -3,7 +3,9 @@
 	"formula": "NetoContinuas + NetoDiscontinuas"
 },
 {"nombre":"Indicador1","formula":"Ingreso Neto + EBITDA +  FreeCashFlow"},
-{"nombre":"Indicador2","formula":" EBITDA + 2"}]
+{"nombre":"Indicador2","formula":" EBITDA + 2"},
+{"nombre":"puto","formula":"Indicador1 + 2 ("},
+{"nombre":"puto2","formula":"( Indicador2 + 2 )"}]
 
 
 

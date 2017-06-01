@@ -52,24 +52,21 @@ public class Indicador extends Entity {
 
 	/********* METODOS *********/
 
-	public double analizarResultado(List<Cuenta> cuentasUnaEmpresa) throws ParseException {
+	public double analizarResultado(List<Cuenta> cuentasUnaEmpresa)
+			throws ParseException {
 		String formulaSinIndicadores = transformIndicadores(getFormula());
 		String formulaACalcular = transformValores(formulaSinIndicadores,
 				cuentasUnaEmpresa);
-
 		double resultado = 0;
 		Calculator calculator = new Calculator(new StringReader(
 				formulaACalcular));
 		try {
 			resultado = calculator.calculate();
-
 		} catch (ParseException e) {
-			throw new ParseException("Este indicador utiliza una cuenta que no esta disponible en este periodo");
-			// e.printStackTrace();
-
+			throw new ParseException(
+					"Este indicador utiliza una cuenta que no esta disponible en este periodo");
 		}
 		return resultado;
-
 	}
 
 	public String transformIndicadores(String formulaConIndicadores) {
@@ -153,8 +150,11 @@ public class Indicador extends Entity {
 		return ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 
-	/********* METODOS TEST 
-	 * @throws ParseException *********/
+	/*********
+	 * METODOS TEST
+	 * 
+	 * @throws ParseException
+	 *********/
 
 	public double analizarResultadoTest(List<Cuenta> cuentasUnaEmpresa,
 			List<Indicador> repoIndicadores) throws ParseException {
@@ -169,7 +169,8 @@ public class Indicador extends Entity {
 			resultado = calculator.calculate();
 
 		} catch (ParseException e) {
-			throw new ParseException("Este indicador utiliza una cuenta que no esta disponible en este periodo");
+			throw new ParseException(
+					"Este indicador utiliza una cuenta que no esta disponible en este periodo");
 		}
 		return resultado;
 	}
@@ -230,15 +231,20 @@ public class Indicador extends Entity {
 		}
 		return flag;
 	}
-	
+
 	public void guardarIndicador() throws Exception {
 
 		if (this.nombre == null || this.formula == null) {
 			throw new Exception(
 					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
 		}
-		
-		if (esNumero(this.formula.replace(" ", ""))){
+
+		if (!parentesisValidos(this.formula)) {
+			throw new Exception(
+					"Se han ingresado mal los parentesis, o no se encuentra todo separado por espacios");
+		}
+
+		if (esNumero(this.formula.replace(" ", ""))) {
 			throw new Exception(
 					"La formula no puede estar compuesta por numeros unicamente");
 		}
@@ -255,56 +261,73 @@ public class Indicador extends Entity {
 
 		if (this.getRepoIndicadores().filtrar(nombre).size() > 0) {
 			throw new Exception(
-					"Un indicador con ese nombre ya se encuentra cargado en el sistema, Intentelo nuevamente");		
-		} 
-		
+					"Un indicador con ese nombre ya se encuentra cargado en el sistema, Intentelo nuevamente");
+		}
+
 		List<Indicador> list = new ArrayList<Indicador>();
-		Indicador nuevoIndicador = new Indicador(nombre,formula);
+		Indicador nuevoIndicador = new Indicador(nombre, formula);
 		revisarSintaxisYSemantica(nuevoIndicador);
-		
-		new AppData().guardarIndicador(nuevoIndicador) ;
-		
+
+		new AppData().guardarIndicador(nuevoIndicador);
+
 		list.add(nuevoIndicador);
 		this.getRepoIndicadores().cargarListaIndicadores(list);
 	}
-	
-	public boolean formulaContieneNombre(String nombre, String formula){
+
+	public boolean parentesisValidos(String formula) {
+		String[] componentes = formula.split(" ");
+		int cont = 0;
+		for (int i = 0; i < componentes.length; i++) {
+			if (componentes[i].equals("(")) {
+				cont++;
+			}
+			if (componentes[i].equals(")")) {
+				cont--;
+			}
+		}
+		if (cont != 0) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean formulaContieneNombre(String nombre, String formula) {
 		String[] componentes = formula.split(" ");
 		for (int i = 0; i < componentes.length; i++) {
-				if (nombre == componentes[i]){
-					return true;
+			if (nombre == componentes[i]) {
+				return true;
 			}
 		}
 		return false;
 	}
-	
-	public List<Cuenta> todasLasCuentas(){
-		List<Empresa> empresas = this.getRepoEmpresas().filtrar(null, null,null, null);
+
+	public List<Cuenta> todasLasCuentas() {
+		List<Empresa> empresas = this.getRepoEmpresas().filtrar(null, null,
+				null, null);
 		HashSet<Cuenta> cuentas = new HashSet<Cuenta>();
 		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(
-					periodo -> {
-						periodo.getCuentas()
-								.forEach(
-										cuenta -> cuentas.add(cuenta));
-					});
+			empresa.getPeriodos().forEach(periodo -> {
+				periodo.getCuentas().forEach(cuenta -> cuentas.add(cuenta));
+			});
 		});
 
 		return new ArrayList<Cuenta>(cuentas);
 	}
-	
-	public void revisarSintaxisYSemantica(Indicador indicador) throws Exception{
-			
-		boolean cuentaOIndicador= false;
+
+	public void revisarSintaxisYSemantica(Indicador indicador) throws Exception {
+
+		boolean cuentaOIndicador = false;
 		String[] componentes = indicador.getFormula().split(" ");
 		for (int i = 0; i < componentes.length; i++) {
-			if (indicador.esIndicador(componentes[i]) || indicador.esCuenta(componentes[i], todasLasCuentas())) {
+			if (indicador.esIndicador(componentes[i])
+					|| indicador.esCuenta(componentes[i], todasLasCuentas())) {
 				componentes[i] = "2";
 				cuentaOIndicador = true;
 			}
 		}
-		if (cuentaOIndicador == false){
-			throw new Exception("Debe ingresar una formula que contenga al menos una cuenta o un indicador existente.");
+		if (cuentaOIndicador == false) {
+			throw new Exception(
+					"Debe ingresar una formula que contenga al menos una cuenta o un indicador existente.");
 		}
 		String formulaReemplazada = String.join(" ", componentes);
 		Calculator calculator = new Calculator(new StringReader(
@@ -313,18 +336,18 @@ public class Indicador extends Entity {
 			calculator.calculate();
 		} catch (ParseException e) {
 			throw new Exception("La sintaxis es incorrecta");
-		} catch (Error e){
+		} catch (Error e) {
 			throw new Exception("Ingresó una cuenta o un indicador inexistente");
 		}
-		
+
 	}
-	
-	public boolean esNumero(String num){
-			try{
+
+	public boolean esNumero(String num) {
+		try {
 			Double.parseDouble(num);
 			return true;
-			}catch (NumberFormatException e){
-				return false;
-			}	
+		} catch (NumberFormatException e) {
+			return false;
+		}
 	}
 }

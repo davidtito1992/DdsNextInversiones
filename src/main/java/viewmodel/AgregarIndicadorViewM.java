@@ -1,21 +1,13 @@
 package viewmodel;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-
-import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
-
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
-
-import calculator.Calculator;
-import calculator.ParseException;
-import app.AppData;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
 
