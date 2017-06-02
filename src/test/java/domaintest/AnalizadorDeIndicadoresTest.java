@@ -15,22 +15,22 @@ import calculator.ParseException;
 import calculator.TokenMgrError;
 
 public class AnalizadorDeIndicadoresTest {
-	ArrayList<Indicador> repoIndicadores;
-	Indicador indicadorSimple;
-	Indicador indicadorComplejo;
-	Indicador indicadorIngresoNeto;
-	Indicador indicadorConSintaxisErronea;
+	ArrayList<StubIndicador> repoIndicadores;
+	StubIndicador indicadorSimple;
+	StubIndicador indicadorComplejo;
+	StubIndicador indicadorIngresoNeto;
+	StubIndicador indicadorConSintaxisErronea;
 	
 
 	@Before
 	public void initialize() {
-		repoIndicadores = new ArrayList<Indicador>();
-		indicadorSimple = new Indicador("IndicadorSimple", "EBITDA + FDS");
-		indicadorIngresoNeto = new Indicador("Ingreso Neto",
+		repoIndicadores = new ArrayList<StubIndicador>();
+		indicadorSimple = new StubIndicador("IndicadorSimple", "EBITDA + FDS");
+		indicadorIngresoNeto = new StubIndicador("Ingreso Neto",
 				"NetoContinuas + NetoDiscontinuas");
-		indicadorComplejo = new Indicador("IndicadorComplejo",
+		indicadorComplejo = new StubIndicador("IndicadorComplejo",
 				"IndicadorSimple * 3");
-		indicadorConSintaxisErronea = new Indicador("IndicadorConSintaxisErronea",
+		indicadorConSintaxisErronea = new StubIndicador("IndicadorConSintaxisErronea",
 				"2 +");
 		repoIndicadores.add(indicadorSimple);
 		repoIndicadores.add(indicadorComplejo);
