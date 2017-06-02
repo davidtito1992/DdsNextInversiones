@@ -1,3 +1,3 @@
 [{"nombre":"IngresoNeto","formula":"NetoContinuas + NetoDiscontinuas"},
-{"nombre":"I3","formula":"I2 + NetoDiscontinuas"},
-{"nombre":"i4","formula":"( I3 + EBITDA )"}]
+{"nombre":"I3","formula":"EBITDA + NetoDiscontinuas"},
+{"nombre":"I4","formula":"( I3 + EBITDA )"}]
