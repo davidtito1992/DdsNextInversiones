@@ -25,7 +25,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 	protected void createFormPanel(Panel mainPanel) {
 		// TODO Auto-generated method stub
 		this.setTitle("Next-Inversiones");
-		
+
 		mainPanel.setLayout(new VerticalLayout());
 
 		new Label(mainPanel).setText("Bienvenido al Sistema \n")
@@ -62,7 +62,6 @@ public class MainView extends SimpleWindow<MainViewM> {
 		 * ).onClick(this::abrirConsulta).setWidth(140); mainPanel.setWidth(10);
 		 */
 	}
-	
 
 	/*****************
 	 * buttons adicionales: podemos colocarlos horizontales a diferencia de los
@@ -89,10 +88,14 @@ public class MainView extends SimpleWindow<MainViewM> {
 		if (getModelObject().isIndicadoresSinCargar()) {
 			showInfo("Cargue los indicadores primero.");
 		} else {
-			Dialog<?> dialog = new IndicadorView(this);
-			dialog.open();
-			dialog.onAccept(() -> {
-			});
+			if (getModelObject().isEmpresasSinCargar()) {
+				showInfo("No se puede acceder a los indicadores si las empresas no fueron cargadas.");
+			} else {
+				Dialog<?> dialog = new IndicadorView(this);
+				dialog.open();
+				dialog.onAccept(() -> {
+				});
+			}
 		}
 	}
 
@@ -109,8 +112,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 	private void cargarEmpresas() {
 		try {
-			new AppData().cargarEmpresas();
-			System.out.println("Accediendo para ver las empresas...");
+			getModelObject().cargarEmpresas();
 			getModelObject().setEmpresasSinCargar(false);
 		} catch (Exception e) {
 			showInfo(e.getMessage());
@@ -120,8 +122,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 	private void cargarIndicadores() {
 		try {
-			new AppData().cargarIndicadores();
-			System.out.println("Accediendo para ver las indicadores...");
+			getModelObject().cargarIndicadores();
 			getModelObject().setIndicadoresSinCargar(false);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -2,6 +2,8 @@ package viewmodel;
 
 import org.uqbar.commons.utils.Observable;
 
+import app.AppData;
+
 @Observable
 public class MainViewM {
 
@@ -26,4 +28,16 @@ public class MainViewM {
 	public void setIndicadoresSinCargar(boolean indicadoresSinCargar) {
 		this.indicadoresSinCargar = indicadoresSinCargar;
 	}
+	
+	public void cargarIndicadores() throws Exception{
+		new AppData().cargarIndicadores();
+		System.out.println("Accediendo para ver las indicadores...");
+	}
+
+	public void cargarEmpresas() throws Exception {
+		new AppData().cargarEmpresas();
+		System.out.println("Accediendo para ver las empresas...");
+	}
+	
+	
 }
