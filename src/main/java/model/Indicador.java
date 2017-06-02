@@ -1,18 +1,12 @@
 package model;
 
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
-
-import app.AppData;
-import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
 import calculator.Calculator;
 import calculator.ParseException;
@@ -146,135 +140,4 @@ public class Indicador extends Entity {
 		return ApplicationContext.getInstance().getSingleton(Indicador.class);
 	}
 
-	public RepositorioEmpresa getRepoEmpresas() {
-		return ApplicationContext.getInstance().getSingleton(Empresa.class);
-	}
-
-	/*********
-	 * METODOS TEST
-	 * 
-	 * @throws ParseException
-	 *********/
-
-	
-
-	public void guardarIndicador() throws Exception {
-
-		if (this.nombre == null || this.formula == null) {
-			throw new Exception(
-					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
-		}
-
-		if (!parentesisValidos(this.formula)) {
-			throw new Exception(
-					"Se han ingresado mal los parentesis, o no se encuentra todo separado por espacios");
-		}
-
-		if (esNumero(this.formula.replace(" ", ""))) {
-			throw new Exception(
-					"La formula no puede estar compuesta por numeros unicamente");
-		}
-
-		if (this.nombre.contains(" ")) {
-			throw new Exception(
-					"Favor de ingresar un nombre que no contenga espacios");
-		}
-
-		if (formulaContieneNombre(this.nombre, this.formula)) {
-			throw new Exception(
-					"No puede usar ese nombre porque se encuentra dentro de la formula del mismo");
-		}
-
-		if (this.getRepoIndicadores().filtrar(nombre).size() > 0) {
-			throw new Exception(
-					"Un indicador con ese nombre ya se encuentra cargado en el sistema, Intentelo nuevamente");
-		}
-
-		List<Indicador> list = new ArrayList<Indicador>();
-		Indicador nuevoIndicador = new Indicador(nombre, formula);
-		revisarSintaxisYSemantica(nuevoIndicador);
-
-		new AppData().guardarIndicador(nuevoIndicador);
-
-		list.add(nuevoIndicador);
-		this.getRepoIndicadores().cargarListaIndicadores(list);
-	}
-
-	public boolean parentesisValidos(String formula) {
-		String[] componentes = formula.split(" ");
-		int cont = 0;
-		for (int i = 0; i < componentes.length; i++) {
-			if (componentes[i].equals("(")) {
-				cont++;
-			}
-			if (componentes[i].equals(")")) {
-				cont--;
-			}
-		}
-		if (cont != 0) {
-			return false;
-		}
-		return true;
-	}
-
-	public boolean formulaContieneNombre(String nombre, String formula) {
-		String[] componentes = formula.split(" ");
-		for (int i = 0; i < componentes.length; i++) {
-			if (nombre == componentes[i]) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public List<Cuenta> todasLasCuentas() {
-		List<Empresa> empresas = this.getRepoEmpresas().filtrar(null, null,
-				null, null);
-		HashSet<Cuenta> cuentas = new HashSet<Cuenta>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				periodo.getCuentas().forEach(cuenta -> cuentas.add(cuenta));
-			});
-		});
-
-		return new ArrayList<Cuenta>(cuentas);
-	}
-
-	public void revisarSintaxisYSemantica(Indicador indicador) throws Exception {
-
-		boolean cuentaOIndicador = false;
-		String[] componentes = indicador.getFormula().split(" ");
-		for (int i = 0; i < componentes.length; i++) {
-			if (indicador.esIndicador(componentes[i])
-					|| indicador.esCuenta(componentes[i], todasLasCuentas())) {
-				componentes[i] = "2";
-				cuentaOIndicador = true;
-			}
-		}
-		if (cuentaOIndicador == false) {
-			throw new Exception(
-					"Debe ingresar una formula que contenga al menos una cuenta o un indicador existente"
-					+ ", o no se encuentra todo separado por espacios");
-		}
-		String formulaReemplazada = String.join(" ", componentes);
-		Calculator calculator = new Calculator(new StringReader(
-				formulaReemplazada));
-		try {
-			calculator.calculate();
-		} catch (ParseException e) {
-			throw new Exception("La sintaxis es incorrecta");
-		} catch (Error e) {
-			throw new Exception("Ingresó una cuenta o un indicador inexistente");
-		}
-
-	}
-
-	public boolean esNumero(String num) {
-		try {
-			Double.parseDouble(num);
-			return true;
-		} catch (NumberFormatException e) {
-			return false;
-		}
-	}
 }

@@ -21,7 +21,7 @@ public class BorrarIndicadorView extends Dialog<BorrarIndicadorViewM> {
 		Panel form = new Panel(mainPanel);
 		this.setTitle("Borrar Indicador");
 
-		new Label(form).setText("Estas seguro que deseas eliminar el indicador seleccionado?");
+		new Label(form).setText("Estas seguro que deseas borrar definitivamente el indicador seleccionado?");
 
 	}
 

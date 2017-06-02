@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+
 import model.Empresa;
 import model.Indicador;
+
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
+
+import app.AppData;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
 
@@ -117,8 +121,15 @@ public class AgregarIndicadorViewM {
 	}
 
 	public void guardarIndicador() throws Exception {
-		Indicador ind = new Indicador(this.nombre, this.formula);
-		ind.guardarIndicador();
+		
+		
+		if (this.nombre == null || this.formula == null) {
+			throw new Exception(
+					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
+		}
+		Indicador indicadorAGuardar = new Indicador(this.nombre, this.formula);
+	//	ind.guardarIndicador();
+		new AppData().guardarIndicador(indicadorAGuardar);
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {

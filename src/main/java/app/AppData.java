@@ -1,9 +1,8 @@
 package app;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.uqbar.commons.utils.ApplicationContext;
-
 import model.Empresa;
 import model.Indicador;
 import DataManagment.AdapterToJson;
@@ -48,18 +47,27 @@ public class AppData {
 	}
 
 	public void guardarIndicador(Indicador unIndicador) throws Exception {
-		try {
-			//Convertimos un indicador a json
-			String nuevoIndicadorString = new AdapterToJson(unIndicador).getstringJson();
-			//sobreescribimos un archivo segun nombre de archivo, textoviejo,textonuevo		
 
-			new FileWriter("./indicadores.json","}]",nuevoIndicadorString+"]\r\n" );
-	
-		} catch (Exception e) {
-			throw new Exception(
-					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
+		//parseamos la formula,luego comprobamos la existencia de cuentas, indicadores,etc
+		//si esta todo ok ingresa para guardarse en archivo y repo
+		if (new Parser(unIndicador).parsear() && new AnalizadorSemantico(unIndicador).analizar()){	
+
+			try {			
+				//Convertimos un indicador a json
+				String nuevoIndicadorString = new AdapterToJson(unIndicador).getstringJson();
+
+				//sobreescribimos un archivo segun nombre de archivo, textoviejo,textonuevo		
+				new FileWriter("./indicadores.json","}]",nuevoIndicadorString+"]\r\n" );
+
+				List<Indicador> list = new ArrayList<Indicador>();
+				list.add(unIndicador);
+				this.getRepoIndicadores().cargarListaIndicadores(list);	
+
+			} catch (Exception e) {
+				throw new Exception(
+						"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
+			}
 		}
-
 
 	}
 
@@ -73,11 +81,12 @@ public class AppData {
 
 			//eliminamos del repo
 			this.getRepoIndicadores().delete(unIndicador);
-			
+
 		} catch (Exception e) {
 			throw new Exception(
 					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
 		}			    
 	}
-	
+
 }
+
