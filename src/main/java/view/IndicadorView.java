@@ -105,8 +105,19 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 	}
 
 	public void borrar() {
-		// borrar indicador seleccionado del archivo y del
-		// repositorioIndicadores
-	}
+		// repositorioIndicadores		
+		if (this.getModelObject().getIndicadorSeleccionado() != null) {
 
+			Dialog<?> dialog = new BorrarIndicadorView(this,this.getModelObject().getIndicadorSeleccionado());
+			dialog.open();
+			dialog.onAccept(() -> {					
+			});
+		this.getModelObject().llenarTablas();	
+						
+	}else {
+
+			this.showError("Seleccione un Indicador, por favor");
+		}
+
+ }
 }

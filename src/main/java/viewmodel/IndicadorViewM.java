@@ -61,6 +61,7 @@ public class IndicadorViewM {
 		this.setIndicadores(null);
 		this.setIndicadores(getRepoIndicadores().allInstances());
 	}
+	
 
 	public RepositorioIndicadores getRepoIndicadores() {
 		return ApplicationContext.getInstance().getSingleton(Indicador.class);
