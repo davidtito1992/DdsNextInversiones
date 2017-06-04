@@ -147,44 +147,19 @@ public class ConsultarIndicadorViewM {
 
 	public void generarCBoxAnios(List<Empresa> empresas) {
 
-		HashSet<Integer> cantidadAnios = new HashSet<Integer>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				cantidadAnios.add(periodo.getAño());
-			});
-		});
-		ArrayList<Integer> CantidadesAniosFinal = new ArrayList<Integer>(
-				cantidadAnios);
-		Collections.sort(CantidadesAniosFinal);
+		this.años = this.getRepoEmpresas().todosLosAnios(empresas);
 
-		this.años = CantidadesAniosFinal;
 	}
 
 	public void generarCBoxSemestre(List<Empresa> empresas) {
+		
+		this.semestre = this.getRepoEmpresas().todosLosPeriodos(empresas);
 
-		HashSet<Integer> cantidadSemestres = new HashSet<Integer>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				cantidadSemestres.add(periodo.getSemestre());
-			});
-		});
-		ArrayList<Integer> cantidadSemestresFinal = new ArrayList<Integer>(
-				cantidadSemestres);
-		Collections.sort(cantidadSemestresFinal);
-
-		this.semestre = cantidadSemestresFinal;
 	}
 
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
 
-		HashSet<String> nombreEmpresas = new HashSet<String>();
-		empresas.forEach(name -> (nombreEmpresas.add(name.getNombre())));
-		ArrayList<String> nombreEmpresasFinal = new ArrayList<String>(
-				nombreEmpresas);
-		Collections.sort(nombreEmpresasFinal);
-		this.nombres = nombreEmpresasFinal;
-
-		// nombreEmpresasFinal.forEach(name ->(System.out.println(name)));
+		this.nombres = this.getRepoEmpresas().todosLosNombresDeEmpresas(empresas);
 
 	}
 

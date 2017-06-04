@@ -1,15 +1,10 @@
 package viewmodel;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-
 import model.Cuenta;
 import model.Empresa;
 import model.Periodo;
 import model.SnapshotEmpresa;
-
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
@@ -171,72 +166,26 @@ public class EmpresaViewM {
 
 	public void generarCBoxAnios(List<Empresa> empresas) {
 
-		HashSet<Integer> cantidadAnios = new HashSet<Integer>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				cantidadAnios.add(periodo.getAño());
-			});
-		});
-		ArrayList<Integer> CantidadesAniosFinal = new ArrayList<Integer>(
-				cantidadAnios);
-		Collections.sort(CantidadesAniosFinal);
+		this.años = this.getRepoEmpresas().todosLosAnios(empresas);
 
-		this.años = CantidadesAniosFinal;
-
-		// CantidadesAniosFinal.forEach(name ->(System.out.println(name)));
 	}
 
 	public void generarCBoxSemestre(List<Empresa> empresas) {
 
-		HashSet<Integer> cantidadSemestres = new HashSet<Integer>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				cantidadSemestres.add(periodo.getSemestre());
-			});
-		});
-		ArrayList<Integer> cantidadSemestresFinal = new ArrayList<Integer>(
-				cantidadSemestres);
-		Collections.sort(cantidadSemestresFinal);
-
-		this.semestre = cantidadSemestresFinal;
-
-		// cantidadSemestresFinal.forEach(name ->(System.out.println(name)));
+		this.semestre = this.getRepoEmpresas().todosLosPeriodos(empresas);
 
 	}
 
 	public void generarCBoxCuentas(List<Empresa> empresas) {
 
-		HashSet<String> nombreCuentas = new HashSet<String>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(
-					periodo -> {
-						periodo.getCuentas()
-								.forEach(
-										cuenta -> nombreCuentas.add(cuenta
-												.getNombre()));
-					});
-		});
-
-		ArrayList<String> nombreCuentasfinal = new ArrayList<String>(
-				nombreCuentas);
-		Collections.sort(nombreCuentasfinal);
-
-		this.cuentas = nombreCuentasfinal;
-
-		// nombreCuentasfinal.forEach(name ->(System.out.println(name)));
+		this.cuentas = this.getRepoEmpresas().todosLosNombresDeCuentas(empresas);
 
 	}
 
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
 
-		HashSet<String> nombreEmpresas = new HashSet<String>();
-		empresas.forEach(name -> (nombreEmpresas.add(name.getNombre())));
-		ArrayList<String> nombreEmpresasFinal = new ArrayList<String>(
-				nombreEmpresas);
-		Collections.sort(nombreEmpresasFinal);
-		this.nombres = nombreEmpresasFinal;
+		this.nombres = this.getRepoEmpresas().todosLosNombresDeEmpresas(empresas);
 
-		// nombreEmpresasFinal.forEach(name ->(System.out.println(name)));
 
 	}
 

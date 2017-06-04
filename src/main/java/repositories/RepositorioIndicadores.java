@@ -1,5 +1,8 @@
 package repositories;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.Indicador;
@@ -59,6 +62,18 @@ public class RepositorioIndicadores extends CollectionBasedRepo<Indicador> {
 	protected Predicate getCriterio(Indicador example) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public ArrayList<String> todosLosNombresDeIndicadores(
+			List<Indicador> listaIndicadores) {
+
+		HashSet<String> nombreIndicadores = new HashSet<String>();
+		listaIndicadores.forEach(indicador -> (nombreIndicadores.add(indicador
+				.getNombre())));
+		ArrayList<String> nombreIndicadoresFinal = new ArrayList<String>(
+				nombreIndicadores);
+		Collections.sort(nombreIndicadoresFinal);
+		return nombreIndicadoresFinal;
 	}
 
 }

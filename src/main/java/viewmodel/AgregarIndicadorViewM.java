@@ -1,16 +1,9 @@
 package viewmodel;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-
 import model.Empresa;
 import model.Indicador;
-
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
-
 import app.AppData;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
@@ -87,36 +80,13 @@ public class AgregarIndicadorViewM {
 
 	private void cargarCuentasDisponibles() {
 
-		List<Empresa> empresas = getRepoEmpresas().allInstances();
-		HashSet<String> nombreCuentas = new HashSet<String>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(
-					periodo -> {
-						periodo.getCuentas()
-								.forEach(
-										cuenta -> nombreCuentas.add(cuenta
-												.getNombre()));
-					});
-		});
-
-		ArrayList<String> nombreCuentasfinal = new ArrayList<String>(
-				nombreCuentas);
-		Collections.sort(nombreCuentasfinal);
-
-		this.agregarCuenta = nombreCuentasfinal;
+		this.agregarCuenta = this.getRepoEmpresas().todosLosNombresDeCuentas(this.getRepoEmpresas().allInstances());
 
 	}
 
 	private void cargarIndicadoresDisponibles() {
 
-		List<Indicador> listaIndicadores = getRepoIndicadores().allInstances();
-		HashSet<String> nombreIndicadores = new HashSet<String>();
-		listaIndicadores.forEach(indicador -> (nombreIndicadores.add(indicador
-				.getNombre())));
-		ArrayList<String> nombreIndicadoresFinal = new ArrayList<String>(
-				nombreIndicadores);
-		Collections.sort(nombreIndicadoresFinal);
-		this.agregarIndicador = nombreIndicadoresFinal;
+		this.agregarIndicador = this.getRepoIndicadores().todosLosNombresDeIndicadores(this.getRepoIndicadores().allInstances());
 
 	}
 
