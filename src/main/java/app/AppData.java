@@ -50,7 +50,8 @@ public class AppData {
 
 		//parseamos la formula,luego comprobamos la existencia de cuentas, indicadores,etc
 		//si esta todo ok ingresa para guardarse en archivo y repo
-		if (new Parser(unIndicador).parsear() && new AnalizadorSemantico(unIndicador).analizar()){	
+		new Parser(unIndicador).parsear() ; 
+		new AnalizadorSemantico(unIndicador).analizar() ;	
 
 			try {			
 				//Convertimos un indicador a json
@@ -59,15 +60,13 @@ public class AppData {
 				//sobreescribimos un archivo segun nombre de archivo, textoviejo,textonuevo		
 				new FileWriter("./indicadores.json","}]",nuevoIndicadorString+"]\r\n" );
 
-				List<Indicador> list = new ArrayList<Indicador>();
-				list.add(unIndicador);
-				this.getRepoIndicadores().cargarListaIndicadores(list);	
+				this.getRepoIndicadores().create(unIndicador);	
 
 			} catch (Exception e) {
 				throw new Exception(
 						"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
 			}
-		}
+		
 
 	}
 

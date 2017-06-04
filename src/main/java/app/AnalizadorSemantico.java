@@ -26,23 +26,20 @@ public class AnalizadorSemantico {
 	this.formula = unIndicador.getFormula() ;	
 	}
 	
-	public boolean analizar() throws Exception{
-		boolean analisisCorrecto =true;
+	public void analizar() throws Exception{
 		
 		if (this.getRepoIndicadores().filtrar(nombre).size() > 0) {
 			throw new Exception(
 					"Un indicador con ese nombre ya se encuentra cargado en el sistema, Intentelo nuevamente");
 		}
-		analisisCorrecto = this.revisarSintaxisYSemantica(new Indicador(this.nombre,this.formula));
+		
+		revisarSintaxisYSemantica(new Indicador(this.nombre,this.formula));
 		
 		
-		return analisisCorrecto;
-	}
+		}
 	
 
-	public boolean revisarSintaxisYSemantica(Indicador indicador) throws Exception {
-      
-		boolean chequeoCorrecto= true ;
+	public void revisarSintaxisYSemantica(Indicador indicador) throws Exception {
         
 		boolean cuentaOIndicador = false;
 		String[] componentes = indicador.getFormula().split(" ");
@@ -63,7 +60,6 @@ public class AnalizadorSemantico {
 				formulaReemplazada));
 		try {
 			calculator.calculate();
-			return chequeoCorrecto;
 		} catch (ParseException e) {
 			throw new Exception("La sintaxis es incorrecta");
 		} catch (Error e) {
