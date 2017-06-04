@@ -17,30 +17,28 @@ import model.Indicador;
 
 public class AnalizadorSemantico {
 
-	private String nombre ;
-	private String formula ;
-	
-	public AnalizadorSemantico(Indicador unIndicador){
-		
-	this.nombre = unIndicador.getNombre() ;
-	this.formula = unIndicador.getFormula() ;	
+	private String nombre;
+	private String formula;
+
+	public AnalizadorSemantico(Indicador unIndicador) {
+
+		this.nombre = unIndicador.getNombre();
+		this.formula = unIndicador.getFormula();
 	}
-	
-	public void analizar() throws Exception{
-		
+
+	public void analizar() throws Exception {
+
 		if (this.getRepoIndicadores().filtrar(nombre).size() > 0) {
 			throw new Exception(
 					"Un indicador con ese nombre ya se encuentra cargado en el sistema, Intentelo nuevamente");
 		}
-		
-		revisarSintaxisYSemantica(new Indicador(this.nombre,this.formula));
-		
-		
-		}
-	
+
+		revisarSintaxisYSemantica(new Indicador(this.nombre, this.formula));
+
+	}
 
 	public void revisarSintaxisYSemantica(Indicador indicador) throws Exception {
-        
+
 		boolean cuentaOIndicador = false;
 		String[] componentes = indicador.getFormula().split(" ");
 		for (int i = 0; i < componentes.length; i++) {
@@ -80,11 +78,10 @@ public class AnalizadorSemantico {
 
 		return new ArrayList<Cuenta>(cuentas);
 	}
-	
+
 	public RepositorioIndicadores getRepoIndicadores() {
 		return ApplicationContext.getInstance().getSingleton(Indicador.class);
 	}
-	
 
 	public RepositorioEmpresa getRepoEmpresas() {
 		return ApplicationContext.getInstance().getSingleton(Empresa.class);

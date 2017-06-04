@@ -1,19 +1,18 @@
 package app;
+
 import model.Indicador;
 
 public class Parser {
 
-	private String nombre ;
-	private String formula ;
+	private String nombre;
+	private String formula;
 
-	public Parser(Indicador unIndicador){
-		this.nombre = unIndicador.getNombre() ;
-		this.formula = unIndicador.getFormula() ;
+	public Parser(Indicador unIndicador) {
+		this.nombre = unIndicador.getNombre();
+		this.formula = unIndicador.getFormula();
 	}
 
-	public boolean parsear() throws Exception{		
-
-		boolean parseoCorrecto= true ;	
+	public void parsear() throws Exception {
 
 		if (!parentesisValidos(this.formula)) {
 			throw new Exception(
@@ -34,11 +33,7 @@ public class Parser {
 			throw new Exception(
 					"No puede usar ese nombre porque se encuentra dentro de la formula del mismo");
 		}
-		return parseoCorrecto;
-
 	}
-
-
 
 	public boolean parentesisValidos(String formula) {
 		String[] componentes = formula.split(" ");

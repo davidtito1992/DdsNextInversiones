@@ -1,6 +1,4 @@
 package app;
-
-import java.util.ArrayList;
 import java.util.List;
 import org.uqbar.commons.utils.ApplicationContext;
 import model.Empresa;
@@ -48,44 +46,48 @@ public class AppData {
 
 	public void guardarIndicador(Indicador unIndicador) throws Exception {
 
-		//parseamos la formula,luego comprobamos la existencia de cuentas, indicadores,etc
-		//si esta todo ok ingresa para guardarse en archivo y repo
-		new Parser(unIndicador).parsear() ; 
-		new AnalizadorSemantico(unIndicador).analizar() ;	
+		// parseamos la formula,luego comprobamos la existencia de cuentas,
+		// indicadores,etc
+		// si esta todo ok ingresa para guardarse en archivo y repo
+		new Parser(unIndicador).parsear();
+		new AnalizadorSemantico(unIndicador).analizar();
 
-			try {			
-				//Convertimos un indicador a json
-				String nuevoIndicadorString = new AdapterToJson(unIndicador).getstringJson();
+		try {
+			// Convertimos un indicador a json
+			String nuevoIndicadorString = new AdapterToJson(unIndicador)
+					.getstringJson();
 
-				//sobreescribimos un archivo segun nombre de archivo, textoviejo,textonuevo		
-				new FileWriter("./indicadores.json","}]",nuevoIndicadorString+"]\r\n" );
+			// sobreescribimos un archivo segun nombre de archivo,
+			// textoviejo,textonuevo
+			new FileWriter("./indicadores.json", "}]", nuevoIndicadorString
+					+ "]\r\n");
 
-				this.getRepoIndicadores().create(unIndicador);	
+			this.getRepoIndicadores().create(unIndicador);
 
-			} catch (Exception e) {
-				throw new Exception(
-						"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
-			}
-		
+		} catch (Exception e) {
+			throw new Exception(
+					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
+		}
 
 	}
 
-	public void borrarIndicador(Indicador unIndicador) throws Exception{
+	public void borrarIndicador(Indicador unIndicador) throws Exception {
 
-		try{
-			//Convertimos un indicador a json
-			String nuevoIndicadorString = new AdapterToJson( new Indicador(unIndicador.getNombre(),unIndicador.getFormula())).getstringJson();
-			//sobreescribimos para borrar		 
-			new FileWriter("./indicadores.json",nuevoIndicadorString,"");
+		try {
+			// Convertimos un indicador a json
+			String nuevoIndicadorString = new AdapterToJson(new Indicador(
+					unIndicador.getNombre(), unIndicador.getFormula()))
+					.getstringJson();
+			// sobreescribimos para borrar
+			new FileWriter("./indicadores.json", nuevoIndicadorString, "");
 
-			//eliminamos del repo
+			// eliminamos del repo
 			this.getRepoIndicadores().delete(unIndicador);
 
 		} catch (Exception e) {
 			throw new Exception(
 					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
-		}			    
+		}
 	}
 
 }
-
