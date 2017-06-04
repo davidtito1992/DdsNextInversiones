@@ -43,7 +43,6 @@ public class BorrarIndicadorView extends Dialog<BorrarIndicadorViewM> {
 			this.showInfo("El indicador se elimino exitosamente!");
 			this.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			this.showError( e.getMessage() );
 		}
 

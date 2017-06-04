@@ -78,8 +78,6 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 			try {
 				this.getModelObject().consultar();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
 				showInfo(e.getMessage());
 			} catch (Error e){
 				showInfo("Hubo un error al consultar las cuentas en el período deseado, por favor verificar que las cuentas que utiliza el indicador sean validas.");

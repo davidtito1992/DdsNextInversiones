@@ -89,7 +89,6 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 			super.executeTask();
 			this.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			this.showError(e.getMessage());
 		}
 
