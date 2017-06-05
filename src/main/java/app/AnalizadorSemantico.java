@@ -39,19 +39,12 @@ public class AnalizadorSemantico {
 
 	public void revisarSintaxisYSemantica(Indicador indicador) throws Exception {
 
-		boolean cuentaOIndicador = false;
 		String[] componentes = indicador.getFormula().split(" ");
 		for (int i = 0; i < componentes.length; i++) {
 			if (indicador.esIndicador(componentes[i])
 					|| indicador.esCuenta(componentes[i], todasLasCuentas())) {
 				componentes[i] = "2";
-				cuentaOIndicador = true;
 			}
-		}
-		if (cuentaOIndicador == false) {
-			throw new Exception(
-					"Debe ingresar una formula que contenga al menos una cuenta o un indicador existente"
-							+ ", o no se encuentra todo separado por espacios");
 		}
 		String formulaReemplazada = String.join(" ", componentes);
 		Calculator calculator = new Calculator(new StringReader(

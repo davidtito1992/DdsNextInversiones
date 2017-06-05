@@ -19,11 +19,6 @@ public class Parser {
 					"Se han ingresado mal los parentesis, o no se encuentra todo separado por espacios");
 		}
 
-		if (esNumero(this.formula.replace(" ", ""))) {
-			throw new Exception(
-					"La formula no puede estar compuesta por numeros unicamente");
-		}
-
 		if (this.nombre.contains(" ")) {
 			throw new Exception(
 					"Favor de ingresar un nombre que no contenga espacios");
@@ -60,15 +55,6 @@ public class Parser {
 			}
 		}
 		return false;
-	}
-
-	public boolean esNumero(String num) {
-		try {
-			Double.parseDouble(num);
-			return true;
-		} catch (NumberFormatException e) {
-			return false;
-		}
 	}
 
 }

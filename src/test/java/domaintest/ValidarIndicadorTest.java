@@ -21,7 +21,6 @@ public class ValidarIndicadorTest {
 
 	@Before
 	public void initialize() {
-		AppData app = new AppData();
 		indicadorSinNombre = new Indicador(null, null);
 		indicadorCompuestoDeNumeros = new Indicador(
 				"IndicadorCompuestoDeNumeros", "45 45 45 45");
@@ -30,18 +29,6 @@ public class ValidarIndicadorTest {
 		indicadorNuevo = new Indicador("IndicadorNuevo", "2*2");
 		indicadorConNombreYaExistente = new Indicador("IndicadorNuevo", "2*3");
 		indicadorNuevo = new Indicador("IndicadorNuevo", "IndicadorNuevo + 3");
-	}
-
-	@Test
-	public void indicadorCompuestoSoloDeNumeros() {
-		try {
-			AppData app = new AppData();
-			app.guardarIndicador(indicadorCompuestoDeNumeros);
-		} catch (Exception e) {
-			assertEquals(
-					"La formula no puede estar compuesta por numeros unicamente",
-					e.getMessage());
-		}
 	}
 
 	@Test
