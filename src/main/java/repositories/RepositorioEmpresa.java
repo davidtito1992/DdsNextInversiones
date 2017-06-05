@@ -34,19 +34,16 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 
 	@Override
 	public Class<Empresa> getEntityType() {
-		// TODO Auto-generated method stub
 		return Empresa.class;
 	}
 
 	@Override
 	public Empresa createExample() {
-		// TODO Auto-generated method stub
 		return new Empresa();
 	}
 
 	@Override
 	protected Predicate getCriterio(Empresa example) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

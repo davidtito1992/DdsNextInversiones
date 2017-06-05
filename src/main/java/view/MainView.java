@@ -23,7 +23,6 @@ public class MainView extends SimpleWindow<MainViewM> {
 	/***************************** panel maestro:label , tablas , buttons, etc ************************/
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
-		// TODO Auto-generated method stub
 		this.setTitle("Next-Inversiones");
 
 		mainPanel.setLayout(new VerticalLayout());
@@ -69,7 +68,6 @@ public class MainView extends SimpleWindow<MainViewM> {
 	 *************/
 	@Override
 	protected void addActions(Panel actionsPanel) {
-		// TODO Auto-generated method stub
 	}
 
 	/************* metodos para los buttons ***************************/
@@ -125,7 +123,6 @@ public class MainView extends SimpleWindow<MainViewM> {
 			getModelObject().cargarIndicadores();
 			getModelObject().setIndicadoresSinCargar(false);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			showInfo(e.getMessage());
 		}
 	}
