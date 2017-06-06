@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
 import model.SnapshotIndicador;
+
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
+
+import com.ibm.icu.math.BigDecimal;
+
 import repositories.RepositorioEmpresa;
 
 
@@ -26,7 +31,7 @@ public class ConsultarIndicadorViewM {
 	private Integer semestreSeleccionado;
 	private List<SnapshotIndicador> snapshotIndicadores;
 	private SnapshotIndicador snapshotIndicadorSeleccionado;
-	private double resultado;
+	private BigDecimal resultado;
 	private Indicador indicadorElegido;
 
 	/********* GETTERS/SETTERS *********/
@@ -43,11 +48,11 @@ public class ConsultarIndicadorViewM {
 		this.indicadorElegido = indicadorElegido;
 	}
 
-	public double getResultado() {
+	public BigDecimal getResultado() {
 		return resultado;
 	}
 
-	public void setResultado(double resultado) {
+	public void setResultado(BigDecimal resultado) {
 		this.resultado = resultado;
 	}
 
@@ -177,7 +182,7 @@ public class ConsultarIndicadorViewM {
 		this.generarTodosLosCBox(null, null, null);
 		this.snapshotIndicadorSeleccionado = null;
 		this.limpiarFiltros();
-		this.resultado = 0;
+		this.resultado = new BigDecimal(0);
 	}
 
 	public void limpiarFiltros() {

@@ -3,10 +3,14 @@ package model;
 import java.io.StringReader;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
+
+import com.ibm.icu.math.BigDecimal;
+
 import repositories.RepositorioIndicadores;
 import calculator.Calculator;
 import calculator.ParseException;
@@ -46,7 +50,7 @@ public class Indicador extends Entity {
 
 	/********* METODOS *********/
 
-	public double analizarResultado(List<Cuenta> cuentasUnaEmpresa)
+	public BigDecimal analizarResultado(List<Cuenta> cuentasUnaEmpresa)
 			throws ParseException {
 		
 		String formulaSinIndicadores = getRepoIndicadores()
@@ -55,7 +59,7 @@ public class Indicador extends Entity {
 		String formulaACalcular = getRepoIndicadores().transformValores(
 				formulaSinIndicadores, cuentasUnaEmpresa);
 		
-		double resultado = 0;
+		BigDecimal resultado = new BigDecimal(0);
 		Calculator calculator = new Calculator(new StringReader(
 				formulaACalcular));
 		try {

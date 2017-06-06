@@ -13,6 +13,8 @@ import org.apache.commons.collections15.Predicate;
 import org.uqbar.commons.model.CollectionBasedRepo;
 import org.uqbar.commons.utils.Observable;
 
+import com.ibm.icu.math.BigDecimal;
+
 @Observable
 public class RepositorioIndicadores extends CollectionBasedRepo<Indicador> {
 
@@ -103,7 +105,7 @@ public class RepositorioIndicadores extends CollectionBasedRepo<Indicador> {
 		return String.join(" ", componentes);
 	}
 
-	private int getValorCuenta(String nombre, List<Cuenta> cuentasUnaEmpresa) {
+	private BigDecimal getValorCuenta(String nombre, List<Cuenta> cuentasUnaEmpresa) {
 		List<Cuenta> cuentaADevolver = cuentasUnaEmpresa.stream()
 				.filter(cuenta -> cuenta.getNombre().equals(nombre))
 				.collect(Collectors.toList());

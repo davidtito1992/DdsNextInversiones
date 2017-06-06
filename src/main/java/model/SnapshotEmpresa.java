@@ -2,6 +2,8 @@ package model;
 
 import org.uqbar.commons.utils.Observable;
 
+import com.ibm.icu.math.BigDecimal;
+
 @Observable
 public class SnapshotEmpresa {
 
@@ -11,7 +13,7 @@ public class SnapshotEmpresa {
 	private int año;
 	private int semestre;
 	private String cuenta;
-	private int valor;
+	private BigDecimal valor;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -47,11 +49,11 @@ public class SnapshotEmpresa {
 		this.cuenta = cuenta;
 	}
 
-	public int getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(int valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 

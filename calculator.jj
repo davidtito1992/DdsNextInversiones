@@ -4,6 +4,7 @@ options{
 }
 PARSER_BEGIN(Calculator)
 package calculator;
+import java.math.BigDecimal;
 public class Calculator{}PARSER_END(Calculator)
 SKIP:{
   " "
@@ -18,20 +19,20 @@ TOKEN:{
   | <DIV:("/")>
   | <LBR:("(")>
   | <RBR:(")")>
-  | <DOUBLE:(["0"-"9"])+ ("." (["0"-"9"])+)?>
+  | <BIGDECIMAL:(["0"-"9"])+ ("." (["0"-"9"])+)?>
 }
-double calculate():{
-  double result;
+BigDecimal calculate():{
+  BigDecimal result;
 }
 {
   result = expr(){
     return result;
   }
 }
-double expr():{
-  double a;
-  double b;
-  double result = 0;
+BigDecimal expr():{
+  BigDecimal a;
+  BigDecimal b;
+  BigDecimal result = 0;
 }
 {
   a = term(){
@@ -47,10 +48,10 @@ double expr():{
     return result;
   }
 }
-double term():{
-  double a;
-  double b;
-  double result = 0;
+BigDecimal term():{
+  BigDecimal a;
+  BigDecimal b;
+  BigDecimal result = 0;
 }
 {
   a = factor(){
@@ -66,13 +67,13 @@ double term():{
     return result;
   }
 }
-double factor():{
+BigDecimal factor():{
   Token t;
-  double result;
+  BigDecimal result;
 }
 {
-  t = <DOUBLE>{
-    return Double.parseDouble(t.image);
+  t = <BIGDECIMAL>{
+    return BigDecimal.parseBigDecimal(t.image);
   }
   | <LBR>result = expr()<RBR>{
     return result;

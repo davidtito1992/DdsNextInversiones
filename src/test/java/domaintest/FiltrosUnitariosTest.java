@@ -1,9 +1,14 @@
 package domaintest;
 
 import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Test;
+
+import com.ibm.icu.math.BigDecimal;
+
 import repositories.RepositorioEmpresa;
 import model.Cuenta;
 import model.Empresa;
@@ -16,7 +21,7 @@ public class FiltrosUnitariosTest {
 	public Empresa crearEmpresaTest() {
 		Empresa emp = new Empresa();
 		Periodo per = new Periodo();
-		Cuenta cue = new Cuenta("CTest", 10);
+		Cuenta cue = new Cuenta("CTest", new BigDecimal(10));
 		List<Cuenta> lCue = new ArrayList<Cuenta>();
 		List<Periodo> lPer = new ArrayList<Periodo>();
 		lCue.add(cue);
