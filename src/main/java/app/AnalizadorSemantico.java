@@ -41,8 +41,9 @@ public class AnalizadorSemantico {
 
 		String[] componentes = indicador.getFormula().split(" ");
 		for (int i = 0; i < componentes.length; i++) {
-			if (indicador.esIndicador(componentes[i])
-					|| indicador.esCuenta(componentes[i], todasLasCuentas())) {
+			if (getRepoIndicadores().esIndicador(componentes[i])
+					|| getRepoIndicadores().esCuenta(componentes[i],
+							todasLasCuentas())) {
 				componentes[i] = "2";
 			}
 		}

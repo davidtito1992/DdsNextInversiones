@@ -48,9 +48,13 @@ public class Indicador extends Entity {
 
 	public double analizarResultado(List<Cuenta> cuentasUnaEmpresa)
 			throws ParseException {
-		String formulaSinIndicadores = transformIndicadores(getFormula());
-		String formulaACalcular = transformValores(formulaSinIndicadores,
-				cuentasUnaEmpresa);
+		
+		String formulaSinIndicadores = getRepoIndicadores()
+				.transformIndicadores(getFormula());
+		
+		String formulaACalcular = getRepoIndicadores().transformValores(
+				formulaSinIndicadores, cuentasUnaEmpresa);
+		
 		double resultado = 0;
 		Calculator calculator = new Calculator(new StringReader(
 				formulaACalcular));
@@ -61,79 +65,6 @@ public class Indicador extends Entity {
 					"Este indicador utiliza una cuenta que no esta disponible en este periodo");
 		}
 		return resultado;
-	}
-
-	public String transformIndicadores(String formulaConIndicadores) {
-		String devolverEsto = formulaConIndicadores;
-		if (contieneIndicadores(formulaConIndicadores)) {
-			String[] componentes = formulaConIndicadores.split(" ");
-
-			for (int i = 0; i < componentes.length; i++) {
-
-				if (esIndicador(componentes[i])) {
-					componentes[i] = "( "
-							+ transformIndicadores(getIndicador(componentes[i])
-									.getFormula()) + " )";
-				}
-
-			}
-			devolverEsto = String.join(" ", componentes);
-		}
-		return devolverEsto;
-	}
-
-	public String transformValores(String formulaConCuentas,
-			List<Cuenta> cuentasUnaEmpresa) {
-		String[] componentes = formulaConCuentas.split(" ");
-		for (int i = 0; i < componentes.length; i++) {
-			if (esCuenta(componentes[i], cuentasUnaEmpresa)) {
-				componentes[i] = String.valueOf(getValorCuenta(componentes[i],
-						cuentasUnaEmpresa));
-			}
-		}
-		return String.join(" ", componentes);
-	}
-
-	private int getValorCuenta(String nombre, List<Cuenta> cuentasUnaEmpresa) {
-		List<Cuenta> cuentaADevolver = cuentasUnaEmpresa.stream()
-				.filter(cuenta -> cuenta.getNombre().equals(nombre))
-				.collect(Collectors.toList());
-		return cuentaADevolver.get(0).getValor();
-	}
-
-	public boolean esCuenta(String componente, List<Cuenta> cuentasUnaEmpresa) {
-		return cuentasUnaEmpresa.stream().map(cuenta -> cuenta.getNombre())
-				.anyMatch(cuenta -> cuenta.equals(componente));
-	}
-
-	public Indicador getIndicador(String nombre) {
-		List<Indicador> indicadoresConEseNombre = getRepoIndicadores().filtrar(
-				nombre);
-		if (indicadoresConEseNombre.isEmpty()) {
-			return null;
-		}
-		return indicadoresConEseNombre.get(0);
-	}
-
-	public boolean esIndicador(String nombre) {
-		List<Indicador> indicadoresConEseNombre = getRepoIndicadores().filtrar(
-				nombre);
-		if (indicadoresConEseNombre.isEmpty()) {
-			return false;
-		}
-		return true;
-
-	}
-
-	public boolean contieneIndicadores(String formula) {
-		boolean flag = false;
-		String[] componentes = formula.split(" ");
-		for (int i = 0; i < componentes.length; i++) {
-			if (esIndicador(componentes[i])) {
-				flag = true;
-			}
-		}
-		return flag;
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {
