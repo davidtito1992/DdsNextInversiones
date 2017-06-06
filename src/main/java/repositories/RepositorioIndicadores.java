@@ -48,19 +48,16 @@ public class RepositorioIndicadores extends CollectionBasedRepo<Indicador> {
 
 	@Override
 	public Class<Indicador> getEntityType() {
-		// TODO Auto-generated method stub
 		return Indicador.class;
 	}
 
 	@Override
 	public Indicador createExample() {
-		// TODO Auto-generated method stub
 		return new Indicador("", "");
 	}
 
 	@Override
 	protected Predicate getCriterio(Indicador example) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
