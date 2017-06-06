@@ -63,14 +63,11 @@ public class RepositorioIndicadores extends CollectionBasedRepo<Indicador> {
 
 	public ArrayList<String> todosLosNombresDeIndicadores(
 			List<Indicador> listaIndicadores) {
-
-		HashSet<String> nombreIndicadores = new HashSet<String>();
-		listaIndicadores.forEach(indicador -> (nombreIndicadores.add(indicador
-				.getNombre())));
-		ArrayList<String> nombreIndicadoresFinal = new ArrayList<String>(
-				nombreIndicadores);
-		Collections.sort(nombreIndicadoresFinal);
-		return nombreIndicadoresFinal;
+		
+		ArrayList<String> nombresDeTodosLosIndicadores = listaIndicadores
+				.stream().map(indicador -> indicador.getNombre()).distinct()
+				.sorted().collect(Collectors.toCollection(ArrayList::new));
+		return nombresDeTodosLosIndicadores;
 	}
 
 }

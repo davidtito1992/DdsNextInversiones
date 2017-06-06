@@ -107,60 +107,50 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		}
 	}
 	
-	public ArrayList<Integer> todosLosAnios(List<Empresa> listaEmpresas){
-		HashSet<Integer> cantidadAnios = new HashSet<Integer>();
-		listaEmpresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				cantidadAnios.add(periodo.getAño());
-			});
-		});
-		ArrayList<Integer> CantidadesAniosFinal = new ArrayList<Integer>(
-				cantidadAnios);
-		Collections.sort(CantidadesAniosFinal);
-        return CantidadesAniosFinal;
-	}
-	
-	public ArrayList<Integer> todosLosPeriodos(List<Empresa> listaEmpresa){
+	public ArrayList<Integer> todosLosAnios(List<Empresa> listaEmpresas) {
 
-		HashSet<Integer> cantidadSemestres = new HashSet<Integer>();
-		listaEmpresa.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				cantidadSemestres.add(periodo.getSemestre());
-			});
-		});
-		ArrayList<Integer> cantidadSemestresFinal = new ArrayList<Integer>(
-				cantidadSemestres);
-		Collections.sort(cantidadSemestresFinal);
-		return cantidadSemestresFinal;
-	}
-	
-	public ArrayList<String> todosLosNombresDeCuentas(List<Empresa> listaEmpresas){
-		
-		HashSet<String> nombreCuentas = new HashSet<String>();
-		listaEmpresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(
-					periodo -> {
-						periodo.getCuentas()
-								.forEach(
-										cuenta -> nombreCuentas.add(cuenta
-												.getNombre()));
-					});
-		});
+		ArrayList<Integer> todosLosAnios = listaEmpresas.stream()
+				.map(empresa -> empresa.getPeriodos())
+				.flatMap(periodos -> periodos.stream())
+				.map(periodo -> periodo.getAño()).distinct().sorted()
+				.collect(Collectors.toCollection(ArrayList::new));
 
-		ArrayList<String> nombreCuentasfinal = new ArrayList<String>(
-				nombreCuentas);
-		Collections.sort(nombreCuentasfinal);
-	return nombreCuentasfinal ;
+		return todosLosAnios;
 	}
-	
-	public ArrayList<String> todosLosNombresDeEmpresas(List<Empresa> empresas){
 
-		HashSet<String> nombreEmpresas = new HashSet<String>();
-		empresas.forEach(name -> (nombreEmpresas.add(name.getNombre())));
-		ArrayList<String> nombreEmpresasFinal = new ArrayList<String>(
-				nombreEmpresas);
-		Collections.sort(nombreEmpresasFinal);
-		return nombreEmpresasFinal ;
+	public ArrayList<Integer> todosLosPeriodos(List<Empresa> listaEmpresa) {
+
+		ArrayList<Integer> todosLosPeriodos = listaEmpresa.stream()
+				.map(empresa -> empresa.getPeriodos())
+				.flatMap(periodos -> periodos.stream())
+				.map(periodo -> periodo.getSemestre()).distinct().sorted()
+				.collect(Collectors.toCollection(ArrayList::new));
+
+		return todosLosPeriodos;
+	}
+
+	public ArrayList<String> todosLosNombresDeCuentas(
+			List<Empresa> listaEmpresas) {
+
+		ArrayList<String> nombresDeTodasLasCuentas = listaEmpresas.stream()
+				.map(empresa -> empresa.getPeriodos())
+				.flatMap(periodos -> periodos.stream())
+				.map(periodo -> periodo.getCuentas())
+				.flatMap(cuentas -> cuentas.stream())
+				.map(cuenta -> cuenta.getNombre()).distinct().sorted()
+				.collect(Collectors.toCollection(ArrayList::new));
+
+		return nombresDeTodasLasCuentas;
+
+	}
+
+	public ArrayList<String> todosLosNombresDeEmpresas(List<Empresa> empresas) {
+
+		ArrayList<String> nombresDeTodasLasEmpresas = empresas.stream()
+				.map(empresa -> empresa.getNombre()).distinct().sorted()
+				.collect(Collectors.toCollection(ArrayList::new));
+
+		return nombresDeTodasLasEmpresas;
 	}
 	
 }
