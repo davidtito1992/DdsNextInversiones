@@ -1,22 +1,16 @@
 package viewmodel;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
 import model.SnapshotIndicador;
-
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
-
 import com.ibm.icu.math.BigDecimal;
-
+import formulaTeam.CalculoFormula;
 import repositories.RepositorioEmpresa;
-
 
 @Observable
 public class ConsultarIndicadorViewM {
@@ -136,13 +130,13 @@ public class ConsultarIndicadorViewM {
 	public void generarTodosLosCBox(String empresa, Integer anio,
 			Integer semestre) {
 
-		List<Empresa> repoEmpresa2 = new ArrayList<Empresa>();
-		repoEmpresa2 = this.getRepoEmpresas().filtrar(null, empresa, semestre,
-				anio);
+		List<Empresa> repoEmpresaFiltrado = new ArrayList<Empresa>();
+		repoEmpresaFiltrado = this.getRepoEmpresas().filtrar(null, empresa,
+				semestre, anio);
 
-		generarCBoxNombresEmpresas(repoEmpresa2);
-		generarCBoxAnios(repoEmpresa2);
-		generarCBoxSemestre(repoEmpresa2);
+		generarCBoxNombresEmpresas(repoEmpresaFiltrado);
+		generarCBoxAnios(repoEmpresaFiltrado);
+		generarCBoxSemestre(repoEmpresaFiltrado);
 
 	}
 
@@ -157,25 +151,26 @@ public class ConsultarIndicadorViewM {
 	}
 
 	public void generarCBoxSemestre(List<Empresa> empresas) {
-		
+
 		this.semestre = this.getRepoEmpresas().todosLosPeriodos(empresas);
 
 	}
 
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
 
-		this.nombres = this.getRepoEmpresas().todosLosNombresDeEmpresas(empresas);
+		this.nombres = this.getRepoEmpresas().todosLosNombresDeEmpresas(
+				empresas);
 
 	}
 
 	public void consultar() throws Exception {
-		List<Empresa> empresas = this.getRepoEmpresas().filtrar(null,
+
+		List<Cuenta> cuentas = getRepoEmpresas().obtenerCuentas(
 				nombreSeleccionado, semestreSeleccionado, añoSeleccionado);
 
-		List<Cuenta> cuentas = empresas.get(0).getPeriodos().get(0)
-				.getCuentas();
-
-		this.resultado = getIndicadorElegido().analizarResultado(cuentas);
+		CalculoFormula calculoFormula = new CalculoFormula();
+		this.resultado = calculoFormula.analizarResultado(
+				getIndicadorElegido(), cuentas);
 	}
 
 	public void reiniciar() {

@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import model.Cuenta;
 import model.Empresa;
+import model.Periodo;
 
 import org.apache.commons.collections15.Predicate;
 import org.uqbar.commons.model.CollectionBasedRepo;
 import org.uqbar.commons.utils.Observable;
+
+import com.ibm.icu.math.BigDecimal;
 
 @Observable
 public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
@@ -106,7 +111,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 													.equals(cuentaSeleccionada)));
 		}
 	}
-	
+
 	public ArrayList<Integer> todosLosAnios(List<Empresa> listaEmpresas) {
 
 		ArrayList<Integer> todosLosAnios = listaEmpresas.stream()
@@ -152,5 +157,65 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 
 		return nombresDeTodasLasEmpresas;
 	}
-	
+
+	public String transformValores(String formulaConCuentas,
+			List<Cuenta> cuentasUnaEmpresa) {
+		String[] componentes = formulaConCuentas.split(" ");
+		for (int i = 0; i < componentes.length; i++) {
+			if (esCuenta(componentes[i], cuentasUnaEmpresa)) {
+				componentes[i] = String.valueOf(getValorCuenta(componentes[i],
+						cuentasUnaEmpresa));
+			}
+		}
+		return String.join(" ", componentes);
+	}
+
+	private BigDecimal getValorCuenta(String nombre,
+			List<Cuenta> cuentasUnaEmpresa) {
+		List<Cuenta> cuentaADevolver = cuentasUnaEmpresa.stream()
+				.filter(cuenta -> cuenta.getNombre().equals(nombre))
+				.collect(Collectors.toList());
+		return cuentaADevolver.get(0).getValor();
+	}
+
+	public boolean esCuenta(String componente, List<Cuenta> cuentasUnaEmpresa) {
+		return cuentasUnaEmpresa.stream().map(cuenta -> cuenta.getNombre())
+				.anyMatch(cuenta -> cuenta.equals(componente));
+	}
+
+	public List<Cuenta> obtenerCuentas(String nombreSeleccionado,
+			Integer semestreSeleccionado, Integer añoSeleccionado) {
+		List<Empresa> empresas = filtrar(null, nombreSeleccionado,
+				semestreSeleccionado, añoSeleccionado);
+
+		return empresas.get(0).getPeriodos().get(0).getCuentas();
+	}
+
+	public List<Cuenta> todasLasCuentas() {
+		List<Empresa> empresas = this.allInstances();
+
+		// HashSet<Cuenta> cuentas = new HashSet<Cuenta>();
+		//
+		// empresas.forEach(empresa -> {
+		// empresa.getPeriodos().forEach(periodo -> {
+		// periodo.getCuentas().forEach(cuenta -> cuenta.);
+		// });
+		// });
+
+		List<Periodo> todosPeriodos = empresas.stream()
+				.map(empresa -> empresa.getPeriodos())
+				.flatMap(periodo -> periodo.stream())
+				.collect(Collectors.toList());
+
+		List<Cuenta> todasLasCuentas = todosPeriodos.stream()
+				.map(periodo -> periodo.getCuentas())
+				.flatMap(cuenta -> cuenta.stream()).distinct()
+				.collect(Collectors.toList());
+
+		// List<Cuenta> cuentaADevolver = cuentasUnaEmpresa.stream()
+		// .filter(cuenta -> cuenta.getNombre().equals(nombre))
+		// .collect(Collectors.toList());
+
+		return todasLasCuentas;
+	}
 }

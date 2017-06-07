@@ -2,6 +2,4 @@
 {"nombre":"I3","formula":"EBITDA + NetoDiscontinuas"},
 {"nombre":"I4","formula":"( I3 + EBITDA )"},
 {"nombre":"pepe","formula":"IngresoNeto +  EBITDA - ( 4 +  FreeCashFlow )"},
-{"nombre":"K","formula":"I3 + 5"},
-{"nombre":"KGGGG","formula":"2.22 +  EBITDA"},
 {"nombre":"Pi","formula":"3.14"}]

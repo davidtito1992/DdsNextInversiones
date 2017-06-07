@@ -1,4 +1,4 @@
-package app;
+package formulaTeam;
 
 import model.Indicador;
 
@@ -15,8 +15,8 @@ public class Parser {
 	public void parsear() throws Exception {
 
 		if (!parentesisValidos(this.formula)) {
-			throw new Exception(
-					"Se han ingresado mal los parentesis, o no se encuentra todo separado por espacios");
+			throw new Exception("Se han ingresado mal los parentesis, "
+					+ "o no se encuentra todo separado por espacios");
 		}
 
 		if (this.nombre.contains(" ")) {
@@ -25,8 +25,8 @@ public class Parser {
 		}
 
 		if (formulaContieneNombre(this.nombre, this.formula)) {
-			throw new Exception(
-					"No puede usar ese nombre porque se encuentra dentro de la formula del mismo");
+			throw new Exception("No puede usar ese nombre porque se encuentra "
+					+ "dentro de la formula del mismo");
 		}
 	}
 

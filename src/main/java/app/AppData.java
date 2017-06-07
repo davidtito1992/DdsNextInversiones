@@ -1,6 +1,10 @@
 package app;
 import java.util.List;
+
 import org.uqbar.commons.utils.ApplicationContext;
+
+import formulaTeam.AnalizadorSemantico;
+import formulaTeam.Parser;
 import model.Empresa;
 import model.Indicador;
 import DataManagment.AdapterToJson;

@@ -1,19 +1,8 @@
 package model;
 
-import java.io.StringReader;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.uqbar.commons.model.Entity;
-import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
-
-import com.ibm.icu.math.BigDecimal;
-
-import repositories.RepositorioIndicadores;
-import calculator.Calculator;
-import calculator.ParseException;
 
 @SuppressWarnings("serial")
 @Transactional
@@ -49,30 +38,5 @@ public class Indicador extends Entity {
 	}
 
 	/********* METODOS *********/
-
-	public BigDecimal analizarResultado(List<Cuenta> cuentasUnaEmpresa)
-			throws ParseException {
-		
-		String formulaSinIndicadores = getRepoIndicadores()
-				.transformIndicadores(getFormula());
-		
-		String formulaACalcular = getRepoIndicadores().transformValores(
-				formulaSinIndicadores, cuentasUnaEmpresa);
-		
-		BigDecimal resultado = new BigDecimal(0);
-		Calculator calculator = new Calculator(new StringReader(
-				formulaACalcular));
-		try {
-			resultado = calculator.calculate();
-		} catch (ParseException e) {
-			throw new ParseException(
-					"Este indicador utiliza una cuenta que no esta disponible en este periodo");
-		}
-		return resultado;
-	}
-
-	public RepositorioIndicadores getRepoIndicadores() {
-		return ApplicationContext.getInstance().getSingleton(Indicador.class);
-	}
 
 }

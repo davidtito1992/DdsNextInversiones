@@ -1,4 +1,4 @@
-package app;
+package formulaTeam;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class AnalizadorSemantico {
 
 	public void analizar() throws Exception {
 
-		if (this.getRepoIndicadores().filtrar(nombre).size() > 0) {
+		if (getRepoIndicadores().indicadorYaExistente(nombre)) {
 			throw new Exception(
 					"Un indicador con ese nombre ya se encuentra cargado en el sistema, Intentelo nuevamente");
 		}
@@ -40,13 +40,16 @@ public class AnalizadorSemantico {
 	public void revisarSintaxisYSemantica(Indicador indicador) throws Exception {
 
 		String[] componentes = indicador.getFormula().split(" ");
+		List<Cuenta> todasLasCuentas = getRepoEmpresas().todasLasCuentas();
+
 		for (int i = 0; i < componentes.length; i++) {
 			if (getRepoIndicadores().esIndicador(componentes[i])
-					|| getRepoIndicadores().esCuenta(componentes[i],
-							todasLasCuentas())) {
+					|| getRepoEmpresas().esCuenta(componentes[i],
+							todasLasCuentas)) {
 				componentes[i] = "2";
 			}
 		}
+
 		String formulaReemplazada = String.join(" ", componentes);
 		Calculator calculator = new Calculator(new StringReader(
 				formulaReemplazada));
@@ -58,19 +61,6 @@ public class AnalizadorSemantico {
 			throw new Exception("Ingresó una cuenta o un indicador inexistente");
 		}
 
-	}
-
-	public List<Cuenta> todasLasCuentas() {
-		List<Empresa> empresas = this.getRepoEmpresas().filtrar(null, null,
-				null, null);
-		HashSet<Cuenta> cuentas = new HashSet<Cuenta>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				periodo.getCuentas().forEach(cuenta -> cuentas.add(cuenta));
-			});
-		});
-
-		return new ArrayList<Cuenta>(cuentas);
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {
