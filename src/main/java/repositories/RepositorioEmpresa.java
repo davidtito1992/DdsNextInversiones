@@ -194,27 +194,12 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	public List<Cuenta> todasLasCuentas() {
 		List<Empresa> empresas = this.allInstances();
 
-		// HashSet<Cuenta> cuentas = new HashSet<Cuenta>();
-		//
-		// empresas.forEach(empresa -> {
-		// empresa.getPeriodos().forEach(periodo -> {
-		// periodo.getCuentas().forEach(cuenta -> cuenta.);
-		// });
-		// });
-
-		List<Periodo> todosPeriodos = empresas.stream()
+		List<Cuenta> todasLasCuentas = empresas.stream()
 				.map(empresa -> empresa.getPeriodos())
 				.flatMap(periodo -> periodo.stream())
-				.collect(Collectors.toList());
-
-		List<Cuenta> todasLasCuentas = todosPeriodos.stream()
 				.map(periodo -> periodo.getCuentas())
 				.flatMap(cuenta -> cuenta.stream()).distinct()
 				.collect(Collectors.toList());
-
-		// List<Cuenta> cuentaADevolver = cuentasUnaEmpresa.stream()
-		// .filter(cuenta -> cuenta.getNombre().equals(nombre))
-		// .collect(Collectors.toList());
 
 		return todasLasCuentas;
 	}
