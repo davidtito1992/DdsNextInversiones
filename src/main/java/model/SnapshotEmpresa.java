@@ -1,5 +1,7 @@
 package model;
 
+import java.time.Year;
+
 import org.uqbar.commons.utils.Observable;
 
 import com.ibm.icu.math.BigDecimal;
@@ -10,18 +12,18 @@ public class SnapshotEmpresa {
 	/********* ATRIBUTOS *********/
 
 	private String nombre;
-	private int año;
+	private Year año;
 	private int semestre;
 	private String cuenta;
 	private BigDecimal valor;
 
 	/********* GETTERS/SETTERS *********/
 
-	public int getAño() {
+	public Year getAño() {
 		return año;
 	}
 
-	public void setAño(int año) {
+	public void setAño(Year año) {
 		this.año = año;
 	}
 
@@ -63,7 +65,7 @@ public class SnapshotEmpresa {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + año;
+		result = prime * result + ((año == null) ? 0 : año.hashCode());
 		result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + semestre;

@@ -1,6 +1,8 @@
 package model;
 
+import java.time.Year;
 import java.util.List;
+
 import org.uqbar.commons.utils.Observable;
 
 @Observable
@@ -8,7 +10,7 @@ public class Periodo {
 
 	/********* ATRIBUTOS *********/
 
-	private int año;
+	private Year año;
 	private int semestre;
 	private List<Cuenta> cuentas;
 
@@ -22,11 +24,11 @@ public class Periodo {
 		this.semestre = semestre;
 	}
 
-	public int getAño() {
+	public Year getAño() {
 		return año;
 	}
 
-	public void setAño(int año) {
+	public void setAño(Year año) {
 		this.año = año;
 	}
 

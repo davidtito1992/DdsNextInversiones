@@ -1,5 +1,6 @@
 package repositories;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -55,7 +56,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	// METODO PARA FILTRAR UNA LISTA DE EMPRESAS
 	public List<Empresa> filtrar(String cuentaSeleccionada,
 			String nombreSeleccionado, Integer semestreSeleccionado,
-			Integer añoSeleccionado) {
+			Year añoSeleccionado) {
 		return this
 				.allInstances()
 				.stream()
@@ -66,12 +67,12 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 				.collect(Collectors.toList());
 	}
 
-	public boolean filtroAnio(Integer añoSeleccionado, Empresa empresa) {
+	public boolean filtroAnio(Year añoSeleccionado, Empresa empresa) {
 		if (añoSeleccionado == null) {
 			return true;
 		} else {
 			return empresa.getPeriodos().stream()
-					.anyMatch(periodo -> periodo.getAño() == añoSeleccionado);
+					.anyMatch(periodo -> periodo.getAño().equals(añoSeleccionado));
 		}
 	}
 
@@ -112,9 +113,9 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		}
 	}
 
-	public ArrayList<Integer> todosLosAnios(List<Empresa> listaEmpresas) {
+	public ArrayList<Year> todosLosAnios(List<Empresa> listaEmpresas) {
 
-		ArrayList<Integer> todosLosAnios = listaEmpresas.stream()
+		ArrayList<Year> todosLosAnios = listaEmpresas.stream()
 				.map(empresa -> empresa.getPeriodos())
 				.flatMap(periodos -> periodos.stream())
 				.map(periodo -> periodo.getAño()).distinct().sorted()
@@ -184,7 +185,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	}
 
 	public List<Cuenta> obtenerCuentas(String nombreSeleccionado,
-			Integer semestreSeleccionado, Integer añoSeleccionado) {
+			Integer semestreSeleccionado, Year añoSeleccionado) {
 		List<Empresa> empresas = filtrar(null, nombreSeleccionado,
 				semestreSeleccionado, añoSeleccionado);
 

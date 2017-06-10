@@ -1,25 +1,44 @@
 package DataManagment;
 
 import java.lang.reflect.Type;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.Year;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.eclipse.jface.bindings.keys.ParseException;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import model.Empresa;
 import model.Indicador;
 
+import org.eclipse.jface.bindings.keys.ParseException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
+
 public class JsonAdapter implements DataAdapter {
+
+	private static final Gson gson = new GsonBuilder().registerTypeAdapter(Year.class,
+			new JsonDeserializer<Year>() {
+				@Override
+				public Year deserialize(JsonElement json, Type type,
+						JsonDeserializationContext jsonDeserializationContext)
+						throws JsonParseException {
+					return Year.of(json.getAsInt());
+				}
+			}).create();
 
 	public List<Empresa> adaptarEmpresas(String empresas) throws Exception {
 		List<Empresa> listaEmpresas = new ArrayList<Empresa>();
 		try {
 			Type listType = new TypeToken<List<Empresa>>() {
 			}.getType();
-			listaEmpresas = new Gson().fromJson(empresas, listType);
+			listaEmpresas = gson.fromJson(empresas, listType);
 
 		} catch (Exception e) {
 			throw new ParseException(
@@ -34,7 +53,7 @@ public class JsonAdapter implements DataAdapter {
 		try {
 			Type listType = new TypeToken<List<Indicador>>() {
 			}.getType();
-			listaIndicadores = new Gson().fromJson(indicadores, listType);
+			listaIndicadores = gson.fromJson(indicadores, listType);
 
 		} catch (Exception e) {
 			throw new ParseException(

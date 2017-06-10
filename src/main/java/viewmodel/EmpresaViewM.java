@@ -1,10 +1,13 @@
 package viewmodel;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+
 import model.Cuenta;
 import model.Empresa;
 import model.Periodo;
 import model.SnapshotEmpresa;
+
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
@@ -19,8 +22,8 @@ public class EmpresaViewM {
 	private List<String> cuentas = new ArrayList<String>();
 	private List<String> nombres = new ArrayList<String>();
 	private String nombreSeleccionado;
-	private List<Integer> años = new ArrayList<Integer>();
-	private Integer añoSeleccionado;
+	private List<Year> años = new ArrayList<>();
+	private Year añoSeleccionado;
 	private List<Integer> semestre = new ArrayList<Integer>();
 	private Integer semestreSeleccionado;
 	private List<SnapshotEmpresa> snapshotEmpresas;
@@ -28,11 +31,11 @@ public class EmpresaViewM {
 
 	/********* GETTERS/SETTERS *********/
 
-	public List<Integer> getAños() {
+	public List<Year> getAños() {
 		return años;
 	}
 
-	public void setAños(List<Integer> años) {
+	public void setAños(List<Year> años) {
 		this.años = años;
 	}
 
@@ -78,11 +81,11 @@ public class EmpresaViewM {
 				this.semestreSeleccionado);
 	}
 
-	public Integer getAñoSeleccionado() {
+	public Year getAñoSeleccionado() {
 		return añoSeleccionado;
 	}
 
-	public void setAñoSeleccionado(Integer añoSeleccionado) {
+	public void setAñoSeleccionado(Year añoSeleccionado) {
 		this.añoSeleccionado = añoSeleccionado;
 
 		this.generarTodosLosCBox(this.nombreSeleccionado,
@@ -151,7 +154,7 @@ public class EmpresaViewM {
 
 	// Genera todos los combobox en base a la seleccion de cada uno de ellos
 	public void generarTodosLosCBox(String empresa, String cuenta,
-			Integer anio, Integer semestre) {
+			Year anio, Integer semestre) {
 
 		List<Empresa> repoEmpresa2 = new ArrayList<Empresa>();
 		repoEmpresa2 = this.getRepoEmpresas().filtrar(cuenta, empresa,

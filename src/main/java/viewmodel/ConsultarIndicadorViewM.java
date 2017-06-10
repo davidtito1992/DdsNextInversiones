@@ -1,14 +1,19 @@
 package viewmodel;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
 import model.SnapshotIndicador;
+
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
+
 import com.ibm.icu.math.BigDecimal;
+
 import formulaTeam.CalculoFormula;
 import repositories.RepositorioEmpresa;
 
@@ -19,8 +24,8 @@ public class ConsultarIndicadorViewM {
 
 	private List<String> nombres = new ArrayList<String>();
 	private String nombreSeleccionado;
-	private List<Integer> años = new ArrayList<Integer>();
-	private Integer añoSeleccionado;
+	private List<Year> años = new ArrayList<>();
+	private Year añoSeleccionado;
 	private List<Integer> semestre = new ArrayList<Integer>();
 	private Integer semestreSeleccionado;
 	private List<SnapshotIndicador> snapshotIndicadores;
@@ -82,19 +87,19 @@ public class ConsultarIndicadorViewM {
 				this.semestreSeleccionado);
 	}
 
-	public List<Integer> getAños() {
+	public List<Year> getAños() {
 		return años;
 	}
 
-	public void setAños(List<Integer> años) {
+	public void setAños(List<Year> años) {
 		this.años = años;
 	}
 
-	public Integer getAñoSeleccionado() {
+	public Year getAñoSeleccionado() {
 		return añoSeleccionado;
 	}
 
-	public void setAñoSeleccionado(Integer añoSeleccionado) {
+	public void setAñoSeleccionado(Year añoSeleccionado) {
 		this.añoSeleccionado = añoSeleccionado;
 		this.generarTodosLosCBox(this.nombreSeleccionado, this.añoSeleccionado,
 				this.semestreSeleccionado);
@@ -127,7 +132,7 @@ public class ConsultarIndicadorViewM {
 
 	}
 
-	public void generarTodosLosCBox(String empresa, Integer anio,
+	public void generarTodosLosCBox(String empresa, Year anio,
 			Integer semestre) {
 
 		List<Empresa> repoEmpresaFiltrado = new ArrayList<Empresa>();
