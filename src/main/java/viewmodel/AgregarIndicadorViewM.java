@@ -1,4 +1,5 @@
 package viewmodel;
+
 import java.util.List;
 import model.Empresa;
 import model.Indicador;

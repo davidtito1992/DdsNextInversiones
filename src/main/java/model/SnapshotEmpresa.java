@@ -4,7 +4,7 @@ import java.time.Year;
 
 import org.uqbar.commons.utils.Observable;
 
-import com.ibm.icu.math.BigDecimal;
+import java.math.BigDecimal;
 
 @Observable
 public class SnapshotEmpresa {

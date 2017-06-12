@@ -2,7 +2,7 @@ package model;
 
 import org.uqbar.commons.utils.Observable;
 
-import com.ibm.icu.math.BigDecimal;
+import java.math.BigDecimal;
 
 @Observable
 public class Cuenta {

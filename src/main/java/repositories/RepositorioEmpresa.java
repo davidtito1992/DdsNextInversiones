@@ -2,21 +2,17 @@ package repositories;
 
 import java.time.Year;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import model.Cuenta;
 import model.Empresa;
-import model.Periodo;
 
 import org.apache.commons.collections15.Predicate;
 import org.uqbar.commons.model.CollectionBasedRepo;
 import org.uqbar.commons.utils.Observable;
 
-import com.ibm.icu.math.BigDecimal;
+import java.math.BigDecimal;
 
 @Observable
 public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {

@@ -1,4 +1,5 @@
 package viewmodel;
+
 import model.Indicador;
 
 import org.uqbar.commons.utils.Observable;

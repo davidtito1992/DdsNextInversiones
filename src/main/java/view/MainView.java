@@ -10,7 +10,6 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import app.AppData;
 import viewmodel.MainViewM;
 
 @SuppressWarnings("serial")

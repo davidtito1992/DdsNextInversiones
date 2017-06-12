@@ -14,7 +14,7 @@ import repositories.RepositorioIndicadores;
 import calculator.Calculator;
 import calculator.ParseException;
 
-import com.ibm.icu.math.BigDecimal;
+import java.math.BigDecimal;
 
 public class CalculoFormula {
 

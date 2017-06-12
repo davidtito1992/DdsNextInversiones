@@ -12,7 +12,7 @@ import model.SnapshotIndicador;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
-import com.ibm.icu.math.BigDecimal;
+import java.math.BigDecimal;
 
 import formulaTeam.CalculoFormula;
 import repositories.RepositorioEmpresa;
