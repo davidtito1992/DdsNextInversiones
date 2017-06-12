@@ -1,5 +1,7 @@
 package model;
 
+import java.math.BigDecimal;
+
 import org.uqbar.commons.utils.Observable;
 
 @Observable
@@ -10,7 +12,7 @@ public class SnapshotIndicador {
 	private String nombre;
 	private int año;
 	private int semestre;
-	private double resultado;
+	private BigDecimal resultado;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -38,11 +40,11 @@ public class SnapshotIndicador {
 		this.semestre = semestre;
 	}
 
-	public double getResultado() {
+	public BigDecimal getResultado() {
 		return resultado;
 	}
 
-	public void setResultado(double resultado) {
+	public void setResultado(BigDecimal resultado) {
 		this.resultado = resultado;
 	}
 }

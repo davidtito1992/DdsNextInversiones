@@ -10,7 +10,7 @@ public class Cuenta {
 	/********* ATRIBUTOS *********/
 	
 	private String nombre;
-	private double valor;
+	private BigDecimal valor;
 
 	/********* GETTERS/SETTERS *********/
 	
@@ -23,18 +23,18 @@ public class Cuenta {
 	}
 
 	public BigDecimal getValor() {
-		return BigDecimal.valueOf(valor);
+		return valor;
 	}
 
 	public void setValor(BigDecimal valor) {
-		this.valor = valor.doubleValue();
+		this.valor = valor;
 	}
 	
 	/********* METODOS *********/
 
 	public Cuenta(String nombre, BigDecimal valor) {
 		this.nombre = nombre;
-		this.valor = valor.doubleValue();
+		this.valor = valor;
 	}
 	
 }
