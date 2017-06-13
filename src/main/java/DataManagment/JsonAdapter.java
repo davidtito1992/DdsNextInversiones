@@ -1,34 +1,17 @@
 package DataManagment;
 
 import java.lang.reflect.Type;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Empresa;
 import model.Indicador;
-
 import org.eclipse.jface.bindings.keys.ParseException;
-
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
 public class JsonAdapter implements DataAdapter {
 
-	private static final Gson gson = new GsonBuilder().registerTypeAdapter(Year.class,
-			new JsonDeserializer<Year>() {
-				@Override
-				public Year deserialize(JsonElement json, Type type,
-						JsonDeserializationContext jsonDeserializationContext)
-						throws JsonParseException {
-					return Year.of(json.getAsInt());
-				}
-			}).create();
+	Gson gson = GsonFactory.getGson();
 
 	public List<Empresa> adaptarEmpresas(String empresas) throws Exception {
 		List<Empresa> listaEmpresas = new ArrayList<Empresa>();
