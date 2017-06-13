@@ -10,7 +10,7 @@ public class Periodo {
 
 	/********* ATRIBUTOS *********/
 
-	private Year año;
+	private Year anio;
 	private int semestre;
 	private List<Cuenta> cuentas;
 
@@ -24,12 +24,12 @@ public class Periodo {
 		this.semestre = semestre;
 	}
 
-	public Year getAño() {
-		return año;
+	public Year getAnio() {
+		return anio;
 	}
 
-	public void setAño(Year año) {
-		this.año = año;
+	public void setAnio(Year anio) {
+		this.anio = anio;
 	}
 
 	public List<Cuenta> getCuentas() {

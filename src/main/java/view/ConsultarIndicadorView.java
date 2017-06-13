@@ -33,12 +33,12 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 		selectorNombre.bindItemsToProperty("nombres");
 		selectorNombre.bindValueToProperty("nombreSeleccionado");
 
-		new Label(form).setText("\t\tSeleccione Año");
-		Selector<Integer> selectorAño = new Selector<Integer>(form)
+		new Label(form).setText("\t\tSeleccione Anio");
+		Selector<Integer> selectorAnio = new Selector<Integer>(form)
 				.allowNull(true);
-		selectorAño.setWidth(150);
-		selectorAño.bindItemsToProperty("años");
-		selectorAño.bindValueToProperty("añoSeleccionado");
+		selectorAnio.setWidth(150);
+		selectorAnio.bindItemsToProperty("anios");
+		selectorAnio.bindValueToProperty("anioSeleccionado");
 
 		new Label(form).setText("\t\tSeleccione Semestre");
 		Selector<Integer> selectorSemestre = new Selector<Integer>(form)
@@ -74,7 +74,7 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 	}
 
 	public void consultar() {
-		if (this.getModelObject().getNombreSeleccionado()!=null && this.getModelObject().getSemestreSeleccionado() !=null && this.getModelObject().getAñoSeleccionado()!=null){
+		if (this.getModelObject().getNombreSeleccionado()!=null && this.getModelObject().getSemestreSeleccionado() !=null && this.getModelObject().getAnioSeleccionado()!=null){
 			try {
 				this.getModelObject().consultar();
 			} catch (Exception e) {

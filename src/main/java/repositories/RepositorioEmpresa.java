@@ -52,23 +52,23 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	// METODO PARA FILTRAR UNA LISTA DE EMPRESAS
 	public List<Empresa> filtrar(String cuentaSeleccionada,
 			String nombreSeleccionado, Integer semestreSeleccionado,
-			Year añoSeleccionado) {
+			Year anioSeleccionado) {
 		return this
 				.allInstances()
 				.stream()
 				.filter(empresa -> filtroCuenta(cuentaSeleccionada, empresa)
 						&& filtroNombre(nombreSeleccionado, empresa)
 						&& filtroSemestre(semestreSeleccionado, empresa)
-						&& filtroAnio(añoSeleccionado, empresa))
+						&& filtroAnio(anioSeleccionado, empresa))
 				.collect(Collectors.toList());
 	}
 
-	public boolean filtroAnio(Year añoSeleccionado, Empresa empresa) {
-		if (añoSeleccionado == null) {
+	public boolean filtroAnio(Year anioSeleccionado, Empresa empresa) {
+		if (anioSeleccionado == null) {
 			return true;
 		} else {
 			return empresa.getPeriodos().stream()
-					.anyMatch(periodo -> periodo.getAño().equals(añoSeleccionado));
+					.anyMatch(periodo -> periodo.getAnio().equals(anioSeleccionado));
 		}
 	}
 
@@ -114,7 +114,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		ArrayList<Year> todosLosAnios = listaEmpresas.stream()
 				.map(empresa -> empresa.getPeriodos())
 				.flatMap(periodos -> periodos.stream())
-				.map(periodo -> periodo.getAño()).distinct().sorted()
+				.map(periodo -> periodo.getAnio()).distinct().sorted()
 				.collect(Collectors.toCollection(ArrayList::new));
 
 		return todosLosAnios;
@@ -181,9 +181,9 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	}
 
 	public List<Cuenta> obtenerCuentas(String nombreSeleccionado,
-			Integer semestreSeleccionado, Year añoSeleccionado) {
+			Integer semestreSeleccionado, Year anioSeleccionado) {
 		List<Empresa> empresas = filtrar(null, nombreSeleccionado,
-				semestreSeleccionado, añoSeleccionado);
+				semestreSeleccionado, anioSeleccionado);
 
 		return empresas.get(0).getPeriodos().get(0).getCuentas();
 	}

@@ -24,8 +24,8 @@ public class ConsultarIndicadorViewM {
 
 	private List<String> nombres = new ArrayList<String>();
 	private String nombreSeleccionado;
-	private List<Year> años = new ArrayList<>();
-	private Year añoSeleccionado;
+	private List<Year> anios = new ArrayList<>();
+	private Year anioSeleccionado;
 	private List<Integer> semestre = new ArrayList<Integer>();
 	private Integer semestreSeleccionado;
 	private List<SnapshotIndicador> snapshotIndicadores;
@@ -83,25 +83,25 @@ public class ConsultarIndicadorViewM {
 
 	public void setNombreSeleccionado(String nombreSeleccionado) {
 		this.nombreSeleccionado = nombreSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado, this.añoSeleccionado,
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.anioSeleccionado,
 				this.semestreSeleccionado);
 	}
 
-	public List<Year> getAños() {
-		return años;
+	public List<Year> getAnios() {
+		return anios;
 	}
 
-	public void setAños(List<Year> años) {
-		this.años = años;
+	public void setAnios(List<Year> anios) {
+		this.anios = anios;
 	}
 
-	public Year getAñoSeleccionado() {
-		return añoSeleccionado;
+	public Year getAnioSeleccionado() {
+		return anioSeleccionado;
 	}
 
-	public void setAñoSeleccionado(Year añoSeleccionado) {
-		this.añoSeleccionado = añoSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado, this.añoSeleccionado,
+	public void setAnioSeleccionado(Year anioSeleccionado) {
+		this.anioSeleccionado = anioSeleccionado;
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.anioSeleccionado,
 				this.semestreSeleccionado);
 	}
 
@@ -119,7 +119,7 @@ public class ConsultarIndicadorViewM {
 
 	public void setSemestreSeleccionado(Integer semestreSeleccionado) {
 		this.semestreSeleccionado = semestreSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado, this.añoSeleccionado,
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.anioSeleccionado,
 				this.semestreSeleccionado);
 	}
 
@@ -151,7 +151,7 @@ public class ConsultarIndicadorViewM {
 
 	public void generarCBoxAnios(List<Empresa> empresas) {
 
-		this.años = this.getRepoEmpresas().todosLosAnios(empresas);
+		this.anios = this.getRepoEmpresas().todosLosAnios(empresas);
 
 	}
 
@@ -171,7 +171,7 @@ public class ConsultarIndicadorViewM {
 	public void consultar() throws Exception {
 
 		List<Cuenta> cuentas = getRepoEmpresas().obtenerCuentas(
-				nombreSeleccionado, semestreSeleccionado, añoSeleccionado);
+				nombreSeleccionado, semestreSeleccionado, anioSeleccionado);
 
 		CalculoFormula calculoFormula = new CalculoFormula();
 		this.resultado = calculoFormula.analizarResultado(
@@ -188,6 +188,6 @@ public class ConsultarIndicadorViewM {
 	public void limpiarFiltros() {
 		nombreSeleccionado = null;
 		semestreSeleccionado = null;
-		añoSeleccionado = null;
+		anioSeleccionado = null;
 	}
 }

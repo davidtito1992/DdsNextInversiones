@@ -1,7 +1,7 @@
 [{
 		"nombre": "Facebook",
 		"periodos": [{
-				"año": "2016",
+				"anio": "2016",
 				"semestre": "1",
 				"cuentas": [{
 						"nombre": "EBITDA",
@@ -24,7 +24,7 @@
 				]
 			},
 			{
-				"año": "2016",
+				"anio": "2016",
 				"semestre": "2",
 				"cuentas": [{
 						"nombre": "EBITDA",
@@ -51,7 +51,7 @@
 	{
 		"nombre": "Twitter",
 		"periodos": [{
-				"año": "2015",
+				"anio": "2015",
 				"semestre": "1",
 				"cuentas": [{
 						"nombre": "EBITDA",
@@ -68,7 +68,7 @@
 				]
 			},
 			{
-				"año": "2015",
+				"anio": "2015",
 				"semestre": "2",
 				"cuentas": [{
 						"nombre": "EBITDA",
@@ -89,7 +89,7 @@
 	{
 		"nombre": "Google",
 		"periodos": [{
-				"año": "2014",
+				"anio": "2014",
 				"semestre": "1",
 				"cuentas": [{
 						"nombre": "EBITDA",
@@ -112,7 +112,7 @@
 				]
 			},
 			{
-				"año": "2014",
+				"anio": "2014",
 				"semestre": "2",
 				"cuentas": [{
 						"nombre": "EBITDA",

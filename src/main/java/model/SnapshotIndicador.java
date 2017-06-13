@@ -10,7 +10,7 @@ public class SnapshotIndicador {
 	/********* ATRIBUTOS *********/
 
 	private String nombre;
-	private int año;
+	private int anio;
 	private int semestre;
 	private BigDecimal resultado;
 
@@ -24,12 +24,12 @@ public class SnapshotIndicador {
 		this.nombre = nombre;
 	}
 
-	public int getAño() {
-		return año;
+	public int getAnio() {
+		return anio;
 	}
 
-	public void setAño(int año) {
-		this.año = año;
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
 
 	public int getSemestre() {

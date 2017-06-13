@@ -46,12 +46,12 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		selectorCuenta.bindItemsToProperty("cuentas");
 		selectorCuenta.bindValueToProperty("cuentaSeleccionada");
 
-		new Label(form).setText("\t\tSeleccione Año");
-		Selector<Integer> selectorAño = new Selector<Integer>(form)
+		new Label(form).setText("\t\tSeleccione Anio");
+		Selector<Integer> selectorAnio = new Selector<Integer>(form)
 				.allowNull(true);
-		selectorAño.setWidth(150);
-		selectorAño.bindItemsToProperty("años");
-		selectorAño.bindValueToProperty("añoSeleccionado");
+		selectorAnio.setWidth(150);
+		selectorAnio.bindItemsToProperty("anios");
+		selectorAnio.bindValueToProperty("anioSeleccionado");
 
 		new Label(form).setText("\t\tSeleccione Semestre");
 		Selector<Integer> selectorSemestre = new Selector<Integer>(form)
@@ -81,10 +81,10 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		columnaNombre.setTitle("Nombre");
 		columnaNombre.bindContentsToProperty("nombre");
 
-		Column<SnapshotEmpresa> columnaAño = new Column<SnapshotEmpresa>(
+		Column<SnapshotEmpresa> columnaAnio = new Column<SnapshotEmpresa>(
 				tableEmpresas);
-		columnaAño.setTitle("Año");
-		columnaAño.bindContentsToProperty("año");
+		columnaAnio.setTitle("Anio");
+		columnaAnio.bindContentsToProperty("anio");
 
 		Column<SnapshotEmpresa> columnaSemestre = new Column<SnapshotEmpresa>(
 				tableEmpresas);

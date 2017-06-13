@@ -23,8 +23,8 @@ public class EmpresaViewM {
 	private List<String> cuentas = new ArrayList<String>();
 	private List<String> nombres = new ArrayList<String>();
 	private String nombreSeleccionado;
-	private List<Year> años = new ArrayList<>();
-	private Year añoSeleccionado;
+	private List<Year> anios = new ArrayList<>();
+	private Year anioSeleccionado;
 	private List<Integer> semestre = new ArrayList<Integer>();
 	private Integer semestreSeleccionado;
 	private List<SnapshotEmpresa> snapshotEmpresas;
@@ -32,12 +32,12 @@ public class EmpresaViewM {
 
 	/********* GETTERS/SETTERS *********/
 
-	public List<Year> getAños() {
-		return años;
+	public List<Year> getAnios() {
+		return anios;
 	}
 
-	public void setAños(List<Year> años) {
-		this.años = años;
+	public void setAnios(List<Year> anios) {
+		this.anios = anios;
 	}
 
 	public String getNombreSeleccionado() {
@@ -48,7 +48,7 @@ public class EmpresaViewM {
 
 		this.nombreSeleccionado = nombreSeleccionado;
 		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.añoSeleccionado,
+				this.cuentaSeleccionada, this.anioSeleccionado,
 				this.semestreSeleccionado);
 
 	}
@@ -78,19 +78,19 @@ public class EmpresaViewM {
 	public void setCuentaSeleccionada(String cuentaSeleccionada) {
 		this.cuentaSeleccionada = cuentaSeleccionada;
 		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.añoSeleccionado,
+				this.cuentaSeleccionada, this.anioSeleccionado,
 				this.semestreSeleccionado);
 	}
 
-	public Year getAñoSeleccionado() {
-		return añoSeleccionado;
+	public Year getAnioSeleccionado() {
+		return anioSeleccionado;
 	}
 
-	public void setAñoSeleccionado(Year añoSeleccionado) {
-		this.añoSeleccionado = añoSeleccionado;
+	public void setAnioSeleccionado(Year anioSeleccionado) {
+		this.anioSeleccionado = anioSeleccionado;
 
 		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.añoSeleccionado,
+				this.cuentaSeleccionada, this.anioSeleccionado,
 				this.semestreSeleccionado);
 
 	}
@@ -99,7 +99,7 @@ public class EmpresaViewM {
 		this.semestreSeleccionado = semestreSeleccionado;
 
 		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.añoSeleccionado,
+				this.cuentaSeleccionada, this.anioSeleccionado,
 				this.semestreSeleccionado);
 
 	}
@@ -170,7 +170,7 @@ public class EmpresaViewM {
 
 	public void generarCBoxAnios(List<Empresa> empresas) {
 
-		this.años = this.getRepoEmpresas().todosLosAnios(empresas);
+		this.anios = this.getRepoEmpresas().todosLosAnios(empresas);
 
 	}
 
@@ -201,14 +201,14 @@ public class EmpresaViewM {
 		cuentaSeleccionada = null;
 		nombreSeleccionado = null;
 		semestreSeleccionado = null;
-		añoSeleccionado = null;
+		anioSeleccionado = null;
 	}
 
 	public void filtrar() {
 		ArrayList<SnapshotEmpresa> empresitas = (this
 				.dameSnapshotEmpresas(getRepoEmpresas().filtrar(
 						cuentaSeleccionada, nombreSeleccionado,
-						semestreSeleccionado, añoSeleccionado)));
+						semestreSeleccionado, anioSeleccionado)));
 		this.setSnapshotEmpresas(empresitas);
 	}
 
@@ -224,7 +224,7 @@ public class EmpresaViewM {
 					snapshotempresa.setValor(cuenta.getValor());
 					snapshotempresa.setNombre(empresa.getNombre());
 					snapshotempresa.setSemestre(periodo.getSemestre());
-					snapshotempresa.setAño(periodo.getAño());
+					snapshotempresa.setAnio(periodo.getAnio());
 
 					if (agregarALista(empresa, periodo, cuenta)) {
 						listSnapshot.add(snapshotempresa);
@@ -247,11 +247,11 @@ public class EmpresaViewM {
 					&& empresa.getNombre().equals(nombreSeleccionado);
 		}
 
-		if (añoSeleccionado == null) {
+		if (anioSeleccionado == null) {
 			agregarALista = agregarALista && true;
 		} else {
 			agregarALista = agregarALista
-					&& periodo.getAño() == añoSeleccionado;
+					&& periodo.getAnio() == anioSeleccionado;
 		}
 
 		if (semestreSeleccionado == null) {

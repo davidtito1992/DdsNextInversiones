@@ -56,7 +56,7 @@ public class AnalizadorSemantico {
 		} catch (ParseException e) {
 			throw new Exception("La sintaxis es incorrecta");
 		} catch (Error e) {
-			throw new Exception("Ingresó una cuenta o un indicador inexistente");
+			throw new Exception("Ingreso una cuenta o un indicador inexistente");
 		}
 
 	}

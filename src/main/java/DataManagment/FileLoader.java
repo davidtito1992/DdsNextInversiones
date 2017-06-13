@@ -22,7 +22,7 @@ public class FileLoader implements DataLoader {
 			scanner = new Scanner(file);
 		} catch (Exception e) {
 			throw new FileNotFoundException(
-					"Archivo no encontrado, pongalo en el directorio de la aplicación y vuelva a intentarlo.");
+					"Archivo no encontrado, pongalo en el directorio de la aplicacion y vuelva a intentarlo.");
 		}
 		String lineSeparator = System.getProperty("line.separator");
 
