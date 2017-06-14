@@ -1,6 +1,6 @@
 package view;
 
-import model.Indicador;
+import model.RegistroIndicador;
 
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -12,7 +12,7 @@ import viewmodel.BorrarIndicadorViewM;
 public class BorrarIndicadorView extends Dialog<BorrarIndicadorViewM> {
 
 	@SuppressWarnings("rawtypes")
-	public BorrarIndicadorView(SimpleWindow owner, Indicador indicadorABorrar){
+	public BorrarIndicadorView(SimpleWindow owner, RegistroIndicador indicadorABorrar){
 		super(owner, new BorrarIndicadorViewM(indicadorABorrar));
 	}
 

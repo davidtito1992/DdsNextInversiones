@@ -1,6 +1,6 @@
 package view;
 
-import model.Indicador;
+import model.RegistroIndicador;
 
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
@@ -15,7 +15,7 @@ import viewmodel.ConsultarIndicadorViewM;
 public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 
 	@SuppressWarnings("rawtypes")
-	public ConsultarIndicadorView(SimpleWindow owner,Indicador unIndicador) {
+	public ConsultarIndicadorView(SimpleWindow owner,RegistroIndicador unIndicador) {
 		super(owner, new ConsultarIndicadorViewM(unIndicador));
 	}
 

@@ -1,7 +1,7 @@
 package DataManagment;
 
 import model.Empresa;
-import model.Indicador;
+import model.RegistroIndicador;
 
 import com.google.gson.Gson;
 
@@ -9,7 +9,7 @@ public class AdapterToJson {
  
 	private String stringJson;
 	
-	public AdapterToJson(Indicador unIndicador){
+	public AdapterToJson(RegistroIndicador unIndicador){
 
 		final Gson gson = new Gson();
 	    stringJson = gson.toJson(unIndicador);

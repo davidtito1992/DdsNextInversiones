@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
@@ -7,14 +9,16 @@ import org.uqbar.commons.utils.Transactional;
 @SuppressWarnings("serial")
 @Transactional
 @Observable
-public class Indicador extends Entity {
+public class RegistroIndicador extends Entity {
 
 	/********* ATRIBUTOS *********/
 
 	private String nombre;
 	private String formula;
+	private List<String> variables ;
 
-	public Indicador(String nombre, String formula) {
+
+	public RegistroIndicador(String nombre, String formula) {
 		this.nombre = nombre;
 		this.formula = formula;
 	}
@@ -37,6 +41,13 @@ public class Indicador extends Entity {
 		this.formula = formula;
 	}
 
+	public List<String> getVariables() {
+		return variables;
+	}
+
+	public void setVariables(List<String> variables) {
+		this.variables = variables;
+	}
 	/********* METODOS *********/
 
 }

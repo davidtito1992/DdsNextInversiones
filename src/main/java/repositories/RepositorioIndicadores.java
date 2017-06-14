@@ -3,13 +3,13 @@ package repositories;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import model.Indicador;
+import model.RegistroIndicador;
 import org.apache.commons.collections15.Predicate;
 import org.uqbar.commons.model.CollectionBasedRepo;
 import org.uqbar.commons.utils.Observable;
 
 @Observable
-public class RepositorioIndicadores extends CollectionBasedRepo<Indicador> {
+public class RepositorioIndicadores extends CollectionBasedRepo<RegistroIndicador> {
 
 	/********* ATRIBUTOS *********/
 
@@ -17,13 +17,13 @@ public class RepositorioIndicadores extends CollectionBasedRepo<Indicador> {
 
 	/********* METODOS *********/
 
-	public void cargarListaIndicadores(List<Indicador> Indicadores) {
+	public void cargarListaIndicadores(List<RegistroIndicador> Indicadores) {
 		for (int i = 0; i < Indicadores.size(); i++) {
 			create(Indicadores.get(i));
 		}
 	}
 
-	public List<Indicador> filtrar(String nombreSeleccionado) {
+	public List<RegistroIndicador> filtrar(String nombreSeleccionado) {
 		return this
 				.allInstances()
 				.stream()
@@ -31,7 +31,7 @@ public class RepositorioIndicadores extends CollectionBasedRepo<Indicador> {
 				.collect(Collectors.toList());
 	}
 
-	public boolean filtroNombre(String nombreSeleccionado, Indicador indicador) {
+	public boolean filtroNombre(String nombreSeleccionado, RegistroIndicador indicador) {
 		if (nombreSeleccionado == null) {
 			return true;
 		} else {
@@ -44,22 +44,22 @@ public class RepositorioIndicadores extends CollectionBasedRepo<Indicador> {
 	}
 
 	@Override
-	public Class<Indicador> getEntityType() {
-		return Indicador.class;
+	public Class<RegistroIndicador> getEntityType() {
+		return RegistroIndicador.class;
 	}
 
 	@Override
-	public Indicador createExample() {
-		return new Indicador("", "");
+	public RegistroIndicador createExample() {
+		return new RegistroIndicador("", "");
 	}
 
 	@Override
-	protected Predicate getCriterio(Indicador example) {
+	protected Predicate getCriterio(RegistroIndicador example) {
 		return null;
 	}
 
 	public ArrayList<String> todosLosNombresDeIndicadores(
-			List<Indicador> listaIndicadores) {
+			List<RegistroIndicador> listaIndicadores) {
 
 		ArrayList<String> nombresDeTodosLosIndicadores = listaIndicadores
 				.stream().map(indicador -> indicador.getNombre()).distinct()
@@ -86,8 +86,8 @@ public class RepositorioIndicadores extends CollectionBasedRepo<Indicador> {
 		return devolverEsto;
 	}
 
-	public Indicador getIndicador(String nombre) {
-		List<Indicador> indicadoresConEseNombre = this.filtrar(nombre);
+	public RegistroIndicador getIndicador(String nombre) {
+		List<RegistroIndicador> indicadoresConEseNombre = this.filtrar(nombre);
 		if (indicadoresConEseNombre.isEmpty()) {
 			return null;
 		}
@@ -95,7 +95,7 @@ public class RepositorioIndicadores extends CollectionBasedRepo<Indicador> {
 	}
 
 	public boolean esIndicador(String nombre) {
-		List<Indicador> indicadoresConEseNombre = this.filtrar(nombre);
+		List<RegistroIndicador> indicadoresConEseNombre = this.filtrar(nombre);
 		if (indicadoresConEseNombre.isEmpty()) {
 			return false;
 		}

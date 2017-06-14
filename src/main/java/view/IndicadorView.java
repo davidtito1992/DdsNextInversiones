@@ -1,6 +1,6 @@
 package view;
 
-import model.Indicador;
+import model.RegistroIndicador;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
@@ -32,8 +32,8 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 		new Button(form).setCaption("Borrar").onClick(this::borrar)
 				.setWidth(140);
 
-		Table<Indicador> tableIndicadores = new Table<Indicador>(mainPanel,
-				Indicador.class);
+		Table<RegistroIndicador> tableIndicadores = new Table<RegistroIndicador>(mainPanel,
+				RegistroIndicador.class);
 
 		tableIndicadores.setHeight(600);
 		tableIndicadores.setWidth(200);
@@ -41,12 +41,12 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 		tableIndicadores.bindItemsToProperty("indicadores");
 		tableIndicadores.bindValueToProperty("indicadorSeleccionado");
 
-		Column<Indicador> columnaNombre = new Column<Indicador>(
+		Column<RegistroIndicador> columnaNombre = new Column<RegistroIndicador>(
 				tableIndicadores);
 		columnaNombre.setTitle("Nombre");
 		columnaNombre.bindContentsToProperty("nombre");
 
-		Column<Indicador> columnaFormula = new Column<Indicador>(
+		Column<RegistroIndicador> columnaFormula = new Column<RegistroIndicador>(
 				tableIndicadores);
 		columnaFormula.setTitle("Formula");
 		columnaFormula.bindContentsToProperty("formula");

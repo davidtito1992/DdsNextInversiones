@@ -84,13 +84,14 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 	//@Override
 	protected void guardar() {
 
-		try {
-			getModelObject().guardarIndicador();
-			super.executeTask();
-			this.close();
-		} catch (Exception e) {
-			this.showError(e.getMessage());
-		}
+			try {
+				getModelObject().guardarIndicador();
+				super.executeTask();
+				this.close();
+			} catch (Throwable e) {
+				this.showError(e.getMessage());
+			}
+			
 
 	}
 

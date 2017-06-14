@@ -4,7 +4,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import model.Empresa;
-import model.Indicador;
+import model.RegistroIndicador;
 import org.eclipse.jface.bindings.keys.ParseException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,11 +27,11 @@ public class JsonAdapter implements DataAdapter {
 		return listaEmpresas;
 	}
 
-	public List<Indicador> adaptarIndicadores(String indicadores)
+	public List<RegistroIndicador> adaptarIndicadores(String indicadores)
 			throws Exception {
-		List<Indicador> listaIndicadores = new ArrayList<Indicador>();
+		List<RegistroIndicador> listaIndicadores = new ArrayList<RegistroIndicador>();
 		try {
-			Type listType = new TypeToken<List<Indicador>>() {
+			Type listType = new TypeToken<List<RegistroIndicador>>() {
 			}.getType();
 			listaIndicadores = gson.fromJson(indicadores, listType);
 

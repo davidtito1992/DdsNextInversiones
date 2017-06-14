@@ -1,7 +1,7 @@
 package app;
 
 import model.Empresa;
-import model.Indicador;
+import model.RegistroIndicador;
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
 import org.uqbar.commons.utils.ApplicationContext;
@@ -20,7 +20,7 @@ public class NextInversiones extends Application {
 		ApplicationContext.getInstance().configureSingleton(Empresa.class,
 				new RepositorioEmpresa());
 
-		ApplicationContext.getInstance().configureSingleton(Indicador.class,
+		ApplicationContext.getInstance().configureSingleton(RegistroIndicador.class,
 				new RepositorioIndicadores());
 
 		return new MainView(this);

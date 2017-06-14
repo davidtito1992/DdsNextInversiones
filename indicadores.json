@@ -1,5 +1,2 @@
-[{"nombre":"IngresoNeto","formula":"NetoContinuas + NetoDiscontinuas"},
-{"nombre":"I3","formula":"EBITDA + NetoDiscontinuas"},
-{"nombre":"I4","formula":"( I3 + EBITDA )"},
-{"nombre":"pepe","formula":"IngresoNeto +  EBITDA - ( 4 +  FreeCashFlow )"},
-{"nombre":"Pi","formula":"3.14"}]
+[{"nombre":"PrimerNuevoIndicador","formula":"I4 + EBITDA*3","variables":["I4","EBITDA"]},
+{"nombre":"SegundoNuevoIndicador","formula":"(PrimerNuevoIndicador + FDS )","variables":["PrimerNuevoIndicador","FDS"]}]

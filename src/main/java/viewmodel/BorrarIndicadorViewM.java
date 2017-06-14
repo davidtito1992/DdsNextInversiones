@@ -1,6 +1,6 @@
 package viewmodel;
 
-import model.Indicador;
+import model.RegistroIndicador;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -9,9 +9,9 @@ import app.AppData;
 @Observable
 public class BorrarIndicadorViewM {
 
-	private Indicador indicadorABorrar;
+	private RegistroIndicador indicadorABorrar;
 
-	public BorrarIndicadorViewM( Indicador indicadorABorrar){
+	public BorrarIndicadorViewM( RegistroIndicador indicadorABorrar){
 		
 	this.indicadorABorrar =  indicadorABorrar;	
 	}

@@ -2,7 +2,7 @@ package viewmodel;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.Indicador;
+import model.RegistroIndicador;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 import repositories.RepositorioIndicadores;
@@ -14,8 +14,8 @@ public class IndicadorViewM {
 
 	private List<String> formulas = new ArrayList<String>();
 	private List<String> nombres = new ArrayList<String>();
-	private List<Indicador> indicadores;
-	private Indicador indicadorSeleccionado;
+	private List<RegistroIndicador> indicadores;
+	private RegistroIndicador indicadorSeleccionado;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -35,19 +35,19 @@ public class IndicadorViewM {
 		this.nombres = nombres;
 	}
 
-	public List<Indicador> getIndicadores() {
+	public List<RegistroIndicador> getIndicadores() {
 		return indicadores;
 	}
 
-	public void setIndicadores(List<Indicador> indicadores) {
+	public void setIndicadores(List<RegistroIndicador> indicadores) {
 		this.indicadores = indicadores;
 	}
 
-	public Indicador getIndicadorSeleccionado() {
+	public RegistroIndicador getIndicadorSeleccionado() {
 		return indicadorSeleccionado;
 	}
 
-	public void setIndicadorSeleccionado(Indicador indicadorSeleccionado) {
+	public void setIndicadorSeleccionado(RegistroIndicador indicadorSeleccionado) {
 		this.indicadorSeleccionado = indicadorSeleccionado;
 	}
 
@@ -64,7 +64,7 @@ public class IndicadorViewM {
 	
 
 	public RepositorioIndicadores getRepoIndicadores() {
-		return ApplicationContext.getInstance().getSingleton(Indicador.class);
+		return ApplicationContext.getInstance().getSingleton(RegistroIndicador.class);
 	}
 
 }

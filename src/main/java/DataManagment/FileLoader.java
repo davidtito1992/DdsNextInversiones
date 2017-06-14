@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
-import model.Indicador;
+import model.RegistroIndicador;
 import model.Empresa;
 
 public class FileLoader implements DataLoader {
@@ -46,7 +46,7 @@ public class FileLoader implements DataLoader {
 		return adaptador.adaptarEmpresas(archivoEmpresas);
 	}
 
-	public List<Indicador> getDataIndicadores() throws Exception {
+	public List<RegistroIndicador> getDataIndicadores() throws Exception {
 		String AbsolutePath = new File(".").getAbsolutePath();
 		String archivoIndicadores = readFile(AbsolutePath + "/indicadores.json");
 

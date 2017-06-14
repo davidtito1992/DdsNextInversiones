@@ -6,16 +6,19 @@ import java.util.List;
 
 import model.Cuenta;
 import model.Empresa;
-import model.Indicador;
+import model.RegistroIndicador;
 import model.SnapshotIndicador;
 
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
+import formulaIndicador.FormulaIndicador;
+import parserIndicador.ParserIndicador;
+
 import java.math.BigDecimal;
 
-import formulaTeam.CalculoFormula;
 import repositories.RepositorioEmpresa;
+import semanticaIndicador.AnalizadorSemantico;
 
 @Observable
 public class ConsultarIndicadorViewM {
@@ -31,7 +34,7 @@ public class ConsultarIndicadorViewM {
 	private List<SnapshotIndicador> snapshotIndicadores;
 	private SnapshotIndicador snapshotIndicadorSeleccionado;
 	private BigDecimal resultado;
-	private Indicador indicadorElegido;
+	private RegistroIndicador registroIndicadorElegido;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -39,12 +42,12 @@ public class ConsultarIndicadorViewM {
 		return nombres;
 	}
 
-	public Indicador getIndicadorElegido() {
-		return indicadorElegido;
+	public RegistroIndicador getRegistroIndicadorElegido() {
+		return registroIndicadorElegido;
 	}
 
-	public void setIndicadorElegido(Indicador indicadorElegido) {
-		this.indicadorElegido = indicadorElegido;
+	public void setRegistroIndicadorElegido(RegistroIndicador registroIndicadorElegido) {
+		this.registroIndicadorElegido = registroIndicadorElegido;
 	}
 
 	public BigDecimal getResultado() {
@@ -125,9 +128,9 @@ public class ConsultarIndicadorViewM {
 
 	/********* METODOS *********/
 
-	public ConsultarIndicadorViewM(Indicador unIndicador) {
+	public ConsultarIndicadorViewM(RegistroIndicador unIndicador) {
 
-		this.indicadorElegido = unIndicador;
+		this.registroIndicadorElegido = unIndicador;
 		this.generarTodosLosCBox(null, null, null);
 
 	}
@@ -173,9 +176,15 @@ public class ConsultarIndicadorViewM {
 		List<Cuenta> cuentas = getRepoEmpresas().obtenerCuentas(
 				nombreSeleccionado, semestreSeleccionado, anioSeleccionado);
 
-		CalculoFormula calculoFormula = new CalculoFormula();
-		this.resultado = calculoFormula.analizarResultado(
-				getIndicadorElegido(), cuentas);
+		ParserIndicador preIndicador = new ParserIndicador(registroIndicadorElegido.getFormula());
+		new AnalizadorSemantico(preIndicador.variables());
+		
+		FormulaIndicador indicador = preIndicador.pasear() ;
+		
+		this.resultado= indicador.calcular(nombreSeleccionado, anioSeleccionado.getValue(), semestreSeleccionado);
+	//	CalculoFormula calculoFormula = new CalculoFormula();
+	//	this.resultado = calculoFormula.analizarResultado(
+		//		getIndicadorElegido(), cuentas);
 	}
 
 	public void reiniciar() {

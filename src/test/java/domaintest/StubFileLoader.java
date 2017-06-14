@@ -9,7 +9,7 @@ import DataManagment.DataAdapter;
 import DataManagment.DataAdapterFactory;
 import DataManagment.DataLoader;
 import model.Empresa;
-import model.Indicador;
+import model.RegistroIndicador;
 
 public class StubFileLoader implements DataLoader {
 
@@ -41,7 +41,7 @@ public class StubFileLoader implements DataLoader {
 
 	}
 
-	public List<Indicador> getDataIndicadores() throws Exception {
+	public List<RegistroIndicador> getDataIndicadores() throws Exception {
 		String AbsolutePath = new File(".").getAbsolutePath();
 		String archivoIndicadores = readFile(AbsolutePath
 				+ "/archivoInexistente.json");

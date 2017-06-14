@@ -3,16 +3,18 @@ import java.util.List;
 
 import org.uqbar.commons.utils.ApplicationContext;
 
-import formulaTeam.AnalizadorSemantico;
-import formulaTeam.Parser;
+import formulaIndicador.FormulaIndicador;
+import parserIndicador.ParseException;
+import parserIndicador.ParserIndicador;
 import model.Empresa;
-import model.Indicador;
+import model.RegistroIndicador;
 import DataManagment.AdapterToJson;
 import DataManagment.DataLoader;
 import DataManagment.DataLoaderFactory;
 import DataManagment.FileWriter;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
+import semanticaIndicador.AnalizadorSemantico;
 
 public class AppData {
 
@@ -33,7 +35,7 @@ public class AppData {
 		// LEO ARCHIVO YA ADAPTADO
 		DataLoader cargador = DataLoaderFactory
 				.cargarData(DataLoaderFactory.ARCHIVO);
-		List<Indicador> indicadores = cargador.getDataIndicadores();
+		List<RegistroIndicador> indicadores = cargador.getDataIndicadores();
 
 		// CARGO EN REPO
 		this.getRepoIndicadores().cargarListaIndicadores(indicadores);
@@ -41,23 +43,22 @@ public class AppData {
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {
-		return ApplicationContext.getInstance().getSingleton(Indicador.class);
+		return ApplicationContext.getInstance().getSingleton(RegistroIndicador.class);
 	}
 
 	public RepositorioEmpresa getRepoEmpresas() {
 		return ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 
-	public void guardarIndicador(Indicador unIndicador) throws Exception {
+	public void guardarIndicador(RegistroIndicador unIndicador) throws Throwable {
 
-		// parseamos la formula,luego comprobamos la existencia de cuentas,
-		// indicadores,etc
-		// si esta todo ok ingresa para guardarse en archivo y repo
-		new Parser(unIndicador).parsear();
-		new AnalizadorSemantico(unIndicador).analizar();
-
+	
+		ParserIndicador preIndicador = new ParserIndicador(unIndicador.getFormula());
+		preIndicador.pasear() ;
+		new AnalizadorSemantico(preIndicador.variables()).analizar();
+		
 		try {
-			// Convertimos un indicador a json
+			unIndicador.setVariables(preIndicador.variables());
 			String nuevoIndicadorString = new AdapterToJson(unIndicador)
 					.getstringJson();
 
@@ -75,11 +76,11 @@ public class AppData {
 
 	}
 
-	public void borrarIndicador(Indicador unIndicador) throws Exception {
+	public void borrarIndicador(RegistroIndicador unIndicador) throws Exception {
 
 		try {
 			// Convertimos un indicador a json
-			String nuevoIndicadorString = new AdapterToJson(new Indicador(
+			String nuevoIndicadorString = new AdapterToJson(new RegistroIndicador(
 					unIndicador.getNombre(), unIndicador.getFormula()))
 					.getstringJson();
 			// sobreescribimos para borrar
