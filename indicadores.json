@@ -1,2 +1,2 @@
-[{"nombre":"PrimerNuevoIndicador","formula":"I4 + EBITDA*3","variables":["I4","EBITDA"]},
-{"nombre":"SegundoNuevoIndicador","formula":"(PrimerNuevoIndicador + FDS )","variables":["PrimerNuevoIndicador","FDS"]}]
+[{"nombre":"I2","formula":"EBITDA *FDS","variables":["EBITDA","FDS"]},
+{"nombre":"I1","formula":" FDS*5 +10","variables":["FDS"]}]

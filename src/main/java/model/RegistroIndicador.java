@@ -15,12 +15,18 @@ public class RegistroIndicador extends Entity {
 
 	private String nombre;
 	private String formula;
-	private List<String> variables ;
-
+	private List<String> variables;
 
 	public RegistroIndicador(String nombre, String formula) {
 		this.nombre = nombre;
 		this.formula = formula;
+	}
+
+	public RegistroIndicador(String nombre, String formula,
+			List<String> variables) {
+		this.nombre = nombre;
+		this.formula = formula;
+		this.variables = variables;
 	}
 
 	/********* GETTERS/SETTERS *********/

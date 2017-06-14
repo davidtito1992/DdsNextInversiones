@@ -3,6 +3,7 @@ package app;
 import java.util.List;
 
 import org.uqbar.commons.utils.ApplicationContext;
+
 import parserIndicador.ParserIndicador;
 import model.Empresa;
 import model.RegistroIndicador;
@@ -83,7 +84,7 @@ public class AppData {
 			// Convertimos un indicador a json
 			String nuevoIndicadorString = new AdapterToJson(
 					new RegistroIndicador(unIndicador.getNombre(),
-							unIndicador.getFormula())).getstringJson();
+							unIndicador.getFormula(),unIndicador.getVariables())).getstringJson();
 			// sobreescribimos para borrar
 			new FileWriter("./indicadores.json", nuevoIndicadorString, "");
 

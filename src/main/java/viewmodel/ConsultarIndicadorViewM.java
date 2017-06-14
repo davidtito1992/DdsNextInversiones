@@ -33,7 +33,7 @@ public class ConsultarIndicadorViewM {
 	private Integer semestreSeleccionado;
 	private List<SnapshotIndicador> snapshotIndicadores;
 	private SnapshotIndicador snapshotIndicadorSeleccionado;
-	private BigDecimal resultado;
+	private String resultado;
 	private RegistroIndicador registroIndicadorElegido;
 
 	/********* GETTERS/SETTERS *********/
@@ -50,11 +50,11 @@ public class ConsultarIndicadorViewM {
 		this.registroIndicadorElegido = registroIndicadorElegido;
 	}
 
-	public BigDecimal getResultado() {
+	public String getResultado() {
 		return resultado;
 	}
 
-	public void setResultado(BigDecimal resultado) {
+	public void setResultado(String resultado) {
 		this.resultado = resultado;
 	}
 
@@ -183,7 +183,7 @@ public class ConsultarIndicadorViewM {
 		
 		FormulaIndicador indicador = preIndicador.pasear() ;
 		
-		this.resultado= indicador.calcular(nombreSeleccionado, anioSeleccionado.getValue(), semestreSeleccionado);
+		this.resultado= indicador.calcular(nombreSeleccionado, anioSeleccionado.getValue(), semestreSeleccionado).toPlainString();
 	//	CalculoFormula calculoFormula = new CalculoFormula();
 	//	this.resultado = calculoFormula.analizarResultado(
 		//		getIndicadorElegido(), cuentas);
@@ -193,7 +193,7 @@ public class ConsultarIndicadorViewM {
 		this.generarTodosLosCBox(null, null, null);
 		this.snapshotIndicadorSeleccionado = null;
 		this.limpiarFiltros();
-		this.resultado = new BigDecimal(0);
+		this.resultado = "";//new BigDecimal(0);
 	}
 
 	public void limpiarFiltros() {

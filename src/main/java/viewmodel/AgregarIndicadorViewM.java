@@ -103,7 +103,7 @@ public class AgregarIndicadorViewM {
 					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
 		}
 		RegistroIndicador preIndicadorAGuardar = new RegistroIndicador(this.nombre, this.formula);
-	//	AppData valida sintaxis y semantica...si esta todo guarda en el archivo y repo
+	//	AppData valida sintaxis y semantica...si esta todo ok guarda en el archivo y repo
 		new AppData().guardarIndicador(preIndicadorAGuardar);
 	}
 
