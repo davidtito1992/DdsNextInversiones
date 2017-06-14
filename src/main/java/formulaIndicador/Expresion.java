@@ -18,7 +18,7 @@ public class Expresion extends FormulaIndicador {
 
 	@Override
 	public BigDecimal calcular(String empresa, int anio, int semestre) {
-		           
+
 		return operacion.ejecutar(nodoIzquierdo, nodoDerecho);
 	}
 }

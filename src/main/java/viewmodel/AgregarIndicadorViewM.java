@@ -96,14 +96,15 @@ public class AgregarIndicadorViewM {
 
 	public void guardarIndicador() throws Throwable {
 		
+		//validar que el string formula no contenga el caracter ';' 
 		
 		if (this.nombre == null || this.formula == null) {
 			throw new Exception(
 					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
 		}
-		RegistroIndicador indicadorAGuardar = new RegistroIndicador(this.nombre, this.formula);
-	//	ind.guardarIndicador();
-		new AppData().guardarIndicador(indicadorAGuardar);
+		RegistroIndicador preIndicadorAGuardar = new RegistroIndicador(this.nombre, this.formula);
+	//	AppData valida sintaxis y semantica...si esta todo guarda en el archivo y repo
+		new AppData().guardarIndicador(preIndicadorAGuardar);
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {

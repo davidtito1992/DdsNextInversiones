@@ -1,10 +1,8 @@
 package app;
+
 import java.util.List;
 
 import org.uqbar.commons.utils.ApplicationContext;
-
-import formulaIndicador.FormulaIndicador;
-import parserIndicador.ParseException;
 import parserIndicador.ParserIndicador;
 import model.Empresa;
 import model.RegistroIndicador;
@@ -43,20 +41,23 @@ public class AppData {
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {
-		return ApplicationContext.getInstance().getSingleton(RegistroIndicador.class);
+		return ApplicationContext.getInstance().getSingleton(
+				RegistroIndicador.class);
 	}
 
 	public RepositorioEmpresa getRepoEmpresas() {
 		return ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 
-	public void guardarIndicador(RegistroIndicador unIndicador) throws Throwable {
+	public void guardarIndicador(RegistroIndicador unIndicador)
+			throws Throwable {
 
-	
-		ParserIndicador preIndicador = new ParserIndicador(unIndicador.getFormula());
-		preIndicador.pasear() ;
+		ParserIndicador preIndicador = new ParserIndicador(
+				unIndicador.getFormula());
+		preIndicador.pasear();
+		// validar que las variables implicadas existan
 		new AnalizadorSemantico(preIndicador.variables()).analizar();
-		
+
 		try {
 			unIndicador.setVariables(preIndicador.variables());
 			String nuevoIndicadorString = new AdapterToJson(unIndicador)
@@ -80,9 +81,9 @@ public class AppData {
 
 		try {
 			// Convertimos un indicador a json
-			String nuevoIndicadorString = new AdapterToJson(new RegistroIndicador(
-					unIndicador.getNombre(), unIndicador.getFormula()))
-					.getstringJson();
+			String nuevoIndicadorString = new AdapterToJson(
+					new RegistroIndicador(unIndicador.getNombre(),
+							unIndicador.getFormula())).getstringJson();
 			// sobreescribimos para borrar
 			new FileWriter("./indicadores.json", nuevoIndicadorString, "");
 

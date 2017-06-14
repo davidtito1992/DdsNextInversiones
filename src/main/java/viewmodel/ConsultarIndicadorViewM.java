@@ -177,6 +177,8 @@ public class ConsultarIndicadorViewM {
 				nombreSeleccionado, semestreSeleccionado, anioSeleccionado);
 
 		ParserIndicador preIndicador = new ParserIndicador(registroIndicadorElegido.getFormula());
+		
+		//comparar las variables implicadas en el preIndicador y las cuentas
 		new AnalizadorSemantico(preIndicador.variables());
 		
 		FormulaIndicador indicador = preIndicador.pasear() ;

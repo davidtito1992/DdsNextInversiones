@@ -1,4 +1,5 @@
 package formulaIndicador;
+
 import java.math.BigDecimal;
 
 public abstract class FormulaIndicador {
@@ -8,7 +9,7 @@ public abstract class FormulaIndicador {
 	private String empresa;
 
 	public abstract BigDecimal calcular(String empresa, int anio, int semestre);
-	
+
 	public BigDecimal sumar(FormulaIndicador addition) {
 
 		return this.calcular(empresa, anio, semestre).add(
