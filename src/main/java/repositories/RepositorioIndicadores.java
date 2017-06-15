@@ -25,22 +25,6 @@ public class RepositorioIndicadores extends CollectionBasedRepo<RegistroIndicado
 		}
 	}
 
-	public List<RegistroIndicador> filtrar(String nombreSeleccionado) {
-		return this
-				.allInstances()
-				.stream()
-				.filter(indicador -> filtroNombre(nombreSeleccionado, indicador))
-				.collect(Collectors.toList());
-	}
-
-	public boolean filtroNombre(String nombreSeleccionado, RegistroIndicador indicador) {
-		if (nombreSeleccionado == null) {
-			return true;
-		} else {
-			return indicador.getNombre().equals(nombreSeleccionado);
-		}
-	}
-
 	public static RepositorioIndicadores repositorioMaestro() {
 		return instance;
 	}
@@ -69,32 +53,54 @@ public class RepositorioIndicadores extends CollectionBasedRepo<RegistroIndicado
 		return nombresDeTodosLosIndicadores;
 	}
 
-	public String transformIndicadores(String formulaConIndicadores) {
-		String devolverEsto = formulaConIndicadores;
-		if (contieneIndicadores(formulaConIndicadores)) {
-			String[] componentes = formulaConIndicadores.split(" ");
 
-			for (int i = 0; i < componentes.length; i++) {
-
-				if (esIndicador(componentes[i])) {
-					componentes[i] = "( "
-							+ transformIndicadores(getIndicador(componentes[i])
-									.getFormula()) + " )";
-				}
-
-			}
-			devolverEsto = String.join(" ", componentes);
-		}
-		return devolverEsto;
+	public boolean esIndicador(String componente) {
+		return this.allInstances().stream().map(regIndicador -> regIndicador.getNombre())
+				.anyMatch(NombreregIndicador -> NombreregIndicador.equalsIgnoreCase(componente));
 	}
+}	
+	
+//	public String transformIndicadores(String formulaConIndicadores) {
+//		String devolverEsto = formulaConIndicadores;
+//		if (contieneIndicadores(formulaConIndicadores)) {
+//			String[] componentes = formulaConIndicadores.split(" ");
+//
+//			for (int i = 0; i < componentes.length; i++) {
+//
+//				if (esIndicador(componentes[i])) {
+//					componentes[i] = "( "
+//							+ transformIndicadores(getIndicador(componentes[i])
+//									.getFormula()) + " )";
+//				}
+//
+//			}
+//			devolverEsto = String.join(" ", componentes);
+//		}
+//		return devolverEsto;
+//	}
 
-	public RegistroIndicador getIndicador(String nombre) {
-		List<RegistroIndicador> indicadoresConEseNombre = this.filtrar(nombre);
-		if (indicadoresConEseNombre.isEmpty()) {
-			return null;
-		}
-		return indicadoresConEseNombre.get(0);
-	}
+//	public RegistroIndicador getIndicador(String nombre) {
+//		List<RegistroIndicador> indicadoresConEseNombre = this.filtrar(nombre);
+//		if (indicadoresConEseNombre.isEmpty()) {
+//			return null;
+//		}
+//		return indicadoresConEseNombre.get(0);
+//	}
+//	public List<RegistroIndicador> filtrar(String nombreSeleccionado) {
+//		return this
+//				.allInstances()
+//				.stream()
+//				.filter(indicador -> filtroNombre(nombreSeleccionado, indicador))
+//				.collect(Collectors.toList());
+//	}
+//
+//	public boolean filtroNombre(String nombreSeleccionado, RegistroIndicador indicador) {
+//		if (nombreSeleccionado == null) {
+//			return true;
+//		} else {
+//			return indicador.getNombre().equals(nombreSeleccionado);
+//		}
+//	}
 
 //	public boolean esIndicador(String nombre) {
 //		List<RegistroIndicador> indicadoresConEseNombre = this.filtrar(nombre);
@@ -105,27 +111,21 @@ public class RepositorioIndicadores extends CollectionBasedRepo<RegistroIndicado
 //
 //	}
 
-	public boolean esIndicador(String componente) {
-		return this.allInstances().stream().map(regIndicador -> regIndicador.getNombre())
-				.anyMatch(NombreregIndicador -> NombreregIndicador.equalsIgnoreCase(componente));
-	}
 	
-	public boolean contieneIndicadores(String formula) {
-		boolean flag = false;
-		String[] componentes = formula.split(" ");
-		for (int i = 0; i < componentes.length; i++) {
-			if (esIndicador(componentes[i])) {
-				flag = true;
-			}
-		}
-		return flag;
-	}
-
-	public boolean indicadorYaExistente(String nombre) {
-
-		return allInstances().stream().anyMatch(
-				indicador -> indicador.getNombre().equals(nombre));
-
-	}
-
-}
+//	public boolean contieneIndicadores(String formula) {
+//		boolean flag = false;
+//		String[] componentes = formula.split(" ");
+//		for (int i = 0; i < componentes.length; i++) {
+//			if (esIndicador(componentes[i])) {
+//				flag = true;
+//			}
+//		}
+//		return flag;
+//	}
+//
+//	public boolean indicadorYaExistente(String nombre) {
+//
+//		return allInstances().stream().anyMatch(
+//				indicador -> indicador.getNombre().equals(nombre));
+//
+//	}

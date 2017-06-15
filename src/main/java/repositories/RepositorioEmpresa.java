@@ -154,18 +154,18 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 
 		return nombresDeTodasLasEmpresas;
 	}
-
-	public String transformValores(String formulaConCuentas,
-			List<Cuenta> cuentasUnaEmpresa) {
-		String[] componentes = formulaConCuentas.split(" ");
-		for (int i = 0; i < componentes.length; i++) {
-			if (esCuenta(componentes[i], cuentasUnaEmpresa)) {
-				componentes[i] = String.valueOf(getValorCuenta(componentes[i],
-						cuentasUnaEmpresa));
-			}
-		}
-		return String.join(" ", componentes);
-	}
+//
+//	public String transformValores(String formulaConCuentas,
+//			List<Cuenta> cuentasUnaEmpresa) {
+//		String[] componentes = formulaConCuentas.split(" ");
+//		for (int i = 0; i < componentes.length; i++) {
+//			if (esCuenta(componentes[i], cuentasUnaEmpresa)) {
+//				componentes[i] = String.valueOf(getValorCuenta(componentes[i],
+//						cuentasUnaEmpresa));
+//			}
+//		}
+//		return String.join(" ", componentes);
+//	}
 
 	private BigDecimal getValorCuenta(String nombre,
 			List<Cuenta> cuentasUnaEmpresa) {

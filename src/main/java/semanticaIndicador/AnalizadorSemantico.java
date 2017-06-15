@@ -1,4 +1,5 @@
 package semanticaIndicador;
+
 import java.util.List;
 import org.uqbar.commons.utils.ApplicationContext;
 import repositories.RepositorioEmpresa;
@@ -35,6 +36,15 @@ public class AnalizadorSemantico {
 
 	}
 
+	public RepositorioIndicadores getRepoIndicadores() {
+		return ApplicationContext.getInstance().getSingleton(
+				RegistroIndicador.class);
+	}
+
+	public RepositorioEmpresa getRepoEmpresas() {
+		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+	}
+}
 
 	
 	//
@@ -85,11 +95,3 @@ public class AnalizadorSemantico {
 	//
 	// }
 	//
-	 public RepositorioIndicadores getRepoIndicadores() {
-	 return ApplicationContext.getInstance().getSingleton(RegistroIndicador.class);
-	 }
-	
-	 public RepositorioEmpresa getRepoEmpresas() {
-	 return ApplicationContext.getInstance().getSingleton(Empresa.class);
-	 }
-}
