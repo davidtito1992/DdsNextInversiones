@@ -3,7 +3,9 @@ package repositories;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import model.RegistroIndicador;
+
 import org.apache.commons.collections15.Predicate;
 import org.uqbar.commons.model.CollectionBasedRepo;
 import org.uqbar.commons.utils.Observable;
@@ -94,15 +96,20 @@ public class RepositorioIndicadores extends CollectionBasedRepo<RegistroIndicado
 		return indicadoresConEseNombre.get(0);
 	}
 
-	public boolean esIndicador(String nombre) {
-		List<RegistroIndicador> indicadoresConEseNombre = this.filtrar(nombre);
-		if (indicadoresConEseNombre.isEmpty()) {
-			return false;
-		}
-		return true;
+//	public boolean esIndicador(String nombre) {
+//		List<RegistroIndicador> indicadoresConEseNombre = this.filtrar(nombre);
+//		if (indicadoresConEseNombre.isEmpty()) {
+//			return false;
+//		}
+//		return true;
+//
+//	}
 
+	public boolean esIndicador(String componente) {
+		return this.allInstances().stream().map(regIndicador -> regIndicador.getNombre())
+				.anyMatch(NombreregIndicador -> NombreregIndicador.equalsIgnoreCase(componente));
 	}
-
+	
 	public boolean contieneIndicadores(String formula) {
 		boolean flag = false;
 		String[] componentes = formula.split(" ");

@@ -1,6 +1,4 @@
 package semanticaIndicador;
-
-import java.io.StringReader;
 import java.util.List;
 import org.uqbar.commons.utils.ApplicationContext;
 import repositories.RepositorioEmpresa;
@@ -22,7 +20,23 @@ public class AnalizadorSemantico {
 	// repo
 	public void analizar() {
 
+		List<Cuenta> todasLasCuentas = this.getRepoEmpresas().todasLasCuentas();
+
+		this.variables.forEach(nombreVariable -> {
+			if (this.getRepoEmpresas()
+					.esCuenta(nombreVariable, todasLasCuentas))
+				;
+			else if (this.getRepoIndicadores().esIndicador(nombreVariable))
+				;
+			else
+				throw new RuntimeException("El nombre de la variable: "
+						+ nombreVariable + " no existe");
+		});
+
 	}
+
+
+	
 	//
 	// private String nombre;
 	// private String formula;
@@ -71,11 +85,11 @@ public class AnalizadorSemantico {
 	//
 	// }
 	//
-	// public RepositorioIndicadores getRepoIndicadores() {
-	// return ApplicationContext.getInstance().getSingleton(Indicador.class);
-	// }
-	//
-	// public RepositorioEmpresa getRepoEmpresas() {
-	// return ApplicationContext.getInstance().getSingleton(Empresa.class);
-	// }
+	 public RepositorioIndicadores getRepoIndicadores() {
+	 return ApplicationContext.getInstance().getSingleton(RegistroIndicador.class);
+	 }
+	
+	 public RepositorioEmpresa getRepoEmpresas() {
+	 return ApplicationContext.getInstance().getSingleton(Empresa.class);
+	 }
 }

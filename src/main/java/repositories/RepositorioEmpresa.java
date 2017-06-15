@@ -177,7 +177,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 
 	public boolean esCuenta(String componente, List<Cuenta> cuentasUnaEmpresa) {
 		return cuentasUnaEmpresa.stream().map(cuenta -> cuenta.getNombre())
-				.anyMatch(cuenta -> cuenta.equals(componente));
+				.anyMatch(nombreCuenta -> nombreCuenta.equalsIgnoreCase(componente));
 	}
 
 	public List<Cuenta> obtenerCuentas(String nombreSeleccionado,
