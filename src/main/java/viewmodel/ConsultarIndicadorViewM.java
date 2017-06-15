@@ -13,6 +13,7 @@ import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
 import formulaIndicador.FormulaIndicador;
+import parserIndicador.ParseException;
 import parserIndicador.ParserIndicador;
 
 import java.math.BigDecimal;
@@ -171,22 +172,31 @@ public class ConsultarIndicadorViewM {
 
 	}
 
-	public void consultar() throws Exception {
+	public void consultar() throws RuntimeException, ParseException {
 
 		List<Cuenta> cuentas = getRepoEmpresas().obtenerCuentas(
 				nombreSeleccionado, semestreSeleccionado, anioSeleccionado);
 
-		ParserIndicador preIndicador = new ParserIndicador(registroIndicadorElegido.getFormula());
-		
-		//comparar las variables implicadas en el preIndicador y las cuentas
+		ParserIndicador preIndicador = new ParserIndicador(
+				registroIndicadorElegido.getFormula());
+
+		// comparar las variables implicadas en el preIndicador y las cuentas
 		new AnalizadorSemantico(preIndicador.variables());
-		
-		FormulaIndicador indicador = preIndicador.pasear() ;
-		
-		this.resultado= indicador.calcular(nombreSeleccionado, anioSeleccionado.getValue(), semestreSeleccionado).toPlainString();
-	//	CalculoFormula calculoFormula = new CalculoFormula();
-	//	this.resultado = calculoFormula.analizarResultado(
-		//		getIndicadorElegido(), cuentas);
+
+		FormulaIndicador indicador = preIndicador.pasear();
+
+		try {
+			this.resultado = indicador.calcular(nombreSeleccionado,
+					anioSeleccionado.getValue(), semestreSeleccionado)
+					.toPlainString();
+		} catch (RuntimeException e) {
+			//lo pasamos a string para mostrar el resultado en la futura tabla. 
+			this.resultado = e.getMessage();
+		}
+
+		// CalculoFormula calculoFormula = new CalculoFormula();
+		// this.resultado = calculoFormula.analizarResultado(
+		// getIndicadorElegido(), cuentas);
 	}
 
 	public void reiniciar() {

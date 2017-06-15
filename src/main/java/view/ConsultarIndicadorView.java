@@ -10,6 +10,7 @@ import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 
+import parserIndicador.ParseException;
 import viewmodel.ConsultarIndicadorViewM;
 
 public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
@@ -77,7 +78,7 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 		if (this.getModelObject().getNombreSeleccionado()!=null && this.getModelObject().getSemestreSeleccionado() !=null && this.getModelObject().getAnioSeleccionado()!=null){
 			try {
 				this.getModelObject().consultar();
-			} catch (Exception e) {
+			} catch (ParseException e) {
 				showInfo(e.getMessage());
 			} catch (Error e){
 				showInfo("Hubo un error al consultar las cuentas en el período deseado, por favor verificar que las cuentas que utiliza el indicador sean validas.");
