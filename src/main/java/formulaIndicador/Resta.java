@@ -5,9 +5,9 @@ import java.math.BigDecimal;
 public class Resta implements Operacion {
 
 	@Override
-	public BigDecimal ejecutar(FormulaIndicador nodoIzquierdo,
-			FormulaIndicador nodoDerecho) {
+	public BigDecimal ejecutar(BigDecimal nodoIzquierdo,
+			BigDecimal nodoDerecho) {
 
-		return nodoIzquierdo.restar(nodoDerecho);
+		return nodoIzquierdo.subtract(nodoDerecho);
 	}
 }

@@ -2,7 +2,7 @@ package formulaIndicador;
 
 import java.math.BigDecimal;
 
-public class Expresion extends FormulaIndicador {
+public class Expresion implements FormulaIndicador {
 
 	private final FormulaIndicador nodoIzquierdo;
 	private final FormulaIndicador nodoDerecho;
@@ -19,6 +19,7 @@ public class Expresion extends FormulaIndicador {
 	@Override
 	public BigDecimal calcular(String empresa, int anio, int semestre) {
 
-		return operacion.ejecutar(nodoIzquierdo, nodoDerecho);
+		return operacion.ejecutar(nodoIzquierdo.calcular(empresa, anio, semestre), nodoDerecho.calcular(empresa, anio, semestre));
 	}
+
 }

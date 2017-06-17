@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import model.Cuenta;
 import model.RegistroIndicador;
 
 import org.apache.commons.collections15.Predicate;
@@ -57,6 +58,13 @@ public class RepositorioIndicadores extends CollectionBasedRepo<RegistroIndicado
 	public boolean esIndicador(String componente) {
 		return this.allInstances().stream().map(regIndicador -> regIndicador.getNombre())
 				.anyMatch(NombreregIndicador -> NombreregIndicador.equalsIgnoreCase(componente));
+	}
+	
+	public RegistroIndicador getRegistroIndicador(String nombreIndicador){
+		 	List<RegistroIndicador> registroIndicadores = this.allInstances().stream()
+				.filter(registroIndicador -> registroIndicador.getNombre().equalsIgnoreCase(nombreIndicador))
+				.collect(Collectors.toList());
+		 	return registroIndicadores.get(0);
 	}
 }	
 	

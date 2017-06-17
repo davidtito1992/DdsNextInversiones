@@ -170,14 +170,33 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	private BigDecimal getValorCuenta(String nombre,
 			List<Cuenta> cuentasUnaEmpresa) {
 		List<Cuenta> cuentaADevolver = cuentasUnaEmpresa.stream()
-				.filter(cuenta -> cuenta.getNombre().equals(nombre))
+				.filter(cuenta -> cuenta.getNombre().equalsIgnoreCase(nombre))
 				.collect(Collectors.toList());
 		return cuentaADevolver.get(0).getValor();
 	}
 
-	public boolean esCuenta(String componente, List<Cuenta> cuentasUnaEmpresa) {
-		return cuentasUnaEmpresa.stream().map(cuenta -> cuenta.getNombre())
-				.anyMatch(nombreCuenta -> nombreCuenta.equalsIgnoreCase(componente));
+	public BigDecimal getValorCuenta(String nombreEmpresa, Year anio,
+			int semestre, String nombreCuenta) throws RuntimeException {
+
+		List<Cuenta> cuentas = this.obtenerCuentas(nombreEmpresa, semestre,
+				anio);
+		if (this.esCuenta(nombreCuenta, cuentas)) {
+
+			return this.getValorCuenta(nombreCuenta, cuentas);
+		} else {
+			throw new RuntimeException(
+					"No pudimos obtener el valor de la variable: "
+							+ nombreCuenta);
+		}
+	}
+
+	public boolean esCuenta(String componente, List<Cuenta> cuentas) {
+		return cuentas
+				.stream()
+				.map(cuenta -> cuenta.getNombre())
+				.anyMatch(
+						nombreCuenta -> nombreCuenta
+								.equalsIgnoreCase(componente));
 	}
 
 	public List<Cuenta> obtenerCuentas(String nombreSeleccionado,

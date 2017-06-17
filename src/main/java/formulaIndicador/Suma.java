@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 public class Suma implements Operacion {
 
 	@Override
-	public BigDecimal ejecutar(FormulaIndicador nodoIzquierdo,
-			FormulaIndicador nodoDerecho) {
-		return nodoIzquierdo.sumar(nodoDerecho);
+	public BigDecimal ejecutar(BigDecimal nodoIzquierdo,
+			BigDecimal nodoDerecho) {
+		return nodoIzquierdo.add(nodoDerecho);
 	}
 }

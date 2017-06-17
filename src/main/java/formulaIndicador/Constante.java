@@ -2,7 +2,7 @@ package formulaIndicador;
 
 import java.math.BigDecimal;
 
-public class Constante extends FormulaIndicador {
+public class Constante implements FormulaIndicador {
 
 	private final BigDecimal numero;
 	private static final int SCALE = 2;

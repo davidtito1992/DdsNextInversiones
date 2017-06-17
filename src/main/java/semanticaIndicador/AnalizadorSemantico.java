@@ -4,7 +4,6 @@ import java.util.List;
 import org.uqbar.commons.utils.ApplicationContext;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
-import model.Cuenta;
 import model.Empresa;
 import model.RegistroIndicador;
 
@@ -21,11 +20,9 @@ public class AnalizadorSemantico {
 	// repo
 	public void analizar() {
 
-		List<Cuenta> todasLasCuentas = this.getRepoEmpresas().todasLasCuentas();
-
 		this.variables.forEach(nombreVariable -> {
 			if (this.getRepoEmpresas()
-					.esCuenta(nombreVariable, todasLasCuentas))
+					.esCuenta(nombreVariable,this.getRepoEmpresas().todasLasCuentas()))
 				;
 			else if (this.getRepoIndicadores().esIndicador(nombreVariable))
 				;
