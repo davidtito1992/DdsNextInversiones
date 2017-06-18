@@ -154,8 +154,8 @@ public class EmpresaViewM {
 	}
 
 	// Genera todos los combobox en base a la seleccion de cada uno de ellos
-	public void generarTodosLosCBox(String empresa, String cuenta,
-			Year anio, Integer semestre) {
+	public void generarTodosLosCBox(String empresa, String cuenta, Year anio,
+			Integer semestre) {
 
 		List<Empresa> repoEmpresa2 = new ArrayList<Empresa>();
 		repoEmpresa2 = this.getRepoEmpresas().filtrar(cuenta, empresa,
@@ -182,14 +182,15 @@ public class EmpresaViewM {
 
 	public void generarCBoxCuentas(List<Empresa> empresas) {
 
-		this.cuentas = this.getRepoEmpresas().todosLosNombresDeCuentas(empresas);
+		this.cuentas = this.getRepoEmpresas()
+				.todosLosNombresDeCuentas(empresas);
 
 	}
 
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
 
-		this.nombres = this.getRepoEmpresas().todosLosNombresDeEmpresas(empresas);
-
+		this.nombres = this.getRepoEmpresas().todosLosNombresDeEmpresas(
+				empresas);
 
 	}
 

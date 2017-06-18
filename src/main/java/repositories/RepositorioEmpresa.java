@@ -67,8 +67,12 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		if (anioSeleccionado == null) {
 			return true;
 		} else {
-			return empresa.getPeriodos().stream()
-					.anyMatch(periodo -> periodo.getAnio().equals(anioSeleccionado));
+			return empresa
+					.getPeriodos()
+					.stream()
+					.anyMatch(
+							periodo -> periodo.getAnio().equals(
+									anioSeleccionado));
 		}
 	}
 
@@ -154,24 +158,27 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 
 		return nombresDeTodasLasEmpresas;
 	}
-//
-//	public String transformValores(String formulaConCuentas,
-//			List<Cuenta> cuentasUnaEmpresa) {
-//		String[] componentes = formulaConCuentas.split(" ");
-//		for (int i = 0; i < componentes.length; i++) {
-//			if (esCuenta(componentes[i], cuentasUnaEmpresa)) {
-//				componentes[i] = String.valueOf(getValorCuenta(componentes[i],
-//						cuentasUnaEmpresa));
-//			}
-//		}
-//		return String.join(" ", componentes);
-//	}
+
+	//
+	// public String transformValores(String formulaConCuentas,
+	// List<Cuenta> cuentasUnaEmpresa) {
+	// String[] componentes = formulaConCuentas.split(" ");
+	// for (int i = 0; i < componentes.length; i++) {
+	// if (esCuenta(componentes[i], cuentasUnaEmpresa)) {
+	// componentes[i] = String.valueOf(getValorCuenta(componentes[i],
+	// cuentasUnaEmpresa));
+	// }
+	// }
+	// return String.join(" ", componentes);
+	// }
 
 	private BigDecimal getValorCuenta(String nombre,
 			List<Cuenta> cuentasUnaEmpresa) {
+		// devuelve mal
 		List<Cuenta> cuentaADevolver = cuentasUnaEmpresa.stream()
 				.filter(cuenta -> cuenta.getNombre().equalsIgnoreCase(nombre))
 				.collect(Collectors.toList());
+
 		return cuentaADevolver.get(0).getValor();
 	}
 
@@ -203,7 +210,13 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 			Integer semestreSeleccionado, Year anioSeleccionado) {
 		List<Empresa> empresas = filtrar(null, nombreSeleccionado,
 				semestreSeleccionado, anioSeleccionado);
-
+		// filtrar obtiene mal las cuentas
+		System.out.println(nombreSeleccionado + " " + anioSeleccionado + " "
+				+ semestreSeleccionado);
+		System.out.println(empresas.get(0).getPeriodos().get(1).getCuentas()
+				.get(0).getNombre()
+				+ empresas.get(0).getPeriodos().get(1).getCuentas().get(0)
+						.getValor());
 		return empresas.get(0).getPeriodos().get(0).getCuentas();
 	}
 

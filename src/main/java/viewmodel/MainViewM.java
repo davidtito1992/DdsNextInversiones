@@ -28,8 +28,8 @@ public class MainViewM {
 	public void setIndicadoresSinCargar(boolean indicadoresSinCargar) {
 		this.indicadoresSinCargar = indicadoresSinCargar;
 	}
-	
-	public void cargarIndicadores() throws Exception{
+
+	public void cargarIndicadores() throws Exception {
 		new AppData().cargarIndicadores();
 		System.out.println("Accediendo para ver las indicadores...");
 	}
@@ -38,6 +38,5 @@ public class MainViewM {
 		new AppData().cargarEmpresas();
 		System.out.println("Accediendo para ver las empresas...");
 	}
-	
-	
+
 }

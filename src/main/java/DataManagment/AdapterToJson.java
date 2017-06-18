@@ -6,22 +6,22 @@ import model.RegistroIndicador;
 import com.google.gson.Gson;
 
 public class AdapterToJson {
- 
+
 	private String stringJson;
-	
-	public AdapterToJson(RegistroIndicador unIndicador){
+
+	public AdapterToJson(RegistroIndicador unIndicador) {
 
 		final Gson gson = new Gson();
-	    stringJson = gson.toJson(unIndicador);
+		stringJson = gson.toJson(unIndicador);
 	}
-	
-	public AdapterToJson(Empresa unaEmpresa){
+
+	public AdapterToJson(Empresa unaEmpresa) {
 
 		final Gson gson = new Gson();
-	    stringJson = gson.toJson(unaEmpresa);
+		stringJson = gson.toJson(unaEmpresa);
 	}
-	
-	public String getstringJson(){
+
+	public String getstringJson() {
 		return this.stringJson;
 	}
 }

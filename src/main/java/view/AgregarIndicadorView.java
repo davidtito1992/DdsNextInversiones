@@ -50,8 +50,8 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 		new Label(form).setText("\t\t\t\tFormula:");
 		new TextBox(form).setWidth(250).bindValueToProperty("formula");
 
-		new Label(form).setText(
-				"Recuerde ingresar cada variable separada por espacios. Ejemplo: ( CUENTA + 2 )");
+		new Label(form)
+				.setText("Recuerde ingresar cada variable separada por espacios. Ejemplo: ( CUENTA + 2 )");
 
 	}
 
@@ -81,17 +81,16 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 		getModelObject().agregarCuentaALaFormula();
 	}
 
-	//@Override
+	// @Override
 	protected void guardar() {
 
-			try {
-				getModelObject().guardarIndicador();
-				super.executeTask();
-				this.close();
-			} catch (Throwable e) {
-				this.showError(e.getMessage());
-			}
-			
+		try {
+			getModelObject().guardarIndicador();
+			super.executeTask();
+			this.close();
+		} catch (Throwable e) {
+			this.showError(e.getMessage());
+		}
 
 	}
 

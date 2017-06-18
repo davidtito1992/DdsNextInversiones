@@ -20,8 +20,8 @@ public class NextInversiones extends Application {
 		ApplicationContext.getInstance().configureSingleton(Empresa.class,
 				new RepositorioEmpresa());
 
-		ApplicationContext.getInstance().configureSingleton(RegistroIndicador.class,
-				new RepositorioIndicadores());
+		ApplicationContext.getInstance().configureSingleton(
+				RegistroIndicador.class, new RepositorioIndicadores());
 
 		return new MainView(this);
 	}

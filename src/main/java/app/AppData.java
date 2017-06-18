@@ -84,7 +84,8 @@ public class AppData {
 			// Convertimos un indicador a json
 			String nuevoIndicadorString = new AdapterToJson(
 					new RegistroIndicador(unIndicador.getNombre(),
-							unIndicador.getFormula(),unIndicador.getVariables())).getstringJson();
+							unIndicador.getFormula(),
+							unIndicador.getVariables())).getstringJson();
 			// sobreescribimos para borrar
 			new FileWriter("./indicadores.json", nuevoIndicadorString, "");
 

@@ -21,8 +21,8 @@ public class AnalizadorSemantico {
 	public void analizar() {
 
 		this.variables.forEach(nombreVariable -> {
-			if (this.getRepoEmpresas()
-					.esCuenta(nombreVariable,this.getRepoEmpresas().todasLasCuentas()))
+			if (this.getRepoEmpresas().esCuenta(nombreVariable,
+					this.getRepoEmpresas().todasLasCuentas()))
 				;
 			else if (this.getRepoIndicadores().esIndicador(nombreVariable))
 				;

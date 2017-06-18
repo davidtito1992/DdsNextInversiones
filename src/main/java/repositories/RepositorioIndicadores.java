@@ -12,7 +12,8 @@ import org.uqbar.commons.model.CollectionBasedRepo;
 import org.uqbar.commons.utils.Observable;
 
 @Observable
-public class RepositorioIndicadores extends CollectionBasedRepo<RegistroIndicador> {
+public class RepositorioIndicadores extends
+		CollectionBasedRepo<RegistroIndicador> {
 
 	/********* ATRIBUTOS *********/
 
@@ -54,86 +55,93 @@ public class RepositorioIndicadores extends CollectionBasedRepo<RegistroIndicado
 		return nombresDeTodosLosIndicadores;
 	}
 
-
 	public boolean esIndicador(String componente) {
-		return this.allInstances().stream().map(regIndicador -> regIndicador.getNombre())
-				.anyMatch(NombreregIndicador -> NombreregIndicador.equalsIgnoreCase(componente));
+		return this
+				.allInstances()
+				.stream()
+				.map(regIndicador -> regIndicador.getNombre())
+				.anyMatch(
+						NombreregIndicador -> NombreregIndicador
+								.equalsIgnoreCase(componente));
 	}
-	
-	public RegistroIndicador getRegistroIndicador(String nombreIndicador){
-		 	List<RegistroIndicador> registroIndicadores = this.allInstances().stream()
-				.filter(registroIndicador -> registroIndicador.getNombre().equalsIgnoreCase(nombreIndicador))
+
+	public RegistroIndicador getRegistroIndicador(String nombreIndicador) {
+		List<RegistroIndicador> registroIndicadores = this
+				.allInstances()
+				.stream()
+				.filter(registroIndicador -> registroIndicador.getNombre()
+						.equalsIgnoreCase(nombreIndicador))
 				.collect(Collectors.toList());
-		 	return registroIndicadores.get(0);
+		return registroIndicadores.get(0);
 	}
-}	
-	
-//	public String transformIndicadores(String formulaConIndicadores) {
-//		String devolverEsto = formulaConIndicadores;
-//		if (contieneIndicadores(formulaConIndicadores)) {
-//			String[] componentes = formulaConIndicadores.split(" ");
-//
-//			for (int i = 0; i < componentes.length; i++) {
-//
-//				if (esIndicador(componentes[i])) {
-//					componentes[i] = "( "
-//							+ transformIndicadores(getIndicador(componentes[i])
-//									.getFormula()) + " )";
-//				}
-//
-//			}
-//			devolverEsto = String.join(" ", componentes);
-//		}
-//		return devolverEsto;
-//	}
+}
 
-//	public RegistroIndicador getIndicador(String nombre) {
-//		List<RegistroIndicador> indicadoresConEseNombre = this.filtrar(nombre);
-//		if (indicadoresConEseNombre.isEmpty()) {
-//			return null;
-//		}
-//		return indicadoresConEseNombre.get(0);
-//	}
-//	public List<RegistroIndicador> filtrar(String nombreSeleccionado) {
-//		return this
-//				.allInstances()
-//				.stream()
-//				.filter(indicador -> filtroNombre(nombreSeleccionado, indicador))
-//				.collect(Collectors.toList());
-//	}
+// public String transformIndicadores(String formulaConIndicadores) {
+// String devolverEsto = formulaConIndicadores;
+// if (contieneIndicadores(formulaConIndicadores)) {
+// String[] componentes = formulaConIndicadores.split(" ");
 //
-//	public boolean filtroNombre(String nombreSeleccionado, RegistroIndicador indicador) {
-//		if (nombreSeleccionado == null) {
-//			return true;
-//		} else {
-//			return indicador.getNombre().equals(nombreSeleccionado);
-//		}
-//	}
+// for (int i = 0; i < componentes.length; i++) {
+//
+// if (esIndicador(componentes[i])) {
+// componentes[i] = "( "
+// + transformIndicadores(getIndicador(componentes[i])
+// .getFormula()) + " )";
+// }
+//
+// }
+// devolverEsto = String.join(" ", componentes);
+// }
+// return devolverEsto;
+// }
 
-//	public boolean esIndicador(String nombre) {
-//		List<RegistroIndicador> indicadoresConEseNombre = this.filtrar(nombre);
-//		if (indicadoresConEseNombre.isEmpty()) {
-//			return false;
-//		}
-//		return true;
+// public RegistroIndicador getIndicador(String nombre) {
+// List<RegistroIndicador> indicadoresConEseNombre = this.filtrar(nombre);
+// if (indicadoresConEseNombre.isEmpty()) {
+// return null;
+// }
+// return indicadoresConEseNombre.get(0);
+// }
+// public List<RegistroIndicador> filtrar(String nombreSeleccionado) {
+// return this
+// .allInstances()
+// .stream()
+// .filter(indicador -> filtroNombre(nombreSeleccionado, indicador))
+// .collect(Collectors.toList());
+// }
 //
-//	}
+// public boolean filtroNombre(String nombreSeleccionado, RegistroIndicador
+// indicador) {
+// if (nombreSeleccionado == null) {
+// return true;
+// } else {
+// return indicador.getNombre().equals(nombreSeleccionado);
+// }
+// }
 
-	
-//	public boolean contieneIndicadores(String formula) {
-//		boolean flag = false;
-//		String[] componentes = formula.split(" ");
-//		for (int i = 0; i < componentes.length; i++) {
-//			if (esIndicador(componentes[i])) {
-//				flag = true;
-//			}
-//		}
-//		return flag;
-//	}
+// public boolean esIndicador(String nombre) {
+// List<RegistroIndicador> indicadoresConEseNombre = this.filtrar(nombre);
+// if (indicadoresConEseNombre.isEmpty()) {
+// return false;
+// }
+// return true;
 //
-//	public boolean indicadorYaExistente(String nombre) {
+// }
+
+// public boolean contieneIndicadores(String formula) {
+// boolean flag = false;
+// String[] componentes = formula.split(" ");
+// for (int i = 0; i < componentes.length; i++) {
+// if (esIndicador(componentes[i])) {
+// flag = true;
+// }
+// }
+// return flag;
+// }
 //
-//		return allInstances().stream().anyMatch(
-//				indicador -> indicador.getNombre().equals(nombre));
+// public boolean indicadorYaExistente(String nombre) {
 //
-//	}
+// return allInstances().stream().anyMatch(
+// indicador -> indicador.getNombre().equals(nombre));
+//
+// }

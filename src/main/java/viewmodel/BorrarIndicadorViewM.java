@@ -11,15 +11,14 @@ public class BorrarIndicadorViewM {
 
 	private RegistroIndicador indicadorABorrar;
 
-	public BorrarIndicadorViewM( RegistroIndicador indicadorABorrar){
-		
-	this.indicadorABorrar =  indicadorABorrar;	
-	}
-	
+	public BorrarIndicadorViewM(RegistroIndicador indicadorABorrar) {
 
-	public void borrar() throws Exception{
+		this.indicadorABorrar = indicadorABorrar;
+	}
+
+	public void borrar() throws Exception {
 		new AppData().borrarIndicador(this.indicadorABorrar);
-	
+
 	}
 
 }

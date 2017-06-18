@@ -34,12 +34,14 @@ public class SemanticaVariable {
 
 		BigDecimal valor;
 
-		if (this.getRepoEmpresas().esCuenta(nombreVariable,this.getRepoEmpresas().todasLasCuentas())) {
+		if (this.getRepoEmpresas().esCuenta(nombreVariable,
+				this.getRepoEmpresas().todasLasCuentas())) {
 
 			// calculo del valor de una cuenta segun parametros
 			// ver si esto lo movemos al repo
-			valor= this.getRepoEmpresas().getValorCuenta(nombreEmpresa, Year.of(anio), semestre, nombreVariable) ;
-        
+			valor = this.getRepoEmpresas().getValorCuenta(nombreEmpresa,
+					Year.of(anio), semestre, nombreVariable);
+
 		} else {
 
 			// calculo del valor de un indicador segun parametros
@@ -51,7 +53,7 @@ public class SemanticaVariable {
 				formulaIndicador = new ParserIndicador(
 						indicadorAObtener.getFormula()).pasear();
 			} catch (ParseException e) {
-				
+
 				throw new RuntimeException("Problemas al parsear la variable: "
 						+ this.nombreVariable);
 

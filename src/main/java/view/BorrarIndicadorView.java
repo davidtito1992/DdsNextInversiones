@@ -12,7 +12,8 @@ import viewmodel.BorrarIndicadorViewM;
 public class BorrarIndicadorView extends Dialog<BorrarIndicadorViewM> {
 
 	@SuppressWarnings("rawtypes")
-	public BorrarIndicadorView(SimpleWindow owner, RegistroIndicador indicadorABorrar){
+	public BorrarIndicadorView(SimpleWindow owner,
+			RegistroIndicador indicadorABorrar) {
 		super(owner, new BorrarIndicadorViewM(indicadorABorrar));
 	}
 
@@ -21,7 +22,8 @@ public class BorrarIndicadorView extends Dialog<BorrarIndicadorViewM> {
 		Panel form = new Panel(mainPanel);
 		this.setTitle("Borrar Indicador");
 
-		new Label(form).setText("Estas seguro que deseas borrar definitivamente el indicador seleccionado?");
+		new Label(form)
+				.setText("Estas seguro que deseas borrar definitivamente el indicador seleccionado?");
 
 	}
 
@@ -29,10 +31,10 @@ public class BorrarIndicadorView extends Dialog<BorrarIndicadorViewM> {
 	protected void addActions(Panel actions) {
 
 		new Button(actions).setCaption("Borrar").onClick(this::accept)
-		.setAsDefault().setWidth(140);
+				.setAsDefault().setWidth(140);
 
 		new Button(actions).setCaption("Cancelar").onClick(this::cancel)
-		.setWidth(140);
+				.setWidth(140);
 
 	}
 
@@ -43,9 +45,9 @@ public class BorrarIndicadorView extends Dialog<BorrarIndicadorViewM> {
 			this.showInfo("El indicador se elimino exitosamente!");
 			this.close();
 		} catch (Exception e) {
-			this.showError( e.getMessage() );
+			this.showError(e.getMessage());
 		}
 
 	}
 
-}	
+}

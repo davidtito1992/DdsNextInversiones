@@ -16,7 +16,8 @@ import viewmodel.ConsultarIndicadorViewM;
 public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 
 	@SuppressWarnings("rawtypes")
-	public ConsultarIndicadorView(SimpleWindow owner,RegistroIndicador unIndicador) {
+	public ConsultarIndicadorView(SimpleWindow owner,
+			RegistroIndicador unIndicador) {
 		super(owner, new ConsultarIndicadorViewM(unIndicador));
 	}
 
@@ -25,8 +26,8 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 		Panel form = new Panel(mainPanel);
 		this.setTitle("Consultar Indicador");
 		form.setLayout(new ColumnLayout(2));
-		//this.getModelObject().llenarTablas();
-		
+		// this.getModelObject().llenarTablas();
+
 		new Label(form).setText("\t\tSeleccione Empresa");
 		Selector<String> selectorNombre = new Selector<String>(form)
 				.allowNull(true);
@@ -50,43 +51,45 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 
 		new Label(form).setText("\t\t");
 		new Label(form).setText("\t\t");
-		new Label(form).setText("\t\tResultado: \t\t\t\t") ;
-		new Label(form).bindValueToProperty("resultado") ;
+		new Label(form).setText("\t\tResultado: \t\t\t\t");
+		new Label(form).bindValueToProperty("resultado");
 
 		new Label(form).setText("\t\t");
 		new Label(form).setText("\t\t");
 		new Label(form).setText("\t\t");
 		new Button(form).setCaption("Consultar").onClick(this::consultar)
-		.setWidth(140);
-        new Label(form).setText("\t\t");
-        new Button(form).setCaption("Reiniciar").onClick(this::reiniciar)
-		.setWidth(140);
+				.setWidth(140);
 		new Label(form).setText("\t\t");
-        new Button(form).setCaption("Cancelar").onClick(this::cancel)
-        .setWidth(140);
+		new Button(form).setCaption("Reiniciar").onClick(this::reiniciar)
+				.setWidth(140);
+		new Label(form).setText("\t\t");
+		new Button(form).setCaption("Cancelar").onClick(this::cancel)
+				.setWidth(140);
 	}
 
 	@Override
 	protected void addActions(Panel actions) {
 	}
-	
+
 	public void reiniciar() {
 		getModelObject().reiniciar();
 	}
 
 	public void consultar() {
-		if (this.getModelObject().getNombreSeleccionado()!=null && this.getModelObject().getSemestreSeleccionado() !=null && this.getModelObject().getAnioSeleccionado()!=null){
+		if (this.getModelObject().getNombreSeleccionado() != null
+				&& this.getModelObject().getSemestreSeleccionado() != null
+				&& this.getModelObject().getAnioSeleccionado() != null) {
 			try {
 				this.getModelObject().consultar();
 			} catch (ParseException e) {
 				showInfo(e.getMessage());
-			} catch (Error e){
+			} catch (Error e) {
 				showInfo("Hubo un error al consultar las cuentas en el período deseado, por favor verificar que las cuentas que utiliza el indicador sean validas.");
-			}			
-		}else {
+			}
+		} else {
 			this.showError("Seleccione todos los campos, por favor");
 		}
 
 	}
-	
+
 }

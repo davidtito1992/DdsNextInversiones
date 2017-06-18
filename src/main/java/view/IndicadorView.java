@@ -32,8 +32,8 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 		new Button(form).setCaption("Borrar").onClick(this::borrar)
 				.setWidth(140);
 
-		Table<RegistroIndicador> tableIndicadores = new Table<RegistroIndicador>(mainPanel,
-				RegistroIndicador.class);
+		Table<RegistroIndicador> tableIndicadores = new Table<RegistroIndicador>(
+				mainPanel, RegistroIndicador.class);
 
 		tableIndicadores.setHeight(600);
 		tableIndicadores.setWidth(200);
@@ -105,19 +105,20 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 	}
 
 	public void borrar() {
-		// repositorioIndicadores		
+		// repositorioIndicadores
 		if (this.getModelObject().getIndicadorSeleccionado() != null) {
 
-			Dialog<?> dialog = new BorrarIndicadorView(this,this.getModelObject().getIndicadorSeleccionado());
+			Dialog<?> dialog = new BorrarIndicadorView(this, this
+					.getModelObject().getIndicadorSeleccionado());
 			dialog.open();
-			dialog.onAccept(() -> {					
+			dialog.onAccept(() -> {
 			});
-		this.getModelObject().llenarTablas();	
-						
-	}else {
+			this.getModelObject().llenarTablas();
+
+		} else {
 
 			this.showError("Seleccione un Indicador, por favor");
 		}
 
- }
+	}
 }

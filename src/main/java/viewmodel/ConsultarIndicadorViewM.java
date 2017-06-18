@@ -47,7 +47,8 @@ public class ConsultarIndicadorViewM {
 		return registroIndicadorElegido;
 	}
 
-	public void setRegistroIndicadorElegido(RegistroIndicador registroIndicadorElegido) {
+	public void setRegistroIndicadorElegido(
+			RegistroIndicador registroIndicadorElegido) {
 		this.registroIndicadorElegido = registroIndicadorElegido;
 	}
 
@@ -87,8 +88,8 @@ public class ConsultarIndicadorViewM {
 
 	public void setNombreSeleccionado(String nombreSeleccionado) {
 		this.nombreSeleccionado = nombreSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado, this.anioSeleccionado,
-				this.semestreSeleccionado);
+		this.generarTodosLosCBox(this.nombreSeleccionado,
+				this.anioSeleccionado, this.semestreSeleccionado);
 	}
 
 	public List<Year> getAnios() {
@@ -105,8 +106,8 @@ public class ConsultarIndicadorViewM {
 
 	public void setAnioSeleccionado(Year anioSeleccionado) {
 		this.anioSeleccionado = anioSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado, this.anioSeleccionado,
-				this.semestreSeleccionado);
+		this.generarTodosLosCBox(this.nombreSeleccionado,
+				this.anioSeleccionado, this.semestreSeleccionado);
 	}
 
 	public List<Integer> getSemestre() {
@@ -123,8 +124,8 @@ public class ConsultarIndicadorViewM {
 
 	public void setSemestreSeleccionado(Integer semestreSeleccionado) {
 		this.semestreSeleccionado = semestreSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado, this.anioSeleccionado,
-				this.semestreSeleccionado);
+		this.generarTodosLosCBox(this.nombreSeleccionado,
+				this.anioSeleccionado, this.semestreSeleccionado);
 	}
 
 	/********* METODOS *********/
@@ -136,8 +137,7 @@ public class ConsultarIndicadorViewM {
 
 	}
 
-	public void generarTodosLosCBox(String empresa, Year anio,
-			Integer semestre) {
+	public void generarTodosLosCBox(String empresa, Year anio, Integer semestre) {
 
 		List<Empresa> repoEmpresaFiltrado = new ArrayList<Empresa>();
 		repoEmpresaFiltrado = this.getRepoEmpresas().filtrar(null, empresa,
@@ -190,7 +190,7 @@ public class ConsultarIndicadorViewM {
 					anioSeleccionado.getValue(), semestreSeleccionado)
 					.toPlainString();
 		} catch (RuntimeException e) {
-			//lo pasamos a string para mostrar el resultado en la futura tabla. 
+			// lo pasamos a string para mostrar el resultado en la futura tabla.
 			this.resultado = e.getMessage();
 		}
 
@@ -203,7 +203,7 @@ public class ConsultarIndicadorViewM {
 		this.generarTodosLosCBox(null, null, null);
 		this.snapshotIndicadorSeleccionado = null;
 		this.limpiarFiltros();
-		this.resultado = "";//new BigDecimal(0);
+		this.resultado = "";// new BigDecimal(0);
 	}
 
 	public void limpiarFiltros() {

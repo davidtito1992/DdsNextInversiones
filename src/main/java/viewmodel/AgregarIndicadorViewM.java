@@ -84,31 +84,37 @@ public class AgregarIndicadorViewM {
 
 	private void cargarCuentasDisponibles() {
 
-		this.agregarCuenta = this.getRepoEmpresas().todosLosNombresDeCuentas(this.getRepoEmpresas().allInstances());
+		this.agregarCuenta = this.getRepoEmpresas().todosLosNombresDeCuentas(
+				this.getRepoEmpresas().allInstances());
 
 	}
 
 	private void cargarIndicadoresDisponibles() {
 
-		this.agregarIndicador = this.getRepoIndicadores().todosLosNombresDeIndicadores(this.getRepoIndicadores().allInstances());
+		this.agregarIndicador = this.getRepoIndicadores()
+				.todosLosNombresDeIndicadores(
+						this.getRepoIndicadores().allInstances());
 
 	}
 
 	public void guardarIndicador() throws Throwable {
-		
-		//validar que el string formula no contenga el caracter ';' 
-		
+
+		// validar que el string formula no contenga el caracter ';'
+
 		if (this.nombre == null || this.formula == null) {
 			throw new Exception(
 					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
 		}
-		RegistroIndicador preIndicadorAGuardar = new RegistroIndicador(this.nombre, this.formula);
-	//	AppData valida sintaxis y semantica...si esta todo ok guarda en el archivo y repo
+		RegistroIndicador preIndicadorAGuardar = new RegistroIndicador(
+				this.nombre, this.formula);
+		// AppData valida sintaxis y semantica...si esta todo ok guarda en el
+		// archivo y repo
 		new AppData().guardarIndicador(preIndicadorAGuardar);
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {
-		return ApplicationContext.getInstance().getSingleton(RegistroIndicador.class);
+		return ApplicationContext.getInstance().getSingleton(
+				RegistroIndicador.class);
 	}
 
 	public void agregarCuentaALaFormula() {
