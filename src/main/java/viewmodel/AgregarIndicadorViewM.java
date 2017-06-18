@@ -9,6 +9,7 @@ import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
 import app.AppData;
+import app.Dsl;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
 
@@ -105,11 +106,12 @@ public class AgregarIndicadorViewM {
 			throw new Exception(
 					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
 		}
-		RegistroIndicador preIndicadorAGuardar = new RegistroIndicador(
-				this.nombre, this.formula);
-		// AppData valida sintaxis y semantica...si esta todo ok guarda en el
-		// archivo y repo
-		new AppData().guardarIndicador(preIndicadorAGuardar);
+		// RegistroIndicador preIndicadorAGuardar = new RegistroIndicador(
+		// this.nombre, this.formula);
+
+		// new AppData().guardarIndicador(preIndicadorAGuardar);
+		new Dsl().añadirIndicador(new RegistroIndicador(this.nombre,
+				this.formula));
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {

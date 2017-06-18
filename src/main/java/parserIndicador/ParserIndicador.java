@@ -4,7 +4,6 @@ import java.io.StringReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-
 import formulaIndicador.*;
 
 public class ParserIndicador implements ParserIndicadorConstants {
@@ -22,7 +21,7 @@ FormulaIndicador cadena;
       jj_consume_token(FINALIZACION);
                                     System.out.println("Parseo Exitoso!\u005cn");{if (true) return cadena ;}
     } catch (ParseException e) {
-    {if (true) throw new ParseException("Lo lamento. Hay problemas en la sintaxis :/!\u005cn" + e.toString());}
+    {if (true) throw new ParseException("Lo lamento. Hay problemas en la sintaxis :/!\u005cn");}
     }
     throw new Error("Missing return statement in function");
   }
@@ -127,6 +126,24 @@ FormulaIndicador fact1 ;
 
   final public List<String> variables() throws ParseException {
    {if (true) return listaPalabras;}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public String pasearSoloNombre() throws ParseException {
+String cadena;
+    try {
+      cadena = palabra();
+      jj_consume_token(FINALIZACION);
+                                        System.out.println("Parseo Exitoso!\u005cn");{if (true) return cadena ;}
+    } catch (ParseException e) {
+    {if (true) throw new ParseException("Lo lamento. Hay problemas en la sintaxis :/!\u005cn");}
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+  final public String palabra() throws ParseException {
+    jj_consume_token(PALABRA);
+              {if (true) return token.image;}
     throw new Error("Missing return statement in function");
   }
 

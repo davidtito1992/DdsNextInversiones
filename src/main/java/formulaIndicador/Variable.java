@@ -1,8 +1,7 @@
 package formulaIndicador;
 
 import java.math.BigDecimal;
-
-import semanticaIndicador.SemanticaVariable;
+import app.Dsl;
 
 public class Variable implements FormulaIndicador {
 
@@ -17,8 +16,8 @@ public class Variable implements FormulaIndicador {
 	public BigDecimal calcular(String empresa, int anio, int semestre)
 			throws RuntimeException {
 
-		return new SemanticaVariable(this.nombre, empresa, anio, semestre)
-				.valor();
+		return new Dsl().traducirVariable(this.nombre, empresa, anio, semestre);
+
 	}
 
 }

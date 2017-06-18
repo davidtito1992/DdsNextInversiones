@@ -211,12 +211,12 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		List<Empresa> empresas = filtrar(null, nombreSeleccionado,
 				semestreSeleccionado, anioSeleccionado);
 		// filtrar obtiene mal las cuentas
-		System.out.println(nombreSeleccionado + " " + anioSeleccionado + " "
-				+ semestreSeleccionado);
-		System.out.println(empresas.get(0).getPeriodos().get(1).getCuentas()
-				.get(0).getNombre()
-				+ empresas.get(0).getPeriodos().get(1).getCuentas().get(0)
-						.getValor());
+//		System.out.println(nombreSeleccionado + " " + anioSeleccionado + " "
+//				+ semestreSeleccionado);
+//		System.out.println(empresas.get(0).getPeriodos().get(1).getCuentas()
+//				.get(0).getNombre()
+//				+ empresas.get(0).getPeriodos().get(1).getCuentas().get(0)
+//						.getValor());
 		return empresas.get(0).getPeriodos().get(0).getCuentas();
 	}
 

@@ -3,8 +3,6 @@ package app;
 import java.util.List;
 
 import org.uqbar.commons.utils.ApplicationContext;
-
-import parserIndicador.ParserIndicador;
 import model.Empresa;
 import model.RegistroIndicador;
 import DataManagment.AdapterToJson;
@@ -13,7 +11,6 @@ import DataManagment.DataLoaderFactory;
 import DataManagment.FileWriter;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
-import semanticaIndicador.AnalizadorSemantico;
 
 public class AppData {
 
@@ -51,16 +48,9 @@ public class AppData {
 	}
 
 	public void guardarIndicador(RegistroIndicador unIndicador)
-			throws Throwable {
-
-		ParserIndicador preIndicador = new ParserIndicador(
-				unIndicador.getFormula());
-		preIndicador.pasear();
-		// validar que las variables implicadas existan
-		new AnalizadorSemantico(preIndicador.variables()).analizar();
+			throws Exception {
 
 		try {
-			unIndicador.setVariables(preIndicador.variables());
 			String nuevoIndicadorString = new AdapterToJson(unIndicador)
 					.getstringJson();
 

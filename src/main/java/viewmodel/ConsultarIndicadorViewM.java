@@ -3,21 +3,14 @@ package viewmodel;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
-
-import model.Cuenta;
 import model.Empresa;
 import model.RegistroIndicador;
 import model.SnapshotIndicador;
-
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
-
 import formulaIndicador.FormulaIndicador;
 import parserIndicador.ParseException;
 import parserIndicador.ParserIndicador;
-
-import java.math.BigDecimal;
-
 import repositories.RepositorioEmpresa;
 import semanticaIndicador.AnalizadorSemantico;
 
@@ -174,8 +167,8 @@ public class ConsultarIndicadorViewM {
 
 	public void consultar() throws RuntimeException, ParseException {
 
-		List<Cuenta> cuentas = getRepoEmpresas().obtenerCuentas(
-				nombreSeleccionado, semestreSeleccionado, anioSeleccionado);
+//		List<Cuenta> cuentas = getRepoEmpresas().obtenerCuentas(
+//				nombreSeleccionado, semestreSeleccionado, anioSeleccionado);
 
 		ParserIndicador preIndicador = new ParserIndicador(
 				registroIndicadorElegido.getFormula());
@@ -193,10 +186,6 @@ public class ConsultarIndicadorViewM {
 			// lo pasamos a string para mostrar el resultado en la futura tabla.
 			this.resultado = e.getMessage();
 		}
-
-		// CalculoFormula calculoFormula = new CalculoFormula();
-		// this.resultado = calculoFormula.analizarResultado(
-		// getIndicadorElegido(), cuentas);
 	}
 
 	public void reiniciar() {

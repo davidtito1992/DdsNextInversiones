@@ -4,7 +4,6 @@ import java.io.StringReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-
 import formulaIndicador.*;
 
 /** Token Manager. */
