@@ -8,12 +8,12 @@ import java.math.BigDecimal;
 public class Cuenta {
 
 	/********* ATRIBUTOS *********/
-	
+
 	private String nombre;
 	private BigDecimal valor;
 
 	/********* GETTERS/SETTERS *********/
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -29,12 +29,12 @@ public class Cuenta {
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
-	
+
 	/********* METODOS *********/
 
 	public Cuenta(String nombre, BigDecimal valor) {
 		this.nombre = nombre;
 		this.valor = valor;
 	}
-	
+
 }

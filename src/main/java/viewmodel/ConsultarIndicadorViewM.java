@@ -167,8 +167,8 @@ public class ConsultarIndicadorViewM {
 
 	public void consultar() throws RuntimeException, ParseException {
 
-//		List<Cuenta> cuentas = getRepoEmpresas().obtenerCuentas(
-//				nombreSeleccionado, semestreSeleccionado, anioSeleccionado);
+		// List<Cuenta> cuentas = getRepoEmpresas().obtenerCuentas(
+		// nombreSeleccionado, semestreSeleccionado, anioSeleccionado);
 
 		ParserIndicador preIndicador = new ParserIndicador(
 				registroIndicadorElegido.getFormula());
