@@ -4,6 +4,7 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import model.Cuenta;
 import model.Empresa;
@@ -25,9 +26,8 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 
 	// LO LLAMA EL INICIALIZADOR
 	public void cargarListaEmpresas(List<Empresa> empresas) {
-		for (int i = 0; i < empresas.size(); i++) {
-			create(empresas.get(i));
-		}
+
+		empresas.forEach(empresa -> this.create(empresa));
 	}
 
 	public static RepositorioEmpresa repositorioMaestro() {

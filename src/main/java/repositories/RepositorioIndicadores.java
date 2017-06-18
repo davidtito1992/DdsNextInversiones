@@ -21,10 +21,12 @@ public class RepositorioIndicadores extends
 
 	/********* METODOS *********/
 
-	public void cargarListaIndicadores(List<RegistroIndicador> Indicadores) {
-		for (int i = 0; i < Indicadores.size(); i++) {
-			create(Indicadores.get(i));
-		}
+	public void cargarListaIndicadores(
+			List<RegistroIndicador> registrosIndicadores) {
+
+		registrosIndicadores.forEach(registroIndicador -> this
+				.create(registroIndicador));
+
 	}
 
 	public static RepositorioIndicadores repositorioMaestro() {
