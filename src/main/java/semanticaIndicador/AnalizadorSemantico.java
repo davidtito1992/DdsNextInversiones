@@ -9,20 +9,13 @@ import model.RegistroIndicador;
 
 public class AnalizadorSemantico {
 
-	List<String> variables;
-
-	public AnalizadorSemantico(List<String> variables) {
-		this.variables = variables;
-	}
-
 	// validamos que los nombres de las variables existan
 	// ya sea una cuenta o indicador con la ayuda del
 	// repo
-	public void analizar() {
+	public void analizarVariablesDeFormula(List<String> variables) {
 
-		this.variables.forEach(nombreVariable -> {
-			if (this.getRepoEmpresas().esCuenta(nombreVariable,
-					this.getRepoEmpresas().todasLasCuentas()))
+		variables.forEach(nombreVariable -> {
+			if (this.getRepoEmpresas().esCuenta(nombreVariable))
 				;
 			else if (this.getRepoIndicadores().esIndicador(nombreVariable))
 				;
@@ -30,6 +23,19 @@ public class AnalizadorSemantico {
 				throw new RuntimeException("El nombre de la variable: "
 						+ nombreVariable + " no existe");
 		});
+
+	}
+
+	public void analizarNombreDeIndicador(String nombreIndicador) {
+
+		if (this.getRepoEmpresas().esCuenta(nombreIndicador))
+
+			throw new RuntimeException("Existe una cuenta con el nombre: "
+					+ nombreIndicador + ", escriba otro nombre de indicador.");
+
+		else if (this.getRepoIndicadores().esIndicador(nombreIndicador))
+			throw new RuntimeException("Existe un indicador con el nombre: "
+					+ nombreIndicador + ", escriba otro nombre de indicador.");
 
 	}
 
@@ -42,53 +48,3 @@ public class AnalizadorSemantico {
 		return ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 }
-
-	
-	//
-	// private String nombre;
-	// private String formula;
-	//
-	// public AnalizadorSemantico(Indicador unIndicador) {
-	//
-	// this.nombre = unIndicador.getNombre();
-	// this.formula = unIndicador.getFormula();
-	// }
-	//
-	// public void analizar() throws Exception {
-	//
-	// if (getRepoIndicadores().indicadorYaExistente(nombre)) {
-	// throw new Exception(
-	// "Un indicador con ese nombre ya se encuentra cargado en el sistema, Intentelo nuevamente");
-	// }
-	//
-	// revisarSintaxisYSemantica(new Indicador(this.nombre, this.formula));
-	//
-	// }
-	//
-	// public void revisarSintaxisYSemantica(Indicador indicador) throws
-	// Exception {
-	//
-	// String[] componentes = indicador.getFormula().split(" ");
-	// List<Cuenta> todasLasCuentas = getRepoEmpresas().todasLasCuentas();
-	//
-	// for (int i = 0; i < componentes.length; i++) {
-	// if (getRepoIndicadores().esIndicador(componentes[i])
-	// || getRepoEmpresas().esCuenta(componentes[i],
-	// todasLasCuentas)) {
-	// componentes[i] = "2";
-	// }
-	// }
-	//
-	// String formulaReemplazada = String.join(" ", componentes);
-	// Calculator calculator = new Calculator(new StringReader(
-	// formulaReemplazada));
-	// try {
-	// calculator.calculate();
-	// } catch (ParseException e) {
-	// throw new Exception("La sintaxis es incorrecta");
-	// } catch (Error e) {
-	// throw new Exception("Ingreso una cuenta o un indicador inexistente");
-	// }
-	//
-	// }
-	//

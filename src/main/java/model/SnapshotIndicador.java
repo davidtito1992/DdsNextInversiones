@@ -1,7 +1,5 @@
 package model;
-
-import java.math.BigDecimal;
-
+import java.time.Year;
 import org.uqbar.commons.utils.Observable;
 
 @Observable
@@ -9,27 +7,27 @@ public class SnapshotIndicador {
 
 	/********* ATRIBUTOS *********/
 
-	private String nombre;
-	private int anio;
+	private String nombreEmpresa;
+	private Year anio;
 	private int semestre;
-	private BigDecimal resultado;
+	private String resultado;
 
 	/********* GETTERS/SETTERS *********/
 
-	public String getNombre() {
-		return nombre;
+	public String getNombreEmpresa() {
+		return nombreEmpresa;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreEmpresa(String nombre) {
+		this.nombreEmpresa = nombre;
 	}
 
-	public int getAnio() {
+	public Year getAnio() {
 		return anio;
 	}
 
-	public void setAnio(int anio) {
-		this.anio = anio;
+	public void setAnio(Year year) {
+		this.anio = year;
 	}
 
 	public int getSemestre() {
@@ -40,11 +38,11 @@ public class SnapshotIndicador {
 		this.semestre = semestre;
 	}
 
-	public BigDecimal getResultado() {
+	public String getResultado() {
 		return resultado;
 	}
 
-	public void setResultado(BigDecimal resultado) {
-		this.resultado = resultado;
+	public void setResultado(String string) {
+		this.resultado = string;
 	}
 }

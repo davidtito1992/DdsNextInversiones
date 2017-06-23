@@ -1,14 +1,10 @@
 package viewmodel;
 
 import java.util.List;
-
 import model.Empresa;
 import model.RegistroIndicador;
-
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
-
-import app.AppData;
 import app.Dsl;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
@@ -18,7 +14,7 @@ public class AgregarIndicadorViewM {
 
 	/********* ATRIBUTOS *********/
 
-	private String formula;
+	private String formula = "";
 	private String nombre;
 	private List<String> agregarIndicador;
 	private String agregarIndicadorSeleccionado;
@@ -100,16 +96,11 @@ public class AgregarIndicadorViewM {
 
 	public void guardarIndicador() throws Throwable {
 
-		// validar que el string formula no contenga el caracter ';'
-
-		if (this.nombre == null || this.formula == null) {
+		if (this.nombre == null || this.formula == "") {
 			throw new Exception(
 					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
 		}
-		// RegistroIndicador preIndicadorAGuardar = new RegistroIndicador(
-		// this.nombre, this.formula);
-
-		// new AppData().guardarIndicador(preIndicadorAGuardar);
+		
 		new Dsl().añadirIndicador(new RegistroIndicador(this.nombre,
 				this.formula));
 	}
@@ -120,21 +111,17 @@ public class AgregarIndicadorViewM {
 	}
 
 	public void agregarCuentaALaFormula() {
-		if (this.getFormula() != null) {
+		if (this.getAgregarCuentaSeleccionado() != null)
 			this.setFormula(this.getFormula() + " "
 					+ this.getAgregarCuentaSeleccionado());
-		} else {
-			this.setFormula(this.getAgregarCuentaSeleccionado());
-		}
+
 	}
 
 	public void agregarIndicadorALaFormula() {
-		if (this.getFormula() != null) {
+		if (this.getAgregarIndicadorSeleccionado() != null)
 			this.setFormula(this.getFormula() + " "
 					+ this.getAgregarIndicadorSeleccionado());
-		} else {
-			this.setFormula(this.getAgregarIndicadorSeleccionado());
-		}
+
 	}
 
 	public RepositorioEmpresa getRepoEmpresas() {

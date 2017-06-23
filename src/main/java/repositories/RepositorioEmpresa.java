@@ -4,11 +4,8 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import model.Cuenta;
 import model.Empresa;
-
 import org.apache.commons.collections15.Predicate;
 import org.uqbar.commons.model.CollectionBasedRepo;
 import org.uqbar.commons.utils.Observable;
@@ -64,53 +61,47 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	}
 
 	public boolean filtroAnio(Year anioSeleccionado, Empresa empresa) {
-		if (anioSeleccionado == null) {
-			return true;
-		} else {
-			return empresa
-					.getPeriodos()
-					.stream()
-					.anyMatch(
-							periodo -> periodo.getAnio().equals(
-									anioSeleccionado));
-		}
+		return anioSeleccionado == null
+				|| empresa
+						.getPeriodos()
+						.stream()
+						.anyMatch(
+								periodo -> periodo.getAnio().equals(
+										anioSeleccionado));
+
 	}
 
 	public boolean filtroSemestre(Integer semestreSeleccionado, Empresa empresa) {
-		if (semestreSeleccionado == null) {
-			return true;
-		} else {
-			return empresa
-					.getPeriodos()
-					.stream()
-					.anyMatch(
-							periodo -> periodo.getSemestre() == semestreSeleccionado);
-		}
+		return semestreSeleccionado == null
+				|| empresa
+						.getPeriodos()
+						.stream()
+						.anyMatch(
+								periodo -> periodo.getSemestre() == semestreSeleccionado);
+
 	}
 
 	public boolean filtroNombre(String nombreSeleccionado, Empresa empresa) {
-		if (nombreSeleccionado == null) {
-			return true;
-		} else {
-			return empresa.getNombre().equals(nombreSeleccionado);
-		}
+		return nombreSeleccionado == null ||
+
+		empresa.getNombre().equals(nombreSeleccionado);
+
 	}
 
 	public boolean filtroCuenta(String cuentaSeleccionada, Empresa empresa) {
-		if (cuentaSeleccionada == null) {
-			return true;
-		} else {
-			return empresa
-					.getPeriodos()
-					.stream()
-					.anyMatch(
-							periodo -> periodo
-									.getCuentas()
-									.stream()
-									.anyMatch(
-											cuenta -> cuenta.getNombre()
-													.equals(cuentaSeleccionada)));
-		}
+		return cuentaSeleccionada == null
+				|| empresa
+						.getPeriodos()
+						.stream()
+						.anyMatch(
+								periodo -> periodo
+										.getCuentas()
+										.stream()
+										.anyMatch(
+												cuenta -> cuenta
+														.getNombre()
+														.equals(cuentaSeleccionada)));
+
 	}
 
 	public ArrayList<Year> todosLosAnios(List<Empresa> listaEmpresas) {
@@ -172,33 +163,38 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	// return String.join(" ", componentes);
 	// }
 
-	private BigDecimal getValorCuenta(String nombre,
-			List<Cuenta> cuentasUnaEmpresa) {
-		// devuelve mal
-		List<Cuenta> cuentaADevolver = cuentasUnaEmpresa.stream()
-				.filter(cuenta -> cuenta.getNombre().equalsIgnoreCase(nombre))
-				.collect(Collectors.toList());
-
-		return cuentaADevolver.get(0).getValor();
-	}
+	// private BigDecimal getValorCuenta(String nombre,
+	// List<Cuenta> cuentasUnaEmpresa) {
+	// // devuelve mal
+	// List<Cuenta> cuentaADevolver = cuentasUnaEmpresa.stream()
+	// .filter(cuenta -> cuenta.getNombre().equalsIgnoreCase(nombre))
+	// .collect(Collectors.toList());
+	//
+	// return cuentaADevolver.get(0).getValor();
+	// }
 
 	public BigDecimal getValorCuenta(String nombreEmpresa, Year anio,
 			int semestre, String nombreCuenta) throws RuntimeException {
 
-		List<Cuenta> cuentas = this.obtenerCuentas(nombreEmpresa, semestre,
-				anio);
-		if (this.esCuenta(nombreCuenta, cuentas)) {
+		List<Cuenta> cuentaADevolver = this
+				.obtenerCuentas(nombreEmpresa, semestre, anio)
+				.stream()
+				.filter(cuenta -> cuenta.getNombre().equalsIgnoreCase(
+						nombreCuenta)).collect(Collectors.toList());
 
-			return this.getValorCuenta(nombreCuenta, cuentas);
-		} else {
+		if (cuentaADevolver.isEmpty())
+
 			throw new RuntimeException(
 					"No pudimos obtener el valor de la variable: "
 							+ nombreCuenta);
-		}
+		else
+			return cuentaADevolver.get(0).getValor();
+
 	}
 
-	public boolean esCuenta(String componente, List<Cuenta> cuentas) {
-		return cuentas
+	public boolean esCuenta(String componente) {
+		return this
+				.todasLasCuentas()
 				.stream()
 				.map(cuenta -> cuenta.getNombre())
 				.anyMatch(

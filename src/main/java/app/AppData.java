@@ -51,8 +51,8 @@ public class AppData {
 			throws Exception {
 
 		try {
-			String nuevoIndicadorString = new AdapterToJson(unIndicador)
-					.getstringJson();
+			String nuevoIndicadorString = new AdapterToJson()
+					.getStringRegistroIndicador(unIndicador);
 
 			// sobreescribimos un archivo segun nombre de archivo,
 			// textoviejo,textonuevo
@@ -72,10 +72,10 @@ public class AppData {
 
 		try {
 			// Convertimos un indicador a json
-			String nuevoIndicadorString = new AdapterToJson(
-					new RegistroIndicador(unIndicador.getNombre(),
-							unIndicador.getFormula(),
-							unIndicador.getVariables())).getstringJson();
+			String nuevoIndicadorString = new AdapterToJson()
+					.getStringRegistroIndicador(new RegistroIndicador(
+							unIndicador.getNombre(), unIndicador.getFormula(),
+							unIndicador.getVariables()));
 			// sobreescribimos para borrar
 			new FileWriter("./indicadores.json", nuevoIndicadorString, "");
 

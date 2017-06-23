@@ -9,10 +9,8 @@ import model.SnapshotIndicador;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 import formulaIndicador.FormulaIndicador;
-import parserIndicador.ParseException;
-import parserIndicador.ParserIndicador;
 import repositories.RepositorioEmpresa;
-import semanticaIndicador.AnalizadorSemantico;
+import app.Dsl;
 
 @Observable
 public class ConsultarIndicadorViewM {
@@ -29,6 +27,13 @@ public class ConsultarIndicadorViewM {
 	private SnapshotIndicador snapshotIndicadorSeleccionado;
 	private String resultado;
 	private RegistroIndicador registroIndicadorElegido;
+	private FormulaIndicador formulaIndicador;
+
+	public ConsultarIndicadorViewM(RegistroIndicador unIndicador) {
+
+		this.registroIndicadorElegido = unIndicador;
+		this.generarTodosLosCBox(null, null, null);
+	}
 
 	/********* GETTERS/SETTERS *********/
 
@@ -121,14 +126,15 @@ public class ConsultarIndicadorViewM {
 				this.anioSeleccionado, this.semestreSeleccionado);
 	}
 
-	/********* METODOS *********/
-
-	public ConsultarIndicadorViewM(RegistroIndicador unIndicador) {
-
-		this.registroIndicadorElegido = unIndicador;
-		this.generarTodosLosCBox(null, null, null);
-
+	public FormulaIndicador getFormulaIndicador() {
+		return formulaIndicador;
 	}
+
+	public void setFormulaIndicador(FormulaIndicador formulaIndicador) {
+		this.formulaIndicador = formulaIndicador;
+	}
+
+	/********* METODOS *********/
 
 	public void generarTodosLosCBox(String empresa, Year anio, Integer semestre) {
 
@@ -165,29 +171,6 @@ public class ConsultarIndicadorViewM {
 
 	}
 
-	public void consultar() throws RuntimeException, ParseException {
-
-		// List<Cuenta> cuentas = getRepoEmpresas().obtenerCuentas(
-		// nombreSeleccionado, semestreSeleccionado, anioSeleccionado);
-
-		ParserIndicador preIndicador = new ParserIndicador(
-				registroIndicadorElegido.getFormula());
-
-		// comparar las variables implicadas en el preIndicador y las cuentas
-		new AnalizadorSemantico(preIndicador.variables());
-
-		FormulaIndicador indicador = preIndicador.pasear();
-
-		try {
-			this.resultado = indicador.calcular(nombreSeleccionado,
-					anioSeleccionado.getValue(), semestreSeleccionado)
-					.toPlainString();
-		} catch (RuntimeException e) {
-			// lo pasamos a string para mostrar el resultado en la futura tabla.
-			this.resultado = e.getMessage();
-		}
-	}
-
 	public void reiniciar() {
 		this.generarTodosLosCBox(null, null, null);
 		this.snapshotIndicadorSeleccionado = null;
@@ -199,5 +182,49 @@ public class ConsultarIndicadorViewM {
 		nombreSeleccionado = null;
 		semestreSeleccionado = null;
 		anioSeleccionado = null;
+	}
+
+	public void llenarTablas() {
+		this.setSnapshotIndicadores(this
+				.resultadosIndicadores(getRepoEmpresas().allInstances()));
+	}
+
+	public ArrayList<SnapshotIndicador> resultadosIndicadores(
+			List<Empresa> empresasASnap) {
+
+		ArrayList<SnapshotIndicador> listSnapshot = new ArrayList<SnapshotIndicador>();
+
+		empresasASnap
+				.forEach(empresa -> {
+					empresa.getPeriodos()
+							.forEach(
+									periodo -> {
+										SnapshotIndicador snapshotIndicador = new SnapshotIndicador();
+										snapshotIndicador
+												.setNombreEmpresa(empresa
+														.getNombre());
+										snapshotIndicador.setAnio(periodo
+												.getAnio());
+										snapshotIndicador.setSemestre(periodo
+												.getSemestre());
+										String resultado = new Dsl()
+												.aplicarFormula(
+														this.formulaIndicador,
+														empresa.getNombre(),
+														periodo.getAnio(),
+														periodo.getSemestre());
+										snapshotIndicador
+												.setResultado(resultado);
+
+										listSnapshot.add(snapshotIndicador);
+
+									});
+
+				});
+		return listSnapshot;
+	}
+
+	public void buscar() {
+
 	}
 }

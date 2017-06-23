@@ -2,6 +2,4 @@
 {"nombre":"I1","formula":" FDS*5 +10","variables":["FDS"]},
 {"nombre":"i67","formula":"EBITDA + I1","variables":["EBITDA","I1"]},
 {"nombre":"i3","formula":"i1","variables":["i1"]},
-{"nombre":"i4","formula":"ebitda","variables":["ebitda"]},
-{"nombre":"prueba","formula":"NetoContinuas","variables":["NetoContinuas"]},
-{"nombre":"prueba2","formula":"100","variables":[]}]
+{"nombre":"i4","formula":"ebitda","variables":["ebitda"]}]
