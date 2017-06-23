@@ -84,7 +84,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	public boolean filtroNombre(String nombreSeleccionado, Empresa empresa) {
 		return nombreSeleccionado == null ||
 
-		empresa.getNombre().equals(nombreSeleccionado);
+		empresa.getNombre().equalsIgnoreCase(nombreSeleccionado);
 
 	}
 
@@ -100,7 +100,8 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 										.anyMatch(
 												cuenta -> cuenta
 														.getNombre()
-														.equals(cuentaSeleccionada)));
+														.equalsIgnoreCase(
+																cuentaSeleccionada)));
 
 	}
 
@@ -150,37 +151,11 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		return nombresDeTodasLasEmpresas;
 	}
 
-	//
-	// public String transformValores(String formulaConCuentas,
-	// List<Cuenta> cuentasUnaEmpresa) {
-	// String[] componentes = formulaConCuentas.split(" ");
-	// for (int i = 0; i < componentes.length; i++) {
-	// if (esCuenta(componentes[i], cuentasUnaEmpresa)) {
-	// componentes[i] = String.valueOf(getValorCuenta(componentes[i],
-	// cuentasUnaEmpresa));
-	// }
-	// }
-	// return String.join(" ", componentes);
-	// }
-
-	// private BigDecimal getValorCuenta(String nombre,
-	// List<Cuenta> cuentasUnaEmpresa) {
-	// // devuelve mal
-	// List<Cuenta> cuentaADevolver = cuentasUnaEmpresa.stream()
-	// .filter(cuenta -> cuenta.getNombre().equalsIgnoreCase(nombre))
-	// .collect(Collectors.toList());
-	//
-	// return cuentaADevolver.get(0).getValor();
-	// }
-
 	public BigDecimal getValorCuenta(String nombreEmpresa, Year anio,
 			int semestre, String nombreCuenta) throws RuntimeException {
 
-		List<Cuenta> cuentaADevolver = this
-				.obtenerCuentas(nombreEmpresa, semestre, anio)
-				.stream()
-				.filter(cuenta -> cuenta.getNombre().equalsIgnoreCase(
-						nombreCuenta)).collect(Collectors.toList());
+		List<Cuenta> cuentaADevolver = this.obtenerCuenta(nombreEmpresa, anio,
+				semestre, nombreCuenta);
 
 		if (cuentaADevolver.isEmpty())
 
@@ -202,18 +177,26 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 								.equalsIgnoreCase(componente));
 	}
 
-	public List<Cuenta> obtenerCuentas(String nombreSeleccionado,
-			Integer semestreSeleccionado, Year anioSeleccionado) {
-		List<Empresa> empresas = filtrar(null, nombreSeleccionado,
-				semestreSeleccionado, anioSeleccionado);
-		// filtrar obtiene mal las cuentas
-		// System.out.println(nombreSeleccionado + " " + anioSeleccionado + " "
-		// + semestreSeleccionado);
-		// System.out.println(empresas.get(0).getPeriodos().get(1).getCuentas()
-		// .get(0).getNombre()
-		// + empresas.get(0).getPeriodos().get(1).getCuentas().get(0)
-		// .getValor());
-		return empresas.get(0).getPeriodos().get(0).getCuentas();
+	public List<Cuenta> obtenerCuenta(String nombreSeleccionado,
+			Year anioSeleccionado, Integer semestreSeleccionado,
+			String nombreCuenta) {
+
+		List<Cuenta> cuentasADevolver = this
+				.allInstances()
+				.stream()
+				.filter(empresa -> empresa.getNombre().equalsIgnoreCase(
+						nombreSeleccionado))
+				.map(empresa -> empresa.getPeriodos())
+				.flatMap(periodo -> periodo.stream())
+				.filter(periodo -> periodo.getAnio().equals(anioSeleccionado)
+						&& periodo.getSemestre() == semestreSeleccionado)
+				.map(periodo -> periodo.getCuentas())
+				.flatMap(cuentas -> cuentas.stream())
+				.filter(cuenta -> cuenta.getNombre().equalsIgnoreCase(
+						nombreCuenta)).collect(Collectors.toList());
+
+		return cuentasADevolver;
+
 	}
 
 	public List<Cuenta> todasLasCuentas() {
