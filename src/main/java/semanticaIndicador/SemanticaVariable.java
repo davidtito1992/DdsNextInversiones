@@ -18,11 +18,11 @@ public class SemanticaVariable {
 
 	private String nombreVariable;
 	private String nombreEmpresa;
-	private int anio;
+	private Year anio;
 	private int semestre;
 
 	public SemanticaVariable(String nombreVariable, String nombreEmpresa,
-			int anio, int semestre) {
+			Year anio, int semestre) {
 
 		this.nombreVariable = nombreVariable;
 		this.nombreEmpresa = nombreEmpresa;
@@ -38,8 +38,8 @@ public class SemanticaVariable {
 
 			// calculo del valor de una cuenta segun parametros
 			// ver si esto lo movemos al repo
-			valor = this.getRepoEmpresas().getValorCuenta(nombreEmpresa,
-					Year.of(anio), semestre, nombreVariable);
+			valor = this.getRepoEmpresas().getValorCuenta(nombreEmpresa, anio,
+					semestre, nombreVariable);
 
 		} else {
 
@@ -57,7 +57,8 @@ public class SemanticaVariable {
 						+ this.nombreVariable);
 
 			}
-			valor = formulaIndicador.calcular(nombreEmpresa, anio, semestre);
+			valor = new BigDecimal(10);// formulaIndicador.calcular(nombreEmpresa,
+										// anio, semestre);
 		}
 
 		return valor;

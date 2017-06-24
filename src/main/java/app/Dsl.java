@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import formulaIndicador.FormulaIndicador;
 import model.RegistroIndicador;
@@ -22,15 +23,15 @@ public class Dsl {
 
 		List<String> variablesIndicador = this
 				.analizarFormulaIndicador(posibleIndicador.getFormula());
-		
+
 		posibleIndicador.setVariables(variablesIndicador);
-		
+
 		new AppData().guardarIndicador(posibleIndicador);
 
 	}
 
 	public BigDecimal traducirVariable(String nombreVariable,
-			String nombreEmpresa, int anio, int semestre) {
+			String nombreEmpresa, Year anio, int semestre) {
 
 		return new SemanticaVariable(nombreVariable, nombreEmpresa, anio,
 				semestre).valor();
@@ -52,27 +53,48 @@ public class Dsl {
 		new AnalizadorSemantico().analizarVariablesDeFormula(preIndicador
 				.variables());
 
-		return preIndicador.variables();
+		return preIndicador.variables().stream().map(var -> var.getNombre())
+				.collect(Collectors.toList());
 
 	}
-   
-	public List<SnapshotIndicador> resultadosDeIndicador(RegistroIndicador unIndicador){
-		
-		List<SnapshotIndicador> listaDeResultados= new ArrayList<SnapshotIndicador>();
-		
+
+	public List<SnapshotIndicador> resultadosDeIndicador(
+			RegistroIndicador unIndicador) {
+
+		List<SnapshotIndicador> listaDeResultados = new ArrayList<SnapshotIndicador>();
+
 		return listaDeResultados;
 	}
 
-	public String aplicarFormula(FormulaIndicador formulaIndicador,String nombreEmpresa, Year anio, int semestre) {
+	public String aplicarFormula(String formulaIndicador, String nombreEmpresa,
+			Year anio, int semestre) {
 
 		String resultado;
 		try {
-			resultado = formulaIndicador.calcular(nombreEmpresa,
-					anio.getValue(), semestre).toPlainString();
+			ParserIndicador preIndicador = new ParserIndicador(formulaIndicador);
+			FormulaIndicador formulaACalcular = preIndicador.pasear();
+
+			preIndicador.variables()
+					.forEach(
+							variable -> variable.setValor(this
+									.traducirVariable(variable.getNombre(),
+											nombreEmpresa, anio, semestre)));
+			resultado = formulaACalcular.calcular().toPlainString();
 		} catch (RuntimeException e) {
 			resultado = e.getMessage();
+		} catch (ParseException e) {
+
+			resultado = "No pudimos obtener el resultado por problemas de sintaxis";
 		}
 		return resultado;
 	}
+
+	// ParserIndicador unindicador = new ParserIndicador("EBITDA * FDS");
+	// FormulaIndicador otroindicador= unindicador.pasear();
+	// unindicador.variables().forEach(variable-> variable.setValor(new
+	// BigDecimal(10))) ;
+	// System.out.println(otroindicador.calcular()) ;
+	// //System.out.println(variable.getNombre())
+	// new NextInversiones().start();
 
 }

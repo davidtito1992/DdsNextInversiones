@@ -13,8 +13,6 @@ import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
-import parserIndicador.ParseException;
-import parserIndicador.ParserIndicador;
 import viewmodel.ConsultarIndicadorViewM;
 
 public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
@@ -67,8 +65,6 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 
 		new Button(form).setCaption("Buscar").onClick(this::buscar)
 				.setWidth(140);
-
-		this.inicializarTabla();
 
 		Table<SnapshotIndicador> tableIndicador = new Table<SnapshotIndicador>(
 				mainPanel, SnapshotIndicador.class);
@@ -127,17 +123,6 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 	}
 
 	public void inicializarTabla() {
-		try {
-			ParserIndicador preIndicador = new ParserIndicador(this
-					.getModelObject().getRegistroIndicadorElegido()
-					.getFormula());
-			this.getModelObject().setFormulaIndicador(preIndicador.pasear());
-		} catch (ParseException e) {
-
-			this.showError("No se pudo parsear correctamente la formula del indicador");
-			this.close();
-		}
-
 		this.getModelObject().llenarTablas();
 
 	}

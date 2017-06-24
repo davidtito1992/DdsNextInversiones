@@ -8,7 +8,6 @@ import model.RegistroIndicador;
 import model.SnapshotIndicador;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
-import formulaIndicador.FormulaIndicador;
 import repositories.RepositorioEmpresa;
 import app.Dsl;
 
@@ -27,12 +26,12 @@ public class ConsultarIndicadorViewM {
 	private SnapshotIndicador snapshotIndicadorSeleccionado;
 	private String resultado;
 	private RegistroIndicador registroIndicadorElegido;
-	private FormulaIndicador formulaIndicador;
 
 	public ConsultarIndicadorViewM(RegistroIndicador unIndicador) {
 
 		this.registroIndicadorElegido = unIndicador;
 		this.generarTodosLosCBox(null, null, null);
+		this.llenarTablas();
 	}
 
 	/********* GETTERS/SETTERS *********/
@@ -126,14 +125,6 @@ public class ConsultarIndicadorViewM {
 				this.anioSeleccionado, this.semestreSeleccionado);
 	}
 
-	public FormulaIndicador getFormulaIndicador() {
-		return formulaIndicador;
-	}
-
-	public void setFormulaIndicador(FormulaIndicador formulaIndicador) {
-		this.formulaIndicador = formulaIndicador;
-	}
-
 	/********* METODOS *********/
 
 	public void generarTodosLosCBox(String empresa, Year anio, Integer semestre) {
@@ -209,7 +200,8 @@ public class ConsultarIndicadorViewM {
 												.getSemestre());
 										String resultado = new Dsl()
 												.aplicarFormula(
-														this.formulaIndicador,
+														this.getRegistroIndicadorElegido()
+																.getFormula(),
 														empresa.getNombre(),
 														periodo.getAnio(),
 														periodo.getSemestre());

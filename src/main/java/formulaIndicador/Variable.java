@@ -1,7 +1,6 @@
 package formulaIndicador;
 
 import java.math.BigDecimal;
-import app.Dsl;
 
 public class Variable implements FormulaIndicador {
 
@@ -12,12 +11,20 @@ public class Variable implements FormulaIndicador {
 
 	}
 
-	@Override
-	public BigDecimal calcular(String empresa, int anio, int semestre)
-			throws RuntimeException {
+	public String getNombre() {
 
-		return new Dsl().traducirVariable(this.nombre, empresa, anio, semestre);
-
+		return this.nombre;
 	}
 
+	private BigDecimal numero;
+
+	public void setValor(BigDecimal num) {
+		this.numero = num;
+	}
+
+	@Override
+	public BigDecimal calcular() {
+
+		return this.numero;
+	}
 }

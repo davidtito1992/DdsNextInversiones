@@ -11,10 +11,8 @@ public class Constante implements FormulaIndicador {
 		this.numero = new BigDecimal(num).setScale(SCALE);
 	}
 
-	@Override
-	public BigDecimal calcular(String empresa, int anio, int semestre) {
+	public BigDecimal calcular() {
 
 		return this.numero;
 	}
-
 }

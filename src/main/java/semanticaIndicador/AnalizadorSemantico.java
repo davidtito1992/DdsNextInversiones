@@ -1,7 +1,10 @@
 package semanticaIndicador;
 
 import java.util.List;
+
 import org.uqbar.commons.utils.ApplicationContext;
+
+import formulaIndicador.Variable;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
 import model.Empresa;
@@ -12,16 +15,17 @@ public class AnalizadorSemantico {
 	// validamos que los nombres de las variables existan
 	// ya sea una cuenta o indicador con la ayuda del
 	// repo
-	public void analizarVariablesDeFormula(List<String> variables) {
+	public void analizarVariablesDeFormula(List<Variable> variables) {
 
 		variables.forEach(nombreVariable -> {
-			if (this.getRepoEmpresas().esCuenta(nombreVariable))
+			if (this.getRepoEmpresas().esCuenta(nombreVariable.getNombre()))
 				;
-			else if (this.getRepoIndicadores().esIndicador(nombreVariable))
+			else if (this.getRepoIndicadores().esIndicador(
+					nombreVariable.getNombre()))
 				;
 			else
 				throw new RuntimeException("El nombre de la variable: "
-						+ nombreVariable + " no existe");
+						+ nombreVariable.getNombre() + " no existe");
 		});
 
 	}
