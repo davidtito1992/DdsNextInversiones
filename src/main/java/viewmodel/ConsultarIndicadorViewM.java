@@ -3,11 +3,14 @@ package viewmodel;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+
 import model.Empresa;
 import model.RegistroIndicador;
 import model.SnapshotIndicador;
+
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
+
 import repositories.RepositorioEmpresa;
 import app.Dsl;
 
@@ -198,13 +201,19 @@ public class ConsultarIndicadorViewM {
 												.getAnio());
 										snapshotIndicador.setSemestre(periodo
 												.getSemestre());
-										String resultado = new Dsl()
-												.aplicarFormula(
-														this.getRegistroIndicadorElegido()
-																.getFormula(),
-														empresa.getNombre(),
-														periodo.getAnio(),
-														periodo.getSemestre());
+										String resultado;
+										try {
+											resultado = new Dsl()
+													.prepararFormula(
+															this.getRegistroIndicadorElegido()
+																	.getFormula(),
+															empresa.getNombre(),
+															periodo.getAnio(),
+															periodo.getSemestre())
+													.calcular().toPlainString();
+										} catch (Exception e) {
+											resultado = e.getMessage();
+										}
 										snapshotIndicador
 												.setResultado(resultado);
 

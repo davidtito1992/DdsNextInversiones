@@ -66,27 +66,21 @@ public class Dsl {
 		return listaDeResultados;
 	}
 
-	public String aplicarFormula(String formulaIndicador, String nombreEmpresa,
-			Year anio, int semestre) {
+	public FormulaIndicador prepararFormula(String formulaIndicador,
+			String nombreEmpresa, Year anio, int semestre)
+			throws ParseException {
 
-		String resultado;
-		try {
-			ParserIndicador preIndicador = new ParserIndicador(formulaIndicador);
-			FormulaIndicador formulaACalcular = preIndicador.pasear();
+		// String resultado;
+		// try {
+		ParserIndicador preIndicador = new ParserIndicador(formulaIndicador);
+		FormulaIndicador formulaACalcular = preIndicador.pasear();
 
-			preIndicador.variables()
-					.forEach(
-							variable -> variable.setValor(this
-									.traducirVariable(variable.getNombre(),
-											nombreEmpresa, anio, semestre)));
-			resultado = formulaACalcular.calcular().toPlainString();
-		} catch (RuntimeException e) {
-			resultado = e.getMessage();
-		} catch (ParseException e) {
+		preIndicador.variables().forEach(
+				variable -> variable.setValor(this.traducirVariable(
+						variable.getNombre(), nombreEmpresa, anio, semestre)));
+		// resultado = formulaACalcular.calcular();
 
-			resultado = "No pudimos obtener el resultado por problemas de sintaxis";
-		}
-		return resultado;
+		return formulaACalcular;
 	}
 
 	// ParserIndicador unindicador = new ParserIndicador("EBITDA * FDS");

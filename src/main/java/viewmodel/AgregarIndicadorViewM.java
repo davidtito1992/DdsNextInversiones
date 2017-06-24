@@ -100,7 +100,7 @@ public class AgregarIndicadorViewM {
 			throw new Exception(
 					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
 		}
-		
+
 		new Dsl().añadirIndicador(new RegistroIndicador(this.nombre,
 				this.formula));
 	}
