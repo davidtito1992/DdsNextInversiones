@@ -17,6 +17,11 @@ import viewmodel.ConsultarIndicadorViewM;
 
 public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@SuppressWarnings("rawtypes")
 	public ConsultarIndicadorView(SimpleWindow owner,
 			RegistroIndicador unIndicador) {
@@ -122,8 +127,4 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 
 	}
 
-	public void inicializarTabla() {
-		this.getModelObject().llenarTablas();
-
-	}
 }

@@ -8,6 +8,7 @@ import model.RegistroIndicador;
 
 import org.uqbar.commons.utils.ApplicationContext;
 
+import app.Dsl;
 import formulaIndicador.FormulaIndicador;
 import parserIndicador.ParseException;
 import parserIndicador.ParserIndicador;
@@ -45,18 +46,23 @@ public class SemanticaVariable {
 
 			// calculo del valor de un indicador segun parametros
 			// ver si esto lo movemos al repo
-			RegistroIndicador indicadorAObtener = this.getRepoIndicadores()
-					.getRegistroIndicador(this.nombreVariable);
-			FormulaIndicador formulaIndicador;
-			try {
-				formulaIndicador = new ParserIndicador(
-						indicadorAObtener.getFormula()).pasear();
-			} catch (ParseException e) {
-
-				throw new RuntimeException("Problemas al parsear la variable: "
-						+ this.nombreVariable);
-
-			}
+			// RegistroIndicador indicadorAObtener = this.getRepoIndicadores()
+			// .getRegistroIndicador(this.nombreVariable);
+			//
+			// try {
+			//
+			// new Dsl().aplicarFormula(indicadorAObtener.getFormula(),
+			// nombreEmpresa, anio, semestre) ;
+			// //
+			// // FormulaIndicador formulaIndicador = new ParserIndicador(
+			// indicadorAObtener.getFormula()).pasear();
+			// } catch (ParseException e) {
+			//
+			// throw new RuntimeException("Problemas al parsear la variable: "
+			// + this.nombreVariable);
+			//
+			// }
+			// HARDCODE
 			valor = new BigDecimal(10);// formulaIndicador.calcular(nombreEmpresa,
 										// anio, semestre);
 		}

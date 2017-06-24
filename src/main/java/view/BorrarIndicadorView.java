@@ -11,6 +11,11 @@ import viewmodel.BorrarIndicadorViewM;
 
 public class BorrarIndicadorView extends Dialog<BorrarIndicadorViewM> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@SuppressWarnings("rawtypes")
 	public BorrarIndicadorView(SimpleWindow owner,
 			RegistroIndicador indicadorABorrar) {

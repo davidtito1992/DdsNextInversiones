@@ -13,6 +13,11 @@ import viewmodel.AgregarIndicadorViewM;
 
 public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@SuppressWarnings("rawtypes")
 	public AgregarIndicadorView(SimpleWindow owner) throws Exception {
 		super(owner, new AgregarIndicadorViewM());
