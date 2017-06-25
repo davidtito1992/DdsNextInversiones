@@ -2,16 +2,12 @@ package semanticaIndicador;
 
 import java.math.BigDecimal;
 import java.time.Year;
-
 import model.Empresa;
 import model.RegistroIndicador;
-
 import org.uqbar.commons.utils.ApplicationContext;
-
 import app.Dsl;
 import formulaIndicador.FormulaIndicador;
 import parserIndicador.ParseException;
-import parserIndicador.ParserIndicador;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
 
@@ -50,24 +46,17 @@ public class SemanticaVariable {
 					.getRegistroIndicador(this.nombreVariable);
 
 			try {
-
 				FormulaIndicador variableIndicador = new Dsl().prepararFormula(
 						indicadorAObtener.getFormula(), nombreEmpresa, anio,
 						semestre);
 				valor = variableIndicador.calcular();
-				//
-				// FormulaIndicador formulaIndicador = new ParserIndicador(
-				// indicadorAObtener.getFormula()).pasear();
+				
 			} catch (ParseException e) {
 
 				throw new RuntimeException("Problemas al parsear la variable: "
 						+ this.nombreVariable);
 
 			}
-			// HARDCODE
-			// valor = new BigDecimal(10);//
-			// formulaIndicador.calcular(nombreEmpresa,
-			// anio, semestre);
 		}
 
 		return valor;

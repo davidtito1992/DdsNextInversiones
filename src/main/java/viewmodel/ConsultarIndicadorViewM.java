@@ -3,6 +3,7 @@ package viewmodel;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import model.Empresa;
 import model.RegistroIndicador;
@@ -179,53 +180,50 @@ public class ConsultarIndicadorViewM {
 	}
 
 	public void llenarTablas() {
-		this.setSnapshotIndicadores(this
-				.resultadosIndicadores(getRepoEmpresas().allInstances()));
+		this.setSnapshotIndicadores(this.resultadosIndicadores());
 	}
 
-	public ArrayList<SnapshotIndicador> resultadosIndicadores(
-			List<Empresa> empresasASnap) {
+	public List<SnapshotIndicador> resultadosIndicadores() {
 
-		ArrayList<SnapshotIndicador> listSnapshot = new ArrayList<SnapshotIndicador>();
+		List<SnapshotIndicador> listSnapshot = getRepoEmpresas()
+				.allInstances()
+				.stream()
+				.map(empresa -> empresa
+						.getPeriodos()
+						.stream()
+						.map(periodo ->
 
-		empresasASnap
-				.forEach(empresa -> {
-					empresa.getPeriodos()
-							.forEach(
-									periodo -> {
-										SnapshotIndicador snapshotIndicador = new SnapshotIndicador();
-										snapshotIndicador
-												.setNombreEmpresa(empresa
-														.getNombre());
-										snapshotIndicador.setAnio(periodo
-												.getAnio());
-										snapshotIndicador.setSemestre(periodo
-												.getSemestre());
-										String resultado;
-										try {
-											resultado = new Dsl()
-													.prepararFormula(
-															this.getRegistroIndicadorElegido()
-																	.getFormula(),
-															empresa.getNombre(),
-															periodo.getAnio(),
-															periodo.getSemestre())
-													.calcular().toPlainString();
-										} catch (Exception e) {
-											resultado = e.getMessage();
-										}
-										snapshotIndicador
-												.setResultado(resultado);
+						{
+							return crearSnapshotIndicador(empresa.getNombre(),
+									periodo.getAnio(), periodo.getSemestre());
+						}).collect(Collectors.toList()))
+				.flatMap(listaSnap -> listaSnap.stream())
+				.collect(Collectors.toList());
 
-										listSnapshot.add(snapshotIndicador);
-
-									});
-
-				});
 		return listSnapshot;
 	}
 
 	public void buscar() {
 
+	}
+
+	public SnapshotIndicador crearSnapshotIndicador(String nombreEmpresa,
+			Year anio, int semestre) {
+		SnapshotIndicador snapshotIndicador = new SnapshotIndicador();
+		snapshotIndicador.setNombreEmpresa(nombreEmpresa);
+		snapshotIndicador.setAnio(anio);
+		snapshotIndicador.setSemestre(semestre);
+		String resultado;
+		try {
+			resultado = new Dsl()
+					.prepararFormula(
+							this.getRegistroIndicadorElegido().getFormula(),
+							nombreEmpresa, anio, semestre).calcular()
+					.toPlainString();
+		} catch (Exception e) {
+			resultado = e.getMessage();
+		}
+		snapshotIndicador.setResultado(resultado);
+		return snapshotIndicador;
 	}
 }

@@ -54,10 +54,11 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 
 		new Label(form).setText("\t\t\t\tFormula:");
 		new TextBox(form).setWidth(250).bindValueToProperty("formula");
+		//
+		// new Label(form)
+		// .setText("Recuerde ingresar cada variable separada por espacios. Ejemplo: ( CUENTA + 2 )");
 
-		new Label(form)
-				.setText("Recuerde ingresar cada variable separada por espacios. Ejemplo: ( CUENTA + 2 )");
-
+		new Label(form).setText("\t");
 	}
 
 	@Override

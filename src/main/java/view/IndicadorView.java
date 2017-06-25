@@ -55,16 +55,16 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Aceptar").onClick(this::accept)
-				.setAsDefault();
-		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
+
+		new Button(actions).setCaption("Salir").onClick(this::cancel)
+				.setWidth(140);
 	}
 
-	@Override
-	protected void executeTask() {
-		System.out.println("Que hacemos?:/");
-		super.executeTask();
-	}
+	// @Override
+	// protected void executeTask() {
+	// System.out.println("Que hacemos?:/");
+	// super.executeTask();
+	// }
 
 	@Override
 	public void cancel() {
