@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import model.Empresa;
 import model.RegistroIndicador;
+import model.SnapshotEmpresa;
 import model.SnapshotIndicador;
 
 import org.uqbar.commons.utils.ApplicationContext;
@@ -170,7 +171,7 @@ public class ConsultarIndicadorViewM {
 		this.generarTodosLosCBox(null, null, null);
 		this.snapshotIndicadorSeleccionado = null;
 		this.limpiarFiltros();
-		this.resultado = "";// new BigDecimal(0);
+		this.llenarTablas();
 	}
 
 	public void limpiarFiltros() {
@@ -180,13 +181,14 @@ public class ConsultarIndicadorViewM {
 	}
 
 	public void llenarTablas() {
-		this.setSnapshotIndicadores(this.resultadosIndicadores());
+		this.setSnapshotIndicadores(this
+				.resultadosIndicadores(getRepoEmpresas().allInstances()));
 	}
 
-	public List<SnapshotIndicador> resultadosIndicadores() {
+	public List<SnapshotIndicador> resultadosIndicadores(
+			List<Empresa> listaDeEmpresas) {
 
-		List<SnapshotIndicador> listSnapshot = getRepoEmpresas()
-				.allInstances()
+		List<SnapshotIndicador> listSnapshot = listaDeEmpresas
 				.stream()
 				.map(empresa -> empresa
 						.getPeriodos()
@@ -204,7 +206,11 @@ public class ConsultarIndicadorViewM {
 	}
 
 	public void buscar() {
-
+		List<SnapshotIndicador> listSnapshot = (this
+				.resultadosIndicadores(getRepoEmpresas().filtrar(null,
+						nombreSeleccionado, null,
+						anioSeleccionado)));
+		this.setSnapshotIndicadores(listSnapshot);
 	}
 
 	public SnapshotIndicador crearSnapshotIndicador(String nombreEmpresa,

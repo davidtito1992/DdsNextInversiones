@@ -105,7 +105,8 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Salir").onClick(this::cancel).setWidth(140);
+		new Button(actions).setCaption("Salir").onClick(this::cancel)
+				.setWidth(140);
 	}
 
 	// @Override
