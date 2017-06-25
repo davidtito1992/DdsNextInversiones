@@ -19,7 +19,7 @@ public class Expresion implements FormulaIndicador {
 	@Override
 	public BigDecimal calcular() {
 		return operacion.ejecutar(nodoIzquierdo.calcular(),
-				nodoDerecho.calcular());
+				nodoDerecho.calcular()).setScale(SCALE);
 	}
 
 }

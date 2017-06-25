@@ -7,6 +7,6 @@ public class Resta implements Operacion {
 	@Override
 	public BigDecimal ejecutar(BigDecimal nodoIzquierdo, BigDecimal nodoDerecho) {
 
-		return nodoIzquierdo.subtract(nodoDerecho);
+		return nodoIzquierdo.subtract(nodoDerecho).setScale(SCALE);
 	}
 }

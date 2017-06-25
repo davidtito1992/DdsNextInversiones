@@ -6,6 +6,6 @@ public class Suma implements Operacion {
 
 	@Override
 	public BigDecimal ejecutar(BigDecimal nodoIzquierdo, BigDecimal nodoDerecho) {
-		return nodoIzquierdo.add(nodoDerecho);
+		return nodoIzquierdo.add(nodoDerecho).setScale(SCALE);
 	}
 }
