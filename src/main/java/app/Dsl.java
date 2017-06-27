@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.Year;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import formulaIndicador.FormulaIndicador;
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
@@ -14,7 +15,7 @@ import semanticaIndicador.SemanticaVariable;
 public class Dsl {
 
 	public void añadirIndicador(RegistroIndicador posibleIndicador)
-			throws Throwable {
+			throws Exception {
 
 		this.analizarNombreIndicador(posibleIndicador.getNombre());
 
@@ -28,7 +29,8 @@ public class Dsl {
 	}
 
 	public BigDecimal traducirVariable(String nombreVariable,
-			String nombreEmpresa, Year anio, int semestre) {
+			String nombreEmpresa, Year anio, int semestre)
+			throws RuntimeException {
 
 		return new SemanticaVariable(nombreVariable, nombreEmpresa, anio,
 				semestre).valor();
@@ -60,11 +62,13 @@ public class Dsl {
 			throws ParseException {
 
 		ParserIndicador preIndicador = new ParserIndicador(formulaIndicador);
-		FormulaIndicador formulaACalcular = preIndicador.pasear();
+		preIndicador.pasear();
 
 		preIndicador.variables().forEach(
 				variable -> variable.setValor(this.traducirVariable(
 						variable.getNombre(), nombreEmpresa, anio, semestre)));
+
+		FormulaIndicador formulaACalcular = preIndicador.getFormulaIndicador();
 
 		return formulaACalcular;
 	}

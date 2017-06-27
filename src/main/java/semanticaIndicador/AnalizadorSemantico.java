@@ -15,7 +15,8 @@ public class AnalizadorSemantico {
 	// validamos que los nombres de las variables existan
 	// ya sea una cuenta o indicador con la ayuda del
 	// repo
-	public void analizarVariablesDeFormula(List<Variable> variables) {
+	public void analizarVariablesDeFormula(List<Variable> variables)
+			throws RuntimeException {
 
 		variables.forEach(nombreVariable -> {
 			if (this.getRepoEmpresas().esCuenta(nombreVariable.getNombre()))
@@ -30,7 +31,8 @@ public class AnalizadorSemantico {
 
 	}
 
-	public void analizarNombreDeIndicador(String nombreIndicador) {
+	public void analizarNombreDeIndicador(String nombreIndicador)
+			throws RuntimeException {
 
 		if (this.getRepoEmpresas().esCuenta(nombreIndicador))
 

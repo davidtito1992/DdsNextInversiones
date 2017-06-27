@@ -10,21 +10,17 @@ import formulaIndicador.*;
 public class ParserIndicador implements ParserIndicadorConstants {
 
 	List<Variable> listaDeVariables = new ArrayList<Variable>();
+	FormulaIndicador formula;
 
 	public ParserIndicador(String indicador) {
 		this((Reader) (new StringReader(indicador + ";")));
 	}
 
-	final public FormulaIndicador pasear() throws ParseException {
-		FormulaIndicador cadena;
+	final public void pasear() throws ParseException {
 		try {
-			cadena = expr();
+			formula = expr();
 			jj_consume_token(FINALIZACION);
 			System.out.println("Parseo Exitoso!\u005cn");
-			{
-				if (true)
-					return cadena;
-			}
 		} catch (ParseException e) {
 			{
 				if (true)
@@ -32,7 +28,6 @@ public class ParserIndicador implements ParserIndicadorConstants {
 							"Lo lamento. Hay problemas en la sintaxis :/!\u005cn");
 			}
 		}
-		throw new Error("Missing return statement in function");
 	}
 
 	final public FormulaIndicador expr() throws ParseException {
@@ -182,6 +177,14 @@ public class ParserIndicador implements ParserIndicadorConstants {
 		{
 			if (true)
 				return token.image;
+		}
+		throw new Error("Missing return statement in function");
+	}
+
+	final public FormulaIndicador getFormulaIndicador() throws ParseException {
+		{
+			if (true)
+				return formula;
 		}
 		throw new Error("Missing return statement in function");
 	}
