@@ -74,11 +74,6 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 
 	}
 
-	@Override
-	public void cancel() {
-		this.close();
-	}
-
 	public void agregarIndicador() {
 		getModelObject().agregarIndicadorALaFormula();
 	}
@@ -87,14 +82,12 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 		getModelObject().agregarCuentaALaFormula();
 	}
 
-	// @Override
 	protected void guardar() {
 
 		try {
 			getModelObject().guardarIndicador();
-			super.executeTask();
 			this.close();
-		} catch (Throwable e) {
+		} catch (Exception e) {
 			this.showError(e.getMessage());
 		}
 

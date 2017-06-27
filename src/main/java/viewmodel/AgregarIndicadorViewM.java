@@ -94,10 +94,10 @@ public class AgregarIndicadorViewM {
 
 	}
 
-	public void guardarIndicador() throws Throwable {
+	public void guardarIndicador() throws Exception {
 
 		if (this.nombre == null || this.formula == "") {
-			throw new Exception(
+			throw new RuntimeException(
 					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
 		}
 
