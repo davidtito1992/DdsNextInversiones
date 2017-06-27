@@ -5,7 +5,7 @@ import model.Empresa;
 import model.RegistroIndicador;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
-import app.Dsl;
+import app.DslIndicador;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
 
@@ -101,7 +101,7 @@ public class AgregarIndicadorViewM {
 					"Debe ingresar nombre y formula para guardar correctamente. Intentelo nuevamente");
 		}
 
-		new Dsl().añadirIndicador(new RegistroIndicador(this.nombre,
+		new DslIndicador().añadirIndicador(new RegistroIndicador(this.nombre,
 				this.formula));
 	}
 

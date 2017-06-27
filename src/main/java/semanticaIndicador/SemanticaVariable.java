@@ -5,7 +5,7 @@ import java.time.Year;
 import model.Empresa;
 import model.RegistroIndicador;
 import org.uqbar.commons.utils.ApplicationContext;
-import app.Dsl;
+import app.DslIndicador;
 import formulaIndicador.FormulaIndicador;
 import parserIndicador.ParseException;
 import repositories.RepositorioEmpresa;
@@ -46,7 +46,7 @@ public class SemanticaVariable {
 					.getRegistroIndicador(this.nombreVariable);
 
 			try {
-				FormulaIndicador variableIndicador = new Dsl().prepararFormula(
+				FormulaIndicador variableIndicador = new DslIndicador().prepararFormula(
 						indicadorAObtener.getFormula(), nombreEmpresa, anio,
 						semestre);
 				valor = variableIndicador.calcular();

@@ -12,7 +12,7 @@ import parserIndicador.ParserIndicador;
 import semanticaIndicador.AnalizadorSemantico;
 import semanticaIndicador.SemanticaVariable;
 
-public class Dsl {
+public class DslIndicador {
 
 	public void añadirIndicador(RegistroIndicador posibleIndicador)
 			throws Exception {

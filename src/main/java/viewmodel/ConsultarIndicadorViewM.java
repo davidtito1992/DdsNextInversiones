@@ -10,7 +10,7 @@ import model.SnapshotIndicador;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 import repositories.RepositorioEmpresa;
-import app.Dsl;
+import app.DslIndicador;
 
 @Observable
 public class ConsultarIndicadorViewM {
@@ -217,7 +217,7 @@ public class ConsultarIndicadorViewM {
 		snapshotIndicador.setSemestre(semestre);
 		String resultado;
 		try {
-			resultado = new Dsl()
+			resultado = new DslIndicador()
 					.prepararFormula(
 							this.getRegistroIndicadorElegido().getFormula(),
 							nombreEmpresa, anio, semestre).calcular()
