@@ -116,7 +116,7 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 
 	public void buscar() {
 		if (this.getModelObject().getNombreSeleccionado() != null
-				|| this.getModelObject().getSemestreSeleccionado() != null
+		// || this.getModelObject().getSemestreSeleccionado() != null
 				|| this.getModelObject().getAnioSeleccionado() != null) {
 
 			this.getModelObject().buscar();

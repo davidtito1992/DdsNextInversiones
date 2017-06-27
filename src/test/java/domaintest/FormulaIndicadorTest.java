@@ -35,11 +35,12 @@ public class FormulaIndicadorTest {
 
 		var2 = new Variable("variable2");
 		var2.setValor(new BigDecimal(2));
-		
-		expr1 = new Expresion(const1, var2, new Suma()); //12
-		expr2 = new Expresion(var1, var2, new Resta()); //4
+
+		expr1 = new Expresion(const1, var2, new Suma()); // 12
+		expr2 = new Expresion(var1, var2, new Resta()); // 4
 
 	}
+
 	@Test
 	public void sumaDeConstantes() throws RuntimeException {
 		BigDecimal resultado = new Suma().ejecutar(const1.calcular(),
@@ -128,45 +129,41 @@ public class FormulaIndicadorTest {
 		assertThat(resultado, is(new BigDecimal(3).setScale(2)));
 	}
 
-
 	@Test
 	public void sumaDeNodoIzqExpresionYNodoDerExpresion()
 			throws RuntimeException {
 
-		Expresion nuevaExpresion =new Expresion(expr1, expr2, new Suma());
+		Expresion nuevaExpresion = new Expresion(expr1, expr2, new Suma());
 		BigDecimal resultado = nuevaExpresion.calcular();
 		assertThat(resultado, is(new BigDecimal(16).setScale(2)));
 	}
-
 
 	@Test
 	public void RestaDeNodoIzqExpresionYNodoDerExpresion()
 			throws RuntimeException {
 
-		Expresion nuevaExpresion =new Expresion(expr1, expr2, new Resta());
+		Expresion nuevaExpresion = new Expresion(expr1, expr2, new Resta());
 		BigDecimal resultado = nuevaExpresion.calcular();
 		assertThat(resultado, is(new BigDecimal(8).setScale(2)));
 	}
-	
+
 	@Test
 	public void MultiplicacionDeNodoIzqExpresionYNodoDerExpresion()
 			throws RuntimeException {
 
-		Expresion nuevaExpresion =new Expresion(expr1, expr2, new Multiplicacion());
+		Expresion nuevaExpresion = new Expresion(expr1, expr2,
+				new Multiplicacion());
 		BigDecimal resultado = nuevaExpresion.calcular();
 		assertThat(resultado, is(new BigDecimal(48).setScale(2)));
 	}
-	
+
 	@Test
 	public void DivisionDeNodoIzqExpresionYNodoDerExpresion()
 			throws RuntimeException {
 
-		Expresion nuevaExpresion =new Expresion(expr1, expr2, new Division());
+		Expresion nuevaExpresion = new Expresion(expr1, expr2, new Division());
 		BigDecimal resultado = nuevaExpresion.calcular();
 		assertThat(resultado, is(new BigDecimal(3).setScale(2)));
 	}
-	
-	
-	
-	
+
 }

@@ -4,15 +4,11 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import model.Empresa;
 import model.RegistroIndicador;
-import model.SnapshotEmpresa;
 import model.SnapshotIndicador;
-
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
-
 import repositories.RepositorioEmpresa;
 import app.Dsl;
 
@@ -25,8 +21,8 @@ public class ConsultarIndicadorViewM {
 	private String nombreSeleccionado;
 	private List<Year> anios = new ArrayList<>();
 	private Year anioSeleccionado;
-	private List<Integer> semestre = new ArrayList<Integer>();
-	private Integer semestreSeleccionado;
+	// private List<Integer> semestre = new ArrayList<Integer>();
+	// private Integer semestreSeleccionado;
 	private List<SnapshotIndicador> snapshotIndicadores;
 	private SnapshotIndicador snapshotIndicadorSeleccionado;
 	private String resultado;
@@ -35,7 +31,7 @@ public class ConsultarIndicadorViewM {
 	public ConsultarIndicadorViewM(RegistroIndicador unIndicador) {
 
 		this.registroIndicadorElegido = unIndicador;
-		this.generarTodosLosCBox(null, null, null);
+		this.generarTodosLosCBox(null, null);
 		this.llenarTablas();
 	}
 
@@ -90,8 +86,8 @@ public class ConsultarIndicadorViewM {
 
 	public void setNombreSeleccionado(String nombreSeleccionado) {
 		this.nombreSeleccionado = nombreSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.anioSeleccionado, this.semestreSeleccionado);
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.anioSeleccionado);// ,
+																					// this.semestreSeleccionado);
 	}
 
 	public List<Year> getAnios() {
@@ -108,39 +104,40 @@ public class ConsultarIndicadorViewM {
 
 	public void setAnioSeleccionado(Year anioSeleccionado) {
 		this.anioSeleccionado = anioSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.anioSeleccionado, this.semestreSeleccionado);
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.anioSeleccionado);// ,
+																					// this.semestreSeleccionado);
 	}
 
-	public List<Integer> getSemestre() {
-		return semestre;
-	}
-
-	public void setSemestre(List<Integer> semestre) {
-		this.semestre = semestre;
-	}
-
-	public Integer getSemestreSeleccionado() {
-		return semestreSeleccionado;
-	}
-
-	public void setSemestreSeleccionado(Integer semestreSeleccionado) {
-		this.semestreSeleccionado = semestreSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.anioSeleccionado, this.semestreSeleccionado);
-	}
+	// public List<Integer> getSemestre() {
+	// return semestre;
+	// }
+	//
+	// public void setSemestre(List<Integer> semestre) {
+	// this.semestre = semestre;
+	// }
+	//
+	// public Integer getSemestreSeleccionado() {
+	// return semestreSeleccionado;
+	// }
+	//
+	// public void setSemestreSeleccionado(Integer semestreSeleccionado) {
+	// this.semestreSeleccionado = semestreSeleccionado;
+	// this.generarTodosLosCBox(this.nombreSeleccionado,
+	// this.anioSeleccionado, this.semestreSeleccionado);
+	// }
 
 	/********* METODOS *********/
 
-	public void generarTodosLosCBox(String empresa, Year anio, Integer semestre) {
+	public void generarTodosLosCBox(String empresa, Year anio) {// , Integer
+																// semestre) {
 
 		List<Empresa> repoEmpresaFiltrado = new ArrayList<Empresa>();
 		repoEmpresaFiltrado = this.getRepoEmpresas().filtrar(null, empresa,
-				semestre, anio);
+				null, anio); // semestre, anio);
 
 		generarCBoxNombresEmpresas(repoEmpresaFiltrado);
 		generarCBoxAnios(repoEmpresaFiltrado);
-		generarCBoxSemestre(repoEmpresaFiltrado);
+		// generarCBoxSemestre(repoEmpresaFiltrado);
 
 	}
 
@@ -154,11 +151,11 @@ public class ConsultarIndicadorViewM {
 
 	}
 
-	public void generarCBoxSemestre(List<Empresa> empresas) {
-
-		this.semestre = this.getRepoEmpresas().todosLosPeriodos(empresas);
-
-	}
+	// public void generarCBoxSemestre(List<Empresa> empresas) {
+	//
+	// this.semestre = this.getRepoEmpresas().todosLosPeriodos(empresas);
+	//
+	// }
 
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
 
@@ -168,7 +165,7 @@ public class ConsultarIndicadorViewM {
 	}
 
 	public void reiniciar() {
-		this.generarTodosLosCBox(null, null, null);
+		this.generarTodosLosCBox(null, null);
 		this.snapshotIndicadorSeleccionado = null;
 		this.limpiarFiltros();
 		this.llenarTablas();
@@ -176,7 +173,7 @@ public class ConsultarIndicadorViewM {
 
 	public void limpiarFiltros() {
 		nombreSeleccionado = null;
-		semestreSeleccionado = null;
+		// semestreSeleccionado = null;
 		anioSeleccionado = null;
 	}
 
@@ -208,8 +205,7 @@ public class ConsultarIndicadorViewM {
 	public void buscar() {
 		List<SnapshotIndicador> listSnapshot = (this
 				.resultadosIndicadores(getRepoEmpresas().filtrar(null,
-						nombreSeleccionado, null,
-						anioSeleccionado)));
+						nombreSeleccionado, null, anioSeleccionado)));
 		this.setSnapshotIndicadores(listSnapshot);
 	}
 
