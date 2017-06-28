@@ -37,24 +37,32 @@ public class DslIndicador {
 	}
 
 	private void analizarNombreIndicador(String nombre) throws ParseException {
-
-		String nombreIndicador = new ParserIndicador(nombre).pasearSoloNombre();
-
-		new AnalizadorSemantico().analizarNombreDeIndicador(nombreIndicador);
+		try {
+			String nombreIndicador = new ParserIndicador(nombre)
+					.pasearSoloNombre();
+			new AnalizadorSemantico()
+					.analizarNombreDeIndicador(nombreIndicador);
+		} catch (ParseException e) {
+			throw new ParseException(
+					"Hay problemas de sintaxis en el nombre del indicador que desea guardar!");
+		}
 	}
 
 	private List<String> analizarFormulaIndicador(String formula)
 			throws ParseException {
+		try {
+			ParserIndicador preIndicador = new ParserIndicador(formula);
+			preIndicador.pasear();
 
-		ParserIndicador preIndicador = new ParserIndicador(formula);
-		preIndicador.pasear();
+			new AnalizadorSemantico().analizarVariablesDeFormula(preIndicador
+					.variables());
 
-		new AnalizadorSemantico().analizarVariablesDeFormula(preIndicador
-				.variables());
-
-		return preIndicador.variables().stream().map(var -> var.getNombre())
-				.collect(Collectors.toList());
-
+			return preIndicador.variables().stream()
+					.map(var -> var.getNombre()).collect(Collectors.toList());
+		} catch (ParseException e) {
+			throw new ParseException(
+					"Hay problemas de sintaxis en la formula del indicador que desea guardar!");
+		}
 	}
 
 	public FormulaIndicador prepararFormula(RegistroIndicador formulaIndicador,
