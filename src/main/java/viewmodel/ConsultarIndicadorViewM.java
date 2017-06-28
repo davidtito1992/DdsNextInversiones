@@ -218,8 +218,7 @@ public class ConsultarIndicadorViewM {
 		String resultado;
 		try {
 			resultado = new DslIndicador()
-					.prepararFormula(
-							this.getRegistroIndicadorElegido().getFormula(),
+					.prepararFormula(this.getRegistroIndicadorElegido(),
 							nombreEmpresa, anio, semestre).calcular()
 					.toPlainString();
 		} catch (Exception e) {

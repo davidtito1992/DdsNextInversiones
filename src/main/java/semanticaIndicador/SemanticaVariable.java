@@ -34,23 +34,21 @@ public class SemanticaVariable {
 		if (this.getRepoEmpresas().esCuenta(nombreVariable)) {
 
 			// calculo del valor de una cuenta segun parametros
-			// ver si esto lo movemos al repo
 			valor = this.getRepoEmpresas().getValorCuenta(nombreEmpresa, anio,
 					semestre, nombreVariable);
 
 		} else {
 			//
 			// calculo del valor de un indicador segun parametros
-			// ver si esto lo movemos al repo
 			RegistroIndicador indicadorAObtener = this.getRepoIndicadores()
 					.getRegistroIndicador(this.nombreVariable);
 
 			try {
-				FormulaIndicador variableIndicador = new DslIndicador().prepararFormula(
-						indicadorAObtener.getFormula(), nombreEmpresa, anio,
-						semestre);
+				FormulaIndicador variableIndicador = new DslIndicador()
+						.prepararFormula(indicadorAObtener, nombreEmpresa,
+								anio, semestre);
 				valor = variableIndicador.calcular();
-				
+
 			} catch (ParseException e) {
 
 				throw new RuntimeException("Problemas al parsear la variable: "

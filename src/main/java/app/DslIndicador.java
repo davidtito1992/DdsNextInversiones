@@ -57,11 +57,12 @@ public class DslIndicador {
 
 	}
 
-	public FormulaIndicador prepararFormula(String formulaIndicador,
+	public FormulaIndicador prepararFormula(RegistroIndicador formulaIndicador,
 			String nombreEmpresa, Year anio, int semestre)
 			throws ParseException {
 
-		ParserIndicador preIndicador = new ParserIndicador(formulaIndicador);
+		ParserIndicador preIndicador = new ParserIndicador(
+				formulaIndicador.getFormula());
 		preIndicador.pasear();
 
 		preIndicador.variables().forEach(
