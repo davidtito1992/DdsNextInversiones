@@ -1,11 +1,14 @@
 package domaintest;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
+import model.Empresa;
+import model.RegistroIndicador;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.uqbar.commons.utils.ApplicationContext;
@@ -20,25 +23,59 @@ public class AnalizadorSemanticoTest {
 	RepositorioEmpresa mockRepo;
 	RepositorioIndicadores mockRepoIndicadores;
 	AnalizadorSemantico analizador;
-	String I1;
+	Variable i1;
+	Variable i2;
+    Variable ebitda;
+    Variable fds;
+    Variable cuentaNueva1;
+    Variable cuentaNueva2;
+    Variable indicadorNuevo1;
+    Variable indicadorNuevo2;
  	
 	
 	@Before
 	public void init() {
-		 mockRepo = mock(RepositorioEmpresa.class);
-	    ApplicationContext.getInstance().configureSingleton(RepositorioEmpresa.class, mockRepo);
-	    ApplicationContext.getInstance().configureSingleton(RepositorioIndicadores.class, mockRepoIndicadores);
+		mockRepoIndicadores = mock(RepositorioIndicadores.class);
+		mockRepo = mock(RepositorioEmpresa.class);
+	    ApplicationContext.getInstance().configureSingleton(Empresa.class, mockRepo);
+	    ApplicationContext.getInstance().configureSingleton(RegistroIndicador.class, mockRepoIndicadores);
 	    variables = new ArrayList<Variable>();
 	    analizador = new AnalizadorSemantico();
-	    I1 = "I1";
+	    i1 = new Variable("I1");
+	    i2 = new Variable("I2");
+	    ebitda = new Variable("EBITDA");
+	    fds = new Variable("FDS");
+	    cuentaNueva1 = new Variable("cuentaNueva1");
+	    cuentaNueva2 = new Variable("cuentaNueva2");
+	    indicadorNuevo1 = new Variable("indicadorNuevo1");
+	    indicadorNuevo2 = new Variable("indicadorNuevo2");
+	    
 	}
 	
-	@Test(expected = RuntimeException.class)
-	public void variablesDeFormulaSonCuentas(){
-	    Variable EBITDA = new Variable("EBITDA");
-	    Variable FDS = new Variable("FDS");
-		variables.add(EBITDA);
-		variables.add(FDS);
+	@Test
+	public void nombreIndicadorNuevoIgualAIndicadorExistente(){
+		try{
+			when(mockRepoIndicadores.esIndicador("I1")).thenReturn(true);
+			analizador.analizarNombreDeIndicador(i1.getNombre());
+		}catch(RuntimeException e){
+			assertEquals("Existe un indicador con el nombre: " + i1.getNombre() + ", escriba otro nombre de indicador.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void nombreDeIndicadorNuevoIgualACuentaExistente(){
+		try{
+			when(mockRepo.esCuenta("EBITDA")).thenReturn(true);
+			analizador.analizarNombreDeIndicador(ebitda.getNombre());
+		}catch(RuntimeException e){
+			assertEquals("Existe una cuenta con el nombre: " + ebitda.getNombre() + ", escriba otro nombre de indicador.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void variablesDeFormulaSonCuentasExistentes(){
+		variables.add(ebitda);
+		variables.add(fds);
 		when(mockRepo.esCuenta("EBITDA")).thenReturn(true);
 		when(mockRepo.esCuenta("FDS")).thenReturn(true);
 		AnalizadorSemantico analizador = new AnalizadorSemantico();	
@@ -46,53 +83,83 @@ public class AnalizadorSemanticoTest {
 	}
 	
 	@Test(expected = RuntimeException.class)
-	public void variablesDeFormulaSonIndicadores(){
-		Variable I1 = new Variable("I1");
-	    Variable I2 = new Variable("I2");
-		variables.add(I1);
-		variables.add(I2);
+	public void variablesDeFormulaSonCuentasInexistentes(){
+		variables.add(cuentaNueva1);
+		variables.add(cuentaNueva2);
+		when(mockRepo.esCuenta("cuentaNueva1")).thenReturn(false);
+		when(mockRepo.esCuenta("cuentaNueva2")).thenReturn(false);
+		analizador.analizarVariablesDeFormula(variables);
+	}
+	
+	@Test
+	public void variablesDeFormulaSonIndicadoresExistentes(){
+		variables.add(i1);
+		variables.add(i2);
 		when(mockRepoIndicadores.esIndicador("I1")).thenReturn(true);
 		when(mockRepoIndicadores.esIndicador("I2")).thenReturn(true);
 		analizador.analizarVariablesDeFormula(variables);
 	}
 	
 	@Test(expected = RuntimeException.class)
-	public void variablesDeFormulaSonIndicadoresYCuentas(){
-		Variable I1 = new Variable("I1");
-		Variable EBITDA = new Variable("EBITDA");
-		variables.add(I1);
-		variables.add(EBITDA);
+	public void variablesDeFormulaSonIndicadoresInexistentes(){
+		variables.add(indicadorNuevo1);
+		variables.add(indicadorNuevo2);
+		when(mockRepoIndicadores.esIndicador("indicadorNuevo1")).thenReturn(false);
+		when(mockRepoIndicadores.esIndicador("indicadorNuevo2")).thenReturn(false);
+		analizador.analizarVariablesDeFormula(variables);
+	}
+	
+	@Test
+	public void variablesDeFormulaSonIndicadoresYCuentasExistentes(){
+		variables.add(i1);
+		variables.add(ebitda);
 		when(mockRepoIndicadores.esIndicador("I1")).thenReturn(true);
 		when(mockRepo.esCuenta("EBITDA")).thenReturn(true);
 		analizador.analizarVariablesDeFormula(variables);
 	}
 	
-	@Test
-	public void variableDeFormulaEsInexistente(){
-		try{
-			Variable indicador = new Variable("Indicador");
-			Variable i1 = new Variable("I1");
-			variables.add(i1);
-			variables.add(indicador);
-			when(mockRepoIndicadores.esIndicador("I1")).thenReturn(true);
-			when(mockRepoIndicadores.esIndicador("Indicador")).thenReturn(false);
-		}catch(RuntimeException e){
-			assertEquals("El nombre de la variable: Indicador, no existe", e.getMessage());
-		}
+	@Test(expected = RuntimeException.class)
+	public void variablesDeFormulaSonIndicadorExistenteYCuentaInexistente(){
+		variables.add(i1);
+		variables.add(cuentaNueva1);
+		when(mockRepoIndicadores.esIndicador("I1")).thenReturn(true);
+		when(mockRepo.esCuenta("cuentaNueva1")).thenReturn(false);
+		analizador.analizarVariablesDeFormula(variables);
 	}
-	
-
 	
 	@Test(expected = RuntimeException.class)
-	public void analizarNombreIndicadorExistente(){
+	public void variablesDeFormulaSonIndicadorInexistenteYCuentaExistente(){
+		variables.add(indicadorNuevo1);
+		variables.add(fds);
+		when(mockRepoIndicadores.esIndicador("indicadorNuevo1")).thenReturn(false);
+		when(mockRepo.esCuenta("FDS")).thenReturn(true);
+		analizador.analizarVariablesDeFormula(variables);
+	}
+	
+	@Test
+	public void variablesDeFormulaContieneUnaCuentaInexistente(){
 		try{
+			variables.add(cuentaNueva1);
+			variables.add(i1);
 			when(mockRepoIndicadores.esIndicador("I1")).thenReturn(true);
-			analizador.analizarNombreDeIndicador("I1");
+			when(mockRepo.esCuenta("cuentaNueva1")).thenReturn(false);
+			analizador.analizarVariablesDeFormula(variables);
 		}catch(RuntimeException e){
-			assertEquals("Existe un indicador con el nombre: I1, escriba otro nombre de indicador.", e.getMessage());
+			assertEquals("El nombre de la variable: " + cuentaNueva1.getNombre() + " no existe", e.getMessage());
 		}
 	}
 	
-
+	@Test
+	public void variablesDeFormulaContieneUnIndicadorInexistente(){
+		try{
+			variables.add(indicadorNuevo1);
+			variables.add(fds);
+			when(mockRepoIndicadores.esIndicador("indicadorNuevo1")).thenReturn(false);
+			when(mockRepo.esCuenta("FDS")).thenReturn(true);
+			analizador.analizarVariablesDeFormula(variables);
+		}catch(RuntimeException e){
+			assertEquals("El nombre de la variable: " + indicadorNuevo1.getNombre() + " no existe", e.getMessage());
+		}
+	}
 }
 	
