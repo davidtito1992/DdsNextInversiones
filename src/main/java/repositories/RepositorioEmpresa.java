@@ -152,7 +152,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	}
 
 	public BigDecimal getValorCuenta(String nombreEmpresa, Year anio,
-			int semestre, String nombreCuenta) throws RuntimeException {
+			int semestre, String nombreCuenta) {
 
 		List<Cuenta> cuentaADevolver = this.obtenerCuenta(nombreEmpresa, anio,
 				semestre, nombreCuenta);

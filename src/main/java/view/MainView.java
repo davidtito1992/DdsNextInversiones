@@ -46,19 +46,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 		new Button(mainPanel).setCaption("Cerrar").onClick(() -> cerrar())
 				.setHeight(50);
-		/*
-		 * new
-		 * Label(mainPanel).setText("\t\tSeleccione tipo de consulta a realizar: "
-		 * ); Selector<String> selectorSemestre = new
-		 * Selector<String>(mainPanel).allowNull(false);
-		 * selectorSemestre.setWidth(150);
-		 * selectorSemestre.bindItemsToProperty("tipoConsultas");
-		 * selectorSemestre.bindValueToProperty("consultaSeleccionada");
-		 * 
-		 * new Label(mainPanel).setText(""); new
-		 * Button(mainPanel).setCaption("IR"
-		 * ).onClick(this::abrirConsulta).setWidth(140); mainPanel.setWidth(10);
-		 */
+
 	}
 
 	/*****************
@@ -72,9 +60,6 @@ public class MainView extends SimpleWindow<MainViewM> {
 	/************* metodos para los buttons ***************************/
 	public void verAlgo() {
 		System.out.println("Accediendo para...");
-		// Dialog<?> dialog = new ddd(ventanita);
-		// dialog.open();
-		// dialog.onAccept(() -> {});
 	}
 
 	public void cerrar() {
@@ -126,17 +111,6 @@ public class MainView extends SimpleWindow<MainViewM> {
 		}
 	}
 
-	/*
-	 * public void abrirConsulta(){
-	 * 
-	 * String seleccionado = this.getModelObject().getConsultaSeleccionada();
-	 * 
-	 * if (seleccionado == "Indicadores") { System.out
-	 * .println("aca se abre la ventana de consulta indicadores"); } else { if
-	 * (seleccionado == "Metodologias") { System.out
-	 * .println("aca se abre la ventana de consulta Metodologias"); } else {
-	 * System.out .println("aca se abre la ventana de consulta Graficos"); } } }
-	 */
 	/*************************************/
 
 }

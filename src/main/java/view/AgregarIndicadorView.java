@@ -19,7 +19,7 @@ public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewM> {
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("rawtypes")
-	public AgregarIndicadorView(SimpleWindow owner) throws Exception {
+	public AgregarIndicadorView(SimpleWindow owner) {
 		super(owner, new AgregarIndicadorViewM());
 	}
 

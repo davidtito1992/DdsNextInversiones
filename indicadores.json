@@ -1,6 +1,4 @@
 [{"nombre":"I2","formula":"EBITDA *FDS","variables":["EBITDA","FDS"]},
-{"nombre":"I1","formula":" FDS*5 +10","variables":["FDS"]},
-{"nombre":"i67","formula":"EBITDA + I1","variables":["EBITDA","I1"]},
 {"nombre":"i3","formula":"i1","variables":["i1"]},
 {"nombre":"i4","formula":"ebitda","variables":["ebitda"]},
 {"nombre":"i5","formula":" EBITDA +  FDS","variables":["EBITDA","FDS"]}]

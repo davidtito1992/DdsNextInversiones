@@ -66,7 +66,7 @@ public class FileWriter {
 		}
 		this.escribir(input);
 		if (escribio == false) {
-			throw new Exception();
+			throw new RuntimeException();
 		}
 		return finalArchivo;
 	}

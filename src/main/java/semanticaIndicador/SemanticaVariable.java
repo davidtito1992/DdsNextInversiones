@@ -27,7 +27,7 @@ public class SemanticaVariable {
 		this.semestre = semestre;
 	}
 
-	public BigDecimal valor() throws RuntimeException {
+	public BigDecimal valor() {
 
 		BigDecimal valor;
 

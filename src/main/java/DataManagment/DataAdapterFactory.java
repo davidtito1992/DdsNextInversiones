@@ -8,13 +8,13 @@ public class DataAdapterFactory {
 
 	/********* METODOS **********/
 
-	public static DataAdapter adaptarData(String criteria) throws Exception {
+	public static DataAdapter adaptarData(String criteria) {
 
 		if (criteria.equals("json")) {
 			return new JsonAdapter();
 		}
 
-		throw new Exception("Tipo de DataAdapter inexistente");
+		throw new RuntimeException("Tipo de DataAdapter inexistente");
 
 	}
 

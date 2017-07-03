@@ -1,7 +1,6 @@
 package domaintest;
 
 import java.io.File;
-import org.eclipse.jface.bindings.keys.ParseException;
 
 import org.junit.Test;
 
@@ -10,7 +9,7 @@ import DataManagment.JsonAdapter;
 
 public class LeerArchivoErroneoTest {
 
-	@Test(expected = ParseException.class)
+	@Test(expected = Exception.class)
 	public void leerArchivoTest() throws Exception {
 		FileLoader fl = new FileLoader();
 		String AbsolutePath = new File(".").getAbsolutePath();

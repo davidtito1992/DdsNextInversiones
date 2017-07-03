@@ -29,8 +29,7 @@ public class DslIndicador {
 	}
 
 	public BigDecimal traducirVariable(String nombreVariable,
-			String nombreEmpresa, Year anio, int semestre)
-			throws RuntimeException {
+			String nombreEmpresa, Year anio, int semestre) {
 
 		return new SemanticaVariable(nombreVariable, nombreEmpresa, anio,
 				semestre).valor();

@@ -47,8 +47,7 @@ public class AppData {
 		return ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 
-	public void guardarIndicador(RegistroIndicador unIndicador)
-			throws Exception {
+	public void guardarIndicador(RegistroIndicador unIndicador) {
 
 		try {
 			String nuevoIndicadorString = new AdapterToJson()
@@ -62,13 +61,13 @@ public class AppData {
 			this.getRepoIndicadores().create(unIndicador);
 
 		} catch (Exception e) {
-			throw new Exception(
+			throw new RuntimeException(
 					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
 		}
 
 	}
 
-	public void borrarIndicador(RegistroIndicador unIndicador) throws Exception {
+	public void borrarIndicador(RegistroIndicador unIndicador) {
 
 		try {
 			// Convertimos un indicador a json
@@ -83,7 +82,7 @@ public class AppData {
 			this.getRepoIndicadores().delete(unIndicador);
 
 		} catch (Exception e) {
-			throw new Exception(
+			throw new RuntimeException(
 					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
 		}
 	}

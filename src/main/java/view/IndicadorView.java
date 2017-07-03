@@ -60,12 +60,6 @@ public class IndicadorView extends Dialog<IndicadorViewM> {
 				.setWidth(140);
 	}
 
-	// @Override
-	// protected void executeTask() {
-	// System.out.println("Que hacemos?:/");
-	// super.executeTask();
-	// }
-
 	@Override
 	public void cancel() {
 		this.close();

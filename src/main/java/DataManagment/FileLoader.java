@@ -12,7 +12,7 @@ public class FileLoader implements DataLoader {
 	// Al construir objetos con los elementos necesarios para su utilidad,
 	// desacoplamos...
 
-	public String readFile(String pathname) throws Exception {
+	public String readFile(String pathname) throws FileNotFoundException {
 		File file;
 		StringBuilder fileContents;
 		Scanner scanner;

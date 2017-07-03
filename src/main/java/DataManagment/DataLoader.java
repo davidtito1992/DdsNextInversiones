@@ -1,6 +1,7 @@
 package DataManagment;
 
 import java.util.List;
+
 import model.RegistroIndicador;
 import model.Empresa;
 
