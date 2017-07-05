@@ -8,13 +8,13 @@ public class DataLoaderFactory {
 
 	/********* METODOS **********/
 
-	public static DataLoader cargarData(String criteria) throws Exception {
+	public static DataLoader cargarData(String criteria) {
 
 		if (criteria.equals("archivo")) {
 			return new FileLoader();
 		}
 
-		throw new Exception("tipo de DataLoader inexistente");
+		throw new RuntimeException("tipo de DataLoader inexistente");
 
 	}
 

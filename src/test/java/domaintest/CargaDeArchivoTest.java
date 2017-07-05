@@ -7,15 +7,20 @@ import org.junit.Test;
 import DataManagment.FileLoader;
 
 public class CargaDeArchivoTest {
-	
+
 	@Test(expected = FileNotFoundException.class)
 	public void cargarArchivoInexistente() throws Exception {
-		new StubFileLoader().getData();
+		new StubFileLoader().getDataEmpresas();
 	}
 
 	@Test
-	public void cargaExistosaDeArchivo() throws Exception {
-		new FileLoader().getData();
+	public void cargaExistosaDeArchivoEmpresa() throws Exception {
+		new FileLoader().getDataEmpresas();
+	}
+
+	@Test
+	public void cargaExistosaDeArchivoIndicadores() throws Exception {
+		new FileLoader().getDataIndicadores();
 	}
 
 }

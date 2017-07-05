@@ -2,14 +2,18 @@ package model;
 
 import org.uqbar.commons.utils.Observable;
 
+import java.math.BigDecimal;
+
 @Observable
 public class Cuenta {
 
 	/********* ATRIBUTOS *********/
+
 	private String nombre;
-	private int valor;
+	private BigDecimal valor;
 
 	/********* GETTERS/SETTERS *********/
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -18,11 +22,18 @@ public class Cuenta {
 		this.nombre = nombre;
 	}
 
-	public int getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(int valor) {
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+	/********* METODOS *********/
+
+	public Cuenta(String nombre, BigDecimal valor) {
+		this.nombre = nombre;
 		this.valor = valor;
 	}
 

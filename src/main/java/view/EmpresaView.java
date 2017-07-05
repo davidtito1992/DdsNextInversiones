@@ -26,7 +26,7 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		Panel form = new Panel(mainPanel);
 		this.setTitle("Empresas");
 		form.setLayout(new ColumnLayout(4));
-		getModelObject().llenarTablas();
+		// getModelObject().llenarTablas();
 
 		// new
 		// Label(form).setText("\nFILTROS\n").setBackground(Color.LIGHT_GRAY).setWidth(300);
@@ -46,12 +46,12 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		selectorCuenta.bindItemsToProperty("cuentas");
 		selectorCuenta.bindValueToProperty("cuentaSeleccionada");
 
-		new Label(form).setText("\t\tSeleccione Año");
-		Selector<Integer> selectorAño = new Selector<Integer>(form)
+		new Label(form).setText("\t\tSeleccione Anio");
+		Selector<Integer> selectorAnio = new Selector<Integer>(form)
 				.allowNull(true);
-		selectorAño.setWidth(150);
-		selectorAño.bindItemsToProperty("años");
-		selectorAño.bindValueToProperty("añoSeleccionado");
+		selectorAnio.setWidth(150);
+		selectorAnio.bindItemsToProperty("anios");
+		selectorAnio.bindValueToProperty("anioSeleccionado");
 
 		new Label(form).setText("\t\tSeleccione Semestre");
 		Selector<Integer> selectorSemestre = new Selector<Integer>(form)
@@ -81,10 +81,10 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 		columnaNombre.setTitle("Nombre");
 		columnaNombre.bindContentsToProperty("nombre");
 
-		Column<SnapshotEmpresa> columnaAño = new Column<SnapshotEmpresa>(
+		Column<SnapshotEmpresa> columnaAnio = new Column<SnapshotEmpresa>(
 				tableEmpresas);
-		columnaAño.setTitle("Año");
-		columnaAño.bindContentsToProperty("año");
+		columnaAnio.setTitle("Anio");
+		columnaAnio.bindContentsToProperty("anio");
 
 		Column<SnapshotEmpresa> columnaSemestre = new Column<SnapshotEmpresa>(
 				tableEmpresas);
@@ -105,16 +105,15 @@ public class EmpresaView extends Dialog<EmpresaViewM> {
 
 	@Override
 	protected void addActions(Panel actions) {
-		new Button(actions).setCaption("Aceptar").onClick(this::accept)
-				.setAsDefault();
-		new Button(actions).setCaption("Cancelar").onClick(this::cancel);
+		new Button(actions).setCaption("Salir").onClick(this::cancel)
+				.setWidth(140);
 	}
 
-	@Override
-	protected void executeTask() {
-		System.out.println("Que hacemos?:/");
-		super.executeTask();
-	}
+	// @Override
+	// protected void executeTask() {
+	// System.out.println("Que hacemos?:/");
+	// super.executeTask();
+	// }
 
 	@Override
 	public void cancel() {

@@ -2,34 +2,41 @@ package viewmodel;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioEmpresa;
+import app.AppData;
 
 @Observable
 public class MainViewM {
 
-	RepositorioEmpresa repoEmpresa;
+	private boolean empresasSinCargar = true;
+	private boolean indicadoresSinCargar = true;
 
 	public MainViewM() {
-
 	}
 
-	// COMBOBOX CONSULTAS A REALIZAR
+	public boolean isEmpresasSinCargar() {
+		return empresasSinCargar;
+	}
 
-	// private Collection<String> tipoConsultas = new ArrayList<String>();
-	// private String consultaSeleccionada ;
-	//
-	// public Collection<String> getTipoConsultas() { return tipoConsultas; }
-	//
-	// public void setTipoConsultas(Collection<String> tipoConsultas) {
-	// this.tipoConsultas = tipoConsultas; }
-	//
-	// public String getConsultaSeleccionada() { return consultaSeleccionada; }
-	//
-	// public void setConsultaSeleccionada(String consultaSeleccionada) {
-	// this.consultaSeleccionada = consultaSeleccionada; }
-	//
-	// public MainViewM(){ agregarConsultas(); }
-	//
-	// public void agregarConsultas(){ tipoConsultas.add("Indicadores");
-	// tipoConsultas.add("Metodologias"); tipoConsultas.add("Graficos"); }
+	public void setEmpresasSinCargar(boolean empresasSinCargar) {
+		this.empresasSinCargar = empresasSinCargar;
+	}
+
+	public boolean isIndicadoresSinCargar() {
+		return indicadoresSinCargar;
+	}
+
+	public void setIndicadoresSinCargar(boolean indicadoresSinCargar) {
+		this.indicadoresSinCargar = indicadoresSinCargar;
+	}
+
+	public void cargarIndicadores() throws Exception {
+		new AppData().cargarIndicadores();
+		System.out.println("Accediendo para ver las indicadores...");
+	}
+
+	public void cargarEmpresas() throws Exception {
+		new AppData().cargarEmpresas();
+		System.out.println("Accediendo para ver las empresas...");
+	}
+
 }

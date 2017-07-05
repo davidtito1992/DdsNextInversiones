@@ -1,7 +1,7 @@
 [{
 		"nombre": "Facebook",
 		"periodos": [{
-				"año": "2016",
+				"anio": "2016",
 				"semestre": "1",
 				"cuentas": [{
 						"nombre": "EBITDA",
@@ -15,16 +15,16 @@
 						"nombre": "FreeCashFlow",
 						"valor": "3"
 					}, {
-						"nombre": "Neto Discontinuas",
+						"nombre": "NetoDiscontinuas",
 						"valor": "5"
 					}, {
-						"nombre": "Neto Continuas",
+						"nombre": "NetoContinuas",
 						"valor": "6"
 					}
 				]
 			},
 			{
-				"año": "2016",
+				"anio": "2016",
 				"semestre": "2",
 				"cuentas": [{
 						"nombre": "EBITDA",
@@ -38,10 +38,10 @@
 						"nombre": "FreeCashFlow",
 						"valor": "8"
 					}, {
-						"nombre": "Neto Discontinuas",
+						"nombre": "NetoDiscontinuas",
 						"valor": "9"
 					}, {
-						"nombre": "Neto Continuas",
+						"nombre": "NetoContinuas",
 						"valor": "10"
 					}
 				]
@@ -51,7 +51,7 @@
 	{
 		"nombre": "Twitter",
 		"periodos": [{
-				"año": "2015",
+				"anio": "2015",
 				"semestre": "1",
 				"cuentas": [{
 						"nombre": "EBITDA",
@@ -68,7 +68,7 @@
 				]
 			},
 			{
-				"año": "2015",
+				"anio": "2015",
 				"semestre": "2",
 				"cuentas": [{
 						"nombre": "EBITDA",
@@ -89,7 +89,7 @@
 	{
 		"nombre": "Google",
 		"periodos": [{
-				"año": "2014",
+				"anio": "2014",
 				"semestre": "1",
 				"cuentas": [{
 						"nombre": "EBITDA",
@@ -103,33 +103,33 @@
 						"nombre": "FreeCashFlow",
 						"valor": "99999"
 					}, {
-						"nombre": "Neto Discontinuas",
+						"nombre": "NetoDiscontinuas",
 						"valor": "99999"
 					}, {
-						"nombre": "Neto Continuas",
+						"nombre": "NetoContinuas",
 						"valor": "99999"
 					}
 				]
 			},
 			{
-				"año": "2014",
+				"anio": "2014",
 				"semestre": "2",
 				"cuentas": [{
 						"nombre": "EBITDA",
-						"valor": "99999"
+						"valor": "990"
 					},
 					{
 						"nombre": "FDS",
-						"valor": "99999"
+						"valor": "10"
 					},
 					{
 						"nombre": "FreeCashFlow",
 						"valor": "99999"
 					}, {
-						"nombre": "Neto Discontinuas",
+						"nombre": "NetoDiscontinuas",
 						"valor": "99999"
 					}, {
-						"nombre": "Neto Continuas",
+						"nombre": "NetoContinuas",
 						"valor": "99999"
 					}
 				]

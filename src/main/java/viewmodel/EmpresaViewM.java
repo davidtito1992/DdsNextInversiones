@@ -1,8 +1,7 @@
 package viewmodel;
 
+import java.time.Year;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 import model.Cuenta;
@@ -24,8 +23,8 @@ public class EmpresaViewM {
 	private List<String> cuentas = new ArrayList<String>();
 	private List<String> nombres = new ArrayList<String>();
 	private String nombreSeleccionado;
-	private List<Integer> años = new ArrayList<Integer>();
-	private Integer añoSeleccionado;
+	private List<Year> anios = new ArrayList<>();
+	private Year anioSeleccionado;
 	private List<Integer> semestre = new ArrayList<Integer>();
 	private Integer semestreSeleccionado;
 	private List<SnapshotEmpresa> snapshotEmpresas;
@@ -33,32 +32,23 @@ public class EmpresaViewM {
 
 	/********* GETTERS/SETTERS *********/
 
-	public List<Integer> getAños() {
-		return años;
+	public List<Year> getAnios() {
+		return anios;
 	}
 
-	public void setAños(List<Integer> años) {
-		this.años = años;
+	public void setAnios(List<Year> anios) {
+		this.anios = anios;
 	}
 
 	public String getNombreSeleccionado() {
 		return nombreSeleccionado;
 	}
 
-	// *********** Seleccionamos un nombreempresa y si la cuenta==null cargar en
-	// base a lo
-	// demas seleccionado
-	// sino lo dejamos como esta
-	// si la anio==null cargar en base a lo demas seleccionado
-	// sino lo dejamos como esta
-	// si la semestre==null cargar en base a lo demas seleccionado
-	// sino lo dejamos como esta
-
 	public void setNombreSeleccionado(String nombreSeleccionado) {
 
 		this.nombreSeleccionado = nombreSeleccionado;
 		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.añoSeleccionado,
+				this.cuentaSeleccionada, this.anioSeleccionado,
 				this.semestreSeleccionado);
 
 	}
@@ -85,38 +75,22 @@ public class EmpresaViewM {
 		this.nombres = nombres;
 	}
 
-	// Seleccionamos un nombredecuenta y si la empresa==null cargar en base a lo
-	// demas seleccionado
-	// sino lo dejamos como esta
-	// si la anio==null cargar en base a lo demas seleccionado
-	// sino lo dejamos como esta
-	// si la semestre==null cargar en base a lo demas seleccionado
-	// sino lo dejamos como esta
-
 	public void setCuentaSeleccionada(String cuentaSeleccionada) {
 		this.cuentaSeleccionada = cuentaSeleccionada;
 		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.añoSeleccionado,
+				this.cuentaSeleccionada, this.anioSeleccionado,
 				this.semestreSeleccionado);
 	}
 
-	public Integer getAñoSeleccionado() {
-		return añoSeleccionado;
+	public Year getAnioSeleccionado() {
+		return anioSeleccionado;
 	}
 
-	// Seleccionamos un anio y si la empresa==null cargar en base a lo demas
-	// seleccionado
-	// sino lo dejamos como esta
-	// si la cuenta==null cargar en base a lo demas seleccionado
-	// sino lo dejamos como esta
-	// si la semestre==null cargar en base a lo demas seleccionado
-	// sino lo dejamos como esta
-
-	public void setAñoSeleccionado(Integer añoSeleccionado) {
-		this.añoSeleccionado = añoSeleccionado;
+	public void setAnioSeleccionado(Year anioSeleccionado) {
+		this.anioSeleccionado = anioSeleccionado;
 
 		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.añoSeleccionado,
+				this.cuentaSeleccionada, this.anioSeleccionado,
 				this.semestreSeleccionado);
 
 	}
@@ -125,7 +99,7 @@ public class EmpresaViewM {
 		this.semestreSeleccionado = semestreSeleccionado;
 
 		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.añoSeleccionado,
+				this.cuentaSeleccionada, this.anioSeleccionado,
 				this.semestreSeleccionado);
 
 	}
@@ -164,7 +138,7 @@ public class EmpresaViewM {
 	public EmpresaViewM() {
 
 		this.generarTodosLosCBox(null, null, null, null);
-
+		this.llenarTablas();
 	}
 
 	public void llenarTablas() {
@@ -180,8 +154,8 @@ public class EmpresaViewM {
 	}
 
 	// Genera todos los combobox en base a la seleccion de cada uno de ellos
-	public void generarTodosLosCBox(String empresa, String cuenta,
-			Integer anio, Integer semestre) {
+	public void generarTodosLosCBox(String empresa, String cuenta, Year anio,
+			Integer semestre) {
 
 		List<Empresa> repoEmpresa2 = new ArrayList<Empresa>();
 		repoEmpresa2 = this.getRepoEmpresas().filtrar(cuenta, empresa,
@@ -196,77 +170,31 @@ public class EmpresaViewM {
 
 	public void generarCBoxAnios(List<Empresa> empresas) {
 
-		HashSet<Integer> cantidadAnios = new HashSet<Integer>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				cantidadAnios.add(periodo.getAño());
-			});
-		});
-		ArrayList<Integer> CantidadesAniosFinal = new ArrayList<Integer>(
-				cantidadAnios);
-		Collections.sort(CantidadesAniosFinal);
+		this.anios = this.getRepoEmpresas().todosLosAnios(empresas);
 
-		this.años = CantidadesAniosFinal;
-
-		// CantidadesAniosFinal.forEach(name ->(System.out.println(name)));
 	}
 
 	public void generarCBoxSemestre(List<Empresa> empresas) {
 
-		HashSet<Integer> cantidadSemestres = new HashSet<Integer>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				cantidadSemestres.add(periodo.getSemestre());
-			});
-		});
-		ArrayList<Integer> cantidadSemestresFinal = new ArrayList<Integer>(
-				cantidadSemestres);
-		Collections.sort(cantidadSemestresFinal);
-
-		this.semestre = cantidadSemestresFinal;
-
-		// cantidadSemestresFinal.forEach(name ->(System.out.println(name)));
+		this.semestre = this.getRepoEmpresas().todosLosPeriodos(empresas);
 
 	}
 
 	public void generarCBoxCuentas(List<Empresa> empresas) {
 
-		HashSet<String> nombreCuentas = new HashSet<String>();
-		empresas.forEach(empresa -> {
-			empresa.getPeriodos().forEach(
-					periodo -> {
-						periodo.getCuentas()
-								.forEach(
-										cuenta -> nombreCuentas.add(cuenta
-												.getNombre()));
-					});
-		});
-
-		ArrayList<String> nombreCuentasfinal = new ArrayList<String>(
-				nombreCuentas);
-		Collections.sort(nombreCuentasfinal);
-
-		this.cuentas = nombreCuentasfinal;
-
-		// nombreCuentasfinal.forEach(name ->(System.out.println(name)));
+		this.cuentas = this.getRepoEmpresas()
+				.todosLosNombresDeCuentas(empresas);
 
 	}
 
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
 
-		HashSet<String> nombreEmpresas = new HashSet<String>();
-		empresas.forEach(name -> (nombreEmpresas.add(name.getNombre())));
-		ArrayList<String> nombreEmpresasFinal = new ArrayList<String>(
-				nombreEmpresas);
-		Collections.sort(nombreEmpresasFinal);
-		this.nombres = nombreEmpresasFinal;
-
-		// nombreEmpresasFinal.forEach(name ->(System.out.println(name)));
+		this.nombres = this.getRepoEmpresas().todosLosNombresDeEmpresas(
+				empresas);
 
 	}
 
 	public RepositorioEmpresa getRepoEmpresas() {
-
 		return ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
 
@@ -274,14 +202,14 @@ public class EmpresaViewM {
 		cuentaSeleccionada = null;
 		nombreSeleccionado = null;
 		semestreSeleccionado = null;
-		añoSeleccionado = null;
+		anioSeleccionado = null;
 	}
 
 	public void filtrar() {
 		ArrayList<SnapshotEmpresa> empresitas = (this
 				.dameSnapshotEmpresas(getRepoEmpresas().filtrar(
 						cuentaSeleccionada, nombreSeleccionado,
-						semestreSeleccionado, añoSeleccionado)));
+						semestreSeleccionado, anioSeleccionado)));
 		this.setSnapshotEmpresas(empresitas);
 	}
 
@@ -297,7 +225,7 @@ public class EmpresaViewM {
 					snapshotempresa.setValor(cuenta.getValor());
 					snapshotempresa.setNombre(empresa.getNombre());
 					snapshotempresa.setSemestre(periodo.getSemestre());
-					snapshotempresa.setAño(periodo.getAño());
+					snapshotempresa.setAnio(periodo.getAnio());
 
 					if (agregarALista(empresa, periodo, cuenta)) {
 						listSnapshot.add(snapshotempresa);
@@ -320,11 +248,11 @@ public class EmpresaViewM {
 					&& empresa.getNombre().equals(nombreSeleccionado);
 		}
 
-		if (añoSeleccionado == null) {
+		if (anioSeleccionado == null) {
 			agregarALista = agregarALista && true;
 		} else {
 			agregarALista = agregarALista
-					&& periodo.getAño() == añoSeleccionado;
+					&& periodo.getAnio() == anioSeleccionado;
 		}
 
 		if (semestreSeleccionado == null) {

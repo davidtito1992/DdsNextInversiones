@@ -1,6 +1,10 @@
 package model;
 
+import java.time.Year;
+
 import org.uqbar.commons.utils.Observable;
+
+import java.math.BigDecimal;
 
 @Observable
 public class SnapshotEmpresa {
@@ -8,19 +12,19 @@ public class SnapshotEmpresa {
 	/********* ATRIBUTOS *********/
 
 	private String nombre;
-	private int año;
+	private Year anio;
 	private int semestre;
 	private String cuenta;
-	private int valor;
+	private BigDecimal valor;
 
 	/********* GETTERS/SETTERS *********/
 
-	public int getAño() {
-		return año;
+	public Year getAnio() {
+		return anio;
 	}
 
-	public void setAño(int año) {
-		this.año = año;
+	public void setAnio(Year anio) {
+		this.anio = anio;
 	}
 
 	public String getNombre() {
@@ -47,11 +51,11 @@ public class SnapshotEmpresa {
 		this.cuenta = cuenta;
 	}
 
-	public int getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(int valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 
@@ -61,7 +65,7 @@ public class SnapshotEmpresa {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + año;
+		result = prime * result + ((anio == null) ? 0 : anio.hashCode());
 		result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + semestre;
@@ -77,7 +81,7 @@ public class SnapshotEmpresa {
 		if (getClass() != obj.getClass())
 			return false;
 		SnapshotEmpresa other = (SnapshotEmpresa) obj;
-		if (año != other.año)
+		if (anio != other.anio)
 			return false;
 		if (cuenta == null) {
 			if (other.cuenta != null)
