@@ -55,7 +55,7 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewM> {
 		selectorNro.bindValueToProperty("agregarNroSeleccionado");
 		new Label(form).setText("\t\t");
 
-		new Label(form).setText("\t\tComparar con: ");
+		new Label(form).setText("\t\tCant Anios: ");
 		Selector<String> selectorAnios = new Selector<String>(form)
 				.allowNull(true);
 		selectorAnios.setWidth(150);

@@ -61,19 +61,20 @@ public class MetodologiaView extends Dialog<MetodologiaViewM>{
 	}
 
 	public void agregarMetodologia() {
-//		// abrir ventana AgregarMetodologiaView
-//		try {
-//			System.out.println("Accediendo para ver las metodologias...");
-//
-//			Dialog<?> dialog = new AgregarMetodologiaView(this);
-//			dialog.open();
-//			dialog.onAccept(() -> {
-//			});
-//
-//			this.getModelObject().llenarTablas();
-//		} catch (Exception e) {
-//			showInfo(e.getMessage());
-//		}
+		// abrir ventana AgregarMetodologiaView
+		try {
+			System.out.println("Accediendo para ver las metodologias...");
+
+			Dialog<?> dialog = new AgregarMetodologiaView(this);
+			dialog.open();
+			dialog.onAccept(() -> {
+			});
+			
+			// DESPUES DESCOMENTAR ESTO!!!!!
+			//this.getModelObject().llenarTablas();
+		} catch (Exception e) {
+			showInfo(e.getMessage());
+		}
 	}
 
 	public void consultar() {

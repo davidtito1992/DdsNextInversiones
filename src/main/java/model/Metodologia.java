@@ -3,12 +3,14 @@ package model;
 import java.util.List;
 
 import org.uqbar.commons.model.Entity;
+import org.uqbar.commons.utils.Observable;
 
 import parserIndicador.ParseException;
 import condiciones.CondicionCualitativa;
 import condiciones.CondicionTaxativa;
 
 @SuppressWarnings("serial")
+@Observable 
 public class Metodologia extends Entity {
 
 	public Metodologia(String nombre, List<CondicionTaxativa> condTaxativas,

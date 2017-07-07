@@ -19,7 +19,8 @@ public class MainViewM {
 	}
 
 	public boolean isMetodologiasSinCargar() {
-		return metodologiasSinCargar;
+		return false;
+		//return metodologiasSinCargar;
 	}
 
 	public void setMetodologiasSinCargar(boolean metodologiasSinCargar) {

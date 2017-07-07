@@ -1,1 +1,4 @@
-[{"nombre":"probando","condicionesTaxativas":[{"indicador":{"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"],"id":5},"numeroAComparar":100,"ultimosAnios":2}],"condicionesCualitativas":[]}]
+[{"nombre":"probando","condicionesTaxativas":[{"indicador":{"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"],"id":5},"numeroAComparar":100,"ultimosAnios":2},
+{"nombre":"puto","condicionesTaxativas":[{"limiteAnios":2}],"condicionesCualitativas":[]}]
+,"condicionesCualitativas":[]},
+{"nombre":"puto","condicionesTaxativas":[{"limiteAnios":2}],"condicionesCualitativas":[]}]

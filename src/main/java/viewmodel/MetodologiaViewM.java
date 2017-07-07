@@ -48,7 +48,8 @@ public class MetodologiaViewM {
 	/********* METODOS *********/
 
 	public MetodologiaViewM() {
-		this.llenarTablas();
+		// DESPUES DESCOMENTAR ESTO!!!!
+		//this.llenarTablas();
 	}
 
 	public void llenarTablas() {
