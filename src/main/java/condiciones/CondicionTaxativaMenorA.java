@@ -11,12 +11,12 @@ import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;
 
-public class CondicionTaxativaMayorA implements CondicionTaxativa {
+public class CondicionTaxativaMenorA implements CondicionTaxativa {
 	private RegistroIndicador indicador;
 	private BigDecimal numeroAComparar;
 	private int ultimosAnios;
 	
-	public CondicionTaxativaMayorA(RegistroIndicador indicador,BigDecimal numeroAComparar,int ultimosAnios){
+	public CondicionTaxativaMenorA(RegistroIndicador indicador,BigDecimal numeroAComparar,int ultimosAnios){
 		this.indicador = indicador;
 		this.numeroAComparar = numeroAComparar;
 		this.ultimosAnios = ultimosAnios;
@@ -30,7 +30,7 @@ public class CondicionTaxativaMayorA implements CondicionTaxativa {
 			acumulador = acumulador.add(aplicarIndicador(indicador, empresa.getNombre(), periodos.get(i).getAnio(),periodos.get(i).getSemestre()));
 		}
 		
-		return acumulador.compareTo(numeroAComparar) > 0;
+		return acumulador.compareTo(numeroAComparar) < 0;
 	}
 	
 	
