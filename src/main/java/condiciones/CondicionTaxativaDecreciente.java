@@ -11,30 +11,24 @@ import model.Periodo;
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 
-public class CondicionCualitativaSumatoria implements CondicionCualitativa{
-	private RegistroIndicador indicador;
-	private int ultimosAnios;
-	private double peso;
-	
-	public CondicionCualitativaSumatoria(RegistroIndicador indicador,int ultimosAnios){
-		this.indicador = indicador;
-		this.ultimosAnios = ultimosAnios;
-	}
-	
-	public double calcular(Empresa empresa) throws ParseException{
-		BigDecimal acumulador = BigDecimal.ZERO;
+public class CondicionTaxativaDecreciente implements CondicionTaxativa{
+
+	public RegistroIndicador indicador;
+	public int ultimosAnios;
+
+	public boolean calcular(Empresa empresa) throws ParseException {
 		List<Periodo> periodos = empresa.getPeriodos().stream()
 		.filter(periodo -> periodo.getAnio().getValue() > 2017-ultimosAnios).collect(Collectors.toList());
 		for (int i = 0; i < periodos.size(); i++) {
-			acumulador = acumulador.add(aplicarIndicador(indicador, empresa.getNombre(), periodos.get(i).getAnio(),periodos.get(i).getSemestre()));
+			if(aplicarIndicador(indicador, empresa.getNombre(), periodos.get(i).getAnio(),periodos.get(i).getSemestre()).doubleValue() 
+					< aplicarIndicador(indicador, empresa.getNombre(), periodos.get(i+1).getAnio(),periodos.get(i+1).getSemestre()).doubleValue()){
+				return false;
+			}
 		}
-		
-		return acumulador.doubleValue() * peso;
+		return true;
 	}
-	
-	
+
 	private BigDecimal aplicarIndicador(RegistroIndicador indicador, String nombreEmpresa, Year anio, int semestre) throws ParseException{
 		return new DslIndicador().prepararFormula(indicador, nombreEmpresa, anio, semestre).calcular();
 	}
-	
 }
