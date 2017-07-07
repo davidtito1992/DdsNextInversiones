@@ -83,6 +83,26 @@ public class AppData {
 		}
 
 	}
+	
+	public void guardarMetodologia(Metodologia metodologia) {
+
+		try {
+//			String nuevaMetodologiaString = new AdapterToJson()
+//					.getStringMetodologia(metodologia);
+//
+//			// sobreescribimos un archivo segun nombre de archivo,
+//			// textoviejo,textonuevo
+//			new FileWriter("./metodologias.json", "}]", nuevaMetodologiaString
+//					+ "]\r\n");
+
+			this.getRepoMetodologias().create(metodologia);
+
+		} catch (Exception e) {
+			throw new RuntimeException(
+					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
+		}
+
+	}
 
 	public void borrarIndicador(RegistroIndicador unIndicador) {
 
