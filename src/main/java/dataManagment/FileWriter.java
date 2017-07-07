@@ -1,4 +1,4 @@
-package DataManagment;
+package dataManagment;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;

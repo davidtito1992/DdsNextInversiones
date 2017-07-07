@@ -1,4 +1,4 @@
-package DataManagment;
+package dataManagment;
 
 public class DataLoaderFactory {
 

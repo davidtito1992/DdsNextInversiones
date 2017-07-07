@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import condiciones.CondicionTaxativaMayorA;
-import DataManagment.FileLoader;
+import dataManagment.FileLoader;
 import model.Empresa;
 
 public class CondicionTaxativaTest {

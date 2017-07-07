@@ -1,4 +1,4 @@
-package DataManagment;
+package dataManagment;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package DataManagment;
+package dataManagment;
 
 import model.Empresa;
 import model.RegistroIndicador;

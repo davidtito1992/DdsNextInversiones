@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
-import DataManagment.DataAdapter;
-import DataManagment.DataAdapterFactory;
-import DataManagment.DataLoader;
+import dataManagment.DataAdapter;
+import dataManagment.DataAdapterFactory;
+import dataManagment.DataLoader;
 import model.Empresa;
 import model.RegistroIndicador;
 
