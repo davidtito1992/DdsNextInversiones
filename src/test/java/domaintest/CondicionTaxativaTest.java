@@ -2,11 +2,13 @@ package domaintest;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import parserIndicador.ParseException;
 import condiciones.CondicionTaxativaMayorA;
 import dataManagment.FileLoader;
 import model.Empresa;
@@ -26,8 +28,8 @@ public class CondicionTaxativaTest {
 	}
 	
 	@Test
-	public void CondicionNetoDiscontinuasMayorA4Test() {
-		assertTrue(new CondicionTaxativaMayorA(indicador,4,2).calcular(empresa));
+	public void CondicionNetoDiscontinuasMayorA4Test() throws ParseException {
+		assertTrue(new CondicionTaxativaMayorA(indicador,BigDecimal.valueOf(4),2).calcular(empresa));
 	}
 	
 }
