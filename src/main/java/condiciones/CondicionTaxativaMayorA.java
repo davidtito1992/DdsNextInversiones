@@ -23,14 +23,14 @@ public class CondicionTaxativaMayorA {
 	}
 	
 	public boolean calcular(Empresa empresa) throws ParseException{
-		BigDecimal contador = BigDecimal.ZERO;
+		BigDecimal acumulador = BigDecimal.ZERO;
 		List<Periodo> periodos = empresa.getPeriodos().stream()
 		.filter(periodo -> periodo.getAnio().getValue() > 2017-ultimosAnios).collect(Collectors.toList());
 		for (int i = 0; i < periodos.size(); i++) {
-			contador = contador.add(aplicarIndicador(indicador, empresa.getNombre(), periodos.get(i).getAnio(),periodos.get(i).getSemestre()));
+			acumulador = acumulador.add(aplicarIndicador(indicador, empresa.getNombre(), periodos.get(i).getAnio(),periodos.get(i).getSemestre()));
 		}
 		
-		return contador.compareTo(numeroAComparar) > 0;
+		return acumulador.compareTo(numeroAComparar) > 0;
 	}
 	
 	
