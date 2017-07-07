@@ -35,18 +35,17 @@ public class Metodologia{
 	}
 
 	private boolean analizarCondicionesTaxativas(Empresa empresa) throws ParseException{
-		boolean flag = true;
 		for (int i = 0; i < condicionesTaxativas.size(); i++) {
 			if(!condicionesTaxativas.get(i).calcular(empresa)){
-				flag = false;
+				return false;
 			}
 		}
-		return flag;
+		return true;
 	}
 	
 	private int analizarCondicionesCualitativas(Empresa empresa) throws ParseException {
 		int acumulador = 0;
-		for (int i = 0; i < condicionesTaxativas.size(); i++) {
+		for (int i = 0; i < condicionesCualitativas.size(); i++) {
 			acumulador += condicionesCualitativas.get(i).calcular(empresa);
 		}
 		return acumulador;
