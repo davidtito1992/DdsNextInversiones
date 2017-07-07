@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import DataManagment.FileLoader;
 import model.Empresa;
 
 public class CondicionTaxativaTest {
@@ -14,7 +15,7 @@ public class CondicionTaxativaTest {
 	
 	@Before
 	public void inicializar() throws Exception {
-		empresas = new StubFileLoader().getDataEmpresas();
+		empresas = new FileLoader().getDataEmpresas();
 		empresa = empresas.get(0);		
 	}
 	
