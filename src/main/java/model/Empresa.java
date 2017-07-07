@@ -39,18 +39,19 @@ public class Empresa extends Entity {
 	public void setPeriodos(List<Periodo> periodos) {
 		this.periodos = periodos;
 	}
-	
+
 	/********* METODOS *********/
-	
-	public int getAntiguedadEmpresa(){
+
+	public int getAntiguedadEmpresa() {
 		Date date = new Date();
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(date);
 		int anioActual = calendar.get(Calendar.YEAR);
-		
-		ArrayList<Year> aniosPeriodos = (ArrayList<Year>) this.getPeriodos().stream()
-		.map(periodo -> periodo.getAnio()).distinct().sorted().collect(Collectors.toCollection(ArrayList::new));
-				
+
+		ArrayList<Year> aniosPeriodos = (ArrayList<Year>) this.getPeriodos()
+				.stream().map(periodo -> periodo.getAnio()).distinct().sorted()
+				.collect(Collectors.toCollection(ArrayList::new));
+
 		return anioActual - aniosPeriodos.get(0).getValue();
 	}
 

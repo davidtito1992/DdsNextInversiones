@@ -10,22 +10,22 @@ import condiciones.CondicionTaxativa;
 
 @SuppressWarnings("serial")
 public class Metodologia extends Entity {
-	
-	public Metodologia(String nombre, List<CondicionTaxativa> condTaxativas, List<CondicionCualitativa> condCualitativas){
+
+	public Metodologia(String nombre, List<CondicionTaxativa> condTaxativas,
+			List<CondicionCualitativa> condCualitativas) {
 		this.nombre = nombre;
 		this.condicionesTaxativas = condTaxativas;
 		this.condicionesCualitativas = condCualitativas;
 	}
 
-	
 	/********* ATRIBUTOS *********/
-	
+
 	public String nombre;
 	public List<CondicionTaxativa> condicionesTaxativas;
 	public List<CondicionCualitativa> condicionesCualitativas;
 
 	/********* GETTERS/SETTERS *********/
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -33,25 +33,27 @@ public class Metodologia extends Entity {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	public int analizarResultado(Empresa empresa) throws ParseException{
-		if(!analizarCondicionesTaxativas(empresa)){
+
+	public int analizarResultado(Empresa empresa) throws ParseException {
+		if (!analizarCondicionesTaxativas(empresa)) {
 			return 0;
 		} else {
 			return analizarCondicionesCualitativas(empresa);
 		}
 	}
 
-	private boolean analizarCondicionesTaxativas(Empresa empresa) throws ParseException{
+	private boolean analizarCondicionesTaxativas(Empresa empresa)
+			throws ParseException {
 		for (int i = 0; i < condicionesTaxativas.size(); i++) {
-			if(!condicionesTaxativas.get(i).calcular(empresa)){
+			if (!condicionesTaxativas.get(i).calcular(empresa)) {
 				return false;
 			}
 		}
 		return true;
 	}
-	
-	private int analizarCondicionesCualitativas(Empresa empresa) throws ParseException {
+
+	private int analizarCondicionesCualitativas(Empresa empresa)
+			throws ParseException {
 		int acumulador = 0;
 		for (int i = 0; i < condicionesCualitativas.size(); i++) {
 			acumulador += condicionesCualitativas.get(i).calcular(empresa);

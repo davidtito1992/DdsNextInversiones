@@ -11,30 +11,38 @@ import model.Periodo;
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 
-public class CondicionCualitativaSumatoria implements CondicionCualitativa{
+public class CondicionCualitativaSumatoria implements CondicionCualitativa {
 	private RegistroIndicador indicador;
 	private int ultimosAnios;
 	private double peso;
-	
-	public CondicionCualitativaSumatoria(RegistroIndicador indicador,int ultimosAnios){
+
+	public CondicionCualitativaSumatoria(RegistroIndicador indicador,
+			int ultimosAnios) {
 		this.indicador = indicador;
 		this.ultimosAnios = ultimosAnios;
 	}
-	
-	public double calcular(Empresa empresa) throws ParseException{
+
+	public double calcular(Empresa empresa) throws ParseException {
 		BigDecimal acumulador = BigDecimal.ZERO;
-		List<Periodo> periodos = empresa.getPeriodos().stream()
-		.filter(periodo -> periodo.getAnio().getValue() > 2017-ultimosAnios).collect(Collectors.toList());
+		List<Periodo> periodos = empresa
+				.getPeriodos()
+				.stream()
+				.filter(periodo -> periodo.getAnio().getValue() > 2017 - ultimosAnios)
+				.collect(Collectors.toList());
 		for (int i = 0; i < periodos.size(); i++) {
-			acumulador = acumulador.add(aplicarIndicador(indicador, empresa.getNombre(), periodos.get(i).getAnio(),periodos.get(i).getSemestre()));
+			acumulador = acumulador.add(aplicarIndicador(indicador, empresa
+					.getNombre(), periodos.get(i).getAnio(), periodos.get(i)
+					.getSemestre()));
 		}
-		
+
 		return acumulador.doubleValue() * peso;
 	}
-	
-	
-	private BigDecimal aplicarIndicador(RegistroIndicador indicador, String nombreEmpresa, Year anio, int semestre) throws ParseException{
-		return new DslIndicador().prepararFormula(indicador, nombreEmpresa, anio, semestre).calcular();
+
+	private BigDecimal aplicarIndicador(RegistroIndicador indicador,
+			String nombreEmpresa, Year anio, int semestre)
+			throws ParseException {
+		return new DslIndicador().prepararFormula(indicador, nombreEmpresa,
+				anio, semestre).calcular();
 	}
-	
+
 }
