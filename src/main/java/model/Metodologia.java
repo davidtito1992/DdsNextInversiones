@@ -8,7 +8,14 @@ import parserIndicador.ParseException;
 import condiciones.CondicionCualitativa;
 import condiciones.CondicionTaxativa;
 
-public class Metodologia extends Entity{
+public class Metodologia{
+	
+	public Metodologia(String nombre, List<CondicionTaxativa> condTaxativas, List<CondicionCualitativa> condCualitativas){
+		this.nombre = nombre;
+		this.condicionesTaxativas = condTaxativas;
+		this.condicionesCualitativas = condCualitativas;
+	}
+
 	
 	/********* ATRIBUTOS *********/
 	
@@ -26,7 +33,7 @@ public class Metodologia extends Entity{
 		this.nombre = nombre;
 	}
 	
-	public double analizarResultado(Empresa empresa) throws ParseException{
+	public int analizarResultado(Empresa empresa) throws ParseException{
 		if(!analizarCondicionesTaxativas(empresa)){
 			return 0;
 		} else {
@@ -43,8 +50,8 @@ public class Metodologia extends Entity{
 		return true;
 	}
 	
-	private double analizarCondicionesCualitativas(Empresa empresa) throws ParseException {
-		double acumulador = 0;
+	private int analizarCondicionesCualitativas(Empresa empresa) throws ParseException {
+		int acumulador = 0;
 		for (int i = 0; i < condicionesCualitativas.size(); i++) {
 			acumulador += condicionesCualitativas.get(i).calcular(empresa);
 		}
