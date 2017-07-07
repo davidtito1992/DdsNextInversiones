@@ -24,7 +24,7 @@ public class Metodologia{
 		this.nombre = nombre;
 	}
 	
-	public int analizarResultado(Empresa empresa) throws ParseException{
+	public double analizarResultado(Empresa empresa) throws ParseException{
 		if(!analizarCondicionesTaxativas(empresa)){
 			return 0;
 		} else {
@@ -41,8 +41,8 @@ public class Metodologia{
 		return true;
 	}
 	
-	private int analizarCondicionesCualitativas(Empresa empresa) throws ParseException {
-		int acumulador = 0;
+	private double analizarCondicionesCualitativas(Empresa empresa) throws ParseException {
+		double acumulador = 0;
 		for (int i = 0; i < condicionesCualitativas.size(); i++) {
 			acumulador += condicionesCualitativas.get(i).calcular(empresa);
 		}

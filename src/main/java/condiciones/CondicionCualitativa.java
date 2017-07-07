@@ -5,5 +5,5 @@ import model.Empresa;
 
 public interface CondicionCualitativa {
 
-	public int calcular(Empresa empresa) throws ParseException;
+	public double calcular(Empresa empresa) throws ParseException;
 }
