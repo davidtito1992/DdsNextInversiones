@@ -9,12 +9,21 @@ public class MainViewM {
 
 	private boolean empresasSinCargar = true;
 	private boolean indicadoresSinCargar = true;
+	private boolean metodologiasSinCargar = true;
 
 	public MainViewM() {
 	}
 
 	public boolean isEmpresasSinCargar() {
 		return empresasSinCargar;
+	}
+
+	public boolean isMetodologiasSinCargar() {
+		return metodologiasSinCargar;
+	}
+
+	public void setMetodologiasSinCargar(boolean metodologiasSinCargar) {
+		this.metodologiasSinCargar = metodologiasSinCargar;
 	}
 
 	public void setEmpresasSinCargar(boolean empresasSinCargar) {
@@ -37,6 +46,11 @@ public class MainViewM {
 	public void cargarEmpresas() throws Exception {
 		new AppData().cargarEmpresas();
 		System.out.println("Accediendo para ver las empresas...");
+	}
+
+	public void cargarMetodologias() throws Exception {
+		new AppData().cargarMetodologias();
+		System.out.println("Accediendo para ver las metodologias...");
 	}
 
 }

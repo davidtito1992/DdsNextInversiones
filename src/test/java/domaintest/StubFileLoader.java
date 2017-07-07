@@ -9,6 +9,7 @@ import dataManagment.DataAdapter;
 import dataManagment.DataAdapterFactory;
 import dataManagment.DataLoader;
 import model.Empresa;
+import model.Metodologia;
 import model.RegistroIndicador;
 
 public class StubFileLoader implements DataLoader {
@@ -49,5 +50,15 @@ public class StubFileLoader implements DataLoader {
 		DataAdapter adaptador = DataAdapterFactory
 				.adaptarData(DataAdapterFactory.JSON);
 		return adaptador.adaptarIndicadores(archivoIndicadores);
+	}
+
+	@Override
+	public List<Metodologia> getDataMetodologias() throws Exception {
+		String AbsolutePath = new File(".").getAbsolutePath();
+		String archivoMetodologias = readFile(AbsolutePath + "/archivoInexistente.json");
+
+		DataAdapter adaptador = DataAdapterFactory
+				.adaptarData(DataAdapterFactory.JSON);
+		return adaptador.adaptarMetodologias(archivoMetodologias);
 	}
 }

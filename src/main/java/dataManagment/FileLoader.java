@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
+
+import model.Metodologia;
 import model.RegistroIndicador;
 import model.Empresa;
 
@@ -55,4 +57,13 @@ public class FileLoader implements DataLoader {
 		return adaptador.adaptarIndicadores(archivoIndicadores);
 	}
 
+	public List<Metodologia> getDataMetodologias() throws Exception {
+		String AbsolutePath = new File(".").getAbsolutePath();
+		String archivoMetodologias = readFile(AbsolutePath + "/metodologias.json");
+
+		DataAdapter adaptador = DataAdapterFactory
+				.adaptarData(DataAdapterFactory.JSON);
+		return adaptador.adaptarMetodologias(archivoMetodologias);
+	}
+	
 }

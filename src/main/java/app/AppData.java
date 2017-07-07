@@ -9,9 +9,11 @@ import dataManagment.DataLoader;
 import dataManagment.DataLoaderFactory;
 import dataManagment.FileWriter;
 import model.Empresa;
+import model.Metodologia;
 import model.RegistroIndicador;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
+import repositories.RepositorioMetodologias;
 
 public class AppData {
 
@@ -24,9 +26,19 @@ public class AppData {
 
 		// CARGO EN REPO
 		this.getRepoEmpresas().cargarListaEmpresas(empresas);
-
 	}
 
+	public void cargarMetodologias() throws Exception {
+
+		// LEO ARCHIVO YA ADAPTADO
+		DataLoader cargador = DataLoaderFactory
+				.cargarData(DataLoaderFactory.ARCHIVO);
+		List<Metodologia> metodologias = cargador.getDataMetodologias();
+
+		// CARGO EN REPO
+		this.getRepoMetodologias().cargarListaMetodologias(metodologias);
+	}
+	
 	public void cargarIndicadores() throws Exception {
 
 		// LEO ARCHIVO YA ADAPTADO
@@ -46,6 +58,10 @@ public class AppData {
 
 	public RepositorioEmpresa getRepoEmpresas() {
 		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+	}
+	
+	public RepositorioMetodologias getRepoMetodologias() {
+		return ApplicationContext.getInstance().getSingleton(Metodologia.class);
 	}
 
 	public void guardarIndicador(RegistroIndicador unIndicador) {

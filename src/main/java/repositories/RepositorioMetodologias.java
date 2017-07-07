@@ -37,6 +37,7 @@ public class RepositorioMetodologias extends CollectionBasedRepo<Metodologia> {
 		return Metodologia.class;
 	}
 
+	// ESTO NO SE SI ESTA BIEN
 	@Override
 	public Metodologia createExample() {
 		List<CondicionTaxativa> lista = new ArrayList<CondicionTaxativa>();
