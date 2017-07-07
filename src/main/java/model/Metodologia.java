@@ -2,7 +2,9 @@ package model;
 
 import java.util.List;
 
-public class Metodologia {
+import org.uqbar.commons.model.Entity;
+
+public class Metodologia extends Entity {
 	
 	/********* ATRIBUTOS *********/
 	
