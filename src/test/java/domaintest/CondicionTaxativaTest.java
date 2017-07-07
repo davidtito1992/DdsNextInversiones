@@ -1,10 +1,13 @@
 package domaintest;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import condiciones.CondicionTaxativaMayorA;
 import DataManagment.FileLoader;
 import model.Empresa;
 
