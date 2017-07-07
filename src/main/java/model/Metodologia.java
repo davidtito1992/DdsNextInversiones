@@ -2,11 +2,13 @@ package model;
 
 import java.util.List;
 
+import org.uqbar.commons.model.Entity;
+
 import parserIndicador.ParseException;
 import condiciones.CondicionCualitativa;
 import condiciones.CondicionTaxativa;
 
-public class Metodologia{
+public class Metodologia extends Entity{
 	
 	/********* ATRIBUTOS *********/
 	
