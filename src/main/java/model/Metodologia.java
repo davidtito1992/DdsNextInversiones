@@ -8,7 +8,8 @@ import parserIndicador.ParseException;
 import condiciones.CondicionCualitativa;
 import condiciones.CondicionTaxativa;
 
-public class Metodologia{
+@SuppressWarnings("serial")
+public class Metodologia extends Entity {
 	
 	public Metodologia(String nombre, List<CondicionTaxativa> condTaxativas, List<CondicionCualitativa> condCualitativas){
 		this.nombre = nombre;

@@ -1,10 +1,16 @@
 package repositories;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import model.Metodologia;
+
 import org.apache.commons.collections15.Predicate;
 import org.uqbar.commons.model.CollectionBasedRepo;
 import org.uqbar.commons.utils.Observable;
+
+import condiciones.CondicionCualitativa;
+import condiciones.CondicionTaxativa;
 
 @Observable
 public class RepositorioMetodologias extends CollectionBasedRepo<Metodologia> {
@@ -33,7 +39,9 @@ public class RepositorioMetodologias extends CollectionBasedRepo<Metodologia> {
 
 	@Override
 	public Metodologia createExample() {
-		return new Metodologia();
+		List<CondicionTaxativa> lista = new ArrayList<CondicionTaxativa>();
+		List<CondicionCualitativa> lista2 = new ArrayList<CondicionCualitativa>();
+		return new Metodologia("", lista, lista2);
 	}
 
 	@Override
