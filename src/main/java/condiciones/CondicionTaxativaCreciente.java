@@ -16,6 +16,11 @@ public class CondicionTaxativaCreciente implements CondicionTaxativa{
 
 	public RegistroIndicador indicador;
 	public int ultimosAnios;
+	
+	public CondicionTaxativaCreciente(RegistroIndicador indicador,int ultimosAnios){
+		this.indicador = indicador;
+		this.ultimosAnios = ultimosAnios;
+	}
 
 	public boolean calcular(Empresa empresa) throws ParseException {
 		List<Periodo> periodos = empresa.getPeriodos().stream()
