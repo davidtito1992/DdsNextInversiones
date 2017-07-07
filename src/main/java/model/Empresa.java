@@ -2,7 +2,9 @@ package model;
 
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,8 +43,11 @@ public class Empresa extends Entity {
 	/********* METODOS *********/
 	
 	public int getAntiguedadEmpresa(){
-		Date fecha = new Date();
-		int anioActual = fecha.getYear();
+		Date date = new Date();
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		int anioActual = calendar.get(Calendar.YEAR);
+		
 		ArrayList<Year> aniosPeriodos = (ArrayList<Year>) this.getPeriodos().stream()
 		.map(periodo -> periodo.getAnio()).distinct().sorted().collect(Collectors.toCollection(ArrayList::new));
 				
