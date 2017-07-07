@@ -1,5 +1,1 @@
-[{
-	"nombre": "Metodologia1",
-	"condicionesTaxativas": [{}],
-	"condicionesCualitativas": [{}]
-}]
+[{"nombre":"probando","condicionesTaxativas":[{"indicador":{"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"],"id":5},"numeroAComparar":100,"ultimosAnios":2}],"condicionesCualitativas":[]}]

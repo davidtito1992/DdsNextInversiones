@@ -44,7 +44,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 				.setHeight(80);
 		new Button(mainPanel).setCaption("Metodologias")
 				.onClick(() -> this.verMetodologias()).setWidth(60)
-				.setHeight(80);
+				.setHeight(80);		
 
 		new Label(mainPanel).setText("\n\n\n");
 
@@ -52,7 +52,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 				.setHeight(50);
 
 	}
-
+	
 	/*****************
 	 * buttons adicionales: podemos colocarlos horizontales a diferencia de los
 	 * demas

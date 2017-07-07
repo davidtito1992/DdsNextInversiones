@@ -66,9 +66,6 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewM> {
 		new Button(form).setCaption("Agregar Condicion")
 				.onClick(this::agregarTaxativa).setWidth(140);
 
-		new Label(form).setText("\t\t\t\tFormula:");
-		new TextBox(form).setWidth(250).bindValueToProperty("formula");
-
 		new Label(form).setText("\t");
 	}
 
@@ -91,12 +88,12 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewM> {
 
 	protected void guardar() {
 
-		// try {
-		// getModelObject().guardarMetodologia();
-		// this.close();
-		// } catch (Exception e) {
-		// this.showError(e.getMessage());
-		// }
+		 try {
+		 getModelObject().guardarMetodologia();
+		 this.close();
+		 } catch (Exception e) {
+		 this.showError(e.getMessage());
+		 }
 
 	}
 }

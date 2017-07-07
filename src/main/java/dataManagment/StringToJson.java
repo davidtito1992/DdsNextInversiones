@@ -1,10 +1,12 @@
 package dataManagment;
 
 import model.Empresa;
+import model.Metodologia;
 import model.RegistroIndicador;
+
 import com.google.gson.Gson;
 
-public class AdapterToJson {
+public class StringToJson {
 
 	public String getStringRegistroIndicador(RegistroIndicador unIndicador) {
 
@@ -16,6 +18,12 @@ public class AdapterToJson {
 
 		final Gson gson = new Gson();
 		return gson.toJson(unaEmpresa);
+	}
+
+	public String getStringMetodologia(Metodologia unaMetodologia) {
+
+		final Gson gson = new Gson();
+		return gson.toJson(unaMetodologia);
 	}
 
 }

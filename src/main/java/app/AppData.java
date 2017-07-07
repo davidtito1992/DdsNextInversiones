@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.uqbar.commons.utils.ApplicationContext;
 
-import dataManagment.AdapterToJson;
+import dataManagment.StringToJson;
 import dataManagment.DataLoader;
 import dataManagment.DataLoaderFactory;
 import dataManagment.FileWriter;
@@ -67,7 +67,7 @@ public class AppData {
 	public void guardarIndicador(RegistroIndicador unIndicador) {
 
 		try {
-			String nuevoIndicadorString = new AdapterToJson()
+			String nuevoIndicadorString = new StringToJson()
 					.getStringRegistroIndicador(unIndicador);
 
 			// sobreescribimos un archivo segun nombre de archivo,
@@ -87,13 +87,13 @@ public class AppData {
 	public void guardarMetodologia(Metodologia metodologia) {
 
 		try {
-//			String nuevaMetodologiaString = new AdapterToJson()
-//					.getStringMetodologia(metodologia);
-//
-//			// sobreescribimos un archivo segun nombre de archivo,
-//			// textoviejo,textonuevo
-//			new FileWriter("./metodologias.json", "}]", nuevaMetodologiaString
-//					+ "]\r\n");
+			String nuevaMetodologiaString = new StringToJson()
+					.getStringMetodologia(metodologia);
+
+			// sobreescribimos un archivo segun nombre de archivo,
+			// textoviejo,textonuevo
+			new FileWriter("./metodologias.json", "}]", nuevaMetodologiaString
+					+ "]\r\n");
 
 			this.getRepoMetodologias().create(metodologia);
 
@@ -108,7 +108,7 @@ public class AppData {
 
 		try {
 			// Convertimos un indicador a json
-			String nuevoIndicadorString = new AdapterToJson()
+			String nuevoIndicadorString = new StringToJson()
 					.getStringRegistroIndicador(new RegistroIndicador(
 							unIndicador.getNombre(), unIndicador.getFormula(),
 							unIndicador.getVariables()));
