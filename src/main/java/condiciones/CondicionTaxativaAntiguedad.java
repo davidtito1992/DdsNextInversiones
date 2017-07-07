@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import parserIndicador.ParseException;
 import model.Empresa;
 
-public class CondicionTaxativaAntiguedad {
+public class CondicionTaxativaAntiguedad implements CondicionTaxativa{
 	private int limiteAnios;
 	
 	public CondicionTaxativaAntiguedad(int limiteAnios){
