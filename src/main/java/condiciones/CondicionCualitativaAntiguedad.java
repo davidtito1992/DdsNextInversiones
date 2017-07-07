@@ -7,8 +7,8 @@ public class CondicionCualitativaAntiguedad implements CondicionCualitativa{
 
 	private double peso;
 	
-	public CondicionCualitativaAntiguedad(){
-		this.peso = 0.3;
+	public CondicionCualitativaAntiguedad(double peso){
+		this.peso = peso;
 	}
 	
 	public double calcular(Empresa empresa) throws ParseException{
