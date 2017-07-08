@@ -17,9 +17,10 @@ public class CondicionCualitativaSumatoria implements CondicionCualitativa {
 	private double peso;
 
 	public CondicionCualitativaSumatoria(RegistroIndicador indicador,
-			int ultimosAnios) {
+			int ultimosAnios,double peso) {
 		this.indicador = indicador;
 		this.ultimosAnios = ultimosAnios;
+		this.peso = peso;
 	}
 
 	public double calcular(Empresa empresa) throws ParseException {
