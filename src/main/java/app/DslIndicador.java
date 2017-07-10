@@ -35,7 +35,7 @@ public class DslIndicador {
 				semestre).valor();
 	}
 
-	private void analizarNombreIndicador(String nombre) throws ParseException {
+	public void analizarNombreIndicador(String nombre) throws ParseException {
 		try {
 			String nombreIndicador = new ParserIndicador(nombre)
 					.pasearSoloNombre();
@@ -47,7 +47,7 @@ public class DslIndicador {
 		}
 	}
 
-	private List<String> analizarFormulaIndicador(String formula)
+	public List<String> analizarFormulaIndicador(String formula)
 			throws ParseException {
 		try {
 			ParserIndicador preIndicador = new ParserIndicador(formula);
