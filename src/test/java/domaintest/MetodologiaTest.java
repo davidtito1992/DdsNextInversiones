@@ -23,7 +23,7 @@ import condiciones.CondicionCualitativaSumatoria;
 import condiciones.CondicionTaxativa;
 import condiciones.CondicionTaxativaMayorA;
 import condiciones.CondicionTaxativaMenorA;
-import dataManagment.FileLoader;
+import dataManagment.dataLoader.FileLoader;
 
 public class MetodologiaTest {
 	List<Empresa> empresas;

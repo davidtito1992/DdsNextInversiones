@@ -71,7 +71,8 @@ public class DslIndicador {
 		ParserIndicador preIndicador = new ParserIndicador(
 				formulaIndicador.getFormula());
 		preIndicador.pasear();
-
+		new AnalizadorSemantico().analizarVariablesDeFormula(preIndicador
+				.variables());
 		preIndicador.variables().forEach(
 				variable -> variable.setValor(this.traducirVariable(
 						variable.getNombre(), nombreEmpresa, anio, semestre)));

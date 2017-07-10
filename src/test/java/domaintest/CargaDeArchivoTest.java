@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 import org.junit.Test;
 
-import dataManagment.FileLoader;
+import dataManagment.dataLoader.FileLoader;
 
 public class CargaDeArchivoTest {
 

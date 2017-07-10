@@ -4,10 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import dataManagment.DataAdapterFactory;
-import dataManagment.DataLoaderFactory;
-import dataManagment.FileLoader;
-import dataManagment.JsonAdapter;
+import dataManagment.dataLoader.DataAdapterFactory;
+import dataManagment.dataLoader.DataLoaderFactory;
+import dataManagment.dataLoader.FileLoader;
+import dataManagment.dataLoader.JsonAdapter;
 
 public class FactoryTests {
 

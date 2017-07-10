@@ -1,4 +1,4 @@
-package dataManagment;
+package dataManagment.dataUploader;
 
 import model.Empresa;
 import model.Metodologia;
@@ -6,7 +6,7 @@ import model.RegistroIndicador;
 
 import com.google.gson.Gson;
 
-public class StringToJson {
+public class AdapterToJson implements AdapterToData {
 
 	public String getStringRegistroIndicador(RegistroIndicador unIndicador) {
 

@@ -1,13 +1,12 @@
 package app;
 
 import java.util.List;
-
 import org.uqbar.commons.utils.ApplicationContext;
-
-import dataManagment.StringToJson;
-import dataManagment.DataLoader;
-import dataManagment.DataLoaderFactory;
-import dataManagment.FileWriter;
+import dataManagment.dataLoader.DataLoader;
+import dataManagment.dataLoader.DataLoaderFactory;
+import dataManagment.dataUploader.DataUploader;
+import dataManagment.dataUploader.DataUploaderFactory;
+import dataManagment.dataUploader.AdapterToJson;
 import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
@@ -38,7 +37,7 @@ public class AppData {
 		// CARGO EN REPO
 		this.getRepoMetodologias().cargarListaMetodologias(metodologias);
 	}
-	
+
 	public void cargarIndicadores() throws Exception {
 
 		// LEO ARCHIVO YA ADAPTADO
@@ -59,7 +58,7 @@ public class AppData {
 	public RepositorioEmpresa getRepoEmpresas() {
 		return ApplicationContext.getInstance().getSingleton(Empresa.class);
 	}
-	
+
 	public RepositorioMetodologias getRepoMetodologias() {
 		return ApplicationContext.getInstance().getSingleton(Metodologia.class);
 	}
@@ -67,35 +66,12 @@ public class AppData {
 	public void guardarIndicador(RegistroIndicador unIndicador) {
 
 		try {
-			String nuevoIndicadorString = new StringToJson()
-					.getStringRegistroIndicador(unIndicador);
+			DataUploader cargador = DataUploaderFactory
+					.actualizarData(DataLoaderFactory.ARCHIVO);
 
-			// sobreescribimos un archivo segun nombre de archivo,
-			// textoviejo,textonuevo
-			new FileWriter("./indicadores.json", "}]", nuevoIndicadorString
-					+ "]\r\n");
+			cargador.escribirNuevoIndicador(unIndicador);
 
 			this.getRepoIndicadores().create(unIndicador);
-
-		} catch (Exception e) {
-			throw new RuntimeException(
-					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
-		}
-
-	}
-	
-	public void guardarMetodologia(Metodologia metodologia) {
-
-		try {
-			String nuevaMetodologiaString = new StringToJson()
-					.getStringMetodologia(metodologia);
-
-			// sobreescribimos un archivo segun nombre de archivo,
-			// textoviejo,textonuevo
-			new FileWriter("./metodologias.json", "}]", nuevaMetodologiaString
-					+ "]\r\n");
-
-			this.getRepoMetodologias().create(metodologia);
 
 		} catch (Exception e) {
 			throw new RuntimeException(
@@ -107,21 +83,45 @@ public class AppData {
 	public void borrarIndicador(RegistroIndicador unIndicador) {
 
 		try {
-			// Convertimos un indicador a json
-			String nuevoIndicadorString = new StringToJson()
-					.getStringRegistroIndicador(new RegistroIndicador(
-							unIndicador.getNombre(), unIndicador.getFormula(),
-							unIndicador.getVariables()));
-			// sobreescribimos para borrar
-			new FileWriter("./indicadores.json", nuevoIndicadorString, "");
+			DataUploader cargador = DataUploaderFactory
+					.actualizarData(DataLoaderFactory.ARCHIVO);
 
-			// eliminamos del repo
+			cargador.borrarIndicador(unIndicador);
+
 			this.getRepoIndicadores().delete(unIndicador);
 
 		} catch (Exception e) {
 			throw new RuntimeException(
 					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
 		}
+	}
+
+	public void guardarMetodologia(Metodologia metodologia) {
+
+		try {
+			// String nuevaMetodologiaString = new AdapterToJson()
+			// .getStringMetodologia(metodologia);
+			//
+			// // sobreescribimos un archivo segun nombre de archivo,
+			// textoviejo,textonuevo
+			// new FileUploader("./metodologias.json", "}]",
+			// nuevaMetodologiaString
+			// + "]\r\n");
+			//
+			// this.getRepoMetodologias().create(metodologia);
+
+			DataUploader cargador = DataUploaderFactory
+					.actualizarData(DataLoaderFactory.ARCHIVO);
+
+			cargador.escribirNuevaMetodologia(metodologia);
+
+			this.getRepoMetodologias().create(metodologia);
+
+		} catch (Exception e) {
+			throw new RuntimeException(
+					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
+		}
+
 	}
 
 }

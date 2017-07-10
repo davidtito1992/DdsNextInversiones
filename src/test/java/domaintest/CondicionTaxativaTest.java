@@ -3,7 +3,8 @@ package domaintest;
 import java.util.List;
 
 import org.junit.Before;
-import dataManagment.FileLoader;
+
+import dataManagment.dataLoader.FileLoader;
 import model.Empresa;
 import model.RegistroIndicador;
 

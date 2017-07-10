@@ -1,4 +1,4 @@
-package dataManagment;
+package dataManagment.dataLoader;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
