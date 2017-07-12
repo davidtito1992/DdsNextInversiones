@@ -1,29 +1,29 @@
-package condiciones;
+package ex_condiciones;
 
 import java.math.BigDecimal;
 import java.time.Year;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import parserIndicador.ParseException;
 import app.DslIndicador;
 import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;
+import parserIndicador.ParseException;
 
-public class CondicionTaxativaMenorA implements CondicionTaxativa {
+public class CondicionCualitativaSumatoria implements CondicionCualitativa {
 	private RegistroIndicador indicador;
-	private BigDecimal numeroAComparar;
 	private int ultimosAnios;
+	private double peso;
 
-	public CondicionTaxativaMenorA(RegistroIndicador indicador,
-			BigDecimal numeroAComparar, int ultimosAnios) {
+	public CondicionCualitativaSumatoria(RegistroIndicador indicador,
+			int ultimosAnios,double peso) {
 		this.indicador = indicador;
-		this.numeroAComparar = numeroAComparar;
 		this.ultimosAnios = ultimosAnios;
+		this.peso = peso;
 	}
 
-	public boolean calcular(Empresa empresa) throws ParseException {
+	public double calcular(Empresa empresa) throws ParseException {
 		BigDecimal acumulador = BigDecimal.ZERO;
 		List<Periodo> periodos = empresa
 				.getPeriodos()
@@ -36,7 +36,7 @@ public class CondicionTaxativaMenorA implements CondicionTaxativa {
 					.getSemestre()));
 		}
 
-		return acumulador.compareTo(numeroAComparar) < 0;
+		return acumulador.doubleValue() * peso;
 	}
 
 	private BigDecimal aplicarIndicador(RegistroIndicador indicador,
@@ -45,4 +45,5 @@ public class CondicionTaxativaMenorA implements CondicionTaxativa {
 		return new DslIndicador().prepararFormula(indicador, nombreEmpresa,
 				anio, semestre).calcular();
 	}
+
 }

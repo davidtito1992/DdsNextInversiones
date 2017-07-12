@@ -17,13 +17,13 @@ import org.uqbar.commons.utils.ApplicationContext;
 
 import parserIndicador.ParseException;
 import repositories.RepositorioIndicadores;
-import condiciones.CondicionCualitativa;
-import condiciones.CondicionCualitativaAntiguedad;
-import condiciones.CondicionCualitativaSumatoria;
-import condiciones.CondicionTaxativa;
-import condiciones.CondicionTaxativaMayorA;
-import condiciones.CondicionTaxativaMenorA;
 import dataManagment.dataLoader.FileLoader;
+import ex_condiciones.CondicionCualitativa;
+import ex_condiciones.CondicionCualitativaAntiguedad;
+import ex_condiciones.CondicionCualitativaSumatoria;
+import ex_condiciones.CondicionTaxativa;
+import ex_condiciones.CondicionTaxativaMayorA;
+import ex_condiciones.CondicionTaxativaMenorA;
 
 public class MetodologiaTest {
 	List<Empresa> empresas;

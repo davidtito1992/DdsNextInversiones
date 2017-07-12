@@ -1,44 +1,42 @@
-package condiciones;
+package ex_condiciones;
 
 import java.math.BigDecimal;
 import java.time.Year;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import parserIndicador.ParseException;
 import app.DslIndicador;
 import model.Empresa;
 import model.Periodo;
-import model.PeriodoComparator;
 import model.RegistroIndicador;
-import parserIndicador.ParseException;
 
-public class CondicionTaxativaCreciente implements CondicionTaxativa {
+public class CondicionTaxativaMayorA implements CondicionTaxativa {
+	private RegistroIndicador indicador;
+	private BigDecimal numeroAComparar;
+	private int ultimosAnios;
 
-	public RegistroIndicador indicador;
-	public int ultimosAnios;
-
-	public CondicionTaxativaCreciente(RegistroIndicador indicador,
-			int ultimosAnios) {
+	public CondicionTaxativaMayorA(RegistroIndicador indicador,
+			BigDecimal numeroAComparar, int ultimosAnios) {
 		this.indicador = indicador;
+		this.numeroAComparar = numeroAComparar;
 		this.ultimosAnios = ultimosAnios;
 	}
 
 	public boolean calcular(Empresa empresa) throws ParseException {
+		BigDecimal acumulador = BigDecimal.ZERO;
 		List<Periodo> periodos = empresa
 				.getPeriodos()
 				.stream()
 				.filter(periodo -> periodo.getAnio().getValue() > 2017 - ultimosAnios)
-				.sorted(new PeriodoComparator()).collect(Collectors.toList());
-		for (int i = 0; i < periodos.size() - 1; i++) {
-			if (aplicarIndicador(indicador, empresa.getNombre(),
-					periodos.get(i).getAnio(), periodos.get(i).getSemestre())
-					.doubleValue() > aplicarIndicador(indicador,
-					empresa.getNombre(), periodos.get(i + 1).getAnio(),
-					periodos.get(i + 1).getSemestre()).doubleValue()) {
-				return false;
-			}
+				.collect(Collectors.toList());
+		for (int i = 0; i < periodos.size(); i++) {
+			acumulador = acumulador.add(aplicarIndicador(indicador, empresa
+					.getNombre(), periodos.get(i).getAnio(), periodos.get(i)
+					.getSemestre()));
 		}
-		return true;
+
+		return acumulador.compareTo(numeroAComparar) > 0;
 	}
 
 	private BigDecimal aplicarIndicador(RegistroIndicador indicador,

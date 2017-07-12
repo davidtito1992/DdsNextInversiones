@@ -1,4 +1,4 @@
-package condiciones;
+package ex_condiciones;
 
 import java.math.BigDecimal;
 import java.time.Year;
@@ -12,12 +12,12 @@ import model.PeriodoComparator;
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 
-public class CondicionTaxativaDecreciente implements CondicionTaxativa {
+public class CondicionTaxativaCreciente implements CondicionTaxativa {
 
 	public RegistroIndicador indicador;
 	public int ultimosAnios;
 
-	public CondicionTaxativaDecreciente(RegistroIndicador indicador,
+	public CondicionTaxativaCreciente(RegistroIndicador indicador,
 			int ultimosAnios) {
 		this.indicador = indicador;
 		this.ultimosAnios = ultimosAnios;
@@ -32,7 +32,7 @@ public class CondicionTaxativaDecreciente implements CondicionTaxativa {
 		for (int i = 0; i < periodos.size() - 1; i++) {
 			if (aplicarIndicador(indicador, empresa.getNombre(),
 					periodos.get(i).getAnio(), periodos.get(i).getSemestre())
-					.doubleValue() < aplicarIndicador(indicador,
+					.doubleValue() > aplicarIndicador(indicador,
 					empresa.getNombre(), periodos.get(i + 1).getAnio(),
 					periodos.get(i + 1).getSemestre()).doubleValue()) {
 				return false;
