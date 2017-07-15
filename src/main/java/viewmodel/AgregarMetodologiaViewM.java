@@ -11,13 +11,13 @@ import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
 import app.AppData;
-import condiciones.CondicionCualitativa;
-import condiciones.CondicionTaxativa;
-import condiciones.CondicionTaxativaAntiguedad;
-import condiciones.CondicionTaxativaCreciente;
-import condiciones.CondicionTaxativaDecreciente;
-import condiciones.CondicionTaxativaMayorA;
-import condiciones.CondicionTaxativaMenorA;
+import ex_condiciones.CondicionCualitativa;
+import ex_condiciones.CondicionTaxativa;
+import ex_condiciones.CondicionTaxativaAntiguedad;
+import ex_condiciones.CondicionTaxativaCreciente;
+import ex_condiciones.CondicionTaxativaDecreciente;
+import ex_condiciones.CondicionTaxativaMayorA;
+import ex_condiciones.CondicionTaxativaMenorA;
 import repositories.RepositorioIndicadores;
 
 @Observable

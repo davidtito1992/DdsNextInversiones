@@ -6,8 +6,8 @@ import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.Observable;
 
 import parserIndicador.ParseException;
-import condiciones.CondicionCualitativa;
-import condiciones.CondicionTaxativa;
+import ex_condiciones.CondicionCualitativa;
+import ex_condiciones.CondicionTaxativa;
 
 @SuppressWarnings("serial")
 @Observable 

@@ -9,8 +9,8 @@ import org.apache.commons.collections15.Predicate;
 import org.uqbar.commons.model.CollectionBasedRepo;
 import org.uqbar.commons.utils.Observable;
 
-import condiciones.CondicionCualitativa;
-import condiciones.CondicionTaxativa;
+import ex_condiciones.CondicionCualitativa;
+import ex_condiciones.CondicionTaxativa;
 
 @Observable
 public class RepositorioMetodologias extends CollectionBasedRepo<Metodologia> {

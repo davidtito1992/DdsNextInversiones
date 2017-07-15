@@ -1,4 +1,4 @@
-package condiciones;
+package ex_condiciones;
 
 import model.Empresa;
 import parserIndicador.ParseException;
