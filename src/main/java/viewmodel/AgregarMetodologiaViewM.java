@@ -31,6 +31,8 @@ public class AgregarMetodologiaViewM {
 	private CondicionTaxativa taxativa;
 	private String nombre;
 
+	private List<Integer> prioridades =  new ArrayList<Integer>();
+	private Integer agregarPrioridadSeleccionada;
 	private List<String> agregarIndicador;
 	private String agregarIndicadorSeleccionado;
 	private List<String> agregarCriterio = new ArrayList<String>();
@@ -148,6 +150,21 @@ public class AgregarMetodologiaViewM {
 			String agregarCriterioSeleccionado) {
 		this.agregarCriterioSeleccionado = agregarCriterioSeleccionado;
 	}
+	
+	public Integer getAgregarPrioridadSeleccionada() {
+		return agregarPrioridadSeleccionada;
+	}
+
+	public void setAgregarPrioridadSeleccionada(Integer agregarPrioridadSeleccionado) {
+		this.agregarPrioridadSeleccionada = agregarPrioridadSeleccionado;
+	}
+	public List<Integer> getPrioridades() {
+		return prioridades;
+	}
+
+	public void setPrioridades(List<Integer> prioridades) {
+		this.prioridades = prioridades;
+	}
 
 	/********* METODOS *********/
 
@@ -156,8 +173,20 @@ public class AgregarMetodologiaViewM {
 		this.cargarCriteriosDisponibles();
 		this.cargarAniosDisponibles();
 		this.cargarNrosDisponibles();
+		this.cargarPrioridades();
 	}
-
+	private void cargarPrioridades() {
+		
+		this.prioridades.add(1);
+		this.prioridades.add(2);
+		this.prioridades.add(3);
+		this.prioridades.add(4);
+		this.prioridades.add(5);
+		this.prioridades.add(6);
+		this.prioridades.add(7);
+		this.prioridades.add(8);
+		
+	}
 	private void cargarAniosDisponibles() {
 		this.agregarAnios.add(1);
 		this.agregarAnios.add(2);
