@@ -1,18 +1,20 @@
 package app;
 
 import java.util.List;
+
+import model.Empresa;
+import model.Metodologia;
+import model.RegistroIndicador;
+
 import org.uqbar.commons.utils.ApplicationContext;
+
+import repositories.RepositorioEmpresa;
+import repositories.RepositorioIndicadores;
+import repositories.RepositorioMetodologias;
 import dataManagment.dataLoader.DataLoader;
 import dataManagment.dataLoader.DataLoaderFactory;
 import dataManagment.dataUploader.DataUploader;
 import dataManagment.dataUploader.DataUploaderFactory;
-import dataManagment.dataUploader.AdapterToJson;
-import model.Empresa;
-import model.Metodologia;
-import model.RegistroIndicador;
-import repositories.RepositorioEmpresa;
-import repositories.RepositorioIndicadores;
-import repositories.RepositorioMetodologias;
 
 public class AppData {
 
