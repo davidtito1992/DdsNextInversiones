@@ -8,10 +8,8 @@ import model.RegistroIndicador;
 
 public class RepositorioUnicoDeIndicadores {
 	
-	private static RepositorioUnicoDeIndicadores repositorioIndicadores;
 	private List<RegistroIndicador> indicadoresExistentes;
-	
-	private RepositorioUnicoDeIndicadores(){}
+	private static RepositorioUnicoDeIndicadores repositorioIndicadores = null; 
 	
 	public static RepositorioUnicoDeIndicadores getSingletonInstance(){
         if (repositorioIndicadores == null){
@@ -21,18 +19,24 @@ public class RepositorioUnicoDeIndicadores {
        
         return repositorioIndicadores;
 	}
-
-	public static RepositorioUnicoDeIndicadores getRepositorioIndicadores() {
-		return repositorioIndicadores;
+	
+	private RepositorioUnicoDeIndicadores(){
+		indicadoresExistentes = new ArrayList<>();
 	}
-
-	public static void setRepositorioIndicadores(
-			RepositorioUnicoDeIndicadores repositorioIndicadores) {
-		RepositorioUnicoDeIndicadores.repositorioIndicadores = repositorioIndicadores;
-	}
+	
+	
 	
 //	---------- Metodos ---------
 	
+	public List<RegistroIndicador> getIndicadoresExistentes() {
+		return indicadoresExistentes;
+	}
+
+	public void setIndicadoresExistentes(
+			List<RegistroIndicador> indicadoresExistentes) {
+		this.indicadoresExistentes = indicadoresExistentes;
+	}
+
 	public void cargarListaIndicadores(List<RegistroIndicador> registrosIndicadores) {
 		for(RegistroIndicador registroIndicador : registrosIndicadores){
 			indicadoresExistentes.add(registroIndicador);

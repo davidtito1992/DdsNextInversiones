@@ -12,12 +12,9 @@ import modelFilter.EmpresaDataFilter;
 
 public class RepositorioUnicoDeEmpresas {
 	
-	private static RepositorioUnicoDeEmpresas repositorioEmpresas;
-	
 	private List<Empresa> empresasExistentes;
-	
-	private RepositorioUnicoDeEmpresas(){}
-	
+	private static RepositorioUnicoDeEmpresas repositorioEmpresas = null;
+		
 	public static RepositorioUnicoDeEmpresas getSingletonInstance(){
         if (repositorioEmpresas == null){
         	repositorioEmpresas = new RepositorioUnicoDeEmpresas();}
@@ -26,18 +23,21 @@ public class RepositorioUnicoDeEmpresas {
        
         return repositorioEmpresas;
 	}
-
-	public static RepositorioUnicoDeEmpresas getRepositorioEmpresas() {
-		return repositorioEmpresas;
-	}
-
-	public static void setRepositorioEmpresas(
-			RepositorioUnicoDeEmpresas repositorioEmpresas) {
-		RepositorioUnicoDeEmpresas.repositorioEmpresas = repositorioEmpresas;
+	
+	private RepositorioUnicoDeEmpresas(){
+		empresasExistentes = new ArrayList<>();
 	}
 	
 // -------------- Metodos -------------
 	
+	public List<Empresa> getEmpresasExistentes() {
+		return empresasExistentes;
+	}
+
+	public void setEmpresasExistentes(List<Empresa> empresasExistentes) {
+		this.empresasExistentes = empresasExistentes;
+	}
+
 	public void cargarListaEmpresas(List<Empresa> empresas) {
 		for(Empresa empresa : empresas){
 			empresasExistentes.add(empresa);
