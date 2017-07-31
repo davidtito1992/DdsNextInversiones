@@ -5,9 +5,11 @@ import model.SnapshotIndicador;
 public class Longevidad extends Condicion{
 
 	@Override
-	public SnapshotIndicador calcular(SnapshotIndicador lista) {
-		
+	public RankingEmpresa calcular(RankingEmpresa lista) {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

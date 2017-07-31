@@ -1,11 +1,7 @@
 package viewmodel;
 
 import model.Metodologia;
-import model.RegistroIndicador;
-
 import org.uqbar.commons.utils.Observable;
-
-import app.AppData;
 
 @Observable
 public class BorrarMetodologiaViewM {

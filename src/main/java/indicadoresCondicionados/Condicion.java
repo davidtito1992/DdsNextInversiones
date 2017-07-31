@@ -9,7 +9,7 @@ public abstract class Condicion {
 	
 	private BigDecimal numeroAComparar;
 	
-	public abstract SnapshotIndicador calcular(SnapshotIndicador lista); 
+	public abstract RankingEmpresa calcular(RankingEmpresa lista); 
 	
 
 }
