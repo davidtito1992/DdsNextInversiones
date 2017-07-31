@@ -81,13 +81,13 @@ public class MetodologiaView extends Dialog<MetodologiaViewM>{
 		// abrir ventana ConsultarIndicadorView
 
 		if (this.getModelObject().getMetodologiaSeleccionada() != null) {
-//			System.out.println("Accediendo para consultar las metodologias...");
-//
-//			Dialog<?> dialog = new ConsultarMetodologiaView(this, this
-//					.getModelObject().getMetodologiaSeleccionada());
-//			dialog.open();
-//			dialog.onAccept(() -> {
-//			});
+			System.out.println("Accediendo para consultar las metodologias...");
+
+			Dialog<?> dialog = new ConsultarMetodologiaView(this, this
+					.getModelObject().getMetodologiaSeleccionada());
+			dialog.open();
+			dialog.onAccept(() -> {
+			});
 		} else {
 
 			this.showError("Seleccione una Metodologia, por favor");

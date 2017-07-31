@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.Year;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import parserIndicador.ParseException;
 import app.DslIndicador;
 import model.Empresa;

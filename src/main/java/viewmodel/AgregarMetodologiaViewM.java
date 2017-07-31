@@ -1,5 +1,7 @@
 package viewmodel;
 
+import indicadoresCondicionados.IndicadorCondicionado;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +28,13 @@ public class AgregarMetodologiaViewM {
 	/********* ATRIBUTOS *********/
 
 	private List<CondicionTaxativa> listaTaxativas = new ArrayList<CondicionTaxativa>();
-	private List<CondicionCualitativa> listaCualitativas = new ArrayList<CondicionCualitativa>();
+	private List<CondicionCualitativa> listaCualitativas = new ArrayList<CondicionCualitativa>();	
 	private CondicionCualitativa cualitativa;
 	private CondicionTaxativa taxativa;
-	private String nombre;
+	
+	private List<IndicadorCondicionado> listaDeIndicadoresCondicionados = new ArrayList<IndicadorCondicionado>();
 
+	private String nombre;
 	private List<Integer> prioridades =  new ArrayList<Integer>();
 	private Integer agregarPrioridadSeleccionada;
 	private List<String> agregarIndicador;
@@ -165,7 +169,14 @@ public class AgregarMetodologiaViewM {
 	public void setPrioridades(List<Integer> prioridades) {
 		this.prioridades = prioridades;
 	}
+	public List<IndicadorCondicionado> getListaDeIndicadoresCondicionados() {
+		return listaDeIndicadoresCondicionados;
+	}
 
+	public void setListaDeIndicadoresCondicionados(
+			List<IndicadorCondicionado> listaDeIndicadoresCondicionados) {
+		this.listaDeIndicadoresCondicionados = listaDeIndicadoresCondicionados;
+	}
 	/********* METODOS *********/
 
 	public AgregarMetodologiaViewM() {
@@ -217,20 +228,27 @@ public class AgregarMetodologiaViewM {
 						this.getRepoIndicadores().allInstances());
 	}
 
-	public void guardarMetodologia() throws Exception {
+	public void guardarMetodologia() {
+
+//		if (this.nombre == null
+//				|| (this.listaCualitativas.isEmpty() && this.listaTaxativas
+//						.isEmpty())) {
+//			throw new RuntimeException(
+//					"Debe ingresar nombre y al menos una condicion para guardar correctamente. "
+//							+ "Intentelo nuevamente");
+//		}
 
 		if (this.nombre == null
-				|| (this.listaCualitativas.isEmpty() && this.listaTaxativas
-						.isEmpty())) {
+				|| (this.listaCualitativas.isEmpty()))
 			throw new RuntimeException(
 					"Debe ingresar nombre y al menos una condicion para guardar correctamente. "
 							+ "Intentelo nuevamente");
-		}
+		
+//		Metodologia laNueva = new Metodologia(this.getNombre(),
+//				this.getListaTaxativas(), this.getListaCualitativas());
+	//	Metodologia nuevaMetodologia = new Metodologia(this.getNombre(),this.getListaDeIndicadoresCondicionados()) ;
 
-		Metodologia laNueva = new Metodologia(this.getNombre(),
-				this.getListaTaxativas(), this.getListaCualitativas());
-
-		new AppData().guardarMetodologia(laNueva);
+		//new AppData().guardarMetodologia(nuevaMetodologia);
 	}
 
 	public RepositorioIndicadores getRepoIndicadores() {

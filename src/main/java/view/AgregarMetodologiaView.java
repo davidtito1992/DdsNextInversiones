@@ -41,7 +41,7 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewM> {
 		selectorIndicador.bindItemsToProperty("agregarIndicador");
 		selectorIndicador.bindValueToProperty("agregarIndicadorSeleccionado");
 
-		new Label(form).setText("\tTipo: ");
+		new Label(form).setText("\tCondicion 1: ");
 		Selector<String> selectorTipo = new Selector<String>(form)
 				.allowNull(true);
 		selectorTipo.setWidth(150);

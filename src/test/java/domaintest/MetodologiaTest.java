@@ -54,7 +54,7 @@ public class MetodologiaTest {
 		condicionesTaxativas.add(condicionTaxativaMenorA1000);
 		condicionesCualitativas.add(condicionCualitativaSumatoria);
 		condicionesCualitativas.add(condicionCualitativaAntiguedad1);
-		metodologia = new Metodologia("prueba", condicionesTaxativas, condicionesCualitativas);
+//		metodologia = new Metodologia("prueba", condicionesTaxativas, condicionesCualitativas);
 	}
 	
 	@Test
@@ -67,10 +67,10 @@ public class MetodologiaTest {
 		assertEquals("20.0",String.valueOf(condicionCualitativaSumatoria.calcular(empresa)));
 	}
 	
-	@Test
-	public void metodologiaTest() throws ParseException{
-		assertEquals(0,metodologia.analizarResultado(empresa));
-	}
+//	@Test
+//	public void metodologiaTest() throws ParseException{
+//		assertEquals(0,metodologia.analizarResultado(empresa));
+//	}
 	
 	
 	

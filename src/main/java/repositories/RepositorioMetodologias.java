@@ -1,16 +1,11 @@
 package repositories;
 
-import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 import model.Metodologia;
-
 import org.apache.commons.collections15.Predicate;
 import org.uqbar.commons.model.CollectionBasedRepo;
 import org.uqbar.commons.utils.Observable;
-
-import ex_condiciones.CondicionCualitativa;
-import ex_condiciones.CondicionTaxativa;
 
 @Observable
 public class RepositorioMetodologias extends CollectionBasedRepo<Metodologia> {
@@ -38,16 +33,32 @@ public class RepositorioMetodologias extends CollectionBasedRepo<Metodologia> {
 	}
 
 	// ESTO NO SE SI ESTA BIEN
-	@Override
-	public Metodologia createExample() {
-		List<CondicionTaxativa> lista = new ArrayList<CondicionTaxativa>();
-		List<CondicionCualitativa> lista2 = new ArrayList<CondicionCualitativa>();
-		return new Metodologia("", lista, lista2);
-	}
-
+	// @Override
+	// public Metodologia createExample() {
+	// List<CondicionTaxativa> lista = new ArrayList<CondicionTaxativa>();
+	// List<CondicionCualitativa> lista2 = new
+	// ArrayList<CondicionCualitativa>();
+	// return new Metodologia("", lista, lista2);
+	// }
+	//
 	@Override
 	protected Predicate getCriterio(Metodologia example) {
 		return null;
 	}
 
+	@Override
+	public Metodologia createExample() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Metodologia getMetodologia(String nombreMetodologia) {
+		List<Metodologia> metodologias = this
+				.allInstances()
+				.stream()
+				.filter(metodologia -> metodologia.getNombre()
+						.equalsIgnoreCase(nombreMetodologia))
+				.collect(Collectors.toList());
+		return metodologias.get(0);
+	}
 }

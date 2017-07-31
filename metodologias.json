@@ -1,10 +1,1 @@
-[{"nombre":"probando","condicionesTaxativas":[{"indicador":{"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"],"id":5},"numeroAComparar":100,"ultimosAnios":2},
-{"nombre":"puto","condicionesTaxativas":[{"limiteAnios":2},
-{"nombre":"ola","condicionesTaxativas":[{"indicador":{"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"],"id":5},"numeroAComparar":10,"ultimosAnios":2}],"condicionesCualitativas":[]}]
-,"condicionesCualitativas":[]},
-{"nombre":"ola","condicionesTaxativas":[{"indicador":{"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"],"id":5},"numeroAComparar":10,"ultimosAnios":2}],"condicionesCualitativas":[]}]
-,"condicionesCualitativas":[{"nombre":"ola","condicionesTaxativas":[{"indicador":{"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"],"id":5},"numeroAComparar":10,"ultimosAnios":2}],"condicionesCualitativas":[]}]
-},{"nombre":"puto","condicionesTaxativas":[{"limiteAnios":2},
-{"nombre":"ola","condicionesTaxativas":[{"indicador":{"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"],"id":5},"numeroAComparar":10,"ultimosAnios":2}],"condicionesCualitativas":[]}]
-,"condicionesCualitativas":[]},
-{"nombre":"ola","condicionesTaxativas":[{"indicador":{"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"],"id":5},"numeroAComparar":10,"ultimosAnios":2}],"condicionesCualitativas":[]}]
+[{"nombre":"Warren Buffet", "indicadoresCondicionados": [{}] }]

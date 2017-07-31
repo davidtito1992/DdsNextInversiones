@@ -1,6 +1,7 @@
 package app;
 
 import model.Empresa;
+import model.Metodologia;
 import model.RegistroIndicador;
 
 import org.uqbar.arena.Application;
@@ -9,6 +10,7 @@ import org.uqbar.commons.utils.ApplicationContext;
 
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicadores;
+import repositories.RepositorioMetodologias;
 import repositories.RepositorioUnicoDeEmpresas;
 import repositories.RepositorioUnicoDeIndicadores;
 import view.MainView;
@@ -26,9 +28,12 @@ public class NextInversiones extends Application {
 
 		ApplicationContext.getInstance().configureSingleton(
 				RegistroIndicador.class, new RepositorioIndicadores());
-		
-		 RepositorioUnicoDeEmpresas.getSingletonInstance();
-		 RepositorioUnicoDeIndicadores.getSingletonInstance();
+
+		ApplicationContext.getInstance().configureSingleton(
+				Metodologia.class, new RepositorioMetodologias());		
+//		
+//		 RepositorioUnicoDeEmpresas.getSingletonInstance();
+//		 RepositorioUnicoDeIndicadores.getSingletonInstance();
 
 		return new MainView(this);
 	}

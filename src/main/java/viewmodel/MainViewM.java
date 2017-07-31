@@ -19,7 +19,7 @@ public class MainViewM {
 	}
 
 	public boolean isMetodologiasSinCargar() {
-		return false;
+		return metodologiasSinCargar;
 		//return metodologiasSinCargar;
 	}
 
