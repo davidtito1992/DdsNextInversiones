@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IndicadorCondicionado {
-	private byte prioridad;
+	private int prioridad;
 	private String nombreIndicador;
 	private List<Condicion> condiciones;
 
-	public IndicadorCondicionado(byte prioridad, String nombre,
+	public IndicadorCondicionado(int prioridad, String nombre,
 			List<Condicion> condiciones) {
 
 		this.prioridad = prioridad;
@@ -28,7 +28,7 @@ public class IndicadorCondicionado {
 		return prioridad;
 	}
 
-	public void setProridad(byte proridad) {
+	public void setProridad(int proridad) {
 		this.prioridad = proridad;
 	}
 

@@ -40,7 +40,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	public Empresa createExample() {
 		return new Empresa();
 	}
-
+	
 	@Override
 	protected Predicate getCriterio(Empresa example) {
 		return null;
@@ -141,7 +141,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 		return nombresDeTodasLasCuentas;
 
 	}
-
+	
 	public ArrayList<String> todosLosNombresDeEmpresas(List<Empresa> empresas) {
 
 		ArrayList<String> nombresDeTodasLasEmpresas = empresas.stream()

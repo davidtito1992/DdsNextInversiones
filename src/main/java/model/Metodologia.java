@@ -1,6 +1,7 @@
 package model;
 
 import indicadoresCondicionados.IndicadorCondicionado;
+import indicadoresCondicionados.RankingEmpresa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class Metodologia extends Entity {
 	public String nombre;
 	// public List<CondicionTaxativa> condicionesTaxativas;
 	// public List<CondicionCualitativa> condicionesCualitativas;
-	public List<IndicadorCondicionado> indicadoresCondicionados;
+	public ArrayList<IndicadorCondicionado> indicadoresCondicionados;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -48,12 +49,12 @@ public class Metodologia extends Entity {
 		this.nombre = nombre;
 	}
 
-	public List<IndicadorCondicionado> getIndicadoresCondicionados() {
+	public ArrayList<IndicadorCondicionado> getIndicadoresCondicionados() {
 		return indicadoresCondicionados;
 	}
 
 	public void setIndicadoresCondicionados(
-			List<IndicadorCondicionado> indicadoresCondicionados) {
+			ArrayList<IndicadorCondicionado> indicadoresCondicionados) {
 		this.indicadoresCondicionados = indicadoresCondicionados;
 	}
 
