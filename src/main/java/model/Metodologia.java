@@ -1,9 +1,11 @@
 package model;
 
+import indicadoresCondicionados.ControladorDeMetodologia;
 import indicadoresCondicionados.IndicadorCondicionado;
 import indicadoresCondicionados.RankingEmpresa;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.uqbar.commons.model.Entity;
@@ -84,4 +86,65 @@ public class Metodologia extends Entity {
 	// }
 	// return acumulador;
 	// }
+
+	public ArrayList<RankingEmpresa> calcular() {
+
+		ArrayList<IndicadorCondicionado> indicadoresCondicionados = this
+				.getIndicadoresCondicionadosOrdenados(this
+						.getIndicadoresCondicionados());
+
+		ArrayList<RankingEmpresa> listRanking = this
+				.obtenerRankingNuloDeTodasLasEmpresas();
+
+		for (int i = 0; i < indicadoresCondicionados.size(); i++) {
+
+			listRanking = this.calcularIndicadorCondicionado(
+					indicadoresCondicionados.get(i), listRanking);
+		}
+		listRanking.sort(Comparator.comparing(RankingEmpresa::getRanking));
+	
+		return listRanking;
+	}
+
+	public ArrayList<IndicadorCondicionado> getIndicadoresCondicionadosOrdenados(
+			ArrayList<IndicadorCondicionado> indicadoresCondicionados) {
+
+		// ***************HARDCODE**********//
+		indicadoresCondicionados.remove(0);
+		indicadoresCondicionados.add(new IndicadorCondicionado(3, "ROE", null));
+		indicadoresCondicionados.add(new IndicadorCondicionado(2,
+				"CantidadAcciones", null));
+		indicadoresCondicionados.add(new IndicadorCondicionado(4,
+				"IngresoNeto", null));
+		indicadoresCondicionados.add(new IndicadorCondicionado(2, "I2", null));
+		// ///***********************//
+
+		indicadoresCondicionados.sort(Comparator
+				.comparing(IndicadorCondicionado::getPrioridad));
+
+		return indicadoresCondicionados;
+	}
+
+	public ArrayList<RankingEmpresa> calcularIndicadorCondicionado(
+			IndicadorCondicionado indicadorCondicionado,
+			ArrayList<RankingEmpresa> listRanking) {
+
+		return indicadorCondicionado.calcular(listRanking);
+	}
+
+	public ArrayList<RankingEmpresa> obtenerRankingNuloDeTodasLasEmpresas() {
+
+		ControladorDeMetodologia controlador = new ControladorDeMetodologia();
+
+		ArrayList<RankingEmpresa> listEmpresas = new ArrayList<RankingEmpresa>();
+		controlador
+				.getRepoEmpresas()
+				.todosLosNombresDeEmpresas(
+						controlador.getRepoEmpresas().allInstances())
+				.forEach(
+						nombreEmpresa -> listEmpresas.add(new RankingEmpresa(0,
+								nombreEmpresa)));
+		return listEmpresas;
+	}
+
 }

@@ -1,13 +1,9 @@
 package viewmodel;
 
-import indicadoresCondicionados.ControladorDeMetodologia;
 import indicadoresCondicionados.RankingEmpresa;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Metodologia;
-
 import org.uqbar.commons.utils.Observable;
 
 @Observable
@@ -85,8 +81,8 @@ public class ConsultarMetodologiaViewM {
 
 	public void llenarTablas() {
 
-		this.setRankingDeEmpresas(new ControladorDeMetodologia().calcular(this.metodologia));
-		}
+		this.setRankingDeEmpresas(this.getMetodologia().calcular());
+	}
 
 	public void buscar() {
 	}
