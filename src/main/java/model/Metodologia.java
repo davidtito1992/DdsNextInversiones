@@ -102,7 +102,8 @@ public class Metodologia extends Entity {
 					indicadoresCondicionados.get(i), listRanking);
 		}
 		listRanking.sort(Comparator.comparing(RankingEmpresa::getRanking));
-	
+		listRanking.get(listRanking.size() -1).setRanking(-1);
+		listRanking.get(listRanking.size() -1).setObservaciones("No Invertir");
 		return listRanking;
 	}
 

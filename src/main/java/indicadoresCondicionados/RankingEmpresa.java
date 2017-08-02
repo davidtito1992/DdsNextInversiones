@@ -7,6 +7,7 @@ public class RankingEmpresa {
 
 	private int ranking;
 	private String nombre;
+	private String observaciones ;
 
 	public RankingEmpresa(int ranking, String nombre) {
 
@@ -30,4 +31,13 @@ public class RankingEmpresa {
 		this.nombre = nombre;
 	}
 
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
+	
 }

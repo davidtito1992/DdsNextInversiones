@@ -73,6 +73,11 @@ public class ConsultarMetodologiaView extends Dialog<ConsultarMetodologiaViewM> 
 		columnaNombreEmpresa.setTitle("Empresa").setWeight(140);
 		columnaNombreEmpresa.bindContentsToProperty("nombre");
 
+		Column<RankingEmpresa> columnaObservacionEmpresa = new Column<RankingEmpresa>(
+				tableRankingEmpresa);
+		columnaObservacionEmpresa.setTitle("Observaciones").setWeight(140);
+		columnaObservacionEmpresa.bindContentsToProperty("observaciones");
+		
 		tableRankingEmpresa.bindItemsToProperty("rankingDeEmpresas");
 		tableRankingEmpresa.bindValueToProperty("rankingDeEmpresaSeleccionado");
 
