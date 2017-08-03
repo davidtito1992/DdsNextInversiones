@@ -3,19 +3,21 @@ package repositories;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.uqbar.commons.utils.Observable;
+
 import model.Metodologia;
 
-public class RepositorioUnicoDeMetodologias {
+@Observable
+public class RepositorioUnicoDeMetodologias extends Repositorio{
 	
 	private List<Metodologia> metodologiasExistentes;
 	private static RepositorioUnicoDeMetodologias repositorioMetodologias = null;
 	
 	public static RepositorioUnicoDeMetodologias getSingletonInstance(){
+		
         if (repositorioMetodologias == null){
         	repositorioMetodologias = new RepositorioUnicoDeMetodologias();}
-        else{
-        	throw new RuntimeException("El repositorio de indicadores ya ha sido creado");}
-       
+
         return repositorioMetodologias;
 	}
 	
@@ -38,6 +40,10 @@ public class RepositorioUnicoDeMetodologias {
 		for(Metodologia metodologia : registrosMetodologias){
 			metodologiasExistentes.add(metodologia);
 		}
+	}
+	
+	public void agregarMetodologiaNueva(Metodologia metodologia){
+		metodologiasExistentes.add(metodologia);
 	}
 
 }

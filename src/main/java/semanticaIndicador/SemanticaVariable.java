@@ -2,14 +2,14 @@ package semanticaIndicador;
 
 import java.math.BigDecimal;
 import java.time.Year;
-import model.Empresa;
+
 import model.RegistroIndicador;
-import org.uqbar.commons.utils.ApplicationContext;
+import parserIndicador.ParseException;
+import repositories.RepositorioUnicoDeEmpresas;
+import repositories.RepositorioUnicoDeIndicadores;
+import app.AplicacionContexto;
 import app.DslIndicador;
 import formulaIndicador.FormulaIndicador;
-import parserIndicador.ParseException;
-import repositories.RepositorioEmpresa;
-import repositories.RepositorioIndicadores;
 
 public class SemanticaVariable {
 
@@ -31,16 +31,16 @@ public class SemanticaVariable {
 
 		BigDecimal valor;
 
-		if (this.getRepoEmpresas().esCuenta(nombreVariable)) {
+		if (this.getRepositorioEmpresas().esCuenta(nombreVariable)) {
 
 			// calculo del valor de una cuenta segun parametros
-			valor = this.getRepoEmpresas().getValorCuenta(nombreEmpresa, anio,
+			valor = this.getRepositorioEmpresas().getValorCuenta(nombreEmpresa, anio,
 					semestre, nombreVariable);
 
 		} else {
 			//
 			// calculo del valor de un indicador segun parametros
-			RegistroIndicador indicadorAObtener = this.getRepoIndicadores()
+			RegistroIndicador indicadorAObtener = this.getRepositorioIndicadores()
 					.getRegistroIndicador(this.nombreVariable);
 
 			try {
@@ -60,12 +60,20 @@ public class SemanticaVariable {
 		return valor;
 	}
 
-	public RepositorioIndicadores getRepoIndicadores() {
-		return ApplicationContext.getInstance().getSingleton(
-				RegistroIndicador.class);
+//	public RepositorioIndicadores getRepoIndicadores() {
+//		return ApplicationContext.getInstance().getSingleton(
+//				RegistroIndicador.class);
+//	}
+//
+//	public RepositorioEmpresa getRepoEmpresas() {
+//		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+//	}
+	
+	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
+		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
-
-	public RepositorioEmpresa getRepoEmpresas() {
-		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+	
+	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
+		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 }

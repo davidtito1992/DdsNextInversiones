@@ -2,12 +2,12 @@ package dataManagment.dataLoader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
-import model.Empresa;
 
 public class FileLoader implements DataLoader {
 
@@ -39,7 +39,7 @@ public class FileLoader implements DataLoader {
 		}
 	}
 
-	public List<Empresa> getDataEmpresas() throws Exception {
+	public ArrayList<Empresa> getDataEmpresas() throws Exception {
 		String AbsolutePath = new File(".").getAbsolutePath();
 		String archivoEmpresas = readFile(AbsolutePath + "/empresas.json");
 
@@ -48,7 +48,7 @@ public class FileLoader implements DataLoader {
 		return adaptador.adaptarEmpresas(archivoEmpresas);
 	}
 
-	public List<RegistroIndicador> getDataIndicadores() throws Exception {
+	public ArrayList<RegistroIndicador> getDataIndicadores() throws Exception {
 		String AbsolutePath = new File(".").getAbsolutePath();
 		String archivoIndicadores = readFile(AbsolutePath + "/indicadores.json");
 
@@ -57,7 +57,7 @@ public class FileLoader implements DataLoader {
 		return adaptador.adaptarIndicadores(archivoIndicadores);
 	}
 
-	public List<Metodologia> getDataMetodologias() throws Exception {
+	public ArrayList<Metodologia> getDataMetodologias() throws Exception {
 		String AbsolutePath = new File(".").getAbsolutePath();
 		String archivoMetodologias = readFile(AbsolutePath + "/metodologias.json");
 

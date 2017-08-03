@@ -2,7 +2,6 @@ package dataManagment.dataLoader;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 import model.Empresa;
 import model.Metodologia;
@@ -17,10 +16,10 @@ public class JsonAdapter implements DataAdapter {
 
 	Gson gson = GsonFactory.getGson();
 
-	public List<Empresa> adaptarEmpresas(String empresas) throws ParseException {
-		List<Empresa> listaEmpresas = new ArrayList<Empresa>();
+	public ArrayList<Empresa> adaptarEmpresas(String empresas) throws ParseException {
+		ArrayList<Empresa> listaEmpresas = new ArrayList<Empresa>();
 		try {
-			Type listType = new TypeToken<List<Empresa>>() {
+			Type listType = new TypeToken<ArrayList<Empresa>>() {
 			}.getType();
 			listaEmpresas = gson.fromJson(empresas, listType);
 
@@ -31,11 +30,11 @@ public class JsonAdapter implements DataAdapter {
 		return listaEmpresas;
 	}
 
-	public List<RegistroIndicador> adaptarIndicadores(String indicadores)
+	public ArrayList<RegistroIndicador> adaptarIndicadores(String indicadores)
 			throws ParseException {
-		List<RegistroIndicador> listaIndicadores = new ArrayList<RegistroIndicador>();
+		ArrayList<RegistroIndicador> listaIndicadores = new ArrayList<RegistroIndicador>();
 		try {
-			Type listType = new TypeToken<List<RegistroIndicador>>() {
+			Type listType = new TypeToken<ArrayList<RegistroIndicador>>() {
 			}.getType();
 			listaIndicadores = gson.fromJson(indicadores, listType);
 
@@ -46,11 +45,11 @@ public class JsonAdapter implements DataAdapter {
 		return listaIndicadores;
 	}
 	
-	public List<Metodologia> adaptarMetodologias(String metodologias)
+	public ArrayList<Metodologia> adaptarMetodologias(String metodologias)
 			throws ParseException {
-		List<Metodologia> listaMetodologias = new ArrayList<Metodologia>();
+		ArrayList<Metodologia> listaMetodologias = new ArrayList<Metodologia>();
 		try {
-			Type listType = new TypeToken<List<Metodologia>>() {
+			Type listType = new TypeToken<ArrayList<Metodologia>>() {
 			}.getType();
 			listaMetodologias = gson.fromJson(metodologias, listType);
 

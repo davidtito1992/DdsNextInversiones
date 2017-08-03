@@ -1,32 +1,34 @@
 package app;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
-
-import org.uqbar.commons.utils.ApplicationContext;
-
-import repositories.RepositorioEmpresa;
-import repositories.RepositorioIndicadores;
-import repositories.RepositorioMetodologias;
+import repositories.RepositorioUnicoDeEmpresas;
+import repositories.RepositorioUnicoDeIndicadores;
+import repositories.RepositorioUnicoDeMetodologias;
 import dataManagment.dataLoader.DataLoader;
 import dataManagment.dataLoader.DataLoaderFactory;
 import dataManagment.dataUploader.DataUploader;
 import dataManagment.dataUploader.DataUploaderFactory;
 
 public class AppData {
-
+	
+	@SuppressWarnings("unchecked")	
 	public void cargarEmpresas() throws Exception {
 
 		// LEO ARCHIVO YA ADAPTADO
 		DataLoader cargador = DataLoaderFactory
 				.cargarData(DataLoaderFactory.ARCHIVO);
-		List<Empresa> empresas = cargador.getDataEmpresas();
+		ArrayList<Empresa> empresas = cargador.getDataEmpresas();
 
 		// CARGO EN REPO
-		this.getRepoEmpresas().cargarListaEmpresas(empresas);
+//		this.getRepoEmpresas().cargarListaEmpresas(empresas);
+		
+//		Cargo en Repo propio
+		this.getRepositorioEmpresas().cargarListaDeElementos(empresas);
 	}
 
 	public void cargarMetodologias() throws Exception {
@@ -37,34 +39,58 @@ public class AppData {
 		List<Metodologia> metodologias = cargador.getDataMetodologias();
 
 		// CARGO EN REPO
-		this.getRepoMetodologias().cargarListaMetodologias(metodologias);
+//		this.getRepoMetodologias().cargarListaMetodologias(metodologias);
+		
+//		Cargo en repo propio
+		this.getRepositorioMetodologias().cargarListaMetodologias(metodologias);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void cargarIndicadores() throws Exception {
 
 		// LEO ARCHIVO YA ADAPTADO
 		DataLoader cargador = DataLoaderFactory
 				.cargarData(DataLoaderFactory.ARCHIVO);
-		List<RegistroIndicador> indicadores = cargador.getDataIndicadores();
+		ArrayList<RegistroIndicador> indicadores = cargador.getDataIndicadores();
 
 		// CARGO EN REPO
-		this.getRepoIndicadores().cargarListaIndicadores(indicadores);
+//		this.getRepoIndicadores().cargarListaIndicadores(indicadores);
+		
+//		Cargo en repositorio propio 
+		this.getRepositorioIndicadores().cargarListaDeElementos(indicadores);
 
 	}
 
-	public RepositorioIndicadores getRepoIndicadores() {
-		return ApplicationContext.getInstance().getSingleton(
-				RegistroIndicador.class);
+//	public RepositorioIndicadores getRepoIndicadores() {
+//		return ApplicationContext.getInstance().getSingleton(
+//				RegistroIndicador.class);
+//	}
+//
+//	public RepositorioEmpresa getRepoEmpresas() {
+//		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+//	}
+//
+//	public RepositorioMetodologias getRepoMetodologias() {
+//		return ApplicationContext.getInstance().getSingleton(Metodologia.class);
+//	}
+	
+//	----------- repositoriosPropios---------
+	
+	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
+		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
-
-	public RepositorioEmpresa getRepoEmpresas() {
-		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+	
+	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
+		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
-
-	public RepositorioMetodologias getRepoMetodologias() {
-		return ApplicationContext.getInstance().getSingleton(Metodologia.class);
+	
+	public RepositorioUnicoDeMetodologias getRepositorioMetodologias(){
+		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 	}
-
+	
+//	---------------------------------
+	
+	@SuppressWarnings("unchecked")
 	public void guardarIndicador(RegistroIndicador unIndicador) {
 
 		try {
@@ -73,7 +99,10 @@ public class AppData {
 
 			cargador.escribirNuevoIndicador(unIndicador);
 
-			this.getRepoIndicadores().create(unIndicador);
+//			this.getRepoIndicadores().create(unIndicador);
+			
+//			El metodo queda asi con repositorio de indicadores propio
+			this.getRepositorioIndicadores().add(unIndicador);
 
 		} catch (Exception e) {
 			throw new RuntimeException(
@@ -82,6 +111,7 @@ public class AppData {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void borrarIndicador(RegistroIndicador unIndicador) {
 
 		try {
@@ -90,7 +120,10 @@ public class AppData {
 
 			cargador.borrarIndicador(unIndicador);
 
-			this.getRepoIndicadores().delete(unIndicador);
+//			this.getRepoIndicadores().delete(unIndicador);
+			
+//			El metodo queda asi con los repositorio indicador propio
+			this.getRepositorioIndicadores().delete(unIndicador);
 
 		} catch (Exception e) {
 			throw new RuntimeException(
@@ -117,7 +150,11 @@ public class AppData {
 
 			cargador.escribirNuevaMetodologia(metodologia);
 
-			this.getRepoMetodologias().create(metodologia);
+//			this.getRepoMetodologias().create(metodologia);
+			
+//			El metodo queda asi con repositorio propio 
+			this.getRepositorioMetodologias().agregarMetodologiaNueva(metodologia);
+			
 
 		} catch (Exception e) {
 			throw new RuntimeException(

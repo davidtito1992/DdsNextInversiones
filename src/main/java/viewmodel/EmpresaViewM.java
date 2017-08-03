@@ -9,10 +9,9 @@ import model.Empresa;
 import model.Periodo;
 import model.SnapshotEmpresa;
 
-import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioEmpresa;
+import repositories.RepositorioUnicoDeEmpresas;
 
 @Observable
 public class EmpresaViewM {
@@ -141,9 +140,12 @@ public class EmpresaViewM {
 		this.llenarTablas();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void llenarTablas() {
-		this.setSnapshotEmpresas(this.dameSnapshotEmpresas(getRepoEmpresas()
-				.allInstances()));
+//		this.setSnapshotEmpresas(this.dameSnapshotEmpresas(getRepoEmpresas()
+//				.allInstances()));
+		
+		this.setSnapshotEmpresas(this.dameSnapshotEmpresas(getRepositorioEmpresas().getElementos()));
 	}
 
 	public void reiniciar() {
@@ -158,7 +160,7 @@ public class EmpresaViewM {
 			Integer semestre) {
 
 		List<Empresa> repoEmpresa2 = new ArrayList<Empresa>();
-		repoEmpresa2 = this.getRepoEmpresas().filtrar(cuenta, empresa,
+		repoEmpresa2 = this.getRepositorioEmpresas().filtrar(cuenta, empresa,
 				semestre, anio);
 
 		generarCBoxNombresEmpresas(repoEmpresa2);
@@ -170,32 +172,36 @@ public class EmpresaViewM {
 
 	public void generarCBoxAnios(List<Empresa> empresas) {
 
-		this.anios = this.getRepoEmpresas().todosLosAnios(empresas);
+		this.anios = this.getRepositorioEmpresas().todosLosAnios(empresas);
 
 	}
 
 	public void generarCBoxSemestre(List<Empresa> empresas) {
 
-		this.semestre = this.getRepoEmpresas().todosLosPeriodos(empresas);
+		this.semestre = this.getRepositorioEmpresas().todosLosPeriodos(empresas);
 
 	}
 
 	public void generarCBoxCuentas(List<Empresa> empresas) {
 
-		this.cuentas = this.getRepoEmpresas()
+		this.cuentas = this.getRepositorioEmpresas()
 				.todosLosNombresDeCuentas(empresas);
 
 	}
 
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
 
-		this.nombres = this.getRepoEmpresas().todosLosNombresDeEmpresas(
+		this.nombres = this.getRepositorioEmpresas().todosLosNombresDeEmpresas(
 				empresas);
 
 	}
 
-	public RepositorioEmpresa getRepoEmpresas() {
-		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+//	public RepositorioEmpresa getRepoEmpresas() {
+//		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+//	}
+	
+	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
+		return RepositorioUnicoDeEmpresas.getSingletonInstance();
 	}
 
 	public void limpiarFiltros() {
@@ -207,7 +213,7 @@ public class EmpresaViewM {
 
 	public void filtrar() {
 		ArrayList<SnapshotEmpresa> empresitas = (this
-				.dameSnapshotEmpresas(getRepoEmpresas().filtrar(
+				.dameSnapshotEmpresas(getRepositorioEmpresas().filtrar(
 						cuentaSeleccionada, nombreSeleccionado,
 						semestreSeleccionado, anioSeleccionado)));
 		this.setSnapshotEmpresas(empresitas);

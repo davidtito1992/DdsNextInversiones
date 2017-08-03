@@ -4,12 +4,15 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import model.Empresa;
 import model.RegistroIndicador;
 import model.SnapshotIndicador;
-import org.uqbar.commons.utils.ApplicationContext;
+
 import org.uqbar.commons.utils.Observable;
-import repositories.RepositorioEmpresa;
+
+import repositories.RepositorioUnicoDeEmpresas;
+import app.AplicacionContexto;
 import app.DslIndicador;
 
 @Observable
@@ -111,7 +114,7 @@ public class ConsultarIndicadorViewM {
 	public void generarTodosLosCBox(String empresa, Year anio) {
 
 		List<Empresa> repoEmpresaFiltrado = new ArrayList<Empresa>();
-		repoEmpresaFiltrado = this.getRepoEmpresas().filtrar(null, empresa,
+		repoEmpresaFiltrado = this.getRepositorioEmpresas().filtrar(null, empresa,
 				null, anio);
 
 		generarCBoxNombresEmpresas(repoEmpresaFiltrado);
@@ -119,19 +122,23 @@ public class ConsultarIndicadorViewM {
 
 	}
 
-	public RepositorioEmpresa getRepoEmpresas() {
-		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+//	public RepositorioEmpresa getRepoEmpresas() {
+//		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+//	}
+	
+	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
+		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
 	public void generarCBoxAnios(List<Empresa> empresas) {
 
-		this.anios = this.getRepoEmpresas().todosLosAnios(empresas);
+		this.anios = this.getRepositorioEmpresas().todosLosAnios(empresas);
 
 	}
 
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
 
-		this.nombres = this.getRepoEmpresas().todosLosNombresDeEmpresas(
+		this.nombres = this.getRepositorioEmpresas().todosLosNombresDeEmpresas(
 				empresas);
 
 	}
@@ -149,9 +156,10 @@ public class ConsultarIndicadorViewM {
 		anioSeleccionado = null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void llenarTablas() {
 		this.setSnapshotIndicadores(this
-				.resultadosIndicadores(getRepoEmpresas().allInstances()));
+				.resultadosIndicadores(getRepositorioEmpresas().getElementos()));
 	}
 
 	public List<SnapshotIndicador> resultadosIndicadores(
@@ -176,7 +184,7 @@ public class ConsultarIndicadorViewM {
 
 	public void buscar() {
 		List<SnapshotIndicador> listSnapshot = (this
-				.resultadosIndicadores(getRepoEmpresas().filtrar(null,
+				.resultadosIndicadores(getRepositorioEmpresas().filtrar(null,
 						nombreSeleccionado, null, anioSeleccionado)));
 		this.setSnapshotIndicadores(listSnapshot);
 	}

@@ -12,6 +12,7 @@ import model.RegistroIndicador;
 import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
+import app.AplicacionContexto;
 import app.AppData;
 import ex_condiciones.CondicionCualitativa;
 import ex_condiciones.CondicionTaxativa;
@@ -21,6 +22,7 @@ import ex_condiciones.CondicionTaxativaDecreciente;
 import ex_condiciones.CondicionTaxativaMayorA;
 import ex_condiciones.CondicionTaxativaMenorA;
 import repositories.RepositorioIndicadores;
+import repositories.RepositorioUnicoDeIndicadores;
 
 @Observable
 public class AgregarMetodologiaViewM {
@@ -222,10 +224,11 @@ public class AgregarMetodologiaViewM {
 		this.agregarCriterio.add("Decreciente");
 	}
 
+	@SuppressWarnings("unchecked")
 	private void cargarIndicadoresDisponibles() {
-		this.agregarIndicador = this.getRepoIndicadores()
+		this.agregarIndicador = this.getRepositorindicadores()
 				.todosLosNombresDeIndicadores(
-						this.getRepoIndicadores().allInstances());
+						this.getRepositorindicadores().getElementos());
 	}
 
 	public void guardarMetodologia() {
@@ -251,9 +254,13 @@ public class AgregarMetodologiaViewM {
 		//new AppData().guardarMetodologia(nuevaMetodologia);
 	}
 
-	public RepositorioIndicadores getRepoIndicadores() {
-		return ApplicationContext.getInstance().getSingleton(
-				RegistroIndicador.class);
+//	public RepositorioIndicadores getRepoIndicadores() {
+//		return ApplicationContext.getInstance().getSingleton(
+//				RegistroIndicador.class);
+//	}
+	
+	public RepositorioUnicoDeIndicadores getRepositorindicadores(){
+		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 
 	public boolean estanTodosLosDatosTaxativa() {
@@ -306,7 +313,7 @@ public class AgregarMetodologiaViewM {
 
 	private CondicionTaxativa newTaxativaMayorA() {
 
-		RegistroIndicador indicador = getRepoIndicadores()
+		RegistroIndicador indicador = getRepositorindicadores()
 				.getRegistroIndicador(this.getAgregarIndicadorSeleccionado());
 		return new CondicionTaxativaMayorA(indicador,
 				this.getAgregarNroSeleccionado(),
@@ -319,21 +326,21 @@ public class AgregarMetodologiaViewM {
 	}
 
 	private CondicionTaxativa newTaxativaCreciente() {
-		RegistroIndicador indicador = getRepoIndicadores()
+		RegistroIndicador indicador = getRepositorindicadores()
 				.getRegistroIndicador(this.getAgregarIndicadorSeleccionado());
 		return new CondicionTaxativaCreciente(indicador,
 				this.getAgregarAniosSeleccionado());
 	}
 
 	private CondicionTaxativa newTaxativaDecreciente() {
-		RegistroIndicador indicador = getRepoIndicadores()
+		RegistroIndicador indicador = getRepositorindicadores()
 				.getRegistroIndicador(this.getAgregarIndicadorSeleccionado());
 		return new CondicionTaxativaDecreciente(indicador,
 				this.getAgregarAniosSeleccionado());
 	}
 
 	private CondicionTaxativa newTaxativaMenorA() {
-		RegistroIndicador indicador = getRepoIndicadores()
+		RegistroIndicador indicador = getRepositorindicadores()
 				.getRegistroIndicador(this.getAgregarIndicadorSeleccionado());
 		return new CondicionTaxativaMenorA(indicador,
 				this.getAgregarNroSeleccionado(),

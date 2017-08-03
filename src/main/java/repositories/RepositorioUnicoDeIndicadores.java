@@ -6,40 +6,32 @@ import java.util.stream.Collectors;
 
 import model.RegistroIndicador;
 
-public class RepositorioUnicoDeIndicadores {
+import org.uqbar.commons.utils.Observable;
+
+@Observable
+public class RepositorioUnicoDeIndicadores extends Repositorio{
 	
-	private List<RegistroIndicador> indicadoresExistentes;
 	private static RepositorioUnicoDeIndicadores repositorioIndicadores = null; 
 	
 	public static RepositorioUnicoDeIndicadores getSingletonInstance(){
+		
         if (repositorioIndicadores == null){
         	repositorioIndicadores = new RepositorioUnicoDeIndicadores();}
-        else{
-        	throw new RuntimeException("El repositorio de indicadores ya ha sido creado");}
        
         return repositorioIndicadores;
 	}
 	
 	private RepositorioUnicoDeIndicadores(){
-		indicadoresExistentes = new ArrayList<>();
+		super();
 	}
-	
 	
 	
 //	---------- Metodos ---------
-	
-	public List<RegistroIndicador> getIndicadoresExistentes() {
-		return indicadoresExistentes;
-	}
 
-	public void setIndicadoresExistentes(
-			List<RegistroIndicador> indicadoresExistentes) {
-		this.indicadoresExistentes = indicadoresExistentes;
-	}
-
+	@SuppressWarnings("unchecked")
 	public void cargarListaIndicadores(List<RegistroIndicador> registrosIndicadores) {
 		for(RegistroIndicador registroIndicador : registrosIndicadores){
-			indicadoresExistentes.add(registroIndicador);
+			this.getElementos().add(registroIndicador);
 		}
 	}
 	
@@ -50,12 +42,18 @@ public class RepositorioUnicoDeIndicadores {
 		return nombresDeTodosLosIndicadores;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public boolean esIndicador(String componente) {
+		ArrayList<RegistroIndicador> indicadoresExistentes = new ArrayList<RegistroIndicador>();
+		indicadoresExistentes = this.getElementos();
 		return indicadoresExistentes.stream().map(regIndicador -> regIndicador.getNombre())
 				.anyMatch(NombreregIndicador -> NombreregIndicador.equalsIgnoreCase(componente));
 	}
 
+	@SuppressWarnings("unchecked")
 	public RegistroIndicador getRegistroIndicador(String nombreIndicador) {
+		ArrayList<RegistroIndicador> indicadoresExistentes = new ArrayList<RegistroIndicador>();
+		indicadoresExistentes = this.getElementos();
 		List<RegistroIndicador> registroIndicadores = indicadoresExistentes
 				.stream()
 				.filter(registroIndicador -> registroIndicador.getNombre()
@@ -63,5 +61,4 @@ public class RepositorioUnicoDeIndicadores {
 				.collect(Collectors.toList());
 		return registroIndicadores.get(0);
 	}
-
 }

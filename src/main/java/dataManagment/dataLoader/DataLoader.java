@@ -1,17 +1,17 @@
 package dataManagment.dataLoader;
 
-import java.util.List;
+import java.util.ArrayList;
 
+import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
-import model.Empresa;
 
 public interface DataLoader {
 
-	public List<Empresa> getDataEmpresas() throws Exception;
+	public ArrayList<Empresa> getDataEmpresas() throws Exception;
 
-	public List<RegistroIndicador> getDataIndicadores() throws Exception;
+	public ArrayList<RegistroIndicador> getDataIndicadores() throws Exception;
 	
-	public List<Metodologia> getDataMetodologias() throws Exception;
+	public ArrayList<Metodologia> getDataMetodologias() throws Exception;
 
 }

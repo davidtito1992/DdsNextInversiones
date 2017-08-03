@@ -1,26 +1,34 @@
 package app;
 
+import org.uqbar.commons.utils.Observable;
+
 import repositories.RepositorioUnicoDeEmpresas;
 import repositories.RepositorioUnicoDeIndicadores;
 import repositories.RepositorioUnicoDeMetodologias;
 
+
+@Observable
 public class AplicacionContexto {
-	
-	private RepositorioUnicoDeEmpresas repositorioEmpresas;
-	private RepositorioUnicoDeIndicadores repositorioIndicadores;
-	private RepositorioUnicoDeMetodologias repositorioMetodologias;
 	
 	private static AplicacionContexto aplicacionContexto = null;
 	
-	public static AplicacionContexto getSingletonInstance(){
+	public static AplicacionContexto getInstance(){
         if (aplicacionContexto == null){
-        	aplicacionContexto = new AplicacionContexto();}
-        else{
-        	throw new RuntimeException("AplicacionContexto ya ha sido creado");}
-       
+        	aplicacionContexto = new AplicacionContexto();
+        }
         return aplicacionContexto;
 	}
 	
-
-
+	public RepositorioUnicoDeEmpresas  getInstanceRepoEmpresas(){
+		return RepositorioUnicoDeEmpresas.getSingletonInstance();
+	}
+	
+	public RepositorioUnicoDeIndicadores getInstanceRepoIndicadores(){
+		return RepositorioUnicoDeIndicadores.getSingletonInstance();
+	}
+	
+	public RepositorioUnicoDeMetodologias getInstanceRepoMetodologias(){
+		return RepositorioUnicoDeMetodologias.getSingletonInstance();
+	}
+	
 }

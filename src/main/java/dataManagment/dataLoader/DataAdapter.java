@@ -1,6 +1,6 @@
 package dataManagment.dataLoader;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import model.Empresa;
 import model.Metodologia;
@@ -8,12 +8,12 @@ import model.RegistroIndicador;
 
 public interface DataAdapter {
 
-	public List<Empresa> adaptarEmpresas(String empresas) throws Exception;
+	public ArrayList<Empresa> adaptarEmpresas(String empresas) throws Exception;
 
-	public List<RegistroIndicador> adaptarIndicadores(String indicadores)
+	public ArrayList<RegistroIndicador> adaptarIndicadores(String indicadores)
 			throws Exception;
 	
-	public List<Metodologia> adaptarMetodologias(String metodologias)
+	public ArrayList<Metodologia> adaptarMetodologias(String metodologias)
 			throws Exception;
 
 }
