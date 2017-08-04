@@ -10,7 +10,7 @@ import model.Metodologia;
 @Observable
 public class RepositorioUnicoDeMetodologias extends Repositorio{
 	
-	private List<Metodologia> metodologiasExistentes;
+//	private List<Metodologia> metodologiasExistentes;
 	private static RepositorioUnicoDeMetodologias repositorioMetodologias = null;
 	
 	public static RepositorioUnicoDeMetodologias getSingletonInstance(){
@@ -22,28 +22,29 @@ public class RepositorioUnicoDeMetodologias extends Repositorio{
 	}
 	
 	private RepositorioUnicoDeMetodologias(){
-		metodologiasExistentes = new ArrayList<>();
 	}
 	
 	
-	public List<Metodologia> getMetodologiasExistentes() {
-		return metodologiasExistentes;
-	}
-
-	public void setMetodologiasExistentes(List<Metodologia> metodologiasExistentes) {
-		this.metodologiasExistentes = metodologiasExistentes;
-	}
+//	public List<Metodologia> getMetodologiasExistentes() {
+//		return metodologiasExistentes;
+//	}
+//
+//	public void setMetodologiasExistentes(List<Metodologia> metodologiasExistentes) {
+//		this.metodologiasExistentes = metodologiasExistentes;
+//	}
 
 	/********* METODOS *********/
 
+	@SuppressWarnings("unchecked")
 	public void cargarListaMetodologias(List<Metodologia> registrosMetodologias) {
 		for(Metodologia metodologia : registrosMetodologias){
-			metodologiasExistentes.add(metodologia);
+			this.getElementos().add(metodologia);
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void agregarMetodologiaNueva(Metodologia metodologia){
-		metodologiasExistentes.add(metodologia);
+		this.getElementos().add(metodologia);
 	}
 
 }

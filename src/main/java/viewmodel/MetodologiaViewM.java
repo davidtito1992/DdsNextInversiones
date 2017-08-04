@@ -3,10 +3,12 @@ package viewmodel;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.uqbar.commons.utils.ApplicationContext;
-import org.uqbar.commons.utils.Observable;
-import repositories.RepositorioMetodologias;
 import model.Metodologia;
+
+import org.uqbar.commons.utils.Observable;
+
+import repositories.RepositorioUnicoDeMetodologias;
+import app.AplicacionContexto;
 
 
 @Observable
@@ -52,13 +54,18 @@ public class MetodologiaViewM {
 		this.llenarTablas();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void llenarTablas() {
 		this.setMetodologias(null);
-		this.setMetodologias(getRepoMetodologias().allInstances());
+		this.setMetodologias(getRepoMetodologias().getElementos());
 	}
 
-	public RepositorioMetodologias getRepoMetodologias() {
-		return ApplicationContext.getInstance().getSingleton(Metodologia.class);
+//	public RepositorioMetodologias getRepoMetodologias() {
+//		return ApplicationContext.getInstance().getSingleton(Metodologia.class);
+//	}
+	
+	public RepositorioUnicoDeMetodologias getRepoMetodologias(){
+		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 	}
 
 }

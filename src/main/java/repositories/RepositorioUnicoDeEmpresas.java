@@ -156,4 +156,13 @@ public class RepositorioUnicoDeEmpresas extends Repositorio {
 
 		return todasLasCuentas;
 	}	
+	
+	@SuppressWarnings("unchecked")
+	public Empresa getEmpresa(String nombreEmpresa) {
+		ArrayList<Empresa> empresas = new ArrayList<Empresa>();
+		empresas = this.getElementos();
+		return empresas.stream()
+				.filter(emp -> emp.getNombre().equalsIgnoreCase(nombreEmpresa))
+				.collect(Collectors.toCollection(ArrayList::new)).get(0);
+	}
 }

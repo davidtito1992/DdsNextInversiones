@@ -133,6 +133,7 @@ public class Metodologia extends Entity {
 		return indicadorCondicionado.calcular(listRanking);
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<RankingEmpresa> obtenerRankingNuloDeTodasLasEmpresas() {
 
 		ControladorDeMetodologia controlador = new ControladorDeMetodologia();
@@ -141,7 +142,7 @@ public class Metodologia extends Entity {
 		controlador
 				.getRepoEmpresas()
 				.todosLosNombresDeEmpresas(
-						controlador.getRepoEmpresas().allInstances())
+						controlador.getRepoEmpresas().getElementos())
 				.forEach(
 						nombreEmpresa -> listEmpresas.add(new RankingEmpresa(0,
 								nombreEmpresa)));

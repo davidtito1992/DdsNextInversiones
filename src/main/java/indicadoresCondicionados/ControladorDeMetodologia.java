@@ -1,25 +1,33 @@
 package indicadoresCondicionados;
-import model.Empresa;
-import model.Metodologia;
-import model.RegistroIndicador;
-import org.uqbar.commons.utils.ApplicationContext;
-import repositories.RepositorioEmpresa;
-import repositories.RepositorioIndicadores;
-import repositories.RepositorioMetodologias;
+import repositories.RepositorioUnicoDeEmpresas;
+import repositories.RepositorioUnicoDeIndicadores;
+import repositories.RepositorioUnicoDeMetodologias;
+import app.AplicacionContexto;
 
 public class ControladorDeMetodologia {
 
 
-	public RepositorioMetodologias getRepoMetodologias() {
-		return ApplicationContext.getInstance().getSingleton(Metodologia.class);
+//	public RepositorioMetodologias getRepoMetodologias() {
+//		return ApplicationContext.getInstance().getSingleton(Metodologia.class);
+//	}
+//
+//	public RepositorioEmpresa getRepoEmpresas() {
+//		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+//	}
+//
+//	public RepositorioIndicadores getRepoIndicadores() {
+//		return ApplicationContext.getInstance().getSingleton(RegistroIndicador.class);
+//	}
+	
+	public RepositorioUnicoDeMetodologias getRepoMetodologias(){
+		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 	}
-
-	public RepositorioEmpresa getRepoEmpresas() {
-		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+	
+	public RepositorioUnicoDeIndicadores getRepoIndicadores(){
+		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
-
-	public RepositorioIndicadores getRepoIndicadores() {
-		return ApplicationContext.getInstance().getSingleton(
-				RegistroIndicador.class);
+	
+	public RepositorioUnicoDeEmpresas getRepoEmpresas(){
+		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 }
