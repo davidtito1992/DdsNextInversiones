@@ -142,9 +142,6 @@ public class EmpresaViewM {
 
 	@SuppressWarnings("unchecked")
 	public void llenarTablas() {
-//		this.setSnapshotEmpresas(this.dameSnapshotEmpresas(getRepoEmpresas()
-//				.allInstances()));
-		
 		this.setSnapshotEmpresas(this.dameSnapshotEmpresas(getRepositorioEmpresas().getElementos()));
 	}
 
@@ -171,34 +168,20 @@ public class EmpresaViewM {
 	}
 
 	public void generarCBoxAnios(List<Empresa> empresas) {
-
 		this.anios = this.getRepositorioEmpresas().todosLosAnios(empresas);
-
 	}
 
 	public void generarCBoxSemestre(List<Empresa> empresas) {
-
 		this.semestre = this.getRepositorioEmpresas().todosLosPeriodos(empresas);
-
 	}
 
 	public void generarCBoxCuentas(List<Empresa> empresas) {
-
-		this.cuentas = this.getRepositorioEmpresas()
-				.todosLosNombresDeCuentas(empresas);
-
+		this.cuentas = this.getRepositorioEmpresas().todosLosNombresDeCuentas(empresas);
 	}
 
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
-
-		this.nombres = this.getRepositorioEmpresas().todosLosNombresDeEmpresas(
-				empresas);
-
+		this.nombres = this.getRepositorioEmpresas().todosLosNombresDeEmpresas(empresas);
 	}
-
-//	public RepositorioEmpresa getRepoEmpresas() {
-//		return ApplicationContext.getInstance().getSingleton(Empresa.class);
-//	}
 	
 	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
 		return RepositorioUnicoDeEmpresas.getSingletonInstance();

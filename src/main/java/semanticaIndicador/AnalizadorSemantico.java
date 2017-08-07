@@ -41,15 +41,6 @@ public class AnalizadorSemantico {
 
 	}
 
-//	public RepositorioIndicadores getRepoIndicadores() {
-//		return ApplicationContext.getInstance().getSingleton(
-//				RegistroIndicador.class);
-//	}
-//
-//	public RepositorioEmpresa getRepoEmpresas() {
-//		return ApplicationContext.getInstance().getSingleton(Empresa.class);
-//	}
-	
 	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}

@@ -24,15 +24,6 @@ public class RepositorioUnicoDeMetodologias extends Repositorio{
 	private RepositorioUnicoDeMetodologias(){
 	}
 	
-	
-//	public List<Metodologia> getMetodologiasExistentes() {
-//		return metodologiasExistentes;
-//	}
-//
-//	public void setMetodologiasExistentes(List<Metodologia> metodologiasExistentes) {
-//		this.metodologiasExistentes = metodologiasExistentes;
-//	}
-
 	/********* METODOS *********/
 
 	@SuppressWarnings("unchecked")

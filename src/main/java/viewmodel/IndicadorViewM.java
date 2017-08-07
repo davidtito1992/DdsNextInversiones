@@ -66,11 +66,6 @@ public class IndicadorViewM {
 		this.setIndicadores(getRepositorioIndicadores().getElementos());
 	}
 
-//	public RepositorioIndicadores getRepoIndicadores() {
-//		return ApplicationContext.getInstance().getSingleton(
-//				RegistroIndicador.class);
-//	}
-	
 	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}

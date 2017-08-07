@@ -6,14 +6,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Metodologia;
 import model.RegistroIndicador;
 
-import org.uqbar.commons.utils.ApplicationContext;
 import org.uqbar.commons.utils.Observable;
 
+import repositories.RepositorioUnicoDeIndicadores;
 import app.AplicacionContexto;
-import app.AppData;
 import ex_condiciones.CondicionCualitativa;
 import ex_condiciones.CondicionTaxativa;
 import ex_condiciones.CondicionTaxativaAntiguedad;
@@ -21,8 +19,6 @@ import ex_condiciones.CondicionTaxativaCreciente;
 import ex_condiciones.CondicionTaxativaDecreciente;
 import ex_condiciones.CondicionTaxativaMayorA;
 import ex_condiciones.CondicionTaxativaMenorA;
-import repositories.RepositorioIndicadores;
-import repositories.RepositorioUnicoDeIndicadores;
 
 @Observable
 public class AgregarMetodologiaViewM {

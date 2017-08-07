@@ -9,9 +9,6 @@ import java.util.stream.Collectors;
 import model.Cuenta;
 import model.Empresa;
 
-import org.uqbar.commons.utils.Observable;
-
-@Observable
 public class RepositorioUnicoDeEmpresas extends Repositorio {
 	
 	private static RepositorioUnicoDeEmpresas repositorioEmpresas = null;

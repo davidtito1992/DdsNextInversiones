@@ -121,19 +121,13 @@ public class ConsultarIndicadorViewM {
 		generarCBoxAnios(repoEmpresaFiltrado);
 
 	}
-
-//	public RepositorioEmpresa getRepoEmpresas() {
-//		return ApplicationContext.getInstance().getSingleton(Empresa.class);
-//	}
 	
 	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
 	public void generarCBoxAnios(List<Empresa> empresas) {
-
 		this.anios = this.getRepositorioEmpresas().todosLosAnios(empresas);
-
 	}
 
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
