@@ -47,5 +47,11 @@ public class RankingEmpresa {
 		return this.empresa.getAntiguedadEmpresa();
 	}
 
+	public void acumularValor(BigDecimal nuevoValor){
+		this.ranking = ranking.add(nuevoValor);
+		
+	}
+	
+	
 	
 }

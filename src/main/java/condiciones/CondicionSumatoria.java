@@ -3,10 +3,11 @@ package condiciones;
 import java.math.BigDecimal;
 import java.util.List;
 
-import parserIndicador.ParseException;
 import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;
+import parserIndicador.ParseException;
+import RankingEmpresa.RankingEmpresa;
 
 public class CondicionSumatoria extends Condicion {
 
@@ -33,9 +34,10 @@ public class CondicionSumatoria extends Condicion {
 	}
 
 	@Override
-	public double calcularCuantitativa(Empresa empresa) throws ParseException {
-
-		return sumador(empresa).doubleValue() * peso;
+	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
+		BigDecimal nuevoValor = sumador(rEmpresa.getEmpresa()).multiply(new BigDecimal(peso));
+		rEmpresa.acumularValor(nuevoValor);
+		return rEmpresa;
 
 	}
 

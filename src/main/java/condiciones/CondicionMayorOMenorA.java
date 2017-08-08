@@ -1,9 +1,10 @@
 package condiciones;
 
 import java.math.BigDecimal;
-import parserIndicador.ParseException;
-import model.Empresa;
+
 import model.RegistroIndicador;
+import parserIndicador.ParseException;
+import RankingEmpresa.RankingEmpresa;
 
 public class CondicionMayorOMenorA extends CondicionSumatoria {
 
@@ -21,16 +22,26 @@ public class CondicionMayorOMenorA extends CondicionSumatoria {
 		this.criterio = criterio;
 		this.numeroAComparar = nroAComparar;
 	}
+	
+	@Override
+	public String toString(){
+		return "Condicion " + criterio;
+	}
 
 	@Override
-	public boolean calcularTaxativa(Empresa empresa) throws ParseException {
-		BigDecimal acumulador = sumador(empresa);
+	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
+		BigDecimal acumulador = sumador(rEmpresa.getEmpresa());
 
-		if (criterio.equals(Criterio.mayorA)) {
-			return acumulador.compareTo(numeroAComparar) > 0;
+		if (criterio.equals(Criterio.menorA)) {
+			if(acumulador.compareTo(numeroAComparar) > 0){
+				throw new RuntimeException(this.toString());
+			};
 		} else {
-			return acumulador.compareTo(numeroAComparar) < 0;
+			if(acumulador.compareTo(numeroAComparar) < 0){
+				throw new RuntimeException(this.toString());
+			};
 		}
+		return rEmpresa;
 
 	}
 }
