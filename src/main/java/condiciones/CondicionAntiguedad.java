@@ -1,7 +1,9 @@
 package condiciones;
 
-import model.Empresa;
+import java.math.BigDecimal;
+
 import parserIndicador.ParseException;
+import RankingEmpresa.RankingEmpresa;
 
 public class CondicionAntiguedad extends Condicion {
 
@@ -12,8 +14,12 @@ public class CondicionAntiguedad extends Condicion {
 	}
 
 	@Override
-	public double calcularCuantitativa(Empresa empresa) throws ParseException {
-		return empresa.getAntiguedadEmpresa() * peso;
+	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
+		
+		BigDecimal valorAnterior = rEmpresa.getRanking(); 
+		BigDecimal valorNuevo = new BigDecimal(rEmpresa.dameAntiguedadEmpresa() * peso);
+		rEmpresa.setRanking(valorAnterior.add(valorNuevo));
+		return rEmpresa;
 	}
 
 }

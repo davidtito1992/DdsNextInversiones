@@ -6,12 +6,13 @@ import java.time.Year;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import app.DslIndicador;
 import model.Empresa;
 import model.Periodo;
 import model.PeriodoComparator;
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
+import RankingEmpresa.RankingEmpresa;
+import app.DslIndicador;
 
 public abstract class Condicion {
 
@@ -22,12 +23,8 @@ public abstract class Condicion {
 		CUANTITATIVA, TAXATIVA;
 	}
 
-	public double calcularCuantitativa(Empresa empresa) throws ParseException {
-		return 0;
-	}
-
-	public boolean calcularTaxativa(Empresa empresa) throws ParseException {
-		return false;
+	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
+		return rEmpresa;
 	}
 
 	protected List<Periodo> periodosDesdexAnio(Empresa empresa) {

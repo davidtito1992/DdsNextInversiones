@@ -2,10 +2,12 @@ package condiciones;
 
 import java.math.BigDecimal;
 import java.util.List;
-import parserIndicador.ParseException;
+
 import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;
+import parserIndicador.ParseException;
+import RankingEmpresa.RankingEmpresa;
 
 public class CondicionCrecienteODecreciente extends Condicion {
 
@@ -22,9 +24,15 @@ public class CondicionCrecienteODecreciente extends Condicion {
 		this.criterio = criterio;
 		this.ultimosAnios = ultimosAnios;
 	}
+	
+	@Override
+	public String toString(){
+		return "CondicionCreciente";
+	}
 
 	@Override
-	public boolean calcularTaxativa(Empresa empresa) throws ParseException {
+	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
+		Empresa empresa = rEmpresa.getEmpresa();
 		List<Periodo> periodos = super.periodosDesdexAnio(empresa);
 
 		for (int i = 0; i < periodos.size() - 1; i++) {
@@ -41,17 +49,17 @@ public class CondicionCrecienteODecreciente extends Condicion {
 				case -1:
 
 				default:
-					return false;
+					throw new RuntimeException (this.toString());
 				}
 			} else if (criterio.equals(Criterio.DECRECIENTE)) {
 				switch (indicadorActual.compareTo(indicadorSiguiente)) {
 				case 1:
 
 				default:
-					return false;
+					throw new RuntimeException (this.toString());
 				}
 			}
 		}
-		return true;
+		return rEmpresa;
 	}
 }

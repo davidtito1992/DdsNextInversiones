@@ -8,13 +8,14 @@ import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;
 
-public class CondicionSumatoria extends CondicionAntiguedad {
+public class CondicionSumatoria extends Condicion {
 
 	private RegistroIndicador indicador;
-
+	private double peso;
+	
 	public CondicionSumatoria(RegistroIndicador indicador, int ultimosAnios,
 			double peso) {
-		super(peso);
+		this.peso = peso;
 		this.indicador = indicador;
 		this.ultimosAnios = ultimosAnios;
 	}
