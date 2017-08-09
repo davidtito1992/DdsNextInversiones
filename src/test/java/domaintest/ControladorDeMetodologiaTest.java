@@ -45,11 +45,35 @@ public class ControladorDeMetodologiaTest {
 	}
 	
 	@Test
-	public void metodologiaConCondicionTaxativaMayorATest() throws Exception {
+	public void metodologiaConCondicionTaxativaMayorATestERR() throws Exception {
 		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,BigDecimal.valueOf(17)));
 		Metodologia metodologia = new Metodologia("Metodlogia Prueba",condicionesPrueba);
 		
 		Assert.assertTrue(metodologia.calcularEmpresa(rEmpresa).getErrorTaxativa());	
+	}
+	
+	@Test
+	public void metodologiaConCondicionTaxativaMayorATestOK() throws Exception {
+		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,BigDecimal.valueOf(16)));
+		Metodologia metodologia = new Metodologia("Metodlogia Prueba",condicionesPrueba);
+		
+		Assert.assertFalse(metodologia.calcularEmpresa(rEmpresa).getErrorTaxativa());	
+	}
+	
+	@Test
+	public void metodologiaConCondicionTaxativaMenorATestERR() throws Exception {
+		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.menorA,ingresoNeto,2,BigDecimal.valueOf(15)));
+		Metodologia metodologia = new Metodologia("Metodlogia Prueba",condicionesPrueba);
+		
+		Assert.assertTrue(metodologia.calcularEmpresa(rEmpresa).getErrorTaxativa());	
+	}
+	
+	@Test
+	public void metodologiaConCondicionTaxativaMenorATestOK() throws Exception {
+		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.menorA,ingresoNeto,2,BigDecimal.valueOf(16)));
+		Metodologia metodologia = new Metodologia("Metodlogia Prueba",condicionesPrueba);
+		
+		Assert.assertFalse(metodologia.calcularEmpresa(rEmpresa).getErrorTaxativa());	
 	}
 	
 	@Test
@@ -59,7 +83,6 @@ public class ControladorDeMetodologiaTest {
 
 		Assert.assertEquals(0,BigDecimal.valueOf(3).compareTo(metodologia.calcularEmpresa(rEmpresa).getRanking()));	
 	}
-	
 	
 
 }
