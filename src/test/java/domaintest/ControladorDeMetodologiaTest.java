@@ -8,27 +8,36 @@ import model.Metodologia;
 import model.RegistroIndicador;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import RankingEmpresa.RankingEmpresa;
 import app.AppData;
 import condiciones.Condicion;
+import condiciones.CondicionAntiguedad;
 import condiciones.CondicionCuantitativaMayorOMenorA;
 import condiciones.CondicionSumatoria.Criterio;
 import condiciones.CondicionTaxativaMayorOMenorA;
 
 public class ControladorDeMetodologiaTest {
-
-	@Test
-	public void metodologiaConCondicionCuantitativaMayorATest() throws Exception {
+	
+	public ArrayList<Condicion> condicionesPrueba = new ArrayList<Condicion>();
+	public RegistroIndicador ingresoNeto;
+	public Empresa facebook;
+	public RankingEmpresa rEmpresa;
+	
+	@Before 
+	public void inicializar () throws Exception{
 		new AppData().cargarEmpresas();
 		new AppData().cargarIndicadores();
 		
-		ArrayList<Condicion> condicionesPrueba = new ArrayList<Condicion>();
-		RegistroIndicador ingresoNeto = new AppData().getRepositorioIndicadores().getRegistroIndicador("IngresoNeto");
-		Empresa facebook = new AppData().getRepositorioEmpresas().getEmpresa("Facebook");
-		RankingEmpresa rEmpresa = new RankingEmpresa(BigDecimal.ZERO, facebook);
-		
+		ingresoNeto = new AppData().getRepositorioIndicadores().getRegistroIndicador("IngresoNeto");
+		facebook = new AppData().getRepositorioEmpresas().getEmpresa("Facebook");
+		rEmpresa = new RankingEmpresa(BigDecimal.ZERO, facebook);
+	}
+	
+	@Test
+	public void metodologiaConCondicionCuantitativaMayorATest() throws Exception {
 		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,1));
 		Metodologia metodologia = new Metodologia("Metodlogia Prueba",condicionesPrueba);
 		
@@ -37,18 +46,20 @@ public class ControladorDeMetodologiaTest {
 	
 	@Test
 	public void metodologiaConCondicionTaxativaMayorATest() throws Exception {
-		new AppData().cargarEmpresas();
-		new AppData().cargarIndicadores();
-		
-		ArrayList<Condicion> condicionesPrueba = new ArrayList<Condicion>();
-		RegistroIndicador ingresoNeto = new AppData().getRepositorioIndicadores().getRegistroIndicador("IngresoNeto");
-		Empresa facebook = new AppData().getRepositorioEmpresas().getEmpresa("Facebook");
-		RankingEmpresa rEmpresa = new RankingEmpresa(BigDecimal.ZERO, facebook);
-		
 		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,BigDecimal.valueOf(17)));
 		Metodologia metodologia = new Metodologia("Metodlogia Prueba",condicionesPrueba);
 		
 		Assert.assertTrue(metodologia.calcularEmpresa(rEmpresa).getErrorTaxativa());	
 	}
+	
+	@Test
+	public void metodologiaConCondicionAntiguedad() throws Exception {
+		condicionesPrueba.add(new CondicionAntiguedad(3.00));
+		Metodologia metodologia = new Metodologia("Metodlogia Prueba",condicionesPrueba);
+
+		Assert.assertEquals(0,BigDecimal.valueOf(3).compareTo(metodologia.calcularEmpresa(rEmpresa).getRanking()));	
+	}
+	
+	
 
 }
