@@ -22,7 +22,6 @@ import condiciones.CondicionTaxativaMayorOMenorA;
 
 public class CondicionesUnitariasTest {
 	
-	public ArrayList<Condicion> condicionesPrueba = new ArrayList<Condicion>();
 	public RegistroIndicador ingresoNeto;
 	public Empresa facebook;
 	public Empresa twitter;
@@ -43,90 +42,85 @@ public class CondicionesUnitariasTest {
 	
 	@Test
 	public void metodologiaConCondicionCuantitativaMayorATest() throws Exception {
-		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,1));
-		Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+		RankingEmpresa rEmpResul = new CondicionCuantitativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,1).calcular(rEmpresaFB);
 		
-		Assert.assertEquals(0,BigDecimal.valueOf(16).compareTo(metodologia.calcularEmpresa(rEmpresaFB).getRanking()));		
+		Assert.assertEquals(0,BigDecimal.valueOf(16).compareTo(rEmpResul.getRanking()));		
 	}
 	
-	@Test
+	@Test(expected = RuntimeException.class)
 	public void metodologiaConCondicionTaxativaMayorATestERR() throws Exception {
-		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,BigDecimal.valueOf(17)));
-		Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
-		
-		Assert.assertTrue(metodologia.calcularEmpresa(rEmpresaFB).getErrorTaxativa());	
+		new CondicionTaxativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,BigDecimal.valueOf(17)).calcular(rEmpresaFB);
+
 	}
 	
 	@Test
 	public void metodologiaConCondicionTaxativaMayorATestOK() throws Exception {
-		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,BigDecimal.valueOf(16)));
-		Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+		RankingEmpresa rEmpResul = new CondicionTaxativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,BigDecimal.valueOf(16))
+																		.calcular(rEmpresaFB);
 		
-		Assert.assertFalse(metodologia.calcularEmpresa(rEmpresaFB).getErrorTaxativa());	
+		Assert.assertFalse(rEmpResul.getErrorTaxativa());	
 	}
 	
-	@Test
+	@Test(expected = RuntimeException.class)
 	public void metodologiaConCondicionTaxativaMenorATestERR() throws Exception {
-		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.menorA,ingresoNeto,2,BigDecimal.valueOf(15)));
-		Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
-		
-		Assert.assertTrue(metodologia.calcularEmpresa(rEmpresaFB).getErrorTaxativa());	
+		new CondicionTaxativaMayorOMenorA(Criterio.menorA,ingresoNeto,2,BigDecimal.valueOf(15)).calcular(rEmpresaFB);
 	}
 	
 	@Test
 	public void metodologiaConCondicionTaxativaMenorATestOK() throws Exception {
-		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.menorA,ingresoNeto,2,BigDecimal.valueOf(16)));
-		Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+		RankingEmpresa rEmpResul = new CondicionTaxativaMayorOMenorA(Criterio.menorA,ingresoNeto,2,BigDecimal.valueOf(16)).calcular(rEmpresaFB);
 		
-		Assert.assertFalse(metodologia.calcularEmpresa(rEmpresaFB).getErrorTaxativa());	
+		Assert.assertFalse(rEmpResul.getErrorTaxativa());	
 	}
 	
 	@Test
 	public void metodologiaConCondicionAntiguedad() throws Exception {
-		condicionesPrueba.add(new CondicionAntiguedad(3.00));
-		Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+		RankingEmpresa rEmpResul = new CondicionAntiguedad(3.00).calcular(rEmpresaFB);
 
-		Assert.assertEquals(0,BigDecimal.valueOf(3).compareTo(metodologia.calcularEmpresa(rEmpresaFB).getRanking()));	
+		Assert.assertEquals(0,BigDecimal.valueOf(3).compareTo(rEmpResul.getRanking()));	
 	}
 	
 	@Test
 	public void metodologiaConCondicionCrecienteOK() throws Exception {
-		condicionesPrueba.add(new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.Criterio.CRECIENTE,ingresoNeto,5));
-		Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+		RankingEmpresa rEmpResul = new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.
+				Criterio.CRECIENTE,ingresoNeto,5)
+				.calcular(rEmpresaFB);
 
-		Assert.assertFalse(metodologia.calcularEmpresa(rEmpresaFB).getErrorTaxativa());	
+		Assert.assertFalse(rEmpResul.getErrorTaxativa());	
 	}
 	
-	@Test
+	@Test(expected = RuntimeException.class)
 	public void metodologiaConCondicionCrecienteERR() throws Exception {
-		condicionesPrueba.add(new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.Criterio.CRECIENTE,ingresoNeto,5));
-		Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
-
-		Assert.assertTrue(metodologia.calcularEmpresa(rEmpresaTW).getErrorTaxativa());	
+		new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.
+				Criterio.CRECIENTE,ingresoNeto,5)
+				.calcular(rEmpresaTW);
+	}
+	
+	@Test(expected = RuntimeException.class)
+	public void metodologiaConCondicionDecrecienteERR() throws Exception {
+		new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.
+				Criterio.DECRECIENTE,ingresoNeto,5)
+				.calcular(rEmpresaFB);
 	}
 	
 	@Test
 	public void metodologiaConCondicionDecrecienteOK() throws Exception {
-		condicionesPrueba.add(new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.Criterio.DECRECIENTE,ingresoNeto,5));
-		Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+		RankingEmpresa rEmpResul = new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.
+																Criterio.DECRECIENTE,ingresoNeto,5)
+																.calcular(rEmpresaTW);
 
-		Assert.assertTrue(metodologia.calcularEmpresa(rEmpresaFB).getErrorTaxativa());	
-	}
-	
-	@Test
-	public void metodologiaConCondicionDecrecienteERR() throws Exception {
-		condicionesPrueba.add(new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.Criterio.DECRECIENTE,ingresoNeto,5));
-		Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
-
-		Assert.assertFalse(metodologia.calcularEmpresa(rEmpresaTW).getErrorTaxativa());		
+		Assert.assertFalse(rEmpResul.getErrorTaxativa());		
 	}
 	
 	@Test
 	public void metodologiaConCuantitativaMenorA() throws Exception {
-		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.menorA,ingresoNeto,5,10));
-		Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+		RankingEmpresa resultado = new CondicionCuantitativaMayorOMenorA(Criterio.menorA,ingresoNeto,5,10).calcular(rEmpresaFB);
 		
-		Assert.assertEquals(0,BigDecimal.valueOf(-160).compareTo(metodologia.calcularEmpresa(rEmpresaFB).getRanking()));	
+		Assert.assertEquals(0,BigDecimal.valueOf(-160).compareTo(resultado.getRanking()));
+		//condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.menorA,ingresoNeto,5,10));
+		//Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+		
+		//Assert.assertEquals(0,BigDecimal.valueOf(-160).compareTo(metodologia.calcularEmpresa(rEmpresaFB).getRanking()));	
 	}
 	
 }
