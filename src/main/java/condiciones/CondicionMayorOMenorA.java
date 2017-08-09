@@ -31,17 +31,18 @@ public class CondicionMayorOMenorA extends CondicionSumatoria {
 	@Override
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
 		BigDecimal acumulador = sumador(rEmpresa.getEmpresa());
-
-		if (criterio.equals(Criterio.menorA)) {
-			if(acumulador.compareTo(numeroAComparar) > 0){
-				throw new RuntimeException(this.toString());
-			};
-		} else {
-			if(acumulador.compareTo(numeroAComparar) < 0){
-				throw new RuntimeException(this.toString());
-			};
-		}
+		if(comparar(acumulador,numeroAComparar)){
+			throw new RuntimeException(this.toString());
+		};
 		return rEmpresa;
 
+	}
+	
+	private boolean comparar(BigDecimal acumulador, BigDecimal numeroAComparar){
+		if(criterio.equals(Criterio.menorA)){
+			return acumulador.compareTo(numeroAComparar) > 0;
+		}else {
+			return acumulador.compareTo(numeroAComparar) < 0;
+		}
 	}
 }

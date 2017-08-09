@@ -17,11 +17,6 @@ import app.DslIndicador;
 public abstract class Condicion {
 
 	protected int ultimosAnios;
-	protected tipoCondicion tipoCondicion;
-
-	public enum tipoCondicion {
-		CUANTITATIVA, TAXATIVA;
-	}
 
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
 		return rEmpresa;

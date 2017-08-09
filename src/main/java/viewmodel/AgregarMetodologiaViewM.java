@@ -1,7 +1,5 @@
 package viewmodel;
 
-import indicadoresCondicionados.IndicadorCondicionado;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +8,7 @@ import model.RegistroIndicador;
 
 import org.uqbar.commons.utils.Observable;
 
+import condiciones.Condicion;
 import repositories.RepositorioUnicoDeIndicadores;
 import app.AplicacionContexto;
 import ex_condiciones.CondicionCualitativa;
@@ -30,7 +29,7 @@ public class AgregarMetodologiaViewM {
 	private CondicionCualitativa cualitativa;
 	private CondicionTaxativa taxativa;
 	
-	private List<IndicadorCondicionado> listaDeIndicadoresCondicionados = new ArrayList<IndicadorCondicionado>();
+	private List<Condicion> listaDeIndicadoresCondicionados = new ArrayList<Condicion>();
 
 	private String nombre;
 	private List<Integer> prioridades =  new ArrayList<Integer>();
@@ -167,12 +166,12 @@ public class AgregarMetodologiaViewM {
 	public void setPrioridades(List<Integer> prioridades) {
 		this.prioridades = prioridades;
 	}
-	public List<IndicadorCondicionado> getListaDeIndicadoresCondicionados() {
+	public List<Condicion> getListaDeIndicadoresCondicionados() {
 		return listaDeIndicadoresCondicionados;
 	}
 
 	public void setListaDeIndicadoresCondicionados(
-			List<IndicadorCondicionado> listaDeIndicadoresCondicionados) {
+			List<Condicion> listaDeIndicadoresCondicionados) {
 		this.listaDeIndicadoresCondicionados = listaDeIndicadoresCondicionados;
 	}
 	/********* METODOS *********/

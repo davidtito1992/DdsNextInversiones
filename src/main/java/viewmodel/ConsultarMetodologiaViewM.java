@@ -83,8 +83,7 @@ public class ConsultarMetodologiaViewM {
 	}
 
 	public void llenarTablas() {
-
-		this.setRankingDeEmpresas(this.getMetodologia().calcular());
+		//TODO
 	}
 
 	public void buscar() {
