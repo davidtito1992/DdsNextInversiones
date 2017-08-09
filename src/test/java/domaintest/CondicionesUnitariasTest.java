@@ -19,14 +19,17 @@ import condiciones.CondicionCrecienteODecreciente;
 import condiciones.CondicionCuantitativaMayorOMenorA;
 import condiciones.CondicionSumatoria.Criterio;
 import condiciones.CondicionTaxativaMayorOMenorA;
+import parserIndicador.ParseException;
 
 public class CondicionesUnitariasTest {
 	
 	public RegistroIndicador ingresoNeto;
 	public Empresa facebook;
 	public Empresa twitter;
+	public Empresa google;
 	public RankingEmpresa rEmpresaFB;
 	public RankingEmpresa rEmpresaTW;
+	public RankingEmpresa rEmpresaGO;
 	
 	@Before 
 	public void inicializar () throws Exception{
@@ -36,8 +39,10 @@ public class CondicionesUnitariasTest {
 		ingresoNeto = new AppData().getRepositorioIndicadores().getRegistroIndicador("IngresoNeto");
 		facebook = new AppData().getRepositorioEmpresas().getEmpresa("Facebook");
 		twitter = new AppData().getRepositorioEmpresas().getEmpresa("Twitter");
+		google = new AppData().getRepositorioEmpresas().getEmpresa("Google");
 		rEmpresaFB = new RankingEmpresa(BigDecimal.ZERO, facebook);
 		rEmpresaTW = new RankingEmpresa(BigDecimal.ZERO, twitter);
+		rEmpresaGO = new RankingEmpresa(BigDecimal.ZERO, google);
 	}
 	
 	@Test
@@ -119,4 +124,14 @@ public class CondicionesUnitariasTest {
 		Assert.assertEquals(0,BigDecimal.valueOf(-160).compareTo(resultado.getRanking()));
 	}
 	
+	@Test(expected = RuntimeException.class)
+	public void cuantitativaMenorAErrNoIndicador() throws Exception {
+		new CondicionCuantitativaMayorOMenorA(Criterio.menorA,ingresoNeto,5,10).calcular(rEmpresaGO);
+	}
+	
+	@Test(expected = RuntimeException.class)
+	public void cuantitativaMeAErrNoIndicador() throws Exception {
+		new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.Criterio.CRECIENTE,ingresoNeto,5)
+													.calcular(rEmpresaGO);
+	}
 }

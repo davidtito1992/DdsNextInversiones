@@ -25,8 +25,10 @@ public class MetodologiasTest {
 	public RegistroIndicador ingresoNeto;
 	public Empresa facebook;
 	public Empresa twitter;
+	public Empresa google;
 	public RankingEmpresa rEmpresaFB;
 	public RankingEmpresa rEmpresaTW;
+	public RankingEmpresa rEmpresaGO;
 	
 	@Before 
 	public void inicializar () throws Exception{
@@ -36,8 +38,10 @@ public class MetodologiasTest {
 		ingresoNeto = new AppData().getRepositorioIndicadores().getRegistroIndicador("IngresoNeto");
 		facebook = new AppData().getRepositorioEmpresas().getEmpresa("Facebook");
 		twitter = new AppData().getRepositorioEmpresas().getEmpresa("Twitter");
+		google = new AppData().getRepositorioEmpresas().getEmpresa("Google");
 		rEmpresaFB = new RankingEmpresa(BigDecimal.ZERO, facebook);
 		rEmpresaTW = new RankingEmpresa(BigDecimal.ZERO, twitter);
+		rEmpresaGO = new RankingEmpresa(BigDecimal.ZERO, google);
 	}
 	
 	@Test 
@@ -71,4 +75,29 @@ public class MetodologiasTest {
 	
 	 	Assert.assertFalse(metodologia.calcularEmpresa(rEmpresaTW).getErrorTaxativa());		
 	}
+	
+	public void metodologiaConCondicionesCualitativas() throws Exception {
+	 	condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,1));	//16
+	 	condicionesPrueba.add(new CondicionAntiguedad(3.00));											//3
+	 	Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+	
+	 	Assert.assertEquals(0,BigDecimal.valueOf(19).compareTo(metodologia.calcularEmpresa(rEmpresaFB).getRanking()));		
+	}
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
