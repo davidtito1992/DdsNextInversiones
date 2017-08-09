@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.RegistroIndicador;
+import model.SnapshotCondicion;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -25,14 +26,17 @@ public class AgregarMetodologiaViewM {
 	/********* ATRIBUTOS *********/
 
 	private List<CondicionTaxativa> listaTaxativas = new ArrayList<CondicionTaxativa>();
-	private List<CondicionCualitativa> listaCualitativas = new ArrayList<CondicionCualitativa>();	
+	private List<CondicionCualitativa> listaCualitativas = new ArrayList<CondicionCualitativa>();
 	private CondicionCualitativa cualitativa;
 	private CondicionTaxativa taxativa;
-	
+
 	private List<Condicion> listaDeIndicadoresCondicionados = new ArrayList<Condicion>();
 
 	private String nombre;
-	private List<Integer> prioridades =  new ArrayList<Integer>();
+	private Long pesoOComparar = null;
+	private List<String> tiposCondiciones = new ArrayList<String>();
+	private String tipoCondicionSeleccionado;
+	// private List<Integer> prioridades = new ArrayList<Integer>();
 	private Integer agregarPrioridadSeleccionada;
 	private List<String> agregarIndicador;
 	private String agregarIndicadorSeleccionado;
@@ -42,6 +46,8 @@ public class AgregarMetodologiaViewM {
 	private BigDecimal agregarNroSeleccionado;
 	private List<Integer> agregarAnios = new ArrayList<Integer>();
 	private Integer agregarAniosSeleccionado;
+	private List<SnapshotCondicion> snapshotCondiciones = new ArrayList<SnapshotCondicion>();;
+	private SnapshotCondicion snapshotCondicionSeleccionado;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -151,21 +157,25 @@ public class AgregarMetodologiaViewM {
 			String agregarCriterioSeleccionado) {
 		this.agregarCriterioSeleccionado = agregarCriterioSeleccionado;
 	}
-	
+
 	public Integer getAgregarPrioridadSeleccionada() {
 		return agregarPrioridadSeleccionada;
 	}
 
-	public void setAgregarPrioridadSeleccionada(Integer agregarPrioridadSeleccionado) {
+	public void setAgregarPrioridadSeleccionada(
+			Integer agregarPrioridadSeleccionado) {
 		this.agregarPrioridadSeleccionada = agregarPrioridadSeleccionado;
 	}
-	public List<Integer> getPrioridades() {
-		return prioridades;
-	}
 
-	public void setPrioridades(List<Integer> prioridades) {
-		this.prioridades = prioridades;
-	}
+	//
+	// public List<Integer> getPrioridades() {
+	// return prioridades;
+	// }
+	//
+	// public void setPrioridades(List<Integer> prioridades) {
+	// this.prioridades = prioridades;
+	// }
+
 	public List<Condicion> getListaDeIndicadoresCondicionados() {
 		return listaDeIndicadoresCondicionados;
 	}
@@ -174,33 +184,84 @@ public class AgregarMetodologiaViewM {
 			List<Condicion> listaDeIndicadoresCondicionados) {
 		this.listaDeIndicadoresCondicionados = listaDeIndicadoresCondicionados;
 	}
+
+	public List<SnapshotCondicion> getSnapshotCondiciones() {
+		return snapshotCondiciones;
+	}
+
+	public void setSnapshotCondiciones(
+			List<SnapshotCondicion> snapshotCondiciones) {
+		this.snapshotCondiciones = snapshotCondiciones;
+	}
+
+	public SnapshotCondicion getSnapshotCondicionSeleccionado() {
+		return snapshotCondicionSeleccionado;
+	}
+
+	public void setSnapshotCondicionSeleccionado(
+			SnapshotCondicion snapshotCondicionSeleccionado) {
+		this.snapshotCondicionSeleccionado = snapshotCondicionSeleccionado;
+	}
+
+	public Long getPesoOComparar() {
+		return pesoOComparar;
+	}
+
+	public void setPesoOComparar(Long pesoOComparar) {
+		this.pesoOComparar = pesoOComparar;
+	}
+
+	public List<String> getTiposCondiciones() {
+		return tiposCondiciones;
+	}
+
+	public void setTiposCondiciones(List<String> tiposCondiciones) {
+		this.tiposCondiciones = tiposCondiciones;
+	}
+
+	public String getTipoCondicionSeleccionado() {
+		return tipoCondicionSeleccionado;
+	}
+
+	public void setTipoCondicionSeleccionado(String tiposCondicionSeleccionado) {
+		this.tipoCondicionSeleccionado = tiposCondicionSeleccionado;
+	}
+
 	/********* METODOS *********/
 
 	public AgregarMetodologiaViewM() {
 		this.cargarIndicadoresDisponibles();
+		this.cargarTiposDeCondiciones();
 		this.cargarCriteriosDisponibles();
 		this.cargarAniosDisponibles();
 		this.cargarNrosDisponibles();
-		this.cargarPrioridades();
+		// this.cargarPrioridades();
 	}
-	private void cargarPrioridades() {
-		
-		this.prioridades.add(1);
-		this.prioridades.add(2);
-		this.prioridades.add(3);
-		this.prioridades.add(4);
-		this.prioridades.add(5);
-		this.prioridades.add(6);
-		this.prioridades.add(7);
-		this.prioridades.add(8);
-		
-	}
+
+	// private void cargarPrioridades() {
+	//
+	// this.prioridades.add(1);
+	// this.prioridades.add(2);
+	// this.prioridades.add(3);
+	// this.prioridades.add(4);
+	// this.prioridades.add(5);
+	// this.prioridades.add(6);
+	// this.prioridades.add(7);
+	// this.prioridades.add(8);
+	//
+	// }
+
 	private void cargarAniosDisponibles() {
 		this.agregarAnios.add(1);
 		this.agregarAnios.add(2);
 		this.agregarAnios.add(3);
 		this.agregarAnios.add(4);
 		this.agregarAnios.add(5);
+		this.agregarAnios.add(10);
+		this.agregarAnios.add(15);
+		this.agregarAnios.add(20);
+		this.agregarAnios.add(30);
+		this.agregarAnios.add(50);
 	}
 
 	private void cargarNrosDisponibles() {
@@ -219,6 +280,11 @@ public class AgregarMetodologiaViewM {
 		this.agregarCriterio.add("Decreciente");
 	}
 
+	private void cargarTiposDeCondiciones() {
+		this.tiposCondiciones.add("Taxativa");
+		this.tiposCondiciones.add("Cuantitativa");
+	}
+
 	@SuppressWarnings("unchecked")
 	private void cargarIndicadoresDisponibles() {
 		this.agregarIndicador = this.getRepositorindicadores()
@@ -228,33 +294,34 @@ public class AgregarMetodologiaViewM {
 
 	public void guardarMetodologia() {
 
-//		if (this.nombre == null
-//				|| (this.listaCualitativas.isEmpty() && this.listaTaxativas
-//						.isEmpty())) {
-//			throw new RuntimeException(
-//					"Debe ingresar nombre y al menos una condicion para guardar correctamente. "
-//							+ "Intentelo nuevamente");
-//		}
+		// if (this.nombre == null
+		// || (this.listaCualitativas.isEmpty() && this.listaTaxativas
+		// .isEmpty())) {
+		// throw new RuntimeException(
+		// "Debe ingresar nombre y al menos una condicion para guardar correctamente. "
+		// + "Intentelo nuevamente");
+		// }
 
-		if (this.nombre == null
-				|| (this.listaCualitativas.isEmpty()))
+		if (this.nombre == null || (this.listaCualitativas.isEmpty()))
 			throw new RuntimeException(
 					"Debe ingresar nombre y al menos una condicion para guardar correctamente. "
 							+ "Intentelo nuevamente");
-		
-//		Metodologia laNueva = new Metodologia(this.getNombre(),
-//				this.getListaTaxativas(), this.getListaCualitativas());
-	//	Metodologia nuevaMetodologia = new Metodologia(this.getNombre(),this.getListaDeIndicadoresCondicionados()) ;
 
-		//new AppData().guardarMetodologia(nuevaMetodologia);
+		// Metodologia laNueva = new Metodologia(this.getNombre(),
+		// this.getListaTaxativas(), this.getListaCualitativas());
+		// Metodologia nuevaMetodologia = new
+		// Metodologia(this.getNombre(),this.getListaDeIndicadoresCondicionados())
+		// ;
+
+		// new AppData().guardarMetodologia(nuevaMetodologia);
 	}
 
-//	public RepositorioIndicadores getRepoIndicadores() {
-//		return ApplicationContext.getInstance().getSingleton(
-//				RegistroIndicador.class);
-//	}
-	
-	public RepositorioUnicoDeIndicadores getRepositorindicadores(){
+	// public RepositorioIndicadores getRepoIndicadores() {
+	// return ApplicationContext.getInstance().getSingleton(
+	// RegistroIndicador.class);
+	// }
+
+	public RepositorioUnicoDeIndicadores getRepositorindicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 
@@ -278,13 +345,19 @@ public class AgregarMetodologiaViewM {
 		return creceODecre && anios && criterio && nro;
 	}
 
-	public void agregarCondicionTaxativa() {
+	public void agregarCondicion() {
 
-		if (this.estanTodosLosDatosTaxativa()) {
-			CondicionTaxativa taxativa = crearCondicion();
-			this.setTaxativa(taxativa);
-			this.listaTaxativas.add(taxativa);
-		}
+//		if (this.estanTodosLosDatosTaxativa()) {
+//			CondicionTaxativa taxativa = crearCondicion();
+//			this.setTaxativa(taxativa);
+//			this.listaTaxativas.add(taxativa);
+//		}
+//		if (this.getTipoCondicionSeleccionado().equalsIgnoreCase("Taxativa")) {
+//			
+//		}
+		
+		this.snapshotCondiciones.add(new SnapshotCondicion(this.getTipoCondicionSeleccionado(),this.getAgregarCriterioSeleccionado(),this.getAgregarIndicadorSeleccionado(),this.getPesoOComparar(),this.getAgregarAniosSeleccionado()));
+		this.limpiar();
 	}
 
 	private CondicionTaxativa crearCondicion() {
@@ -340,6 +413,16 @@ public class AgregarMetodologiaViewM {
 		return new CondicionTaxativaMenorA(indicador,
 				this.getAgregarNroSeleccionado(),
 				this.getAgregarAniosSeleccionado());
+	}
+
+	public void limpiar() {
+		this.setAgregarCriterioSeleccionado(null);
+		this.setPesoOComparar(null);
+		this.setTipoCondicionSeleccionado(null);
+		this.setAgregarNroSeleccionado(null);
+		this.setAgregarAniosSeleccionado(null);
+		this.setAgregarIndicadorSeleccionado(null);
+
 	}
 
 }
