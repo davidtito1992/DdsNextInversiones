@@ -11,12 +11,14 @@ public class RankingEmpresa {
 
 	private BigDecimal ranking;
 	private Empresa empresa;
-	private String observaciones ;
+	private String observaciones;
+	public Boolean errorTaxativa;
 
 	public RankingEmpresa(BigDecimal ranking, Empresa empresa) {
 
 		this.ranking = ranking;
 		this.empresa = empresa;
+		this.errorTaxativa = false;
 	}
 
 	public BigDecimal getRanking() {
@@ -45,6 +47,14 @@ public class RankingEmpresa {
 
 	public int dameAntiguedadEmpresa() {
 		return this.empresa.getAntiguedadEmpresa();
+	}
+	
+	public Boolean getErrorTaxativa(){
+		return this.errorTaxativa;
+	}
+	
+	public void setErrorTaxativa(Boolean errorTaxativa){
+		this.errorTaxativa = errorTaxativa;
 	}
 
 	public void acumularValor(BigDecimal nuevoValor){
