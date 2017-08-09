@@ -21,9 +21,9 @@ public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 	
 	public String textoError(){
 		if(criterio.equals(Criterio.menorA)){
-			return "La condicion menor a "+numeroAComparar.toString()+" no se cumple";
+			return "La condicion menor a "+numeroAComparar.toString()+" no se cumple para el indicador "+indicador.getNombre();
 		}else {
-			return "La condicion mayor a "+numeroAComparar.toString()+" no se cumple";
+			return "La condicion mayor a "+numeroAComparar.toString()+" no se cumple para el indicador "+indicador.getNombre();
 		}
 	}
 

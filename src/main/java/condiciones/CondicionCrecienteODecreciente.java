@@ -28,9 +28,9 @@ public class CondicionCrecienteODecreciente extends Condicion {
 	
 	public String stringError(){
 		if(criterio.equals(Criterio.CRECIENTE)){
-			return "La condicion creciente no se cumple";
+			return "La condicion creciente no se cumple para el indicador "+indicador.getNombre();
 		}else{
-			return "La condicion decreciente no se cumple";
+			return "La condicion decreciente no se cumple para el indicador "+indicador.getNombre();
 		}
 	}
 
