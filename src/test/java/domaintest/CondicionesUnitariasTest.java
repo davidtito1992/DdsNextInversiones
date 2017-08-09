@@ -117,10 +117,6 @@ public class CondicionesUnitariasTest {
 		RankingEmpresa resultado = new CondicionCuantitativaMayorOMenorA(Criterio.menorA,ingresoNeto,5,10).calcular(rEmpresaFB);
 		
 		Assert.assertEquals(0,BigDecimal.valueOf(-160).compareTo(resultado.getRanking()));
-		//condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.menorA,ingresoNeto,5,10));
-		//Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
-		
-		//Assert.assertEquals(0,BigDecimal.valueOf(-160).compareTo(metodologia.calcularEmpresa(rEmpresaFB).getRanking()));	
 	}
 	
 }
