@@ -16,7 +16,7 @@ public class CondicionAntiguedad extends Condicion {
 	@Override
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
 		
-		BigDecimal valorAnterior = rEmpresa.getRanking(); 
+		BigDecimal valorAnterior = rEmpresa.getRanking();
 		BigDecimal valorNuevo = new BigDecimal(rEmpresa.dameAntiguedadEmpresa() * peso);
 		rEmpresa.setRanking(valorAnterior.add(valorNuevo));
 		return rEmpresa;

@@ -51,10 +51,10 @@ public class Metodologia extends Entity {
 			for (Condicion condicion : condiciones) {
 			    rEmpresa = condicion.calcular(rEmpresa);
 			}
-		}catch (RuntimeException e){
-			//Esto es cuando una taxativa no pasa
 		}catch (ParseException e){
-			//Esto es cuando un indicador no se puede correr
+			//TODO Esto es cuando un indicador no se puede correr
+		}catch (RuntimeException e){
+			//TODO Esto es cuando una taxativa no pasa
 		}
 		return rEmpresa;
 	}

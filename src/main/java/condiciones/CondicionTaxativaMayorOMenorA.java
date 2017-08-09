@@ -6,7 +6,7 @@ import model.RegistroIndicador;
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
-public class CondicionMayorOMenorA extends CondicionSumatoria {
+public class CondicionTaxativaMayorOMenorA extends CondicionCuantitativaMayorOMenorA {
 
 	public enum Criterio {
 		mayorA, menorA;
@@ -15,7 +15,7 @@ public class CondicionMayorOMenorA extends CondicionSumatoria {
 	private Criterio criterio;
 	private BigDecimal numeroAComparar;
 
-	public CondicionMayorOMenorA(Criterio criterio,
+	public CondicionTaxativaMayorOMenorA(Criterio criterio,
 			RegistroIndicador indicador, int ultimosAnios,
 			BigDecimal nroAComparar) {
 		super(indicador, ultimosAnios, 0);

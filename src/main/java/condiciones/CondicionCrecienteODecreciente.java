@@ -3,6 +3,7 @@ package condiciones;
 import java.math.BigDecimal;
 import java.util.List;
 
+import condiciones.CondicionTaxativaMayorOMenorA.Criterio;
 import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;
@@ -25,9 +26,13 @@ public class CondicionCrecienteODecreciente extends Condicion {
 		this.ultimosAnios = ultimosAnios;
 	}
 	
-	@Override
-	public String toString(){
-		return "CondicionCreciente";
+	
+	public String stringError(){
+		if(criterio.equals(Criterio.CRECIENTE)){
+			return "La condicion creciente no se cumple";
+		}else{
+			return "La condicion decreciente no se cumple";
+		}
 	}
 
 	@Override
@@ -44,22 +49,18 @@ public class CondicionCrecienteODecreciente extends Condicion {
 					empresa.getNombre(), periodos.get(i + 1).getAnio(),
 					periodos.get(i + 1).getSemestre());
 
-			if (criterio.equals(Criterio.CRECIENTE)) {
-				switch (indicadorActual.compareTo(indicadorSiguiente)) {
-				case -1:
-
-				default:
-					throw new RuntimeException (this.toString());
-				}
-			} else if (criterio.equals(Criterio.DECRECIENTE)) {
-				switch (indicadorActual.compareTo(indicadorSiguiente)) {
-				case 1:
-
-				default:
-					throw new RuntimeException (this.toString());
-				}
+			if (comparar(indicadorActual,indicadorSiguiente)) {
+					throw new RuntimeException (this.stringError());
 			}
 		}
 		return rEmpresa;
+	}
+	
+	private boolean comparar(BigDecimal indicadorActual, BigDecimal indicadorSiguiente){
+		if(criterio.equals(Criterio.CRECIENTE)){
+			return indicadorActual.compareTo(indicadorSiguiente) >= 0;
+		}else {
+			return indicadorActual.compareTo(indicadorSiguiente) <= 0;
+		}
 	}
 }

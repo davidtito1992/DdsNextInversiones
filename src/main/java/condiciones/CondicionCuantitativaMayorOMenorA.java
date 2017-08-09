@@ -3,18 +3,24 @@ package condiciones;
 import java.math.BigDecimal;
 import java.util.List;
 
+import condiciones.CondicionTaxativaMayorOMenorA.Criterio;
 import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
-public class CondicionSumatoria extends Condicion {
+public class CondicionCuantitativaMayorOMenorA extends Condicion {
 
+	public enum Criterio {
+		mayorA, menorA;
+	}
+
+	private Criterio criterio;
 	private RegistroIndicador indicador;
 	private double peso;
 	
-	public CondicionSumatoria(RegistroIndicador indicador, int ultimosAnios,
+	public CondicionCuantitativaMayorOMenorA(RegistroIndicador indicador, int ultimosAnios,
 			double peso) {
 		this.peso = peso;
 		this.indicador = indicador;
@@ -35,10 +41,18 @@ public class CondicionSumatoria extends Condicion {
 
 	@Override
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
-		BigDecimal nuevoValor = sumador(rEmpresa.getEmpresa()).multiply(new BigDecimal(peso));
+		BigDecimal nuevoValor = sumador(rEmpresa.getEmpresa()).multiply(new BigDecimal(peso)).multiply(multiplicador());
 		rEmpresa.acumularValor(nuevoValor);
 		return rEmpresa;
 
+	}
+	
+	private BigDecimal multiplicador(){
+		if(criterio.equals(Criterio.menorA)){
+			return BigDecimal.valueOf(-1);
+		}else{
+			return BigDecimal.valueOf(1);
+		}
 	}
 
 }
