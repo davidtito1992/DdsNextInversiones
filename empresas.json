@@ -59,7 +59,7 @@
 					},
 					{
 						"nombre": "FDS",
-						"valor": "456"
+						"valor": "123"
 					},
 					{
 						"nombre": "FreeCashFlow",
@@ -72,11 +72,11 @@
 				"semestre": "2",
 				"cuentas": [{
 						"nombre": "EBITDA",
-						"valor": "789"
+						"valor": "111"
 					},
 					{
 						"nombre": "FDS",
-						"valor": "456"
+						"valor": "111"
 					},
 					{
 						"nombre": "FreeCashFlow",
