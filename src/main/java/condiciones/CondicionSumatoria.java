@@ -8,7 +8,7 @@ import model.Periodo;
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 
-public class CondicionSumatoria extends Condicion{
+public abstract class CondicionSumatoria extends Condicion{
 	public enum Criterio {
 		mayorA, menorA;
 	}

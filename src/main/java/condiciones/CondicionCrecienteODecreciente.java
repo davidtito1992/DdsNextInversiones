@@ -3,7 +3,6 @@ package condiciones;
 import java.math.BigDecimal;
 import java.util.List;
 
-import condiciones.CondicionTaxativaMayorOMenorA.Criterio;
 import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;

@@ -21,10 +21,10 @@ public class ControladorDeMetodologiaTest {
 
 		ArrayList<Condicion> condicionesPrueba = new ArrayList<Condicion>();
 		
-		RegistroIndicador roe = RepositorioIndicadores.repositorioMaestro().getRegistroIndicador("ROE");
+		RegistroIndicador ingresoNeto = RepositorioIndicadores.repositorioMaestro().getRegistroIndicador("ImgresoNeto");
 		
-		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.mayorA, roe, 2, BigDecimal.valueOf(5)));
-		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(condiciones.CondicionCuantitativaMayorOMenorA.Criterio.mayorA,roe,2,1));
+		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.mayorA, ingresoNeto, 2, BigDecimal.valueOf(5)));
+		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(condiciones.CondicionCuantitativaMayorOMenorA.Criterio.mayorA,ingresoNeto,2,1));
 		
 		Metodologia metodologia = new Metodologia("Metodlogia Prueba",condicionesPrueba);
 		
