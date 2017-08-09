@@ -76,12 +76,44 @@ public class MetodologiasTest {
 	 	Assert.assertFalse(metodologia.calcularEmpresa(rEmpresaTW).getErrorTaxativa());		
 	}
 	
-	public void metodologiaConCondicionesCualitativas() throws Exception {
+	@Test
+	public void metodologiaConCondicionesCuantitativas() throws Exception {
 	 	condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,1));	//16
 	 	condicionesPrueba.add(new CondicionAntiguedad(3.00));											//3
 	 	Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
 	
 	 	Assert.assertEquals(0,BigDecimal.valueOf(19).compareTo(metodologia.calcularEmpresa(rEmpresaFB).getRanking()));		
+	}
+	
+	@Test
+	public void metodologiaConCondicionesTaxativasOK() throws Exception {
+	 	condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,BigDecimal.valueOf(16)));
+	 	condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.menorA,ingresoNeto,2,BigDecimal.valueOf(16)));	
+	 	condicionesPrueba.add(new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.
+	 											Criterio.CRECIENTE,ingresoNeto,5));
+	 	Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+	
+	 	Assert.assertFalse(metodologia.calcularEmpresa(rEmpresaFB).getErrorTaxativa());		
+	}
+	
+	@Test
+	public void metodologiaConCondicionesTaxativasERR() throws Exception {
+	 	condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,BigDecimal.valueOf(16)));
+	 	condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.menorA,ingresoNeto,2,BigDecimal.valueOf(16)));	
+	 	condicionesPrueba.add(new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.
+	 											Criterio.DECRECIENTE,ingresoNeto,5));//no se cumple
+	 	Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+	
+	 	Assert.assertTrue(metodologia.calcularEmpresa(rEmpresaFB).getErrorTaxativa());		
+	}
+	
+	@Test
+	public void metodologiaConCondicionesTaxativasERRNoIndicador() throws Exception {
+	 	condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.mayorA,ingresoNeto,2,BigDecimal.valueOf(16)));
+	 	condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(Criterio.menorA,ingresoNeto,2,BigDecimal.valueOf(16)));	
+	 	Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+	
+	 	Assert.assertTrue(metodologia.calcularEmpresa(rEmpresaGO).getErrorTaxativa());		
 	}
 	
 	
