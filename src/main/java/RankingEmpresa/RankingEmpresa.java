@@ -1,4 +1,4 @@
-package indicadoresCondicionados;
+package RankingEmpresa;
 
 import java.math.BigDecimal;
 

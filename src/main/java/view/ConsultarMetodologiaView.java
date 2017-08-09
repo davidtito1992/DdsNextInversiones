@@ -1,7 +1,5 @@
 package view;
 
-import indicadoresCondicionados.RankingEmpresa;
-
 import java.awt.Color;
 
 import model.Metodologia;
@@ -16,7 +14,10 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 
+import RankingEmpresa.RankingEmpresa;
 import viewmodel.ConsultarMetodologiaViewM;
+
+
 
 public class ConsultarMetodologiaView extends Dialog<ConsultarMetodologiaViewM> {
 

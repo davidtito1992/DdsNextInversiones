@@ -10,6 +10,8 @@ import model.Empresa;
 import model.RegistroIndicador;
 import model.SnapshotIndicador;
 
+import RankingEmpresa.RankingEmpresa;
+
 public class IndicadorCondicionado {
 	private int prioridad;
 	private String nombreIndicador;

@@ -2,7 +2,6 @@ package model;
 
 import indicadoresCondicionados.ControladorDeMetodologia;
 import indicadoresCondicionados.IndicadorCondicionado;
-import indicadoresCondicionados.RankingEmpresa;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,6 +10,7 @@ import java.util.List;
 import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.Observable;
 
+import RankingEmpresa.RankingEmpresa;
 import parserIndicador.ParseException;
 import ex_condiciones.CondicionCualitativa;
 import ex_condiciones.CondicionTaxativa;

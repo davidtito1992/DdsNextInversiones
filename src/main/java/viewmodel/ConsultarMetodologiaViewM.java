@@ -1,10 +1,13 @@
 package viewmodel;
 
-import indicadoresCondicionados.RankingEmpresa;
 import java.util.ArrayList;
 import java.util.List;
+
 import model.Metodologia;
+
 import org.uqbar.commons.utils.Observable;
+
+import RankingEmpresa.RankingEmpresa;
 
 @Observable
 public class ConsultarMetodologiaViewM {

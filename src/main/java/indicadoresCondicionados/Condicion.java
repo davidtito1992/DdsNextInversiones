@@ -3,6 +3,7 @@ package indicadoresCondicionados;
 import java.math.BigDecimal;
 
 import model.SnapshotIndicador;
+import RankingEmpresa.RankingEmpresa;
 
 @SuppressWarnings("unused")
 public abstract class Condicion {
