@@ -6,33 +6,32 @@ import model.RegistroIndicador;
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
-public class CondicionTaxativaMayorOMenorA extends CondicionCuantitativaMayorOMenorA {
+public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 
-	public enum Criterio {
-		mayorA, menorA;
-	}
 
-	private Criterio criterio;
 	private BigDecimal numeroAComparar;
 
 	public CondicionTaxativaMayorOMenorA(Criterio criterio,
 			RegistroIndicador indicador, int ultimosAnios,
 			BigDecimal nroAComparar) {
-		super(indicador, ultimosAnios, 0);
-		this.criterio = criterio;
+		super(criterio, indicador, ultimosAnios);
 		this.numeroAComparar = nroAComparar;
 	}
 	
-	@Override
-	public String toString(){
-		return "Condicion " + criterio;
+	
+	public String textoError(){
+		if(criterio.equals(Criterio.menorA)){
+			return "La condicion menor a "+numeroAComparar.toString()+" no se cumple";
+		}else {
+			return "La condicion mayor a "+numeroAComparar.toString()+" no se cumple";
+		}
 	}
 
 	@Override
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
 		BigDecimal acumulador = sumador(rEmpresa.getEmpresa());
 		if(comparar(acumulador,numeroAComparar)){
-			throw new RuntimeException(this.toString());
+			throw new RuntimeException(textoError());
 		};
 		return rEmpresa;
 

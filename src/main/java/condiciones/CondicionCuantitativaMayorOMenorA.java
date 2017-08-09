@@ -3,28 +3,21 @@ package condiciones;
 import java.math.BigDecimal;
 import java.util.List;
 
-import condiciones.CondicionTaxativaMayorOMenorA.Criterio;
 import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
-public class CondicionCuantitativaMayorOMenorA extends Condicion {
+public class CondicionCuantitativaMayorOMenorA extends CondicionSumatoria {
 
-	public enum Criterio {
-		mayorA, menorA;
-	}
 
-	private Criterio criterio;
-	private RegistroIndicador indicador;
 	private double peso;
 	
-	public CondicionCuantitativaMayorOMenorA(RegistroIndicador indicador, int ultimosAnios,
+	public CondicionCuantitativaMayorOMenorA(Criterio criterio,RegistroIndicador indicador, int ultimosAnios,
 			double peso) {
+		super(criterio, indicador, ultimosAnios);
 		this.peso = peso;
-		this.indicador = indicador;
-		this.ultimosAnios = ultimosAnios;
 	}
 
 	public BigDecimal sumador(Empresa empresa) throws ParseException {
