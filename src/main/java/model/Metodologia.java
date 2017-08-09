@@ -53,8 +53,12 @@ public class Metodologia extends Entity {
 			}
 		}catch (RuntimeException e){
 			//Esto es cuando una taxativa no pasa
+			rEmpresa.setErrorTaxativa(true);
+			rEmpresa.setObservaciones("La condicion taxativa que no se cumplió fue: " + e.getMessage());
 		}catch (ParseException e){
 			//Esto es cuando un indicador no se puede correr
+			rEmpresa.setErrorTaxativa(true);
+			rEmpresa.setObservaciones("No se pudo evaluar una condicion sobre la empresa. Error: " + e.getMessage());
 		}
 		return rEmpresa;
 	}
