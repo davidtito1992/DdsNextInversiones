@@ -46,7 +46,7 @@ public class Metodologia extends Entity {
 		this.condiciones = condiciones;
 	}
 
-	private RankingEmpresa calcularEmpresa(RankingEmpresa rEmpresa){
+	public RankingEmpresa calcularEmpresa(RankingEmpresa rEmpresa){
 		try{
 			for (Condicion condicion : condiciones) {
 			    rEmpresa = condicion.calcular(rEmpresa);

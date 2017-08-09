@@ -20,7 +20,7 @@ public class CargaDeArchivoTest {
 
 	@Test
 	public void cargaExistosaDeArchivoIndicadores() throws Exception {
-		new FileLoader().getDataIndicadores();
+		new FileLoader().getDataEmpresas();
 	}
 
 }
