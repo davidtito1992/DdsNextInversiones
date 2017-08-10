@@ -46,9 +46,9 @@ public class MetodologiasTest {
 		rEmpresaFB = new RankingEmpresa(BigDecimal.ZERO, facebook);
 		rEmpresaTW = new RankingEmpresa(BigDecimal.ZERO, twitter);
 		rEmpresaGO = new RankingEmpresa(BigDecimal.ZERO, google);
+		rEmpresas.add(rEmpresaFB);
 		rEmpresas.add(rEmpresaGO);
 		rEmpresas.add(rEmpresaTW);
-		rEmpresas.add(rEmpresaFB);
 	}
 	
 	@Test 
