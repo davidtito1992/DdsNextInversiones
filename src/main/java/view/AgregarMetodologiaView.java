@@ -67,10 +67,11 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewM> {
 		selectorAnios.bindValueToProperty("agregarAniosSeleccionado");
 
 		new Label(form).setText("\t");
+		
 		new Button(form).setCaption("Agregar").onClick(this::agregarCondicion)
 				.setWidth(140);
 		new Label(form).setText("\t");
-
+		
 		new Button(form).setCaption("Limpiar").onClick(this::limpiar)
 				.setWidth(140);
 
@@ -125,17 +126,16 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewM> {
 	}
 
 	public void agregarCondicion() {
-
-		if (this.getModelObject().getAgregarAniosSeleccionado() == null
-				|| this.getModelObject().getAgregarCriterioSeleccionado() == null
-				|| this.getModelObject().getAgregarIndicadorSeleccionado() == null
-				|| this.getModelObject().getTipoCondicionSeleccionado() == null
-				|| this.getModelObject().getPesoOComparar() == null) {
-
-			this.showError("Debe Seleccionar todos los campos para agregar una condicion");
-		} else {
-
+		/*this.getModelObject().getAgregarAniosSeleccionado() == null
+		|| this.getModelObject().getAgregarCriterioSeleccionado() == null
+		|| this.getModelObject().getAgregarIndicadorSeleccionado() == null
+		|| this.getModelObject().getTipoCondicionSeleccionado() == null
+		|| this.getModelObject().getPesoOComparar() == null*/
+		try{
+			this.getModelObject().validar();
 			getModelObject().agregarCondicion();
+		}catch (RuntimeException e){
+			this.showInfo(e.getMessage());
 		}
 	}
 

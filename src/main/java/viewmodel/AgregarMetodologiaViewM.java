@@ -277,4 +277,33 @@ public class AgregarMetodologiaViewM {
 
 	}
 
+	public void validar() throws RuntimeException {
+		if (getAgregarIndicadorSeleccionado() == null){
+			throw new RuntimeException("Seleccione un indicador");
+		}
+		if(getTipoCondicionSeleccionado() == null){
+			throw new RuntimeException("Seleccione un tipo de condicion");
+		}
+		if(getAgregarCriterioSeleccionado() == null){
+			throw new RuntimeException("Seleccione una condicion");
+		}
+		if (getTipoCondicionSeleccionado()=="Cuantitativa" && (getAgregarCriterioSeleccionado() == "Creciente" || getAgregarCriterioSeleccionado() == "Decreciente")){
+			throw new RuntimeException("Las condiciones Creciente y Decreciente no pueden ser Cuantitativas");
+		}
+		if (getAgregarCriterioSeleccionado() != "Antiguedad" && getAgregarAniosSeleccionado() == null){
+			throw new RuntimeException("Falta indicar desde que año aplica la condicion");
+		}else{
+			if(getAgregarAniosSeleccionado() == null){
+				setAgregarAniosSeleccionado(0);
+			}
+		}
+		if (getAgregarCriterioSeleccionado() != "Creciente" && getAgregarCriterioSeleccionado() != "Decreciente" && getPesoOComparar() == null){
+			throw new RuntimeException("Falta indicar el Peso o Numero a Comparar");
+		}else{
+			if(getPesoOComparar() == null){
+				setPesoOComparar(BigDecimal.ZERO);
+			}
+		}
+	}
+
 }
