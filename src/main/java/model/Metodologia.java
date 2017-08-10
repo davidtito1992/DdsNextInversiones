@@ -16,7 +16,7 @@ import condiciones.Condicion;
 public class Metodologia extends Entity {
 
 	public Metodologia(String nombre,
-			ArrayList<Condicion> condiciones) {
+			List<Condicion> condiciones) {
 		this.nombre = nombre;
 		this.condiciones = condiciones;
 
@@ -25,7 +25,7 @@ public class Metodologia extends Entity {
 	/********* ATRIBUTOS *********/
 
 	public String nombre;
-	public ArrayList<Condicion> condiciones;
+	public List<Condicion> condiciones;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -37,12 +37,12 @@ public class Metodologia extends Entity {
 		this.nombre = nombre;
 	}
 
-	public ArrayList<Condicion> getCondiciones() {
+	public List<Condicion> getCondiciones() {
 		return condiciones;
 	}
 
 	public void setCondiciones(
-			ArrayList<Condicion> condiciones) {
+			List<Condicion> condiciones) {
 		this.condiciones = condiciones;
 	}
 

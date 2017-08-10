@@ -108,11 +108,6 @@ public class AgregarIndicadorViewM {
 		new DslIndicador().añadirIndicador(new RegistroIndicador(this.nombre,
 				this.formula));
 	}
-
-//	public RepositorioIndicadores getRepoIndicadores() {
-//		return ApplicationContext.getInstance().getSingleton(
-//				RegistroIndicador.class);
-//	}
 	
 	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();

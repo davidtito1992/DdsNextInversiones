@@ -4,39 +4,26 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.RegistroIndicador;
+import model.Metodologia;
 import model.SnapshotCondicion;
 
 import org.uqbar.commons.utils.Observable;
 
-import condiciones.Condicion;
 import repositories.RepositorioUnicoDeIndicadores;
+import repositories.RepositorioUnicoDeMetodologias;
 import app.AplicacionContexto;
-import ex_condiciones.CondicionCualitativa;
-import ex_condiciones.CondicionTaxativa;
-import ex_condiciones.CondicionTaxativaAntiguedad;
-import ex_condiciones.CondicionTaxativaCreciente;
-import ex_condiciones.CondicionTaxativaDecreciente;
-import ex_condiciones.CondicionTaxativaMayorA;
-import ex_condiciones.CondicionTaxativaMenorA;
+import condiciones.Condicion;
+import condiciones.CondicionesBuilder;
 
 @Observable
 public class AgregarMetodologiaViewM {
 
 	/********* ATRIBUTOS *********/
 
-	private List<CondicionTaxativa> listaTaxativas = new ArrayList<CondicionTaxativa>();
-	private List<CondicionCualitativa> listaCualitativas = new ArrayList<CondicionCualitativa>();
-	private CondicionCualitativa cualitativa;
-	private CondicionTaxativa taxativa;
-
-	private List<Condicion> listaDeIndicadoresCondicionados = new ArrayList<Condicion>();
-
 	private String nombre;
 	private Long pesoOComparar = null;
 	private List<String> tiposCondiciones = new ArrayList<String>();
 	private String tipoCondicionSeleccionado;
-	// private List<Integer> prioridades = new ArrayList<Integer>();
 	private Integer agregarPrioridadSeleccionada;
 	private List<String> agregarIndicador;
 	private String agregarIndicadorSeleccionado;
@@ -87,39 +74,6 @@ public class AgregarMetodologiaViewM {
 		this.agregarAniosSeleccionado = agregarAniosSeleccionado;
 	}
 
-	public List<CondicionTaxativa> getListaTaxativas() {
-		return listaTaxativas;
-	}
-
-	public void setListaTaxativas(List<CondicionTaxativa> listaTaxativas) {
-		this.listaTaxativas = listaTaxativas;
-	}
-
-	public List<CondicionCualitativa> getListaCualitativas() {
-		return listaCualitativas;
-	}
-
-	public void setListaCualitativas(
-			List<CondicionCualitativa> listaCualitativas) {
-		this.listaCualitativas = listaCualitativas;
-	}
-
-	public CondicionCualitativa getCualitativa() {
-		return cualitativa;
-	}
-
-	public void setCualitativa(CondicionCualitativa cualitativa) {
-		this.cualitativa = cualitativa;
-	}
-
-	public CondicionTaxativa getTaxativa() {
-		return taxativa;
-	}
-
-	public void setTaxativa(CondicionTaxativa taxativa) {
-		this.taxativa = taxativa;
-	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -165,24 +119,6 @@ public class AgregarMetodologiaViewM {
 	public void setAgregarPrioridadSeleccionada(
 			Integer agregarPrioridadSeleccionado) {
 		this.agregarPrioridadSeleccionada = agregarPrioridadSeleccionado;
-	}
-
-	//
-	// public List<Integer> getPrioridades() {
-	// return prioridades;
-	// }
-	//
-	// public void setPrioridades(List<Integer> prioridades) {
-	// this.prioridades = prioridades;
-	// }
-
-	public List<Condicion> getListaDeIndicadoresCondicionados() {
-		return listaDeIndicadoresCondicionados;
-	}
-
-	public void setListaDeIndicadoresCondicionados(
-			List<Condicion> listaDeIndicadoresCondicionados) {
-		this.listaDeIndicadoresCondicionados = listaDeIndicadoresCondicionados;
 	}
 
 	public List<SnapshotCondicion> getSnapshotCondiciones() {
@@ -235,21 +171,7 @@ public class AgregarMetodologiaViewM {
 		this.cargarCriteriosDisponibles();
 		this.cargarAniosDisponibles();
 		this.cargarNrosDisponibles();
-		// this.cargarPrioridades();
 	}
-
-	// private void cargarPrioridades() {
-	//
-	// this.prioridades.add(1);
-	// this.prioridades.add(2);
-	// this.prioridades.add(3);
-	// this.prioridades.add(4);
-	// this.prioridades.add(5);
-	// this.prioridades.add(6);
-	// this.prioridades.add(7);
-	// this.prioridades.add(8);
-	//
-	// }
 
 	private void cargarAniosDisponibles() {
 		this.agregarAnios.add(1);
@@ -294,35 +216,26 @@ public class AgregarMetodologiaViewM {
 
 	public void guardarMetodologia() {
 
-		// if (this.nombre == null
-		// || (this.listaCualitativas.isEmpty() && this.listaTaxativas
-		// .isEmpty())) {
-		// throw new RuntimeException(
-		// "Debe ingresar nombre y al menos una condicion para guardar correctamente. "
-		// + "Intentelo nuevamente");
-		// }
-
-		if (this.nombre == null || (this.listaCualitativas.isEmpty()))
+		if (this.nombre == null || (this.snapshotCondiciones.isEmpty()))
 			throw new RuntimeException(
 					"Debe ingresar nombre y al menos una condicion para guardar correctamente. "
 							+ "Intentelo nuevamente");
+		List<Condicion> condiciones = new ArrayList<Condicion>();
 
-		// Metodologia laNueva = new Metodologia(this.getNombre(),
-		// this.getListaTaxativas(), this.getListaCualitativas());
-		// Metodologia nuevaMetodologia = new
-		// Metodologia(this.getNombre(),this.getListaDeIndicadoresCondicionados())
-		// ;
-
-		// new AppData().guardarMetodologia(nuevaMetodologia);
+		for (SnapshotCondicion snapshotCondicion : snapshotCondiciones) {
+			condiciones.add(new CondicionesBuilder().crear(snapshotCondicion));
+		}
+ 		Metodologia metodologia = new Metodologia(nombre,condiciones);
+		getRepositorioMetodologias().agregarMetodologiaNueva(metodologia);
+		
 	}
-
-	// public RepositorioIndicadores getRepoIndicadores() {
-	// return ApplicationContext.getInstance().getSingleton(
-	// RegistroIndicador.class);
-	// }
 
 	public RepositorioUnicoDeIndicadores getRepositorindicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
+	}
+	
+	public RepositorioUnicoDeMetodologias getRepositorioMetodologias(){
+		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 	}
 
 	public boolean estanTodosLosDatosTaxativa() {
@@ -345,74 +258,9 @@ public class AgregarMetodologiaViewM {
 		return creceODecre && anios && criterio && nro;
 	}
 
-	public void agregarCondicion() {
-
-//		if (this.estanTodosLosDatosTaxativa()) {
-//			CondicionTaxativa taxativa = crearCondicion();
-//			this.setTaxativa(taxativa);
-//			this.listaTaxativas.add(taxativa);
-//		}
-//		if (this.getTipoCondicionSeleccionado().equalsIgnoreCase("Taxativa")) {
-//			
-//		}
-		
+	public void agregarCondicion() {		
 		this.snapshotCondiciones.add(new SnapshotCondicion(this.getTipoCondicionSeleccionado(),this.getAgregarCriterioSeleccionado(),this.getAgregarIndicadorSeleccionado(),this.getPesoOComparar(),this.getAgregarAniosSeleccionado()));
 		this.limpiar();
-	}
-
-	private CondicionTaxativa crearCondicion() {
-		switch (this.getAgregarCriterioSeleccionado()) {
-
-		case "<":
-			return newTaxativaMenorA();
-		case ">":
-			return newTaxativaMayorA();
-		case "Antiguedad":
-			return newTaxativaAntiguedad();
-		case "Creciente":
-			return newTaxativaCreciente();
-		case "Decreciente":
-			return newTaxativaDecreciente();
-		default:
-			throw new RuntimeException(
-					"Debe elegir un criterio para esta condicion");
-		}
-	}
-
-	private CondicionTaxativa newTaxativaMayorA() {
-
-		RegistroIndicador indicador = getRepositorindicadores()
-				.getRegistroIndicador(this.getAgregarIndicadorSeleccionado());
-		return new CondicionTaxativaMayorA(indicador,
-				this.getAgregarNroSeleccionado(),
-				this.getAgregarAniosSeleccionado());
-	}
-
-	private CondicionTaxativa newTaxativaAntiguedad() {
-		return new CondicionTaxativaAntiguedad(
-				this.getAgregarAniosSeleccionado());
-	}
-
-	private CondicionTaxativa newTaxativaCreciente() {
-		RegistroIndicador indicador = getRepositorindicadores()
-				.getRegistroIndicador(this.getAgregarIndicadorSeleccionado());
-		return new CondicionTaxativaCreciente(indicador,
-				this.getAgregarAniosSeleccionado());
-	}
-
-	private CondicionTaxativa newTaxativaDecreciente() {
-		RegistroIndicador indicador = getRepositorindicadores()
-				.getRegistroIndicador(this.getAgregarIndicadorSeleccionado());
-		return new CondicionTaxativaDecreciente(indicador,
-				this.getAgregarAniosSeleccionado());
-	}
-
-	private CondicionTaxativa newTaxativaMenorA() {
-		RegistroIndicador indicador = getRepositorindicadores()
-				.getRegistroIndicador(this.getAgregarIndicadorSeleccionado());
-		return new CondicionTaxativaMenorA(indicador,
-				this.getAgregarNroSeleccionado(),
-				this.getAgregarAniosSeleccionado());
 	}
 
 	public void limpiar() {
