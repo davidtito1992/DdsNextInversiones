@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 
 import model.Metodologia;
+import model.SnapshotRankingEmpresa;
 
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
@@ -38,55 +39,42 @@ public class ConsultarMetodologiaView extends Dialog<ConsultarMetodologiaViewM> 
 		form.setLayout(new ColumnLayout(2));
 
 		new Label(form).setText(
-				"\tMetodologia: "
+				"Metodologia: "
 						+ this.getModelObject().getMetodologia().getNombre())
 				.setBackground(Color.WHITE);
 
-		new Label(form).setText("\n\n\n");
-		new Label(form).setText("\tSeleccione Empresa");
-		Selector<String> selectorNombre = new Selector<String>(form)
-				.allowNull(true);
-		selectorNombre.setWidth(150);
-		selectorNombre.bindItemsToProperty("nombresEmpresas");
-		selectorNombre.bindValueToProperty("nombreEmpresaSeleccionado");
-
-		new Label(form).setText("\t");
-		new Label(form).setText("\t");
-		new Button(form).setCaption("Reiniciar").onClick(this::reiniciar)
-				.setWidth(140);
-
-		new Button(form).setCaption("Buscar").onClick(this::buscar)
-				.setWidth(140);
-
-		Table<RankingEmpresa> tableRankingEmpresa = new Table<RankingEmpresa>(
-				mainPanel, RankingEmpresa.class);
+		Table<SnapshotRankingEmpresa> tableRankingEmpresa = new Table<SnapshotRankingEmpresa>(
+				mainPanel, SnapshotRankingEmpresa.class);
 
 		tableRankingEmpresa.setHeight(4000);
-		tableRankingEmpresa.setWidth(1000);
+		tableRankingEmpresa.setWidth(500);
 
-		Column<RankingEmpresa> columnaRankingEmpresa = new Column<RankingEmpresa>(
-				tableRankingEmpresa);
-		columnaRankingEmpresa.setTitle("Ranking").setWeight(60);
-		columnaRankingEmpresa.bindContentsToProperty("ranking");
-
-		Column<RankingEmpresa> columnaNombreEmpresa = new Column<RankingEmpresa>(
+		Column<SnapshotRankingEmpresa> columnaNombreEmpresa = new Column<SnapshotRankingEmpresa>(
 				tableRankingEmpresa);
 		columnaNombreEmpresa.setTitle("Empresa").setWeight(140);
-		columnaNombreEmpresa.bindContentsToProperty("empresa");
+		columnaNombreEmpresa.bindContentsToProperty("nombreEmpresa");
 		
-		Column<RankingEmpresa> columnaInvertibleEmpresa = new Column<RankingEmpresa>(
-				tableRankingEmpresa);
-		columnaInvertibleEmpresa.setTitle("Invertible").setWeight(140);
-		columnaInvertibleEmpresa.bindContentsToProperty("errorTaxativa");
+		Table<SnapshotRankingEmpresa> tableRankingEmpresasFallidas = new Table<SnapshotRankingEmpresa>(
+				mainPanel, SnapshotRankingEmpresa.class);
 
-		Column<RankingEmpresa> columnaObservacionEmpresa = new Column<RankingEmpresa>(
-				tableRankingEmpresa);
-		columnaObservacionEmpresa.setTitle("Observaciones").setWeight(140);
-		columnaObservacionEmpresa.bindContentsToProperty("observaciones");
+		tableRankingEmpresasFallidas.setHeight(4000);
+		tableRankingEmpresasFallidas.setWidth(500);
+
+		Column<SnapshotRankingEmpresa> columnaNombreEmpresasFallidas = new Column<SnapshotRankingEmpresa>(
+				tableRankingEmpresasFallidas);
+		columnaNombreEmpresasFallidas.setTitle("Empresa que fallaron").setWeight(300);
+		columnaNombreEmpresasFallidas.bindContentsToProperty("nombreEmpresa");
 		
-		tableRankingEmpresa.bindItemsToProperty("rankingDeEmpresas");
-		tableRankingEmpresa.bindValueToProperty("rankingDeEmpresaSeleccionado");
-
+		Column<SnapshotRankingEmpresa> columnaObservacionEmpresasFallidas = new Column<SnapshotRankingEmpresa>(
+				tableRankingEmpresasFallidas);
+		columnaObservacionEmpresasFallidas.setTitle("Observacion").setWeight(140);
+		columnaObservacionEmpresasFallidas.bindContentsToProperty("observacion");
+		
+		tableRankingEmpresa.bindItemsToProperty("snapshotRankingEmpresas");
+		tableRankingEmpresa.bindValueToProperty("snapshotRankingEmpresasSeleccionado");
+		
+		tableRankingEmpresasFallidas.bindItemsToProperty("snapshotRankingEmpresasFallidas");
+		tableRankingEmpresasFallidas.bindValueToProperty("snapshotRankingEmpresasFallidasSeleccionado");
 	}
 
 	@Override
@@ -97,17 +85,4 @@ public class ConsultarMetodologiaView extends Dialog<ConsultarMetodologiaViewM> 
 				.setWidth(140);
 	}
 
-	public void reiniciar() {
-		getModelObject().reiniciar();
-	}
-
-	public void buscar() {
-		if (this.getModelObject().getNombreEmpresaSeleccionado() != null) {
-			this.getModelObject().buscar();
-
-		} else {
-			this.showError("Seleccione algun item por favor");
-		}
-
-	}
 }

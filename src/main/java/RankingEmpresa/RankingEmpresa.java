@@ -14,9 +14,9 @@ public class RankingEmpresa {
 	private String observaciones;
 	public Boolean errorTaxativa;
 
-	public RankingEmpresa(BigDecimal ranking, Empresa empresa) {
+	public RankingEmpresa(BigDecimal zero, Empresa empresa) {
 
-		this.ranking = ranking;
+		this.ranking = zero;
 		this.empresa = empresa;
 		this.errorTaxativa = false;
 	}

@@ -1,6 +1,8 @@
 package model;
 import org.uqbar.commons.utils.Observable;
 
+import RankingEmpresa.RankingEmpresa;
+
 @Observable
 public class SnapshotRankingEmpresa {
 	
@@ -22,5 +24,10 @@ public class SnapshotRankingEmpresa {
 	}
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
+	}
+	
+	public SnapshotRankingEmpresa(RankingEmpresa rEmpresa){
+		this.nombreEmpresa = rEmpresa.getEmpresa().getNombre();
+		this.observacion = rEmpresa.getObservaciones();
 	}
 }

@@ -64,7 +64,7 @@ public class Metodologia extends Entity {
 		return rEmpresa;
 	}
 	
-	public List<RankingEmpresa> calcularEmpresas(ArrayList<RankingEmpresa> rEmpresas) {
+	public List<RankingEmpresa> calcularEmpresas(List<RankingEmpresa> rEmpresas) {
 		return rEmpresas.stream()
 				.map(empresa->calcularEmpresa(empresa))
 				.sorted(new RankingEmpresasComparator())

@@ -59,10 +59,6 @@ public class MetodologiaViewM {
 		this.setMetodologias(null);
 		this.setMetodologias(getRepoMetodologias().getElementos());
 	}
-
-//	public RepositorioMetodologias getRepoMetodologias() {
-//		return ApplicationContext.getInstance().getSingleton(Metodologia.class);
-//	}
 	
 	public RepositorioUnicoDeMetodologias getRepoMetodologias(){
 		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
