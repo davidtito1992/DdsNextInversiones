@@ -8,7 +8,6 @@ import RankingEmpresa.RankingEmpresa;
 
 public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 
-
 	private BigDecimal numeroAComparar;
 
 	public CondicionTaxativaMayorOMenorA(Criterio criterio,
@@ -17,30 +16,35 @@ public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 		super(criterio, indicador, ultimosAnios);
 		this.numeroAComparar = nroAComparar;
 	}
-	
-	
-	public String textoError(){
-		if(criterio.equals(Criterio.menorA)){
-			return "La condicion menor a "+numeroAComparar.toString()+" no se cumple para el indicador "+indicador.getNombre();
-		}else {
-			return "La condicion mayor a "+numeroAComparar.toString()+" no se cumple para el indicador "+indicador.getNombre();
+
+	public String textoError() {
+		if (criterio.equals(Criterio.menorA)) {
+			return "La condicion menor a " + numeroAComparar.toString()
+					+ " no se cumple para el indicador "
+					+ indicador.getNombre();
+		} else {
+			return "La condicion mayor a " + numeroAComparar.toString()
+					+ " no se cumple para el indicador "
+					+ indicador.getNombre();
 		}
 	}
 
 	@Override
-	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
+	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
+			throws ParseException {
 		BigDecimal acumulador = sumador(rEmpresa.getEmpresa());
-		if(comparar(acumulador,numeroAComparar)){
+		if (comparar(acumulador, numeroAComparar)) {
 			throw new RuntimeException(textoError());
-		};
+		}
+		;
 		return rEmpresa;
 
 	}
-	
-	private boolean comparar(BigDecimal acumulador, BigDecimal numeroAComparar){
-		if(criterio.equals(Criterio.menorA)){
+
+	private boolean comparar(BigDecimal acumulador, BigDecimal numeroAComparar) {
+		if (criterio.equals(Criterio.menorA)) {
 			return acumulador.compareTo(numeroAComparar) > 0;
-		}else {
+		} else {
 			return acumulador.compareTo(numeroAComparar) < 0;
 		}
 	}

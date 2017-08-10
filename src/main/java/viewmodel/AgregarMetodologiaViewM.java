@@ -21,7 +21,7 @@ public class AgregarMetodologiaViewM {
 	/********* ATRIBUTOS *********/
 
 	private String nombre;
-	private Long pesoOComparar = null;
+	private BigDecimal pesoOComparar = null;
 	private List<String> tiposCondiciones = new ArrayList<String>();
 	private String tipoCondicionSeleccionado;
 	private Integer agregarPrioridadSeleccionada;
@@ -139,11 +139,11 @@ public class AgregarMetodologiaViewM {
 		this.snapshotCondicionSeleccionado = snapshotCondicionSeleccionado;
 	}
 
-	public Long getPesoOComparar() {
+	public BigDecimal getPesoOComparar() {
 		return pesoOComparar;
 	}
 
-	public void setPesoOComparar(Long pesoOComparar) {
+	public void setPesoOComparar(BigDecimal pesoOComparar) {
 		this.pesoOComparar = pesoOComparar;
 	}
 
@@ -225,16 +225,16 @@ public class AgregarMetodologiaViewM {
 		for (SnapshotCondicion snapshotCondicion : snapshotCondiciones) {
 			condiciones.add(new CondicionesBuilder().crear(snapshotCondicion));
 		}
- 		Metodologia metodologia = new Metodologia(nombre,condiciones);
+		Metodologia metodologia = new Metodologia(nombre, condiciones);
 		getRepositorioMetodologias().agregarMetodologiaNueva(metodologia);
-		
+
 	}
 
 	public RepositorioUnicoDeIndicadores getRepositorindicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
-	
-	public RepositorioUnicoDeMetodologias getRepositorioMetodologias(){
+
+	public RepositorioUnicoDeMetodologias getRepositorioMetodologias() {
 		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 	}
 
@@ -258,8 +258,12 @@ public class AgregarMetodologiaViewM {
 		return creceODecre && anios && criterio && nro;
 	}
 
-	public void agregarCondicion() {		
-		this.snapshotCondiciones.add(new SnapshotCondicion(this.getTipoCondicionSeleccionado(),this.getAgregarCriterioSeleccionado(),this.getAgregarIndicadorSeleccionado(),this.getPesoOComparar(),this.getAgregarAniosSeleccionado()));
+	public void agregarCondicion() {
+		this.snapshotCondiciones.add(new SnapshotCondicion(this
+				.getTipoCondicionSeleccionado(), this
+				.getAgregarCriterioSeleccionado(), this
+				.getAgregarIndicadorSeleccionado(), this.getPesoOComparar(),
+				this.getAgregarAniosSeleccionado()));
 		this.limpiar();
 	}
 

@@ -10,11 +10,11 @@ public class SnapshotCondicion {
 	private String tipoCondicion;
 	private String nombreCondicion;
 	private String indicador;
-	private Long pesoOComparar;
+	private BigDecimal pesoOComparar;
 	private int anios;
 
 	public SnapshotCondicion(String tipo, String nombre, String indicador,
-			Long pesoOComparar, int anios) {
+			BigDecimal pesoOComparar, int anios) {
 		this.tipoCondicion = tipo;
 		this.nombreCondicion = nombre;
 		this.indicador = indicador;
@@ -47,11 +47,11 @@ public class SnapshotCondicion {
 		this.indicador = indicador;
 	}
 
-	public Long getPesoOComparar() {
+	public BigDecimal getPesoOComparar() {
 		return pesoOComparar;
 	}
 
-	public void setPesoOComparar(Long pesoOComparar) {
+	public void setPesoOComparar(BigDecimal pesoOComparar) {
 		this.pesoOComparar = pesoOComparar;
 	}
 
