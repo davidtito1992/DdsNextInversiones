@@ -16,7 +16,6 @@ public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 		super(criterio, indicador, ultimosAnios);
 		this.numeroAComparar = nroAComparar;
 	}
-<<<<<<< HEAD
 
 	public String textoError() {
 		if (criterio.equals(Criterio.menorA)) {
@@ -27,15 +26,6 @@ public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 			return "La condicion mayor a " + numeroAComparar.toString()
 					+ " no se cumple para el indicador "
 					+ indicador.getNombre();
-=======
-	
-	
-	public String textoError(){
-		if(criterio.equals(Criterio.menorA)){
-			return "La condicion taxativa menor a "+numeroAComparar.toString()+" no se cumple para el indicador "+indicador.getNombre();
-		}else {
-			return "La condicion taxativa mayor a "+numeroAComparar.toString()+" no se cumple para el indicador "+indicador.getNombre();
->>>>>>> 2e31079b5fb4fbfa7461bf33336b242fc8cdd2c4
 		}
 	}
 
