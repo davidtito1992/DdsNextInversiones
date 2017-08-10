@@ -24,7 +24,7 @@ import condiciones.CondicionTaxativaAntiguedad;
 import condiciones.CondicionTaxativaMayorOMenorA;
 
 public class MetodologiasTest {
-	public ArrayList<Condicion> condicionesPrueba = new ArrayList<Condicion>();
+	public List<Condicion> condicionesPrueba = new ArrayList<Condicion>();
 	public RegistroIndicador ingresoNeto;
 	public RegistroIndicador i4;
 	public RegistroIndicador ROE;
@@ -36,7 +36,7 @@ public class MetodologiasTest {
 	public RankingEmpresa rEmpresaFB;
 	public RankingEmpresa rEmpresaTW;
 	public RankingEmpresa rEmpresaGO;
-	public ArrayList<RankingEmpresa> rEmpresas = new ArrayList<RankingEmpresa>();
+	public List<RankingEmpresa> rEmpresas = new ArrayList<RankingEmpresa>();
 
 	@Before
 	public void inicializar() throws Exception {
@@ -45,10 +45,14 @@ public class MetodologiasTest {
 
 		ingresoNeto = new AppData().getRepositorioIndicadores()
 				.getRegistroIndicador("IngresoNeto");
-		i4 = new AppData().getRepositorioIndicadores().getRegistroIndicador("i4");
-		ROE = new AppData().getRepositorioIndicadores().getRegistroIndicador("ROE");
-		propDeu = new AppData().getRepositorioIndicadores().getRegistroIndicador("ProporcionDeDeuda");
-		margen = new AppData().getRepositorioIndicadores().getRegistroIndicador("margen");
+		i4 = new AppData().getRepositorioIndicadores().getRegistroIndicador(
+				"i4");
+		ROE = new AppData().getRepositorioIndicadores().getRegistroIndicador(
+				"ROE");
+		propDeu = new AppData().getRepositorioIndicadores()
+				.getRegistroIndicador("ProporcionDeDeuda");
+		margen = new AppData().getRepositorioIndicadores()
+				.getRegistroIndicador("margen");
 		facebook = new AppData().getRepositorioEmpresas()
 				.getEmpresa("Facebook");
 		twitter = new AppData().getRepositorioEmpresas().getEmpresa("Twitter");
@@ -183,41 +187,62 @@ public class MetodologiasTest {
 				metodologia.calcularEmpresas(rEmpresas).get(0).getEmpresa()
 						.getNombre());
 	}
-	
+
 	@Test
-	public void metodologiaWarrenBuffettERR(){
-		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.mayorA,ROE,
-																		10,new BigDecimal(5)));//roe creciente
-		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.menorA,propDeu,
-																		10,new BigDecimal(3)));//proporcion de deuda mas chico
-		condicionesPrueba.add(new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.Criterio.CRECIENTE,
-																		i4,10));//Margenes crecientes
-		condicionesPrueba.add(new CondicionTaxativaAntiguedad(new BigDecimal(10)));//mayor a 10 años
-		condicionesPrueba.add(new CondicionCuantitativaAntiguedad(new BigDecimal(2)));//las mas importantes son las mas antiguas
-		
-		Metodologia metodologia = new Metodologia("WarrenBuffet",condicionesPrueba);
-		
+	public void metodologiaWarrenBuffettERR() {
+		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
+				Criterio.mayorA, ROE, 10, new BigDecimal(5)));// roe creciente
+		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
+				Criterio.menorA, propDeu, 10, new BigDecimal(3)));// proporcion
+																	// de deuda
+																	// mas chico
+		condicionesPrueba.add(new CondicionCrecienteODecreciente(
+				CondicionCrecienteODecreciente.Criterio.CRECIENTE, i4, 10));// Margenes
+																			// crecientes
+		condicionesPrueba.add(new CondicionTaxativaAntiguedad(
+				new BigDecimal(10)));// mayor a 10 años
+		condicionesPrueba.add(new CondicionCuantitativaAntiguedad(
+				new BigDecimal(2)));// las mas importantes son las mas antiguas
+
+		Metodologia metodologia = new Metodologia("WarrenBuffet",
+				condicionesPrueba);
+
 		Assert.assertTrue(metodologia.calcularEmpresa(rEmpresaGO)
-				.getErrorTaxativa());//devuelve true porque no tiene mas de 10 años
+				.getErrorTaxativa());// devuelve true porque no tiene mas de 10
+										// años
 	}
-	
+
 	@Test
-	public void metodologiaWarrenBuffettModificadaOK(){
-		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.mayorA,ROE,10,new BigDecimal(5)));//roe creciente
-		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.menorA,propDeu,10,new BigDecimal(3)));//proporcion de deuda mas chico
-		condicionesPrueba.add(new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.Criterio.CRECIENTE,margen,10));//Margenes crecientes
-		condicionesPrueba.add(new CondicionTaxativaAntiguedad(new BigDecimal(1)));//mayor a 1 año
-		condicionesPrueba.add(new CondicionCuantitativaAntiguedad(new BigDecimal(2)));//las mas importantes son las mas antiguas
-		
-		Metodologia metodologia = new Metodologia("WarrenBuffet",condicionesPrueba);
-		
+	public void metodologiaWarrenBuffettModificadaOK() {
+		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
+				Criterio.mayorA, ROE, 10, new BigDecimal(5)));// roe creciente
+		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
+				Criterio.menorA, propDeu, 10, new BigDecimal(3)));// proporcion
+																	// de deuda
+																	// mas chico
+		condicionesPrueba.add(new CondicionCrecienteODecreciente(
+				CondicionCrecienteODecreciente.Criterio.CRECIENTE, margen, 10));// Margenes
+																				// crecientes
+		condicionesPrueba
+				.add(new CondicionTaxativaAntiguedad(new BigDecimal(1)));// mayor
+																			// a
+																			// 1
+																			// año
+		condicionesPrueba.add(new CondicionCuantitativaAntiguedad(
+				new BigDecimal(2)));// las mas importantes son las mas antiguas
+
+		Metodologia metodologia = new Metodologia("WarrenBuffet",
+				condicionesPrueba);
+
 		List<String> resultado = new ArrayList<String>();
 		List<String> esperado = new ArrayList<String>();
 		resultado = metodologia.calcularEmpresas(rEmpresas).stream()
-						.filter(rEmpresa -> !rEmpresa.getErrorTaxativa())
-						.map(rEmpresa -> rEmpresa.getEmpresa().getNombre()).collect(Collectors.toList());
-		
-		esperado.add("Facebook"); //la unica que se encuentra es Facebook, por ser la unica con Margen creciente.
+				.filter(rEmpresa -> !rEmpresa.getErrorTaxativa())
+				.map(rEmpresa -> rEmpresa.getEmpresa().getNombre())
+				.collect(Collectors.toList());
+
+		esperado.add("Facebook"); // la unica que se encuentra es Facebook, por
+									// ser la unica con Margen creciente.
 		Assert.assertEquals(esperado, resultado);
 	}
 
