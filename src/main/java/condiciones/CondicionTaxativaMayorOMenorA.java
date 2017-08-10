@@ -29,7 +29,6 @@ public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 		}
 	}
 
-	@Override
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
 			throws ParseException {
 		BigDecimal acumulador = sumador(rEmpresa.getEmpresa());

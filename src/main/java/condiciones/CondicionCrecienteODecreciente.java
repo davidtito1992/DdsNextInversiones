@@ -35,7 +35,6 @@ public class CondicionCrecienteODecreciente extends Condicion {
 		}
 	}
 
-	@Override
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
 			throws ParseException {
 		Empresa empresa = rEmpresa.getEmpresa();

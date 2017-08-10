@@ -18,7 +18,6 @@ public class CondicionTaxativaAntiguedad extends Condicion {
 				+ nroAComparar.toString() + " anios ";
 	}
 
-	@Override
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
 			throws ParseException {
 		if (rEmpresa.dameAntiguedadEmpresa() < nroAComparar.intValue()) {

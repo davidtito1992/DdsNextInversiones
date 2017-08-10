@@ -18,10 +18,7 @@ public abstract class Condicion {
 
 	protected int ultimosAnios;
 
-	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
-			throws ParseException {
-		return rEmpresa;
-	}
+	public abstract RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException;
 
 	protected List<Periodo> periodosDesdexAnio(Empresa empresa) {
 		Year anioLimite = Year.of(LocalDate.now().getYear() - ultimosAnios);

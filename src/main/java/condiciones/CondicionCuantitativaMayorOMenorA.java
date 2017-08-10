@@ -15,7 +15,6 @@ public class CondicionCuantitativaMayorOMenorA extends CondicionSumatoria {
 		this.peso = peso;
 	}
 
-	@Override
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
 			throws ParseException {
 		BigDecimal nuevoValor = sumador(rEmpresa.getEmpresa()).multiply(peso)

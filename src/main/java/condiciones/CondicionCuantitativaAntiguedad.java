@@ -13,7 +13,6 @@ public class CondicionCuantitativaAntiguedad extends Condicion {
 		this.peso = peso;
 	}
 
-	@Override
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
 			throws ParseException {
 		BigDecimal nuevoValor = new BigDecimal(rEmpresa.dameAntiguedadEmpresa())
