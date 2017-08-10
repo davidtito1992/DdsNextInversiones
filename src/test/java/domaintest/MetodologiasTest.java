@@ -18,12 +18,15 @@ import condiciones.CondicionCuantitativaAntiguedad;
 import condiciones.CondicionCrecienteODecreciente;
 import condiciones.CondicionCuantitativaMayorOMenorA;
 import condiciones.CondicionSumatoria.Criterio;
+import condiciones.CondicionTaxativaAntiguedad;
 import condiciones.CondicionTaxativaMayorOMenorA;
 
 public class MetodologiasTest {
 	public ArrayList<Condicion> condicionesPrueba = new ArrayList<Condicion>();
 	public RegistroIndicador ingresoNeto;
 	public RegistroIndicador i4;
+	public RegistroIndicador ROE;
+	public RegistroIndicador propDeu;
 	public Empresa facebook;
 	public Empresa twitter;
 	public Empresa google;
@@ -39,8 +42,9 @@ public class MetodologiasTest {
 
 		ingresoNeto = new AppData().getRepositorioIndicadores()
 				.getRegistroIndicador("IngresoNeto");
-		i4 = new AppData().getRepositorioIndicadores().getRegistroIndicador(
-				"i4");
+		i4 = new AppData().getRepositorioIndicadores().getRegistroIndicador("i4");
+		ROE = new AppData().getRepositorioIndicadores().getRegistroIndicador("ROE");
+		propDeu = new AppData().getRepositorioIndicadores().getRegistroIndicador("ProporcionDeDeuda");
 		facebook = new AppData().getRepositorioEmpresas()
 				.getEmpresa("Facebook");
 		twitter = new AppData().getRepositorioEmpresas().getEmpresa("Twitter");
@@ -174,6 +178,38 @@ public class MetodologiasTest {
 		Assert.assertEquals(google.getNombre(),
 				metodologia.calcularEmpresas(rEmpresas).get(0).getEmpresa()
 						.getNombre());
+	}
+	
+	@Test
+	public void metodologiaWarrenBuffettERR(){
+		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.mayorA,ROE,
+																		10,new BigDecimal(5)));//roe creciente
+		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.menorA,propDeu,
+																		10,new BigDecimal(3)));//proporcion de deuda mas chico
+		condicionesPrueba.add(new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.Criterio.CRECIENTE,
+																		i4,10));//Margenes crecientes
+		condicionesPrueba.add(new CondicionTaxativaAntiguedad(new BigDecimal(10)));//mayor a 10 años
+		condicionesPrueba.add(new CondicionCuantitativaAntiguedad(new BigDecimal(2)));//las mas importantes son las mas antiguas
+		
+		Metodologia metodologia = new Metodologia("WarrenBuffet",condicionesPrueba);
+		
+		Assert.assertTrue(metodologia.calcularEmpresa(rEmpresaGO)
+				.getErrorTaxativa());//devuelve true porque no tiene mas de 10 años
+	}
+	
+	public void metodologiaWarrenBuffettModificadaOK(){
+		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.mayorA,ROE,
+																		10,new BigDecimal(5)));//roe creciente
+		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.menorA,propDeu,
+																		10,new BigDecimal(3)));//proporcion de deuda mas chico
+		condicionesPrueba.add(new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.Criterio.CRECIENTE,
+																		i4,10));//Margenes crecientes
+		condicionesPrueba.add(new CondicionTaxativaAntiguedad(new BigDecimal(1)));//mayor a 1 año
+		condicionesPrueba.add(new CondicionCuantitativaAntiguedad(new BigDecimal(2)));//las mas importantes son las mas antiguas
+		
+		Metodologia metodologia = new Metodologia("WarrenBuffet",condicionesPrueba);
+		
+		//falta comparar 
 	}
 
 }

@@ -93,7 +93,7 @@
 				"semestre": "1",
 				"cuentas": [{
 						"nombre": "EBITDA",
-						"valor": "99999"
+						"valor": "10"
 					},
 					{
 						"nombre": "FDS",

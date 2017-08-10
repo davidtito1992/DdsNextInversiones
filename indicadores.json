@@ -4,5 +4,6 @@
 {"nombre":"i5","formula":" EBITDA +  FDS","variables":["EBITDA","FDS"]},
 {"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"]},
 {"nombre":"CantidadAcciones","formula":" FDS","variables":["FDS"]},
-{"nombre":"ROE","formula":" IngresoNeto / CantidadAcciones","variables":["IngresoNeto","CantidadAcciones"]}]
+{"nombre":"ROE","formula":" IngresoNeto / CantidadAcciones","variables":["IngresoNeto","CantidadAcciones"]},
+{"nombre":"ProporcionDeDeuda","formula":" FreeCashFlow + NetoContinuas","variables":["FreeCashFlow","NetoContinuas"]}]
 
