@@ -59,11 +59,12 @@ public class FileLoader implements DataLoader {
 
 	public ArrayList<Metodologia> getDataMetodologias() throws Exception {
 		String AbsolutePath = new File(".").getAbsolutePath();
-		String archivoMetodologias = readFile(AbsolutePath + "/metodologias.json");
+		String archivoMetodologias = readFile(AbsolutePath
+				+ "/metodologias.json");
 
 		DataAdapter adaptador = DataAdapterFactory
 				.adaptarData(DataAdapterFactory.JSON);
 		return adaptador.adaptarMetodologias(archivoMetodologias);
 	}
-	
+
 }

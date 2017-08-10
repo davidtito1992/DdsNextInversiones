@@ -114,15 +114,15 @@ public class ConsultarIndicadorViewM {
 	public void generarTodosLosCBox(String empresa, Year anio) {
 
 		List<Empresa> repoEmpresaFiltrado = new ArrayList<Empresa>();
-		repoEmpresaFiltrado = this.getRepositorioEmpresas().filtrar(null, empresa,
-				null, anio);
+		repoEmpresaFiltrado = this.getRepositorioEmpresas().filtrar(null,
+				empresa, null, anio);
 
 		generarCBoxNombresEmpresas(repoEmpresaFiltrado);
 		generarCBoxAnios(repoEmpresaFiltrado);
 
 	}
-	
-	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
+
+	public RepositorioUnicoDeEmpresas getRepositorioEmpresas() {
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
