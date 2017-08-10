@@ -278,8 +278,12 @@ public class AgregarMetodologiaViewM {
 	}
 
 	public void validar() throws RuntimeException {
-		if (getAgregarIndicadorSeleccionado() == null) {
+		if (getAgregarIndicadorSeleccionado() == null && getAgregarCriterioSeleccionado() != "Antiguedad") {
 			throw new RuntimeException("Seleccione un indicador");
+		}else {
+			if (getAgregarIndicadorSeleccionado() == null) {
+				setAgregarIndicadorSeleccionado("i4");
+			}
 		}
 		if (getTipoCondicionSeleccionado() == null) {
 			throw new RuntimeException("Seleccione un tipo de condicion");
