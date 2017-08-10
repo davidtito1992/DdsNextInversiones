@@ -34,8 +34,6 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewM> {
 		new Label(form)
 				.setText("\t\t--------------------------------------------");
 		new Label(form).setText("--------------------------------------------");
-		// new Label(form).setText("\tCondiciones Taxativas");
-		// new Label(form).setText("\t");
 
 		new Label(form).setText("\tIndicadores: ");
 		Selector<String> selectorIndicador = new Selector<String>(form)
@@ -60,11 +58,6 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewM> {
 
 		new Label(form).setText("\tPeso/Comparar: ");
 		new TextBox(form).setWidth(250).bindValueToProperty("pesoOComparar");
-		// Selector<String> selectorNro = new Selector<String>(form)
-		// .allowNull(true);
-		// selectorNro.setWidth(150);
-		// selectorNro.bindItemsToProperty("agregarNro");
-		// selectorNro.bindValueToProperty("agregarNroSeleccionado");
 
 		new Label(form).setText("\tUltimos años: ");
 		Selector<String> selectorAnios = new Selector<String>(form)
@@ -73,19 +66,11 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewM> {
 		selectorAnios.bindItemsToProperty("agregarAnios");
 		selectorAnios.bindValueToProperty("agregarAniosSeleccionado");
 
-		// new Label(form).setText("\tPrioridad: ");
-		// Selector<Integer> selectorDePrioridad = new Selector<Integer>(form)
-		// .allowNull(true);
-		// selectorDePrioridad.setWidth(150);
-		// selectorDePrioridad.bindItemsToProperty("prioridades");
-		// selectorDePrioridad.bindValueToProperty("agregarPrioridadSeleccionada");
 		new Label(form).setText("\t");
 		new Button(form).setCaption("Agregar").onClick(this::agregarCondicion)
 				.setWidth(140);
 		new Label(form).setText("\t");
-		// new Label(form).setText("\t");
-		// new Label(form).setText("\t");
-		//
+
 		new Button(form).setCaption("Limpiar").onClick(this::limpiar)
 				.setWidth(140);
 

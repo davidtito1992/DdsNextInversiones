@@ -5,11 +5,11 @@ import java.math.BigDecimal;
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
-public class CondicionAntiguedadCuantitativa extends Condicion {
+public class CondicionCuantitativaAntiguedad extends Condicion {
 
 	public BigDecimal peso;
 
-	public CondicionAntiguedadCuantitativa(BigDecimal peso) {
+	public CondicionCuantitativaAntiguedad(BigDecimal peso) {
 		this.peso = peso;
 	}
 

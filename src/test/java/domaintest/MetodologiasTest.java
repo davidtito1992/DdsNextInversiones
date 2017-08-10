@@ -14,7 +14,7 @@ import org.junit.Test;
 import RankingEmpresa.RankingEmpresa;
 import app.AppData;
 import condiciones.Condicion;
-import condiciones.CondicionAntiguedadCuantitativa;
+import condiciones.CondicionCuantitativaAntiguedad;
 import condiciones.CondicionCrecienteODecreciente;
 import condiciones.CondicionCuantitativaMayorOMenorA;
 import condiciones.CondicionSumatoria.Criterio;
@@ -107,7 +107,7 @@ public class MetodologiasTest {
 	public void metodologiaConCondicionesCuantitativas() throws Exception {
 		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
 				Criterio.mayorA, ingresoNeto, 2, new BigDecimal(1))); // 16
-		condicionesPrueba.add(new CondicionAntiguedadCuantitativa(
+		condicionesPrueba.add(new CondicionCuantitativaAntiguedad(
 				new BigDecimal(3))); // 3
 		Metodologia metodologia = new Metodologia("Metodologia Prueba",
 				condicionesPrueba);

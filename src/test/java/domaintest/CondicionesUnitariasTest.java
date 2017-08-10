@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import RankingEmpresa.RankingEmpresa;
 import app.AppData;
-import condiciones.CondicionAntiguedadCuantitativa;
+import condiciones.CondicionCuantitativaAntiguedad;
 import condiciones.CondicionCrecienteODecreciente;
 import condiciones.CondicionCuantitativaMayorOMenorA;
 import condiciones.CondicionSumatoria.Criterio;
@@ -85,7 +85,7 @@ public class CondicionesUnitariasTest {
 
 	@Test
 	public void antiguedad() throws Exception {
-		RankingEmpresa rEmpResul = new CondicionAntiguedadCuantitativa(
+		RankingEmpresa rEmpResul = new CondicionCuantitativaAntiguedad(
 				new BigDecimal(3)).calcular(rEmpresaFB);
 
 		Assert.assertEquals(0,

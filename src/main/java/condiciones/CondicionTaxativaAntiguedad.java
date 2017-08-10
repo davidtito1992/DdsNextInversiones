@@ -5,11 +5,11 @@ import java.math.BigDecimal;
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
-public class CondicionAntiguedadTaxativa extends Condicion {
+public class CondicionTaxativaAntiguedad extends Condicion {
 
 	public BigDecimal nroAComparar;
 
-	public CondicionAntiguedadTaxativa(BigDecimal nroAComparar) {
+	public CondicionTaxativaAntiguedad(BigDecimal nroAComparar) {
 		this.nroAComparar = nroAComparar;
 	}
 

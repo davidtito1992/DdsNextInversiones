@@ -37,7 +37,7 @@ public class CondicionesBuilder {
 						registroIndicador, ultimosAnios,
 						pesoOComparar);
 			case "Antiguedad":
-				return new CondicionAntiguedadTaxativa(pesoOComparar);
+				return new CondicionTaxativaAntiguedad(pesoOComparar);
 			default:
 				throw new Error("Esto no tendria que pasar");
 			}
@@ -52,7 +52,7 @@ public class CondicionesBuilder {
 						condiciones.CondicionSumatoria.Criterio.mayorA,
 						registroIndicador, ultimosAnios, pesoOComparar);
 			case "Antiguedad":
-				return new CondicionAntiguedadCuantitativa(pesoOComparar);
+				return new CondicionCuantitativaAntiguedad(pesoOComparar);
 			default:
 				throw new Error("Esto no tendria que pasar");
 			}
