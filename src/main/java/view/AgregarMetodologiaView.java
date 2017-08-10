@@ -126,11 +126,6 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewM> {
 	}
 
 	public void agregarCondicion() {
-		/*this.getModelObject().getAgregarAniosSeleccionado() == null
-		|| this.getModelObject().getAgregarCriterioSeleccionado() == null
-		|| this.getModelObject().getAgregarIndicadorSeleccionado() == null
-		|| this.getModelObject().getTipoCondicionSeleccionado() == null
-		|| this.getModelObject().getPesoOComparar() == null*/
 		try{
 			this.getModelObject().validar();
 			getModelObject().agregarCondicion();
