@@ -2,6 +2,7 @@ package domaintest;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Empresa;
 import model.Metodologia;
@@ -23,12 +24,14 @@ import condiciones.CondicionTaxativaMayorOMenorA;
 public class MetodologiasTest {
 	public ArrayList<Condicion> condicionesPrueba = new ArrayList<Condicion>();
 	public RegistroIndicador ingresoNeto;
+	public RegistroIndicador i4;
 	public Empresa facebook;
 	public Empresa twitter;
 	public Empresa google;
 	public RankingEmpresa rEmpresaFB;
 	public RankingEmpresa rEmpresaTW;
 	public RankingEmpresa rEmpresaGO;
+	public ArrayList<RankingEmpresa> rEmpresas = new ArrayList<RankingEmpresa>();
 	
 	@Before 
 	public void inicializar () throws Exception{
@@ -36,12 +39,16 @@ public class MetodologiasTest {
 		new AppData().cargarIndicadores();
 		
 		ingresoNeto = new AppData().getRepositorioIndicadores().getRegistroIndicador("IngresoNeto");
+		i4 = new AppData().getRepositorioIndicadores().getRegistroIndicador("i4");
 		facebook = new AppData().getRepositorioEmpresas().getEmpresa("Facebook");
 		twitter = new AppData().getRepositorioEmpresas().getEmpresa("Twitter");
 		google = new AppData().getRepositorioEmpresas().getEmpresa("Google");
 		rEmpresaFB = new RankingEmpresa(BigDecimal.ZERO, facebook);
 		rEmpresaTW = new RankingEmpresa(BigDecimal.ZERO, twitter);
 		rEmpresaGO = new RankingEmpresa(BigDecimal.ZERO, google);
+		rEmpresas.add(rEmpresaGO);
+		rEmpresas.add(rEmpresaTW);
+		rEmpresas.add(rEmpresaFB);
 	}
 	
 	@Test 
@@ -114,6 +121,14 @@ public class MetodologiasTest {
 	 	Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
 	
 	 	Assert.assertTrue(metodologia.calcularEmpresa(rEmpresaGO).getErrorTaxativa());		
+	}
+	
+	@Test
+	public void calcularEmpresasYSacarLaMasAlta(){
+		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.mayorA,i4,5,1));
+		Metodologia metodologia = new Metodologia("Metodologia Prueba",condicionesPrueba);
+		
+		Assert.assertEquals(google.getNombre(),metodologia.calcularEmpresas(rEmpresas).get(0).getEmpresa().getNombre());
 	}
 	
 	

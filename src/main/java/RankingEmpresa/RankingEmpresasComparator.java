@@ -10,9 +10,9 @@ public class RankingEmpresasComparator implements Comparator<RankingEmpresa>{
 		BigDecimal ranking1 = r1.getRanking();
 		BigDecimal ranking2 = r2.getRanking();
 		
-	       if (ranking1.compareTo(ranking2) > 0) {
+	       if (ranking1.compareTo(ranking2) < 0) {
 	           return 1;
-	       } else if (ranking1.compareTo(ranking2) < 0){
+	       } else if (ranking1.compareTo(ranking2) > 0){
 	           return -1;
 	       } else {
 	           return 0;
