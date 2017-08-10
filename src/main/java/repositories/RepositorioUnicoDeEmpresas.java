@@ -10,58 +10,84 @@ import model.Cuenta;
 import model.Empresa;
 
 public class RepositorioUnicoDeEmpresas extends Repositorio {
-	
+
 	private static RepositorioUnicoDeEmpresas repositorioEmpresas = null;
-		
-	public static RepositorioUnicoDeEmpresas getSingletonInstance(){
-		
-        if (repositorioEmpresas == null){
-        	repositorioEmpresas = new RepositorioUnicoDeEmpresas();}
-        return repositorioEmpresas;
-	}
-	
-	private RepositorioUnicoDeEmpresas(){
-		super();
-	}
-	
-	public RepositorioUnicoDeEmpresas getRepoEmp(){
+
+	public static RepositorioUnicoDeEmpresas getSingletonInstance() {
+
+		if (repositorioEmpresas == null) {
+			repositorioEmpresas = new RepositorioUnicoDeEmpresas();
+		}
 		return repositorioEmpresas;
 	}
-	
-// -------------- Metodos -------------
-	
-	
+
+	private RepositorioUnicoDeEmpresas() {
+		super();
+	}
+
+	public RepositorioUnicoDeEmpresas getRepoEmp() {
+		return repositorioEmpresas;
+	}
+
+	// -------------- Metodos -------------
+
 	// METODO PARA FILTRAR UNA LISTA DE EMPRESAS
-	@SuppressWarnings("unchecked")	
-	public List<Empresa> filtrar(String cuentaSeleccionada,String nombreSeleccionado,
-			Integer semestreSeleccionado, Year anioSeleccionado) {
-		ArrayList<Empresa> empresasExistentes = new ArrayList<Empresa>();
+	@SuppressWarnings("unchecked")
+	public List<Empresa> filtrar(String cuentaSeleccionada,
+			String nombreSeleccionado, Integer semestreSeleccionado,
+			Year anioSeleccionado) {
+		List<Empresa> empresasExistentes = new ArrayList<Empresa>();
 		empresasExistentes = this.getElementos();
-		return 	empresasExistentes.stream().filter(empresa -> filtroCuenta(cuentaSeleccionada, empresa)
+		return empresasExistentes
+				.stream()
+				.filter(empresa -> filtroCuenta(cuentaSeleccionada, empresa)
 						&& filtroNombre(nombreSeleccionado, empresa)
-						&& filtroSemestre(semestreSeleccionado,empresa)
-						&& filtroAnio(anioSeleccionado,empresa))
-						.collect(Collectors.toList());
+						&& filtroSemestre(semestreSeleccionado, empresa)
+						&& filtroAnio(anioSeleccionado, empresa))
+				.collect(Collectors.toList());
 	}
-	
+
 	public boolean filtroCuenta(String cuentaSeleccionada, Empresa empresa) {
-		return cuentaSeleccionada == null || empresa.getPeriodos().stream().anyMatch(periodo -> periodo.getCuentas()
-				.stream().anyMatch(cuenta -> cuenta.getNombre().equalsIgnoreCase(cuentaSeleccionada)));
+		return cuentaSeleccionada == null
+				|| empresa
+						.getPeriodos()
+						.stream()
+						.anyMatch(
+								periodo -> periodo
+										.getCuentas()
+										.stream()
+										.anyMatch(
+												cuenta -> cuenta
+														.getNombre()
+														.equalsIgnoreCase(
+																cuentaSeleccionada)));
 	}
-	
+
 	public boolean filtroNombre(String nombreSeleccionado, Empresa empresa) {
-		return nombreSeleccionado == null || empresa.getNombre().equalsIgnoreCase(nombreSeleccionado);
+		return nombreSeleccionado == null
+				|| empresa.getNombre().equalsIgnoreCase(nombreSeleccionado);
 	}
-	
+
 	public boolean filtroSemestre(Integer semestreSeleccionado, Empresa empresa) {
-		return semestreSeleccionado == null || empresa.getPeriodos().stream().anyMatch(periodo -> periodo.getSemestre() == semestreSeleccionado);
+		return semestreSeleccionado == null
+				|| empresa
+						.getPeriodos()
+						.stream()
+						.anyMatch(
+								periodo -> periodo.getSemestre() == semestreSeleccionado);
 	}
-	
+
 	public boolean filtroAnio(Year anioSeleccionado, Empresa empresa) {
-		return anioSeleccionado == null || empresa.getPeriodos().stream().anyMatch(periodo -> periodo.getAnio().equals(anioSeleccionado));
+		return anioSeleccionado == null
+				|| empresa
+						.getPeriodos()
+						.stream()
+						.anyMatch(
+								periodo -> periodo.getAnio().equals(
+										anioSeleccionado));
 
 	}
-	
+
 	public ArrayList<Year> todosLosAnios(List<Empresa> listaEmpresas) {
 		ArrayList<Year> todosLosAnios = listaEmpresas.stream()
 				.map(empresa -> empresa.getPeriodos())
@@ -70,7 +96,7 @@ public class RepositorioUnicoDeEmpresas extends Repositorio {
 				.collect(Collectors.toCollection(ArrayList::new));
 		return todosLosAnios;
 	}
-	
+
 	public ArrayList<Integer> todosLosPeriodos(List<Empresa> listaEmpresa) {
 
 		ArrayList<Integer> todosLosPeriodos = listaEmpresa.stream()
@@ -81,8 +107,9 @@ public class RepositorioUnicoDeEmpresas extends Repositorio {
 
 		return todosLosPeriodos;
 	}
-	
-	public ArrayList<String> todosLosNombresDeCuentas(List<Empresa> listaEmpresas) {
+
+	public ArrayList<String> todosLosNombresDeCuentas(
+			List<Empresa> listaEmpresas) {
 		ArrayList<String> nombresDeTodasLasCuentas = listaEmpresas.stream()
 				.map(empresa -> empresa.getPeriodos())
 				.flatMap(periodos -> periodos.stream())
@@ -93,7 +120,7 @@ public class RepositorioUnicoDeEmpresas extends Repositorio {
 
 		return nombresDeTodasLasCuentas;
 	}
-	
+
 	public ArrayList<String> todosLosNombresDeEmpresas(List<Empresa> empresas) {
 		ArrayList<String> nombresDeTodasLasEmpresas = empresas.stream()
 				.map(empresa -> empresa.getNombre()).distinct().sorted()
@@ -101,16 +128,19 @@ public class RepositorioUnicoDeEmpresas extends Repositorio {
 
 		return nombresDeTodasLasEmpresas;
 	}
-	
-	public BigDecimal getValorCuenta(String nombreEmpresa, Year anio, int semestre, String nombreCuenta) {
-		List<Cuenta> cuentaADevolver = this.obtenerCuenta(nombreEmpresa, anio, semestre, nombreCuenta);
+
+	public BigDecimal getValorCuenta(String nombreEmpresa, Year anio,
+			int semestre, String nombreCuenta) {
+		List<Cuenta> cuentaADevolver = this.obtenerCuenta(nombreEmpresa, anio,
+				semestre, nombreCuenta);
 		if (cuentaADevolver.isEmpty())
 			throw new RuntimeException(
-					"No pudimos obtener el valor de la variable: " + nombreCuenta);
+					"No pudimos obtener el valor de la variable: "
+							+ nombreCuenta);
 		else
 			return cuentaADevolver.get(0).getValor();
 	}
-	
+
 	public boolean esCuenta(String componente) {
 		return this
 				.todasLasCuentas()
@@ -121,11 +151,14 @@ public class RepositorioUnicoDeEmpresas extends Repositorio {
 								.equalsIgnoreCase(componente));
 	}
 
-	@SuppressWarnings("unchecked")	
-	public List<Cuenta> obtenerCuenta(String nombreSeleccionado,Year anioSeleccionado, Integer semestreSeleccionado,String nombreCuenta) {
-		ArrayList<Empresa> empresasExistentes = new ArrayList<Empresa>();
+	@SuppressWarnings("unchecked")
+	public List<Cuenta> obtenerCuenta(String nombreSeleccionado,
+			Year anioSeleccionado, Integer semestreSeleccionado,
+			String nombreCuenta) {
+		List<Empresa> empresasExistentes = new ArrayList<Empresa>();
 		empresasExistentes = this.getElementos();
-		List<Cuenta> cuentasADevolver = empresasExistentes.stream()
+		List<Cuenta> cuentasADevolver = empresasExistentes
+				.stream()
 				.filter(empresa -> empresa.getNombre().equalsIgnoreCase(
 						nombreSeleccionado))
 				.map(empresa -> empresa.getPeriodos())
@@ -139,10 +172,10 @@ public class RepositorioUnicoDeEmpresas extends Repositorio {
 
 		return cuentasADevolver;
 	}
-	
-	@SuppressWarnings("unchecked")	
+
+	@SuppressWarnings("unchecked")
 	public List<Cuenta> todasLasCuentas() {
-		ArrayList<Empresa> empresasExistentes = new ArrayList<Empresa>();
+		List<Empresa> empresasExistentes = new ArrayList<Empresa>();
 		empresasExistentes = this.getElementos();
 		List<Cuenta> todasLasCuentas = empresasExistentes.stream()
 				.map(empresa -> empresa.getPeriodos())
@@ -152,11 +185,11 @@ public class RepositorioUnicoDeEmpresas extends Repositorio {
 				.collect(Collectors.toList());
 
 		return todasLasCuentas;
-	}	
-	
+	}
+
 	@SuppressWarnings("unchecked")
 	public Empresa getEmpresa(String nombreEmpresa) {
-		ArrayList<Empresa> empresas = new ArrayList<Empresa>();
+		List<Empresa> empresas = new ArrayList<Empresa>();
 		empresas = this.getElementos();
 		return empresas.stream()
 				.filter(emp -> emp.getNombre().equalsIgnoreCase(nombreEmpresa))

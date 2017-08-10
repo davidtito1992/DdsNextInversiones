@@ -13,9 +13,6 @@ public class DataLoaderFactory {
 		if (criteria.equals("archivo")) {
 			return new FileLoader();
 		}
-
 		throw new RuntimeException("tipo de DataLoader inexistente");
-
 	}
-
 }

@@ -30,7 +30,7 @@ public class ConsultarMetodologiaViewM {
 	public ConsultarMetodologiaViewM(Metodologia metodologia) {
 
 		this.metodologia = metodologia;
-		
+
 		this.inicializar();
 		this.llenarTablas();
 	}
@@ -52,7 +52,7 @@ public class ConsultarMetodologiaViewM {
 	public void setRankingDeEmpresas(List<RankingEmpresa> rankingDeEmpresas) {
 		this.rankingDeEmpresas = rankingDeEmpresas;
 	}
-	
+
 	public SnapshotRankingEmpresa getSnapshotRankingEmpresasFallidasSeleccionado() {
 		return snapshotRankingEmpresasFallidasSeleccionado;
 	}
@@ -66,7 +66,8 @@ public class ConsultarMetodologiaViewM {
 		return snapshotRankingEmpresas;
 	}
 
-	public void setSnapshotRankingEmpresas(List<SnapshotRankingEmpresa> snapshotRankingEmpresas) {
+	public void setSnapshotRankingEmpresas(
+			List<SnapshotRankingEmpresa> snapshotRankingEmpresas) {
 		this.snapshotRankingEmpresas = snapshotRankingEmpresas;
 	}
 
@@ -90,33 +91,32 @@ public class ConsultarMetodologiaViewM {
 
 	/********* METODOS *********/
 
-	public void inicializar(){
-		ArrayList<Empresa> empresas = new ArrayList<Empresa>(); 
+	@SuppressWarnings("unchecked")
+	public void inicializar() {
+		List<Empresa> empresas = new ArrayList<Empresa>();
 		empresas = getRepositorioEmpresas().getElementos();
 		rankingDeEmpresas = empresas.stream()
-							.map(empresa -> new RankingEmpresa(BigDecimal.ZERO,empresa))
-							.collect(Collectors.toList());
-		
+				.map(empresa -> new RankingEmpresa(BigDecimal.ZERO, empresa))
+				.collect(Collectors.toList());
+
 	}
 
 	public void llenarTablas() {
 		List<RankingEmpresa> rankingDeEmpresasCalculado = new ArrayList<RankingEmpresa>();
-		rankingDeEmpresasCalculado = metodologia.calcularEmpresas(rankingDeEmpresas);
+		rankingDeEmpresasCalculado = metodologia
+				.calcularEmpresas(rankingDeEmpresas);
 		snapshotRankingEmpresas = rankingDeEmpresasCalculado.stream()
-								  .filter(empresa -> !empresa.getErrorTaxativa())
-								  .map(rEmpresa -> new SnapshotRankingEmpresa(rEmpresa))
-								  .collect(Collectors.toList());
+				.filter(empresa -> !empresa.getErrorTaxativa())
+				.map(rEmpresa -> new SnapshotRankingEmpresa(rEmpresa))
+				.collect(Collectors.toList());
 		snapshotRankingEmpresasFallidas = rankingDeEmpresasCalculado.stream()
-				  .filter(empresa -> empresa.getErrorTaxativa())
-				  .map(rEmpresa -> new SnapshotRankingEmpresa(rEmpresa))
-				  .collect(Collectors.toList());
+				.filter(empresa -> empresa.getErrorTaxativa())
+				.map(rEmpresa -> new SnapshotRankingEmpresa(rEmpresa))
+				.collect(Collectors.toList());
 	}
-	
-	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
+
+	public RepositorioUnicoDeEmpresas getRepositorioEmpresas() {
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
-	
-	
-
 
 }

@@ -9,16 +9,12 @@ import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 
-import RankingEmpresa.RankingEmpresa;
 import viewmodel.ConsultarMetodologiaViewM;
-
-
 
 public class ConsultarMetodologiaView extends Dialog<ConsultarMetodologiaViewM> {
 
@@ -53,7 +49,7 @@ public class ConsultarMetodologiaView extends Dialog<ConsultarMetodologiaViewM> 
 				tableRankingEmpresa);
 		columnaNombreEmpresa.setTitle("Empresa").setWeight(140);
 		columnaNombreEmpresa.bindContentsToProperty("nombreEmpresa");
-		
+
 		Table<SnapshotRankingEmpresa> tableRankingEmpresasFallidas = new Table<SnapshotRankingEmpresa>(
 				mainPanel, SnapshotRankingEmpresa.class);
 
@@ -62,19 +58,25 @@ public class ConsultarMetodologiaView extends Dialog<ConsultarMetodologiaViewM> 
 
 		Column<SnapshotRankingEmpresa> columnaNombreEmpresasFallidas = new Column<SnapshotRankingEmpresa>(
 				tableRankingEmpresasFallidas);
-		columnaNombreEmpresasFallidas.setTitle("Empresa que fallaron").setWeight(300);
+		columnaNombreEmpresasFallidas.setTitle("Empresa que fallaron")
+				.setWeight(300);
 		columnaNombreEmpresasFallidas.bindContentsToProperty("nombreEmpresa");
-		
+
 		Column<SnapshotRankingEmpresa> columnaObservacionEmpresasFallidas = new Column<SnapshotRankingEmpresa>(
 				tableRankingEmpresasFallidas);
-		columnaObservacionEmpresasFallidas.setTitle("Observacion").setWeight(140);
-		columnaObservacionEmpresasFallidas.bindContentsToProperty("observacion");
-		
+		columnaObservacionEmpresasFallidas.setTitle("Observacion").setWeight(
+				140);
+		columnaObservacionEmpresasFallidas
+				.bindContentsToProperty("observacion");
+
 		tableRankingEmpresa.bindItemsToProperty("snapshotRankingEmpresas");
-		tableRankingEmpresa.bindValueToProperty("snapshotRankingEmpresasSeleccionado");
-		
-		tableRankingEmpresasFallidas.bindItemsToProperty("snapshotRankingEmpresasFallidas");
-		tableRankingEmpresasFallidas.bindValueToProperty("snapshotRankingEmpresasFallidasSeleccionado");
+		tableRankingEmpresa
+				.bindValueToProperty("snapshotRankingEmpresasSeleccionado");
+
+		tableRankingEmpresasFallidas
+				.bindItemsToProperty("snapshotRankingEmpresasFallidas");
+		tableRankingEmpresasFallidas
+				.bindValueToProperty("snapshotRankingEmpresasFallidasSeleccionado");
 	}
 
 	@Override

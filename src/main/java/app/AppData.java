@@ -1,15 +1,6 @@
 package app;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
-
-import condiciones.Condicion;
-import condiciones.CondicionCrecienteODecreciente;
-import condiciones.CondicionCuantitativaAntiguedad;
-import condiciones.CondicionCuantitativaMayorOMenorA;
-import condiciones.CondicionTaxativaAntiguedad;
-import condiciones.CondicionSumatoria.Criterio;
 import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
@@ -18,6 +9,7 @@ import repositories.RepositorioUnicoDeIndicadores;
 import repositories.RepositorioUnicoDeMetodologias;
 import dataManagment.dataLoader.DataLoader;
 import dataManagment.dataLoader.DataLoaderFactory;
+import dataManagment.dataLoader.MetodologiasLoader;
 import dataManagment.dataUploader.DataUploader;
 import dataManagment.dataUploader.DataUploaderFactory;
 
@@ -35,37 +27,10 @@ public class AppData {
 
 	@SuppressWarnings("unchecked")
 	public void cargarMetodologias() throws Exception {
-		List<Condicion> condicionesWarren = new ArrayList<Condicion>();
-		RegistroIndicador ROE;
-		RegistroIndicador propDeu;
-		RegistroIndicador i4;
 
-		i4 = new AppData().getRepositorioIndicadores().getRegistroIndicador(
-				"i4");
-		ROE = new AppData().getRepositorioIndicadores().getRegistroIndicador(
-				"ROE");
-		propDeu = new AppData().getRepositorioIndicadores()
-				.getRegistroIndicador("ProporcionDeDeuda");
+		this.getRepositorioMetodologias().cargarListaDeElementos(
+				MetodologiasLoader.damePredefinidas());
 
-		condicionesWarren.add(new CondicionCuantitativaMayorOMenorA(
-				Criterio.mayorA, ROE, 10, new BigDecimal(5)));// roe creciente
-		condicionesWarren.add(new CondicionCuantitativaMayorOMenorA(
-				Criterio.menorA, propDeu, 10, new BigDecimal(3)));// proporcion
-																	// de deuda
-																	// mas chico
-		condicionesWarren.add(new CondicionCrecienteODecreciente(
-				CondicionCrecienteODecreciente.Criterio.CRECIENTE, i4, 10));// Margenes
-																			// crecientes
-		condicionesWarren.add(new CondicionTaxativaAntiguedad(
-				new BigDecimal(10)));// mayor a 10 años
-		condicionesWarren.add(new CondicionCuantitativaAntiguedad(
-				new BigDecimal(2)));// las mas importantes son las mas antiguas
-
-		Metodologia metodologia = new Metodologia("WarrenBuffet",
-				condicionesWarren);
-		ArrayList<Metodologia> metodologias = new ArrayList<Metodologia>();
-		metodologias.add(metodologia);
-		this.getRepositorioMetodologias().cargarListaDeElementos(metodologias);
 	}
 
 	@SuppressWarnings("unchecked")

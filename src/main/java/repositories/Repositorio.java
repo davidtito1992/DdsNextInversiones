@@ -2,24 +2,25 @@ package repositories;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public abstract class Repositorio<T> implements Iterable<T> {
 	
-	private ArrayList<T> elementos= new ArrayList<T>();
+	private List<T> elementos= new ArrayList<T>();
 	
 	public Repositorio(){
 		super();
 	}
 	
-	public ArrayList<T> getElementos() {
+	public List<T> getElementos() {
 			return elementos;
 	}
 
-	public void setElementos(ArrayList<T> elementos) {
+	public void setElementos(List<T> elementos) {
 		this.elementos = elementos;
 	}
 	
-	public void cargarListaDeElementos(ArrayList<T> lista){
+	public void cargarListaDeElementos(List<T> lista){
 		for(T element : lista){
 			elementos.add(element);
 		}

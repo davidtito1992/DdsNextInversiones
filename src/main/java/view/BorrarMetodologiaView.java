@@ -54,5 +54,5 @@ public class BorrarMetodologiaView extends Dialog<BorrarMetodologiaViewM> {
 		}
 
 	}
-	
+
 }

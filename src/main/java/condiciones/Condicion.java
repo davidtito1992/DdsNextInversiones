@@ -18,7 +18,8 @@ public abstract class Condicion {
 
 	protected int ultimosAnios;
 
-	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
+	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
+			throws ParseException {
 		return rEmpresa;
 	}
 

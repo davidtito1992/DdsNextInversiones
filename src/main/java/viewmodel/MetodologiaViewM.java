@@ -10,7 +10,6 @@ import org.uqbar.commons.utils.Observable;
 import repositories.RepositorioUnicoDeMetodologias;
 import app.AplicacionContexto;
 
-
 @Observable
 public class MetodologiaViewM {
 
@@ -42,15 +41,14 @@ public class MetodologiaViewM {
 		return metodologiaSeleccionada;
 	}
 
-	public void setMetodologiaSeleccionada(
-			Metodologia metodologiaSeleccionada) {
+	public void setMetodologiaSeleccionada(Metodologia metodologiaSeleccionada) {
 		this.metodologiaSeleccionada = metodologiaSeleccionada;
 	}
 
 	/********* METODOS *********/
 
 	public MetodologiaViewM() {
-		
+
 		this.llenarTablas();
 	}
 
@@ -59,10 +57,9 @@ public class MetodologiaViewM {
 		this.setMetodologias(null);
 		this.setMetodologias(getRepoMetodologias().getElementos());
 	}
-	
-	public RepositorioUnicoDeMetodologias getRepoMetodologias(){
+
+	public RepositorioUnicoDeMetodologias getRepoMetodologias() {
 		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 	}
-	
 
 }

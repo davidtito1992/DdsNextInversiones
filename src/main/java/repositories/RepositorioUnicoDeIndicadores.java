@@ -44,7 +44,7 @@ public class RepositorioUnicoDeIndicadores extends Repositorio{
 	
 	@SuppressWarnings("unchecked")
 	public boolean esIndicador(String componente) {
-		ArrayList<RegistroIndicador> indicadoresExistentes = new ArrayList<RegistroIndicador>();
+		List<RegistroIndicador> indicadoresExistentes = new ArrayList<RegistroIndicador>();
 		indicadoresExistentes = this.getElementos();
 		return indicadoresExistentes.stream().map(regIndicador -> regIndicador.getNombre())
 				.anyMatch(NombreregIndicador -> NombreregIndicador.equalsIgnoreCase(componente));
@@ -52,7 +52,7 @@ public class RepositorioUnicoDeIndicadores extends Repositorio{
 
 	@SuppressWarnings("unchecked")
 	public RegistroIndicador getRegistroIndicador(String nombreIndicador) {
-		ArrayList<RegistroIndicador> indicadoresExistentes = new ArrayList<RegistroIndicador>();
+		List<RegistroIndicador> indicadoresExistentes = new ArrayList<RegistroIndicador>();
 		indicadoresExistentes = this.getElementos();
 		List<RegistroIndicador> registroIndicadores = indicadoresExistentes
 				.stream()

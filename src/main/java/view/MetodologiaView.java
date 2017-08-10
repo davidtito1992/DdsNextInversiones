@@ -14,8 +14,8 @@ import repositories.RepositorioUnicoDeMetodologias;
 import viewmodel.MetodologiaViewM;
 
 @SuppressWarnings("serial")
-public class MetodologiaView extends Dialog<MetodologiaViewM>{
-	
+public class MetodologiaView extends Dialog<MetodologiaViewM> {
+
 	@SuppressWarnings("rawtypes")
 	public MetodologiaView(SimpleWindow owner) {
 		super(owner, new MetodologiaViewM());
@@ -27,8 +27,8 @@ public class MetodologiaView extends Dialog<MetodologiaViewM>{
 		this.setTitle("Metodologia");
 		form.setLayout(new ColumnLayout(4));
 
-		new Button(form).setCaption("Agregar").onClick(this::agregarMetodologia)
-				.setWidth(140);
+		new Button(form).setCaption("Agregar")
+				.onClick(this::agregarMetodologia).setWidth(140);
 		new Button(form).setCaption("Consultar").onClick(this::consultar)
 				.setWidth(140);
 		new Button(form).setCaption("Borrar").onClick(this::borrar)
@@ -70,7 +70,7 @@ public class MetodologiaView extends Dialog<MetodologiaViewM>{
 			dialog.open();
 			dialog.onAccept(() -> {
 			});
-			
+
 			this.getModelObject().llenarTablas();
 		} catch (Exception e) {
 			showInfo(e.getMessage());
@@ -95,14 +95,15 @@ public class MetodologiaView extends Dialog<MetodologiaViewM>{
 	}
 
 	public void borrar() {
-		Metodologia metSelec = this.getModelObject().getMetodologiaSeleccionada();
+		Metodologia metSelec = this.getModelObject()
+				.getMetodologiaSeleccionada();
 		if (this.getModelObject().getMetodologiaSeleccionada() != null) {
 
 			Dialog<?> dialog = new BorrarMetodologiaView(this, metSelec);
 			dialog.open();
 			dialog.onAccept(() -> {
 			});
-			
+
 			this.getModelObject().llenarTablas();
 
 		} else {

@@ -24,18 +24,20 @@ public class CondicionCrecienteODecreciente extends Condicion {
 		this.criterio = criterio;
 		this.ultimosAnios = ultimosAnios;
 	}
-	
-	
-	public String stringError(){
-		if(criterio.equals(Criterio.CRECIENTE)){
-			return "La condicion creciente no se cumple para el indicador "+indicador.getNombre();
-		}else{
-			return "La condicion decreciente no se cumple para el indicador "+indicador.getNombre();
+
+	public String stringError() {
+		if (criterio.equals(Criterio.CRECIENTE)) {
+			return "La condicion creciente no se cumple para el indicador "
+					+ indicador.getNombre();
+		} else {
+			return "La condicion decreciente no se cumple para el indicador "
+					+ indicador.getNombre();
 		}
 	}
 
 	@Override
-	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
+	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
+			throws ParseException {
 		Empresa empresa = rEmpresa.getEmpresa();
 		List<Periodo> periodos = super.periodosDesdexAnio(empresa);
 
@@ -48,17 +50,18 @@ public class CondicionCrecienteODecreciente extends Condicion {
 					empresa.getNombre(), periodos.get(i + 1).getAnio(),
 					periodos.get(i + 1).getSemestre());
 
-			if (comparar(indicadorActual,indicadorSiguiente)) {
-					throw new RuntimeException (this.stringError());
+			if (comparar(indicadorActual, indicadorSiguiente)) {
+				throw new RuntimeException(this.stringError());
 			}
 		}
 		return rEmpresa;
 	}
-	
-	private boolean comparar(BigDecimal indicadorActual, BigDecimal indicadorSiguiente){
-		if(criterio.equals(Criterio.CRECIENTE)){
+
+	private boolean comparar(BigDecimal indicadorActual,
+			BigDecimal indicadorSiguiente) {
+		if (criterio.equals(Criterio.CRECIENTE)) {
 			return indicadorActual.compareTo(indicadorSiguiente) >= 0;
-		}else {
+		} else {
 			return indicadorActual.compareTo(indicadorSiguiente) <= 0;
 		}
 	}

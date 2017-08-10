@@ -16,7 +16,8 @@ public class JsonAdapter implements DataAdapter {
 
 	Gson gson = GsonFactory.getGson();
 
-	public ArrayList<Empresa> adaptarEmpresas(String empresas) throws ParseException {
+	public ArrayList<Empresa> adaptarEmpresas(String empresas)
+			throws ParseException {
 		ArrayList<Empresa> listaEmpresas = new ArrayList<Empresa>();
 		try {
 			Type listType = new TypeToken<ArrayList<Empresa>>() {
@@ -44,7 +45,7 @@ public class JsonAdapter implements DataAdapter {
 		}
 		return listaIndicadores;
 	}
-	
+
 	public ArrayList<Metodologia> adaptarMetodologias(String metodologias)
 			throws ParseException {
 		ArrayList<Metodologia> listaMetodologias = new ArrayList<Metodologia>();

@@ -29,13 +29,11 @@ public class CondicionesBuilder {
 			case "<":
 				return new CondicionTaxativaMayorOMenorA(
 						condiciones.CondicionSumatoria.Criterio.menorA,
-						registroIndicador, ultimosAnios,
-						pesoOComparar);
+						registroIndicador, ultimosAnios, pesoOComparar);
 			case ">":
 				return new CondicionTaxativaMayorOMenorA(
 						condiciones.CondicionSumatoria.Criterio.mayorA,
-						registroIndicador, ultimosAnios,
-						pesoOComparar);
+						registroIndicador, ultimosAnios, pesoOComparar);
 			case "Antiguedad":
 				return new CondicionTaxativaAntiguedad(pesoOComparar);
 			default:
