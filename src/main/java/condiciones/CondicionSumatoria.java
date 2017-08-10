@@ -24,11 +24,11 @@ public abstract class CondicionSumatoria extends Condicion {
 	}
 
 	public BigDecimal sumador(Empresa empresa) throws ParseException {
-		List<Periodo> periodos = super.periodosDesdexAnio(empresa);
+		List<Periodo> periodos = this.periodosDesdexAnio(empresa);
 		BigDecimal acumulador = BigDecimal.ZERO;
 
 		for (int i = 0; i < periodos.size(); i++) {
-			acumulador = acumulador.add(super.aplicarIndicador(indicador,
+			acumulador = acumulador.add(this.aplicarIndicador(indicador,
 					empresa.getNombre(), periodos.get(i).getAnio(), periodos
 							.get(i).getSemestre()));
 		}

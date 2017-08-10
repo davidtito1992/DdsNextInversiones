@@ -38,7 +38,7 @@ public class CondicionCrecienteODecreciente extends Condicion {
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
 			throws ParseException {
 		Empresa empresa = rEmpresa.getEmpresa();
-		List<Periodo> periodos = super.periodosDesdexAnio(empresa);
+		List<Periodo> periodos = this.periodosDesdexAnio(empresa);
 
 		for (int i = 0; i < periodos.size() - 1; i++) {
 
