@@ -9,6 +9,7 @@ import org.uqbar.commons.utils.Observable;
 
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
+import RankingEmpresa.RankingEmpresasComparator;
 import condiciones.Condicion;
 
 @SuppressWarnings("serial")
@@ -64,7 +65,10 @@ public class Metodologia extends Entity {
 	}
 	
 	public List<RankingEmpresa> calcularEmpresas(ArrayList<RankingEmpresa> rEmpresas) {
-		return rEmpresas.stream().map(empresa->calcularEmpresa(empresa)).collect(Collectors.toList());
+		return rEmpresas.stream()
+				.map(empresa->calcularEmpresa(empresa))
+				.sorted(new RankingEmpresasComparator())
+				.collect(Collectors.toList());
 	}
 
 
