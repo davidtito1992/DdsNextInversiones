@@ -70,8 +70,7 @@ public class MetodologiaView extends Dialog<MetodologiaViewM>{
 			dialog.onAccept(() -> {
 			});
 			
-			// DESPUES DESCOMENTAR ESTO!!!!!
-			//this.getModelObject().llenarTablas();
+			this.getModelObject().llenarTablas();
 		} catch (Exception e) {
 			showInfo(e.getMessage());
 		}
@@ -95,7 +94,6 @@ public class MetodologiaView extends Dialog<MetodologiaViewM>{
 	}
 
 	public void borrar() {
-		// repositorioIndicadores
 		if (this.getModelObject().getMetodologiaSeleccionada() != null) {
 
 			Dialog<?> dialog = new BorrarMetodologiaView(this, this
