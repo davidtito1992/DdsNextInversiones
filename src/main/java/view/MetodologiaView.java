@@ -10,6 +10,7 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 
+import repositories.RepositorioUnicoDeMetodologias;
 import viewmodel.MetodologiaViewM;
 
 @SuppressWarnings("serial")
@@ -94,10 +95,10 @@ public class MetodologiaView extends Dialog<MetodologiaViewM>{
 	}
 
 	public void borrar() {
+		Metodologia metSelec = this.getModelObject().getMetodologiaSeleccionada();
 		if (this.getModelObject().getMetodologiaSeleccionada() != null) {
 
-			Dialog<?> dialog = new BorrarMetodologiaView(this, this
-					.getModelObject().getMetodologiaSeleccionada());
+			Dialog<?> dialog = new BorrarMetodologiaView(this, metSelec);
 			dialog.open();
 			dialog.onAccept(() -> {
 			});

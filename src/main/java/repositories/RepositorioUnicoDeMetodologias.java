@@ -37,5 +37,10 @@ public class RepositorioUnicoDeMetodologias extends Repositorio{
 	public void agregarMetodologiaNueva(Metodologia metodologia){
 		this.getElementos().add(metodologia);
 	}
+	
+	//@SuppressWarnings("unchecked")
+	public void borrarElemento(Metodologia metodologia){
+		this.getElementos().remove(metodologia);
+	}
 
 }

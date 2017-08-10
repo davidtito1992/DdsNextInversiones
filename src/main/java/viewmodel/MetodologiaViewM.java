@@ -67,5 +67,6 @@ public class MetodologiaViewM {
 	public RepositorioUnicoDeMetodologias getRepoMetodologias(){
 		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 	}
+	
 
 }

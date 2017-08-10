@@ -1,7 +1,10 @@
 package viewmodel;
 
 import model.Metodologia;
+
 import org.uqbar.commons.utils.Observable;
+
+import app.AppData;
 
 @Observable
 public class BorrarMetodologiaViewM {
@@ -14,7 +17,7 @@ public class BorrarMetodologiaViewM {
 	}
 
 	public void borrar() throws Exception {
-		//new AppData().borrarMetodologia(this.metodologiaABorrar);
+		new AppData().borrarMetodologia(this.metodologiaABorrar);
 
 	}
 	

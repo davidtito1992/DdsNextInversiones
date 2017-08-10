@@ -43,6 +43,10 @@ public class AppData {
 		ArrayList<RegistroIndicador> indicadores = cargador.getDataIndicadores();
 		this.getRepositorioIndicadores().cargarListaDeElementos(indicadores);
 	}
+	
+	public void borrarMetodologia(Metodologia metSelec){
+		this.getRepositorioMetodologias().borrarElemento(metSelec);
+	}
 
 	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
