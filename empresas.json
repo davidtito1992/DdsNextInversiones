@@ -55,11 +55,11 @@
 				"semestre": "1",
 				"cuentas": [{
 						"nombre": "EBITDA",
-						"valor": "123"
+						"valor": "6"
 					},
 					{
 						"nombre": "FDS",
-						"valor": "123"
+						"valor": "7"
 					},
 					{
 						"nombre": "FreeCashFlow",
@@ -72,11 +72,11 @@
 				"semestre": "2",
 				"cuentas": [{
 						"nombre": "EBITDA",
-						"valor": "111"
+						"valor": "1"
 					},
 					{
 						"nombre": "FDS",
-						"valor": "111"
+						"valor": "2"
 					},
 					{
 						"nombre": "FreeCashFlow",
@@ -97,7 +97,7 @@
 					},
 					{
 						"nombre": "FDS",
-						"valor": "99999"
+						"valor": "20"
 					},
 					{
 						"nombre": "FreeCashFlow",
@@ -117,6 +117,10 @@
 				"cuentas": [{
 						"nombre": "EBITDA",
 						"valor": "990"
+					},
+					{
+						"nombre": "FDS",
+						"valor": "5"
 					},
 					{
 						"nombre": "FreeCashFlow",

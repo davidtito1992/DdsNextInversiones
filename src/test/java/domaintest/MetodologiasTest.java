@@ -2,6 +2,8 @@ package domaintest;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import model.Empresa;
 import model.Metodologia;
@@ -27,6 +29,7 @@ public class MetodologiasTest {
 	public RegistroIndicador i4;
 	public RegistroIndicador ROE;
 	public RegistroIndicador propDeu;
+	public RegistroIndicador margen;
 	public Empresa facebook;
 	public Empresa twitter;
 	public Empresa google;
@@ -45,6 +48,7 @@ public class MetodologiasTest {
 		i4 = new AppData().getRepositorioIndicadores().getRegistroIndicador("i4");
 		ROE = new AppData().getRepositorioIndicadores().getRegistroIndicador("ROE");
 		propDeu = new AppData().getRepositorioIndicadores().getRegistroIndicador("ProporcionDeDeuda");
+		margen = new AppData().getRepositorioIndicadores().getRegistroIndicador("margen");
 		facebook = new AppData().getRepositorioEmpresas()
 				.getEmpresa("Facebook");
 		twitter = new AppData().getRepositorioEmpresas().getEmpresa("Twitter");
@@ -197,19 +201,24 @@ public class MetodologiasTest {
 				.getErrorTaxativa());//devuelve true porque no tiene mas de 10 años
 	}
 	
+	@Test
 	public void metodologiaWarrenBuffettModificadaOK(){
-		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.mayorA,ROE,
-																		10,new BigDecimal(5)));//roe creciente
-		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.menorA,propDeu,
-																		10,new BigDecimal(3)));//proporcion de deuda mas chico
-		condicionesPrueba.add(new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.Criterio.CRECIENTE,
-																		i4,10));//Margenes crecientes
+		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.mayorA,ROE,10,new BigDecimal(5)));//roe creciente
+		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(Criterio.menorA,propDeu,10,new BigDecimal(3)));//proporcion de deuda mas chico
+		condicionesPrueba.add(new CondicionCrecienteODecreciente(CondicionCrecienteODecreciente.Criterio.CRECIENTE,margen,10));//Margenes crecientes
 		condicionesPrueba.add(new CondicionTaxativaAntiguedad(new BigDecimal(1)));//mayor a 1 año
 		condicionesPrueba.add(new CondicionCuantitativaAntiguedad(new BigDecimal(2)));//las mas importantes son las mas antiguas
 		
 		Metodologia metodologia = new Metodologia("WarrenBuffet",condicionesPrueba);
 		
-		//falta comparar 
+		List<String> resultado = new ArrayList<String>();
+		List<String> esperado = new ArrayList<String>();
+		resultado = metodologia.calcularEmpresas(rEmpresas).stream()
+						.filter(rEmpresa -> !rEmpresa.getErrorTaxativa())
+						.map(rEmpresa -> rEmpresa.getEmpresa().getNombre()).collect(Collectors.toList());
+		
+		esperado.add("Facebook"); //la unica que se encuentra es Facebook, por ser la unica con Margen creciente.
+		Assert.assertEquals(esperado, resultado);
 	}
 
 }
