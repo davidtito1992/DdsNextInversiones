@@ -23,9 +23,9 @@ public class ConsultarMetodologiaViewM {
 	private Metodologia metodologia;
 	private List<RankingEmpresa> rankingDeEmpresas;
 	private List<SnapshotRankingEmpresa> snapshotRankingEmpresas;
-	private SnapshotRankingEmpresa snapshotRankingEmpresasSeleccionado;
+	//private SnapshotRankingEmpresa snapshotRankingEmpresasSeleccionado;
 	private List<SnapshotRankingEmpresa> snapshotRankingEmpresasFallidas;
-	private SnapshotRankingEmpresa snapshotRankingEmpresasFallidasSeleccionado;
+	//private SnapshotRankingEmpresa snapshotRankingEmpresasFallidasSeleccionado;
 
 	public ConsultarMetodologiaViewM(Metodologia metodologia) {
 
@@ -53,14 +53,14 @@ public class ConsultarMetodologiaViewM {
 		this.rankingDeEmpresas = rankingDeEmpresas;
 	}
 
-	public SnapshotRankingEmpresa getSnapshotRankingEmpresasFallidasSeleccionado() {
+	/*public SnapshotRankingEmpresa getSnapshotRankingEmpresasFallidasSeleccionado() {
 		return snapshotRankingEmpresasFallidasSeleccionado;
 	}
 
 	public void setSnapshotRankingEmpresasFallidasSeleccionado(
 			SnapshotRankingEmpresa snapshotRankingEmpresasFallidasSeleccionado) {
 		this.snapshotRankingEmpresasFallidasSeleccionado = snapshotRankingEmpresasFallidasSeleccionado;
-	}
+	}*/
 
 	public List<SnapshotRankingEmpresa> getSnapshotRankingEmpresas() {
 		return snapshotRankingEmpresas;
@@ -71,14 +71,14 @@ public class ConsultarMetodologiaViewM {
 		this.snapshotRankingEmpresas = snapshotRankingEmpresas;
 	}
 
-	public SnapshotRankingEmpresa getSnapshotRankingEmpresasSeleccionado() {
+	/*public SnapshotRankingEmpresa getSnapshotRankingEmpresasSeleccionado() {
 		return snapshotRankingEmpresasSeleccionado;
 	}
 
 	public void setSnapshotRankingEmpresasSeleccionado(
 			SnapshotRankingEmpresa snapshotRankingEmpresasSeleccionado) {
 		this.snapshotRankingEmpresasSeleccionado = snapshotRankingEmpresasSeleccionado;
-	}
+	}*/
 
 	public List<SnapshotRankingEmpresa> getSnapshotRankingEmpresasFallidas() {
 		return snapshotRankingEmpresasFallidas;
