@@ -45,7 +45,7 @@ public class CondicionesBuilder {
 			case ANTIGUEDAD:
 				return new CondicionTaxativaAntiguedad(pesoOComparar);
 			default:
-				throw new Error(
+				throw new RuntimeException(
 						"El tipo de condicion elegida no esta disponible");
 			}
 		} else {
@@ -61,8 +61,8 @@ public class CondicionesBuilder {
 			case ANTIGUEDAD:
 				return new CondicionCuantitativaAntiguedad(pesoOComparar);
 			default:
-				throw new Error(
-						"EEl tipo de condicion elegida no esta disponible");
+				throw new RuntimeException(
+						"El tipo de condicion elegida no esta disponible");
 			}
 		}
 	}
