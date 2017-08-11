@@ -53,15 +53,6 @@ public class ConsultarMetodologiaViewM {
 		this.rankingDeEmpresas = rankingDeEmpresas;
 	}
 
-	/*public SnapshotRankingEmpresa getSnapshotRankingEmpresasFallidasSeleccionado() {
-		return snapshotRankingEmpresasFallidasSeleccionado;
-	}
-
-	public void setSnapshotRankingEmpresasFallidasSeleccionado(
-			SnapshotRankingEmpresa snapshotRankingEmpresasFallidasSeleccionado) {
-		this.snapshotRankingEmpresasFallidasSeleccionado = snapshotRankingEmpresasFallidasSeleccionado;
-	}*/
-
 	public List<SnapshotRankingEmpresa> getSnapshotRankingEmpresas() {
 		return snapshotRankingEmpresas;
 	}
@@ -70,15 +61,6 @@ public class ConsultarMetodologiaViewM {
 			List<SnapshotRankingEmpresa> snapshotRankingEmpresas) {
 		this.snapshotRankingEmpresas = snapshotRankingEmpresas;
 	}
-
-	/*public SnapshotRankingEmpresa getSnapshotRankingEmpresasSeleccionado() {
-		return snapshotRankingEmpresasSeleccionado;
-	}
-
-	public void setSnapshotRankingEmpresasSeleccionado(
-			SnapshotRankingEmpresa snapshotRankingEmpresasSeleccionado) {
-		this.snapshotRankingEmpresasSeleccionado = snapshotRankingEmpresasSeleccionado;
-	}*/
 
 	public List<SnapshotRankingEmpresa> getSnapshotRankingEmpresasFallidas() {
 		return snapshotRankingEmpresasFallidas;

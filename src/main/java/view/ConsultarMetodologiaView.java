@@ -69,14 +69,9 @@ public class ConsultarMetodologiaView extends Dialog<ConsultarMetodologiaViewM> 
 		columnaObservacionEmpresasFallidas
 				.bindContentsToProperty("observacion");
 
-		/*tableRankingEmpresa.bindItemsToProperty("snapshotRankingEmpresas");
-		tableRankingEmpresa
-				.bindValueToProperty("snapshotRankingEmpresasSeleccionado");*/
 
 		tableRankingEmpresasFallidas
 				.bindItemsToProperty("snapshotRankingEmpresasFallidas");
-		/*tableRankingEmpresasFallidas
-				.bindValueToProperty("snapshotRankingEmpresasFallidasSeleccionado");*/
 	}
 
 	@Override
