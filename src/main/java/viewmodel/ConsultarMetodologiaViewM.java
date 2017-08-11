@@ -1,19 +1,15 @@
 package viewmodel;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import model.ControladorDeMetodologia;
-import model.Empresa;
 import model.Metodologia;
 import model.SnapshotRankingEmpresa;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioUnicoDeEmpresas;
+import RankingEmpresa.ControladorDeRankingEmpresas;
 import RankingEmpresa.RankingEmpresa;
-import app.AplicacionContexto;
 
 @Observable
 public class ConsultarMetodologiaViewM {
@@ -73,14 +69,8 @@ public class ConsultarMetodologiaViewM {
 
 	/********* METODOS *********/
 
-	@SuppressWarnings("unchecked")
 	public void inicializar() {
-		List<Empresa> empresas = new ArrayList<Empresa>();
-		empresas = getRepositorioEmpresas().getElementos();
-		rankingDeEmpresas = empresas.stream()
-				.map(empresa -> new RankingEmpresa(empresa))
-				.collect(Collectors.toList());
-
+		rankingDeEmpresas = new ControladorDeRankingEmpresas().obtenerRankingEmpresas();
 	}
 
 	public void llenarTablas() {
@@ -88,9 +78,4 @@ public class ConsultarMetodologiaViewM {
 		snapshotRankingEmpresas = controladorDeMetodologia.obtenerSnapshotRankingEmpresas();
 		snapshotRankingEmpresasFallidas = controladorDeMetodologia.obtenerSnapshotRankingEmpresasFallidas();
 	}
-
-	public RepositorioUnicoDeEmpresas getRepositorioEmpresas() {
-		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
-	}
-
 }
