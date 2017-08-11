@@ -78,7 +78,7 @@ public class ConsultarMetodologiaViewM {
 		List<Empresa> empresas = new ArrayList<Empresa>();
 		empresas = getRepositorioEmpresas().getElementos();
 		rankingDeEmpresas = empresas.stream()
-				.map(empresa -> new RankingEmpresa(BigDecimal.ZERO, empresa))
+				.map(empresa -> new RankingEmpresa(empresa))
 				.collect(Collectors.toList());
 
 	}

@@ -37,9 +37,9 @@ public class CondicionesUnitariasTest {
 				.getEmpresa("Facebook");
 		twitter = new AppData().getRepositorioEmpresas().getEmpresa("Twitter");
 		google = new AppData().getRepositorioEmpresas().getEmpresa("Google");
-		rEmpresaFB = new RankingEmpresa(BigDecimal.ZERO, facebook);
-		rEmpresaTW = new RankingEmpresa(BigDecimal.ZERO, twitter);
-		rEmpresaGO = new RankingEmpresa(BigDecimal.ZERO, google);
+		rEmpresaFB = new RankingEmpresa(facebook);
+		rEmpresaTW = new RankingEmpresa(twitter);
+		rEmpresaGO = new RankingEmpresa(google);
 	}
 
 	@Test
