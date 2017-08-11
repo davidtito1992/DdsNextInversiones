@@ -3,8 +3,8 @@ package viewmodel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.math.BigDecimal;
 
+import model.ControladorDeMetodologia;
 import model.Empresa;
 import model.Metodologia;
 import model.SnapshotRankingEmpresa;
@@ -12,8 +12,8 @@ import model.SnapshotRankingEmpresa;
 import org.uqbar.commons.utils.Observable;
 
 import repositories.RepositorioUnicoDeEmpresas;
-import app.AplicacionContexto;
 import RankingEmpresa.RankingEmpresa;
+import app.AplicacionContexto;
 
 @Observable
 public class ConsultarMetodologiaViewM {
@@ -84,17 +84,9 @@ public class ConsultarMetodologiaViewM {
 	}
 
 	public void llenarTablas() {
-		List<RankingEmpresa> rankingDeEmpresasCalculado = new ArrayList<RankingEmpresa>();
-		rankingDeEmpresasCalculado = metodologia
-				.calcularEmpresas(rankingDeEmpresas);
-		snapshotRankingEmpresas = rankingDeEmpresasCalculado.stream()
-				.filter(empresa -> !empresa.getErrorTaxativa())
-				.map(rEmpresa -> new SnapshotRankingEmpresa(rEmpresa))
-				.collect(Collectors.toList());
-		snapshotRankingEmpresasFallidas = rankingDeEmpresasCalculado.stream()
-				.filter(empresa -> empresa.getErrorTaxativa())
-				.map(rEmpresa -> new SnapshotRankingEmpresa(rEmpresa))
-				.collect(Collectors.toList());
+		ControladorDeMetodologia controladorDeMetodologia = new ControladorDeMetodologia(metodologia, rankingDeEmpresas);
+		snapshotRankingEmpresas = controladorDeMetodologia.obtenerSnapshotRankingEmpresas();
+		snapshotRankingEmpresasFallidas = controladorDeMetodologia.obtenerSnapshotRankingEmpresasFallidas();
 	}
 
 	public RepositorioUnicoDeEmpresas getRepositorioEmpresas() {
