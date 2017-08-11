@@ -11,14 +11,14 @@ import RankingEmpresa.RankingEmpresa;
 
 public class CondicionCrecienteODecreciente extends Condicion {
 
-	public enum Criterio {
+	public enum CreceODecrece {
 		CRECIENTE, DECRECIENTE;
 	}
 
 	private RegistroIndicador indicador;
-	private Criterio criterio;
+	private CreceODecrece criterio;
 
-	public CondicionCrecienteODecreciente(Criterio criterio,
+	public CondicionCrecienteODecreciente(CreceODecrece criterio,
 			RegistroIndicador indicador, int ultimosAnios) {
 		this.indicador = indicador;
 		this.criterio = criterio;
@@ -26,7 +26,7 @@ public class CondicionCrecienteODecreciente extends Condicion {
 	}
 
 	public String stringError() {
-		if (criterio.equals(Criterio.CRECIENTE)) {
+		if (criterio.equals(CreceODecrece.CRECIENTE)) {
 			return "La condicion creciente no se cumple para el indicador "
 					+ indicador.getNombre();
 		} else {
@@ -58,7 +58,7 @@ public class CondicionCrecienteODecreciente extends Condicion {
 
 	private boolean comparar(BigDecimal indicadorActual,
 			BigDecimal indicadorSiguiente) {
-		if (criterio.equals(Criterio.CRECIENTE)) {
+		if (criterio.equals(CreceODecrece.CRECIENTE)) {
 			return indicadorActual.compareTo(indicadorSiguiente) >= 0;
 		} else {
 			return indicadorActual.compareTo(indicadorSiguiente) <= 0;

@@ -1,6 +1,7 @@
 package domaintest;
 
 import java.math.BigDecimal;
+
 import model.Empresa;
 import model.RegistroIndicador;
 
@@ -10,6 +11,7 @@ import org.junit.Test;
 
 import RankingEmpresa.RankingEmpresa;
 import app.AppData;
+import condiciones.CondicionCrecienteODecreciente.CreceODecrece;
 import condiciones.CondicionCuantitativaAntiguedad;
 import condiciones.CondicionCrecienteODecreciente;
 import condiciones.CondicionCuantitativaMayorOMenorA;
@@ -95,7 +97,7 @@ public class CondicionesUnitariasTest {
 	@Test
 	public void crecienteOK() throws Exception {
 		RankingEmpresa rEmpResul = new CondicionCrecienteODecreciente(
-				CondicionCrecienteODecreciente.Criterio.CRECIENTE, ingresoNeto,
+				CreceODecrece.CRECIENTE, ingresoNeto,
 				5).calcular(rEmpresaFB);
 
 		Assert.assertFalse(rEmpResul.getErrorTaxativa());
@@ -104,21 +106,21 @@ public class CondicionesUnitariasTest {
 	@Test(expected = RuntimeException.class)
 	public void crecienteERR() throws Exception {
 		new CondicionCrecienteODecreciente(
-				CondicionCrecienteODecreciente.Criterio.CRECIENTE, ingresoNeto,
+				CreceODecrece.CRECIENTE, ingresoNeto,
 				5).calcular(rEmpresaTW);
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void decrecienteERR() throws Exception {
 		new CondicionCrecienteODecreciente(
-				CondicionCrecienteODecreciente.Criterio.DECRECIENTE,
+				CreceODecrece.DECRECIENTE,
 				ingresoNeto, 5).calcular(rEmpresaFB);
 	}
 
 	@Test
 	public void decrecienteOK() throws Exception {
 		RankingEmpresa rEmpResul = new CondicionCrecienteODecreciente(
-				CondicionCrecienteODecreciente.Criterio.DECRECIENTE,
+				CreceODecrece.DECRECIENTE,
 				ingresoNeto, 5).calcular(rEmpresaTW);
 
 		Assert.assertFalse(rEmpResul.getErrorTaxativa());
@@ -143,7 +145,7 @@ public class CondicionesUnitariasTest {
 	@Test(expected = RuntimeException.class)
 	public void cuantitativaMeAErrNoIndicador() throws Exception {
 		new CondicionCrecienteODecreciente(
-				CondicionCrecienteODecreciente.Criterio.CRECIENTE, ingresoNeto,
+				CreceODecrece.CRECIENTE, ingresoNeto,
 				5).calcular(rEmpresaGO);
 	}
 }

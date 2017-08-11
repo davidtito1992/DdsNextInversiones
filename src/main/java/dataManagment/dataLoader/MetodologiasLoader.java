@@ -9,6 +9,7 @@ import model.RegistroIndicador;
 import app.AppData;
 import condiciones.Condicion;
 import condiciones.CondicionCrecienteODecreciente;
+import condiciones.CondicionCrecienteODecreciente.CreceODecrece;
 import condiciones.CondicionCuantitativaAntiguedad;
 import condiciones.CondicionCuantitativaMayorOMenorA;
 import condiciones.CondicionTaxativaAntiguedad;
@@ -43,7 +44,7 @@ public class MetodologiasLoader {
 																	// de deuda
 																	// mas chico
 		condicionesWarren.add(new CondicionCrecienteODecreciente(
-				CondicionCrecienteODecreciente.Criterio.CRECIENTE, i4, 10));// Margenes
+				CreceODecrece.CRECIENTE, i4, 10));// Margenes
 																			// crecientes
 		condicionesWarren.add(new CondicionTaxativaAntiguedad(
 				new BigDecimal(10)));// mayor a 10 años

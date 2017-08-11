@@ -16,6 +16,7 @@ import org.junit.Test;
 import RankingEmpresa.RankingEmpresa;
 import app.AppData;
 import condiciones.Condicion;
+import condiciones.CondicionCrecienteODecreciente.CreceODecrece;
 import condiciones.CondicionCuantitativaAntiguedad;
 import condiciones.CondicionCrecienteODecreciente;
 import condiciones.CondicionCuantitativaMayorOMenorA;
@@ -106,7 +107,7 @@ public class MetodologiasTest {
 	@Test
 	public void metodologiaConCondicionDecrecienteERR() throws Exception {
 		condicionesPrueba.add(new CondicionCrecienteODecreciente(
-				CondicionCrecienteODecreciente.Criterio.DECRECIENTE,
+				CreceODecrece.DECRECIENTE,
 				ingresoNeto, 5));
 		Metodologia metodologia = new Metodologia("Metodologia Prueba",
 				condicionesPrueba);
@@ -137,7 +138,7 @@ public class MetodologiasTest {
 		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(
 				Criterio.menorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
 		condicionesPrueba.add(new CondicionCrecienteODecreciente(
-				CondicionCrecienteODecreciente.Criterio.CRECIENTE, ingresoNeto,
+				CreceODecrece.CRECIENTE, ingresoNeto,
 				5));
 		Metodologia metodologia = new Metodologia("Metodologia Prueba",
 				condicionesPrueba);
@@ -153,7 +154,7 @@ public class MetodologiasTest {
 		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(
 				Criterio.menorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
 		condicionesPrueba.add(new CondicionCrecienteODecreciente(
-				CondicionCrecienteODecreciente.Criterio.DECRECIENTE,
+				CreceODecrece.DECRECIENTE,
 				ingresoNeto, 5));// no se cumple
 		Metodologia metodologia = new Metodologia("Metodologia Prueba",
 				condicionesPrueba);
@@ -197,7 +198,7 @@ public class MetodologiasTest {
 																	// de deuda
 																	// mas chico
 		condicionesPrueba.add(new CondicionCrecienteODecreciente(
-				CondicionCrecienteODecreciente.Criterio.CRECIENTE, i4, 10));// Margenes
+				CreceODecrece.CRECIENTE, i4, 10));// Margenes
 																			// crecientes
 		condicionesPrueba.add(new CondicionTaxativaAntiguedad(
 				new BigDecimal(10)));// mayor a 10 años
@@ -221,7 +222,7 @@ public class MetodologiasTest {
 																	// de deuda
 																	// mas chico
 		condicionesPrueba.add(new CondicionCrecienteODecreciente(
-				CondicionCrecienteODecreciente.Criterio.CRECIENTE, margen, 10));// Margenes
+				CreceODecrece.CRECIENTE, margen, 10));// Margenes
 																				// crecientes
 		condicionesPrueba
 				.add(new CondicionTaxativaAntiguedad(new BigDecimal(1)));// mayor

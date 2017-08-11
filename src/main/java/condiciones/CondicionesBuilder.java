@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import model.RegistroIndicador;
 import model.SnapshotCondicion;
 import app.AppData;
-import condiciones.CondicionCrecienteODecreciente.Criterio;
+import condiciones.CondicionCrecienteODecreciente.CreceODecrece;
 
 public class CondicionesBuilder {
 
@@ -29,10 +29,10 @@ public class CondicionesBuilder {
 		if (tipoCondicion.equals(TAXATIVA)) {
 			switch (condicion) {
 			case CRECIENTE:
-				return new CondicionCrecienteODecreciente(Criterio.CRECIENTE,
+				return new CondicionCrecienteODecreciente(CreceODecrece.CRECIENTE,
 						registroIndicador, ultimosAnios);
 			case DECRECIENTE:
-				return new CondicionCrecienteODecreciente(Criterio.DECRECIENTE,
+				return new CondicionCrecienteODecreciente(CreceODecrece.DECRECIENTE,
 						registroIndicador, ultimosAnios);
 			case MENOR:
 				return new CondicionTaxativaMayorOMenorA(

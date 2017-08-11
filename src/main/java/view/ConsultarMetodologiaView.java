@@ -49,6 +49,9 @@ public class ConsultarMetodologiaView extends Dialog<ConsultarMetodologiaViewM> 
 				tableRankingEmpresa);
 		columnaNombreEmpresa.setTitle("Empresa").setWeight(140);
 		columnaNombreEmpresa.bindContentsToProperty("nombreEmpresa");
+		
+		tableRankingEmpresa
+		.bindItemsToProperty("snapshotRankingEmpresas");
 
 		Table<SnapshotRankingEmpresa> tableRankingEmpresasFallidas = new Table<SnapshotRankingEmpresa>(
 				mainPanel, SnapshotRankingEmpresa.class);
