@@ -211,11 +211,10 @@ public class AgregarMetodologiaViewM {
 
 	public void limpiar() {
 		this.setAgregarCriterioSeleccionado(null);
-		this.setPesoOComparar(null);
+		this.setPesoOComparar(BigDecimal.ZERO);
 		this.setTipoCondicionSeleccionado(null);
 		this.setAgregarAniosSeleccionado(null);
 		this.setAgregarIndicadorSeleccionado(null);
-
 	}
 
 	public void validar() throws RuntimeException {
@@ -251,7 +250,7 @@ public class AgregarMetodologiaViewM {
 			}
 		}
 		if (!getAgregarCriterioSeleccionado().equalsIgnoreCase("Creciente")
-				&& getAgregarCriterioSeleccionado() != "Decreciente"
+				&& !getAgregarCriterioSeleccionado().equalsIgnoreCase("Decreciente")
 				&& getPesoOComparar() == null) {
 			throw new RuntimeException(
 					"Falta indicar el Peso o Numero a Comparar");
