@@ -3,9 +3,12 @@ package viewmodel;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
 import model.Metodologia;
 import model.SnapshotCondicion;
+
 import org.uqbar.commons.utils.Observable;
+
 import repositories.RepositorioUnicoDeIndicadores;
 import repositories.RepositorioUnicoDeMetodologias;
 import app.AplicacionContexto;
@@ -88,6 +91,14 @@ public class AgregarMetodologiaViewM {
 
 	public void setAgregarCriterioSeleccionado(
 			String agregarCriterioSeleccionado) {
+
+		if (agregarCriterioSeleccionado.equalsIgnoreCase("Antiguedad")) {
+			this.setAgregarIndicadorSeleccionado(null);
+			this.setAgregarIndicador(null);
+		} else {
+			this.cargarIndicadoresDisponibles();
+		}
+
 		this.agregarCriterioSeleccionado = agregarCriterioSeleccionado;
 	}
 
@@ -186,31 +197,40 @@ public class AgregarMetodologiaViewM {
 
 	public void guardarMetodologia() {
 
-		if (this.nombre == null || (this.snapshotCondiciones.isEmpty()))
+		if (this.getNombre() == null
+				|| (this.getSnapshotCondiciones().isEmpty()))
 			throw new RuntimeException(
 					"Debe ingresar nombre y al menos una condicion para guardar correctamente. "
 							+ "Intentelo nuevamente");
 		List<Condicion> condiciones = new ArrayList<Condicion>();
 
-		for (SnapshotCondicion snapshotCondicion : snapshotCondiciones) {
+		for (SnapshotCondicion snapshotCondicion : this
+				.getSnapshotCondiciones()) {
 			condiciones.add(new CondicionesBuilder().crear(snapshotCondicion));
 		}
-		Metodologia metodologia = new Metodologia(nombre, condiciones);
-		getRepositorioMetodologias().agregarMetodologiaNueva(metodologia);
+		Metodologia metodologia = new Metodologia(this.getNombre(), condiciones);
+		this.getRepositorioMetodologias().agregarMetodologiaNueva(metodologia);
 
 	}
 
 	public void agregarCondicion() {
+		String indicadorSeleccionado;
+		if (this.getAgregarIndicadorSeleccionado() == null) {
+			indicadorSeleccionado = "Ninguno";
+		} else {
+			indicadorSeleccionado = this.getAgregarIndicadorSeleccionado();
+		}
+
 		this.snapshotCondiciones.add(new SnapshotCondicion(this
 				.getTipoCondicionSeleccionado(), this
-				.getAgregarCriterioSeleccionado(), this
-				.getAgregarIndicadorSeleccionado(), this.getPesoOComparar(),
-				this.getAgregarAniosSeleccionado()));
+				.getAgregarCriterioSeleccionado(), indicadorSeleccionado, this
+				.getPesoOComparar(), this.getAgregarAniosSeleccionado()));
 		this.limpiar();
 	}
 
 	public void limpiar() {
-		this.setAgregarCriterioSeleccionado(null);
+		// con el set me tira error
+		this.agregarCriterioSeleccionado = null;
 		this.setPesoOComparar(BigDecimal.ZERO);
 		this.setTipoCondicionSeleccionado(null);
 		this.setAgregarAniosSeleccionado(null);
@@ -218,45 +238,45 @@ public class AgregarMetodologiaViewM {
 	}
 
 	public void validar() throws RuntimeException {
-		if (getAgregarIndicadorSeleccionado() == null
-				&& !getAgregarCriterioSeleccionado().equalsIgnoreCase(
+		if (this.getAgregarIndicadorSeleccionado() == null
+				&& !this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
 						"Antiguedad")) {
 			throw new RuntimeException("Seleccione un indicador");
-		} else {
-			if (getAgregarIndicadorSeleccionado() == null) {
-				setAgregarIndicadorSeleccionado("i4");
-			}
 		}
-		if (getTipoCondicionSeleccionado() == null) {
+
+		if (this.getTipoCondicionSeleccionado() == null) {
 			throw new RuntimeException("Seleccione un tipo de condicion");
 		}
-		if (getAgregarCriterioSeleccionado() == null) {
+		if (this.getAgregarCriterioSeleccionado() == null) {
 			throw new RuntimeException("Seleccione una condicion");
 		}
-		if (getTipoCondicionSeleccionado().equalsIgnoreCase("Cuantitativa")
-				&& (getAgregarCriterioSeleccionado().equalsIgnoreCase(
-						"Creciente") || getAgregarCriterioSeleccionado()
+		if (this.getTipoCondicionSeleccionado()
+				.equalsIgnoreCase("Cuantitativa")
+				&& (this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
+						"Creciente") || this.getAgregarCriterioSeleccionado()
 						.equalsIgnoreCase("Decreciente"))) {
 			throw new RuntimeException(
 					"Las condiciones Creciente y Decreciente no pueden ser Cuantitativas");
 		}
-		if (!getAgregarCriterioSeleccionado().equalsIgnoreCase("Antiguedad")
-				&& getAgregarAniosSeleccionado() == null) {
+		if (!this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
+				"Antiguedad")
+				&& this.getAgregarAniosSeleccionado() == null) {
 			throw new RuntimeException(
 					"Falta indicar desde que año aplica la condicion");
 		} else {
-			if (getAgregarAniosSeleccionado() == null) {
-				setAgregarAniosSeleccionado(0);
+			if (this.getAgregarAniosSeleccionado() == null) {
+				this.setAgregarAniosSeleccionado(0);
 			}
 		}
-		if (!getAgregarCriterioSeleccionado().equalsIgnoreCase("Creciente")
-				&& !getAgregarCriterioSeleccionado().equalsIgnoreCase("Decreciente")
-				&& getPesoOComparar() == null) {
+		if (!this.getAgregarCriterioSeleccionado()
+				.equalsIgnoreCase("Creciente")
+				&& !this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
+						"Decreciente") && this.getPesoOComparar() == null) {
 			throw new RuntimeException(
 					"Falta indicar el Peso o Numero a Comparar");
 		} else {
-			if (getPesoOComparar() == null) {
-				setPesoOComparar(BigDecimal.ZERO);
+			if (this.getPesoOComparar() == null) {
+				this.setPesoOComparar(BigDecimal.ZERO);
 			}
 		}
 	}

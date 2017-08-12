@@ -2,7 +2,6 @@ package condiciones;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;
@@ -42,10 +41,10 @@ public class CondicionCrecienteODecreciente extends Condicion {
 
 		for (int i = 0; i < periodos.size() - 1; i++) {
 
-			BigDecimal indicadorActual = aplicarIndicador(indicador,
+			BigDecimal indicadorActual = this.aplicarIndicador(indicador,
 					empresa.getNombre(), periodos.get(i).getAnio(), periodos
 							.get(i).getSemestre());
-			BigDecimal indicadorSiguiente = aplicarIndicador(indicador,
+			BigDecimal indicadorSiguiente = this.aplicarIndicador(indicador,
 					empresa.getNombre(), periodos.get(i + 1).getAnio(),
 					periodos.get(i + 1).getSemestre());
 

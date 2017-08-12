@@ -1,7 +1,6 @@
 package condiciones;
 
 import java.math.BigDecimal;
-
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
@@ -32,7 +31,7 @@ public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
 			throws ParseException {
 		BigDecimal acumulador = sumador(rEmpresa.getEmpresa());
-		if (comparar(acumulador, numeroAComparar)) {
+		if (this.comparar(acumulador, numeroAComparar)) {
 			throw new RuntimeException(textoError());
 		}
 		;

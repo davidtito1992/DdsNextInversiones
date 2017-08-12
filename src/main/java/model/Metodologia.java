@@ -1,12 +1,9 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.Observable;
-
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 import RankingEmpresa.RankingEmpresasComparator;
@@ -16,8 +13,7 @@ import condiciones.Condicion;
 @Observable
 public class Metodologia extends Entity {
 
-	public Metodologia(String nombre,
-			List<Condicion> condiciones) {
+	public Metodologia(String nombre, List<Condicion> condiciones) {
 		this.nombre = nombre;
 		this.condiciones = condiciones;
 
@@ -42,32 +38,29 @@ public class Metodologia extends Entity {
 		return condiciones;
 	}
 
-	public void setCondiciones(
-			List<Condicion> condiciones) {
+	public void setCondiciones(List<Condicion> condiciones) {
 		this.condiciones = condiciones;
 	}
 
-	public RankingEmpresa calcularEmpresa(RankingEmpresa rEmpresa){
-		try{
+	public RankingEmpresa calcularEmpresa(RankingEmpresa rEmpresa) {
+		try {
 			for (Condicion condicion : condiciones) {
-			    rEmpresa = condicion.calcular(rEmpresa);
+				rEmpresa = condicion.calcular(rEmpresa);
 			}
-		}catch (ParseException e){
+		} catch (ParseException e) {
 			rEmpresa.setErrorTaxativa(true);
 			rEmpresa.setObservaciones(e.getMessage());
-		}catch (RuntimeException e){
+		} catch (RuntimeException e) {
 			rEmpresa.setErrorTaxativa(true);
 			rEmpresa.setObservaciones(e.getMessage());
 		}
 		return rEmpresa;
 	}
-	
+
 	public List<RankingEmpresa> calcularEmpresas(List<RankingEmpresa> rEmpresas) {
-		return rEmpresas.stream()
-				.map(empresa->calcularEmpresa(empresa))
+		return rEmpresas.stream().map(empresa -> calcularEmpresa(empresa))
 				.sorted(new RankingEmpresasComparator())
 				.collect(Collectors.toList());
 	}
-
 
 }

@@ -31,7 +31,7 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		Panel form = new Panel(mainPanel);
-		this.setTitle("Consultar Indicador");
+		this.setTitle("Consultar Metodologia");
 		form.setLayout(new ColumnLayout(2));
 
 		new Label(form).setText(
@@ -57,12 +57,6 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 		selectorAnio.bindItemsToProperty("anios");
 		selectorAnio.bindValueToProperty("anioSeleccionado");
 
-		// new Label(form).setText("\tSeleccione Semestre");
-		// Selector<Integer> selectorSemestre = new Selector<Integer>(form)
-		// .allowNull(true);
-		// selectorSemestre.setWidth(150);
-		// selectorSemestre.bindItemsToProperty("semestre");
-		// selectorSemestre.bindValueToProperty("semestreSeleccionado");
 		new Label(form).setText("\t");
 		new Label(form).setText("\t");
 		new Button(form).setCaption("Reiniciar").onClick(this::reiniciar)
@@ -116,7 +110,6 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 
 	public void buscar() {
 		if (this.getModelObject().getNombreSeleccionado() != null
-		// || this.getModelObject().getSemestreSeleccionado() != null
 				|| this.getModelObject().getAnioSeleccionado() != null) {
 
 			this.getModelObject().buscar();
