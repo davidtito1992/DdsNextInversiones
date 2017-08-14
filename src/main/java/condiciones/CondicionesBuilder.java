@@ -14,6 +14,7 @@ public class CondicionesBuilder {
 	public static final String ANTIGUEDAD = "Antiguedad";
 	public static final String MAYOR = ">";
 	public static final String MENOR = "<";
+	public static final String VACIARINDICADOR = "S/N";
 
 	public Condicion crear(SnapshotCondicion snapshotCondicion) {
 
@@ -22,8 +23,11 @@ public class CondicionesBuilder {
 		String indicador = snapshotCondicion.getIndicador();
 		int ultimosAnios = snapshotCondicion.getAnios();
 		BigDecimal pesoOComparar = snapshotCondicion.getPesoOComparar();
-		RegistroIndicador registroIndicador = new AppData()
-				.getRepositorioIndicadores().getRegistroIndicador(indicador);
+		RegistroIndicador registroIndicador = null;
+		if (!indicador.equalsIgnoreCase(VACIARINDICADOR)){
+			registroIndicador = new AppData()
+			.getRepositorioIndicadores().getRegistroIndicador(indicador);
+		}
 
 		if (tipoCondicion.equals(TAXATIVA)) {
 			switch (condicion) {

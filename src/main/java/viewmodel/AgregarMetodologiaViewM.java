@@ -216,7 +216,7 @@ public class AgregarMetodologiaViewM {
 	public void agregarCondicion() {
 		String indicadorSeleccionado;
 		if (this.getAgregarIndicadorSeleccionado() == null) {
-			indicadorSeleccionado = "Ninguno";
+			indicadorSeleccionado = CondicionesBuilder.VACIARINDICADOR;
 		} else {
 			indicadorSeleccionado = this.getAgregarIndicadorSeleccionado();
 		}
