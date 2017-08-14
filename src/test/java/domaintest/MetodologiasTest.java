@@ -20,7 +20,7 @@ import condiciones.CondicionCrecienteODecreciente.CreceODecrece;
 import condiciones.CondicionCuantitativaAntiguedad;
 import condiciones.CondicionCrecienteODecreciente;
 import condiciones.CondicionCuantitativaMayorOMenorA;
-import condiciones.CondicionSumatoria.Criterio;
+import condiciones.CondicionSumatoria.MenorOMayor;
 import condiciones.CondicionTaxativaAntiguedad;
 import condiciones.CondicionTaxativaMayorOMenorA;
 
@@ -69,7 +69,7 @@ public class MetodologiasTest {
 	@Test
 	public void metodologiaConCondicionCuantitativaMenorA() {
 		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
-				Criterio.menorA, ingresoNeto, 5, new BigDecimal(10)));
+				MenorOMayor.menorA, ingresoNeto, 5, new BigDecimal(10)));
 		Metodologia metodologia = new Metodologia("Metodologia Prueba",
 				condicionesPrueba);
 
@@ -83,7 +83,7 @@ public class MetodologiasTest {
 	public void metodologiaConCondicionCuantitativaMayorATest()
 			throws Exception {
 		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
-				Criterio.mayorA, ingresoNeto, 2, new BigDecimal(1)));
+				MenorOMayor.mayorA, ingresoNeto, 2, new BigDecimal(1)));
 		Metodologia metodologia = new Metodologia("Metodologia Prueba",
 				condicionesPrueba);
 
@@ -96,7 +96,7 @@ public class MetodologiasTest {
 	@Test
 	public void metodologiaConCondicionTaxativaMenorATestOK() throws Exception {
 		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(
-				Criterio.menorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
+				MenorOMayor.menorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
 		Metodologia metodologia = new Metodologia("Metodologia Prueba",
 				condicionesPrueba);
 
@@ -119,7 +119,7 @@ public class MetodologiasTest {
 	@Test
 	public void metodologiaConCondicionesCuantitativas() throws Exception {
 		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
-				Criterio.mayorA, ingresoNeto, 2, new BigDecimal(1))); // 16
+				MenorOMayor.mayorA, ingresoNeto, 2, new BigDecimal(1))); // 16
 		condicionesPrueba.add(new CondicionCuantitativaAntiguedad(
 				new BigDecimal(3))); // 3
 		Metodologia metodologia = new Metodologia("Metodologia Prueba",
@@ -134,9 +134,9 @@ public class MetodologiasTest {
 	@Test
 	public void metodologiaConCondicionesTaxativasOK() throws Exception {
 		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(
-				Criterio.mayorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
+				MenorOMayor.mayorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
 		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(
-				Criterio.menorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
+				MenorOMayor.menorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
 		condicionesPrueba.add(new CondicionCrecienteODecreciente(
 				CreceODecrece.CRECIENTE, ingresoNeto,
 				5));
@@ -150,9 +150,9 @@ public class MetodologiasTest {
 	@Test
 	public void metodologiaConCondicionesTaxativasERR() throws Exception {
 		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(
-				Criterio.mayorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
+				MenorOMayor.mayorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
 		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(
-				Criterio.menorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
+				MenorOMayor.menorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
 		condicionesPrueba.add(new CondicionCrecienteODecreciente(
 				CreceODecrece.DECRECIENTE,
 				ingresoNeto, 5));// no se cumple
@@ -167,9 +167,9 @@ public class MetodologiasTest {
 	public void metodologiaConCondicionesTaxativasERRNoIndicador()
 			throws Exception {
 		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(
-				Criterio.mayorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
+				MenorOMayor.mayorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
 		condicionesPrueba.add(new CondicionTaxativaMayorOMenorA(
-				Criterio.menorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
+				MenorOMayor.menorA, ingresoNeto, 2, BigDecimal.valueOf(16)));
 		Metodologia metodologia = new Metodologia("Metodologia Prueba",
 				condicionesPrueba);
 
@@ -180,7 +180,7 @@ public class MetodologiasTest {
 	@Test
 	public void calcularEmpresasYSacarLaMasAlta() {
 		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
-				Criterio.mayorA, i4, 5, new BigDecimal(1)));
+				MenorOMayor.mayorA, i4, 5, new BigDecimal(1)));
 		Metodologia metodologia = new Metodologia("Metodologia Prueba",
 				condicionesPrueba);
 
@@ -192,9 +192,9 @@ public class MetodologiasTest {
 	@Test
 	public void metodologiaWarrenBuffettERR() {
 		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
-				Criterio.mayorA, ROE, 10, new BigDecimal(5)));// roe creciente
+				MenorOMayor.mayorA, ROE, 10, new BigDecimal(5)));// roe creciente
 		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
-				Criterio.menorA, propDeu, 10, new BigDecimal(3)));// proporcion
+				MenorOMayor.menorA, propDeu, 10, new BigDecimal(3)));// proporcion
 																	// de deuda
 																	// mas chico
 		condicionesPrueba.add(new CondicionCrecienteODecreciente(
@@ -216,9 +216,9 @@ public class MetodologiasTest {
 	@Test
 	public void metodologiaWarrenBuffettModificadaOK() {
 		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
-				Criterio.mayorA, ROE, 10, new BigDecimal(5)));// roe creciente
+				MenorOMayor.mayorA, ROE, 10, new BigDecimal(5)));// roe creciente
 		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
-				Criterio.menorA, propDeu, 10, new BigDecimal(3)));// proporcion
+				MenorOMayor.menorA, propDeu, 10, new BigDecimal(3)));// proporcion
 																	// de deuda
 																	// mas chico
 		condicionesPrueba.add(new CondicionCrecienteODecreciente(

@@ -15,7 +15,7 @@ import condiciones.CondicionCrecienteODecreciente.CreceODecrece;
 import condiciones.CondicionCuantitativaAntiguedad;
 import condiciones.CondicionCrecienteODecreciente;
 import condiciones.CondicionCuantitativaMayorOMenorA;
-import condiciones.CondicionSumatoria.Criterio;
+import condiciones.CondicionSumatoria.MenorOMayor;
 import condiciones.CondicionTaxativaMayorOMenorA;
 
 public class CondicionesUnitariasTest {
@@ -47,7 +47,7 @@ public class CondicionesUnitariasTest {
 	@Test
 	public void cuantitativaMayorATest() throws Exception {
 		RankingEmpresa rEmpResul = new CondicionCuantitativaMayorOMenorA(
-				Criterio.mayorA, ingresoNeto, 2, new BigDecimal(1))
+				MenorOMayor.mayorA, ingresoNeto, 2, new BigDecimal(1))
 				.calcular(rEmpresaFB);
 
 		Assert.assertEquals(0,
@@ -56,7 +56,7 @@ public class CondicionesUnitariasTest {
 
 	@Test(expected = RuntimeException.class)
 	public void taxativaMayorATestERR() throws Exception {
-		new CondicionTaxativaMayorOMenorA(Criterio.mayorA, ingresoNeto, 2,
+		new CondicionTaxativaMayorOMenorA(MenorOMayor.mayorA, ingresoNeto, 2,
 				BigDecimal.valueOf(17)).calcular(rEmpresaFB);
 
 	}
@@ -64,7 +64,7 @@ public class CondicionesUnitariasTest {
 	@Test
 	public void taxativaMayorATestOK() throws Exception {
 		RankingEmpresa rEmpResul = new CondicionTaxativaMayorOMenorA(
-				Criterio.mayorA, ingresoNeto, 2, BigDecimal.valueOf(16))
+				MenorOMayor.mayorA, ingresoNeto, 2, BigDecimal.valueOf(16))
 				.calcular(rEmpresaFB);
 
 		Assert.assertFalse(rEmpResul.getErrorTaxativa());
@@ -72,14 +72,14 @@ public class CondicionesUnitariasTest {
 
 	@Test(expected = RuntimeException.class)
 	public void taxativaMenorATestERR() throws Exception {
-		new CondicionTaxativaMayorOMenorA(Criterio.menorA, ingresoNeto, 2,
+		new CondicionTaxativaMayorOMenorA(MenorOMayor.menorA, ingresoNeto, 2,
 				BigDecimal.valueOf(15)).calcular(rEmpresaFB);
 	}
 
 	@Test
 	public void taxativaMenorATestOK() throws Exception {
 		RankingEmpresa rEmpResul = new CondicionTaxativaMayorOMenorA(
-				Criterio.menorA, ingresoNeto, 2, BigDecimal.valueOf(16))
+				MenorOMayor.menorA, ingresoNeto, 2, BigDecimal.valueOf(16))
 				.calcular(rEmpresaFB);
 
 		Assert.assertFalse(rEmpResul.getErrorTaxativa());
@@ -129,7 +129,7 @@ public class CondicionesUnitariasTest {
 	@Test
 	public void cuantitativaMenorA() throws Exception {
 		RankingEmpresa resultado = new CondicionCuantitativaMayorOMenorA(
-				Criterio.menorA, ingresoNeto, 5, new BigDecimal(10))
+				MenorOMayor.menorA, ingresoNeto, 5, new BigDecimal(10))
 				.calcular(rEmpresaFB);
 
 		Assert.assertEquals(0,
@@ -138,7 +138,7 @@ public class CondicionesUnitariasTest {
 
 	@Test(expected = RuntimeException.class)
 	public void cuantitativaMenorAErrNoIndicador() throws Exception {
-		new CondicionCuantitativaMayorOMenorA(Criterio.menorA, ingresoNeto, 5,
+		new CondicionCuantitativaMayorOMenorA(MenorOMayor.menorA, ingresoNeto, 5,
 				new BigDecimal(10)).calcular(rEmpresaGO);
 	}
 

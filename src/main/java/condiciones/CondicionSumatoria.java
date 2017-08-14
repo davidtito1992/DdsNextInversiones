@@ -9,14 +9,14 @@ import model.RegistroIndicador;
 import parserIndicador.ParseException;
 
 public abstract class CondicionSumatoria extends Condicion {
-	public enum Criterio {
+	public enum MenorOMayor {
 		mayorA, menorA;
 	}
 
-	protected Criterio criterio;
+	protected MenorOMayor criterio;
 	protected RegistroIndicador indicador;
 
-	public CondicionSumatoria(Criterio criterio, RegistroIndicador indicador,
+	public CondicionSumatoria(MenorOMayor criterio, RegistroIndicador indicador,
 			int ultimosAnios) {
 		this.criterio = criterio;
 		this.indicador = indicador;

@@ -37,11 +37,11 @@ public class CondicionesBuilder {
 						ultimosAnios);
 			case MENOR:
 				return new CondicionTaxativaMayorOMenorA(
-						condiciones.CondicionSumatoria.Criterio.menorA,
+						condiciones.CondicionSumatoria.MenorOMayor.menorA,
 						registroIndicador, ultimosAnios, pesoOComparar);
 			case MAYOR:
 				return new CondicionTaxativaMayorOMenorA(
-						condiciones.CondicionSumatoria.Criterio.mayorA,
+						condiciones.CondicionSumatoria.MenorOMayor.mayorA,
 						registroIndicador, ultimosAnios, pesoOComparar);
 			case ANTIGUEDAD:
 				return new CondicionTaxativaAntiguedad(pesoOComparar);
@@ -53,11 +53,11 @@ public class CondicionesBuilder {
 			switch (condicion) {
 			case MENOR:
 				return new CondicionCuantitativaMayorOMenorA(
-						condiciones.CondicionSumatoria.Criterio.menorA,
+						condiciones.CondicionSumatoria.MenorOMayor.menorA,
 						registroIndicador, ultimosAnios, pesoOComparar);
 			case MAYOR:
 				return new CondicionCuantitativaMayorOMenorA(
-						condiciones.CondicionSumatoria.Criterio.mayorA,
+						condiciones.CondicionSumatoria.MenorOMayor.mayorA,
 						registroIndicador, ultimosAnios, pesoOComparar);
 			case ANTIGUEDAD:
 				return new CondicionCuantitativaAntiguedad(pesoOComparar);

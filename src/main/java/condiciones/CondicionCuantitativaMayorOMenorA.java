@@ -9,7 +9,7 @@ public class CondicionCuantitativaMayorOMenorA extends CondicionSumatoria {
 
 	private BigDecimal peso;
 
-	public CondicionCuantitativaMayorOMenorA(Criterio criterio,
+	public CondicionCuantitativaMayorOMenorA(MenorOMayor criterio,
 			RegistroIndicador indicador, int ultimosAnios, BigDecimal peso) {
 		super(criterio, indicador, ultimosAnios);
 		this.peso = peso;
@@ -25,7 +25,7 @@ public class CondicionCuantitativaMayorOMenorA extends CondicionSumatoria {
 	}
 
 	private BigDecimal multiplicador() {
-		if (criterio.equals(Criterio.menorA)) {
+		if (criterio.equals(MenorOMayor.menorA)) {
 			return BigDecimal.valueOf(-1);
 		} else {
 			return BigDecimal.valueOf(1);

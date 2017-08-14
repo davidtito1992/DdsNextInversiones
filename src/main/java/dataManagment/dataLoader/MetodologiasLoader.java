@@ -13,7 +13,7 @@ import condiciones.CondicionCrecienteODecreciente.CreceODecrece;
 import condiciones.CondicionCuantitativaAntiguedad;
 import condiciones.CondicionCuantitativaMayorOMenorA;
 import condiciones.CondicionTaxativaAntiguedad;
-import condiciones.CondicionSumatoria.Criterio;
+import condiciones.CondicionSumatoria.MenorOMayor;
 
 public class MetodologiasLoader {
 
@@ -38,9 +38,9 @@ public class MetodologiasLoader {
 
 	private static void agregarCondicionesA(List<Condicion> condicionesWarren) {
 		condicionesWarren.add(new CondicionCuantitativaMayorOMenorA(
-				Criterio.mayorA, ROE, 10, new BigDecimal(5)));// roe creciente
+				MenorOMayor.mayorA, ROE, 10, new BigDecimal(5)));// roe creciente
 		condicionesWarren.add(new CondicionCuantitativaMayorOMenorA(
-				Criterio.menorA, propDeu, 10, new BigDecimal(3)));// proporcion
+				MenorOMayor.menorA, propDeu, 10, new BigDecimal(3)));// proporcion
 																	// de deuda
 																	// mas chico
 		condicionesWarren.add(new CondicionCrecienteODecreciente(

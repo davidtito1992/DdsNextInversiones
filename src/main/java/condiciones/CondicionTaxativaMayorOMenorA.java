@@ -9,7 +9,7 @@ public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 
 	private BigDecimal numeroAComparar;
 
-	public CondicionTaxativaMayorOMenorA(Criterio criterio,
+	public CondicionTaxativaMayorOMenorA(MenorOMayor criterio,
 			RegistroIndicador indicador, int ultimosAnios,
 			BigDecimal nroAComparar) {
 		super(criterio, indicador, ultimosAnios);
@@ -17,7 +17,7 @@ public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 	}
 
 	public String textoError() {
-		if (criterio.equals(Criterio.menorA)) {
+		if (criterio.equals(MenorOMayor.menorA)) {
 			return "La condicion menor a " + numeroAComparar.toString()
 					+ " no se cumple para el indicador "
 					+ indicador.getNombre();
@@ -40,7 +40,7 @@ public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 	}
 
 	private boolean comparar(BigDecimal acumulador, BigDecimal numeroAComparar) {
-		if (criterio.equals(Criterio.menorA)) {
+		if (criterio.equals(MenorOMayor.menorA)) {
 			return acumulador.compareTo(numeroAComparar) > 0;
 		} else {
 			return acumulador.compareTo(numeroAComparar) < 0;
