@@ -31,7 +31,7 @@ public class ConsultarIndicadorView extends Dialog<ConsultarIndicadorViewM> {
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		Panel form = new Panel(mainPanel);
-		this.setTitle("Consultar Metodologia");
+		this.setTitle("Consultar Indicador");
 		form.setLayout(new ColumnLayout(2));
 
 		new Label(form).setText(
