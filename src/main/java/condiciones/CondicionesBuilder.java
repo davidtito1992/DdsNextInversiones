@@ -9,6 +9,7 @@ import condiciones.CondicionCrecienteODecreciente.CreceODecrece;
 public class CondicionesBuilder {
 
 	public static final String TAXATIVA = "Taxativa";
+	public static final String CUANTITATIVA = "Cuantitativa";
 	public static final String CRECIENTE = "Creciente";
 	public static final String DECRECIENTE = "Decreciente";
 	public static final String ANTIGUEDAD = "Antiguedad";

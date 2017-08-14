@@ -92,7 +92,7 @@ public class AgregarMetodologiaViewM {
 	public void setAgregarCriterioSeleccionado(
 			String agregarCriterioSeleccionado) {
 
-		if (agregarCriterioSeleccionado.equalsIgnoreCase("Antiguedad")) {
+		if (agregarCriterioSeleccionado.equalsIgnoreCase(CondicionesBuilder.ANTIGUEDAD)) {
 			this.setAgregarIndicadorSeleccionado(null);
 			this.setAgregarIndicador(null);
 		} else {
@@ -176,16 +176,16 @@ public class AgregarMetodologiaViewM {
 	}
 
 	private void cargarCriteriosDisponibles() {
-		this.agregarCriterio.add(">");
-		this.agregarCriterio.add("<");
-		this.agregarCriterio.add("Antiguedad");
-		this.agregarCriterio.add("Creciente");
-		this.agregarCriterio.add("Decreciente");
+		this.agregarCriterio.add(CondicionesBuilder.MAYOR);
+		this.agregarCriterio.add(CondicionesBuilder.MENOR);
+		this.agregarCriterio.add(CondicionesBuilder.ANTIGUEDAD);
+		this.agregarCriterio.add(CondicionesBuilder.CRECIENTE);
+		this.agregarCriterio.add(CondicionesBuilder.DECRECIENTE);
 	}
 
 	private void cargarTiposDeCondiciones() {
-		this.tiposCondiciones.add("Taxativa");
-		this.tiposCondiciones.add("Cuantitativa");
+		this.tiposCondiciones.add(CondicionesBuilder.TAXATIVA);
+		this.tiposCondiciones.add(CondicionesBuilder.CUANTITATIVA);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -240,7 +240,7 @@ public class AgregarMetodologiaViewM {
 	public void validar() throws RuntimeException {
 		if (this.getAgregarIndicadorSeleccionado() == null
 				&& !this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
-						"Antiguedad")) {
+						CondicionesBuilder.ANTIGUEDAD)) {
 			throw new RuntimeException("Seleccione un indicador");
 		}
 
@@ -251,15 +251,15 @@ public class AgregarMetodologiaViewM {
 			throw new RuntimeException("Seleccione una condicion");
 		}
 		if (this.getTipoCondicionSeleccionado()
-				.equalsIgnoreCase("Cuantitativa")
+				.equalsIgnoreCase(CondicionesBuilder.CUANTITATIVA)
 				&& (this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
-						"Creciente") || this.getAgregarCriterioSeleccionado()
-						.equalsIgnoreCase("Decreciente"))) {
+						CondicionesBuilder.CRECIENTE) || this.getAgregarCriterioSeleccionado()
+						.equalsIgnoreCase(CondicionesBuilder.DECRECIENTE))) {
 			throw new RuntimeException(
 					"Las condiciones Creciente y Decreciente no pueden ser Cuantitativas");
 		}
 		if (!this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
-				"Antiguedad")
+				CondicionesBuilder.ANTIGUEDAD)
 				&& this.getAgregarAniosSeleccionado() == null) {
 			throw new RuntimeException(
 					"Falta indicar desde que año aplica la condicion");
@@ -269,9 +269,9 @@ public class AgregarMetodologiaViewM {
 			}
 		}
 		if (!this.getAgregarCriterioSeleccionado()
-				.equalsIgnoreCase("Creciente")
+				.equalsIgnoreCase(CondicionesBuilder.CRECIENTE)
 				&& !this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
-						"Decreciente") && this.getPesoOComparar() == null) {
+						CondicionesBuilder.DECRECIENTE) && this.getPesoOComparar() == null) {
 			throw new RuntimeException(
 					"Falta indicar el Peso o Numero a Comparar");
 		} else {
