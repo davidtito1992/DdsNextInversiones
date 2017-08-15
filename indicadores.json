@@ -1,4 +1,9 @@
 [{"nombre":"I2","formula":"EBITDA *FDS","variables":["EBITDA","FDS"]},
 {"nombre":"i3","formula":"i1","variables":["i1"]},
-{"nombre":"i4","formula":"ebitda","variables":["ebitda"]},
-{"nombre":"i5","formula":" EBITDA +  FDS","variables":["EBITDA","FDS"]}]
+{"nombre":"i4","formula":"EBITDA","variables":["EBITDA"]},
+{"nombre":"i5","formula":" EBITDA +  FDS","variables":["EBITDA","FDS"]},
+{"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"]},
+{"nombre":"CantidadAcciones","formula":" FDS","variables":["FDS"]},
+{"nombre":"ROE","formula":" IngresoNeto + CantidadAcciones","variables":["IngresoNeto","CantidadAcciones"]},
+{"nombre":"ProporcionDeDeuda","formula":" EBITDA","variables":["EBITDA"]},
+{"nombre":"Margen","formula":" FDS","variables":["FDS"]}]

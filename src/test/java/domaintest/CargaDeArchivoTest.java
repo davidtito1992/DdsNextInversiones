@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 import org.junit.Test;
 
-import DataManagment.FileLoader;
+import dataManagment.dataLoader.FileLoader;
 
 public class CargaDeArchivoTest {
 
@@ -20,7 +20,7 @@ public class CargaDeArchivoTest {
 
 	@Test
 	public void cargaExistosaDeArchivoIndicadores() throws Exception {
-		new FileLoader().getDataIndicadores();
+		new FileLoader().getDataEmpresas();
 	}
 
 }

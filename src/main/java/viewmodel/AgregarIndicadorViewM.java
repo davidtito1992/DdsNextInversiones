@@ -1,13 +1,15 @@
 package viewmodel;
 
 import java.util.List;
-import model.Empresa;
+
 import model.RegistroIndicador;
-import org.uqbar.commons.utils.ApplicationContext;
+
 import org.uqbar.commons.utils.Observable;
+
+import repositories.RepositorioUnicoDeEmpresas;
+import repositories.RepositorioUnicoDeIndicadores;
+import app.AplicacionContexto;
 import app.DslIndicador;
-import repositories.RepositorioEmpresa;
-import repositories.RepositorioIndicadores;
 
 @Observable
 public class AgregarIndicadorViewM {
@@ -79,18 +81,20 @@ public class AgregarIndicadorViewM {
 		this.cargarCuentasDisponibles();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void cargarCuentasDisponibles() {
 
-		this.agregarCuenta = this.getRepoEmpresas().todosLosNombresDeCuentas(
-				this.getRepoEmpresas().allInstances());
+		this.agregarCuenta = this.getRepositorioEmpresas().todosLosNombresDeCuentas(
+				this.getRepositorioEmpresas().getElementos());
 
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	private void cargarIndicadoresDisponibles() {
 
-		this.agregarIndicador = this.getRepoIndicadores()
+		this.agregarIndicador = this.getRepositorioIndicadores()
 				.todosLosNombresDeIndicadores(
-						this.getRepoIndicadores().allInstances());
+						this.getRepositorioIndicadores().getElementos());
 
 	}
 
@@ -104,10 +108,9 @@ public class AgregarIndicadorViewM {
 		new DslIndicador().añadirIndicador(new RegistroIndicador(this.nombre,
 				this.formula));
 	}
-
-	public RepositorioIndicadores getRepoIndicadores() {
-		return ApplicationContext.getInstance().getSingleton(
-				RegistroIndicador.class);
+	
+	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
+		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 
 	public void agregarCuentaALaFormula() {
@@ -121,11 +124,14 @@ public class AgregarIndicadorViewM {
 		if (this.getAgregarIndicadorSeleccionado() != null)
 			this.setFormula(this.getFormula() + " "
 					+ this.getAgregarIndicadorSeleccionado());
-
 	}
 
-	public RepositorioEmpresa getRepoEmpresas() {
-		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+//	public RepositorioEmpresa getRepoEmpresas() {
+//		return ApplicationContext.getInstance().getSingleton(Empresa.class);
+//	}
+	
+	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
+		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
 }

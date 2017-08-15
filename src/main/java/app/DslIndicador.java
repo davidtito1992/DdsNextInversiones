@@ -35,7 +35,7 @@ public class DslIndicador {
 				semestre).valor();
 	}
 
-	private void analizarNombreIndicador(String nombre) throws ParseException {
+	public void analizarNombreIndicador(String nombre) throws ParseException {
 		try {
 			String nombreIndicador = new ParserIndicador(nombre)
 					.pasearSoloNombre();
@@ -47,7 +47,7 @@ public class DslIndicador {
 		}
 	}
 
-	private List<String> analizarFormulaIndicador(String formula)
+	public List<String> analizarFormulaIndicador(String formula)
 			throws ParseException {
 		try {
 			ParserIndicador preIndicador = new ParserIndicador(formula);
@@ -71,7 +71,8 @@ public class DslIndicador {
 		ParserIndicador preIndicador = new ParserIndicador(
 				formulaIndicador.getFormula());
 		preIndicador.pasear();
-
+		new AnalizadorSemantico().analizarVariablesDeFormula(preIndicador
+				.variables());
 		preIndicador.variables().forEach(
 				variable -> variable.setValor(this.traducirVariable(
 						variable.getNombre(), nombreEmpresa, anio, semestre)));

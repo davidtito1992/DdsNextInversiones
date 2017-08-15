@@ -2,14 +2,15 @@ package domaintest;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import DataManagment.DataAdapter;
-import DataManagment.DataAdapterFactory;
-import DataManagment.DataLoader;
 import model.Empresa;
+import model.Metodologia;
 import model.RegistroIndicador;
+import dataManagment.dataLoader.DataAdapter;
+import dataManagment.dataLoader.DataAdapterFactory;
+import dataManagment.dataLoader.DataLoader;
 
 public class StubFileLoader implements DataLoader {
 
@@ -30,7 +31,7 @@ public class StubFileLoader implements DataLoader {
 		}
 	}
 
-	public List<Empresa> getDataEmpresas() throws Exception {
+	public ArrayList<Empresa> getDataEmpresas() throws Exception {
 		String AbsolutePath = new File(".").getAbsolutePath();
 		String archivoEmpresas = readFile(AbsolutePath
 				+ "/archivoInexistente.json");
@@ -41,7 +42,7 @@ public class StubFileLoader implements DataLoader {
 
 	}
 
-	public List<RegistroIndicador> getDataIndicadores() throws Exception {
+	public ArrayList<RegistroIndicador> getDataIndicadores() throws Exception {
 		String AbsolutePath = new File(".").getAbsolutePath();
 		String archivoIndicadores = readFile(AbsolutePath
 				+ "/archivoInexistente.json");
@@ -49,5 +50,15 @@ public class StubFileLoader implements DataLoader {
 		DataAdapter adaptador = DataAdapterFactory
 				.adaptarData(DataAdapterFactory.JSON);
 		return adaptador.adaptarIndicadores(archivoIndicadores);
+	}
+
+	@Override
+	public ArrayList<Metodologia> getDataMetodologias() throws Exception {
+		String AbsolutePath = new File(".").getAbsolutePath();
+		String archivoMetodologias = readFile(AbsolutePath + "/archivoInexistente.json");
+
+		DataAdapter adaptador = DataAdapterFactory
+				.adaptarData(DataAdapterFactory.JSON);
+		return adaptador.adaptarMetodologias(archivoMetodologias);
 	}
 }

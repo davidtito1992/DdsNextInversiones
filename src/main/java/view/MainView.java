@@ -34,13 +34,17 @@ public class MainView extends SimpleWindow<MainViewM> {
 		new Button(mainPanel).setCaption("Cargar Indicadores")
 				.onClick(this::cargarIndicadores)
 				.bindVisibleToProperty("indicadoresSinCargar");
-		new Button(mainPanel).setCaption("ABM Empresas")
+		new Button(mainPanel).setCaption("Cargar Metodologias")
+				.onClick(this::cargarMetodologias)
+				.bindVisibleToProperty("metodologiasSinCargar");
+		new Button(mainPanel).setCaption("Empresas")
 				.onClick(() -> this.verEmpresas()).setWidth(60).setHeight(80);
-		new Button(mainPanel).setCaption("ABM Indicadores")
+		new Button(mainPanel).setCaption("Indicadores")
 				.onClick(() -> this.verIndicadores()).setWidth(60)
 				.setHeight(80);
-		new Button(mainPanel).setCaption("ABM Metodologias")
-				.onClick(() -> verAlgo()).setWidth(60).setHeight(80);
+		new Button(mainPanel).setCaption("Metodologias")
+				.onClick(() -> this.verMetodologias()).setWidth(60)
+				.setHeight(80);		
 
 		new Label(mainPanel).setText("\n\n\n");
 
@@ -48,7 +52,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 				.setHeight(50);
 
 	}
-
+	
 	/*****************
 	 * buttons adicionales: podemos colocarlos horizontales a diferencia de los
 	 * demas
@@ -64,6 +68,27 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 	public void cerrar() {
 		close();
+	}
+
+	private void verMetodologias() {
+
+		if (getModelObject().isMetodologiasSinCargar()) {
+			showInfo("Cargue las metodologias primero.");
+		} else {
+
+			if (getModelObject().isIndicadoresSinCargar()) {
+				showInfo("No se puede acceder a las metodologias si los indicadores no fueron cargados.");
+			} else {
+				if (getModelObject().isEmpresasSinCargar()) {
+					showInfo("No se puede acceder a los indicadores si las empresas no fueron cargadas.");
+				} else {
+					Dialog<?> dialog = new MetodologiaView(this);
+					dialog.open();
+					dialog.onAccept(() -> {
+					});
+				}
+			}
+		}
 	}
 
 	public void verIndicadores() {
@@ -106,6 +131,15 @@ public class MainView extends SimpleWindow<MainViewM> {
 		try {
 			getModelObject().cargarIndicadores();
 			getModelObject().setIndicadoresSinCargar(false);
+		} catch (Exception e) {
+			showInfo(e.getMessage());
+		}
+	}
+
+	private void cargarMetodologias() {
+		try {
+			getModelObject().cargarMetodologias();
+			getModelObject().setMetodologiasSinCargar(false);
 		} catch (Exception e) {
 			showInfo(e.getMessage());
 		}

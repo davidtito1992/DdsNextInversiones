@@ -42,7 +42,7 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 	}
 
 	@Override
-	protected Predicate getCriterio(Empresa example) {
+	protected Predicate<?> getCriterio(Empresa example) {
 		return null;
 	}
 
@@ -211,4 +211,12 @@ public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
 
 		return todasLasCuentas;
 	}
+
+	public Empresa getEmpresa(String nombreEmpresa) {
+
+		return this.allInstances().stream()
+				.filter(emp -> emp.getNombre().equalsIgnoreCase(nombreEmpresa))
+				.collect(Collectors.toCollection(ArrayList::new)).get(0);
+	}
+
 }

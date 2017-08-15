@@ -2,10 +2,13 @@ package viewmodel;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import model.RegistroIndicador;
-import org.uqbar.commons.utils.ApplicationContext;
+
 import org.uqbar.commons.utils.Observable;
-import repositories.RepositorioIndicadores;
+
+import repositories.RepositorioUnicoDeIndicadores;
+import app.AplicacionContexto;
 
 @Observable
 public class IndicadorViewM {
@@ -57,14 +60,14 @@ public class IndicadorViewM {
 		this.llenarTablas();
 	}
 
+	@SuppressWarnings("unchecked")	
 	public void llenarTablas() {
 		this.setIndicadores(null);
-		this.setIndicadores(getRepoIndicadores().allInstances());
+		this.setIndicadores(getRepositorioIndicadores().getElementos());
 	}
 
-	public RepositorioIndicadores getRepoIndicadores() {
-		return ApplicationContext.getInstance().getSingleton(
-				RegistroIndicador.class);
+	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
+		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 
 }

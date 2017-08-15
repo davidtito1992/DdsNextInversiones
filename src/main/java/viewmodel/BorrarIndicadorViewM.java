@@ -17,7 +17,8 @@ public class BorrarIndicadorViewM {
 	}
 
 	public void borrar() throws Exception {
-		new AppData().borrarIndicador(this.indicadorABorrar);
+
+		new AppData().borrarIndicador(indicadorABorrar);
 
 	}
 

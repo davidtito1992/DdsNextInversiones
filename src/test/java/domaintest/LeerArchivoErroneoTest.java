@@ -4,8 +4,8 @@ import java.io.File;
 
 import org.junit.Test;
 
-import DataManagment.FileLoader;
-import DataManagment.JsonAdapter;
+import dataManagment.dataLoader.FileLoader;
+import dataManagment.dataLoader.JsonAdapter;
 
 public class LeerArchivoErroneoTest {
 
