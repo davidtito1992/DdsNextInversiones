@@ -2,9 +2,9 @@ package app;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioUnicoDeEmpresas;
-import repositories.RepositorioUnicoDeIndicadores;
-import repositories.RepositorioUnicoDeMetodologias;
+import repositories.RepositorioEmpresa;
+import repositoriesVIEJOS.RepositorioUnicoDeIndicadores;
+import repositoriesVIEJOS.RepositorioUnicoDeMetodologias;
 
 @Observable
 public class AplicacionContexto {
@@ -18,8 +18,8 @@ public class AplicacionContexto {
 		return aplicacionContexto;
 	}
 
-	public RepositorioUnicoDeEmpresas getInstanceRepoEmpresas() {
-		return RepositorioUnicoDeEmpresas.getSingletonInstance();
+	public RepositorioEmpresa getInstanceRepoEmpresas() {
+		return RepositorioEmpresa.getInstance();
 	}
 
 	public RepositorioUnicoDeIndicadores getInstanceRepoIndicadores() {

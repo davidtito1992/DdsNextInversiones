@@ -2,6 +2,7 @@ package mockRepo;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 import repositories.RepositorioEmpresa;
 
 public class MockRepoEmpresa {

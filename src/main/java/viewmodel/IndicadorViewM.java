@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.RegistroIndicador;
+import repositoriesVIEJOS.RepositorioUnicoDeIndicadores;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioUnicoDeIndicadores;
 import app.AplicacionContexto;
 
 @Observable

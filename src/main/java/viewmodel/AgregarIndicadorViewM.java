@@ -3,11 +3,11 @@ package viewmodel;
 import java.util.List;
 
 import model.RegistroIndicador;
+import repositories.RepositorioEmpresa;
+import repositoriesVIEJOS.RepositorioUnicoDeIndicadores;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioUnicoDeEmpresas;
-import repositories.RepositorioUnicoDeIndicadores;
 import app.AplicacionContexto;
 import app.DslIndicador;
 
@@ -85,7 +85,7 @@ public class AgregarIndicadorViewM {
 	private void cargarCuentasDisponibles() {
 
 		this.agregarCuenta = this.getRepositorioEmpresas().todosLosNombresDeCuentas(
-				this.getRepositorioEmpresas().getElementos());
+				this.getRepositorioEmpresas().allInstances());
 
 	}
 	
@@ -130,7 +130,7 @@ public class AgregarIndicadorViewM {
 //		return ApplicationContext.getInstance().getSingleton(Empresa.class);
 //	}
 	
-	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
+	public RepositorioEmpresa getRepositorioEmpresas(){
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 

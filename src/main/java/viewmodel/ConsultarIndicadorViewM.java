@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 import model.Empresa;
 import model.RegistroIndicador;
 import model.SnapshotIndicador;
+import repositories.RepositorioEmpresa;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioUnicoDeEmpresas;
 import app.AplicacionContexto;
 import app.DslIndicador;
 
@@ -122,7 +122,7 @@ public class ConsultarIndicadorViewM {
 
 	}
 
-	public RepositorioUnicoDeEmpresas getRepositorioEmpresas() {
+	public RepositorioEmpresa getRepositorioEmpresas() {
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
@@ -153,7 +153,7 @@ public class ConsultarIndicadorViewM {
 	@SuppressWarnings("unchecked")
 	public void llenarTablas() {
 		this.setSnapshotIndicadores(this
-				.resultadosIndicadores(getRepositorioEmpresas().getElementos()));
+				.resultadosIndicadores(getRepositorioEmpresas().allInstances()));
 	}
 
 	public List<SnapshotIndicador> resultadosIndicadores(

@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 import model.Empresa;
 import model.RegistroIndicador;
+import repositories.RepositorioEmpresa;
+import repositoriesVIEJOS.RepositorioIndicadores;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.uqbar.commons.utils.ApplicationContext;
 
-import repositories.RepositorioEmpresa;
-import repositories.RepositorioIndicadores;
 import semanticaIndicador.AnalizadorSemantico;
 import formulaIndicador.Variable;
 

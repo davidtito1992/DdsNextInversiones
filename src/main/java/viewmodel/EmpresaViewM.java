@@ -8,10 +8,11 @@ import model.Cuenta;
 import model.Empresa;
 import model.Periodo;
 import model.SnapshotEmpresa;
+import repositories.RepositorioEmpresa;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioUnicoDeEmpresas;
+import app.AplicacionContexto;
 
 @Observable
 public class EmpresaViewM {
@@ -46,8 +47,7 @@ public class EmpresaViewM {
 	public void setNombreSeleccionado(String nombreSeleccionado) {
 
 		this.nombreSeleccionado = nombreSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.anioSeleccionado,
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.cuentaSeleccionada, this.anioSeleccionado,
 				this.semestreSeleccionado);
 
 	}
@@ -76,8 +76,7 @@ public class EmpresaViewM {
 
 	public void setCuentaSeleccionada(String cuentaSeleccionada) {
 		this.cuentaSeleccionada = cuentaSeleccionada;
-		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.anioSeleccionado,
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.cuentaSeleccionada, this.anioSeleccionado,
 				this.semestreSeleccionado);
 	}
 
@@ -88,8 +87,7 @@ public class EmpresaViewM {
 	public void setAnioSeleccionado(Year anioSeleccionado) {
 		this.anioSeleccionado = anioSeleccionado;
 
-		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.anioSeleccionado,
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.cuentaSeleccionada, this.anioSeleccionado,
 				this.semestreSeleccionado);
 
 	}
@@ -97,8 +95,7 @@ public class EmpresaViewM {
 	public void setSemestreSeleccionado(Integer semestreSeleccionado) {
 		this.semestreSeleccionado = semestreSeleccionado;
 
-		this.generarTodosLosCBox(this.nombreSeleccionado,
-				this.cuentaSeleccionada, this.anioSeleccionado,
+		this.generarTodosLosCBox(this.nombreSeleccionado, this.cuentaSeleccionada, this.anioSeleccionado,
 				this.semestreSeleccionado);
 
 	}
@@ -127,8 +124,7 @@ public class EmpresaViewM {
 		return snapshotEmpresaSeleccionada;
 	}
 
-	public void setSnapshotEmpresaSeleccionada(
-			SnapshotEmpresa snapshotEmpresaSeleccionada) {
+	public void setSnapshotEmpresaSeleccionada(SnapshotEmpresa snapshotEmpresaSeleccionada) {
 		this.snapshotEmpresaSeleccionada = snapshotEmpresaSeleccionada;
 	}
 
@@ -142,7 +138,7 @@ public class EmpresaViewM {
 
 	@SuppressWarnings("unchecked")
 	public void llenarTablas() {
-		this.setSnapshotEmpresas(this.dameSnapshotEmpresas(getRepositorioEmpresas().getElementos()));
+		this.setSnapshotEmpresas(this.dameSnapshotEmpresas(getRepositorioEmpresas().allInstances()));
 	}
 
 	public void reiniciar() {
@@ -153,12 +149,10 @@ public class EmpresaViewM {
 	}
 
 	// Genera todos los combobox en base a la seleccion de cada uno de ellos
-	public void generarTodosLosCBox(String empresa, String cuenta, Year anio,
-			Integer semestre) {
+	public void generarTodosLosCBox(String empresa, String cuenta, Year anio, Integer semestre) {
 
 		List<Empresa> repoEmpresa2 = new ArrayList<Empresa>();
-		repoEmpresa2 = this.getRepositorioEmpresas().filtrar(cuenta, empresa,
-				semestre, anio);
+		repoEmpresa2 = this.getRepositorioEmpresas().filtrar(cuenta, empresa, semestre, anio);
 
 		generarCBoxNombresEmpresas(repoEmpresa2);
 		generarCBoxCuentas(repoEmpresa2);
@@ -182,9 +176,9 @@ public class EmpresaViewM {
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
 		this.nombres = this.getRepositorioEmpresas().todosLosNombresDeEmpresas(empresas);
 	}
-	
-	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
-		return RepositorioUnicoDeEmpresas.getSingletonInstance();
+
+	public RepositorioEmpresa getRepositorioEmpresas() {
+		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
 	public void limpiarFiltros() {
@@ -195,16 +189,13 @@ public class EmpresaViewM {
 	}
 
 	public void filtrar() {
-		ArrayList<SnapshotEmpresa> empresitas = (this
-				.dameSnapshotEmpresas(getRepositorioEmpresas().filtrar(
-						cuentaSeleccionada, nombreSeleccionado,
-						semestreSeleccionado, anioSeleccionado)));
+		ArrayList<SnapshotEmpresa> empresitas = (this.dameSnapshotEmpresas(getRepositorioEmpresas()
+				.filtrar(cuentaSeleccionada, nombreSeleccionado, semestreSeleccionado, anioSeleccionado)));
 		this.setSnapshotEmpresas(empresitas);
 	}
 
 	// TRANSFORMA EMPRESA EN SNAPSHOT, MOSTRANDO SOLO SNAPSHOTS QUE INTERESAN
-	public ArrayList<SnapshotEmpresa> dameSnapshotEmpresas(
-			List<Empresa> empresasASnap) {
+	public ArrayList<SnapshotEmpresa> dameSnapshotEmpresas(List<Empresa> empresasASnap) {
 		ArrayList<SnapshotEmpresa> listSnapshot = new ArrayList<SnapshotEmpresa>();
 		empresasASnap.forEach(empresa -> {
 			empresa.getPeriodos().forEach(periodo -> {
@@ -226,36 +217,31 @@ public class EmpresaViewM {
 	}
 
 	// FILTRA EMPRESA PARA NO MOSTRAR TODOS SUS DATOS SEGUN FILTROS
-	private boolean agregarALista(Empresa empresa, Periodo periodo,
-			Cuenta cuenta) {
+	private boolean agregarALista(Empresa empresa, Periodo periodo, Cuenta cuenta) {
 		boolean agregarALista = true;
 
 		if (nombreSeleccionado == null) {
 			agregarALista = agregarALista && true;
 		} else {
-			agregarALista = agregarALista
-					&& empresa.getNombre().equals(nombreSeleccionado);
+			agregarALista = agregarALista && empresa.getNombre().equals(nombreSeleccionado);
 		}
 
 		if (anioSeleccionado == null) {
 			agregarALista = agregarALista && true;
 		} else {
-			agregarALista = agregarALista
-					&& periodo.getAnio() == anioSeleccionado;
+			agregarALista = agregarALista && periodo.getAnio() == anioSeleccionado;
 		}
 
 		if (semestreSeleccionado == null) {
 			agregarALista = agregarALista && true;
 		} else {
-			agregarALista = agregarALista
-					&& periodo.getSemestre() == semestreSeleccionado;
+			agregarALista = agregarALista && periodo.getSemestre() == semestreSeleccionado;
 		}
 
 		if (cuentaSeleccionada == null) {
 			agregarALista = agregarALista && true;
 		} else {
-			agregarALista = agregarALista
-					&& cuenta.getNombre().equals(cuentaSeleccionada);
+			agregarALista = agregarALista && cuenta.getNombre().equals(cuentaSeleccionada);
 		}
 
 		return agregarALista;

@@ -2,7 +2,8 @@ package mockRepo;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import repositories.RepositorioIndicadores;
+
+import repositoriesVIEJOS.RepositorioIndicadores;
 
 public class MockRepoIndicadores {
 	

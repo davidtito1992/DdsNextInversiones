@@ -12,9 +12,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.uqbar.commons.utils.ApplicationContext;
 import parserIndicador.ParseException;
-import app.DslIndicador;
 import repositories.RepositorioEmpresa;
-import repositories.RepositorioIndicadores;
+import repositoriesVIEJOS.RepositorioIndicadores;
+import app.DslIndicador;
 import semanticaIndicador.SemanticaVariable;
 
 public class SemanticaDeVariablesTest {

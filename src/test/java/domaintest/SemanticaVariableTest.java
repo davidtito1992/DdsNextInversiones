@@ -2,10 +2,9 @@ package domaintest;
 
 import static org.mockito.Mockito.mock;
 import model.Empresa;
+import repositories.RepositorioEmpresa;
 
 import org.uqbar.commons.utils.ApplicationContext;
-
-import repositories.RepositorioEmpresa;
 
 public class SemanticaVariableTest {
 

@@ -6,11 +6,11 @@ import java.util.List;
 
 import model.Metodologia;
 import model.SnapshotCondicion;
+import repositoriesVIEJOS.RepositorioUnicoDeIndicadores;
+import repositoriesVIEJOS.RepositorioUnicoDeMetodologias;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioUnicoDeIndicadores;
-import repositories.RepositorioUnicoDeMetodologias;
 import app.AplicacionContexto;
 import condiciones.Condicion;
 import condiciones.CondicionesBuilder;

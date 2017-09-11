@@ -13,7 +13,7 @@ import org.uqbar.commons.utils.ApplicationContext;
 import formulaIndicador.FormulaIndicador;
 import parserIndicador.ParseException;
 import repositories.RepositorioEmpresa;
-import repositories.RepositorioIndicadores;
+import repositoriesVIEJOS.RepositorioIndicadores;
 import semanticaIndicador.AnalizadorSemantico;
 import app.DslIndicador;
 

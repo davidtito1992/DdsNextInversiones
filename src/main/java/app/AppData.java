@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
-import repositories.RepositorioUnicoDeEmpresas;
-import repositories.RepositorioUnicoDeIndicadores;
-import repositories.RepositorioUnicoDeMetodologias;
+import repositories.RepositorioEmpresa;
+import repositoriesVIEJOS.RepositorioUnicoDeIndicadores;
+import repositoriesVIEJOS.RepositorioUnicoDeMetodologias;
 import dataManagment.dataLoader.DataLoader;
 import dataManagment.dataLoader.DataLoaderFactory;
 import dataManagment.dataLoader.MetodologiasLoader;
@@ -19,8 +19,7 @@ public class AppData {
 	public void cargarEmpresas() throws Exception {
 
 		// LEO ARCHIVO YA ADAPTADO
-		DataLoader cargador = DataLoaderFactory
-				.cargarData(DataLoaderFactory.ARCHIVO);
+		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
 		ArrayList<Empresa> empresas = cargador.getDataEmpresas();
 		this.getRepositorioEmpresas().cargarListaDeElementos(empresas);
 	}
@@ -28,8 +27,7 @@ public class AppData {
 	@SuppressWarnings("unchecked")
 	public void cargarMetodologias() throws Exception {
 
-		this.getRepositorioMetodologias().cargarListaDeElementos(
-				MetodologiasLoader.damePredefinidas());
+		this.getRepositorioMetodologias().cargarListaDeElementos(MetodologiasLoader.damePredefinidas());
 
 	}
 
@@ -37,10 +35,8 @@ public class AppData {
 	public void cargarIndicadores() throws Exception {
 
 		// LEO ARCHIVO YA ADAPTADO
-		DataLoader cargador = DataLoaderFactory
-				.cargarData(DataLoaderFactory.ARCHIVO);
-		ArrayList<RegistroIndicador> indicadores = cargador
-				.getDataIndicadores();
+		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
+		ArrayList<RegistroIndicador> indicadores = cargador.getDataIndicadores();
 		this.getRepositorioIndicadores().cargarListaDeElementos(indicadores);
 	}
 
@@ -52,7 +48,7 @@ public class AppData {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 
-	public RepositorioUnicoDeEmpresas getRepositorioEmpresas() {
+	public RepositorioEmpresa getRepositorioEmpresas() {
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
@@ -64,8 +60,7 @@ public class AppData {
 	public void guardarIndicador(RegistroIndicador unIndicador) {
 
 		try {
-			DataUploader cargador = DataUploaderFactory
-					.actualizarData(DataLoaderFactory.ARCHIVO);
+			DataUploader cargador = DataUploaderFactory.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.escribirNuevoIndicador(unIndicador);
 			this.getRepositorioIndicadores().add(unIndicador);
@@ -80,8 +75,7 @@ public class AppData {
 	public void borrarIndicador(RegistroIndicador unIndicador) {
 
 		try {
-			DataUploader cargador = DataUploaderFactory
-					.actualizarData(DataLoaderFactory.ARCHIVO);
+			DataUploader cargador = DataUploaderFactory.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.borrarIndicador(unIndicador);
 			this.getRepositorioIndicadores().delete(unIndicador);
@@ -106,12 +100,10 @@ public class AppData {
 			//
 			// this.getRepoMetodologias().create(metodologia);
 
-			DataUploader cargador = DataUploaderFactory
-					.actualizarData(DataLoaderFactory.ARCHIVO);
+			DataUploader cargador = DataUploaderFactory.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.escribirNuevaMetodologia(metodologia);
-			this.getRepositorioMetodologias().agregarMetodologiaNueva(
-					metodologia);
+			this.getRepositorioMetodologias().agregarMetodologiaNueva(metodologia);
 
 		} catch (Exception e) {
 			throw new RuntimeException(

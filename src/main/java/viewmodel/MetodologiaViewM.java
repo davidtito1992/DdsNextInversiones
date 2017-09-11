@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Metodologia;
+import repositoriesVIEJOS.RepositorioUnicoDeMetodologias;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioUnicoDeMetodologias;
 import app.AplicacionContexto;
 
 @Observable
