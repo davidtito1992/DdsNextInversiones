@@ -1,11 +1,12 @@
 package app;
 
 import java.util.ArrayList;
+
 import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
 import repositories.RepositorioEmpresa;
-import repositoriesVIEJOS.RepositorioUnicoDeIndicadores;
+import repositories.RepositorioIndicador;
 import repositoriesVIEJOS.RepositorioUnicoDeMetodologias;
 import dataManagment.dataLoader.DataLoader;
 import dataManagment.dataLoader.DataLoaderFactory;
@@ -44,7 +45,7 @@ public class AppData {
 		this.getRepositorioMetodologias().borrarElemento(metSelec);
 	}
 
-	public RepositorioUnicoDeIndicadores getRepositorioIndicadores() {
+	public RepositorioIndicador getRepositorioIndicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 

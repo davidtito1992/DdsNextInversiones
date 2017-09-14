@@ -6,7 +6,7 @@ import java.util.List;
 
 import model.Metodologia;
 import model.SnapshotCondicion;
-import repositoriesVIEJOS.RepositorioUnicoDeIndicadores;
+import repositories.RepositorioIndicador;
 import repositoriesVIEJOS.RepositorioUnicoDeMetodologias;
 
 import org.uqbar.commons.utils.Observable;
@@ -281,7 +281,7 @@ public class AgregarMetodologiaViewM {
 		}
 	}
 
-	public RepositorioUnicoDeIndicadores getRepositorindicadores() {
+	public RepositorioIndicador getRepositorindicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 

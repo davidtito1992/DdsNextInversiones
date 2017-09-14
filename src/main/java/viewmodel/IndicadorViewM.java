@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.RegistroIndicador;
-import repositoriesVIEJOS.RepositorioUnicoDeIndicadores;
+import repositories.RepositorioIndicador;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -66,7 +66,7 @@ public class IndicadorViewM {
 		this.setIndicadores(getRepositorioIndicadores().getElementos());
 	}
 
-	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
+	public RepositorioIndicador getRepositorioIndicadores(){
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 

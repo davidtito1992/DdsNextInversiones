@@ -5,7 +5,7 @@ import java.util.List;
 import app.AplicacionContexto;
 import formulaIndicador.Variable;
 import repositories.RepositorioEmpresa;
-import repositoriesVIEJOS.RepositorioUnicoDeIndicadores;
+import repositories.RepositorioIndicador;
 
 public class AnalizadorSemantico {
 
@@ -38,7 +38,7 @@ public class AnalizadorSemantico {
 
 	}
 
-	public RepositorioUnicoDeIndicadores getRepositorioIndicadores() {
+	public RepositorioIndicador getRepositorioIndicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 

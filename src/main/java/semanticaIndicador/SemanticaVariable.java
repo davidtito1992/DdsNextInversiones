@@ -6,7 +6,7 @@ import java.time.Year;
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 import repositories.RepositorioEmpresa;
-import repositoriesVIEJOS.RepositorioUnicoDeIndicadores;
+import repositories.RepositorioIndicador;
 import app.AplicacionContexto;
 import app.DslIndicador;
 import formulaIndicador.FormulaIndicador;
@@ -56,7 +56,7 @@ public class SemanticaVariable {
 		return valor;
 	}
 
-	public RepositorioUnicoDeIndicadores getRepositorioIndicadores() {
+	public RepositorioIndicador getRepositorioIndicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.RegistroIndicador;
 import repositories.RepositorioEmpresa;
-import repositoriesVIEJOS.RepositorioUnicoDeIndicadores;
+import repositories.RepositorioIndicador;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -109,7 +109,7 @@ public class AgregarIndicadorViewM {
 				this.formula));
 	}
 	
-	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
+	public RepositorioIndicador getRepositorioIndicadores(){
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 
