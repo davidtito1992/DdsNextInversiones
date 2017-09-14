@@ -1,12 +1,24 @@
 package condiciones;
 
 import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
+@Entity
+@DiscriminatorValue("3")
 public class CondicionCuantitativaMayorOMenorA extends CondicionSumatoria {
 
+	public CondicionCuantitativaMayorOMenorA() {
+
+	}
+	
+	@Column(name = "peso")
 	private BigDecimal peso;
 
 	public CondicionCuantitativaMayorOMenorA(MenorOMayor criterio,

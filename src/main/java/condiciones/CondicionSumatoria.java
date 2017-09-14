@@ -9,6 +9,11 @@ import model.RegistroIndicador;
 import parserIndicador.ParseException;
 
 public abstract class CondicionSumatoria extends Condicion {
+	
+	public CondicionSumatoria(){
+		
+	}
+	
 	public enum MenorOMayor {
 		mayorA, menorA;
 	}

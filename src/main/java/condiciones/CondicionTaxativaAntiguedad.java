@@ -2,12 +2,23 @@ package condiciones;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
+@Entity
+@DiscriminatorValue("4")
 public class CondicionTaxativaAntiguedad extends Condicion {
 
-	public BigDecimal nroAComparar;
+	public CondicionTaxativaAntiguedad() {
+
+	}
+	
+	@Column(name = "nroAComparar")
+	private BigDecimal nroAComparar;
 
 	public CondicionTaxativaAntiguedad(BigDecimal nroAComparar) {
 		this.nroAComparar = nroAComparar;

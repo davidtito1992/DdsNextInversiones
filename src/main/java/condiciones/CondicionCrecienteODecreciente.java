@@ -2,19 +2,36 @@ package condiciones;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
+@Entity
+@DiscriminatorValue("1")
 public class CondicionCrecienteODecreciente extends Condicion {
 
+	public CondicionCrecienteODecreciente() {
+
+	}
+	
 	public enum CreceODecrece {
 		CRECIENTE, DECRECIENTE;
 	}
 
+	@OneToOne
+	@JoinColumn(name = "indicador_id")
 	private RegistroIndicador indicador;
+	
+	@Column(name = "criterio")
 	private CreceODecrece criterio;
 
 	public CondicionCrecienteODecreciente(CreceODecrece criterio,

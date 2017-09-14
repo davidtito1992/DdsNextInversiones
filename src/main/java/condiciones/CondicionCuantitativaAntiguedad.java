@@ -1,13 +1,25 @@
 package condiciones;
 
+
 import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
+@Entity
+@DiscriminatorValue("2")
 public class CondicionCuantitativaAntiguedad extends Condicion {
 
-	public BigDecimal peso;
+	public CondicionCuantitativaAntiguedad() {
+
+	}
+	
+	@Column(name = "peso")
+	private BigDecimal peso;
 
 	public CondicionCuantitativaAntiguedad(BigDecimal peso) {
 		this.peso = peso;

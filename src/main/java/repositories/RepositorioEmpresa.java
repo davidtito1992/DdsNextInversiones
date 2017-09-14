@@ -32,7 +32,7 @@ public class RepositorioEmpresa extends Repository {
 
 	@Transactional
 	public void agregarEmpresa(Empresa empresa) {
-		merge(empresa);
+		entityManager.merge(empresa);
 	}
 
 	@Transactional
