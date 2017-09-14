@@ -19,6 +19,7 @@ public abstract class CondicionSumatoria extends Condicion {
 	}
 
 	protected MenorOMayor criterio;
+	
 	protected RegistroIndicador indicador;
 
 	public CondicionSumatoria(MenorOMayor criterio, RegistroIndicador indicador,

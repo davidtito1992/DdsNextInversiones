@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import model.Empresa;
@@ -27,7 +28,7 @@ public class CondicionCrecienteODecreciente extends Condicion {
 		CRECIENTE, DECRECIENTE;
 	}
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "indicador_id")
 	private RegistroIndicador indicador;
 	
