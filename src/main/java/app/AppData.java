@@ -24,14 +24,14 @@ public class AppData {
 		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
 		ArrayList<Empresa> empresas = cargador.getDataEmpresas();
 		this.getRepositorioEmpresas().cargarListaDeElementos(empresas);
-		List<Empresa> lista = this.getRepositorioEmpresas().allInstances();
-		String a = "a";
+		//List<Empresa> lista = this.getRepositorioEmpresas().allInstances();
+		//String a = "a";
 	}
 
 	@SuppressWarnings("unchecked")
 	public void cargarMetodologias() throws Exception {
 
-		this.getRepositorioMetodologias().cargarListaDeElementos(MetodologiasLoader.damePredefinidas());
+		//this.getRepositorioMetodologias().cargarListaDeElementos(MetodologiasLoader.damePredefinidas());
 
 	}
 
@@ -39,9 +39,9 @@ public class AppData {
 	public void cargarIndicadores() throws Exception {
 
 		// LEO ARCHIVO YA ADAPTADO
-		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
-		ArrayList<RegistroIndicador> indicadores = cargador.getDataIndicadores();
-		this.getRepositorioIndicadores().cargarListaDeElementos(indicadores);
+		//DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
+		//ArrayList<RegistroIndicador> indicadores = cargador.getDataIndicadores();
+		//this.getRepositorioIndicadores().cargarListaDeElementos(indicadores);
 	}
 
 	public void borrarMetodologia(Metodologia metSelec) {
