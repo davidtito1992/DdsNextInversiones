@@ -1,6 +1,7 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Empresa;
 import model.Metodologia;
@@ -23,6 +24,8 @@ public class AppData {
 		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
 		ArrayList<Empresa> empresas = cargador.getDataEmpresas();
 		this.getRepositorioEmpresas().cargarListaDeElementos(empresas);
+		//List<Empresa> lista = this.getRepositorioEmpresas().allInstances();
+		//String a = "a";
 	}
 
 	@SuppressWarnings("unchecked")
