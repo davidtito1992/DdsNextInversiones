@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,7 +36,7 @@ public class Empresa {
 	private Long empresaId;
 	@Column(name = "nombre")
 	private String nombre;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empresa")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "empresa", cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
 
 	/********* GETTERS/SETTERS *********/

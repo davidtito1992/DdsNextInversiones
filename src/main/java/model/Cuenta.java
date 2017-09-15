@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +30,7 @@ public class Cuenta {
 	private String nombre;
 	@Column(name = "valor")
 	private BigDecimal valor;
+	//@MapsId("periodoId")
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "periodo_id")
 	private Periodo periodo;

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -28,14 +29,19 @@ public class Periodo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "periodoId")
 	private Long periodoId;
+	
+	//@MapsId("empresaId")
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
+	
 	@Column(name = "anio")
 	private Year anio;
+	
 	@Column(name = "semestre")
 	private int semestre;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "periodo")
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "periodo", cascade = CascadeType.ALL)
 	private List<Cuenta> cuentas;
 
 	/********* GETTERS/SETTERS *********/

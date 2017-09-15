@@ -24,8 +24,8 @@ public class AppData {
 		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
 		ArrayList<Empresa> empresas = cargador.getDataEmpresas();
 		this.getRepositorioEmpresas().cargarListaDeElementos(empresas);
-		//List<Empresa> lista = this.getRepositorioEmpresas().allInstances();
-		//String a = "a";
+		List<Empresa> lista = this.getRepositorioEmpresas().allInstances();
+		String a = "a";
 	}
 
 	@SuppressWarnings("unchecked")
