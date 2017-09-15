@@ -30,7 +30,10 @@ public class Metodologia {
 	public Metodologia(String nombre, List<Condicion> condiciones) {
 		this.nombre = nombre;
 		this.condiciones = condiciones;
-
+	}
+	
+	public Metodologia(){
+		
 	}
 
 	/********* ATRIBUTOS *********/
@@ -40,10 +43,10 @@ public class Metodologia {
 	private Long metodologiaId;
 	
 	@Column(name = "nombre")
-	public String nombre;
+	private String nombre;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "metodologia")
-	public List<Condicion> condiciones;
+	private List<Condicion> condiciones;
 
 	/********* GETTERS/SETTERS *********/
 

@@ -94,7 +94,7 @@ public class AgregarIndicadorViewM {
 
 		this.agregarIndicador = this.getRepositorioIndicadores()
 				.todosLosNombresDeIndicadores(
-						this.getRepositorioIndicadores().getElementos());
+						this.getRepositorioIndicadores().allInstances());
 
 	}
 

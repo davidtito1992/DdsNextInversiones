@@ -58,7 +58,15 @@ public class RegistroIndicador {
 	public String getNombre() {
 		return nombre;
 	}
+	
+	public Long getRegistroIndicadorId() {
+		return registroIndicadorId;
+	}
 
+	public void setRegistroIndicadorId(Long registroIndicadorId){
+		this.registroIndicadorId = registroIndicadorId;
+	}
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

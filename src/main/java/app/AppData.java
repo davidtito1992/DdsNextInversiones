@@ -64,7 +64,7 @@ public class AppData {
 			DataUploader cargador = DataUploaderFactory.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.escribirNuevoIndicador(unIndicador);
-			this.getRepositorioIndicadores().add(unIndicador);
+			this.getRepositorioIndicadores().agregarIndicador(unIndicador);
 
 		} catch (Exception e) {
 			throw new RuntimeException(
@@ -79,7 +79,7 @@ public class AppData {
 			DataUploader cargador = DataUploaderFactory.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.borrarIndicador(unIndicador);
-			this.getRepositorioIndicadores().delete(unIndicador);
+			this.getRepositorioIndicadores().eliminarIndicador(unIndicador.getRegistroIndicadorId());
 
 		} catch (Exception e) {
 			throw new RuntimeException(

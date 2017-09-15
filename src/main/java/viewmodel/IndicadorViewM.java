@@ -63,7 +63,7 @@ public class IndicadorViewM {
 	@SuppressWarnings("unchecked")	
 	public void llenarTablas() {
 		this.setIndicadores(null);
-		this.setIndicadores(getRepositorioIndicadores().getElementos());
+		this.setIndicadores(getRepositorioIndicadores().allInstances());
 	}
 
 	public RepositorioIndicador getRepositorioIndicadores(){

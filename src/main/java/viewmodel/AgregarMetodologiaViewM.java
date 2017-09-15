@@ -192,7 +192,7 @@ public class AgregarMetodologiaViewM {
 	private void cargarIndicadoresDisponibles() {
 		this.agregarIndicador = this.getRepositorindicadores()
 				.todosLosNombresDeIndicadores(
-						this.getRepositorindicadores().getElementos());
+						this.getRepositorindicadores().allInstances());
 	}
 
 	public void guardarMetodologia() {
