@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.uqbar.commons.utils.Observable;
 
+import db.EntityManagerHelper;
 import model.Metodologia;
 
 @SuppressWarnings("rawtypes")
@@ -31,12 +32,16 @@ public class RepositorioMetodologia extends Repository{
 
 	@Transactional
 	public void agregarMetodologia(Metodologia metodologia) {
+		EntityManagerHelper.beginTransaction();
 		entityManager.merge(metodologia);
+		EntityManagerHelper.commit();
 	}
 
 	@Transactional
 	public void eliminarMetodologia(long id) {
+		EntityManagerHelper.beginTransaction();
 		entityManager.remove(this.buscar(id));
+		EntityManagerHelper.commit();
 	}
 
 	@SuppressWarnings("unchecked")
