@@ -4,7 +4,7 @@ import org.uqbar.commons.utils.Observable;
 
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicador;
-import repositoriesVIEJOS.RepositorioUnicoDeMetodologias;
+import repositories.RepositorioMetodologia;
 
 @Observable
 public class AplicacionContexto {
@@ -26,8 +26,8 @@ public class AplicacionContexto {
 		return RepositorioIndicador.getSingletonInstance();
 	}
 
-	public RepositorioUnicoDeMetodologias getInstanceRepoMetodologias() {
-		return RepositorioUnicoDeMetodologias.getSingletonInstance();
+	public RepositorioMetodologia getInstanceRepoMetodologias() {
+		return RepositorioMetodologia.getSingletonInstance();
 	}
 
 }

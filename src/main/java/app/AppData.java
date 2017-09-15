@@ -7,7 +7,7 @@ import model.Metodologia;
 import model.RegistroIndicador;
 import repositories.RepositorioEmpresa;
 import repositories.RepositorioIndicador;
-import repositoriesVIEJOS.RepositorioUnicoDeMetodologias;
+import repositories.RepositorioMetodologia;
 import dataManagment.dataLoader.DataLoader;
 import dataManagment.dataLoader.DataLoaderFactory;
 import dataManagment.dataLoader.MetodologiasLoader;
@@ -42,7 +42,7 @@ public class AppData {
 	}
 
 	public void borrarMetodologia(Metodologia metSelec) {
-		this.getRepositorioMetodologias().borrarElemento(metSelec);
+		this.getRepositorioMetodologias().eliminarMetodologia(metSelec.getMetodologiaId());
 	}
 
 	public RepositorioIndicador getRepositorioIndicadores() {
@@ -53,11 +53,10 @@ public class AppData {
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
-	public RepositorioUnicoDeMetodologias getRepositorioMetodologias() {
+	public RepositorioMetodologia getRepositorioMetodologias() {
 		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 	}
 
-	@SuppressWarnings("unchecked")
 	public void guardarIndicador(RegistroIndicador unIndicador) {
 
 		try {
@@ -72,7 +71,6 @@ public class AppData {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void borrarIndicador(RegistroIndicador unIndicador) {
 
 		try {
@@ -104,7 +102,7 @@ public class AppData {
 			DataUploader cargador = DataUploaderFactory.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.escribirNuevaMetodologia(metodologia);
-			this.getRepositorioMetodologias().agregarMetodologiaNueva(metodologia);
+			this.getRepositorioMetodologias().agregarMetodologia(metodologia);
 
 		} catch (Exception e) {
 			throw new RuntimeException(

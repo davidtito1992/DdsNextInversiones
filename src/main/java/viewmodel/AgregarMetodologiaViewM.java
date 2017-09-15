@@ -7,7 +7,7 @@ import java.util.List;
 import model.Metodologia;
 import model.SnapshotCondicion;
 import repositories.RepositorioIndicador;
-import repositoriesVIEJOS.RepositorioUnicoDeMetodologias;
+import repositories.RepositorioMetodologia;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -209,7 +209,7 @@ public class AgregarMetodologiaViewM {
 			condiciones.add(new CondicionesBuilder().crear(snapshotCondicion));
 		}
 		Metodologia metodologia = new Metodologia(this.getNombre(), condiciones);
-		this.getRepositorioMetodologias().agregarMetodologiaNueva(metodologia);
+		this.getRepositorioMetodologias().agregarMetodologia(metodologia);
 
 	}
 
@@ -285,7 +285,7 @@ public class AgregarMetodologiaViewM {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 
-	public RepositorioUnicoDeMetodologias getRepositorioMetodologias() {
+	public RepositorioMetodologia getRepositorioMetodologias() {
 		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 	}
 

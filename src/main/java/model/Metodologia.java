@@ -86,5 +86,9 @@ public class Metodologia {
 				.sorted(new RankingEmpresasComparator())
 				.collect(Collectors.toList());
 	}
+	
+	public long getMetodologiaId(){
+		return metodologiaId;
+	}
 
 }
