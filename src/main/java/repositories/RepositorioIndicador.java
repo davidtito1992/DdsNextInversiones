@@ -11,6 +11,7 @@ import model.RegistroIndicador;
 
 import org.uqbar.commons.utils.Observable;
 
+import db.EntityManagerHelper;
 import repositoriesVIEJOS.Repositorio;
 
 @SuppressWarnings("rawtypes")
@@ -35,12 +36,16 @@ public class RepositorioIndicador extends Repository{
 
 	@Transactional
 	public void agregarIndicador(RegistroIndicador registroIndicador) {
+		EntityManagerHelper.beginTransaction();
 		entityManager.merge(registroIndicador);
+		EntityManagerHelper.commit();
 	}
 
 	@Transactional
 	public void eliminarIndicador(long id) {
+		EntityManagerHelper.beginTransaction();
 		entityManager.remove(this.buscar(id));
+		EntityManagerHelper.commit();
 	}
 
 	@SuppressWarnings("unchecked")
