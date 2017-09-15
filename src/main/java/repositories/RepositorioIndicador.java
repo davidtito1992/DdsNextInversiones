@@ -75,6 +75,6 @@ public class RepositorioIndicador extends Repository{
 	}
 
 	public RegistroIndicador getRegistroIndicador(String nombreIndicador) {
-		return entityManager.createQuery("from RegistroIndicador RI where RI.nombre = "+nombreIndicador, RegistroIndicador.class).getResultList().get(0);
+		return entityManager.createQuery("from RegistroIndicador RI where RI.nombre = '" + nombreIndicador + "'", RegistroIndicador.class).getResultList().get(0);
 	}
 }
