@@ -20,6 +20,7 @@ public abstract class Repository<T>  {
 			entityManager.persist(element);
 		}
 		EntityManagerHelper.commit();
+		
 	}
 	
 	public T findById(Class<T> typeParameterClass, Long id) {

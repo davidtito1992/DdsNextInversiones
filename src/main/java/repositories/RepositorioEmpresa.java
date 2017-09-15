@@ -6,12 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import model.Cuenta;
 import model.Empresa;
 
 import org.uqbar.commons.utils.Observable;
+
+import db.EntityManagerHelper;
 
 @SuppressWarnings("rawtypes")
 @Observable
@@ -32,12 +35,16 @@ public class RepositorioEmpresa extends Repository {
 
 	@Transactional
 	public void agregarEmpresa(Empresa empresa) {
+		EntityManagerHelper.beginTransaction();
 		entityManager.merge(empresa);
+		EntityManagerHelper.commit();
 	}
 
 	@Transactional
 	public void eliminarEmpresa(long id) {
+		EntityManagerHelper.beginTransaction();
 		entityManager.remove(this.buscar(id));
+		EntityManagerHelper.commit();
 	}
 
 	@SuppressWarnings("unchecked")

@@ -3,11 +3,17 @@ package condiciones;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 
+@Entity
 public abstract class CondicionSumatoria extends Condicion {
 	
 	public CondicionSumatoria(){
@@ -18,8 +24,11 @@ public abstract class CondicionSumatoria extends Condicion {
 		mayorA, menorA;
 	}
 
+	@Column(name = "criterio")
 	protected MenorOMayor criterio;
 	
+	@ManyToOne
+	@JoinColumn(name = "indicador_id")
 	protected RegistroIndicador indicador;
 
 	public CondicionSumatoria(MenorOMayor criterio, RegistroIndicador indicador,
