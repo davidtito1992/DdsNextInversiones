@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +46,7 @@ public class Metodologia {
 	@Column(name = "nombre")
 	private String nombre;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "metodologia")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "metodologia", cascade = CascadeType.ALL)
 	private List<Condicion> condiciones;
 
 	/********* GETTERS/SETTERS *********/
