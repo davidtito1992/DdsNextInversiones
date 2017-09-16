@@ -11,7 +11,6 @@ import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
 @Entity
-@DiscriminatorValue("2")
 public class CondicionCuantitativaAntiguedad extends Condicion {
 
 	public CondicionCuantitativaAntiguedad() {

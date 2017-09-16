@@ -11,7 +11,6 @@ import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
 @Entity
-@DiscriminatorValue("5")
 public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 
 	public CondicionTaxativaMayorOMenorA() {
