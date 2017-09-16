@@ -17,7 +17,6 @@ import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
 @Entity
-@DiscriminatorValue("1")
 public class CondicionCrecienteODecreciente extends Condicion {
 
 	public CondicionCrecienteODecreciente() {

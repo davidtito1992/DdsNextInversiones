@@ -16,7 +16,7 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
-@Table(name= "Cuenta")
+@Table(name= "Cuentas")
 @Observable
 public class Cuenta {
 
@@ -30,10 +30,6 @@ public class Cuenta {
 	private String nombre;
 	@Column(name = "valor")
 	private BigDecimal valor;
-	//@MapsId("periodoId")
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "periodo_id")
-	private Periodo periodo;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -62,14 +58,6 @@ public class Cuenta {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
-	}
-
-	public Periodo getPeriodo() {
-		return periodo;
-	}
-
-	public void setPeriodo(Periodo periodo) {
-		this.periodo = periodo;
 	}
 
 	/********* METODOS *********/

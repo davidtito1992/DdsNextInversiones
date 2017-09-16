@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,7 +23,7 @@ import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
 
 @Entity
-@Table(name= "Empresa")
+@Table(name= "Empresas")
 @SuppressWarnings("serial")
 @Transactional
 @Observable
@@ -36,7 +37,8 @@ public class Empresa {
 	private Long empresaId;
 	@Column(name = "nombre")
 	private String nombre;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "empresa", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "periodoId")
 	private List<Periodo> periodos;
 
 	/********* GETTERS/SETTERS *********/

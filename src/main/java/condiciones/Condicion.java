@@ -43,10 +43,6 @@ public abstract class Condicion {
 	
 	@Column(name = "ultimosAnios")
 	protected int ultimosAnios;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "metodologia_id")
-	private Metodologia metodologia;
 
 	public abstract RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException;
 
