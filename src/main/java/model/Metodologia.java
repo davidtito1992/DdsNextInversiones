@@ -44,7 +44,7 @@ public class Metodologia {
 	
 	private String nombre;
 	
-	@JoinColumn(name = "condicionId")
+	@JoinColumn
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Condicion> condiciones;
 

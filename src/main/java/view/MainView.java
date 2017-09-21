@@ -31,12 +31,12 @@ public class MainView extends SimpleWindow<MainViewM> {
 		new Button(mainPanel).setCaption("Cargar Empresas")
 				.onClick(this::cargarEmpresas)
 				.bindVisibleToProperty("empresasSinCargar");
-		// new Button(mainPanel).setCaption("Cargar Indicadores")
-		// .onClick(this::cargarIndicadores)
-		// .bindVisibleToProperty("indicadoresSinCargar");
-		// new Button(mainPanel).setCaption("Cargar Metodologias")
-		// .onClick(this::cargarMetodologias)
-		// .bindVisibleToProperty("metodologiasSinCargar");
+		new Button(mainPanel).setCaption("Cargar Indicadores")
+				.onClick(this::cargarIndicadores)
+				.bindVisibleToProperty("indicadoresSinCargar");
+		new Button(mainPanel).setCaption("Cargar Metodologias")
+				.onClick(this::cargarMetodologias)
+				.bindVisibleToProperty("metodologiasSinCargar");
 		new Button(mainPanel).setCaption("Empresas")
 				.onClick(() -> this.verEmpresas()).setWidth(60).setHeight(80);
 		new Button(mainPanel).setCaption("Indicadores")

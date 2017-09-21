@@ -37,7 +37,7 @@ public class Empresa {
 	
 	private String nombre;
 	
-	@JoinColumn(name = "periodoId")
+	@JoinColumn
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
 
