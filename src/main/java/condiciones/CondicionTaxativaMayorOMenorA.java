@@ -14,18 +14,17 @@ import RankingEmpresa.RankingEmpresa;
 public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 
 	public CondicionTaxativaMayorOMenorA() {
-
 	}
 	
-	@Column(name = "nroAComparar")
-	private BigDecimal nroAComparar;
-
 	public CondicionTaxativaMayorOMenorA(MenorOMayor criterio,
 			RegistroIndicador indicador, int ultimosAnios,
 			BigDecimal nroAComparar) {
 		super(criterio, indicador, ultimosAnios);
 		this.nroAComparar = nroAComparar;
 	}
+	
+	private BigDecimal nroAComparar;
+
 
 	public String textoError() {
 		if (criterio.equals(MenorOMayor.menorA)) {

@@ -35,20 +35,17 @@ public class Metodologia {
 	}
 	
 	public Metodologia(){
-		
 	}
 
 	/********* ATRIBUTOS *********/
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "metodologiaId")
 	private Long metodologiaId;
 	
-	@Column(name = "nombre")
 	private String nombre;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "condicionId")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Condicion> condiciones;
 
 	/********* GETTERS/SETTERS *********/

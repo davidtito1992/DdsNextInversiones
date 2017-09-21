@@ -14,17 +14,16 @@ import RankingEmpresa.RankingEmpresa;
 public class CondicionCuantitativaMayorOMenorA extends CondicionSumatoria {
 
 	public CondicionCuantitativaMayorOMenorA() {
-
 	}
 	
-	@Column(name = "peso")
-	private BigDecimal peso;
-
 	public CondicionCuantitativaMayorOMenorA(MenorOMayor criterio,
 			RegistroIndicador indicador, int ultimosAnios, BigDecimal peso) {
 		super(criterio, indicador, ultimosAnios);
 		this.peso = peso;
 	}
+
+	private BigDecimal peso;
+
 
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
 			throws ParseException {

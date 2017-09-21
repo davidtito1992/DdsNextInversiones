@@ -31,17 +31,15 @@ import RankingEmpresa.RankingEmpresa;
 import app.DslIndicador;
 
 @Entity
-@Table(name= "Condicion")
+@Table(name= "Condiciones")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipoCondicion",  discriminatorType=DiscriminatorType.INTEGER)
 public abstract class Condicion {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "condicionId")
 	private Long condicionId;
 	
-	@Column(name = "ultimosAnios")
 	protected int ultimosAnios;
 
 	public abstract RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException;

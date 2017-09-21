@@ -10,19 +10,17 @@ import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
 @Entity
-@DiscriminatorValue("4")
 public class CondicionTaxativaAntiguedad extends Condicion {
 
 	public CondicionTaxativaAntiguedad() {
-
 	}
 	
-	@Column(name = "nroAComparar")
-	private BigDecimal nroAComparar;
-
 	public CondicionTaxativaAntiguedad(BigDecimal nroAComparar) {
 		this.nroAComparar = nroAComparar;
 	}
+	
+	private BigDecimal nroAComparar;
+
 
 	public String textoError() {
 		return "La condicion taxativa antiguedad no supera los "

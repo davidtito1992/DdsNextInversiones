@@ -17,26 +17,24 @@ import parserIndicador.ParseException;
 public abstract class CondicionSumatoria extends Condicion {
 	
 	public CondicionSumatoria(){
-		
 	}
 	
-	public enum MenorOMayor {
-		mayorA, menorA;
-	}
-
-	@Column(name = "criterio")
-	protected MenorOMayor criterio;
-	
-	@ManyToOne
-	@JoinColumn(name = "indicador_id")
-	protected RegistroIndicador indicador;
-
 	public CondicionSumatoria(MenorOMayor criterio, RegistroIndicador indicador,
 			int ultimosAnios) {
 		this.criterio = criterio;
 		this.indicador = indicador;
 		this.ultimosAnios = ultimosAnios;
 	}
+	
+	public enum MenorOMayor {
+		mayorA, menorA;
+	}
+
+	protected MenorOMayor criterio;
+	
+	@ManyToOne
+	protected RegistroIndicador indicador;
+
 
 	public BigDecimal sumador(Empresa empresa) throws ParseException {
 		List<Periodo> periodos = this.periodosDesdexAnio(empresa);

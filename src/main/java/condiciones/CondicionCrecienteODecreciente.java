@@ -20,7 +20,13 @@ import RankingEmpresa.RankingEmpresa;
 public class CondicionCrecienteODecreciente extends Condicion {
 
 	public CondicionCrecienteODecreciente() {
-
+	}
+	
+	public CondicionCrecienteODecreciente(CreceODecrece criterio,
+			RegistroIndicador indicador, int ultimosAnios) {
+		this.indicador = indicador;
+		this.criterio = criterio;
+		this.ultimosAnios = ultimosAnios;
 	}
 	
 	public enum CreceODecrece {
@@ -28,18 +34,9 @@ public class CondicionCrecienteODecreciente extends Condicion {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "indicador_id")
 	private RegistroIndicador indicador;
 	
-	@Column(name = "criterio")
 	private CreceODecrece criterio;
-
-	public CondicionCrecienteODecreciente(CreceODecrece criterio,
-			RegistroIndicador indicador, int ultimosAnios) {
-		this.indicador = indicador;
-		this.criterio = criterio;
-		this.ultimosAnios = ultimosAnios;
-	}
 
 	public String stringError() {
 		if (criterio.equals(CreceODecrece.CRECIENTE)) {

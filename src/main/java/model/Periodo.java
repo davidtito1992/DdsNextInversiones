@@ -30,8 +30,8 @@ public class Periodo {
 
 	private int semestre;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "periodoId")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Cuenta> cuentas;
 
 	/********* GETTERS/SETTERS *********/

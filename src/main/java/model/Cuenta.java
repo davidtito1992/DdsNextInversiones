@@ -24,16 +24,20 @@ public class Cuenta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cuentaId")
 	private Long cuentaId;
-	@Column(name = "nombre")
+	
 	private String nombre;
-	@Column(name = "valor")
+	
 	private BigDecimal valor;
 
 	/********* GETTERS/SETTERS *********/
 
 	public Cuenta() {
+	}
+	
+	public Cuenta(String nombre, BigDecimal valor) {
+		this.nombre = nombre;
+		this.valor = valor;
 	}
 
 	public Long getCuentaId() {
@@ -62,9 +66,5 @@ public class Cuenta {
 
 	/********* METODOS *********/
 
-	public Cuenta(String nombre, BigDecimal valor) {
-		this.nombre = nombre;
-		this.valor = valor;
-	}
 
 }

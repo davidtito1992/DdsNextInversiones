@@ -21,31 +21,18 @@ import org.uqbar.commons.utils.Transactional;
 @SuppressWarnings("serial")
 @Transactional
 @Observable
-@Table(name= "RegistroIndicador")
+@Table(name= "Indicadores")
 @Entity
 public class RegistroIndicador {
-
-	/********* ATRIBUTOS *********/
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "registroIndicadorId")
-	private Long registroIndicadorId;
-
-	@Column(name = "nombre")
-	private String nombre;
+	public RegistroIndicador(){
+	}
 	
-	@Column(name = "formula")
-	private String formula;
-	
-	@ElementCollection
-	private List<String> variables;
-
 	public RegistroIndicador(String nombre, String formula) {
 		this.nombre = nombre;
 		this.formula = formula;
 	}
-
+	
 	public RegistroIndicador(String nombre, String formula,
 			List<String> variables) {
 		this.nombre = nombre;
@@ -53,11 +40,20 @@ public class RegistroIndicador {
 		this.variables = variables;
 	}
 
-	/********* GETTERS/SETTERS *********/
+	/********* ATRIBUTOS *********/
 	
-	public RegistroIndicador(){
-		
-	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long registroIndicadorId;
+
+	private String nombre;
+	
+	private String formula;
+	
+	@ElementCollection
+	private List<String> variables;
+
+	/********* GETTERS/SETTERS *********/
 	
 	public String getNombre() {
 		return nombre;

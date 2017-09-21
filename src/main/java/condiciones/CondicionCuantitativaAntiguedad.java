@@ -14,15 +14,14 @@ import RankingEmpresa.RankingEmpresa;
 public class CondicionCuantitativaAntiguedad extends Condicion {
 
 	public CondicionCuantitativaAntiguedad() {
-
 	}
 	
-	@Column(name = "peso")
-	private BigDecimal peso;
-
 	public CondicionCuantitativaAntiguedad(BigDecimal peso) {
 		this.peso = peso;
 	}
+	
+	private BigDecimal peso;
+	
 
 	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
 			throws ParseException {

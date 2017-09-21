@@ -33,12 +33,12 @@ public class Empresa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "empresaId")
 	private Long empresaId;
-	@Column(name = "nombre")
+	
 	private String nombre;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	
 	@JoinColumn(name = "periodoId")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
 
 	/********* GETTERS/SETTERS *********/
