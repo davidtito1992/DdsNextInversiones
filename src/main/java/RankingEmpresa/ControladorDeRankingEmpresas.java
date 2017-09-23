@@ -9,12 +9,10 @@ import app.AplicacionContexto;
 
 public class ControladorDeRankingEmpresas {
 
-	@SuppressWarnings("unchecked")
 	public List<RankingEmpresa> obtenerRankingEmpresas() {
 		List<Empresa> empresas = new ArrayList<Empresa>();
 		empresas = this.getRepositorioEmpresas().allInstances();
-		return empresas.stream().map(empresa -> new RankingEmpresa(empresa))
-				.collect(Collectors.toList());
+		return empresas.stream().map(empresa -> new RankingEmpresa(empresa)).collect(Collectors.toList());
 	}
 
 	public RepositorioEmpresa getRepositorioEmpresas() {

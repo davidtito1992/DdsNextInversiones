@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,7 +23,6 @@ import org.uqbar.commons.utils.Transactional;
 
 @Entity
 @Table(name= "Empresas")
-@SuppressWarnings("serial")
 @Transactional
 @Observable
 public class Empresa {
