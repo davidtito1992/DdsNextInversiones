@@ -58,7 +58,7 @@ public class RepositorioEmpresa extends Repository {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Empresa> allInstances() {
-		return entityManager.unwrap(Session.class).createCriteria(RegistroIndicador.class).list();
+		return entityManager.unwrap(Session.class).createCriteria(Empresa.class).list();
 	}
 
 	// METODO PARA FILTRAR UNA LISTA DE EMPRESAS
