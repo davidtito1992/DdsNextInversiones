@@ -55,9 +55,8 @@ public class RepositorioMetodologia extends Repository {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Metodologia> allInstances() {
-		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
-				Metodologia.class);
-		return criteria.list();
+		return entityManager.unwrap(Session.class).createCriteria(
+				Metodologia.class).list();
 	}
 
 	public void cargarListaMetodologias(List<Metodologia> registrosMetodologias) {

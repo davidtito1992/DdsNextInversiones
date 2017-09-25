@@ -10,7 +10,10 @@ import javax.transaction.Transactional;
 
 import model.Cuenta;
 import model.Empresa;
+import model.RegistroIndicador;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.uqbar.commons.utils.Observable;
 
 import db.EntityManagerHelper;
@@ -52,10 +55,10 @@ public class RepositorioEmpresa extends Repository {
 		return (Empresa) findById(Empresa.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Empresa> allInstances() {
-		return entityManager.createQuery("from Empresa", Empresa.class)
-				.getResultList();
+		return entityManager.unwrap(Session.class).createCriteria(RegistroIndicador.class).list();
 	}
 
 	// METODO PARA FILTRAR UNA LISTA DE EMPRESAS
