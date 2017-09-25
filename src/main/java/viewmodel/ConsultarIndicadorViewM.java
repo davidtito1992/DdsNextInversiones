@@ -150,7 +150,6 @@ public class ConsultarIndicadorViewM {
 		anioSeleccionado = null;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void llenarTablas() {
 		this.setSnapshotIndicadores(this
 				.resultadosIndicadores(getRepositorioEmpresas().allInstances()));

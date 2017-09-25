@@ -16,8 +16,6 @@ import model.Metodologia;
 public class RepositorioMetodologia extends Repository {
 
 	private static RepositorioMetodologia repositorioMetodologia = null;
-	private Criteria criteria = entityManager.unwrap(Session.class)
-			.createCriteria(Metodologia.class);
 
 	public static RepositorioMetodologia getSingletonInstance() {
 
@@ -57,6 +55,8 @@ public class RepositorioMetodologia extends Repository {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Metodologia> allInstances() {
+		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
+				Metodologia.class);
 		return criteria.list();
 	}
 

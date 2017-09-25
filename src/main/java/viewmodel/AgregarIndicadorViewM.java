@@ -81,15 +81,14 @@ public class AgregarIndicadorViewM {
 		this.cargarCuentasDisponibles();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void cargarCuentasDisponibles() {
 
-		this.agregarCuenta = this.getRepositorioEmpresas().todosLosNombresDeCuentas(
-				this.getRepositorioEmpresas().allInstances());
+		this.agregarCuenta = this.getRepositorioEmpresas()
+				.todosLosNombresDeCuentas(
+						this.getRepositorioEmpresas().allInstances());
 
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	private void cargarIndicadoresDisponibles() {
 
 		this.agregarIndicador = this.getRepositorioIndicadores()
@@ -108,8 +107,8 @@ public class AgregarIndicadorViewM {
 		new DslIndicador().añadirIndicador(new RegistroIndicador(this.nombre,
 				this.formula));
 	}
-	
-	public RepositorioIndicador getRepositorioIndicadores(){
+
+	public RepositorioIndicador getRepositorioIndicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 
@@ -126,11 +125,11 @@ public class AgregarIndicadorViewM {
 					+ this.getAgregarIndicadorSeleccionado());
 	}
 
-//	public RepositorioEmpresa getRepoEmpresas() {
-//		return ApplicationContext.getInstance().getSingleton(Empresa.class);
-//	}
-	
-	public RepositorioEmpresa getRepositorioEmpresas(){
+	// public RepositorioEmpresa getRepoEmpresas() {
+	// return ApplicationContext.getInstance().getSingleton(Empresa.class);
+	// }
+
+	public RepositorioEmpresa getRepositorioEmpresas() {
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 

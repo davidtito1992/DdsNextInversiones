@@ -92,7 +92,8 @@ public class AgregarMetodologiaViewM {
 	public void setAgregarCriterioSeleccionado(
 			String agregarCriterioSeleccionado) {
 
-		if (agregarCriterioSeleccionado.equalsIgnoreCase(CondicionesBuilder.ANTIGUEDAD)) {
+		if (agregarCriterioSeleccionado
+				.equalsIgnoreCase(CondicionesBuilder.ANTIGUEDAD)) {
 			this.setAgregarIndicadorSeleccionado(null);
 			this.setAgregarIndicador(null);
 		} else {
@@ -188,7 +189,6 @@ public class AgregarMetodologiaViewM {
 		this.tiposCondiciones.add(CondicionesBuilder.CUANTITATIVA);
 	}
 
-	@SuppressWarnings("unchecked")
 	private void cargarIndicadoresDisponibles() {
 		this.agregarIndicador = this.getRepositorindicadores()
 				.todosLosNombresDeIndicadores(
@@ -250,11 +250,12 @@ public class AgregarMetodologiaViewM {
 		if (this.getAgregarCriterioSeleccionado() == null) {
 			throw new RuntimeException("Seleccione una condicion");
 		}
-		if (this.getTipoCondicionSeleccionado()
-				.equalsIgnoreCase(CondicionesBuilder.CUANTITATIVA)
+		if (this.getTipoCondicionSeleccionado().equalsIgnoreCase(
+				CondicionesBuilder.CUANTITATIVA)
 				&& (this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
-						CondicionesBuilder.CRECIENTE) || this.getAgregarCriterioSeleccionado()
-						.equalsIgnoreCase(CondicionesBuilder.DECRECIENTE))) {
+						CondicionesBuilder.CRECIENTE) || this
+						.getAgregarCriterioSeleccionado().equalsIgnoreCase(
+								CondicionesBuilder.DECRECIENTE))) {
 			throw new RuntimeException(
 					"Las condiciones Creciente y Decreciente no pueden ser Cuantitativas");
 		}
@@ -268,10 +269,11 @@ public class AgregarMetodologiaViewM {
 				this.setAgregarAniosSeleccionado(0);
 			}
 		}
-		if (!this.getAgregarCriterioSeleccionado()
-				.equalsIgnoreCase(CondicionesBuilder.CRECIENTE)
+		if (!this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
+				CondicionesBuilder.CRECIENTE)
 				&& !this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
-						CondicionesBuilder.DECRECIENTE) && this.getPesoOComparar() == null) {
+						CondicionesBuilder.DECRECIENTE)
+				&& this.getPesoOComparar() == null) {
 			throw new RuntimeException(
 					"Falta indicar el Peso o Numero a Comparar");
 		} else {

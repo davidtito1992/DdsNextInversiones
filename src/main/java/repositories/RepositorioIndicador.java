@@ -1,38 +1,37 @@
 package repositories;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
-import model.Empresa;
 import model.RegistroIndicador;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.uqbar.commons.utils.Observable;
 
 import db.EntityManagerHelper;
-import repositoriesVIEJOS.Repositorio;
 
 @SuppressWarnings("rawtypes")
 @Observable
-public class RepositorioIndicador extends Repository{
-	
-	private static RepositorioIndicador repositorioIndicador; 
-	
-	private RepositorioIndicador(){
+public class RepositorioIndicador extends Repository {
+
+	private static RepositorioIndicador repositorioIndicador;
+
+	private RepositorioIndicador() {
 		super();
 	}
-	
-	public static RepositorioIndicador getSingletonInstance(){
-		
-        if (repositorioIndicador == null){
-        	repositorioIndicador = new RepositorioIndicador();}
-       
-        return repositorioIndicador;
+
+	public static RepositorioIndicador getSingletonInstance() {
+		if (repositorioIndicador == null) {
+			repositorioIndicador = new RepositorioIndicador();
+		}
+		return repositorioIndicador;
 	}
-	
-//	---------- Metodos ---------
+
+	/********* METODOS *********/
 
 	@Transactional
 	public void agregarIndicador(RegistroIndicador registroIndicador) {
@@ -54,32 +53,40 @@ public class RepositorioIndicador extends Repository{
 		return (RegistroIndicador) findById(RegistroIndicador.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<RegistroIndicador> allInstances() {
-		return entityManager.createQuery("from RegistroIndicador", RegistroIndicador.class).getResultList();
+		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
+				RegistroIndicador.class);
+		return criteria.list();
 	}
-	
-	public void cargarListaIndicadores(List<RegistroIndicador> registrosIndicadores) {
-		for(RegistroIndicador registroIndicador : registrosIndicadores){
-			this.agregarIndicador(registroIndicador);
+
+	public void cargarListaIndicadores(
+			List<RegistroIndicador> registrosIndicadores) {
+		registrosIndicadores.stream().forEach(
+				indicador -> agregarIndicador(indicador));
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<String> todosLosNombresDeIndicadores(
+			List<RegistroIndicador> listaIndicadores) {
+		Criteria criteria = entityManager.unwrap(Session.class)
+				.createCriteria(RegistroIndicador.class)
+				.setProjection(Projections.property("nombre"));
+		return (List<String>) criteria.list();
+	}
+
+	public boolean esIndicador(String nombre) {
+		if (getRegistroIndicador(nombre) == null) {
+			return false;
 		}
-	}
-	
-	public ArrayList<String> todosLosNombresDeIndicadores(List<RegistroIndicador> listaIndicadores) {
-		ArrayList<String> nombresDeTodosLosIndicadores = listaIndicadores
-				.stream().map(indicador -> indicador.getNombre()).distinct()
-				.sorted().collect(Collectors.toCollection(ArrayList::new));
-		return nombresDeTodosLosIndicadores;
-	}
-	
-	public boolean esIndicador(String componente) {
-		List<RegistroIndicador> indicadoresExistentes = new ArrayList<RegistroIndicador>();
-		indicadoresExistentes = this.allInstances();
-		return indicadoresExistentes.stream().map(regIndicador -> regIndicador.getNombre())
-				.anyMatch(NombreregIndicador -> NombreregIndicador.equalsIgnoreCase(componente));
+		return true;
 	}
 
 	public RegistroIndicador getRegistroIndicador(String nombreIndicador) {
-		return entityManager.createQuery("from RegistroIndicador RI where RI.nombre = '" + nombreIndicador + "'", RegistroIndicador.class).getResultList().get(0);
+		Criteria criteria = entityManager.unwrap(Session.class)
+				.createCriteria(RegistroIndicador.class)
+				.add(Restrictions.eq("nombre", nombreIndicador));
+		return (RegistroIndicador) criteria.uniqueResult();
 	}
 }
