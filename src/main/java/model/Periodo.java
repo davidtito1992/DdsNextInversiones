@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.uqbar.commons.utils.Observable;
 
 @Entity
@@ -31,7 +33,8 @@ public class Periodo {
 	private int semestre;
 
 	@JoinColumn
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Cuenta> cuentas;
 
 	/********* GETTERS/SETTERS *********/
