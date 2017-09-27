@@ -4,9 +4,13 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
+
 import model.Cuenta;
 import model.Empresa;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -118,17 +122,16 @@ public class RepositorioEmpresa extends Repository {
 
 	public BigDecimal getValorCuenta(String nombreEmpresa, Year anio,
 			int semestre, String nombreCuenta) {
-
-		List<Cuenta> cuentaADevolver = this.obtenerCuenta(nombreEmpresa, anio,
-				semestre, nombreCuenta);
-
-		if (cuentaADevolver.isEmpty())
-
+		Cuenta cuentaADevolver;
+		try{
+			cuentaADevolver = this.obtenerCuenta(nombreEmpresa, anio,
+					semestre, nombreCuenta);
+		}catch(NoResultException e){
 			throw new RuntimeException(
 					"No pudimos obtener el valor de la variable: "
 							+ nombreCuenta);
-		else
-			return cuentaADevolver.get(0).getValor();
+		}
+			return cuentaADevolver.getValor();
 
 	}
 
@@ -142,7 +145,7 @@ public class RepositorioEmpresa extends Repository {
 		return false;
 	}
 
-	public List<Cuenta> obtenerCuenta(String nombreSeleccionado,
+	/*public List<Cuenta> obtenerCuenta(String nombreSeleccionado,
 			Year anioSeleccionado, Integer semestreSeleccionado,
 			String nombreCuenta) {
 
@@ -162,8 +165,28 @@ public class RepositorioEmpresa extends Repository {
 
 		return cuentasADevolver;
 
-	}
+	}*/
 
+	public Cuenta obtenerCuenta(String nombreSeleccionado,
+			Year anioSeleccionado, Integer semestreSeleccionado,
+			String nombreCuenta) {
+		String query = 
+				"from Cuentas c, Periodos p, Empresas e "
+				+ "WHERE c.cuentas_periodoId = p.periodoId "
+				+ "AND p.periodos_empresaId = e.empresaId "
+				+ "AND e.nombre = :nombreEmpresa "
+				+ "AND p.anio = :anio "
+				+ "AND p.semestre = :semestre "
+				+ "AND c.nombre = :nombreCuenta";
+		return entityManager
+				.createQuery(query, Cuenta.class)
+				.setParameter("nombreEmpresa", nombreSeleccionado)
+				.setParameter("anio", anioSeleccionado)
+				.setParameter("semestre",semestreSeleccionado)
+				.setParameter("nombreCuenta", nombreCuenta)
+				.getSingleResult();
+	}
+	
 	public Empresa getEmpresa(String nombreEmpresa) {
 		Criteria criteria = entityManager.unwrap(Session.class)
 				.createCriteria(Empresa.class)
