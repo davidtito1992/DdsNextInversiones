@@ -87,27 +87,38 @@ public class RepositorioEmpresa extends Repository {
 	}
 
 	public ArrayList<Integer> todosLosPeriodos(List<Empresa> listaEmpresa) {
-
-		ArrayList<Integer> todosLosPeriodos = listaEmpresa.stream()
+		String query = "SELECT DISTINCT p.semestre FROM Periodos p";
+		
+		ArrayList<Integer> todosLosPeriodos =
+				(ArrayList<Integer>) entityManager
+				.createQuery(query, Integer.class)
+				.getResultList();
+		/*ArrayList<Integer> todosLosPeriodos = listaEmpresa.stream()
 				.map(empresa -> empresa.getPeriodos())
 				.flatMap(periodos -> periodos.stream())
 				.map(periodo -> periodo.getSemestre()).distinct().sorted()
-				.collect(Collectors.toCollection(ArrayList::new));
+				.collect(Collectors.toCollection(ArrayList::new));*/
 
 		return todosLosPeriodos;
 	}
 
 	public ArrayList<String> todosLosNombresDeCuentas(
 			List<Empresa> listaEmpresas) {
-
-		ArrayList<String> nombresDeTodasLasCuentas = listaEmpresas.stream()
+	
+		String query = "SELECT DISTINCT c.nombre FROM Cuentas c";
+		
+		ArrayList<String> nombresDeTodasLasCuentas =
+				(ArrayList<String>) entityManager
+				.createQuery(query, String.class)
+				.getResultList();
+				/*listaEmpresas.stream()
 				.map(empresa -> empresa.getPeriodos())
 				.flatMap(periodos -> periodos.stream())
 				.map(periodo -> periodo.getCuentas())
 				.flatMap(cuentas -> cuentas.stream())
 				.map(cuenta -> cuenta.getNombre()).distinct().sorted()
-				.collect(Collectors.toCollection(ArrayList::new));
-
+				.collect(Collectors.toCollection(ArrayList::new));*/
+				
 		return nombresDeTodasLasCuentas;
 
 	}
