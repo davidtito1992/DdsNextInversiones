@@ -152,14 +152,14 @@ public class RepositorioEmpresa extends Repository {
 
 	}
 
-	public boolean esCuenta(String componente) {
-		return this
-				.todasLasCuentas()
-				.stream()
-				.map(cuenta -> cuenta.getNombre())
-				.anyMatch(
-						nombreCuenta -> nombreCuenta
-								.equalsIgnoreCase(componente));
+	public boolean esCuenta(String nombre) {
+		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
+				Cuenta.class);
+		criteria.add(Restrictions.eq("nombre", nombre));
+		if (criteria.list().isEmpty()) {
+			return true;
+		}
+		return false;
 	}
 
 	public List<Cuenta> obtenerCuenta(String nombreSeleccionado,
@@ -182,19 +182,6 @@ public class RepositorioEmpresa extends Repository {
 
 		return cuentasADevolver;
 
-	}
-
-	public List<Cuenta> todasLasCuentas() {
-		List<Empresa> empresas = this.allInstances();
-
-		List<Cuenta> todasLasCuentas = empresas.stream()
-				.map(empresa -> empresa.getPeriodos())
-				.flatMap(periodo -> periodo.stream())
-				.map(periodo -> periodo.getCuentas())
-				.flatMap(cuenta -> cuenta.stream()).distinct()
-				.collect(Collectors.toList());
-
-		return todasLasCuentas;
 	}
 
 	public Empresa getEmpresa(String nombreEmpresa) {
