@@ -22,7 +22,7 @@ import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
 
 @Entity
-@Table(name= "Empresas")
+@Table(name = "Empresas")
 @Transactional
 @Observable
 public class Empresa {
@@ -32,9 +32,9 @@ public class Empresa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long empresaId;
-	
+
 	private String nombre;
-	
+
 	@JoinColumn
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
@@ -77,8 +77,9 @@ public class Empresa {
 		calendar.setTime(date);
 		int anioActual = calendar.get(Calendar.YEAR);
 
-		ArrayList<Year> aniosPeriodos = (ArrayList<Year>) this.getPeriodos().stream().map(periodo -> periodo.getAnio())
-				.distinct().sorted().collect(Collectors.toCollection(ArrayList::new));
+		ArrayList<Year> aniosPeriodos = (ArrayList<Year>) this.getPeriodos()
+				.stream().map(periodo -> periodo.getAnio()).distinct().sorted()
+				.collect(Collectors.toCollection(ArrayList::new));
 
 		return anioActual - aniosPeriodos.get(0).getValue();
 	}

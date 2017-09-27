@@ -56,7 +56,8 @@ public class RepositorioIndicador extends Repository {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<RegistroIndicador> allInstances() {
-		return entityManager.unwrap(Session.class).createCriteria(RegistroIndicador.class).list();
+		return entityManager.unwrap(Session.class)
+				.createCriteria(RegistroIndicador.class).list();
 	}
 
 	public void cargarListaIndicadores(

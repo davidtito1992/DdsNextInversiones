@@ -31,7 +31,7 @@ public class Periodo {
 	private int semestre;
 
 	@JoinColumn
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Cuenta> cuentas;
 
 	/********* GETTERS/SETTERS *********/

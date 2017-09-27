@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.uqbar.commons.utils.Observable;
 
@@ -55,7 +54,8 @@ public class RepositorioMetodologia extends Repository {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Metodologia> allInstances() {
-		return entityManager.unwrap(Session.class).createCriteria(Metodologia.class).list();
+		return entityManager.unwrap(Session.class)
+				.createCriteria(Metodologia.class).list();
 	}
 
 	public void cargarListaMetodologias(List<Metodologia> registrosMetodologias) {
