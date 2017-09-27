@@ -48,7 +48,7 @@ public class AppData {
 	}
 
 	public void borrarMetodologia(Metodologia metSelec) {
-		this.getRepositorioMetodologias().eliminarMetodologia(
+		this.getRepositorioMetodologias().eliminar(
 				metSelec.getMetodologiaId());
 	}
 
@@ -64,6 +64,7 @@ public class AppData {
 		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void guardarIndicador(RegistroIndicador unIndicador) {
 
 		try {
@@ -71,7 +72,7 @@ public class AppData {
 					.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.escribirNuevoIndicador(unIndicador);
-			this.getRepositorioIndicadores().agregarIndicador(unIndicador);
+			this.getRepositorioIndicadores().agregar(unIndicador);
 
 		} catch (Exception e) {
 			throw new RuntimeException(
@@ -86,7 +87,7 @@ public class AppData {
 					.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.borrarIndicador(unIndicador);
-			this.getRepositorioIndicadores().eliminarIndicador(
+			this.getRepositorioIndicadores().eliminar(
 					unIndicador.getRegistroIndicadorId());
 
 		} catch (Exception e) {
@@ -95,6 +96,7 @@ public class AppData {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void guardarMetodologia(Metodologia metodologia) {
 
 		try {
@@ -113,7 +115,7 @@ public class AppData {
 					.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.escribirNuevaMetodologia(metodologia);
-			this.getRepositorioMetodologias().agregarMetodologia(metodologia);
+			this.getRepositorioMetodologias().agregar(metodologia);
 
 		} catch (Exception e) {
 			throw new RuntimeException(

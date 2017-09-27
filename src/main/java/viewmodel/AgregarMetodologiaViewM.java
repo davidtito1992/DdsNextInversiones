@@ -195,6 +195,7 @@ public class AgregarMetodologiaViewM {
 						this.getRepositorindicadores().allInstances());
 	}
 
+	@SuppressWarnings("unchecked")
 	public void guardarMetodologia() {
 
 		if (this.getNombre() == null
@@ -204,12 +205,11 @@ public class AgregarMetodologiaViewM {
 							+ "Intentelo nuevamente");
 		List<Condicion> condiciones = new ArrayList<Condicion>();
 
-		for (SnapshotCondicion snapshotCondicion : this
-				.getSnapshotCondiciones()) {
-			condiciones.add(new CondicionesBuilder().crear(snapshotCondicion));
-		}
+		this.getSnapshotCondiciones().forEach(
+				snapshotCondicion -> condiciones.add(new CondicionesBuilder()
+						.crear(snapshotCondicion)));
 		Metodologia metodologia = new Metodologia(this.getNombre(), condiciones);
-		this.getRepositorioMetodologias().agregarMetodologia(metodologia);
+		this.getRepositorioMetodologias().agregar(metodologia);
 
 	}
 

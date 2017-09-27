@@ -1,13 +1,8 @@
 package repositories;
-
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.hibernate.Session;
 import org.uqbar.commons.utils.Observable;
-
-import db.EntityManagerHelper;
 import model.Metodologia;
 
 @SuppressWarnings("rawtypes")
@@ -31,20 +26,6 @@ public class RepositorioMetodologia extends Repository {
 
 	/********* METODOS *********/
 
-	@Transactional
-	public void agregarMetodologia(Metodologia metodologia) {
-		EntityManagerHelper.beginTransaction();
-		entityManager.merge(metodologia);
-		EntityManagerHelper.commit();
-	}
-
-	@Transactional
-	public void eliminarMetodologia(long id) {
-		EntityManagerHelper.beginTransaction();
-		entityManager.remove(this.buscar(id));
-		EntityManagerHelper.commit();
-	}
-
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public Metodologia buscar(long id) {
@@ -58,9 +39,23 @@ public class RepositorioMetodologia extends Repository {
 				.createCriteria(Metodologia.class).list();
 	}
 
-	public void cargarListaMetodologias(List<Metodologia> registrosMetodologias) {
-		registrosMetodologias.stream().forEach(
-				metodologia -> agregarMetodologia(metodologia));
-	}
+//	public void cargarListaMetodologias(List<Metodologia> registrosMetodologias) {
+//		registrosMetodologias.stream().forEach(
+//				metodologia -> agregar(metodologia));
+//	}
+
+//	@Transactional
+//	public void agregarMetodologia(Metodologia metodologia) {
+//		EntityManagerHelper.beginTransaction();
+//		entityManager.merge(metodologia);
+//		EntityManagerHelper.commit();
+//	}
+//
+//	@Transactional
+//	public void eliminarMetodologia(long id) {
+//		EntityManagerHelper.beginTransaction();
+//		entityManager.remove(this.buscar(id));
+//		EntityManagerHelper.commit();
+//	}
 
 }

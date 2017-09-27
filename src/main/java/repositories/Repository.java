@@ -1,11 +1,10 @@
 package repositories;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
-
+import javax.transaction.Transactional;
 import db.EntityManagerHelper;
 
 
@@ -16,9 +15,7 @@ public abstract class Repository<T>  {
 
 	public void cargarListaDeElementos(List<T> lista) {
 		EntityManagerHelper.beginTransaction();
-		for (T element : lista) {
-			entityManager.persist(element);
-		}
+		lista.forEach(elem->entityManager.persist(elem));
 		EntityManagerHelper.commit();
 		
 	}
@@ -35,4 +32,20 @@ public abstract class Repository<T>  {
 		return entityManager.merge(object);
 	}
 
+	@Transactional
+	public void agregar(T elemento) {
+		EntityManagerHelper.beginTransaction();
+		entityManager.merge(elemento);
+		EntityManagerHelper.commit();
+	}
+
+	@Transactional
+	public void eliminar(long id) {
+		EntityManagerHelper.beginTransaction();
+		entityManager.remove(this.buscar(id));
+		EntityManagerHelper.commit();
+	}
+	
+	@Transactional
+	public abstract T buscar(long id) ;
 }

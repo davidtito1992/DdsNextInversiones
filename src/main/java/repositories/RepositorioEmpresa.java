@@ -1,23 +1,17 @@
 package repositories;
-
 import java.math.BigDecimal;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.transaction.Transactional;
-
 import model.Cuenta;
 import model.Empresa;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.uqbar.commons.utils.Observable;
-
-import db.EntityManagerHelper;
 
 @SuppressWarnings("rawtypes")
 @Observable
@@ -36,20 +30,6 @@ public class RepositorioEmpresa extends Repository {
 	}
 
 	/********* METODOS *********/
-
-	@Transactional
-	public void agregarEmpresa(Empresa empresa) {
-		EntityManagerHelper.beginTransaction();
-		entityManager.merge(empresa);
-		EntityManagerHelper.commit();
-	}
-
-	@Transactional
-	public void eliminarEmpresa(long id) {
-		EntityManagerHelper.beginTransaction();
-		entityManager.remove(this.buscar(id));
-		EntityManagerHelper.commit();
-	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -191,4 +171,20 @@ public class RepositorioEmpresa extends Repository {
 		return (Empresa) criteria.uniqueResult();
 	}
 
+
+//	@Transactional
+//	public void agregarEmpresa(Empresa empresa) {
+//		EntityManagerHelper.beginTransaction();
+//		entityManager.merge(empresa);
+//		EntityManagerHelper.commit();
+//	}
+//
+//	@Transactional
+//	public void eliminarEmpresa(long id) {
+//		EntityManagerHelper.beginTransaction();
+//		entityManager.remove(this.buscar(id));
+//		EntityManagerHelper.commit();
+//	}
+
+	
 }
