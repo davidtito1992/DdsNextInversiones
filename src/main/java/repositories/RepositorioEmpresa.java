@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import model.Cuenta;
@@ -86,8 +87,8 @@ public class RepositorioEmpresa extends Repository {
 		return todosLosAnios;
 	}
 
-	public ArrayList<Integer> todosLosPeriodos(List<Empresa> listaEmpresa) {
-		String query = "SELECT DISTINCT p.semestre FROM Periodos p";
+	public ArrayList<Integer> todosLosPeriodos(List<Empresa> listaEmpresas) {
+		String query = "SELECT DISTINCT p.semestre FROM Periodo p";
 		
 		ArrayList<Integer> todosLosPeriodos =
 				(ArrayList<Integer>) entityManager
@@ -105,7 +106,7 @@ public class RepositorioEmpresa extends Repository {
 	public ArrayList<String> todosLosNombresDeCuentas(
 			List<Empresa> listaEmpresas) {
 	
-		String query = "SELECT DISTINCT c.nombre FROM Cuentas c";
+		String query = "SELECT DISTINCT c.nombre FROM Cuenta  c";
 		
 		ArrayList<String> nombresDeTodasLasCuentas =
 				(ArrayList<String>) entityManager
@@ -137,7 +138,7 @@ public class RepositorioEmpresa extends Repository {
 		try{
 			cuentaADevolver = this.obtenerCuenta(nombreEmpresa, anio,
 					semestre, nombreCuenta);
-		}catch(NoResultException e){
+		}catch(Exception e){
 			throw new RuntimeException(
 					"No pudimos obtener el valor de la variable: "
 							+ nombreCuenta);
@@ -182,20 +183,18 @@ public class RepositorioEmpresa extends Repository {
 			Year anioSeleccionado, Integer semestreSeleccionado,
 			String nombreCuenta) {
 		String query = 
-				"from Cuentas c, Periodos p, Empresas e "
-				+ "WHERE c.cuentas_periodoId = p.periodoId "
-				+ "AND p.periodos_empresaId = e.empresaId "
-				+ "AND e.nombre = :nombreEmpresa "
+				"SELECT c FROM Empresa e INNER JOIN e.periodos p INNER JOIN p.cuentas c "
+				+ "WHERE e.nombre = :nombreEmpresa "
 				+ "AND p.anio = :anio "
 				+ "AND p.semestre = :semestre "
 				+ "AND c.nombre = :nombreCuenta";
-		return entityManager
+		TypedQuery<Cuenta> q2 = entityManager
 				.createQuery(query, Cuenta.class)
 				.setParameter("nombreEmpresa", nombreSeleccionado)
 				.setParameter("anio", anioSeleccionado)
 				.setParameter("semestre",semestreSeleccionado)
-				.setParameter("nombreCuenta", nombreCuenta)
-				.getSingleResult();
+				.setParameter("nombreCuenta", nombreCuenta);
+				return q2.getSingleResult();
 	}
 	
 	public Empresa getEmpresa(String nombreEmpresa) {
