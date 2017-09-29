@@ -62,7 +62,7 @@ public class DslIndicadorTest {
 
 		FormulaIndicador formulaIndicador = dslIndicador.prepararFormula(
 				indicadorConCuentas, "facebook", Year.of(2016), 1);
-		assertEquals(new BigDecimal(22).setScale(2),
+		assertEquals(new BigDecimal(6).setScale(2),
 				formulaIndicador.calcular());
 	}
 

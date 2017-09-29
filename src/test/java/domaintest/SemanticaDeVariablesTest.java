@@ -26,7 +26,7 @@ public class SemanticaDeVariablesTest {
 		SemanticaVariable variable1 = new SemanticaVariable("Ebitda",
 				"FaceBook", Year.of(2016), 1);
 
-		assertEquals(new BigDecimal("20").setScale(2), variable1.valor());
+		assertEquals(new BigDecimal("1").setScale(2), variable1.valor());
 	}
 
 	@Test(expected = RuntimeException.class)
@@ -42,10 +42,10 @@ public class SemanticaDeVariablesTest {
 	public void deberiaObtenerElValorDeUnaVariableIndicador()
 			throws ParseException {
 
-		SemanticaVariable variable2 = new SemanticaVariable("I1", "FaceBook",
-				Year.of(2016), 1);
+		SemanticaVariable variable2 = new SemanticaVariable("I4", "Facebook",
+				Year.of(2016), 2);
 
-		assertEquals(new BigDecimal("100").setScale(2), variable2.valor());
+		assertEquals(new BigDecimal("6").setScale(2), variable2.valor());
 	}
 
 }
