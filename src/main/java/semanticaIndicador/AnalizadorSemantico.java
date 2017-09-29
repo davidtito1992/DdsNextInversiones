@@ -16,7 +16,7 @@ public class AnalizadorSemantico {
 
 		variables.forEach(nombreVariable -> {
 			if (this.getRepositorioEmpresas().esCuenta(nombreVariable.getNombre()))
-				;
+				System.out.println("PASO SEMANTICA");
 			else if (this.getRepositorioIndicadores().esIndicador(nombreVariable.getNombre()))
 				;
 			else

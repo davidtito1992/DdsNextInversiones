@@ -165,7 +165,8 @@ public class ConsultarIndicadorViewM {
 						.stream()
 						.map(periodo ->
 
-						{
+						{System.out.println(empresa.getNombre()+
+							" "+periodo.getAnio()+ " "+periodo.getSemestre());
 							return crearSnapshotIndicador(empresa.getNombre(),
 									periodo.getAnio(), periodo.getSemestre());
 						}).collect(Collectors.toList()))

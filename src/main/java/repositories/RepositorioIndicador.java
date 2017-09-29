@@ -64,24 +64,4 @@ public class RepositorioIndicador extends Repository {
 		return (RegistroIndicador) criteria.uniqueResult();
 	}
 
-	// @Transactional
-	// public void agregarIndicador(RegistroIndicador registroIndicador) {
-	// EntityManagerHelper.beginTransaction();
-	// entityManager.merge(registroIndicador);
-	// EntityManagerHelper.commit();
-	// }
-	//
-	// @Transactional
-	// public void eliminarIndicador(long id) {
-	// EntityManagerHelper.beginTransaction();
-	// entityManager.remove(this.buscar(id));
-	// EntityManagerHelper.commit();
-	// }
-
-	// public void cargarListaIndicadores(
-	// List<RegistroIndicador> registrosIndicadores) {
-	// registrosIndicadores.stream().forEach(
-	// indicador -> agregarIndicador(indicador));
-	// }
-
 }
