@@ -79,14 +79,10 @@ public class MainView extends SimpleWindow<MainViewM> {
 		// if (getModelObject().isIndicadoresSinCargar()) {
 		// showInfo("No se puede acceder a las metodologias si los indicadores no fueron cargados.");
 		// } else {
-		if (getModelObject().isEmpresasSinCargar()) {
-			showInfo("No se puede acceder a los indicadores si las empresas no fueron cargadas.");
-		} else {
 			Dialog<?> dialog = new MetodologiaView(this);
 			dialog.open();
 			dialog.onAccept(() -> {
 			});
-		}
 		// }
 		// }
 	}
@@ -95,14 +91,10 @@ public class MainView extends SimpleWindow<MainViewM> {
 		// if (getModelObject().isIndicadoresSinCargar()) {
 		// showInfo("Cargue los indicadores primero.");
 		// } else {
-		if (getModelObject().isEmpresasSinCargar()) {
-			showInfo("No se puede acceder a los indicadores si las empresas no fueron cargadas.");
-		} else {
 			Dialog<?> dialog = new IndicadorView(this);
 			dialog.open();
 			dialog.onAccept(() -> {
 			});
-		}
 		// }
 	}
 
