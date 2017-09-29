@@ -13,6 +13,7 @@ public class AnalizadorSemanticoTest {
 	AnalizadorSemantico analizador;
 	Variable i1;
 	Variable i2;
+	Variable i4;
     Variable ebitda;
     Variable fds;
     Variable cuentaNueva1;
@@ -27,6 +28,7 @@ public class AnalizadorSemanticoTest {
 	    analizador = new AnalizadorSemantico();
 	    i1 = new Variable("I1");
 	    i2 = new Variable("I2");
+	    i4 = new Variable("I4");
 	    ebitda = new Variable("EBITDA");
 	    fds = new Variable("FDS");
 	    cuentaNueva1 = new Variable("cuentaNueva1");
@@ -71,7 +73,7 @@ public class AnalizadorSemanticoTest {
 	
 	@Test
 	public void variablesDeFormulaSonIndicadoresExistentes(){
-		variables.add(i1);
+		variables.add(i4);
 		variables.add(i2);
 		analizador.analizarVariablesDeFormula(variables);
 	}
@@ -85,7 +87,7 @@ public class AnalizadorSemanticoTest {
 	
 	@Test
 	public void variablesDeFormulaSonIndicadoresYCuentasExistentes(){
-		variables.add(i1);
+		variables.add(i4);
 		variables.add(ebitda);
 		analizador.analizarVariablesDeFormula(variables);
 	}
