@@ -15,12 +15,15 @@ public class AnalizadorSemantico {
 	public void analizarVariablesDeFormula(List<Variable> variables) {
 
 		variables.forEach(nombreVariable -> {
-			if (this.getRepositorioEmpresas().esCuenta(nombreVariable.getNombre()))
-				System.out.println("PASO SEMANTICA");
-			else if (this.getRepositorioIndicadores().esIndicador(nombreVariable.getNombre()))
+			if (this.getRepositorioEmpresas().esCuenta(
+					nombreVariable.getNombre()))
+				;
+			else if (this.getRepositorioIndicadores().esIndicador(
+					nombreVariable.getNombre()))
 				;
 			else
-				throw new RuntimeException("El nombre de la variable: " + nombreVariable.getNombre() + " no existe");
+				throw new RuntimeException("El nombre de la variable: "
+						+ nombreVariable.getNombre() + " no existe");
 		});
 
 	}
@@ -29,12 +32,12 @@ public class AnalizadorSemantico {
 
 		if (this.getRepositorioEmpresas().esCuenta(nombreIndicador))
 
-			throw new RuntimeException(
-					"Existe una cuenta con el nombre: " + nombreIndicador + ", escriba otro nombre de indicador.");
+			throw new RuntimeException("Existe una cuenta con el nombre: "
+					+ nombreIndicador + ", escriba otro nombre de indicador.");
 
 		else if (this.getRepositorioIndicadores().esIndicador(nombreIndicador))
-			throw new RuntimeException(
-					"Existe un indicador con el nombre: " + nombreIndicador + ", escriba otro nombre de indicador.");
+			throw new RuntimeException("Existe un indicador con el nombre: "
+					+ nombreIndicador + ", escriba otro nombre de indicador.");
 
 	}
 
