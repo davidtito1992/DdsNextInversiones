@@ -43,8 +43,13 @@ public class RepositorioEmpresa extends Repository {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Empresa> allInstances() {
-		return entityManager.unwrap(Session.class)
-				.createCriteria(Empresa.class).list();
+		
+		String query = "FROM Empresa e";
+
+		Query q2 = entityManager.createQuery(query);
+		return q2.getResultList();
+		/*return entityManager.unwrap(Session.class)
+				.createCriteria(Empresa.class).list();*/
 	}
 
 	@SuppressWarnings("unchecked")
