@@ -16,9 +16,8 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.uqbar.commons.utils.Observable;
 
-@SuppressWarnings("rawtypes")
 @Observable
-public class RepositorioEmpresa extends Repository {
+public class RepositorioEmpresa extends Repository<Empresa> {
 
 	private static RepositorioEmpresa repositorioEmpresa;
 
@@ -36,20 +35,17 @@ public class RepositorioEmpresa extends Repository {
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Empresa buscar(long id) {
-		return (Empresa) findById(Empresa.class, id);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Transactional
 	public List<Empresa> allInstances() {
-		
-		String query = "FROM Empresa e";
 
-		Query q2 = entityManager.createQuery(query);
-		return q2.getResultList();
-		/*return entityManager.unwrap(Session.class)
-				.createCriteria(Empresa.class).list();*/
+		/*
+		 * String query = "FROM Empresa e";
+		 * 
+		 * Query q2 = entityManager.createQuery(query); return
+		 * q2.getResultList();
+		 */
+		return entityManager.unwrap(Session.class)
+				.createCriteria(Empresa.class).list();
+
 	}
 
 	@SuppressWarnings("unchecked")

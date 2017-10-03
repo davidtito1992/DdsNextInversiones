@@ -9,9 +9,8 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.uqbar.commons.utils.Observable;
 
-@SuppressWarnings("rawtypes")
 @Observable
-public class RepositorioIndicador extends Repository {
+public class RepositorioIndicador extends Repository<RegistroIndicador> {
 
 	private static RepositorioIndicador repositorioIndicador;
 
@@ -27,12 +26,6 @@ public class RepositorioIndicador extends Repository {
 	}
 
 	/********* METODOS *********/
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public RegistroIndicador buscar(long id) {
-		return (RegistroIndicador) findById(RegistroIndicador.class, id);
-	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional
