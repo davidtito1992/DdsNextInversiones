@@ -22,6 +22,7 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 	private static RepositorioEmpresa repositorioEmpresa;
 
 	private RepositorioEmpresa() {
+		super(Empresa.class);
 	}
 
 	public static RepositorioEmpresa getInstance() {
@@ -33,20 +34,20 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 
 	/********* METODOS *********/
 
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<Empresa> allInstances() {
-
-		/*
-		 * String query = "FROM Empresa e";
-		 * 
-		 * Query q2 = entityManager.createQuery(query); return
-		 * q2.getResultList();
-		 */
-		return entityManager.unwrap(Session.class)
-				.createCriteria(Empresa.class).list();
-
-	}
+//	@SuppressWarnings("unchecked")
+//	@Transactional
+//	public List<Empresa> allInstances() {
+//
+//		/*
+//		 * String query = "FROM Empresa e";
+//		 * 
+//		 * Query q2 = entityManager.createQuery(query); return
+//		 * q2.getResultList();
+//		 */
+//		return entityManager.unwrap(Session.class)
+//				.createCriteria(Empresa.class).list();
+//
+//	}
 
 	@SuppressWarnings("unchecked")
 	public List<Empresa> filtrar(String cuentaSeleccionada,

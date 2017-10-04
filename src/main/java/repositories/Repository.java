@@ -1,14 +1,25 @@
 package repositories;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.transaction.Transactional;
+
+import model.RegistroIndicador;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+
 import db.EntityManagerHelper;
 
 public abstract class Repository<T> {
 
+	public Repository(Class<T> clazz){
+		this.clazz = clazz;
+	}
+	
 	@PersistenceContext(type = PersistenceContextType.TRANSACTION, unitName = "db")
 	public EntityManager entityManager = EntityManagerHelper.entityManager();
 	private Class<T> clazz;
@@ -18,6 +29,14 @@ public abstract class Repository<T> {
 		lista.forEach(elem -> entityManager.persist(elem));
 		EntityManagerHelper.commit();
 
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<T> allInstances() {
+		Criteria criteria = entityManager.unwrap(Session.class)
+				.createCriteria(this.clazz);
+		return criteria.list();
 	}
 
 	@Transactional

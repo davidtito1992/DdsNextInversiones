@@ -1,8 +1,12 @@
 package repositories;
 
 import java.util.List;
+
 import javax.transaction.Transactional;
+
+import model.Empresa;
 import model.RegistroIndicador;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -15,7 +19,7 @@ public class RepositorioIndicador extends Repository<RegistroIndicador> {
 	private static RepositorioIndicador repositorioIndicador;
 
 	private RepositorioIndicador() {
-		super();
+		super(RegistroIndicador.class);
 	}
 
 	public static RepositorioIndicador getSingletonInstance() {
@@ -27,12 +31,12 @@ public class RepositorioIndicador extends Repository<RegistroIndicador> {
 
 	/********* METODOS *********/
 
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<RegistroIndicador> allInstances() {
-		return entityManager.unwrap(Session.class)
-				.createCriteria(RegistroIndicador.class).list();
-	}
+//	@SuppressWarnings("unchecked")
+//	@Transactional
+//	public List<RegistroIndicador> allInstances() {
+//		return entityManager.unwrap(Session.class)
+//				.createCriteria(RegistroIndicador.class).list();
+//	}
 
 	@SuppressWarnings("unchecked")
 	public List<String> todosLosNombresDeIndicadores(
