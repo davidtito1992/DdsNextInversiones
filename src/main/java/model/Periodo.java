@@ -4,6 +4,7 @@ import java.time.Year;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,8 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.uqbar.commons.utils.Observable;
 
+import converter.YearConverter;
+
 @Entity
 @Table(name = "Periodos")
 @Observable
@@ -28,6 +31,7 @@ public class Periodo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long periodoId;
 
+	@Convert(converter = YearConverter.class)
 	private Year anio;
 
 	private int semestre;
