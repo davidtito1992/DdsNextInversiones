@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 
 import model.Cuenta;
 import model.Empresa;
@@ -31,8 +30,7 @@ import condiciones.CondicionSumatoria.MenorOMayor;
 import condiciones.CondicionTaxativaAntiguedad;
 import condiciones.CondicionTaxativaMayorOMenorA;
 
-public class PersistenciaTest extends AbstractPersistenceTest implements
-		WithGlobalEntityManager {
+public class PersistenciaTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
 	EntityManagerFactory emf;
 	EntityManager em;
@@ -46,17 +44,19 @@ public class PersistenciaTest extends AbstractPersistenceTest implements
 	Cuenta ebitda = new Cuenta();
 	Cuenta fds = new Cuenta();
 	Cuenta netoContinuas = new Cuenta();
-	
+
 	RegistroIndicador indicador1 = new RegistroIndicador();
 	RegistroIndicador indicador2 = new RegistroIndicador();
-	
-	CondicionCuantitativaMayorOMenorA condicion1 = new CondicionCuantitativaMayorOMenorA(MenorOMayor.mayorA, indicador1, 1, BigDecimal.ONE);
+
+	CondicionCuantitativaMayorOMenorA condicion1 = new CondicionCuantitativaMayorOMenorA(MenorOMayor.mayorA, indicador1,
+			1, BigDecimal.ONE);
 	CondicionTaxativaAntiguedad condicion2 = new CondicionTaxativaAntiguedad(BigDecimal.ONE);
-	CondicionTaxativaMayorOMenorA condicion3 = new CondicionTaxativaMayorOMenorA(MenorOMayor.mayorA, indicador2, 1, BigDecimal.ONE);
-	
+	CondicionTaxativaMayorOMenorA condicion3 = new CondicionTaxativaMayorOMenorA(MenorOMayor.mayorA, indicador2, 1,
+			BigDecimal.ONE);
+
 	Metodologia metodologia1 = new Metodologia();
 	Metodologia metodologia2 = new Metodologia();
-	
+
 	@Before
 	public void setUp() {
 
@@ -68,22 +68,22 @@ public class PersistenciaTest extends AbstractPersistenceTest implements
 
 		fds.setNombre("FDS");
 		fds.setValor(new BigDecimal(20));
-		
+
 		indicador1.setNombre("Indicador1");
 		indicador1.setFormula("EBITDA+FDS");
-		
+
 		List<Condicion> condiciones1 = new ArrayList<Condicion>();
 		condiciones1.add(condicion1);
 		condiciones1.add(condicion2);
 		metodologia1.setNombre("metodol1");
 		metodologia1.setCondiciones(condiciones1);
-		
+
 		List<Condicion> condiciones2 = new ArrayList<Condicion>();
 		condiciones2.add(condicion2);
 		condiciones2.add(condicion3);
 		metodologia2.setNombre("metodol2");
 		metodologia2.setCondiciones(condiciones2);
-		
+
 		indicador2.setNombre("Indicador2");
 		indicador2.setFormula("FDS+EBITDA");
 
@@ -122,8 +122,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements
 
 		Cuenta ebitdaEncontrado = em.find(Cuenta.class, ebitda.getCuentaId());
 		Cuenta fdsEncontrado = em.find(Cuenta.class, fds.getCuentaId());
-		Cuenta netoContinuasEncontrado = em.find(Cuenta.class,
-				netoContinuas.getCuentaId());
+		Cuenta netoContinuasEncontrado = em.find(Cuenta.class, netoContinuas.getCuentaId());
 
 		assertEquals(ebitda, ebitdaEncontrado);
 		assertEquals(fds, fdsEncontrado);
@@ -141,8 +140,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements
 		tx.commit();
 
 		Empresa facebEncontrado = em.find(Empresa.class, faceb.getEmpresaId());
-		Empresa googleEncontrado = em
-				.find(Empresa.class, google.getEmpresaId());
+		Empresa googleEncontrado = em.find(Empresa.class, google.getEmpresaId());
 
 		assertEquals(faceb, facebEncontrado);
 		assertEquals(google, googleEncontrado);
@@ -158,15 +156,13 @@ public class PersistenciaTest extends AbstractPersistenceTest implements
 		em.persist(periodo2);
 		tx.commit();
 
-		Periodo periodo1Encontrado = em.find(Periodo.class,
-				periodo1.getPeriodoId());
-		Periodo periodo2Encontrado = em.find(Periodo.class,
-				periodo2.getPeriodoId());
+		Periodo periodo1Encontrado = em.find(Periodo.class, periodo1.getPeriodoId());
+		Periodo periodo2Encontrado = em.find(Periodo.class, periodo2.getPeriodoId());
 
 		assertEquals(periodo1, periodo1Encontrado);
 		assertEquals(periodo2, periodo2Encontrado);
 	}
-	
+
 	@Test
 	public void persistenciaDeIndicadores() {
 
@@ -177,15 +173,13 @@ public class PersistenciaTest extends AbstractPersistenceTest implements
 		em.persist(indicador2);
 		tx.commit();
 
-		RegistroIndicador indicador1Encontrado = em.find(RegistroIndicador.class,
-				indicador1.getRegistroIndicadorId());
-		RegistroIndicador indicador2Encontrado = em.find(RegistroIndicador.class,
-				indicador2.getRegistroIndicadorId());
+		RegistroIndicador indicador1Encontrado = em.find(RegistroIndicador.class, indicador1.getRegistroIndicadorId());
+		RegistroIndicador indicador2Encontrado = em.find(RegistroIndicador.class, indicador2.getRegistroIndicadorId());
 
 		assertEquals(indicador1, indicador1Encontrado);
 		assertEquals(indicador2, indicador2Encontrado);
 	}
-	
+
 	@Test
 	public void persistenciaDeMetodologias() {
 
@@ -196,10 +190,8 @@ public class PersistenciaTest extends AbstractPersistenceTest implements
 		em.persist(metodologia2);
 		tx.commit();
 
-		Metodologia metodologia1Encontrada = em.find(Metodologia.class,
-				metodologia1.getMetodologiaId());
-		Metodologia metodologia2Encontrada = em.find(Metodologia.class,
-				metodologia2.getMetodologiaId());
+		Metodologia metodologia1Encontrada = em.find(Metodologia.class, metodologia1.getMetodologiaId());
+		Metodologia metodologia2Encontrada = em.find(Metodologia.class, metodologia2.getMetodologiaId());
 
 		assertEquals(metodologia1, metodologia1Encontrada);
 		assertEquals(metodologia2, metodologia2Encontrada);

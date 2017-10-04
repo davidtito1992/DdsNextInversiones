@@ -16,40 +16,30 @@ import dataManagment.dataUploader.DataUploaderFactory;
 
 public class AppData {
 
-	@SuppressWarnings("unchecked")
 	public void cargarEmpresas() throws Exception {
 
 		// LEO ARCHIVO YA ADAPTADO
-		DataLoader cargador = DataLoaderFactory
-				.cargarData(DataLoaderFactory.ARCHIVO);
+		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
 		ArrayList<Empresa> empresas = cargador.getDataEmpresas();
 		this.getRepositorioEmpresas().cargarListaDeElementos(empresas);
-		// List<Empresa> lista = this.getRepositorioEmpresas().allInstances();
-		// String a = "a";
 	}
 
-	@SuppressWarnings("unchecked")
 	public void cargarMetodologias() throws Exception {
 
-		this.getRepositorioMetodologias().cargarListaDeElementos(
-				MetodologiasLoader.damePredefinidas());
+		this.getRepositorioMetodologias().cargarListaDeElementos(MetodologiasLoader.damePredefinidas());
 
 	}
 
-	@SuppressWarnings("unchecked")
 	public void cargarIndicadores() throws Exception {
 
 		// LEO ARCHIVO YA ADAPTADO
-		DataLoader cargador = DataLoaderFactory
-				.cargarData(DataLoaderFactory.ARCHIVO);
-		ArrayList<RegistroIndicador> indicadores = cargador
-				.getDataIndicadores();
+		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
+		ArrayList<RegistroIndicador> indicadores = cargador.getDataIndicadores();
 		this.getRepositorioIndicadores().cargarListaDeElementos(indicadores);
 	}
 
 	public void borrarMetodologia(Metodologia metSelec) {
-		this.getRepositorioMetodologias().eliminar(
-				metSelec.getMetodologiaId());
+		this.getRepositorioMetodologias().eliminar(metSelec.getMetodologiaId());
 	}
 
 	public RepositorioIndicador getRepositorioIndicadores() {
@@ -64,62 +54,46 @@ public class AppData {
 		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 	}
 
-	@SuppressWarnings("unchecked")
 	public void guardarIndicador(RegistroIndicador unIndicador) {
 
 		try {
-			DataUploader cargador = DataUploaderFactory
-					.actualizarData(DataLoaderFactory.ARCHIVO);
+			DataUploader cargador = DataUploaderFactory.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.escribirNuevoIndicador(unIndicador);
 			this.getRepositorioIndicadores().agregar(unIndicador);
 
 		} catch (Exception e) {
-			throw new RuntimeException(
-					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
+			throw new RuntimeException("Debido a un problema en la lectura y/o escritura del archivo "
+					+ "no pudimos realizar la operacion :/");
 		}
 	}
 
 	public void borrarIndicador(RegistroIndicador unIndicador) {
 
 		try {
-			DataUploader cargador = DataUploaderFactory
-					.actualizarData(DataLoaderFactory.ARCHIVO);
+			DataUploader cargador = DataUploaderFactory.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.borrarIndicador(unIndicador);
-			this.getRepositorioIndicadores().eliminar(
-					unIndicador.getRegistroIndicadorId());
+			this.getRepositorioIndicadores().eliminar(unIndicador.getRegistroIndicadorId());
 
 		} catch (Exception e) {
-			throw new RuntimeException(
-					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
+			throw new RuntimeException("Debido a un problema en la lectura y/o escritura del archivo "
+					+ "no pudimos realizar la operacion :/");
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void guardarMetodologia(Metodologia metodologia) {
 
 		try {
-			// String nuevaMetodologiaString = new AdapterToJson()
-			// .getStringMetodologia(metodologia);
-			//
-			// // sobreescribimos un archivo segun nombre de archivo,
-			// textoviejo,textonuevo
-			// new FileUploader("./metodologias.json", "}]",
-			// nuevaMetodologiaString
-			// + "]\r\n");
-			//
-			// this.getRepoMetodologias().create(metodologia);
 
-			DataUploader cargador = DataUploaderFactory
-					.actualizarData(DataLoaderFactory.ARCHIVO);
+			DataUploader cargador = DataUploaderFactory.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.escribirNuevaMetodologia(metodologia);
 			this.getRepositorioMetodologias().agregar(metodologia);
 
 		} catch (Exception e) {
-			throw new RuntimeException(
-					"Debido a un problema en la lectura y/o escritura del archivo no pudimos realizar la operacion :/");
+			throw new RuntimeException("Debido a un problema en la lectura y/o escritura del archivo "
+					+ "no pudimos realizar la operacion :/");
 		}
 
 	}

@@ -2,9 +2,6 @@ package repositories;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
-import model.Empresa;
 import model.RegistroIndicador;
 
 import org.hibernate.Criteria;
@@ -31,18 +28,9 @@ public class RepositorioIndicador extends Repository<RegistroIndicador> {
 
 	/********* METODOS *********/
 
-//	@SuppressWarnings("unchecked")
-//	@Transactional
-//	public List<RegistroIndicador> allInstances() {
-//		return entityManager.unwrap(Session.class)
-//				.createCriteria(RegistroIndicador.class).list();
-//	}
-
 	@SuppressWarnings("unchecked")
-	public List<String> todosLosNombresDeIndicadores(
-			List<RegistroIndicador> listaIndicadores) {
-		Criteria criteria = entityManager.unwrap(Session.class)
-				.createCriteria(RegistroIndicador.class)
+	public List<String> todosLosNombresDeIndicadores(List<RegistroIndicador> listaIndicadores) {
+		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(RegistroIndicador.class)
 				.setProjection(Projections.property("nombre"));
 		return (List<String>) criteria.list();
 	}
@@ -55,8 +43,7 @@ public class RepositorioIndicador extends Repository<RegistroIndicador> {
 	}
 
 	public RegistroIndicador getRegistroIndicador(String nombreIndicador) {
-		Criteria criteria = entityManager.unwrap(Session.class)
-				.createCriteria(RegistroIndicador.class)
+		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(RegistroIndicador.class)
 				.add(Restrictions.eq("nombre", nombreIndicador));
 		return (RegistroIndicador) criteria.uniqueResult();
 	}

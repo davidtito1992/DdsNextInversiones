@@ -72,8 +72,7 @@ public class AgregarMetodologiaViewM {
 		return agregarIndicadorSeleccionado;
 	}
 
-	public void setAgregarIndicadorSeleccionado(
-			String agregarIndicadorSeleccionado) {
+	public void setAgregarIndicadorSeleccionado(String agregarIndicadorSeleccionado) {
 		this.agregarIndicadorSeleccionado = agregarIndicadorSeleccionado;
 	}
 
@@ -89,11 +88,9 @@ public class AgregarMetodologiaViewM {
 		return agregarCriterioSeleccionado;
 	}
 
-	public void setAgregarCriterioSeleccionado(
-			String agregarCriterioSeleccionado) {
+	public void setAgregarCriterioSeleccionado(String agregarCriterioSeleccionado) {
 
-		if (agregarCriterioSeleccionado
-				.equalsIgnoreCase(CondicionesBuilder.ANTIGUEDAD)) {
+		if (agregarCriterioSeleccionado.equalsIgnoreCase(CondicionesBuilder.ANTIGUEDAD)) {
 			this.setAgregarIndicadorSeleccionado(null);
 			this.setAgregarIndicador(null);
 		} else {
@@ -107,8 +104,7 @@ public class AgregarMetodologiaViewM {
 		return agregarPrioridadSeleccionada;
 	}
 
-	public void setAgregarPrioridadSeleccionada(
-			Integer agregarPrioridadSeleccionado) {
+	public void setAgregarPrioridadSeleccionada(Integer agregarPrioridadSeleccionado) {
 		this.agregarPrioridadSeleccionada = agregarPrioridadSeleccionado;
 	}
 
@@ -116,8 +112,7 @@ public class AgregarMetodologiaViewM {
 		return snapshotCondiciones;
 	}
 
-	public void setSnapshotCondiciones(
-			List<SnapshotCondicion> snapshotCondiciones) {
+	public void setSnapshotCondiciones(List<SnapshotCondicion> snapshotCondiciones) {
 		this.snapshotCondiciones = snapshotCondiciones;
 	}
 
@@ -125,8 +120,7 @@ public class AgregarMetodologiaViewM {
 		return snapshotCondicionSeleccionado;
 	}
 
-	public void setSnapshotCondicionSeleccionado(
-			SnapshotCondicion snapshotCondicionSeleccionado) {
+	public void setSnapshotCondicionSeleccionado(SnapshotCondicion snapshotCondicionSeleccionado) {
 		this.snapshotCondicionSeleccionado = snapshotCondicionSeleccionado;
 	}
 
@@ -191,23 +185,18 @@ public class AgregarMetodologiaViewM {
 
 	private void cargarIndicadoresDisponibles() {
 		this.agregarIndicador = this.getRepositorindicadores()
-				.todosLosNombresDeIndicadores(
-						this.getRepositorindicadores().allInstances());
+				.todosLosNombresDeIndicadores(this.getRepositorindicadores().allInstances());
 	}
 
-	@SuppressWarnings("unchecked")
 	public void guardarMetodologia() {
 
-		if (this.getNombre() == null
-				|| (this.getSnapshotCondiciones().isEmpty()))
-			throw new RuntimeException(
-					"Debe ingresar nombre y al menos una condicion para guardar correctamente. "
-							+ "Intentelo nuevamente");
+		if (this.getNombre() == null || (this.getSnapshotCondiciones().isEmpty()))
+			throw new RuntimeException("Debe ingresar nombre y al menos una condicion para guardar correctamente. "
+					+ "Intentelo nuevamente");
 		List<Condicion> condiciones = new ArrayList<Condicion>();
 
-		this.getSnapshotCondiciones().forEach(
-				snapshotCondicion -> condiciones.add(new CondicionesBuilder()
-						.crear(snapshotCondicion)));
+		this.getSnapshotCondiciones()
+				.forEach(snapshotCondicion -> condiciones.add(new CondicionesBuilder().crear(snapshotCondicion)));
 		Metodologia metodologia = new Metodologia(this.getNombre(), condiciones);
 		this.getRepositorioMetodologias().agregar(metodologia);
 
@@ -221,10 +210,9 @@ public class AgregarMetodologiaViewM {
 			indicadorSeleccionado = this.getAgregarIndicadorSeleccionado();
 		}
 
-		this.snapshotCondiciones.add(new SnapshotCondicion(this
-				.getTipoCondicionSeleccionado(), this
-				.getAgregarCriterioSeleccionado(), indicadorSeleccionado, this
-				.getPesoOComparar(), this.getAgregarAniosSeleccionado()));
+		this.snapshotCondiciones
+				.add(new SnapshotCondicion(this.getTipoCondicionSeleccionado(), this.getAgregarCriterioSeleccionado(),
+						indicadorSeleccionado, this.getPesoOComparar(), this.getAgregarAniosSeleccionado()));
 		this.limpiar();
 	}
 
@@ -239,8 +227,7 @@ public class AgregarMetodologiaViewM {
 
 	public void validar() throws RuntimeException {
 		if (this.getAgregarIndicadorSeleccionado() == null
-				&& !this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
-						CondicionesBuilder.ANTIGUEDAD)) {
+				&& !this.getAgregarCriterioSeleccionado().equalsIgnoreCase(CondicionesBuilder.ANTIGUEDAD)) {
 			throw new RuntimeException("Seleccione un indicador");
 		}
 
@@ -250,32 +237,23 @@ public class AgregarMetodologiaViewM {
 		if (this.getAgregarCriterioSeleccionado() == null) {
 			throw new RuntimeException("Seleccione una condicion");
 		}
-		if (this.getTipoCondicionSeleccionado().equalsIgnoreCase(
-				CondicionesBuilder.CUANTITATIVA)
-				&& (this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
-						CondicionesBuilder.CRECIENTE) || this
-						.getAgregarCriterioSeleccionado().equalsIgnoreCase(
-								CondicionesBuilder.DECRECIENTE))) {
-			throw new RuntimeException(
-					"Las condiciones Creciente y Decreciente no pueden ser Cuantitativas");
+		if (this.getTipoCondicionSeleccionado().equalsIgnoreCase(CondicionesBuilder.CUANTITATIVA)
+				&& (this.getAgregarCriterioSeleccionado().equalsIgnoreCase(CondicionesBuilder.CRECIENTE)
+						|| this.getAgregarCriterioSeleccionado().equalsIgnoreCase(CondicionesBuilder.DECRECIENTE))) {
+			throw new RuntimeException("Las condiciones Creciente y Decreciente no pueden ser Cuantitativas");
 		}
-		if (!this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
-				CondicionesBuilder.ANTIGUEDAD)
+		if (!this.getAgregarCriterioSeleccionado().equalsIgnoreCase(CondicionesBuilder.ANTIGUEDAD)
 				&& this.getAgregarAniosSeleccionado() == null) {
-			throw new RuntimeException(
-					"Falta indicar desde que año aplica la condicion");
+			throw new RuntimeException("Falta indicar desde que año aplica la condicion");
 		} else {
 			if (this.getAgregarAniosSeleccionado() == null) {
 				this.setAgregarAniosSeleccionado(0);
 			}
 		}
-		if (!this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
-				CondicionesBuilder.CRECIENTE)
-				&& !this.getAgregarCriterioSeleccionado().equalsIgnoreCase(
-						CondicionesBuilder.DECRECIENTE)
+		if (!this.getAgregarCriterioSeleccionado().equalsIgnoreCase(CondicionesBuilder.CRECIENTE)
+				&& !this.getAgregarCriterioSeleccionado().equalsIgnoreCase(CondicionesBuilder.DECRECIENTE)
 				&& this.getPesoOComparar() == null) {
-			throw new RuntimeException(
-					"Falta indicar el Peso o Numero a Comparar");
+			throw new RuntimeException("Falta indicar el Peso o Numero a Comparar");
 		} else {
 			if (this.getPesoOComparar() == null) {
 				this.setPesoOComparar(BigDecimal.ZERO);
