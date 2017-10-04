@@ -27,7 +27,7 @@ import app.DslIndicador;
 @Entity
 @Table(name = "Condiciones")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipoCondicion", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name = "tipoCondicion", discriminatorType = DiscriminatorType.STRING)
 public abstract class Condicion {
 
 	@Id

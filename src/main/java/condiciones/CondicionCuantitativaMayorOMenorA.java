@@ -2,6 +2,7 @@ package condiciones;
 
 import java.math.BigDecimal;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import model.RegistroIndicador;
@@ -9,6 +10,7 @@ import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
 @Entity
+@DiscriminatorValue("CuantitativaMayorOMenor")
 public class CondicionCuantitativaMayorOMenorA extends CondicionSumatoria {
 
 	private BigDecimal peso;

@@ -3,6 +3,7 @@ package condiciones;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -13,6 +14,7 @@ import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
 @Entity
+@DiscriminatorValue("CreceODecrece")
 public class CondicionCrecienteODecreciente extends Condicion {
 
 	@ManyToOne

@@ -2,12 +2,14 @@ package condiciones;
 
 import java.math.BigDecimal;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
 @Entity
+@DiscriminatorValue("TaxativaAntiguedad")
 public class CondicionTaxativaAntiguedad extends Condicion {
 
 	public CondicionTaxativaAntiguedad() {
