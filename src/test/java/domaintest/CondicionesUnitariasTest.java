@@ -30,9 +30,6 @@ public class CondicionesUnitariasTest {
 
 	@Before
 	public void inicializar() throws Exception {
-		new AppData().cargarEmpresas();
-		new AppData().cargarIndicadores();
-
 		ingresoNeto = new AppData().getRepositorioIndicadores()
 				.getRegistroIndicador("IngresoNeto");
 		facebook = new AppData().getRepositorioEmpresas()

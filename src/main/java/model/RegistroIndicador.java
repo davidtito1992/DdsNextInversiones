@@ -2,26 +2,30 @@ package model;
 
 import java.util.List;
 
-import org.uqbar.commons.model.Entity;
+import javax.persistence.ElementCollection;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Entity;
+
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
 
-@SuppressWarnings("serial")
 @Transactional
 @Observable
-public class RegistroIndicador extends Entity {
-
-	/********* ATRIBUTOS *********/
-
-	private String nombre;
-	private String formula;
-	private List<String> variables;
-
+@Table(name= "Indicadores")
+@Entity
+public class RegistroIndicador {
+	
+	public RegistroIndicador(){
+	}
+	
 	public RegistroIndicador(String nombre, String formula) {
 		this.nombre = nombre;
 		this.formula = formula;
 	}
-
+	
 	public RegistroIndicador(String nombre, String formula,
 			List<String> variables) {
 		this.nombre = nombre;
@@ -29,12 +33,33 @@ public class RegistroIndicador extends Entity {
 		this.variables = variables;
 	}
 
-	/********* GETTERS/SETTERS *********/
+	/********* ATRIBUTOS *********/
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long registroIndicadorId;
 
+	private String nombre;
+	
+	private String formula;
+	
+	@ElementCollection
+	private List<String> variables;
+
+	/********* GETTERS/SETTERS *********/
+	
 	public String getNombre() {
 		return nombre;
 	}
+	
+	public Long getRegistroIndicadorId() {
+		return registroIndicadorId;
+	}
 
+	public void setRegistroIndicadorId(Long registroIndicadorId){
+		this.registroIndicadorId = registroIndicadorId;
+	}
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

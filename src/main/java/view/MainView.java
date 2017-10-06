@@ -44,7 +44,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 				.setHeight(80);
 		new Button(mainPanel).setCaption("Metodologias")
 				.onClick(() -> this.verMetodologias()).setWidth(60)
-				.setHeight(80);		
+				.setHeight(80);
 
 		new Label(mainPanel).setText("\n\n\n");
 
@@ -52,7 +52,7 @@ public class MainView extends SimpleWindow<MainViewM> {
 				.setHeight(50);
 
 	}
-	
+
 	/*****************
 	 * buttons adicionales: podemos colocarlos horizontales a diferencia de los
 	 * demas
@@ -72,49 +72,41 @@ public class MainView extends SimpleWindow<MainViewM> {
 
 	private void verMetodologias() {
 
-		if (getModelObject().isMetodologiasSinCargar()) {
-			showInfo("Cargue las metodologias primero.");
-		} else {
+		// if (getModelObject().isMetodologiasSinCargar()) {
+		// showInfo("Cargue las metodologias primero.");
+		// } else {
 
-			if (getModelObject().isIndicadoresSinCargar()) {
-				showInfo("No se puede acceder a las metodologias si los indicadores no fueron cargados.");
-			} else {
-				if (getModelObject().isEmpresasSinCargar()) {
-					showInfo("No se puede acceder a los indicadores si las empresas no fueron cargadas.");
-				} else {
-					Dialog<?> dialog = new MetodologiaView(this);
-					dialog.open();
-					dialog.onAccept(() -> {
-					});
-				}
-			}
-		}
-	}
-
-	public void verIndicadores() {
-		if (getModelObject().isIndicadoresSinCargar()) {
-			showInfo("Cargue los indicadores primero.");
-		} else {
-			if (getModelObject().isEmpresasSinCargar()) {
-				showInfo("No se puede acceder a los indicadores si las empresas no fueron cargadas.");
-			} else {
-				Dialog<?> dialog = new IndicadorView(this);
-				dialog.open();
-				dialog.onAccept(() -> {
-				});
-			}
-		}
-	}
-
-	public void verEmpresas() {
-		if (getModelObject().isEmpresasSinCargar()) {
-			showInfo("Cargue las empresas primero.");
-		} else {
-			Dialog<?> dialog = new EmpresaView(this);
+		// if (getModelObject().isIndicadoresSinCargar()) {
+		// showInfo("No se puede acceder a las metodologias si los indicadores no fueron cargados.");
+		// } else {
+			Dialog<?> dialog = new MetodologiaView(this);
 			dialog.open();
 			dialog.onAccept(() -> {
 			});
-		}
+		// }
+		// }
+	}
+
+	public void verIndicadores() {
+		// if (getModelObject().isIndicadoresSinCargar()) {
+		// showInfo("Cargue los indicadores primero.");
+		// } else {
+			Dialog<?> dialog = new IndicadorView(this);
+			dialog.open();
+			dialog.onAccept(() -> {
+			});
+		// }
+	}
+
+	public void verEmpresas() {
+		// if (getModelObject().isEmpresasSinCargar()) {
+		// showInfo("Cargue las empresas primero.");
+		// } else {
+		Dialog<?> dialog = new EmpresaView(this);
+		dialog.open();
+		dialog.onAccept(() -> {
+		});
+		// }
 	}
 
 	private void cargarEmpresas() {

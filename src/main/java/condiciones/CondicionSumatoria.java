@@ -3,24 +3,32 @@ package condiciones;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
 import model.Empresa;
 import model.Periodo;
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 
+@Entity
 public abstract class CondicionSumatoria extends Condicion {
-	public enum MenorOMayor {
-		mayorA, menorA;
+
+	@ManyToOne
+	protected RegistroIndicador indicador;
+	protected MenorOMayor criterio;
+
+	public CondicionSumatoria() {
 	}
 
-	protected MenorOMayor criterio;
-	protected RegistroIndicador indicador;
-
-	public CondicionSumatoria(MenorOMayor criterio, RegistroIndicador indicador,
-			int ultimosAnios) {
+	public CondicionSumatoria(MenorOMayor criterio, RegistroIndicador indicador, int ultimosAnios) {
 		this.criterio = criterio;
 		this.indicador = indicador;
 		this.ultimosAnios = ultimosAnios;
+	}
+
+	public enum MenorOMayor {
+		mayorA, menorA;
 	}
 
 	public BigDecimal sumador(Empresa empresa) throws ParseException {
@@ -28,9 +36,8 @@ public abstract class CondicionSumatoria extends Condicion {
 		BigDecimal acumulador = BigDecimal.ZERO;
 
 		for (int i = 0; i < periodos.size(); i++) {
-			acumulador = acumulador.add(this.aplicarIndicador(indicador,
-					empresa.getNombre(), periodos.get(i).getAnio(), periodos
-							.get(i).getSemestre()));
+			acumulador = acumulador.add(this.aplicarIndicador(indicador, empresa.getNombre(), periodos.get(i).getAnio(),
+					periodos.get(i).getSemestre()));
 		}
 		return acumulador;
 	}

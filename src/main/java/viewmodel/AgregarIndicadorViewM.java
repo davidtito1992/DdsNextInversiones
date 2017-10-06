@@ -3,11 +3,11 @@ package viewmodel;
 import java.util.List;
 
 import model.RegistroIndicador;
+import repositories.RepositorioEmpresa;
+import repositories.RepositorioIndicador;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioUnicoDeEmpresas;
-import repositories.RepositorioUnicoDeIndicadores;
 import app.AplicacionContexto;
 import app.DslIndicador;
 
@@ -81,20 +81,19 @@ public class AgregarIndicadorViewM {
 		this.cargarCuentasDisponibles();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void cargarCuentasDisponibles() {
 
-		this.agregarCuenta = this.getRepositorioEmpresas().todosLosNombresDeCuentas(
-				this.getRepositorioEmpresas().getElementos());
+		this.agregarCuenta = this.getRepositorioEmpresas()
+				.todosLosNombresDeCuentas(
+						this.getRepositorioEmpresas().allInstances());
 
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	private void cargarIndicadoresDisponibles() {
 
 		this.agregarIndicador = this.getRepositorioIndicadores()
 				.todosLosNombresDeIndicadores(
-						this.getRepositorioIndicadores().getElementos());
+						this.getRepositorioIndicadores().allInstances());
 
 	}
 
@@ -108,8 +107,8 @@ public class AgregarIndicadorViewM {
 		new DslIndicador().añadirIndicador(new RegistroIndicador(this.nombre,
 				this.formula));
 	}
-	
-	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
+
+	public RepositorioIndicador getRepositorioIndicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 
@@ -126,11 +125,11 @@ public class AgregarIndicadorViewM {
 					+ this.getAgregarIndicadorSeleccionado());
 	}
 
-//	public RepositorioEmpresa getRepoEmpresas() {
-//		return ApplicationContext.getInstance().getSingleton(Empresa.class);
-//	}
-	
-	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
+	// public RepositorioEmpresa getRepoEmpresas() {
+	// return ApplicationContext.getInstance().getSingleton(Empresa.class);
+	// }
+
+	public RepositorioEmpresa getRepositorioEmpresas() {
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 

@@ -8,10 +8,11 @@ import model.Cuenta;
 import model.Empresa;
 import model.Periodo;
 import model.SnapshotEmpresa;
+import repositories.RepositorioEmpresa;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioUnicoDeEmpresas;
+import app.AplicacionContexto;
 
 @Observable
 public class EmpresaViewM {
@@ -140,9 +141,9 @@ public class EmpresaViewM {
 		this.llenarTablas();
 	}
 
-	@SuppressWarnings("unchecked")
 	public void llenarTablas() {
-		this.setSnapshotEmpresas(this.dameSnapshotEmpresas(getRepositorioEmpresas().getElementos()));
+		this.setSnapshotEmpresas(this
+				.dameSnapshotEmpresas(getRepositorioEmpresas().allInstances()));
 	}
 
 	public void reiniciar() {
@@ -172,19 +173,22 @@ public class EmpresaViewM {
 	}
 
 	public void generarCBoxSemestre(List<Empresa> empresas) {
-		this.semestre = this.getRepositorioEmpresas().todosLosPeriodos(empresas);
+		this.semestre = this.getRepositorioEmpresas()
+				.todosLosPeriodos(empresas);
 	}
 
 	public void generarCBoxCuentas(List<Empresa> empresas) {
-		this.cuentas = this.getRepositorioEmpresas().todosLosNombresDeCuentas(empresas);
+		this.cuentas = this.getRepositorioEmpresas().todosLosNombresDeCuentas(
+				empresas);
 	}
 
 	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
-		this.nombres = this.getRepositorioEmpresas().todosLosNombresDeEmpresas(empresas);
+		this.nombres = this.getRepositorioEmpresas().todosLosNombresDeEmpresas(
+				empresas);
 	}
-	
-	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
-		return RepositorioUnicoDeEmpresas.getSingletonInstance();
+
+	public RepositorioEmpresa getRepositorioEmpresas() {
+		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
 	public void limpiarFiltros() {

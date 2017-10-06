@@ -1,37 +1,42 @@
 package condiciones;
 
 import java.math.BigDecimal;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import model.RegistroIndicador;
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 
+@Entity
+@DiscriminatorValue("TaxativaMayorOMenor")
 public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 
-	private BigDecimal numeroAComparar;
+	private BigDecimal nroAComparar;
 
-	public CondicionTaxativaMayorOMenorA(MenorOMayor criterio,
-			RegistroIndicador indicador, int ultimosAnios,
+	public CondicionTaxativaMayorOMenorA() {
+	}
+
+	public CondicionTaxativaMayorOMenorA(MenorOMayor criterio, RegistroIndicador indicador, int ultimosAnios,
 			BigDecimal nroAComparar) {
 		super(criterio, indicador, ultimosAnios);
-		this.numeroAComparar = nroAComparar;
+		this.nroAComparar = nroAComparar;
 	}
 
 	public String textoError() {
 		if (criterio.equals(MenorOMayor.menorA)) {
-			return "La condicion menor a " + numeroAComparar.toString()
-					+ " no se cumple para el indicador "
+			return "La condicion menor a " + nroAComparar.toString() + " no se cumple para el indicador "
 					+ indicador.getNombre();
 		} else {
-			return "La condicion mayor a " + numeroAComparar.toString()
-					+ " no se cumple para el indicador "
+			return "La condicion mayor a " + nroAComparar.toString() + " no se cumple para el indicador "
 					+ indicador.getNombre();
 		}
 	}
 
-	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
-			throws ParseException {
+	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
 		BigDecimal acumulador = sumador(rEmpresa.getEmpresa());
-		if (this.comparar(acumulador, numeroAComparar)) {
+		if (this.comparar(acumulador, nroAComparar)) {
 			throw new RuntimeException(textoError());
 		}
 		;
@@ -39,11 +44,11 @@ public class CondicionTaxativaMayorOMenorA extends CondicionSumatoria {
 
 	}
 
-	private boolean comparar(BigDecimal acumulador, BigDecimal numeroAComparar) {
+	private boolean comparar(BigDecimal acumulador, BigDecimal nroAComparar) {
 		if (criterio.equals(MenorOMayor.menorA)) {
-			return acumulador.compareTo(numeroAComparar) > 0;
+			return acumulador.compareTo(nroAComparar) > 0;
 		} else {
-			return acumulador.compareTo(numeroAComparar) < 0;
+			return acumulador.compareTo(nroAComparar) < 0;
 		}
 	}
 }

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Metodologia;
+import repositories.RepositorioMetodologia;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioUnicoDeMetodologias;
 import app.AplicacionContexto;
 
 @Observable
@@ -52,13 +52,12 @@ public class MetodologiaViewM {
 		this.llenarTablas();
 	}
 
-	@SuppressWarnings("unchecked")
 	public void llenarTablas() {
 		this.setMetodologias(null);
-		this.setMetodologias(getRepoMetodologias().getElementos());
+		this.setMetodologias(getRepoMetodologias().allInstances());
 	}
 
-	public RepositorioUnicoDeMetodologias getRepoMetodologias() {
+	public RepositorioMetodologia getRepoMetodologias() {
 		return AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 	}
 

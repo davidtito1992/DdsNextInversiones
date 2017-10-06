@@ -1,222 +1,136 @@
 package repositories;
 
+import java.math.BigDecimal;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import model.Cuenta;
 import model.Empresa;
-import org.apache.commons.collections15.Predicate;
-import org.uqbar.commons.model.CollectionBasedRepo;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.uqbar.commons.utils.Observable;
 
-import java.math.BigDecimal;
-
 @Observable
-public class RepositorioEmpresa extends CollectionBasedRepo<Empresa> {
+public class RepositorioEmpresa extends Repository<Empresa> {
 
-	/********* ATRIBUTOS *********/
+	private static RepositorioEmpresa repositorioEmpresa;
 
-	private static RepositorioEmpresa instance = new RepositorioEmpresa();
+	private RepositorioEmpresa() {
+		super(Empresa.class);
+	}
+
+	public static RepositorioEmpresa getInstance() {
+		if (repositorioEmpresa == null) {
+			repositorioEmpresa = new RepositorioEmpresa();
+		}
+		return repositorioEmpresa;
+	}
 
 	/********* METODOS *********/
 
-	// LO LLAMA EL INICIALIZADOR
-	public void cargarListaEmpresas(List<Empresa> empresas) {
-
-		empresas.forEach(empresa -> this.create(empresa));
-	}
-
-	public static RepositorioEmpresa repositorioMaestro() {
-		return instance;
-	}
-
-	@Override
-	public Class<Empresa> getEntityType() {
-		return Empresa.class;
-	}
-
-	@Override
-	public Empresa createExample() {
-		return new Empresa();
-	}
-
-	@Override
-	protected Predicate<?> getCriterio(Empresa example) {
-		return null;
-	}
-
-	// METODO PARA FILTRAR UNA LISTA DE EMPRESAS
-	public List<Empresa> filtrar(String cuentaSeleccionada,
-			String nombreSeleccionado, Integer semestreSeleccionado,
+	@SuppressWarnings("unchecked")
+	public List<Empresa> filtrar(String cuentaSeleccionada, String nombreSeleccionado, Integer semestreSeleccionado,
 			Year anioSeleccionado) {
-		return this
-				.allInstances()
-				.stream()
-				.filter(empresa -> filtroCuenta(cuentaSeleccionada, empresa)
-						&& filtroNombre(nombreSeleccionado, empresa)
-						&& filtroSemestre(semestreSeleccionado, empresa)
-						&& filtroAnio(anioSeleccionado, empresa))
-				.collect(Collectors.toList());
-	}
 
-	public boolean filtroAnio(Year anioSeleccionado, Empresa empresa) {
-		return anioSeleccionado == null
-				|| empresa
-						.getPeriodos()
-						.stream()
-						.anyMatch(
-								periodo -> periodo.getAnio().equals(
-										anioSeleccionado));
+		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(Empresa.class);
+		if (nombreSeleccionado != null) {
+			criteria.add(Restrictions.eq("nombre", nombreSeleccionado));
+		}
+		criteria.createAlias("periodos", "periodo");
+		if (anioSeleccionado != null) {
+			criteria.add(Restrictions.eq("periodo.anio", anioSeleccionado));
+		}
+		if (semestreSeleccionado != null) {
+			criteria.add(Restrictions.eq("periodo.semestre", semestreSeleccionado));
+		}
+		criteria.createAlias("periodo.cuentas", "cuenta");
+		if (cuentaSeleccionada != null) {
+			criteria.add(Restrictions.eq("cuenta.nombre", cuentaSeleccionada));
+		}
 
-	}
-
-	public boolean filtroSemestre(Integer semestreSeleccionado, Empresa empresa) {
-		return semestreSeleccionado == null
-				|| empresa
-						.getPeriodos()
-						.stream()
-						.anyMatch(
-								periodo -> periodo.getSemestre() == semestreSeleccionado);
-
-	}
-
-	public boolean filtroNombre(String nombreSeleccionado, Empresa empresa) {
-		return nombreSeleccionado == null ||
-
-		empresa.getNombre().equalsIgnoreCase(nombreSeleccionado);
-
-	}
-
-	public boolean filtroCuenta(String cuentaSeleccionada, Empresa empresa) {
-		return cuentaSeleccionada == null
-				|| empresa
-						.getPeriodos()
-						.stream()
-						.anyMatch(
-								periodo -> periodo
-										.getCuentas()
-										.stream()
-										.anyMatch(
-												cuenta -> cuenta
-														.getNombre()
-														.equalsIgnoreCase(
-																cuentaSeleccionada)));
-
+		return (List<Empresa>) criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 	}
 
 	public ArrayList<Year> todosLosAnios(List<Empresa> listaEmpresas) {
 
-		ArrayList<Year> todosLosAnios = listaEmpresas.stream()
-				.map(empresa -> empresa.getPeriodos())
-				.flatMap(periodos -> periodos.stream())
-				.map(periodo -> periodo.getAnio()).distinct().sorted()
+		ArrayList<Year> todosLosAnios = listaEmpresas.stream().map(empresa -> empresa.getPeriodos())
+				.flatMap(periodos -> periodos.stream()).map(periodo -> periodo.getAnio()).distinct().sorted()
 				.collect(Collectors.toCollection(ArrayList::new));
 
 		return todosLosAnios;
 	}
 
-	public ArrayList<Integer> todosLosPeriodos(List<Empresa> listaEmpresa) {
+	public ArrayList<Integer> todosLosPeriodos(List<Empresa> listaEmpresas) {
+		String query = "SELECT DISTINCT p.semestre FROM Periodo p";
 
-		ArrayList<Integer> todosLosPeriodos = listaEmpresa.stream()
-				.map(empresa -> empresa.getPeriodos())
-				.flatMap(periodos -> periodos.stream())
-				.map(periodo -> periodo.getSemestre()).distinct().sorted()
-				.collect(Collectors.toCollection(ArrayList::new));
+		ArrayList<Integer> todosLosPeriodos = (ArrayList<Integer>) entityManager.createQuery(query, Integer.class)
+				.getResultList();
 
 		return todosLosPeriodos;
 	}
 
-	public ArrayList<String> todosLosNombresDeCuentas(
-			List<Empresa> listaEmpresas) {
+	public ArrayList<String> todosLosNombresDeCuentas(List<Empresa> listaEmpresas) {
 
-		ArrayList<String> nombresDeTodasLasCuentas = listaEmpresas.stream()
-				.map(empresa -> empresa.getPeriodos())
-				.flatMap(periodos -> periodos.stream())
-				.map(periodo -> periodo.getCuentas())
-				.flatMap(cuentas -> cuentas.stream())
-				.map(cuenta -> cuenta.getNombre()).distinct().sorted()
-				.collect(Collectors.toCollection(ArrayList::new));
+		String query = "SELECT DISTINCT c.nombre FROM Cuenta  c";
+
+		ArrayList<String> nombresDeTodasLasCuentas = (ArrayList<String>) entityManager.createQuery(query, String.class)
+				.getResultList();
 
 		return nombresDeTodasLasCuentas;
 
 	}
 
-	public ArrayList<String> todosLosNombresDeEmpresas(List<Empresa> empresas) {
-
-		ArrayList<String> nombresDeTodasLasEmpresas = empresas.stream()
-				.map(empresa -> empresa.getNombre()).distinct().sorted()
-				.collect(Collectors.toCollection(ArrayList::new));
-
-		return nombresDeTodasLasEmpresas;
+	@SuppressWarnings("unchecked")
+	public List<String> todosLosNombresDeEmpresas(List<Empresa> empresas) {
+		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(Empresa.class)
+				.setProjection(Projections.property("nombre"));
+		return (List<String>) criteria.list();
 	}
 
-	public BigDecimal getValorCuenta(String nombreEmpresa, Year anio,
-			int semestre, String nombreCuenta) {
-
-		List<Cuenta> cuentaADevolver = this.obtenerCuenta(nombreEmpresa, anio,
-				semestre, nombreCuenta);
-
-		if (cuentaADevolver.isEmpty())
-
-			throw new RuntimeException(
-					"No pudimos obtener el valor de la variable: "
-							+ nombreCuenta);
-		else
-			return cuentaADevolver.get(0).getValor();
+	public BigDecimal getValorCuenta(String nombreEmpresa, Year anio, int semestre, String nombreCuenta) {
+		Cuenta cuentaADevolver;
+		try {
+			cuentaADevolver = this.obtenerCuenta(nombreEmpresa, anio, semestre, nombreCuenta);
+		} catch (Exception e) {
+			throw new RuntimeException("No pudimos obtener el valor de la variable: " + nombreCuenta);
+		}
+		return cuentaADevolver.getValor();
 
 	}
 
-	public boolean esCuenta(String componente) {
-		return this
-				.todasLasCuentas()
-				.stream()
-				.map(cuenta -> cuenta.getNombre())
-				.anyMatch(
-						nombreCuenta -> nombreCuenta
-								.equalsIgnoreCase(componente));
+	public boolean esCuenta(String nombreCuenta) {
+
+		String query = "SELECT c FROM Cuenta c WHERE c.nombre = :nombreCuenta";
+
+		Query q2 = entityManager.createQuery(query).setParameter("nombreCuenta", nombreCuenta);
+
+		if (!q2.getResultList().isEmpty()) {
+			return true;
+		}
+		return false;
+
 	}
 
-	public List<Cuenta> obtenerCuenta(String nombreSeleccionado,
-			Year anioSeleccionado, Integer semestreSeleccionado,
+	public Cuenta obtenerCuenta(String nombreSeleccionado, Year anioSeleccionado, Integer semestreSeleccionado,
 			String nombreCuenta) {
-
-		List<Cuenta> cuentasADevolver = this
-				.allInstances()
-				.stream()
-				.filter(empresa -> empresa.getNombre().equalsIgnoreCase(
-						nombreSeleccionado))
-				.map(empresa -> empresa.getPeriodos())
-				.flatMap(periodo -> periodo.stream())
-				.filter(periodo -> periodo.getAnio().equals(anioSeleccionado)
-						&& periodo.getSemestre() == semestreSeleccionado)
-				.map(periodo -> periodo.getCuentas())
-				.flatMap(cuentas -> cuentas.stream())
-				.filter(cuenta -> cuenta.getNombre().equalsIgnoreCase(
-						nombreCuenta)).collect(Collectors.toList());
-
-		return cuentasADevolver;
-
-	}
-
-	public List<Cuenta> todasLasCuentas() {
-		List<Empresa> empresas = this.allInstances();
-
-		List<Cuenta> todasLasCuentas = empresas.stream()
-				.map(empresa -> empresa.getPeriodos())
-				.flatMap(periodo -> periodo.stream())
-				.map(periodo -> periodo.getCuentas())
-				.flatMap(cuenta -> cuenta.stream()).distinct()
-				.collect(Collectors.toList());
-
-		return todasLasCuentas;
+		String query = "SELECT c FROM Empresa e INNER JOIN e.periodos p INNER JOIN p.cuentas c "
+				+ "WHERE e.nombre = :nombreEmpresa " + "AND p.anio = :anio " + "AND p.semestre = :semestre "
+				+ "AND c.nombre = :nombreCuenta";
+		TypedQuery<Cuenta> q2 = entityManager.createQuery(query, Cuenta.class)
+				.setParameter("nombreEmpresa", nombreSeleccionado).setParameter("anio", anioSeleccionado)
+				.setParameter("semestre", semestreSeleccionado).setParameter("nombreCuenta", nombreCuenta);
+		return q2.getSingleResult();
 	}
 
 	public Empresa getEmpresa(String nombreEmpresa) {
-
-		return this.allInstances().stream()
-				.filter(emp -> emp.getNombre().equalsIgnoreCase(nombreEmpresa))
-				.collect(Collectors.toCollection(ArrayList::new)).get(0);
+		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(Empresa.class)
+				.add(Restrictions.eq("nombre", nombreEmpresa));
+		return (Empresa) criteria.uniqueResult();
 	}
 
 }

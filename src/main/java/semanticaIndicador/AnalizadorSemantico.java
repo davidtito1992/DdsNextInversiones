@@ -2,13 +2,12 @@ package semanticaIndicador;
 
 import java.util.List;
 
-import repositories.RepositorioUnicoDeEmpresas;
-import repositories.RepositorioUnicoDeIndicadores;
 import app.AplicacionContexto;
 import formulaIndicador.Variable;
+import repositories.RepositorioEmpresa;
+import repositories.RepositorioIndicador;
 
 public class AnalizadorSemantico {
-	
 
 	// validamos que los nombres de las variables existan
 	// ya sea una cuenta o indicador con la ayuda del
@@ -16,7 +15,8 @@ public class AnalizadorSemantico {
 	public void analizarVariablesDeFormula(List<Variable> variables) {
 
 		variables.forEach(nombreVariable -> {
-			if (this.getRepositorioEmpresas().esCuenta(nombreVariable.getNombre()))
+			if (this.getRepositorioEmpresas().esCuenta(
+					nombreVariable.getNombre()))
 				;
 			else if (this.getRepositorioIndicadores().esIndicador(
 					nombreVariable.getNombre()))
@@ -41,11 +41,11 @@ public class AnalizadorSemantico {
 
 	}
 
-	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
+	public RepositorioIndicador getRepositorioIndicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
-	
-	public RepositorioUnicoDeEmpresas getRepositorioEmpresas(){
+
+	public RepositorioEmpresa getRepositorioEmpresas() {
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 }

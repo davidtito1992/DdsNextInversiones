@@ -8,21 +8,50 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.uqbar.commons.model.Entity;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
 
-@SuppressWarnings("serial")
+@Entity
+@Table(name = "Empresas")
 @Transactional
 @Observable
-public class Empresa extends Entity {
+public class Empresa {
 
 	/********* ATRIBUTOS *********/
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long empresaId;
+
 	private String nombre;
+
+	@JoinColumn
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
 
 	/********* GETTERS/SETTERS *********/
+
+	public Empresa() {
+
+	}
+
+	public Long getEmpresaId() {
+		return empresaId;
+	}
+
+	public void setEmpresaId(Long empresaId) {
+		this.empresaId = empresaId;
+	}
 
 	public String getNombre() {
 		return nombre;

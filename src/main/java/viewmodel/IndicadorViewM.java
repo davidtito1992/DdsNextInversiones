@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.RegistroIndicador;
+import repositories.RepositorioIndicador;
 
 import org.uqbar.commons.utils.Observable;
 
-import repositories.RepositorioUnicoDeIndicadores;
 import app.AplicacionContexto;
 
 @Observable
@@ -60,13 +60,12 @@ public class IndicadorViewM {
 		this.llenarTablas();
 	}
 
-	@SuppressWarnings("unchecked")	
 	public void llenarTablas() {
 		this.setIndicadores(null);
-		this.setIndicadores(getRepositorioIndicadores().getElementos());
+		this.setIndicadores(getRepositorioIndicadores().allInstances());
 	}
 
-	public RepositorioUnicoDeIndicadores getRepositorioIndicadores(){
+	public RepositorioIndicador getRepositorioIndicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 

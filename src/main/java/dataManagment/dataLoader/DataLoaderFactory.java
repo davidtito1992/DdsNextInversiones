@@ -1,7 +1,5 @@
 package dataManagment.dataLoader;
 
-import DB.DBLoader;
-
 public class DataLoaderFactory {
 
 	/********* ATRIBUTOS *********/
@@ -15,9 +13,8 @@ public class DataLoaderFactory {
 
 		if (criteria.equals(ARCHIVO)) {
 			return new FileLoader();
-		} else if (criteria.equals(DATABASE)) {
-			return new DBLoader();
+		} else {
+			throw new RuntimeException("tipo de DataLoader inexistente");
 		}
-		throw new RuntimeException("tipo de DataLoader inexistente");
 	}
 }

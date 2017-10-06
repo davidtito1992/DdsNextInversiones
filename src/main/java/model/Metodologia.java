@@ -2,27 +2,49 @@ package model;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import org.uqbar.commons.model.Entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.uqbar.commons.utils.Observable;
+import org.uqbar.commons.utils.Transactional;
+
 import parserIndicador.ParseException;
 import RankingEmpresa.RankingEmpresa;
 import RankingEmpresa.RankingEmpresasComparator;
 import condiciones.Condicion;
 
-@SuppressWarnings("serial")
+@Entity
 @Observable
-public class Metodologia extends Entity {
+@Table(name= "Metodologias")
+@Transactional
+public class Metodologia {
 
 	public Metodologia(String nombre, List<Condicion> condiciones) {
 		this.nombre = nombre;
 		this.condiciones = condiciones;
-
+	}
+	
+	public Metodologia(){
 	}
 
 	/********* ATRIBUTOS *********/
-
-	public String nombre;
-	public List<Condicion> condiciones;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long metodologiaId;
+	
+	private String nombre;
+	
+	@JoinColumn
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Condicion> condiciones;
 
 	/********* GETTERS/SETTERS *********/
 
@@ -61,6 +83,10 @@ public class Metodologia extends Entity {
 		return rEmpresas.stream().map(empresa -> calcularEmpresa(empresa))
 				.sorted(new RankingEmpresasComparator())
 				.collect(Collectors.toList());
+	}
+	
+	public long getMetodologiaId(){
+		return metodologiaId;
 	}
 
 }

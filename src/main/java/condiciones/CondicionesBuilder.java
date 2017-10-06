@@ -25,50 +25,39 @@ public class CondicionesBuilder {
 		int ultimosAnios = snapshotCondicion.getAnios();
 		BigDecimal pesoOComparar = snapshotCondicion.getPesoOComparar();
 		RegistroIndicador registroIndicador = null;
-		if (!indicador.equalsIgnoreCase(VACIARINDICADOR)){
-			registroIndicador = new AppData()
-			.getRepositorioIndicadores().getRegistroIndicador(indicador);
+		if (!indicador.equalsIgnoreCase(VACIARINDICADOR)) {
+			registroIndicador = new AppData().getRepositorioIndicadores().getRegistroIndicador(indicador);
 		}
 
 		if (tipoCondicion.equals(TAXATIVA)) {
 			switch (condicion) {
 			case CRECIENTE:
-				return new CondicionCrecienteODecreciente(
-						CreceODecrece.CRECIENTE, registroIndicador,
-						ultimosAnios);
+				return new CondicionCrecienteODecreciente(CreceODecrece.CRECIENTE, registroIndicador, ultimosAnios);
 			case DECRECIENTE:
-				return new CondicionCrecienteODecreciente(
-						CreceODecrece.DECRECIENTE, registroIndicador,
-						ultimosAnios);
+				return new CondicionCrecienteODecreciente(CreceODecrece.DECRECIENTE, registroIndicador, ultimosAnios);
 			case MENOR:
-				return new CondicionTaxativaMayorOMenorA(
-						condiciones.CondicionSumatoria.MenorOMayor.menorA,
+				return new CondicionTaxativaMayorOMenorA(condiciones.CondicionSumatoria.MenorOMayor.menorA,
 						registroIndicador, ultimosAnios, pesoOComparar);
 			case MAYOR:
-				return new CondicionTaxativaMayorOMenorA(
-						condiciones.CondicionSumatoria.MenorOMayor.mayorA,
+				return new CondicionTaxativaMayorOMenorA(condiciones.CondicionSumatoria.MenorOMayor.mayorA,
 						registroIndicador, ultimosAnios, pesoOComparar);
 			case ANTIGUEDAD:
 				return new CondicionTaxativaAntiguedad(pesoOComparar);
 			default:
-				throw new RuntimeException(
-						"El tipo de condicion elegida no esta disponible");
+				throw new RuntimeException("El tipo de condicion elegida no esta disponible");
 			}
 		} else {
 			switch (condicion) {
 			case MENOR:
-				return new CondicionCuantitativaMayorOMenorA(
-						condiciones.CondicionSumatoria.MenorOMayor.menorA,
+				return new CondicionCuantitativaMayorOMenorA(condiciones.CondicionSumatoria.MenorOMayor.menorA,
 						registroIndicador, ultimosAnios, pesoOComparar);
 			case MAYOR:
-				return new CondicionCuantitativaMayorOMenorA(
-						condiciones.CondicionSumatoria.MenorOMayor.mayorA,
+				return new CondicionCuantitativaMayorOMenorA(condiciones.CondicionSumatoria.MenorOMayor.mayorA,
 						registroIndicador, ultimosAnios, pesoOComparar);
 			case ANTIGUEDAD:
 				return new CondicionCuantitativaAntiguedad(pesoOComparar);
 			default:
-				throw new RuntimeException(
-						"El tipo de condicion elegida no esta disponible");
+				throw new RuntimeException("El tipo de condicion elegida no esta disponible");
 			}
 		}
 	}

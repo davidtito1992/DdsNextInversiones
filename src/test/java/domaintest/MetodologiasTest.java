@@ -41,9 +41,6 @@ public class MetodologiasTest {
 
 	@Before
 	public void inicializar() throws Exception {
-		new AppData().cargarEmpresas();
-		new AppData().cargarIndicadores();
-
 		ingresoNeto = new AppData().getRepositorioIndicadores()
 				.getRegistroIndicador("IngresoNeto");
 		i4 = new AppData().getRepositorioIndicadores().getRegistroIndicador(
