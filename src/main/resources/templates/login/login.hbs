@@ -1,47 +1,46 @@
 {{#partial "contenido"}}
-            <div class="row">
-                <div class="col-md-3"><img class="img-fluid d-block mr-auto" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/54/Next_2007-_logo.svg/800px-Next_2007-_logo.svg.png"></div>
-                <div class="col-md-6">
-                    <h1 class="text-gray-dark">Iniciar sesión</h1>
+<div class="row">
+    <div class="col-md-3"><img class="img-fluid d-block mr-auto" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/54/Next_2007-_logo.svg/800px-Next_2007-_logo.svg.png"></div>
+    <div class="col-md-6">
+        <h1 class="text-gray-dark">Iniciar sesión</h1>
 
-                    <form class="" method="POST" action="/login">
-                        <div class="form-group">
-                            <label>Dirección Email</label>
-                            <input type="email" name="email" value="" class="form-control" placeholder="Ingrese email"> </div>
-                        <div class="form-group">
-                            <label>Contraseña</label>
-                            <input type="password" name="password" value="" class="form-control" placeholder="Contraseña"> </div>
-                        <button type="submit" name="commit" value="Login" class="btn btn-primary">Ingresar</button>
-                    </form>
-                
-                </div>
-            </div>
-            <div class="row">
+        <form class="" method="POST" action="/login">
+            <div class="form-group">
+                <label>Dirección Email</label>
+                <input type="email" name="email" value="" class="form-control" placeholder="Ingrese email"> </div>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" name="password" value="" class="form-control" placeholder="Contraseña"> </div>
+            <button type="submit" name="commit" value="Login" class="btn btn-primary">Ingresar</button>
+        </form>
 
-                <div class="col-md-3">
-                    <div class="p-4 col-md-12"> <i class="d-block fa fa-3x fa-pie-chart text-center"></i>
-                        <h2 class="my-3 text-center">Seguimiento personalizado de tus inversiones</h2>
+    </div>
+</div>
+<div class="row">
 
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="col-md-12 p-4"> <i class="d-block fa fa-3x fa-th text-center"></i>
-                        <h2 class="my-3 text-center">Metodologías personalizadas</h2>
-
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="col-md-12 p-4"> <i class="d-block fa fa-3x fa-globe text-center"></i>
-                        <h2 class="my-3 text-center">Abrís tu cuenta gratis y en forma remota</h2>
-
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="col-md-12 p-4"> <i class="d-block fa fa-3x fa-money text-center"></i>
-                        <h2 class="my-3 text-center">Sin costos de mantenimiento</h2>
-
-                    </div>
-                </div>
-            </div>
-{{/partial}}
-{{>layout.hbs}}
+    <div class="col lg-3 -md-6">
+        <div class="p-4 col-md-12">
+            <i class="d-block fa fa-3x fa-pie-chart text-center"></i>
+            <h2 class="my-3 text-center">Seguimiento personalizado de tus inversiones</h2>
+        </div>
+    </div>
+    <div class="col lg-3 -md-6">
+        <div class="col-md-12 p-4">
+            <i class="d-block fa fa-3x fa-th text-center"></i>
+            <h2 class="my-3 text-center">Metodologías personalizadas</h2>
+        </div>
+    </div>
+    <div class="col lg-3 -md-6">
+        <div class="col-md-12 p-4">
+            <i class="d-block fa fa-3x fa-globe text-center"></i>
+            <h2 class="my-3 text-center">Abrís tu cuenta gratis y en forma remota</h2>
+        </div>
+    </div>
+    <div class="col lg-3 -md-6">
+        <div class="col-md-12 p-4">
+            <i class="d-block fa fa-3x fa-money text-center"></i>
+            <h2 class="my-3 text-center">Sin costos de mantenimiento</h2>
+        </div>
+    </div>
+</div>
+{{/partial}} {{>layout.hbs}}
