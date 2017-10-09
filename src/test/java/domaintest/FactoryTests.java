@@ -1,13 +1,12 @@
 package domaintest;
 
 import static org.junit.Assert.assertEquals;
+import main.dataManagment.dataLoader.DataAdapterFactory;
+import main.dataManagment.dataLoader.DataLoaderFactory;
+import main.dataManagment.dataLoader.FileLoader;
+import main.dataManagment.dataLoader.JsonAdapter;
 
 import org.junit.Test;
-
-import dataManagment.dataLoader.DataAdapterFactory;
-import dataManagment.dataLoader.DataLoaderFactory;
-import dataManagment.dataLoader.FileLoader;
-import dataManagment.dataLoader.JsonAdapter;
 
 public class FactoryTests {
 

@@ -1,17 +1,20 @@
 package domaintest;
 
-import java.math.BigDecimal;
-import org.junit.Before;
-import org.junit.Test;
-import formulaIndicador.Constante;
-import formulaIndicador.Division;
-import formulaIndicador.Expresion;
-import formulaIndicador.Multiplicacion;
-import formulaIndicador.Resta;
-import formulaIndicador.Suma;
-import formulaIndicador.Variable;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+
+import java.math.BigDecimal;
+
+import main.formulaIndicador.Constante;
+import main.formulaIndicador.Division;
+import main.formulaIndicador.Expresion;
+import main.formulaIndicador.Multiplicacion;
+import main.formulaIndicador.Resta;
+import main.formulaIndicador.Suma;
+import main.formulaIndicador.Variable;
+
+import org.junit.Before;
+import org.junit.Test;
 
 public class FormulaIndicadorTest {
 

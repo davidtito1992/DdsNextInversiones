@@ -2,9 +2,9 @@ package domaintest;
 
 import java.io.FileNotFoundException;
 
-import org.junit.Test;
+import main.dataManagment.dataLoader.FileLoader;
 
-import dataManagment.dataLoader.FileLoader;
+import org.junit.Test;
 
 public class CargaDeArchivoTest {
 

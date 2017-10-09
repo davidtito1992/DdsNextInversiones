@@ -5,12 +5,12 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import main.dataManagment.dataLoader.DataAdapter;
+import main.dataManagment.dataLoader.DataAdapterFactory;
+import main.dataManagment.dataLoader.DataLoader;
 import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
-import dataManagment.dataLoader.DataAdapter;
-import dataManagment.dataLoader.DataAdapterFactory;
-import dataManagment.dataLoader.DataLoader;
 
 public class StubFileLoader implements DataLoader {
 

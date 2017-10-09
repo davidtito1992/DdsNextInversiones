@@ -1,15 +1,18 @@
 package domaintest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 import java.math.BigDecimal;
 import java.time.Year;
+
+import main.app.DslIndicador;
+import main.formulaIndicador.FormulaIndicador;
+import main.parserIndicador.ParseException;
+import main.semanticaIndicador.AnalizadorSemantico;
 import model.RegistroIndicador;
+
 import org.junit.Before;
 import org.junit.Test;
-import formulaIndicador.FormulaIndicador;
-import parserIndicador.ParseException;
-import semanticaIndicador.AnalizadorSemantico;
-import app.DslIndicador;
 
 public class DslIndicadorTest {
 

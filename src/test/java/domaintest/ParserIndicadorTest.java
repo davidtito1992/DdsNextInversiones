@@ -1,13 +1,15 @@
 package domaintest;
 
-import java.math.BigDecimal;
-
-import org.junit.Test;
-import parserIndicador.ParseException;
-import formulaIndicador.FormulaIndicador;
-import parserIndicador.ParserIndicador;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+
+import java.math.BigDecimal;
+
+import main.formulaIndicador.FormulaIndicador;
+import main.parserIndicador.ParseException;
+import main.parserIndicador.ParserIndicador;
+
+import org.junit.Test;
 
 public class ParserIndicadorTest {
 

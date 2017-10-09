@@ -2,10 +2,10 @@ package domaintest;
 
 import java.io.File;
 
-import org.junit.Test;
+import main.dataManagment.dataLoader.FileLoader;
+import main.dataManagment.dataLoader.JsonAdapter;
 
-import dataManagment.dataLoader.FileLoader;
-import dataManagment.dataLoader.JsonAdapter;
+import org.junit.Test;
 
 public class LeerArchivoErroneoTest {
 

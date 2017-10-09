@@ -3,7 +3,7 @@ package model;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import RankingEmpresa.RankingEmpresa;
+import main.rankingEmpresa.RankingEmpresa;
 
 
 public class ControladorDeMetodologia {

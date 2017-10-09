@@ -1,12 +1,14 @@
 package domaintest;
 
 import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
+
+import main.formulaIndicador.Variable;
+import main.semanticaIndicador.AnalizadorSemantico;
 
 import org.junit.Before;
 import org.junit.Test;
-import semanticaIndicador.AnalizadorSemantico;
-import formulaIndicador.Variable;
 
 public class AnalizadorSemanticoTest {
 	ArrayList<Variable> variables;

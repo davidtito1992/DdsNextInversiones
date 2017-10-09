@@ -5,6 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import main.app.AppData;
+import main.condiciones.Condicion;
+import main.condiciones.CondicionCrecienteODecreciente;
+import main.condiciones.CondicionCrecienteODecreciente.CreceODecrece;
+import main.condiciones.CondicionCuantitativaAntiguedad;
+import main.condiciones.CondicionCuantitativaMayorOMenorA;
+import main.condiciones.CondicionSumatoria.MenorOMayor;
+import main.condiciones.CondicionTaxativaAntiguedad;
+import main.condiciones.CondicionTaxativaMayorOMenorA;
+import main.rankingEmpresa.RankingEmpresa;
 import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
@@ -12,17 +22,6 @@ import model.RegistroIndicador;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import RankingEmpresa.RankingEmpresa;
-import app.AppData;
-import condiciones.Condicion;
-import condiciones.CondicionCrecienteODecreciente.CreceODecrece;
-import condiciones.CondicionCuantitativaAntiguedad;
-import condiciones.CondicionCrecienteODecreciente;
-import condiciones.CondicionCuantitativaMayorOMenorA;
-import condiciones.CondicionSumatoria.MenorOMayor;
-import condiciones.CondicionTaxativaAntiguedad;
-import condiciones.CondicionTaxativaMayorOMenorA;
 
 public class MetodologiasTest {
 	public List<Condicion> condicionesPrueba = new ArrayList<Condicion>();

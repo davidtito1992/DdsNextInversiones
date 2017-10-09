@@ -1,13 +1,16 @@
 package domaintest;
 
 import static org.junit.Assert.assertEquals;
+
 import java.math.BigDecimal;
 import java.time.Year;
+
+import main.parserIndicador.ParseException;
+import main.semanticaIndicador.SemanticaVariable;
 import model.RegistroIndicador;
+
 import org.junit.Before;
 import org.junit.Test;
-import parserIndicador.ParseException;
-import semanticaIndicador.SemanticaVariable;
 
 public class SemanticaDeVariablesTest {
 

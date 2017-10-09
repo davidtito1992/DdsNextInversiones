@@ -12,6 +12,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import main.condiciones.Condicion;
+import main.condiciones.CondicionCuantitativaMayorOMenorA;
+import main.condiciones.CondicionTaxativaAntiguedad;
+import main.condiciones.CondicionTaxativaMayorOMenorA;
+import main.condiciones.CondicionSumatoria.MenorOMayor;
 import model.Cuenta;
 import model.Empresa;
 import model.Metodologia;
@@ -23,12 +28,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
-
-import condiciones.Condicion;
-import condiciones.CondicionCuantitativaMayorOMenorA;
-import condiciones.CondicionSumatoria.MenorOMayor;
-import condiciones.CondicionTaxativaAntiguedad;
-import condiciones.CondicionTaxativaMayorOMenorA;
 
 public class PersistenciaTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 

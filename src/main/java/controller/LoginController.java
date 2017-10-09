@@ -1,7 +1,7 @@
 package controller;
 
+import main.repositories.RepositorioUsuario;
 import model.User;
-import repositories.RepositorioUsuario;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;

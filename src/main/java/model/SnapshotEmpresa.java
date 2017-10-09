@@ -1,10 +1,9 @@
 package model;
 
+import java.math.BigDecimal;
 import java.time.Year;
 
 import org.uqbar.commons.utils.Observable;
-
-import java.math.BigDecimal;
 
 @Observable
 public class SnapshotEmpresa {

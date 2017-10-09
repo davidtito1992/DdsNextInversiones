@@ -13,13 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import main.condiciones.Condicion;
+import main.parserIndicador.ParseException;
+import main.rankingEmpresa.RankingEmpresa;
+import main.rankingEmpresa.RankingEmpresasComparator;
+
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
-
-import parserIndicador.ParseException;
-import RankingEmpresa.RankingEmpresa;
-import RankingEmpresa.RankingEmpresasComparator;
-import condiciones.Condicion;
 
 @Entity
 @Observable

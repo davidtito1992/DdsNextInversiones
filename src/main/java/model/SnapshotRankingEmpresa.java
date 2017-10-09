@@ -1,7 +1,7 @@
 package model;
-import org.uqbar.commons.utils.Observable;
+import main.rankingEmpresa.RankingEmpresa;
 
-import RankingEmpresa.RankingEmpresa;
+import org.uqbar.commons.utils.Observable;
 
 @Observable
 public class SnapshotRankingEmpresa {

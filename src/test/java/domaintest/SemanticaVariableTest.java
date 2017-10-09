@@ -1,8 +1,8 @@
 package domaintest;
 
 import static org.mockito.Mockito.mock;
+import main.repositories.RepositorioEmpresa;
 import model.Empresa;
-import repositories.RepositorioEmpresa;
 
 import org.uqbar.commons.utils.ApplicationContext;
 
