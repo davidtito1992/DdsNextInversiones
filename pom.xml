@@ -5,6 +5,13 @@
 	<artifactId>2017-vn-group-20</artifactId>
 	<version>1-SNAPSHOT</version>
 	<dependencies>
+	
+		<!-- TOKENS -->
+		<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>0.6.0</version>
+		</dependency>
 
 		<!--TESTS -->
 		<dependency>
