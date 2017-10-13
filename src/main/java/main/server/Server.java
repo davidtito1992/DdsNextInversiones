@@ -7,7 +7,7 @@ import spark.debug.DebugScreen;
 
 public class Server {
 	public static void main() throws IOException {
-		Spark.port(8088);
+		Spark.port(8080);
 
 		try {
 			// persisto todo?

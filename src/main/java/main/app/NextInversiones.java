@@ -9,10 +9,10 @@ import main.server.Server;
 public class NextInversiones {
 
 	public static void main(String[] args) throws IOException {
-		AplicacionContexto.getInstance();
-		AplicacionContexto.getInstance().getInstanceRepoEmpresas();
-		AplicacionContexto.getInstance().getInstanceRepoIndicadores();
-		AplicacionContexto.getInstance().getInstanceRepoMetodologias();
+//		AplicacionContexto.getInstance();
+//		AplicacionContexto.getInstance().getInstanceRepoEmpresas();
+//		AplicacionContexto.getInstance().getInstanceRepoIndicadores();
+//		AplicacionContexto.getInstance().getInstanceRepoMetodologias();
 		new Server().main();
 		// new NextInversiones().start();
 

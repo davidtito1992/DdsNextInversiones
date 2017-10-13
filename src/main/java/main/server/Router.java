@@ -1,5 +1,6 @@
 package main.server;
 
+import controller.EmpresaController;
 import main.handlebars.HandlebarsTemplateEngineBuilder;
 import controller.LoginController;
 import spark.Spark;
@@ -19,6 +20,9 @@ public class Router {
 		// Email - Password
 		Spark.get("/", LoginController::home, engine);
 		Spark.post("/login", loginController::login);
+
+		//OJO aca iria en la url el id del usuario
+		Spark.get("/empresas", EmpresaController::home,engine);
 
 	}
 }
