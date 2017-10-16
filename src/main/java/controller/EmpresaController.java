@@ -5,7 +5,6 @@ import main.viewmodel.EmpresaViewM;
 import model.Empresa;
 import model.SnapshotEmpresa;
 
-import org.apache.commons.lang3.StringUtils;
 
 import spark.ModelAndView;
 import spark.Request;
@@ -15,44 +14,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class EmpresaController {
+public class EmpresaController extends Controller{
 
 	private static EmpresaViewM adapter = new EmpresaViewM();
-	private static LoginController loginController;
-
-	public EmpresaController(LoginController loginController) {
-		EmpresaController.loginController = loginController;
-	}
-
+	
 	public static ModelAndView home(Request req, Response res) {
-		if (getIdUsuario() != null) {
+		
 			HashMap<String, List<SnapshotEmpresa>> mapEmpresas = new HashMap<>();
-			String idUsuarioAux = req.params("userId");
-			Long idUsuario = idUsuarioAux != null
-					&& StringUtils.isNumeric(idUsuarioAux) ? Long
-					.parseLong(idUsuarioAux) : null;
+			Long idUsuario = autenticar(req,res);
 			List<Empresa> empresasObtenidas = idUsuario != null ? RepositorioEmpresa
 					.getInstance().findFromUser(idUsuario) : new ArrayList<>();
 			List<SnapshotEmpresa> snaps = adapter
 					.dameSnapshotEmpresas(empresasObtenidas);
 			mapEmpresas.put("empresas", snaps);
 			return new ModelAndView(mapEmpresas, "homePage/empresas.hbs");
-		} else {
-			res.redirect("/");
-			return null;
-		}
 	}
-
-	public Void redirect(Request req, Response res) {
-		if (getIdUsuario() != null)
-			res.redirect("/empresas/" + getIdUsuario());
-		else
-			res.redirect("/");
-		return null;
-	}
-
-	public static Long getIdUsuario() {
-		return loginController.getIdUsuario();
-	}
-
 }

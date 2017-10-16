@@ -19,9 +19,9 @@ public class Router {
 		staticFileLocation("/public");
 
 		LoginController loginController = new LoginController();
-		EmpresaController empresaController = new EmpresaController(loginController);
-		IndicadorController indicadorController = new IndicadorController(loginController);
-		MetodologiaController metodologiaController = new MetodologiaController(loginController);
+		//EmpresaController empresaController = new EmpresaController();
+		IndicadorController indicadorController = new IndicadorController();
+		MetodologiaController metodologiaController = new MetodologiaController();
 
 		// Login
 		// Email - Password
@@ -29,20 +29,17 @@ public class Router {
 		Spark.post("/login", loginController::login);
 
 		// Empresas
-		Spark.get("/empresas/:userId", EmpresaController::home, engine);
-		Spark.get("/empresas", empresaController::redirect);
+		Spark.get("/empresas", EmpresaController::home, engine);
 
 		// Indicadores
-		Spark.get("/indicadores/:userId", IndicadorController::home, engine);
-		Spark.get("/indicadores", indicadorController::redirect);
+		Spark.get("/indicadores", IndicadorController::home, engine);
 		Spark.get("/indicadores/borrar/:indicadorId", indicadorController::delete);
-		Spark.get("/indicadores/agregar/indicador", IndicadorController::agregarView, engine);
-		Spark.post("/indicadores/agregar/indicador", indicadorController::agregar);
+		Spark.get("/indicadores/agregar", IndicadorController::agregarView, engine);
+		Spark.post("/indicadores/agregar", indicadorController::agregar);
 		
 
 		// Metodologias
-		Spark.get("/metodologias/:userId", MetodologiaController::home, engine);
-		Spark.get("/metodologias", metodologiaController::redirect);
+		Spark.get("/metodologias", MetodologiaController::home, engine);
 		Spark.get("/metodologias/borrar/:metodologiaId", metodologiaController::delete);
 
 	}

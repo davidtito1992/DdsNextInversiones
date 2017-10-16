@@ -1,14 +1,19 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
+
 import main.repositories.RepositorioUsuario;
 import model.User;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+
 public class LoginController {
 
-	private User usuario  ;
 	
 	public static ModelAndView home(Request req, Response res) {
 		return new ModelAndView(null, "login/login.hbs");
@@ -16,11 +21,22 @@ public class LoginController {
 	
 	public Void login(Request req, Response res) {
 		String user = req.queryParams("email");
-		usuario = RepositorioUsuario.getSingletonInstance().getUser(user);
+		User usuario = RepositorioUsuario.getSingletonInstance().getUser(user);
 		if (usuario != null) {
 			if (usuario.getPassword().equals(req.queryParams("password"))) {
-				setUsuario(usuario);
-				res.redirect("/empresas/" + usuario.getUserId());
+				try {
+				    Algorithm algorithm = Algorithm.HMAC256("secret");
+				    String token = JWT.create()
+				        .withIssuer("auth0")
+				        .withClaim("userId", usuario.getUserId())
+				        .sign(algorithm);
+				res.cookie("authenticationToken", token);
+				} catch (UnsupportedEncodingException exception){
+					res.redirect("/");
+				} catch (JWTCreationException exception){
+					res.redirect("/");
+				}
+				res.redirect("/empresas");
 			} else {
 				res.redirect("/"); // mal mail o pw
 			}
@@ -29,14 +45,4 @@ public class LoginController {
 		}
 		return null;
 	}
-
-
-	private void setUsuario(User usuario2) {
-		usuario = usuario2;
-	}
-
-	public Long getIdUsuario() {
-		return usuario != null ? usuario.getUserId() : null;
-	}
-
 }
