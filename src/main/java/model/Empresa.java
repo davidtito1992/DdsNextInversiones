@@ -30,7 +30,7 @@ public class Empresa {
 
 	/********* ATRIBUTOS *********/
 
-	@ManyToOne(fetch= FetchType.LAZY)//,cascade = CascadeType.ALL)
+	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn
 	private User user;
 

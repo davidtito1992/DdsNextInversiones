@@ -37,10 +37,15 @@ public class Metodologia {
 	public Metodologia() {
 	}
 
+	public Metodologia(String nombre, List<Condicion> condiciones) {
+		this.nombre = nombre;
+		this.condiciones = condiciones;
+	}
+
 	/********* ATRIBUTOS *********/
 
+	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn
-	@ManyToOne(cascade = CascadeType.ALL)
 	private User user;
 
 	@Id

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,8 +39,8 @@ public class RegistroIndicador {
 
 	/********* ATRIBUTOS *********/
 
+	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn
-	@ManyToOne(cascade = CascadeType.ALL)
 	private User user;
 
 	@Id
