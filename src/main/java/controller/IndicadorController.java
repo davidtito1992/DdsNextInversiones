@@ -2,6 +2,7 @@ package controller;
 
 import main.app.AppData;
 import main.repositories.RepositorioIndicador;
+import main.repositories.RepositorioUsuario;
 import main.viewmodel.ConsultarIndicadorViewM;
 import model.RegistroIndicador;
 import model.SnapshotIndicador;
@@ -42,6 +43,27 @@ public class IndicadorController {
 			return null;
 		}
 	}
+	
+	public static ModelAndView agregarView(Request req, Response res) {
+		if (getIdUsuario() != null) {
+			return new ModelAndView(null, "homePage/agregarIndicador.hbs");
+		} else {
+			res.redirect("/");
+			return null;
+		}
+	}
+	
+	public Void agregar(Request req, Response res){
+		String nombre = req.queryParams("nombre");
+		String formula = req.queryParams("formula");
+		RegistroIndicador nuevoIndicador = new RegistroIndicador();
+		nuevoIndicador.setNombre(nombre);
+		nuevoIndicador.setFormula(formula);
+		nuevoIndicador.setUser(RepositorioUsuario.getSingletonInstance().buscar(getIdUsuario()));
+		RepositorioIndicador.getSingletonInstance().agregar(nuevoIndicador);
+		res.redirect("/indicadores/"+getIdUsuario());  
+		return null;
+}
 
 	public Void redirect(Request req, Response res) {
 		if (getIdUsuario() != null)
@@ -59,6 +81,8 @@ public class IndicadorController {
 		res.redirect("/indicadores/" + getIdUsuario());
 		return null;
 	}
+	
+	
 
 	public static Long getIdUsuario() {
 		return loginController.getIdUsuario();
