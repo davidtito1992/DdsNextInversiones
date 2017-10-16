@@ -2,6 +2,7 @@ package main.repositories;
 
 import model.Cuenta;
 import model.Empresa;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -10,6 +11,7 @@ import org.uqbar.commons.utils.Observable;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+
 import java.math.BigDecimal;
 import java.time.Year;
 import java.util.ArrayList;
@@ -153,6 +155,7 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 		return (Empresa) criteria.uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Empresa> findFromUser(Long idUsuario) {
 		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
 				Empresa.class);

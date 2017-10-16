@@ -96,6 +96,7 @@ public class AppData {
 					unIndicador.getRegistroIndicadorId());
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException(
 					"Debido a un problema en la lectura y/o escritura del archivo "
 							+ "no pudimos realizar la operacion :/");

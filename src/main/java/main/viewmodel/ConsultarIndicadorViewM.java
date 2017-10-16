@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import main.app.AplicacionContexto;
 import main.app.DslIndicador;
 import main.repositories.RepositorioEmpresa;
+import main.repositories.RepositorioIndicador;
 import model.Empresa;
 import model.RegistroIndicador;
 import model.SnapshotIndicador;
@@ -27,13 +28,6 @@ public class ConsultarIndicadorViewM {
 	private SnapshotIndicador snapshotIndicadorSeleccionado;
 	private String resultado;
 	private RegistroIndicador registroIndicadorElegido;
-
-	public ConsultarIndicadorViewM(RegistroIndicador unIndicador) {
-
-		this.registroIndicadorElegido = unIndicador;
-		this.generarTodosLosCBox(null, null);
-		this.llenarTablas();
-	}
 
 	/********* GETTERS/SETTERS *********/
 
@@ -84,12 +78,6 @@ public class ConsultarIndicadorViewM {
 		return nombreSeleccionado;
 	}
 
-	public void setNombreSeleccionado(String nombreSeleccionado) {
-		this.nombreSeleccionado = nombreSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado, this.anioSeleccionado);// ,
-																					// this.semestreSeleccionado);
-	}
-
 	public List<Year> getAnios() {
 		return anios;
 	}
@@ -102,60 +90,31 @@ public class ConsultarIndicadorViewM {
 		return anioSeleccionado;
 	}
 
-	public void setAnioSeleccionado(Year anioSeleccionado) {
-		this.anioSeleccionado = anioSeleccionado;
-		this.generarTodosLosCBox(this.nombreSeleccionado, this.anioSeleccionado);// ,
-																					// this.semestreSeleccionado);
-	}
-
 	/********* METODOS *********/
-
-	public void generarTodosLosCBox(String empresa, Year anio) {
-
-		List<Empresa> repoEmpresaFiltrado = new ArrayList<Empresa>();
-		repoEmpresaFiltrado = this.getRepositorioEmpresas().filtrar(null,
-				empresa, null, anio);
-
-		generarCBoxNombresEmpresas(repoEmpresaFiltrado);
-		generarCBoxAnios(repoEmpresaFiltrado);
-
-	}
 
 	public RepositorioEmpresa getRepositorioEmpresas() {
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
-	public void generarCBoxAnios(List<Empresa> empresas) {
-		this.anios = this.getRepositorioEmpresas().todosLosAnios(empresas);
+	public List<SnapshotIndicador> allSnapshotIndicadores(Long idUser) {
+
+		List<Empresa> empresas = getRepositorioEmpresas().findFromUser(idUser);
+		List<RegistroIndicador> indicadores = getRepositorioIndicadores()
+				.findFromUser(idUser);
+		List<SnapshotIndicador> snapshots = new ArrayList<SnapshotIndicador>();
+
+		indicadores.forEach(indicador -> snapshots
+				.addAll(resultadosIndicadores(indicador, empresas)));
+
+		return snapshots.stream().distinct().collect(Collectors.toList());
 	}
 
-	public void generarCBoxNombresEmpresas(List<Empresa> empresas) {
-
-		this.nombres = this.getRepositorioEmpresas().todosLosNombresDeEmpresas(
-				empresas);
-
-	}
-
-	public void reiniciar() {
-		this.generarTodosLosCBox(null, null);
-		this.snapshotIndicadorSeleccionado = null;
-		this.limpiarFiltros();
-		this.llenarTablas();
-	}
-
-	public void limpiarFiltros() {
-		nombreSeleccionado = null;
-		// semestreSeleccionado = null;
-		anioSeleccionado = null;
-	}
-
-	public void llenarTablas() {
-		this.setSnapshotIndicadores(this
-				.resultadosIndicadores(getRepositorioEmpresas().allInstances()));
+	public RepositorioIndicador getRepositorioIndicadores() {
+		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 
 	public List<SnapshotIndicador> resultadosIndicadores(
-			List<Empresa> listaDeEmpresas) {
+			RegistroIndicador indicador, List<Empresa> listaDeEmpresas) {
 
 		List<SnapshotIndicador> listSnapshot = listaDeEmpresas
 				.stream()
@@ -163,8 +122,9 @@ public class ConsultarIndicadorViewM {
 						.getPeriodos()
 						.stream()
 						.map(periodo -> {
-							return crearSnapshotIndicador(empresa.getNombre(),
-									periodo.getAnio(), periodo.getSemestre());
+							return crearSnapshotIndicador(indicador,
+									empresa.getNombre(), periodo.getAnio(),
+									periodo.getSemestre());
 						}).collect(Collectors.toList()))
 				.flatMap(listaSnap -> listaSnap.stream())
 				.collect(Collectors.toList());
@@ -172,29 +132,21 @@ public class ConsultarIndicadorViewM {
 		return listSnapshot;
 	}
 
-	public void buscar() {
-		List<SnapshotIndicador> listSnapshot = (this
-				.resultadosIndicadores(getRepositorioEmpresas().filtrar(null,
-						nombreSeleccionado, null, anioSeleccionado)));
-		this.setSnapshotIndicadores(listSnapshot);
-	}
+	public SnapshotIndicador crearSnapshotIndicador(
+			RegistroIndicador indicador, String nombreEmpresa, Year anio,
+			int semestre) {
 
-	public SnapshotIndicador crearSnapshotIndicador(String nombreEmpresa,
-			Year anio, int semestre) {
-		SnapshotIndicador snapshotIndicador = new SnapshotIndicador();
-		snapshotIndicador.setNombreEmpresa(nombreEmpresa);
-		snapshotIndicador.setAnio(anio);
-		snapshotIndicador.setSemestre(semestre);
 		String resultado;
 		try {
 			resultado = new DslIndicador()
-					.prepararFormula(this.getRegistroIndicadorElegido(),
-							nombreEmpresa, anio, semestre).calcular()
-					.toPlainString();
+					.prepararFormula(indicador, nombreEmpresa, anio, semestre)
+					.calcular().toPlainString();
 		} catch (Exception e) {
 			resultado = e.getMessage();
 		}
-		snapshotIndicador.setResultado(resultado);
+
+		SnapshotIndicador snapshotIndicador = new SnapshotIndicador(indicador,
+				nombreEmpresa, anio, semestre, resultado);
 		return snapshotIndicador;
 	}
 }
