@@ -2,7 +2,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="theme.css" type="text/css"> </head><body>
+  <link rel="stylesheet" href="indicadoresAgregar.css" type="text/css"> </head><body>
   <nav class="navbar navbar-expand-md navbar-dark bg-secondary">
     <div class="container">
       <a class="navbar-brand" href="#">Next</a>
@@ -13,72 +13,43 @@
             <a class="nav-link" href="#">Cuentas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Indicadores</a>
+            <a class="nav-link active" href="#">Indicadores</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Metodologías</a>
+            <a class="nav-link" href="#">Metodologías</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <div class="py-5">
+  <div class="py-5" style="">
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <a class="btn btn-secondary" href="">Atrás</a>
         </div>
       </div>
     </div>
   </div>
-  <div class="py-5">
+  <div class="py-5" style="">
     <div class="container">
-      <div class="row"><div class="col-md-6"><p class="lead">Metodología seleccionada:&nbsp;</p></div><div class="col-md-6"><p class="lead">Warren</p></div></div><div class="row"><div class="col-md-12"><p class="lead text-success">Resultados</p></div></div><div class="row">
-        <div class="col-md-12">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                
-                <th>Empresa</th>
-                
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                
-                <td>Facebook</td>
-                
-              </tr>
-            </tbody>
-          </table>
+      <div class="row">
+        <div class="col-md-4">
+          <p class="lead">Nombre:&nbsp;</p>
+          <p class="lead">Fórmula:&nbsp;</p>
         </div>
-      </div><div class="row"><div class="col-md-12"><p class="lead text-danger">Empresas que fallaron</p></div></div><div class="row">
-        <div class="col-md-12">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                
-                <th>Empresa</th>
-                <th>Observación</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                
-                <td>Facebook</td>
-                <td>No cumple x</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="col-md-4" style="">
+          <form class="form-inline" method="post" action="https://formspree.io/">
+            <input type="email" name="email" class="form-control" placeholder="Ingrese un nombre"> </form>
+          <form class="form-inline" method="post" action="https://formspree.io/">
+            <input type="email" name="email" class="form-control" placeholder="Ingrese una fórmula"> </form>
+        </div>
+        <div class="col-md-4">
+          <a class="btn btn-block btn-sm text-center my-3 btn-success" href="">Agregar</a>
         </div>
       </div>
     </div>
   </div>
-  
   <div class="py-5 bg-dark text-white">
     <div class="container">
       <div class="row">
