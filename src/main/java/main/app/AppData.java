@@ -29,7 +29,9 @@ public class AppData {
 	public void cargarUsuarios() {
 		if (this.getRepositorioUsuarios().buscar(1) == null) {
 			User user = new User(new Long(1), "admin@dominio", "admin");
+			User user2 = new User(new Long(2), "rferro@dominio", "rferro");
 			this.getRepositorioUsuarios().agregar(user);
+			this.getRepositorioUsuarios().agregar(user2);
 		}
 	}
 

@@ -168,5 +168,67 @@
         ]
       }
     ]
+  },
+  {
+    "nombre": "McDonalds",
+    "user": {
+      "email": "rferro@dominio",
+      "password": "rferro",
+      "userId": "2"
+    },
+    "periodos": [
+      {
+        "anio": "2017",
+        "semestre": "1",
+        "cuentas": [
+          {
+            "nombre": "EBITDA",
+            "valor": "123"
+          },
+          {
+            "nombre": "FDS",
+            "valor": "321"
+          },
+          {
+            "nombre": "FreeCashFlow",
+            "valor": "456"
+          },
+          {
+            "nombre": "NetoDiscontinuas",
+            "valor": "645"
+          },
+          {
+            "nombre": "NetoContinuas",
+            "valor": "789"
+          }
+        ]
+      },
+      {
+        "anio": "2017",
+        "semestre": "2",
+        "cuentas": [
+          {
+            "nombre": "EBITDA",
+            "valor": "987"
+          },
+          {
+            "nombre": "FDS",
+            "valor": "789"
+          },
+          {
+            "nombre": "FreeCashFlow",
+            "valor": "654"
+          },
+          {
+            "nombre": "NetoDiscontinuas",
+            "valor": "456"
+          },
+          {
+            "nombre": "NetoContinuas",
+            "valor": "321"
+          }
+        ]
+      }
+    ]
   }
 ]
