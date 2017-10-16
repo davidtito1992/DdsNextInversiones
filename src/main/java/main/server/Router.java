@@ -19,6 +19,9 @@ public class Router {
 		staticFileLocation("/public");
 
 		LoginController loginController = new LoginController();
+		EmpresaController empresaController = new EmpresaController(loginController);
+		IndicadorController indicadorController = new IndicadorController(loginController);
+		MetodologiaController metodologiaController = new MetodologiaController(loginController);
 
 		// Login
 		// Email - Password
@@ -27,12 +30,15 @@ public class Router {
 
 		// Empresas
 		Spark.get("/empresas/:userId", EmpresaController::home, engine);
+		Spark.get("/empresas", empresaController::redirect);
 
 		// Indicadores
 		Spark.get("/indicadores/:userId", IndicadorController::home, engine);
+		Spark.get("/indicadores", indicadorController::redirect);
 
 		// Metodologias
 		Spark.get("/metodologias/:userId", MetodologiaController::home, engine);
+		Spark.get("/metodologias", metodologiaController::redirect);
 
 	}
 }

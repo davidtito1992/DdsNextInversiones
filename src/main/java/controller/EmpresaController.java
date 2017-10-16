@@ -4,7 +4,9 @@ import main.repositories.RepositorioEmpresa;
 import main.viewmodel.EmpresaViewM;
 import model.Empresa;
 import model.SnapshotEmpresa;
+
 import org.apache.commons.lang3.StringUtils;
+
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -16,6 +18,11 @@ import java.util.List;
 public class EmpresaController {
 
 	private static EmpresaViewM adapter = new EmpresaViewM();
+	private static LoginController loginController;
+
+	public EmpresaController(LoginController loginController) {
+		EmpresaController.loginController = loginController;
+	}
 
 	public static ModelAndView home(Request req, Response res) {
 		HashMap<String, List<SnapshotEmpresa>> mapEmpresas = new HashMap<>();
@@ -29,6 +36,15 @@ public class EmpresaController {
 				.dameSnapshotEmpresas(empresasObtenidas);
 		mapEmpresas.put("empresas", snaps);
 		return new ModelAndView(mapEmpresas, "homePage/empresas.hbs");
+	}
+
+	public Void redirect(Request req, Response res) {
+		res.redirect("/empresas/" + getIdUsuario());
+		return null;
+	}
+
+	public static Long getIdUsuario() {
+		return loginController.getIdUsuario();
 	}
 
 }
