@@ -28,7 +28,7 @@ public class MetodologiaController extends Controller{
 	public Void delete(Request req, Response res) {
 		String idMetodologia = req.params("metodologiaId");
 		RepositorioMetodologia.getSingletonInstance().eliminar(Long.parseLong(idMetodologia));
-		res.redirect("/metodologias/");
+		res.redirect("/metodologias");
 		return null;
 	}
 

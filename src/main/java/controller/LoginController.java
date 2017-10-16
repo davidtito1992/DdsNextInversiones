@@ -2,15 +2,15 @@ package controller;
 
 import java.io.UnsupportedEncodingException;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTCreationException;
-
 import main.repositories.RepositorioUsuario;
 import model.User;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
 
 public class LoginController {
 

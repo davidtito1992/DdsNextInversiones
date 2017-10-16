@@ -1,0 +1,24 @@
+{{#partial "contenido"}}
+
+<div class="row">
+    <div class="col-md-4">
+        <p class="lead">Nombre:&nbsp;</p>
+        <p class="lead">Fórmula:&nbsp;</p>
+    </div>
+    <div class="col-md-4" style="">
+    	<form action="/indicadores/agregar" method="POST">
+            <input type="text" name="nombre" class="form-control" placeholder="Ingrese un nombre" required>
+            <input type="text" name="formula" class="form-control" placeholder="Ingrese una fórmula" required>
+        	<div class="col-md-4">
+				<p class="submit">
+					<input type="submit" name="guardar" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar">
+				</p>
+    		</div>
+        </form>
+        
+        
+    </div>
+</div>
+
+{{/partial}}
+{{>layoutIndicadorAgregar.hbs}}

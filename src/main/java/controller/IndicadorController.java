@@ -2,6 +2,7 @@ package controller;
 
 import main.app.AppData;
 import main.repositories.RepositorioIndicador;
+import main.repositories.RepositorioUsuario;
 import main.viewmodel.ConsultarIndicadorViewM;
 import model.RegistroIndicador;
 import model.SnapshotIndicador;
@@ -22,18 +23,52 @@ public class IndicadorController extends Controller{
 	}
 
 	public static ModelAndView home(Request req, Response res) {
-		HashMap<String, List<?>> mapIndicadores = new HashMap<>();
-		Long usuarioId = autenticar(req,res);
-		List<RegistroIndicador> indicadoresObtenidas = usuarioId != null ? RepositorioIndicador
-				.getSingletonInstance().findFromUser(usuarioId)
-				: new ArrayList<>();
-		mapIndicadores.put("indicadores", indicadoresObtenidas);
+		if (autenticar(req,res) != null) {
+			HashMap<String, List<?>> mapIndicadores = new HashMap<>();
 
-		List<SnapshotIndicador> snapshots = indicadorViewM
-				.allSnapshotIndicadores(usuarioId);
-		mapIndicadores.put("snapshots", snapshots);
+			List<RegistroIndicador> indicadoresObtenidas = autenticar(req,res) != null ? RepositorioIndicador
+					.getSingletonInstance().findFromUser(autenticar(req,res))
+					: new ArrayList<>();
+			mapIndicadores.put("indicadores", indicadoresObtenidas);
 
-		return new ModelAndView(mapIndicadores, "homePage/indicadores.hbs");
+			List<SnapshotIndicador> snapshots = indicadorViewM
+					.allSnapshotIndicadores(autenticar(req,res));
+			mapIndicadores.put("snapshots", snapshots);
+
+			return new ModelAndView(mapIndicadores, "homePage/indicadores.hbs");
+		} else {
+			res.redirect("/");
+			return null;
+		}
+	}
+	
+	public static ModelAndView agregarView(Request req, Response res) {
+		if (autenticar(req,res) != null) {
+			return new ModelAndView(null, "homePage/agregarIndicador.hbs");
+		} else {
+			res.redirect("/");
+			return null;
+		}
+	}
+	
+	public Void agregar(Request req, Response res){
+		String nombre = req.queryParams("nombre");
+		String formula = req.queryParams("formula");
+		RegistroIndicador nuevoIndicador = new RegistroIndicador();
+		nuevoIndicador.setNombre(nombre);
+		nuevoIndicador.setFormula(formula);
+		nuevoIndicador.setUser(RepositorioUsuario.getSingletonInstance().buscar(autenticar(req,res)));
+		RepositorioIndicador.getSingletonInstance().agregar(nuevoIndicador);
+		res.redirect("/indicadores"); 
+		return null;
+}
+
+	public Void redirect(Request req, Response res) {
+		if (autenticar(req,res) != null)
+			res.redirect("/indicadores");
+		else
+			res.redirect("/");
+		return null;
 	}
 
 	public Void delete(Request req, Response res) {
@@ -44,5 +79,7 @@ public class IndicadorController extends Controller{
 		res.redirect("/indicadores/");
 		return null;
 	}
+	
+	
 
 }

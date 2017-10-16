@@ -19,7 +19,7 @@ public class Router {
 		staticFileLocation("/public");
 
 		LoginController loginController = new LoginController();
-		EmpresaController empresaController = new EmpresaController();
+		//EmpresaController empresaController = new EmpresaController();
 		IndicadorController indicadorController = new IndicadorController();
 		MetodologiaController metodologiaController = new MetodologiaController();
 
@@ -34,6 +34,9 @@ public class Router {
 		// Indicadores
 		Spark.get("/indicadores", IndicadorController::home, engine);
 		Spark.get("/indicadores/borrar/:indicadorId", indicadorController::delete);
+		Spark.get("/indicadores/agregar", IndicadorController::agregarView, engine);
+		Spark.post("/indicadores/agregar", indicadorController::agregar);
+		
 
 		// Metodologias
 		Spark.get("/metodologias", MetodologiaController::home, engine);

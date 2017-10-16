@@ -5,7 +5,6 @@ import main.viewmodel.EmpresaViewM;
 import model.Empresa;
 import model.SnapshotEmpresa;
 
-import org.apache.commons.lang3.StringUtils;
 
 import spark.ModelAndView;
 import spark.Request;
@@ -19,9 +18,6 @@ public class EmpresaController extends Controller{
 
 	private static EmpresaViewM adapter = new EmpresaViewM();
 	
-	public EmpresaController() {
-	}
-
 	public static ModelAndView home(Request req, Response res) {
 		
 			HashMap<String, List<SnapshotEmpresa>> mapEmpresas = new HashMap<>();
