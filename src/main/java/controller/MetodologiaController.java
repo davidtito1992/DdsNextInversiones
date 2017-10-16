@@ -10,43 +10,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MetodologiaController {
+public class MetodologiaController extends Controller{
 
-	private static LoginController loginController;
-
-	public MetodologiaController(LoginController log) {
-		MetodologiaController.loginController = log;
+	public MetodologiaController() {
 	}
 
 	public static ModelAndView home(Request req, Response res) {
-		if(getIdUsuario() != null){
 			HashMap<String, List<Metodologia>> mapMetodologias = new HashMap<>();
-			List<Metodologia> metodologiasObtenidas = getIdUsuario() != null ? RepositorioMetodologia
-					.getSingletonInstance().findFromUser(getIdUsuario())
+			Long usuarioId = autenticar(req,res);
+			List<Metodologia> metodologiasObtenidas = usuarioId != null ? RepositorioMetodologia
+					.getSingletonInstance().findFromUser(usuarioId)
 					: new ArrayList<>();
 			mapMetodologias.put("metodologias", metodologiasObtenidas);
 			return new ModelAndView(mapMetodologias, "homePage/metodologias.hbs");
-		}else{
-			res.redirect("/");
-			return null;
-		}
-	}
-
-	public Void redirect(Request req, Response res) {
-		if(getIdUsuario() != null) res.redirect("/metodologias/" + getIdUsuario());
-		else res.redirect("/");
-		return null;
 	}
 	
 	public Void delete(Request req, Response res) {
 		String idMetodologia = req.params("metodologiaId");
 		RepositorioMetodologia.getSingletonInstance().eliminar(Long.parseLong(idMetodologia));
-		res.redirect("/metodologias/" + getIdUsuario());
+		res.redirect("/metodologias/");
 		return null;
-	}
-
-	public static Long getIdUsuario() {
-		return loginController.getIdUsuario();
 	}
 
 }

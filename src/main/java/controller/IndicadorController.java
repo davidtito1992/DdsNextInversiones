@@ -13,42 +13,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class IndicadorController {
+public class IndicadorController extends Controller{
 
-	private static LoginController loginController;
 	private AppData appData = new AppData();
 	private static ConsultarIndicadorViewM indicadorViewM = new ConsultarIndicadorViewM();
 
-	public IndicadorController(LoginController log) {
-		IndicadorController.loginController = log;
+	public IndicadorController() {
 	}
 
 	public static ModelAndView home(Request req, Response res) {
-		if (getIdUsuario() != null) {
-			HashMap<String, List<?>> mapIndicadores = new HashMap<>();
+		HashMap<String, List<?>> mapIndicadores = new HashMap<>();
+		Long usuarioId = autenticar(req,res);
+		List<RegistroIndicador> indicadoresObtenidas = usuarioId != null ? RepositorioIndicador
+				.getSingletonInstance().findFromUser(usuarioId)
+				: new ArrayList<>();
+		mapIndicadores.put("indicadores", indicadoresObtenidas);
 
-			List<RegistroIndicador> indicadoresObtenidas = getIdUsuario() != null ? RepositorioIndicador
-					.getSingletonInstance().findFromUser(getIdUsuario())
-					: new ArrayList<>();
-			mapIndicadores.put("indicadores", indicadoresObtenidas);
+		List<SnapshotIndicador> snapshots = indicadorViewM
+				.allSnapshotIndicadores(usuarioId);
+		mapIndicadores.put("snapshots", snapshots);
 
-			List<SnapshotIndicador> snapshots = indicadorViewM
-					.allSnapshotIndicadores(getIdUsuario());
-			mapIndicadores.put("snapshots", snapshots);
-
-			return new ModelAndView(mapIndicadores, "homePage/indicadores.hbs");
-		} else {
-			res.redirect("/");
-			return null;
-		}
-	}
-
-	public Void redirect(Request req, Response res) {
-		if (getIdUsuario() != null)
-			res.redirect("/indicadores/" + getIdUsuario());
-		else
-			res.redirect("/");
-		return null;
+		return new ModelAndView(mapIndicadores, "homePage/indicadores.hbs");
 	}
 
 	public Void delete(Request req, Response res) {
@@ -56,12 +41,8 @@ public class IndicadorController {
 		RegistroIndicador aBorrar = RepositorioIndicador.getSingletonInstance()
 				.buscar(Long.parseLong(idIndicador));
 		appData.borrarIndicador(aBorrar);
-		res.redirect("/indicadores/" + getIdUsuario());
+		res.redirect("/indicadores/");
 		return null;
-	}
-
-	public static Long getIdUsuario() {
-		return loginController.getIdUsuario();
 	}
 
 }
