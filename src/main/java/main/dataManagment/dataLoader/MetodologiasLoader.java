@@ -14,6 +14,7 @@ import main.condiciones.CondicionSumatoria.MenorOMayor;
 import main.condiciones.CondicionTaxativaAntiguedad;
 import model.Metodologia;
 import model.RegistroIndicador;
+import model.User;
 
 public class MetodologiasLoader {
 
@@ -27,8 +28,9 @@ public class MetodologiasLoader {
 
 		List<Condicion> condicionesWarren = new ArrayList<Condicion>();
 		agregarCondicionesA(condicionesWarren);
+		User user = new User(new Long(1), "admin@dominio", "admin");
 		Metodologia metodologia = new Metodologia("WarrenBuffet",
-				condicionesWarren);
+				condicionesWarren, user);
 
 		List<Metodologia> metodologias = new ArrayList<Metodologia>();
 		metodologias.add(metodologia);
@@ -38,14 +40,17 @@ public class MetodologiasLoader {
 
 	private static void agregarCondicionesA(List<Condicion> condicionesWarren) {
 		condicionesWarren.add(new CondicionCuantitativaMayorOMenorA(
-				MenorOMayor.mayorA, ROE, 10, new BigDecimal(5)));// roe creciente
+				MenorOMayor.mayorA, ROE, 10, new BigDecimal(5)));// roe
+																	// creciente
 		condicionesWarren.add(new CondicionCuantitativaMayorOMenorA(
 				MenorOMayor.menorA, propDeu, 10, new BigDecimal(3)));// proporcion
-																	// de deuda
-																	// mas chico
+																		// de
+																		// deuda
+																		// mas
+																		// chico
 		condicionesWarren.add(new CondicionCrecienteODecreciente(
 				CreceODecrece.CRECIENTE, i4, 10));// Margenes
-																			// crecientes
+													// crecientes
 		condicionesWarren.add(new CondicionTaxativaAntiguedad(
 				new BigDecimal(10)));// mayor a 10 años
 		condicionesWarren.add(new CondicionCuantitativaAntiguedad(

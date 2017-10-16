@@ -1,9 +1,9 @@
-[{"nombre":"i3","formula":"i1","variables":["i1"]},
-{"nombre":"i4","formula":"EBITDA","variables":["EBITDA"]},
-{"nombre":"i5","formula":" EBITDA +  FDS","variables":["EBITDA","FDS"]},
-{"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"]},
-{"nombre":"CantidadAcciones","formula":" FDS","variables":["FDS"]},
-{"nombre":"ROE","formula":" IngresoNeto + CantidadAcciones","variables":["IngresoNeto","CantidadAcciones"]},
-{"nombre":"ProporcionDeDeuda","formula":" EBITDA","variables":["EBITDA"]},
-{"nombre":"Margen","formula":" FDS","variables":["FDS"]},
-{"nombre":"i2","formula":" Margen+ FDS","variables":["Margen","FDS"]}]
+[{"user":{"email":"admin@dominio","password":"admin","userId":"1"},"nombre":"i3","formula":"i1","variables":["i1"]},
+{"user":{"email":"admin@dominio","password":"admin","userId":"1"},"nombre":"i4","formula":"EBITDA","variables":["EBITDA"]},
+{"user":{"email":"admin@dominio","password":"admin","userId":"1"},"nombre":"i5","formula":" EBITDA +  FDS","variables":["EBITDA","FDS"]},
+{"user":{"email":"admin@dominio","password":"admin","userId":"1"},"nombre":"IngresoNeto","formula":"EBITDA + FDS","variables":["EBITDA","FDS"]},
+{"user":{"email":"admin@dominio","password":"admin","userId":"1"},"nombre":"CantidadAcciones","formula":" FDS","variables":["FDS"]},
+{"user":{"email":"admin@dominio","password":"admin","userId":"1"},"nombre":"ROE","formula":" IngresoNeto + CantidadAcciones","variables":["IngresoNeto","CantidadAcciones"]},
+{"user":{"email":"admin@dominio","password":"admin","userId":"1"},"nombre":"ProporcionDeDeuda","formula":" EBITDA","variables":["EBITDA"]},
+{"user":{"email":"admin@dominio","password":"admin","userId":"1"},"nombre":"Margen","formula":" FDS","variables":["FDS"]},
+{"user":{"email":"admin@dominio","password":"admin","userId":"1"},"nombre":"i2","formula":" Margen+ FDS","variables":["Margen","FDS"]}]

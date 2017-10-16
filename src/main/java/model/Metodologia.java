@@ -28,11 +28,12 @@ import org.uqbar.commons.utils.Transactional;
 @Transactional
 public class Metodologia {
 
-	public Metodologia(String nombre, List<Condicion> condiciones) {
+	public Metodologia(String nombre, List<Condicion> condiciones, User user) {
 		this.nombre = nombre;
 		this.condiciones = condiciones;
+		this.user = user;
 	}
-
+	
 	public Metodologia() {
 	}
 
