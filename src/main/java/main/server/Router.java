@@ -35,10 +35,12 @@ public class Router {
 		// Indicadores
 		Spark.get("/indicadores/:userId", IndicadorController::home, engine);
 		Spark.get("/indicadores", indicadorController::redirect);
+		Spark.get("/indicadores/borrar/:indicadorId", indicadorController::delete);
 
 		// Metodologias
 		Spark.get("/metodologias/:userId", MetodologiaController::home, engine);
 		Spark.get("/metodologias", metodologiaController::redirect);
+		Spark.get("/metodologias/borrar/:metodologiaId", metodologiaController::delete);
 
 	}
 }

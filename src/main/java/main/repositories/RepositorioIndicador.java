@@ -1,6 +1,8 @@
 package main.repositories;
 
+import main.condiciones.Condicion;
 import model.RegistroIndicador;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -27,6 +29,7 @@ public class RepositorioIndicador extends Repository<RegistroIndicador> {
 
 	/********* METODOS *********/
 
+	@SuppressWarnings("unchecked")
 	public List<String> todosLosNombresDeIndicadores(
 			List<RegistroIndicador> listaIndicadores) {
 		Criteria criteria = entityManager.unwrap(Session.class)
@@ -49,11 +52,20 @@ public class RepositorioIndicador extends Repository<RegistroIndicador> {
 		return (RegistroIndicador) criteria.uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<RegistroIndicador> findFromUser(Long idUsuario) {
 		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
 				RegistroIndicador.class);
 		criteria.add(Restrictions.eq("user.userId", idUsuario));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		return criteria.list();
+	}
+
+	public Boolean existCondicionWith(Long registroIndicadorId) {
+		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
+				Condicion.class);
+		criteria.add(Restrictions.eq("indicador.registroIndicadorId",
+				registroIndicadorId));
+		return criteria.list().size() > 0;
 	}
 }

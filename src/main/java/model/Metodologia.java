@@ -110,5 +110,10 @@ public class Metodologia {
 		}
 		return rEmpresa;
 	}
+	
+	public String getUrl(){
+		return this.metodologiaId.toString();
+	}
+	
 
 }

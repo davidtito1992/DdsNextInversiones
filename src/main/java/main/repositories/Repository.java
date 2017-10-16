@@ -43,15 +43,15 @@ public abstract class Repository<T> {
 
 	@Transactional
 	public void agregar(T elemento) {
-		EntityManagerHelper.beginTransaction();
+		entityManager.getTransaction().begin();
 		entityManager.merge(elemento);
-		EntityManagerHelper.commit();
+		entityManager.getTransaction().commit();
 	}
 
 	@Transactional
 	public void eliminar(long id) {
-		EntityManagerHelper.beginTransaction();
+		entityManager.getTransaction().begin();
 		entityManager.remove(this.buscar(id));
-		EntityManagerHelper.commit();
+		entityManager.getTransaction().commit();
 	}
 }

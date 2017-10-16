@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import main.repositories.RepositorioIndicador;
+
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
 
@@ -38,7 +40,7 @@ public class RegistroIndicador {
 
 	/********* ATRIBUTOS *********/
 
-	@ManyToOne(fetch= FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private User user;
 
@@ -97,4 +99,12 @@ public class RegistroIndicador {
 
 	/********* METODOS *********/
 
+	public String getUrl() {
+		return this.registroIndicadorId.toString();
+	}
+
+	public Boolean getPuedeSerBorrado() {
+		return !RepositorioIndicador.getSingletonInstance().existCondicionWith(
+				this.getRegistroIndicadorId());
+	}
 }

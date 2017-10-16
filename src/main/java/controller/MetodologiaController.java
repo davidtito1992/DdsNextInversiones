@@ -19,15 +19,28 @@ public class MetodologiaController {
 	}
 
 	public static ModelAndView home(Request req, Response res) {
-		HashMap<String, List<Metodologia>> mapMetodologias = new HashMap<>();
-		List<Metodologia> metodologiasObtenidas = getIdUsuario() != null ? RepositorioMetodologia
-				.getSingletonInstance().findFromUser(getIdUsuario())
-				: new ArrayList<>();
-		mapMetodologias.put("metodologias", metodologiasObtenidas);
-		return new ModelAndView(mapMetodologias, "homePage/metodologias.hbs");
+		if(getIdUsuario() != null){
+			HashMap<String, List<Metodologia>> mapMetodologias = new HashMap<>();
+			List<Metodologia> metodologiasObtenidas = getIdUsuario() != null ? RepositorioMetodologia
+					.getSingletonInstance().findFromUser(getIdUsuario())
+					: new ArrayList<>();
+			mapMetodologias.put("metodologias", metodologiasObtenidas);
+			return new ModelAndView(mapMetodologias, "homePage/metodologias.hbs");
+		}else{
+			res.redirect("/");
+			return null;
+		}
 	}
 
 	public Void redirect(Request req, Response res) {
+		if(getIdUsuario() != null) res.redirect("/metodologias/" + getIdUsuario());
+		else res.redirect("/");
+		return null;
+	}
+	
+	public Void delete(Request req, Response res) {
+		String idMetodologia = req.params("metodologiaId");
+		RepositorioMetodologia.getSingletonInstance().eliminar(Long.parseLong(idMetodologia));
 		res.redirect("/metodologias/" + getIdUsuario());
 		return null;
 	}
