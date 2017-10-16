@@ -22,7 +22,7 @@ public class Router {
 		Spark.post("/login", loginController::login);
 
 		// Empresas
-		Spark.get("/empresas", EmpresaController::home,engine);
+		Spark.get("/empresas/:userId", EmpresaController::home,engine);
 
 	}
 }

@@ -13,8 +13,8 @@ public class Server {
 		Spark.port(8080);
 
 		try {
-			//appData.cargarUsuarios();
-			//appData.cargarEmpresas();
+			appData.cargarUsuarios();
+			appData.cargarEmpresas();
 			DebugScreen.enableDebugScreen();
 			Router.configure();
 		} catch (Exception e) {

@@ -156,7 +156,7 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Empresa> findFromUser(String idUsuario) {
+	public List<Empresa> findFromUser(Long idUsuario) {
 		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
 				Empresa.class);
 		criteria.add(Restrictions.eq("user.userId", idUsuario)); // TODO

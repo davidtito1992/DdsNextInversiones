@@ -44,7 +44,7 @@ public abstract class Repository<T> {
 	@Transactional
 	public void agregar(T elemento) {
 		EntityManagerHelper.beginTransaction();
-		entityManager.persist(elemento);
+		entityManager.merge(elemento);
 		EntityManagerHelper.commit();
 	}
 

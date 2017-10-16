@@ -2,8 +2,8 @@
   {
     "user": {
       "email": "admin@dominio",
-      "password": "admin",
-      "userId": "3"
+     "password": "admin",
+      "userId": "1"
     },
     "nombre": "Facebook",
     "periodos": [
@@ -65,8 +65,8 @@
     "nombre": "Twitter",
     "user": {
       "email": "admin@dominio",
-      "password": "admin",
-      "userId": "3"
+     "password": "admin",
+      "userId": "1"
     },
     "periodos": [
       {
@@ -112,7 +112,7 @@
     "user": {
       "email": "admin@dominio",
       "password": "admin",
-      "userId": "3"
+      "userId": "1"
     },
     "periodos": [
       {

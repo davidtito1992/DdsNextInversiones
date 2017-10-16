@@ -21,8 +21,8 @@ public class User {
 	private String email;
 	private String password;
 
-	public User(String email, String password) {
-		super();
+	public User(Long id, String email, String password) {
+		this.userId = id;
 		this.email = email;
 		this.password = password;
 	}

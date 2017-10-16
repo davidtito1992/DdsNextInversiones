@@ -20,26 +20,33 @@ public class AppData {
 
 	public void cargarEmpresas() throws Exception {
 		// LEO ARCHIVO YA ADAPTADO
-		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
+		DataLoader cargador = DataLoaderFactory
+				.cargarData(DataLoaderFactory.ARCHIVO);
 		ArrayList<Empresa> empresas = cargador.getDataEmpresas();
 		this.getRepositorioEmpresas().cargarListaDeElementos(empresas);
 	}
-	
-	public void cargarUsuarios(){
-		this.getRepositorioUsuarios().agregar(new User("admin@dominio","admin"));
+
+	public void cargarUsuarios() {
+		if (this.getRepositorioUsuarios().buscar(1) == null){
+			User user = new User(new Long(1), "admin@dominio", "admin");
+			this.getRepositorioUsuarios().agregar(user);
+		}
 	}
 
 	public void cargarMetodologias() throws Exception {
 
-		this.getRepositorioMetodologias().cargarListaDeElementos(MetodologiasLoader.damePredefinidas());
+		this.getRepositorioMetodologias().cargarListaDeElementos(
+				MetodologiasLoader.damePredefinidas());
 
 	}
 
 	public void cargarIndicadores() throws Exception {
 
 		// LEO ARCHIVO YA ADAPTADO
-		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
-		ArrayList<RegistroIndicador> indicadores = cargador.getDataIndicadores();
+		DataLoader cargador = DataLoaderFactory
+				.cargarData(DataLoaderFactory.ARCHIVO);
+		ArrayList<RegistroIndicador> indicadores = cargador
+				.getDataIndicadores();
 		this.getRepositorioIndicadores().cargarListaDeElementos(indicadores);
 	}
 
@@ -50,7 +57,7 @@ public class AppData {
 	public RepositorioIndicador getRepositorioIndicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
-	
+
 	public RepositorioUsuario getRepositorioUsuarios() {
 		return AplicacionContexto.getInstance().getInstanceRepoUsuarios();
 	}
@@ -66,28 +73,33 @@ public class AppData {
 	public void guardarIndicador(RegistroIndicador unIndicador) {
 
 		try {
-			DataUploader cargador = DataUploaderFactory.actualizarData(DataLoaderFactory.ARCHIVO);
+			DataUploader cargador = DataUploaderFactory
+					.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.escribirNuevoIndicador(unIndicador);
 			this.getRepositorioIndicadores().agregar(unIndicador);
 
 		} catch (Exception e) {
-			throw new RuntimeException("Debido a un problema en la lectura y/o escritura del archivo "
-					+ "no pudimos realizar la operacion :/");
+			throw new RuntimeException(
+					"Debido a un problema en la lectura y/o escritura del archivo "
+							+ "no pudimos realizar la operacion :/");
 		}
 	}
 
 	public void borrarIndicador(RegistroIndicador unIndicador) {
 
 		try {
-			DataUploader cargador = DataUploaderFactory.actualizarData(DataLoaderFactory.ARCHIVO);
+			DataUploader cargador = DataUploaderFactory
+					.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.borrarIndicador(unIndicador);
-			this.getRepositorioIndicadores().eliminar(unIndicador.getRegistroIndicadorId());
+			this.getRepositorioIndicadores().eliminar(
+					unIndicador.getRegistroIndicadorId());
 
 		} catch (Exception e) {
-			throw new RuntimeException("Debido a un problema en la lectura y/o escritura del archivo "
-					+ "no pudimos realizar la operacion :/");
+			throw new RuntimeException(
+					"Debido a un problema en la lectura y/o escritura del archivo "
+							+ "no pudimos realizar la operacion :/");
 		}
 	}
 
@@ -95,14 +107,16 @@ public class AppData {
 
 		try {
 
-			DataUploader cargador = DataUploaderFactory.actualizarData(DataLoaderFactory.ARCHIVO);
+			DataUploader cargador = DataUploaderFactory
+					.actualizarData(DataLoaderFactory.ARCHIVO);
 
 			cargador.escribirNuevaMetodologia(metodologia);
 			this.getRepositorioMetodologias().agregar(metodologia);
 
 		} catch (Exception e) {
-			throw new RuntimeException("Debido a un problema en la lectura y/o escritura del archivo "
-					+ "no pudimos realizar la operacion :/");
+			throw new RuntimeException(
+					"Debido a un problema en la lectura y/o escritura del archivo "
+							+ "no pudimos realizar la operacion :/");
 		}
 
 	}

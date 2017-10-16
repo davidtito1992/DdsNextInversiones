@@ -13,18 +13,14 @@
             </tr>
             </thead>
             <tbody>
-            {{#each empresa}}
+            {{#each empresas}}
                 <tr>
                     <td>{{index}}</td>
                     <td>{{this.nombre}}</td>
-                {{#each periodos}}
                     <td>{{this.anio}}</td>
                     <td>{{this.semestre}}</td>
-                    {{#each cuentas}}
-                        <td>{{this.nombre}}</td>
-                        <td>{{this.valor}}</td>
-                    {{/each}}
-                {{/each}}
+                    <td>{{this.cuenta}}</td>
+                    <td>{{this.valor}}</td>
                 </tr>
             {{/each}}
             </tbody>
