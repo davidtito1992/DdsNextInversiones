@@ -13,6 +13,7 @@
     	<class>model.Cuenta</class>
     	<class>model.Metodologia</class>
     	<class>model.RegistroIndicador</class>
+    	<class>model.User</class>
     	<class>condiciones.Condicion</class>
     	 
         <properties> 

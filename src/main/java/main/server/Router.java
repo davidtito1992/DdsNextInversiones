@@ -21,7 +21,7 @@ public class Router {
 		Spark.get("/", LoginController::home, engine);
 		Spark.post("/login", loginController::login);
 
-		//OJO aca iria en la url el id del usuario
+		// Empresas
 		Spark.get("/empresas", EmpresaController::home,engine);
 
 	}

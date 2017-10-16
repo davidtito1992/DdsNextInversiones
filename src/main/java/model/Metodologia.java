@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,7 +24,7 @@ import org.uqbar.commons.utils.Transactional;
 
 @Entity
 @Observable
-@Table(name= "Metodologias")
+@Table(name = "Metodologias")
 @Transactional
 public class Metodologia {
 
@@ -31,17 +32,22 @@ public class Metodologia {
 		this.nombre = nombre;
 		this.condiciones = condiciones;
 	}
-	
-	public Metodologia(){
+
+	public Metodologia() {
 	}
 
 	/********* ATRIBUTOS *********/
+
+	@JoinColumn
+	@ManyToOne(cascade = CascadeType.ALL)
+	private User user;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long metodologiaId;
-	
+
 	private String nombre;
-	
+
 	@JoinColumn
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Condicion> condiciones;
@@ -64,6 +70,26 @@ public class Metodologia {
 		this.condiciones = condiciones;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public long getMetodologiaId() {
+		return metodologiaId;
+	}
+
+	/********* METODOS *********/
+
+	public List<RankingEmpresa> calcularEmpresas(List<RankingEmpresa> rEmpresas) {
+		return rEmpresas.stream().map(empresa -> calcularEmpresa(empresa))
+				.sorted(new RankingEmpresasComparator())
+				.collect(Collectors.toList());
+	}
+
 	public RankingEmpresa calcularEmpresa(RankingEmpresa rEmpresa) {
 		try {
 			for (Condicion condicion : condiciones) {
@@ -77,16 +103,6 @@ public class Metodologia {
 			rEmpresa.setObservaciones(e.getMessage());
 		}
 		return rEmpresa;
-	}
-
-	public List<RankingEmpresa> calcularEmpresas(List<RankingEmpresa> rEmpresas) {
-		return rEmpresas.stream().map(empresa -> calcularEmpresa(empresa))
-				.sorted(new RankingEmpresasComparator())
-				.collect(Collectors.toList());
-	}
-	
-	public long getMetodologiaId(){
-		return metodologiaId;
 	}
 
 }

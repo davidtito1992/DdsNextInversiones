@@ -10,18 +10,23 @@ import main.dataManagment.dataUploader.DataUploaderFactory;
 import main.repositories.RepositorioEmpresa;
 import main.repositories.RepositorioIndicador;
 import main.repositories.RepositorioMetodologia;
+import main.repositories.RepositorioUsuario;
 import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
+import model.User;
 
 public class AppData {
 
 	public void cargarEmpresas() throws Exception {
-
 		// LEO ARCHIVO YA ADAPTADO
 		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
 		ArrayList<Empresa> empresas = cargador.getDataEmpresas();
 		this.getRepositorioEmpresas().cargarListaDeElementos(empresas);
+	}
+	
+	public void cargarUsuarios(){
+		this.getRepositorioUsuarios().agregar(new User("admin@dominio","admin"));
 	}
 
 	public void cargarMetodologias() throws Exception {
@@ -44,6 +49,10 @@ public class AppData {
 
 	public RepositorioIndicador getRepositorioIndicadores() {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
+	}
+	
+	public RepositorioUsuario getRepositorioUsuarios() {
+		return AplicacionContexto.getInstance().getInstanceRepoUsuarios();
 	}
 
 	public RepositorioEmpresa getRepositorioEmpresas() {

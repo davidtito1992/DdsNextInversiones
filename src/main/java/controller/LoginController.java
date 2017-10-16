@@ -20,7 +20,7 @@ public class LoginController {
 		if (usuario != null) {
 
 			if (usuario.getPassword().equals(req.queryParams("password"))) {
-				res.redirect("/"+usuario.getUserId());
+				res.redirect("/empresas");
 			} else {
 				res.redirect("/"); // mal mail o pw
 			}

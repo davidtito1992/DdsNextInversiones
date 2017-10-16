@@ -4,15 +4,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.uqbar.commons.utils.Observable;
+import org.uqbar.commons.utils.Transactional;
 
 @Entity
+@Observable
+@Table(name = "User")
+@Transactional
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String userId;
+	private Long userId;
 	private String email;
 	private String password;
+
+	public User(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
+
+	public User() {
+	}
 
 	public String getEmail() {
 		return email;
@@ -30,14 +46,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	
-	
-	
+
 }
