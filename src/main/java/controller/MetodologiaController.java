@@ -1,10 +1,15 @@
 package controller;
 
+import main.rankingEmpresa.RankingEmpresa;
+import main.repositories.RepositorioEmpresa;
 import main.repositories.RepositorioIndicador;
 import main.repositories.RepositorioMetodologia;
 import main.repositories.RepositorioUsuario;
+import model.ControladorDeMetodologia;
+import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
+import model.SnapshotRankingEmpresa;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -35,7 +40,7 @@ public class MetodologiaController extends Controller{
 		return null;
 	}
 	
-	public static ModelAndView consultarView(Request req, Response res) {
+	public static ModelAndView consultarView(Request req, Response res) { 
 		if (autenticar(req,res) != null) {
 			return new ModelAndView(null, "layoutMetodologiasConsultar.hbs");
 		} else {
@@ -52,6 +57,21 @@ public class MetodologiaController extends Controller{
 //		nuevoIndicador.setFormula(formula);
 //		nuevoIndicador.setUser(RepositorioUsuario.getSingletonInstance().buscar(autenticar(req,res)));
 //		RepositorioIndicador.getSingletonInstance().agregar(nuevoIndicador);
+		List<RankingEmpresa> rEmpresas = new ArrayList<RankingEmpresa>();
+		RepositorioEmpresa.getInstance().findFromUser(autenticar(req,res))
+			.stream().forEach(empresa -> rEmpresas.add(new RankingEmpresa(empresa)));
+		
+		Metodologia metodologia = RepositorioMetodologia.
+					getSingletonInstance().buscar(Long.parseLong(req.params("metodologiaId")));
+		
+		ControladorDeMetodologia controlador = new ControladorDeMetodologia(metodologia,rEmpresas);
+		
+		HashMap<String, List<SnapshotRankingEmpresa>> mapConsultaMetodologias = new HashMap<>();
+		List<SnapshotRankingEmpresa> empresasOk = controlador.obtenerSnapshotRankingEmpresas();
+		List<SnapshotRankingEmpresa> empresasError = controlador.obtenerSnapshotRankingEmpresasFallidas();
+		
+		mapConsultaMetodologias.put("resultadoOk", empresasOk);
+		mapConsultaMetodologias.put("resultadoError", empresasError);
 		res.redirect("/metodologias/consultar"); 
 		return null;
 	}

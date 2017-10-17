@@ -42,7 +42,7 @@ public class Router {
 		Spark.get("/metodologias", MetodologiaController::home, engine);
 		Spark.get("/metodologias/borrar/:metodologiaId", metodologiaController::delete);
 		Spark.get("/metodologias/consultar", MetodologiaController::consultarView, engine);
-		//Spark.post("/metodologias/consultar", metodologiaController::consultar);
+		Spark.post("/metodologias/consultar/:metodologiaId", metodologiaController::consultar);
 
 	}
 }

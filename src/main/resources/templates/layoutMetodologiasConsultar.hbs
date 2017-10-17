@@ -26,31 +26,32 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <a class="btn btn-secondary" href="">Atrás</a>
+          <a class="btn btn-secondary" href="/metodologias">Atrás</a>
         </div>
       </div>
     </div>
   </div>
   <div class="py-5">
     <div class="container">
-      <div class="row"><div class="col-md-6"><p class="lead">Metodología seleccionada:&nbsp;</p></div><div class="col-md-6"><p class="lead">Warren</p></div></div><div class="row"><div class="col-md-12"><p class="lead text-success">Resultados</p></div></div><div class="row">
+      <div class="row"><div class="col-md-6"><p class="lead">Metodología seleccionada:&nbsp;</p></div><div class="col-md-6"><p class="lead">{{ nombre }}</p></div></div><div class="row"><div class="col-md-12"><p class="lead text-success">Resultados</p></div></div><div class="row">
         <div class="col-md-12">
           <table class="table">
             <thead>
               <tr>
                 <th>#</th>
-                
                 <th>Empresa</th>
                 
               </tr>
             </thead>
             <tbody>
+            
+              {{#each resultadoOk}}
               <tr>
-                <td>1</td>
-                
-                <td>Facebook</td>
-                
+                <td>{{ this.empresa.id }}</td>
+                <td>{{ this.empresa.nombre }}</td>
               </tr>
+              {{/each}}
+              
             </tbody>
           </table>
         </div>
@@ -60,17 +61,21 @@
             <thead>
               <tr>
                 <th>#</th>
-                
                 <th>Empresa</th>
                 <th>Observación</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>1</td>
-                
-                <td>Facebook</td>
-                <td>No cumple x</td>
+              
+              {{#each resultadoError}}
+              <tr>
+                <td>{{ this.empresa.id }}</td>
+                <td>{{ this.empresa.nombre }}</td>
+                <td>{{ this.observacion }}</td>
+              </tr>
+              {{/each}}
+              
               </tr>
             </tbody>
           </table>
