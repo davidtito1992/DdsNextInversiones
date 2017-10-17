@@ -52,24 +52,20 @@ public class IndicadorController extends Controller{
 	}
 	
 	public Void agregar(Request req, Response res){
-		String nombre = req.queryParams("nombre");
-		String formula = req.queryParams("formula");
-		RegistroIndicador nuevoIndicador = new RegistroIndicador();
-		nuevoIndicador.setNombre(nombre);
-		nuevoIndicador.setFormula(formula);
+		RegistroIndicador nuevoIndicador = new RegistroIndicador(req.queryParams("nombre"),req.queryParams("formula"));
 		nuevoIndicador.setUser(RepositorioUsuario.getSingletonInstance().buscar(autenticar(req,res)));
 		RepositorioIndicador.getSingletonInstance().agregar(nuevoIndicador);
 		res.redirect("/indicadores"); 
 		return null;
-}
-
-	public Void redirect(Request req, Response res) {
-		if (autenticar(req,res) != null)
-			res.redirect("/indicadores");
-		else
-			res.redirect("/");
-		return null;
 	}
+
+//	public Void redirect(Request req, Response res) {
+//		if (autenticar(req,res) != null)
+//			res.redirect("/indicadores");
+//		else
+//			res.redirect("/");
+//		return null;
+//	}
 
 	public Void delete(Request req, Response res) {
 		String idIndicador = req.params("indicadorId");
