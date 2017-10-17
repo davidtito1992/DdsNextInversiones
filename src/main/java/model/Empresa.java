@@ -19,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import main.repositories.RepositorioEmpresa;
+
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
 
@@ -96,5 +98,6 @@ public class Empresa {
 
 		return anioActual - aniosPeriodos.get(0).getValue();
 	}
+
 
 }

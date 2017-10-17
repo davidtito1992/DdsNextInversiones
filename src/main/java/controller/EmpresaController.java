@@ -21,12 +21,14 @@ public class EmpresaController extends Controller{
 	public static ModelAndView home(Request req, Response res) {
 		
 			HashMap<String, List<SnapshotEmpresa>> mapEmpresas = new HashMap<>();
+			RepositorioEmpresa repo = RepositorioEmpresa.getInstance();
+			
 			Long idUsuario = autenticar(req,res);
-			List<Empresa> empresasObtenidas = idUsuario != null ? RepositorioEmpresa
-					.getInstance().findFromUser(idUsuario) : new ArrayList<>();
+			List<Empresa> empresasObtenidas = idUsuario != null ? repo.findFromUser(idUsuario) : new ArrayList<>();
 			List<SnapshotEmpresa> snaps = adapter
 					.dameSnapshotEmpresas(empresasObtenidas);
 			mapEmpresas.put("empresas", snaps);
+			
 			return new ModelAndView(mapEmpresas, "homePage/empresas.hbs");
 	}
 }

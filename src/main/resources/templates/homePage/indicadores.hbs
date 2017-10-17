@@ -14,7 +14,7 @@
                 <tbody>
                 {{#each indicadores}}
                 <tr>
-                    <td>{{index}}</td>
+                    <td>{{@index}}</td>
                     <td>{{this.nombre}}</td>
                     <td>{{this.formula}}</td>
                     {{#if puedeSerBorrado}}
@@ -50,7 +50,7 @@
                     <tbody>
                     {{#each snapshots}}
                     <tr>
-                        <td>{{index}}</td>
+                        <td>{{@index}}</td>
                         <td>{{this.registroIndicador.nombre}}</td>
                         <td>{{this.nombreEmpresa}}</td>
                         <td>{{this.anio}}</td>

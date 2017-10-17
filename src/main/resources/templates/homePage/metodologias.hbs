@@ -13,7 +13,7 @@
                 <tbody>
                 {{#each metodologias}}
                 <tr>
-                    <td>{{index}}</td>
+                    <td>{{@index}}</td>
                     <td>{{this.nombre}}</td>
                     <td> <a class="btn btn-secondary btn-sm btn-block" href="/metodologias/consultar/{{url}}">Consultar</a></td>
                     <td><a class="btn btn-danger" href="/metodologias/borrar/{{url}}">Borrar</a></td>

@@ -2,6 +2,9 @@ package model;
 
 import java.math.BigDecimal;
 import java.time.Year;
+import java.util.List;
+
+import main.repositories.RepositorioEmpresa;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -96,5 +99,8 @@ public class SnapshotEmpresa {
 			return false;
 		return true;
 	}
-
+	
+	public List<String> getTodasLasCuentas(){
+		return RepositorioEmpresa.getInstance().todosLosNombresDeCuentas(RepositorioEmpresa.getInstance().allInstances());
+	}
 }

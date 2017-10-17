@@ -47,7 +47,7 @@
             
               {{#each resultadoOk}}
               <tr>
-                <td>{{ index }}</td>
+                <td>{{ @index }}</td>
                 <td>{{ this.nombreEmpresa }}</td>
               </tr>
               {{/each}}
@@ -70,7 +70,7 @@
               
               {{#each resultadoError}}
               <tr>
-                <td>{{ index }}</td>
+                <td>{{ @index }}</td>
                 <td>{{ this.nombreEmpresa }}</td>
                 <td>{{ this.observacion }}</td>
               </tr>
