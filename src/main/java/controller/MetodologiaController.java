@@ -42,7 +42,22 @@ public class MetodologiaController extends Controller{
 	
 	public static ModelAndView consultarView(Request req, Response res) { 
 		if (autenticar(req,res) != null) {
-			return new ModelAndView(null, "layoutMetodologiasConsultar.hbs");
+			List<RankingEmpresa> rEmpresas = new ArrayList<RankingEmpresa>();
+			RepositorioEmpresa.getInstance().findFromUser(autenticar(req,res))
+				.stream().forEach(empresa -> rEmpresas.add(new RankingEmpresa(empresa)));
+			
+			Metodologia metodologia = RepositorioMetodologia.
+						getSingletonInstance().buscar(Long.parseLong(req.params("metodologiaId")));
+			
+			ControladorDeMetodologia controlador = new ControladorDeMetodologia(metodologia,rEmpresas);
+			
+			HashMap<String, List<SnapshotRankingEmpresa>> mapConsultaMetodologias = new HashMap<>();
+			List<SnapshotRankingEmpresa> empresasOk = controlador.obtenerSnapshotRankingEmpresas();
+			List<SnapshotRankingEmpresa> empresasError = controlador.obtenerSnapshotRankingEmpresasFallidas();
+			
+			mapConsultaMetodologias.put("resultadoOk", empresasOk);
+			mapConsultaMetodologias.put("resultadoError", empresasError);
+			return new ModelAndView(mapConsultaMetodologias, "layoutMetodologiasConsultar.hbs");
 		} else {
 			res.redirect("/");
 			return null;
@@ -50,29 +65,8 @@ public class MetodologiaController extends Controller{
 	}
 	
 	public Void consultar(Request req, Response res){
-//		String nombre = req.queryParams("nombre");
-//		String formula = req.queryParams("formula");
-//		RegistroIndicador nuevoIndicador = new RegistroIndicador();
-//		nuevoIndicador.setNombre(nombre);
-//		nuevoIndicador.setFormula(formula);
-//		nuevoIndicador.setUser(RepositorioUsuario.getSingletonInstance().buscar(autenticar(req,res)));
-//		RepositorioIndicador.getSingletonInstance().agregar(nuevoIndicador);
-		List<RankingEmpresa> rEmpresas = new ArrayList<RankingEmpresa>();
-		RepositorioEmpresa.getInstance().findFromUser(autenticar(req,res))
-			.stream().forEach(empresa -> rEmpresas.add(new RankingEmpresa(empresa)));
-		
-		Metodologia metodologia = RepositorioMetodologia.
-					getSingletonInstance().buscar(Long.parseLong(req.params("metodologiaId")));
-		
-		ControladorDeMetodologia controlador = new ControladorDeMetodologia(metodologia,rEmpresas);
-		
-		HashMap<String, List<SnapshotRankingEmpresa>> mapConsultaMetodologias = new HashMap<>();
-		List<SnapshotRankingEmpresa> empresasOk = controlador.obtenerSnapshotRankingEmpresas();
-		List<SnapshotRankingEmpresa> empresasError = controlador.obtenerSnapshotRankingEmpresasFallidas();
-		
-		mapConsultaMetodologias.put("resultadoOk", empresasOk);
-		mapConsultaMetodologias.put("resultadoError", empresasError);
-		res.redirect("/metodologias/consultar"); 
+
+//		res.redirect("/metodologias/consultar"); 
 		return null;
 	}
 
