@@ -34,7 +34,7 @@ public class EmpresaController extends Controller{
 
 		Long idUsuario = autenticar(req, res);
 		List<Empresa> empresasObtenidas = idUsuario != null ? 
-				repo.filtrarLike(nombreCuenta,nombreEmpresa,semestre,anio,idUsuario) : new ArrayList<>();
+				repo.filtrar(nombreCuenta,nombreEmpresa,semestre,anio,idUsuario) : new ArrayList<>();
 		
 		HashMap<String, Object> mapEmpresas = armarHashMap(empresasObtenidas);
 		
