@@ -64,11 +64,11 @@ public class MetodologiaController extends Controller{
 		}
 	}
 	
-	public Void consultar(Request req, Response res){
-
-//		res.redirect("/metodologias/consultar"); 
-		return null;
-	}
+//	public Void consultar(Request req, Response res){
+//
+////		res.redirect("/metodologias/consultar"); 
+//		return null;
+//	}
 
 
 }

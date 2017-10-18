@@ -2,6 +2,7 @@ package main.repositories;
 
 import model.Cuenta;
 import model.Empresa;
+import model.SnapshotEmpresa;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -39,7 +40,7 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 	@SuppressWarnings("unchecked")
 	public List<Empresa> filtrar(String cuentaSeleccionada,
 			String nombreSeleccionado, Integer semestreSeleccionado,
-			Year anioSeleccionado) {
+			Year anioSeleccionado, Long idUsuario) {
 
 		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
 				Empresa.class);
@@ -58,10 +59,48 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 		if (cuentaSeleccionada != null) {
 			criteria.add(Restrictions.eq("cuenta.nombre", cuentaSeleccionada));
 		}
+		
+		criteria.createAlias("user", "us");
+		if (idUsuario != null) {
+			criteria.add(Restrictions.eq("us.userId", idUsuario));
+		}
 
 		return (List<Empresa>) criteria.setResultTransformer(
 				Criteria.DISTINCT_ROOT_ENTITY).list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Empresa> filtrarLike(String cuentaSeleccionada,
+			String nombreSeleccionado, Integer semestreSeleccionado,
+			Year anioSeleccionado, Long idUsuario) {
+
+		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
+				Empresa.class);
+		if (nombreSeleccionado != null) {
+			criteria.add(Restrictions.like("nombre", "%" + nombreSeleccionado + "%"));
+		}
+		criteria.createAlias("periodos", "periodo");
+		if (anioSeleccionado != null) {
+			criteria.add(Restrictions.like("periodo.anio", "%" + anioSeleccionado.toString() + "%"));
+		}
+		if (semestreSeleccionado != null) {
+			criteria.add(Restrictions.like("periodo.semestre",
+					"%" + semestreSeleccionado + "%"));
+		}
+		criteria.createAlias("periodo.cuentas", "cuenta");
+		if (cuentaSeleccionada != null) {
+			criteria.add(Restrictions.like("cuenta.nombre", "%" + cuentaSeleccionada + "%"));
+		}
+		
+		criteria.createAlias("user", "us");
+		if (idUsuario != null) {
+			criteria.add(Restrictions.eq("us.userId", idUsuario));
+		}
+
+		return (List<Empresa>) criteria.setResultTransformer(
+				Criteria.DISTINCT_ROOT_ENTITY).list();
+	}
+
 
 	public ArrayList<Year> todosLosAnios(List<Empresa> listaEmpresas) {
 

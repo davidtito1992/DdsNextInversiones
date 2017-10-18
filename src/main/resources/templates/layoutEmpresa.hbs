@@ -32,71 +32,52 @@
             <div class="col-md-12">
                 <h3 class="">Filtros</h3></div>
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                <p class="lead">Nombre Empresa</p>
-            </div>
-            <div class="col-md-3">
-                <div class="btn-group">
-                    <button class="btn dropdown-toggle btn-outline-secondary" data-toggle="dropdown">Seleccionar</button>
-                    <div class="dropdown-menu">
-                    	{{#each nombresEmpresas}}
-                        	<a class="dropdown-item" href="#"> {{ this }}</a>
-                        	<div class="dropdown-divider"></div>
-                        	{{/each}}
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <p class="lead">Cuenta</p>
-            </div>
-            <div class="col-md-3">
-                <div class="btn-group">
-                    <button class="btn dropdown-toggle btn-outline-secondary" data-toggle="dropdown"> Seleccionar</button>
-                    <div class="dropdown-menu">
-                    	{{#each nombresCuentas}}
-                        	<a class="dropdown-item" href="#"> {{ this }}</a>
-                        	<div class="dropdown-divider"></div>
-                        {{/each}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <p class="lead">Año</p>
-            </div>
-            <div class="col-md-3">
-                <div class="btn-group">
-                    <button class="btn dropdown-toggle btn-outline-secondary" data-toggle="dropdown"> Seleccionar</button>
-                    <div class="dropdown-menu">
-                    	{{#each anios}}
-                        	<a class="dropdown-item" href="#">{{ this }}</a>
-                        	<div class="dropdown-divider"></div>
-                        {{/each}}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <p class="lead">Semestre</p>
-            </div>
-            <div class="col-md-3">
-                <div class="btn-group">
-                    <button class="btn dropdown-toggle btn-outline-secondary" data-toggle="dropdown"> Seleccionar</button>
-                    <div class="dropdown-menu">
-                    	{{#each periodos}}
-                        	<a class="dropdown-item" href="#">{{ this }}</a>
-                        	<div class="dropdown-divider"></div>
-                        {{/each}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <a class="btn btn-success" href="">Buscar</a>
-                <a class="btn btn-danger" href="">Reiniciar</a>
+        <form action="/empresas">
+        	<div class="row">
+            	<label class="mr-sm-2" for="inlineFormCustomSelect">Empresas</label>
+            	<select name="nombreEmpresa" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+            		<option selected></option>
+            		{{#each nombresEmpresas}}
+        				<option value="{{this}}">{{this}}</option>
+        			{{/each}}
+     			</select>
+     			
+     			<label class="mr-sm-2" for="inlineFormCustomSelect">Cuentas</label>
+            	<select name="nombreCuenta" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+            		<option selected></option>
+            		{{#each nombresCuentas}}
+        				<option value="{{this}}">{{this}}</option>
+        			{{/each}}
+     			</select>
+     			 
+        	</div>
+        	<div class="row">
+            	<label class="mr-sm-2" for="inlineFormCustomSelect">Año</label>
+            	<select name="anio" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+            		<option selected></option>
+            		{{#each anios}}
+        				<option value="{{this}}">{{this}}</option>
+        			{{/each}}
+     			</select>
+     			
+     			<label class="mr-sm-2" for="inlineFormCustomSelect">Semestre</label>
+            	<select name="semestre" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+            		<option selected></option>
+            		{{#each periodos}}
+        				<option value="{{this}}">{{this}}</option>
+        			{{/each}}
+     			</select>
+        	</div>
+        	<div class="col-md-4">
+				<p class="submit">
+					<input type="submit" name="buscar" class="btn btn-block btn-sm text-center my-3 btn-success" value="Buscar">
+				</p>
+    		</div>
+
+        </form>
+		<div class="row">
+           	<div class="col-md-6">
+               	<a class="btn btn-danger btn-sm text-center my-3 btn-success" href="">Reiniciar</a>
             </div>
         </div>
     </div>

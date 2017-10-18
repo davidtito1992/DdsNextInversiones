@@ -158,7 +158,7 @@ public class EmpresaViewM {
 
 		List<Empresa> repoEmpresa2 = new ArrayList<Empresa>();
 		repoEmpresa2 = this.getRepositorioEmpresas().filtrar(cuenta, empresa,
-				semestre, anio);
+				semestre, anio, null);
 
 		generarCBoxNombresEmpresas(repoEmpresa2);
 		generarCBoxCuentas(repoEmpresa2);
@@ -201,7 +201,7 @@ public class EmpresaViewM {
 		ArrayList<SnapshotEmpresa> empresitas = (this
 				.dameSnapshotEmpresas(getRepositorioEmpresas().filtrar(
 						cuentaSeleccionada, nombreSeleccionado,
-						semestreSeleccionado, anioSeleccionado)));
+						semestreSeleccionado, anioSeleccionado, null)));
 		this.setSnapshotEmpresas(empresitas);
 	}
 
