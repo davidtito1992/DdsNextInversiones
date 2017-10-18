@@ -18,45 +18,41 @@ import java.util.List;
 import java.util.Objects;
 
 public class EmpresaController extends Controller{
-
-	private static EmpresaViewM adapter = new EmpresaViewM();
+	
+	static String nombreSeleccionado;
+	static String cuentaSeleccionada;
+	static Integer semestreSeleccionado;
+	static Year anioSeleccionado;
+	static RepositorioEmpresa repo = RepositorioEmpresa.getInstance();
 	
 	public static ModelAndView home(Request req, Response res) {
-
-		RepositorioEmpresa repo = RepositorioEmpresa.getInstance();
-		
-		String nombreCuenta = Objects.isNull(req.queryParams("nombreCuenta")) || req.queryParams("nombreCuenta").isEmpty() ? null : req.queryParams("nombreCuenta");
-		String nombreEmpresa = Objects.isNull(req.queryParams("nombreEmpresa")) || req.queryParams("nombreEmpresa").isEmpty() ? null : req.queryParams("nombreEmpresa");
-		Year anio = Objects.isNull(req.queryParams("anio")) || req.queryParams("anio").isEmpty() ? 
+		cuentaSeleccionada = Objects.isNull(req.queryParams("nombreCuenta")) || req.queryParams("nombreCuenta").isEmpty() ? null : req.queryParams("nombreCuenta");
+		nombreSeleccionado = Objects.isNull(req.queryParams("nombreEmpresa")) || req.queryParams("nombreEmpresa").isEmpty() ? null : req.queryParams("nombreEmpresa");
+		anioSeleccionado = Objects.isNull(req.queryParams("anio")) || req.queryParams("anio").isEmpty() ? 
 					null : Year.parse(req.queryParams("anio"));
-		Integer semestre = Objects.isNull(req.queryParams("semestre")) || req.queryParams("semestre").isEmpty() ?
+		semestreSeleccionado = Objects.isNull(req.queryParams("semestre")) || req.queryParams("semestre").isEmpty() ?
 					null : Integer.parseInt(req.queryParams("semestre"));
-
-		Long idUsuario = autenticar(req, res);
-		List<Empresa> empresasObtenidas = idUsuario != null ? 
-				repo.filtrar(nombreCuenta,nombreEmpresa,semestre,anio,idUsuario) : new ArrayList<>();
-		
-		HashMap<String, Object> mapEmpresas = armarHashMap(empresasObtenidas);
-		
-		mapEmpresas.put("nombreEmpresaSeleccionado", nombreEmpresa);
-		
-		return new ModelAndView(mapEmpresas,
-				"homePage/empresas.hbs");
+				
+		return new ModelAndView(armarHashMap(autenticar(req, res)),"homePage/empresas.hbs");
 	}
 	
-	public static HashMap<String, Object> armarHashMap(List<Empresa> empresasObtenidas){
+	public static HashMap<String, Object> armarHashMap(Long idUsuario){
 		
 		HashMap<String, Object> mapEmpresas = new HashMap<>();
+	
+		List<Empresa> todasLasEmpresasDelUsuario = RepositorioEmpresa.getInstance().findFromUser(idUsuario);
+		List<Empresa> empresasPorFiltros = idUsuario != null ? 
+				repo.filtrar(cuentaSeleccionada,nombreSeleccionado,semestreSeleccionado,anioSeleccionado,idUsuario) : new ArrayList<>();
 		
-		mapEmpresas.put("empresas", adapter.dameSnapshotEmpresas(empresasObtenidas));
+		mapEmpresas.put("empresas", repo.dameSnapshotEmpresas(empresasPorFiltros,nombreSeleccionado,cuentaSeleccionada,anioSeleccionado,semestreSeleccionado));
 		mapEmpresas.put("nombresCuentas", RepositorioEmpresa.getInstance().
-				todosLosNombresDeCuentas(empresasObtenidas));
+				todosLosNombresDeCuentas(todasLasEmpresasDelUsuario));
 		mapEmpresas.put("nombresEmpresas", RepositorioEmpresa.getInstance().
-				todosLosNombresDeEmpresas(empresasObtenidas));
+				todosLosNombresDeEmpresas(todasLasEmpresasDelUsuario));
 		mapEmpresas.put("anios",RepositorioEmpresa.getInstance().
-				todosLosAnios(empresasObtenidas));
+				todosLosAnios(todasLasEmpresasDelUsuario));
 		mapEmpresas.put("periodos",RepositorioEmpresa.getInstance().
-				todosLosPeriodos(empresasObtenidas));
+				todosLosPeriodos(todasLasEmpresasDelUsuario));
 		
 		return mapEmpresas;
 	}

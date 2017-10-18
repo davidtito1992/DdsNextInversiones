@@ -139,6 +139,16 @@ public class EmpresaViewM {
 		this.generarTodosLosCBox(null, null, null, null);
 		this.llenarTablas();
 	}
+	
+	public EmpresaViewM(String empresa, String cuenta, Year anio, Integer periodo) {
+
+		this.nombreSeleccionado = empresa;
+		this.cuentaSeleccionada = cuenta;
+		this.anioSeleccionado = anio;
+		this.semestreSeleccionado = periodo;
+		this.generarTodosLosCBox(null, null, null, null);
+		this.llenarTablas();
+	}
 
 	public void llenarTablas() {
 		this.setSnapshotEmpresas(this
