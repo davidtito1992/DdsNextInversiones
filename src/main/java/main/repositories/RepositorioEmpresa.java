@@ -111,7 +111,7 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 			agregarALista = agregarALista && true;
 		} else {
 			agregarALista = agregarALista
-					&& periodo.getAnio() == anioSeleccionado;
+					&& periodo.getAnio().equals(anioSeleccionado);
 		}
 
 		if (semestreSeleccionado == null) {
