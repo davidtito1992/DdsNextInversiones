@@ -98,9 +98,9 @@ public class ConsultarIndicadorViewM {
 
 	public List<SnapshotIndicador> allSnapshotIndicadores(Long idUser) {
 
-		List<Empresa> empresas = getRepositorioEmpresas().findFromUser(idUser);
+		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(idUser);
 		List<RegistroIndicador> indicadores = getRepositorioIndicadores()
-				.findFromUser(idUser);
+				.allInstancesUser(idUser);
 		List<SnapshotIndicador> snapshots = new ArrayList<SnapshotIndicador>();
 
 		indicadores.forEach(indicador -> snapshots

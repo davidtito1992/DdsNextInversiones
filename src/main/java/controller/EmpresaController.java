@@ -40,7 +40,7 @@ public class EmpresaController extends Controller{
 		
 		HashMap<String, Object> mapEmpresas = new HashMap<>();
 	
-		List<Empresa> todasLasEmpresasDelUsuario = RepositorioEmpresa.getInstance().findFromUser(idUsuario);
+		List<Empresa> todasLasEmpresasDelUsuario = RepositorioEmpresa.getInstance().allInstancesUser(idUsuario);
 		List<Empresa> empresasPorFiltros = idUsuario != null ? 
 				repo.filtrar(cuentaSeleccionada,nombreSeleccionado,semestreSeleccionado,anioSeleccionado,idUsuario) : new ArrayList<>();
 		

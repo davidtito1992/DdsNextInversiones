@@ -28,7 +28,7 @@ public class IndicadorController extends Controller{
 			HashMap<String, Object> mapIndicadores = new HashMap<>();
 
 			List<RegistroIndicador> indicadoresObtenidas = autenticar(req,res) != null ? RepositorioIndicador
-					.getSingletonInstance().findFromUser(autenticar(req,res))
+					.getSingletonInstance().allInstancesUser(autenticar(req,res))
 					: new ArrayList<>();
 			mapIndicadores.put("indicadores", indicadoresObtenidas);
 

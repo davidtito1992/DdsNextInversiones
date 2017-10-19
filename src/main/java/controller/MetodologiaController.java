@@ -27,7 +27,7 @@ public class MetodologiaController extends Controller{
 			HashMap<String, List<Metodologia>> mapMetodologias = new HashMap<>();
 			Long usuarioId = autenticar(req,res);
 			List<Metodologia> metodologiasObtenidas = usuarioId != null ? RepositorioMetodologia
-					.getSingletonInstance().findFromUser(usuarioId)
+					.getSingletonInstance().allInstancesUser(usuarioId)
 					: new ArrayList<>();
 			mapMetodologias.put("metodologias", metodologiasObtenidas);
 			return new ModelAndView(mapMetodologias, "homePage/metodologias.hbs");
@@ -43,7 +43,7 @@ public class MetodologiaController extends Controller{
 	public static ModelAndView consultarView(Request req, Response res) { 
 		if (autenticar(req,res) != null) {
 			List<RankingEmpresa> rEmpresas = new ArrayList<RankingEmpresa>();
-			RepositorioEmpresa.getInstance().findFromUser(autenticar(req,res))
+			RepositorioEmpresa.getInstance().allInstancesUser(autenticar(req,res))
 				.stream().forEach(empresa -> rEmpresas.add(new RankingEmpresa(empresa)));
 			
 			Metodologia metodologia = RepositorioMetodologia.

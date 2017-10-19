@@ -8,9 +8,11 @@ import javax.persistence.PersistenceContextType;
 import javax.transaction.Transactional;
 
 import main.db.EntityManagerHelper;
+import model.Empresa;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 public abstract class Repository<T> {
 
@@ -33,6 +35,15 @@ public abstract class Repository<T> {
 	@Transactional
 	public List<T> allInstances() {
 		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(this.clazz);
+		return criteria.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> allInstancesUser(Long idUsuario) {
+		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
+				this.clazz);
+		criteria.add(Restrictions.eq("user.userId", idUsuario));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		return criteria.list();
 	}
 

@@ -224,13 +224,5 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 		return (Empresa) criteria.uniqueResult();
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Empresa> findFromUser(Long idUsuario) {
-		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
-				Empresa.class);
-		criteria.add(Restrictions.eq("user.userId", idUsuario));
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		return criteria.list();
-	}
 
 }

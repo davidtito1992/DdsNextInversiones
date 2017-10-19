@@ -52,15 +52,6 @@ public class RepositorioIndicador extends Repository<RegistroIndicador> {
 		return (RegistroIndicador) criteria.uniqueResult();
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<RegistroIndicador> findFromUser(Long idUsuario) {
-		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
-				RegistroIndicador.class);
-		criteria.add(Restrictions.eq("user.userId", idUsuario));
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		return criteria.list();
-	}
-
 	public Boolean existCondicionWith(Long registroIndicadorId) {
 		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
 				Condicion.class);

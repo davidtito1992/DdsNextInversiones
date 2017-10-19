@@ -27,12 +27,4 @@ public class RepositorioMetodologia extends Repository<Metodologia> {
 		return repositorioMetodologia;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Metodologia> findFromUser(Long idUsuario) {
-		Criteria criteria = entityManager.unwrap(Session.class).createCriteria(
-				Metodologia.class);
-		criteria.add(Restrictions.eq("user.userId", idUsuario));
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		return criteria.list();
-	}
 }
