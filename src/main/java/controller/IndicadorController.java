@@ -25,7 +25,7 @@ public class IndicadorController extends Controller{
 
 	public static ModelAndView home(Request req, Response res) {
 		if (autenticar(req,res) != null) {
-			HashMap<String, List<?>> mapIndicadores = new HashMap<>();
+			HashMap<String, Object> mapIndicadores = new HashMap<>();
 
 			List<RegistroIndicador> indicadoresObtenidas = autenticar(req,res) != null ? RepositorioIndicador
 					.getSingletonInstance().findFromUser(autenticar(req,res))
@@ -35,6 +35,9 @@ public class IndicadorController extends Controller{
 			List<SnapshotIndicador> snapshots = indicadorViewM
 					.allSnapshotIndicadores(autenticar(req,res));
 			mapIndicadores.put("snapshots", snapshots);
+			
+			mapIndicadores.put("errorAgregar", req.cookie("errorAgregarIndicador"));
+			
 
 			return new ModelAndView(mapIndicadores, "homePage/indicadores.hbs");
 		} else {
@@ -60,6 +63,7 @@ public class IndicadorController extends Controller{
 					.buscar(autenticar(req, res)));
 			new DslIndicador().añadirIndicador(nuevoIndicador);
 		} catch (Exception e) {
+			res.cookie("errorAgregarIndicador", "No se pudo guardar el indicador: '" + e.getMessage() + "'", 5);
 		}
 		res.redirect("/indicadores");
 		return null;

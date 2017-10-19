@@ -25,11 +25,11 @@
         </div>
     </div>
 </nav>
-<div class="py-5">
+<div class="py-4">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="">Filtros</h3>
+                <h3>Filtros</h3>
         	</div>
         </div>
         <form action="/empresas">
@@ -72,18 +72,15 @@
      			</div>
         	</div>
         	<div class="row">
-	        	<div class="btn-group" role="group">
+	        	<div class="btn-group col-md-1" role="group">
 						<input type="submit" name="buscar" class="btn btn-block btn-sm text-center my-3 btn-success" value="Buscar">
+	    				<a class="btn btn-danger btn-sm text-center my-3" href="/empresas">Reiniciar</a>
 	    		</div>
-	    		<div class="col-md-1"></div>
-	    		<div class="btn-group">
-	               	<a class="btn btn-danger btn-sm text-center my-3" href="/empresas">Reiniciar</a>
-	            </div>
 	        </div>
         </form>
     </div>
 </div>
-<div class="py-5">
+<div class="py-4">
     <div class="container">
         {{#block "contenido"}}
         {{/block}}
