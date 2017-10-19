@@ -10,18 +10,64 @@ import model.ControladorDeMetodologia;
 import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
+import model.SnapshotCondicion;
 import model.SnapshotRankingEmpresa;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.math.BigDecimal;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class MetodologiaController extends Controller{
+	
+	static String indicadorSeleccionado;
+	static String tipoCondicionSeleccionado;
+	static String condicionSeleccionada;
+	static BigDecimal pesoOCompararSeleccionado;
+	static int ultimosAniosSeleccionado;
+	static List<SnapshotCondicion> condicionesCreadas = new ArrayList<SnapshotCondicion>();; 
 
 	public MetodologiaController() {
+	}
+	
+	public static ModelAndView agregarView(Request req, Response res) { 
+		RepositorioIndicador repoInd = RepositorioIndicador.getSingletonInstance();
+		if (autenticar(req,res) != null) {
+			
+			indicadorSeleccionado = Objects.isNull(req.queryParams("indicadorSeleccionado")) || req.queryParams("indicadorSeleccionado").isEmpty() ? null : req.queryParams("indicadorSeleccionado");
+			tipoCondicionSeleccionado = Objects.isNull(req.queryParams("tipoCondicionSeleccionado")) || req.queryParams("tipoCondicionSeleccionado").isEmpty() ? null : req.queryParams("tipoCondicionSeleccionado");
+			condicionSeleccionada = Objects.isNull(req.queryParams("condicionSeleccionada")) || req.queryParams("condicionSeleccionada").isEmpty() ? null : req.queryParams("condicionSeleccionada");
+			pesoOCompararSeleccionado = Objects.isNull(req.queryParams("pesoOCompararSeleccionado")) || req.queryParams("pesoOCompararSeleccionado").isEmpty() ? 
+					null : BigDecimal.valueOf(Long.parseLong(req.queryParams("pesoOCompararSeleccionado")));
+			ultimosAniosSeleccionado = Objects.isNull(req.queryParams("ultimosAniosSeleccionado")) || req.queryParams("ultimosAniosSeleccionado").isEmpty() ?
+					0 : Integer.parseInt(req.queryParams("ultimosAniosSeleccionado"));
+			
+			if (!(Objects.isNull(indicadorSeleccionado) || Objects.isNull(tipoCondicionSeleccionado) ||
+					Objects.isNull(condicionSeleccionada) || Objects.isNull(pesoOCompararSeleccionado))){
+				SnapshotCondicion snc = new SnapshotCondicion(tipoCondicionSeleccionado,condicionSeleccionada,
+					indicadorSeleccionado,pesoOCompararSeleccionado,ultimosAniosSeleccionado);
+				condicionesCreadas.add(snc);
+			}
+			
+			HashMap<String, Object> mapAMetod = new HashMap<>();
+			mapAMetod.put("condiciones",listaCondiciones());
+			mapAMetod.put("tipoCondiciones",listaTiposCondiciones());
+			mapAMetod.put("indicadores",repoInd
+					.todosLosNombresDeIndicadores(repoInd.allInstancesUser(autenticar(req,res))));
+			mapAMetod.put("condicionesCreadas",condicionesCreadas);
+			
+
+			return new ModelAndView(mapAMetod, "layoutMetodologiasAgregar.hbs");
+		} else {
+			res.redirect("/");
+			return null;
+		}
 	}
 
 	public static ModelAndView home(Request req, Response res) {
@@ -61,22 +107,6 @@ public class MetodologiaController extends Controller{
 			mapConsultaMetodologias.put("resultadoOk", empresasOk);
 			mapConsultaMetodologias.put("resultadoError", empresasError);
 			return new ModelAndView(mapConsultaMetodologias, "layoutMetodologiasConsultar.hbs");
-		} else {
-			res.redirect("/");
-			return null;
-		}
-	}
-	
-	public static ModelAndView agregarView(Request req, Response res) { 
-		RepositorioIndicador repoInd = RepositorioIndicador.getSingletonInstance();
-		if (autenticar(req,res) != null) {
-			HashMap<String, Object> mapAMetod = new HashMap<>();
-			mapAMetod.put("condiciones",listaCondiciones());
-			mapAMetod.put("tipoCondiciones",listaTiposCondiciones());
-			mapAMetod.put("indicadores",repoInd
-					.todosLosNombresDeIndicadores(repoInd.allInstancesUser(autenticar(req,res))));
-
-			return new ModelAndView(mapAMetod, "layoutMetodologiasAgregar.hbs");
 		} else {
 			res.redirect("/");
 			return null;
