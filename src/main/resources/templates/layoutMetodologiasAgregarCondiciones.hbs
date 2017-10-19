@@ -36,6 +36,12 @@
         </div>
         
         <div class="row">
+            <div class="col-md-12 text-danger">
+                <h4>{{errorCrearMetodologia}}</h4>
+        	</div>
+        </div>
+        
+        <div class="row">
             <div class="col-md-12">
                 <h2>Nombre de metodologia: {{nombreMetodologia}}</h2>
         	</div>
@@ -92,10 +98,14 @@
 	     		<div class="row">
 		        	<div class="btn-group col-md-3" role="group">
 						<input type="submit" name="agregarView" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar Condición">
-		    			<a class="btn btn-danger btn-sm text-center my-3" href="/metodologias/agregar">Reiniciar</a>
 		    		</div>
 		        </div>
 	        </form>
+	        <form action="/metodologias/agregar/reiniciar" method=POST>
+	        	<div class="btn-group col-md-3" role="group">
+	        		<input type="submit" name="reiniciar" class="btn btn-block btn-sm text-center my-3 btn-danger" value="Reiniciar Condiciones">
+	 			</div>
+	 		</form>
 	 	</div>  
 	 	
 	 	<div class="col-sm-10">
@@ -131,7 +141,7 @@
 	 	
 	 	<form action="/metodologias/agregar/condiciones" method=POST>
 	 		<div class="row">
-				<div class="btn-group col-md-3" role="group">
+				<div class="btn-group col-md-12" role="group">
 					<input type="submit" name="agregarMetodologia" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar Metodologia">
 		    	</div>
 			</div>

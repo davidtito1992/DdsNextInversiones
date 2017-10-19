@@ -1,6 +1,7 @@
 package controller;
 
 import main.app.DslIndicador;
+import main.condiciones.Condicion;
 import main.condiciones.CondicionesBuilder;
 import main.rankingEmpresa.RankingEmpresa;
 import main.repositories.RepositorioEmpresa;
@@ -53,17 +54,32 @@ public class MetodologiaController extends Controller{
 			nombreMetodologiaSeleccionado = Objects.isNull(req.queryParams("nombreMetodologiaSeleccionado")) || req.queryParams("nombreMetodologiaSeleccionado").isEmpty() ? null : req.queryParams("nombreMetodologiaSeleccionado");
 			res.redirect("/metodologias/agregar/condiciones");
 		} catch (Exception e) {
-			res.cookie("errorAgregarIndicador", "validaciones", 5);
 			res.redirect("/indicadores/agregar");
 		}
 		return null;
 	}
 	
+	public Void reiniciar(Request req, Response res){
+		condicionesCreadas = new ArrayList<SnapshotCondicion>();
+		res.redirect("metodologias/agregar/condiciones");
+		return null;
+	}
+	
 	public Void agregarMetodologia(Request req, Response res) {
 		try {
+			List<Condicion> condiciones = new ArrayList<Condicion>();
+			condicionesCreadas.stream().
+				forEach(snapshotCondicion -> condiciones.add(new CondicionesBuilder().crear(snapshotCondicion)));
+			Metodologia metodologia = new Metodologia(nombreMetodologiaSeleccionado, condiciones);
+			RepositorioMetodologia.getSingletonInstance().agregar(metodologia);
 			
+			condicionesCreadas = new ArrayList<SnapshotCondicion>();
+			nombreMetodologiaSeleccionado = null;
+			
+			res.redirect("/metodologias");
 		} catch (Exception e) {
-			
+			res.cookie("errorCrearMetodologia", "Error al crear la metodologia: " + e.getMessage(), 5);
+			res.redirect("/metodologias/agregar/condiciones");
 		}
 		return null;
 	}
@@ -71,6 +87,7 @@ public class MetodologiaController extends Controller{
 	public static ModelAndView agregarCondicionesView(Request req, Response res) { 
 		if (autenticar(req,res) != null) {
 			
+			String errorCrearMetodologia = req.cookie("errorCrearMetodologia");
 			indicadorSeleccionado = Objects.isNull(req.queryParams("indicadorSeleccionado")) || req.queryParams("indicadorSeleccionado").isEmpty() ? null : req.queryParams("indicadorSeleccionado");
 			tipoCondicionSeleccionado = Objects.isNull(req.queryParams("tipoCondicionSeleccionado")) || req.queryParams("tipoCondicionSeleccionado").isEmpty() ? null : req.queryParams("tipoCondicionSeleccionado");
 			condicionSeleccionada = Objects.isNull(req.queryParams("condicionSeleccionada")) || req.queryParams("condicionSeleccionada").isEmpty() ? null : req.queryParams("condicionSeleccionada");
@@ -81,14 +98,14 @@ public class MetodologiaController extends Controller{
 			
 			agregarCondicionCreada();
 
-			return new ModelAndView(armarHashMapCondiciones(autenticar(req,res)), "layoutMetodologiasAgregarCondiciones.hbs");
+			return new ModelAndView(armarHashMapCondiciones(autenticar(req,res),errorCrearMetodologia), "layoutMetodologiasAgregarCondiciones.hbs");
 		} else {
 			res.redirect("/");
 			return null;
 		}
 	}
 	
-	public static HashMap<String, Object> armarHashMapCondiciones(Long idUsuario){
+	public static HashMap<String, Object> armarHashMapCondiciones(Long idUsuario, String errorCrearMetodologia){
 		HashMap<String, Object> mapAMetod = new HashMap<>();
 		mapAMetod.put("condiciones",listaCondiciones());
 		mapAMetod.put("tipoCondiciones",listaTiposCondiciones());
@@ -96,6 +113,7 @@ public class MetodologiaController extends Controller{
 				.todosLosNombresDeIndicadores(repoInd.allInstancesUser(idUsuario)));
 		mapAMetod.put("condicionesCreadas",condicionesCreadas);
 		mapAMetod.put("nombreMetodologia",nombreMetodologiaSeleccionado);
+		mapAMetod.put("errorCrearMetodologia",errorCrearMetodologia);
 		return mapAMetod;
 	}
 	
