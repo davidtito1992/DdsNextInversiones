@@ -48,7 +48,7 @@ public class IndicadorController extends Controller{
 	
 	public static ModelAndView agregarView(Request req, Response res) {
 		if (autenticar(req,res) != null) {
-			return new ModelAndView(null, "homePage/agregarIndicador.hbs");
+			return new ModelAndView(null, "homePage/nuevoIndicador.hbs");
 		} else {
 			res.redirect("/");
 			return null;
@@ -82,7 +82,7 @@ public class IndicadorController extends Controller{
 		RegistroIndicador aBorrar = RepositorioIndicador.getSingletonInstance()
 				.buscar(Long.parseLong(idIndicador));
 		appData.borrarIndicador(aBorrar);
-		res.redirect("/indicadores/");
+		res.redirect("/indicadores");
 		return null;
 	}
 	

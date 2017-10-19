@@ -90,10 +90,6 @@ public class AppData {
 	public void borrarIndicador(RegistroIndicador unIndicador) {
 
 		try {
-			DataUploader cargador = DataUploaderFactory
-					.actualizarData(DataLoaderFactory.ARCHIVO);
-
-			cargador.borrarIndicador(unIndicador);
 			this.getRepositorioIndicadores().eliminar(
 					unIndicador.getRegistroIndicadorId());
 

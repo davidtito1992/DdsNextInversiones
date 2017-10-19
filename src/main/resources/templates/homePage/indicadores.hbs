@@ -18,7 +18,11 @@
                     <td>{{this.nombre}}</td>
                     <td>{{this.formula}}</td>
                     {{#if puedeSerBorrado}}
-                    	<td><a class="btn btn-danger" href="/indicadores/borrar/{{url}}">Borrar</a></td>
+                    	<td>
+                    		<form action="/indicadores/{{url}}" method="POST">
+                    			<button class="btn btn-danger" type="submit">Borrar</button>
+                    		</form>
+                    	</td>
   					{{else}}
   						<td>No puede ser borrado</td>
   					{{/if}}
