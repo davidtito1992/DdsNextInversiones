@@ -1,5 +1,6 @@
 package controller;
 
+import main.condiciones.CondicionesBuilder;
 import main.rankingEmpresa.RankingEmpresa;
 import main.repositories.RepositorioEmpresa;
 import main.repositories.RepositorioIndicador;
@@ -40,6 +41,8 @@ public class MetodologiaController extends Controller{
 		return null;
 	}
 	
+	
+	
 	public static ModelAndView consultarView(Request req, Response res) { 
 		if (autenticar(req,res) != null) {
 			List<RankingEmpresa> rEmpresas = new ArrayList<RankingEmpresa>();
@@ -63,6 +66,45 @@ public class MetodologiaController extends Controller{
 			return null;
 		}
 	}
+	
+	public static ModelAndView agregarView(Request req, Response res) { 
+		RepositorioIndicador repoInd = RepositorioIndicador.getSingletonInstance();
+		if (autenticar(req,res) != null) {
+			HashMap<String, Object> mapAMetod = new HashMap<>();
+			mapAMetod.put("condiciones",listaCondiciones());
+			mapAMetod.put("tipoCondiciones",listaTiposCondiciones());
+			mapAMetod.put("indicadores",repoInd
+					.todosLosNombresDeIndicadores(repoInd.allInstancesUser(autenticar(req,res))));
+
+			return new ModelAndView(mapAMetod, "layoutMetodologiasAgregar.hbs");
+		} else {
+			res.redirect("/");
+			return null;
+		}
+	}
+	
+	public Void agregarCondicion(Request req, Response res) {
+		res.redirect("/metodologias");
+		return null;
+	}
+	
+	public static List<String> listaCondiciones(){
+		List<String> condiciones = new ArrayList<String>();
+		condiciones.add(CondicionesBuilder.MAYOR);
+		condiciones.add(CondicionesBuilder.MENOR);
+		condiciones.add(CondicionesBuilder.ANTIGUEDAD);
+		condiciones.add(CondicionesBuilder.CRECIENTE);
+		condiciones.add(CondicionesBuilder.DECRECIENTE);
+		return condiciones;
+	}
+	
+	public static List<String> listaTiposCondiciones(){
+		List<String> tiposCondiciones = new ArrayList<String>();
+		tiposCondiciones.add(CondicionesBuilder.TAXATIVA);
+		tiposCondiciones.add(CondicionesBuilder.CUANTITATIVA);
+		return tiposCondiciones;
+	}
+	
 	
 //	public Void consultar(Request req, Response res){
 //
