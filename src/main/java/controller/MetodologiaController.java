@@ -61,7 +61,7 @@ public class MetodologiaController extends Controller{
 	
 	public Void reiniciar(Request req, Response res){
 		condicionesCreadas = new ArrayList<SnapshotCondicion>();
-		res.redirect("metodologias/agregar/condiciones");
+		res.redirect("/metodologias/agregar/condiciones");
 		return null;
 	}
 	
@@ -70,7 +70,8 @@ public class MetodologiaController extends Controller{
 			List<Condicion> condiciones = new ArrayList<Condicion>();
 			condicionesCreadas.stream().
 				forEach(snapshotCondicion -> condiciones.add(new CondicionesBuilder().crear(snapshotCondicion)));
-			Metodologia metodologia = new Metodologia(nombreMetodologiaSeleccionado, condiciones);
+			Metodologia metodologia = new Metodologia(nombreMetodologiaSeleccionado, condiciones, 
+					RepositorioUsuario.getSingletonInstance().buscar(autenticar(req, res)));
 			RepositorioMetodologia.getSingletonInstance().agregar(metodologia);
 			
 			condicionesCreadas = new ArrayList<SnapshotCondicion>();
