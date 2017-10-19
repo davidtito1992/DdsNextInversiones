@@ -1,6 +1,7 @@
 package controller;
 
 import main.app.AppData;
+import main.app.DslIndicador;
 import main.repositories.RepositorioIndicador;
 import main.repositories.RepositorioUsuario;
 import main.viewmodel.ConsultarIndicadorViewM;
@@ -51,11 +52,16 @@ public class IndicadorController extends Controller{
 		}
 	}
 	
-	public Void agregar(Request req, Response res){
-		RegistroIndicador nuevoIndicador = new RegistroIndicador(req.queryParams("nombre"),req.queryParams("formula"));
-		nuevoIndicador.setUser(RepositorioUsuario.getSingletonInstance().buscar(autenticar(req,res)));
-		RepositorioIndicador.getSingletonInstance().agregar(nuevoIndicador);
-		res.redirect("/indicadores"); 
+	public Void agregar(Request req, Response res) {
+		try {
+			RegistroIndicador nuevoIndicador = new RegistroIndicador(
+					req.queryParams("nombre"), req.queryParams("formula"));
+			nuevoIndicador.setUser(RepositorioUsuario.getSingletonInstance()
+					.buscar(autenticar(req, res)));
+			new DslIndicador().añadirIndicador(nuevoIndicador);
+		} catch (Exception e) {
+		}
+		res.redirect("/indicadores");
 		return null;
 	}
 
