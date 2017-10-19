@@ -36,8 +36,29 @@ public class MetodologiaController extends Controller{
 	static int ultimosAniosSeleccionado;
 	static List<SnapshotCondicion> condicionesCreadas = new ArrayList<SnapshotCondicion>();
 	static RepositorioIndicador repoInd = RepositorioIndicador.getSingletonInstance();
+	static String errorCrearMetodologia;
+	static String errorAgregarCondicion;
+	
 
 	public MetodologiaController() {
+	}
+	
+	//---------------------------Metodos ModelAndView---------------------------//
+	
+	public static ModelAndView home(Request req, Response res) {
+		if (autenticar(req, res) != null) {
+			List<Metodologia> metodologiasObtenidas = RepositorioMetodologia
+					.getSingletonInstance().allInstancesUser(autenticar(req, res));
+
+			HashMap<String, List<Metodologia>> mapMetodologias = new HashMap<>();
+			mapMetodologias.put("metodologias", metodologiasObtenidas);
+
+			return new ModelAndView(mapMetodologias,
+					"homePage/metodologias.hbs");
+		} else {
+			res.redirect("/");
+			return null;
+		}
 	}
 	
 	public static ModelAndView agregarNombreView(Request req, Response res) { 
@@ -48,6 +69,41 @@ public class MetodologiaController extends Controller{
 			return null;
 		}		
 	}
+	
+	public static ModelAndView agregarCondicionesView(Request req, Response res) { 
+		errorAgregarCondicion = null;
+		
+		if (autenticar(req,res) != null) {
+			recuperoParametrosCondicion(req);
+			agregarCondicionCreada();
+			
+			return new ModelAndView(mapeoCondiciones(autenticar(req,res)), "layoutMetodologiasAgregarCondiciones.hbs");
+		} else {
+			res.redirect("/");
+			return null;
+		}
+	}
+	
+	public static ModelAndView consultarView(Request req, Response res) {
+		if (autenticar(req, res) != null) {
+			
+			List<RankingEmpresa> rEmpresas = new ArrayList<RankingEmpresa>();
+			RepositorioEmpresa.getInstance().allInstancesUser(autenticar(req, res))
+					.stream().forEach(empresa -> rEmpresas
+									.add(new RankingEmpresa(empresa)));
+			
+			Metodologia metodologia = RepositorioMetodologia.getSingletonInstance().buscar(
+							Long.parseLong(req.params("metodologiaId")));
+			
+			ControladorDeMetodologia contrMet = new ControladorDeMetodologia(metodologia, rEmpresas);
+			return new ModelAndView(mapeoConsultarMetodologia(contrMet),"layoutMetodologiasConsultar.hbs");
+		} else {
+			res.redirect("/");
+			return null;
+		}
+	}
+	
+	//---------------------------Metodos POST---------------------------//
 	
 	public Void agregarNombre(Request req, Response res) {
 		try {
@@ -61,6 +117,8 @@ public class MetodologiaController extends Controller{
 	
 	public Void reiniciar(Request req, Response res){
 		condicionesCreadas = new ArrayList<SnapshotCondicion>();
+		errorAgregarCondicion = null;
+		errorCrearMetodologia = null;
 		res.redirect("/metodologias/agregar/condiciones");
 		return null;
 	}
@@ -85,58 +143,6 @@ public class MetodologiaController extends Controller{
 		return null;
 	}
 	
-	public static ModelAndView agregarCondicionesView(Request req, Response res) { 
-		if (autenticar(req,res) != null) {
-			
-			String errorCrearMetodologia = req.cookie("errorCrearMetodologia");
-			indicadorSeleccionado = Objects.isNull(req.queryParams("indicadorSeleccionado")) || req.queryParams("indicadorSeleccionado").isEmpty() ? null : req.queryParams("indicadorSeleccionado");
-			tipoCondicionSeleccionado = Objects.isNull(req.queryParams("tipoCondicionSeleccionado")) || req.queryParams("tipoCondicionSeleccionado").isEmpty() ? null : req.queryParams("tipoCondicionSeleccionado");
-			condicionSeleccionada = Objects.isNull(req.queryParams("condicionSeleccionada")) || req.queryParams("condicionSeleccionada").isEmpty() ? null : req.queryParams("condicionSeleccionada");
-			pesoOCompararSeleccionado = Objects.isNull(req.queryParams("pesoOCompararSeleccionado")) || req.queryParams("pesoOCompararSeleccionado").isEmpty() ? 
-					null : BigDecimal.valueOf(Long.parseLong(req.queryParams("pesoOCompararSeleccionado")));
-			ultimosAniosSeleccionado = Objects.isNull(req.queryParams("ultimosAniosSeleccionado")) || req.queryParams("ultimosAniosSeleccionado").isEmpty() ?
-					0 : Integer.parseInt(req.queryParams("ultimosAniosSeleccionado"));
-			
-			agregarCondicionCreada();
-
-			return new ModelAndView(armarHashMapCondiciones(autenticar(req,res),errorCrearMetodologia), "layoutMetodologiasAgregarCondiciones.hbs");
-		} else {
-			res.redirect("/");
-			return null;
-		}
-	}
-	
-	public static HashMap<String, Object> armarHashMapCondiciones(Long idUsuario, String errorCrearMetodologia){
-		HashMap<String, Object> mapAMetod = new HashMap<>();
-		mapAMetod.put("condiciones",listaCondiciones());
-		mapAMetod.put("tipoCondiciones",listaTiposCondiciones());
-		mapAMetod.put("indicadores",repoInd
-				.todosLosNombresDeIndicadores(repoInd.allInstancesUser(idUsuario)));
-		mapAMetod.put("condicionesCreadas",condicionesCreadas);
-		mapAMetod.put("nombreMetodologia",nombreMetodologiaSeleccionado);
-		mapAMetod.put("errorCrearMetodologia",errorCrearMetodologia);
-		return mapAMetod;
-	}
-	
-	public static void agregarCondicionCreada(){
-		if (!(Objects.isNull(indicadorSeleccionado) || Objects.isNull(tipoCondicionSeleccionado) ||
-				Objects.isNull(condicionSeleccionada) || Objects.isNull(pesoOCompararSeleccionado))){
-			SnapshotCondicion snc = new SnapshotCondicion(tipoCondicionSeleccionado,condicionSeleccionada,
-				indicadorSeleccionado,pesoOCompararSeleccionado,ultimosAniosSeleccionado);
-			condicionesCreadas.add(snc);
-		}
-	}
-
-	public static ModelAndView home(Request req, Response res) {
-			HashMap<String, List<Metodologia>> mapMetodologias = new HashMap<>();
-			Long usuarioId = autenticar(req,res);
-			List<Metodologia> metodologiasObtenidas = usuarioId != null ? RepositorioMetodologia
-					.getSingletonInstance().allInstancesUser(usuarioId)
-					: new ArrayList<>();
-			mapMetodologias.put("metodologias", metodologiasObtenidas);
-			return new ModelAndView(mapMetodologias, "homePage/metodologias.hbs");
-	}
-	
 	public Void delete(Request req, Response res) {
 		String idMetodologia = req.params("metodologiaId");
 		RepositorioMetodologia.getSingletonInstance().eliminar(Long.parseLong(idMetodologia));
@@ -145,34 +151,101 @@ public class MetodologiaController extends Controller{
 	}
 	
 	
+	//---------------------------Otros Metodos---------------------------//
 	
-	public static ModelAndView consultarView(Request req, Response res) { 
-		if (autenticar(req,res) != null) {
-			List<RankingEmpresa> rEmpresas = new ArrayList<RankingEmpresa>();
-			RepositorioEmpresa.getInstance().allInstancesUser(autenticar(req,res))
-				.stream().forEach(empresa -> rEmpresas.add(new RankingEmpresa(empresa)));
-			
-			Metodologia metodologia = RepositorioMetodologia.
-						getSingletonInstance().buscar(Long.parseLong(req.params("metodologiaId")));
-			
-			ControladorDeMetodologia controlador = new ControladorDeMetodologia(metodologia,rEmpresas);
-			
-			HashMap<String, List<SnapshotRankingEmpresa>> mapConsultaMetodologias = new HashMap<>();
-			List<SnapshotRankingEmpresa> empresasOk = controlador.obtenerSnapshotRankingEmpresas();
-			List<SnapshotRankingEmpresa> empresasError = controlador.obtenerSnapshotRankingEmpresasFallidas();
-			
-			mapConsultaMetodologias.put("resultadoOk", empresasOk);
-			mapConsultaMetodologias.put("resultadoError", empresasError);
-			return new ModelAndView(mapConsultaMetodologias, "layoutMetodologiasConsultar.hbs");
-		} else {
-			res.redirect("/");
-			return null;
+	public static HashMap<String, Object> mapeoConsultarMetodologia(ControladorDeMetodologia controlador){
+		HashMap<String, Object> mapConsultaMetodologias = new HashMap<>();
+		List<SnapshotRankingEmpresa> empresasOk = controlador.obtenerSnapshotRankingEmpresas();
+		List<SnapshotRankingEmpresa> empresasError = controlador.obtenerSnapshotRankingEmpresasFallidas();
+		
+		mapConsultaMetodologias.put("resultadoOk", empresasOk);
+		mapConsultaMetodologias.put("resultadoError", empresasError);
+		return mapConsultaMetodologias;
+	}
+	
+	public static void recuperoParametrosCondicion(Request req){
+		errorCrearMetodologia = req.cookie("errorCrearMetodologia");
+		indicadorSeleccionado = Objects.isNull(req.queryParams("indicadorSeleccionado")) || req.queryParams("indicadorSeleccionado").isEmpty() ? null : req.queryParams("indicadorSeleccionado");
+		tipoCondicionSeleccionado = Objects.isNull(req.queryParams("tipoCondicionSeleccionado")) || req.queryParams("tipoCondicionSeleccionado").isEmpty() ? null : req.queryParams("tipoCondicionSeleccionado");
+		condicionSeleccionada = Objects.isNull(req.queryParams("condicionSeleccionada")) || req.queryParams("condicionSeleccionada").isEmpty() ? null : req.queryParams("condicionSeleccionada");
+		pesoOCompararSeleccionado = Objects.isNull(req.queryParams("pesoOCompararSeleccionado")) || req.queryParams("pesoOCompararSeleccionado").isEmpty() ? 
+				null : BigDecimal.valueOf(Long.parseLong(req.queryParams("pesoOCompararSeleccionado")));
+		ultimosAniosSeleccionado = Objects.isNull(req.queryParams("ultimosAniosSeleccionado")) || req.queryParams("ultimosAniosSeleccionado").isEmpty() ?
+				0 : Integer.parseInt(req.queryParams("ultimosAniosSeleccionado"));
+	}
+	
+	public static HashMap<String, Object> mapeoCondiciones(Long idUsuario){
+		HashMap<String, Object> mapAMetod = new HashMap<>();
+		mapAMetod.put("condiciones",listaCondiciones());
+		mapAMetod.put("tipoCondiciones",listaTiposCondiciones());
+		mapAMetod.put("indicadores",repoInd
+				.todosLosNombresDeIndicadores(repoInd.allInstancesUser(idUsuario)));
+		mapAMetod.put("condicionesCreadas",condicionesCreadas);
+		mapAMetod.put("nombreMetodologia",nombreMetodologiaSeleccionado);
+		mapAMetod.put("errorCrearMetodologia",errorCrearMetodologia);
+		mapAMetod.put("errorAgregarCondicion",errorAgregarCondicion);
+		return mapAMetod;
+	}
+	
+	public static void agregarCondicionCreada(){
+		try{
+			validar();
+			condicionesCreadas.add(new SnapshotCondicion(tipoCondicionSeleccionado,
+					condicionSeleccionada, indicadorSeleccionado,
+					pesoOCompararSeleccionado, ultimosAniosSeleccionado));
+		}catch (RuntimeException e){
+			if (!(Objects.isNull(condicionSeleccionada) && Objects.isNull(indicadorSeleccionado)
+					&& Objects.isNull(tipoCondicionSeleccionado) && ultimosAniosSeleccionado == 0 &&
+					Objects.isNull(pesoOCompararSeleccionado)))
+				errorAgregarCondicion = "La ultima condicion ingresada no cumple las validaciones necesarias. Intentelo nuevamente.";
 		}
 	}
 	
-	public Void agregarCondicion(Request req, Response res) {
-		res.redirect("/metodologias");
-		return null;
+	public static void validar() throws RuntimeException {
+		
+		if (condicionSeleccionada.equals(CondicionesBuilder.ANTIGUEDAD))
+			indicadorSeleccionado = CondicionesBuilder.VACIARINDICADOR;
+		
+		if (indicadorSeleccionado == null) 
+			throw new RuntimeException("Seleccione un indicador");
+
+		if (tipoCondicionSeleccionado == null) 
+			throw new RuntimeException("Seleccione un tipo de condicion");
+
+		if (condicionSeleccionada == null) {
+			throw new RuntimeException("Seleccione una condicion");
+		}
+		if (tipoCondicionSeleccionado.equalsIgnoreCase(
+				CondicionesBuilder.CUANTITATIVA)
+				&& (condicionSeleccionada.equalsIgnoreCase(
+						CondicionesBuilder.CRECIENTE) || condicionSeleccionada.equalsIgnoreCase(
+								CondicionesBuilder.DECRECIENTE))) {
+			throw new RuntimeException(
+					"Las condiciones Creciente y Decreciente no pueden ser Cuantitativas");
+		}
+		if (!condicionSeleccionada.equalsIgnoreCase(
+				CondicionesBuilder.ANTIGUEDAD)
+				&& Objects.isNull(ultimosAniosSeleccionado)) {
+			throw new RuntimeException(
+					"Falta indicar desde que año aplica la condicion");
+		} else {
+			if (Objects.isNull(ultimosAniosSeleccionado)) {
+				ultimosAniosSeleccionado = 0;
+			}
+		}
+		if (!condicionSeleccionada.equalsIgnoreCase(
+				CondicionesBuilder.CRECIENTE)
+				&& !condicionSeleccionada.equalsIgnoreCase(
+						CondicionesBuilder.DECRECIENTE)
+				&& pesoOCompararSeleccionado == null) {
+			throw new RuntimeException(
+					"Falta indicar el Peso o Numero a Comparar");
+		} else {
+			if (pesoOCompararSeleccionado == null) {
+				pesoOCompararSeleccionado.valueOf(0);
+			}
+		}
+
 	}
 	
 	public static List<String> listaCondiciones(){
