@@ -1,5 +1,6 @@
 package controller;
 
+import main.app.DslIndicador;
 import main.condiciones.CondicionesBuilder;
 import main.rankingEmpresa.RankingEmpresa;
 import main.repositories.RepositorioEmpresa;
@@ -26,18 +27,48 @@ import java.util.Set;
 
 public class MetodologiaController extends Controller{
 	
+	static String nombreMetodologiaSeleccionado;
 	static String indicadorSeleccionado;
 	static String tipoCondicionSeleccionado;
 	static String condicionSeleccionada;
 	static BigDecimal pesoOCompararSeleccionado;
 	static int ultimosAniosSeleccionado;
-	static List<SnapshotCondicion> condicionesCreadas = new ArrayList<SnapshotCondicion>();; 
+	static List<SnapshotCondicion> condicionesCreadas = new ArrayList<SnapshotCondicion>();
+	static RepositorioIndicador repoInd = RepositorioIndicador.getSingletonInstance();
 
 	public MetodologiaController() {
 	}
 	
-	public static ModelAndView agregarView(Request req, Response res) { 
-		RepositorioIndicador repoInd = RepositorioIndicador.getSingletonInstance();
+	public static ModelAndView agregarNombreView(Request req, Response res) { 
+		if (autenticar(req,res) != null) {
+			return new ModelAndView(null, "layoutMetodologiasAgregarNombre.hbs");
+		} else {
+			res.redirect("/");
+			return null;
+		}		
+	}
+	
+	public Void agregarNombre(Request req, Response res) {
+		try {
+			nombreMetodologiaSeleccionado = Objects.isNull(req.queryParams("nombreMetodologiaSeleccionado")) || req.queryParams("nombreMetodologiaSeleccionado").isEmpty() ? null : req.queryParams("nombreMetodologiaSeleccionado");
+			res.redirect("/metodologias/agregar/condiciones");
+		} catch (Exception e) {
+			res.cookie("errorAgregarIndicador", "validaciones", 5);
+			res.redirect("/indicadores/agregar");
+		}
+		return null;
+	}
+	
+	public Void agregarMetodologia(Request req, Response res) {
+		try {
+			
+		} catch (Exception e) {
+			
+		}
+		return null;
+	}
+	
+	public static ModelAndView agregarCondicionesView(Request req, Response res) { 
 		if (autenticar(req,res) != null) {
 			
 			indicadorSeleccionado = Objects.isNull(req.queryParams("indicadorSeleccionado")) || req.queryParams("indicadorSeleccionado").isEmpty() ? null : req.queryParams("indicadorSeleccionado");
@@ -48,25 +79,32 @@ public class MetodologiaController extends Controller{
 			ultimosAniosSeleccionado = Objects.isNull(req.queryParams("ultimosAniosSeleccionado")) || req.queryParams("ultimosAniosSeleccionado").isEmpty() ?
 					0 : Integer.parseInt(req.queryParams("ultimosAniosSeleccionado"));
 			
-			if (!(Objects.isNull(indicadorSeleccionado) || Objects.isNull(tipoCondicionSeleccionado) ||
-					Objects.isNull(condicionSeleccionada) || Objects.isNull(pesoOCompararSeleccionado))){
-				SnapshotCondicion snc = new SnapshotCondicion(tipoCondicionSeleccionado,condicionSeleccionada,
-					indicadorSeleccionado,pesoOCompararSeleccionado,ultimosAniosSeleccionado);
-				condicionesCreadas.add(snc);
-			}
-			
-			HashMap<String, Object> mapAMetod = new HashMap<>();
-			mapAMetod.put("condiciones",listaCondiciones());
-			mapAMetod.put("tipoCondiciones",listaTiposCondiciones());
-			mapAMetod.put("indicadores",repoInd
-					.todosLosNombresDeIndicadores(repoInd.allInstancesUser(autenticar(req,res))));
-			mapAMetod.put("condicionesCreadas",condicionesCreadas);
-			
+			agregarCondicionCreada();
 
-			return new ModelAndView(mapAMetod, "layoutMetodologiasAgregar.hbs");
+			return new ModelAndView(armarHashMapCondiciones(autenticar(req,res)), "layoutMetodologiasAgregarCondiciones.hbs");
 		} else {
 			res.redirect("/");
 			return null;
+		}
+	}
+	
+	public static HashMap<String, Object> armarHashMapCondiciones(Long idUsuario){
+		HashMap<String, Object> mapAMetod = new HashMap<>();
+		mapAMetod.put("condiciones",listaCondiciones());
+		mapAMetod.put("tipoCondiciones",listaTiposCondiciones());
+		mapAMetod.put("indicadores",repoInd
+				.todosLosNombresDeIndicadores(repoInd.allInstancesUser(idUsuario)));
+		mapAMetod.put("condicionesCreadas",condicionesCreadas);
+		mapAMetod.put("nombreMetodologia",nombreMetodologiaSeleccionado);
+		return mapAMetod;
+	}
+	
+	public static void agregarCondicionCreada(){
+		if (!(Objects.isNull(indicadorSeleccionado) || Objects.isNull(tipoCondicionSeleccionado) ||
+				Objects.isNull(condicionSeleccionada) || Objects.isNull(pesoOCompararSeleccionado))){
+			SnapshotCondicion snc = new SnapshotCondicion(tipoCondicionSeleccionado,condicionSeleccionada,
+				indicadorSeleccionado,pesoOCompararSeleccionado,ultimosAniosSeleccionado);
+			condicionesCreadas.add(snc);
 		}
 	}
 

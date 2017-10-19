@@ -35,8 +35,14 @@
         	</div>
         </div>
         
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Nombre de metodologia: {{nombreMetodologia}}</h2>
+        	</div>
+        </div>
+        
         <div class="col-sm-10">
-	        <form action="/metodologias/agregar">
+	        <form action="/metodologias/agregar/condiciones">
 	       		<div class="form-group row">
 	            	<label class="col-sm-2 col-form-label">Indicadores</label>
 	            	<div class="col-sm-5">
@@ -73,20 +79,20 @@
 				<div class="form-group row">
 	            	<label class="col-sm-2 col-form-label">Peso/Comparar</label>
 	            	<div class="col-sm-5">
-	            		<input type="text" name="pesoOCompararSeleccionado" class="form-control" placeholder="Ingrese un valor numerico" required>
+	            		<input type="number" name="pesoOCompararSeleccionado" class="form-control" placeholder="Ingrese un valor numerico" required>
 	     			</div>
 				</div>
 				<div class="form-group row">
 	            	<label class="col-sm-2 col-form-label">Ultimos años</label>
 	            	<div class="col-sm-5">
-	            		<input type="text" name="ultimosAniosSeleccionado" class="form-control" placeholder="Ingrese un valor numerico" required>
+	            		<input type="number" name="ultimosAniosSeleccionado" class="form-control" placeholder="Ingrese un valor numerico" required>
 	     			</div>
 				</div>
 	     		  
 	     		<div class="row">
 		        	<div class="btn-group col-md-3" role="group">
 						<input type="submit" name="agregarView" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar Condición">
-		    			<a class="btn btn-danger btn-sm text-center my-3" href="/metodologias">Atras</a>
+		    			<a class="btn btn-danger btn-sm text-center my-3" href="/metodologias/agregar">Reiniciar</a>
 		    		</div>
 		        </div>
 	        </form>
@@ -122,6 +128,14 @@
 			    </div>
 			</div>
 	 	</div>
+	 	
+	 	<form action="/metodologias/agregar/condiciones" method=POST>
+	 		<div class="row">
+				<div class="btn-group col-md-3" role="group">
+					<input type="submit" name="agregarMetodologia" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar Metodologia">
+		    	</div>
+			</div>
+		</form>
     </div>
 </div>
 
