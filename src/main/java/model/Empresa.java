@@ -19,8 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import main.repositories.RepositorioEmpresa;
-
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
 
@@ -32,7 +30,7 @@ public class Empresa {
 
 	/********* ATRIBUTOS *********/
 
-	@ManyToOne(fetch= FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private User user;
 
@@ -92,12 +90,10 @@ public class Empresa {
 		calendar.setTime(date);
 		int anioActual = calendar.get(Calendar.YEAR);
 
-		ArrayList<Year> aniosPeriodos = (ArrayList<Year>) this.getPeriodos()
-				.stream().map(periodo -> periodo.getAnio()).distinct().sorted()
-				.collect(Collectors.toCollection(ArrayList::new));
+		ArrayList<Year> aniosPeriodos = (ArrayList<Year>) this.getPeriodos().stream().map(periodo -> periodo.getAnio())
+				.distinct().sorted().collect(Collectors.toCollection(ArrayList::new));
 
 		return anioActual - aniosPeriodos.get(0).getValue();
 	}
-
 
 }

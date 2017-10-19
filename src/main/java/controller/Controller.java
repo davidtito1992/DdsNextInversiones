@@ -14,26 +14,24 @@ import spark.Request;
 import spark.Response;
 
 public class Controller {
-	public static Long autenticar(Request req,Response res){
+	public static Long autenticar(Request req, Response res) {
 		Long idUsuario = null;
 		String token = req.cookie("authenticationToken");
 		try {
-		    Algorithm algorithm = Algorithm.HMAC256("secret");
-		    JWTVerifier verifier = JWT.require(algorithm)
-		        .withIssuer("auth0")
-		        .build(); //Reusable verifier instance
-		    verifier.verify(token);
-		    DecodedJWT jwtDecoded = JWT.decode(token);
-		    Claim claim = jwtDecoded.getClaim("userId");
-		    
+			Algorithm algorithm = Algorithm.HMAC256("secret");
+			JWTVerifier verifier = JWT.require(algorithm).withIssuer("auth0").build(); // Reusable verifier instance
+			verifier.verify(token);
+			DecodedJWT jwtDecoded = JWT.decode(token);
+			Claim claim = jwtDecoded.getClaim("userId");
+
 			idUsuario = claim.asLong();
-		} catch (JWTDecodeException exception){
+		} catch (JWTDecodeException exception) {
 			res.redirect("/");
-		} catch (UnsupportedEncodingException exception){
+		} catch (UnsupportedEncodingException exception) {
 			res.redirect("/");
-		} catch (JWTVerificationException exception){
+		} catch (JWTVerificationException exception) {
 			res.redirect("/");
-		} catch (NullPointerException exception){
+		} catch (NullPointerException exception) {
 			res.redirect("/");
 		}
 		return idUsuario;

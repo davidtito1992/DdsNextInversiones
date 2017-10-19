@@ -56,18 +56,4 @@ public class EmpresaController extends Controller {
 		return mapEmpresas;
 	}
 
-	// public ModelAndView buscar(Request req, Response res){
-	//
-	// List<Empresa> empresas =
-	// RepositorioEmpresa.getInstance().filtrar(req.queryParams("nombreCuenta"),
-	// req.queryParams("nombreEmpresa"),
-	// Integer.parseInt(req.queryParams("semestre")),
-	// Year.parse(req.queryParams("anio")));
-	//
-	// HashMap<String, List<?>> mapEmpresas = new HashMap<>();
-	// mapEmpresas.put("empresas", empresas);
-	//
-	// return new ModelAndView(mapEmpresas,"homePage/empresas.hbs");
-	// }
-
 }

@@ -13,13 +13,11 @@ import static spark.Spark.staticFileLocation;
 public class Router {
 	public static void configure() {
 
-		HandlebarsTemplateEngine engine = HandlebarsTemplateEngineBuilder
-				.create().withDefaultHelpers().build();
+		HandlebarsTemplateEngine engine = HandlebarsTemplateEngineBuilder.create().withDefaultHelpers().build();
 
 		staticFileLocation("/public");
 
 		LoginController loginController = new LoginController();
-		EmpresaController empresaController = new EmpresaController();
 		IndicadorController indicadorController = new IndicadorController();
 		MetodologiaController metodologiaController = new MetodologiaController();
 
@@ -30,14 +28,12 @@ public class Router {
 
 		// Empresas
 		Spark.get("/empresas", EmpresaController::home, engine);
-		//Spark.get("/empresas", empresaController::buscar, engine);
 
 		// Indicadores
 		Spark.get("/indicadores", IndicadorController::home, engine);
 		Spark.get("/indicadores/borrar/:indicadorId", indicadorController::delete);
 		Spark.get("/indicadores/agregar", IndicadorController::agregarView, engine);
 		Spark.post("/indicadores/agregar", indicadorController::agregar);
-		
 
 		// Metodologias
 		Spark.get("/metodologias", MetodologiaController::home, engine);
