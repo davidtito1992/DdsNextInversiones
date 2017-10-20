@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class MetodologiaController extends Controller {
 
@@ -160,10 +162,11 @@ public class MetodologiaController extends Controller {
 	}
 
 	public static HashMap<String, Object> mapeoCondiciones(Long idUsuario) {
+		ArrayList<String> indicadores = repoInd.allInstancesUser(idUsuario).stream().map(indicador -> indicador.getNombre()).collect(Collectors.toCollection(ArrayList::new));
 		HashMap<String, Object> mapAMetod = new HashMap<>();
 		mapAMetod.put("condiciones", listaCondiciones());
 		mapAMetod.put("tipoCondiciones", listaTiposCondiciones());
-		mapAMetod.put("indicadores", repoInd.todosLosNombresDeIndicadores(repoInd.allInstancesUser(idUsuario)));
+		mapAMetod.put("indicadores", indicadores);
 		mapAMetod.put("condicionesCreadas", condicionesCreadas);
 		mapAMetod.put("nombreMetodologia", nombreMetodologiaSeleccionado);
 		mapAMetod.put("errorCrearMetodologia", errorCrearMetodologia);
