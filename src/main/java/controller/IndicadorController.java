@@ -24,35 +24,29 @@ public class IndicadorController extends Controller{
 	}
 
 	public static ModelAndView home(Request req, Response res) {
-		if (autenticar(req,res) != null) {
-			HashMap<String, Object> mapIndicadores = new HashMap<>();
+		autenticar(req,res);
+		
+		HashMap<String, Object> mapIndicadores = new HashMap<>();
 
-			List<RegistroIndicador> indicadoresObtenidas = autenticar(req,res) != null ? RepositorioIndicador
-					.getSingletonInstance().allInstancesUser(autenticar(req,res))
-					: new ArrayList<>();
-			mapIndicadores.put("indicadores", indicadoresObtenidas);
+		List<RegistroIndicador> indicadoresObtenidas = autenticar(req,res) != null ? RepositorioIndicador
+				.getSingletonInstance().allInstancesUser(autenticar(req,res))
+				: new ArrayList<>();
+		mapIndicadores.put("indicadores", indicadoresObtenidas);
 
-			List<SnapshotIndicador> snapshots = indicadorViewM
-					.allSnapshotIndicadores(autenticar(req,res));
-			mapIndicadores.put("snapshots", snapshots);
-			
-			mapIndicadores.put("errorAgregar", req.cookie("errorAgregarIndicador"));
-			
+		List<SnapshotIndicador> snapshots = indicadorViewM
+				.allSnapshotIndicadores(autenticar(req,res));
+		mapIndicadores.put("snapshots", snapshots);
+		
+		mapIndicadores.put("errorAgregar", req.cookie("errorAgregarIndicador"));
+		
 
-			return new ModelAndView(mapIndicadores, "homePage/indicadores.hbs");
-		} else {
-			res.redirect("/");
-			return null;
-		}
+		return new ModelAndView(mapIndicadores, "homePage/indicadores.hbs");
 	}
 	
 	public static ModelAndView agregarView(Request req, Response res) {
-		if (autenticar(req,res) != null) {
-			return new ModelAndView(null, "homePage/nuevoIndicador.hbs");
-		} else {
-			res.redirect("/");
-			return null;
-		}
+		autenticar(req,res);
+		
+		return new ModelAndView(null, "homePage/nuevoIndicador.hbs");
 	}
 	
 	public Void agregar(Request req, Response res) {
