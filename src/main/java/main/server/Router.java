@@ -32,20 +32,20 @@ public class Router {
 		// Indicadores
 		Spark.get("/indicadores", IndicadorController::home, engine);
 		Spark.post("/indicadores/nuevoIndicador", indicadorController::agregar);
-		Spark.post("/indicadores/:indicadorId", indicadorController::delete);
+		Spark.post("/indicadores/baja/:indicadorId", indicadorController::delete);
 		Spark.get("/indicadores/nuevoIndicador", IndicadorController::agregarView, engine);
 
 
 
 		// Metodologias
 		Spark.get("/metodologias", MetodologiaController::home, engine);
-		Spark.post("/metodologias/:metodologiaId", metodologiaController::delete);
+		Spark.post("/metodologias/baja/:metodologiaId", metodologiaController::delete);
 		Spark.get("/metodologias/consultas/:metodologiaId", MetodologiaController::consultarView, engine);
-		Spark.get("/metodologias/agregar", MetodologiaController::agregarNombreView, engine);
-		Spark.post("/metodologias/agregar", metodologiaController::agregarNombre);
-		Spark.get("/metodologias/agregar/condiciones", MetodologiaController::agregarCondicionesView, engine);
-		Spark.post("/metodologias/agregar/condiciones", metodologiaController::agregarMetodologia);
-		Spark.post("/metodologias/agregar/reiniciar", metodologiaController::reiniciar);
+		Spark.get("/metodologias/nuevaMetodologia", MetodologiaController::agregarNombreView, engine);
+		Spark.post("/metodologias/nuevaMetodologia", metodologiaController::agregarNombre);
+		Spark.get("/metodologias/nuevaCondicion", MetodologiaController::agregarCondicionesView, engine);
+		Spark.post("/metodologias/nuevaCondicion", metodologiaController::agregarMetodologia);
+		Spark.post("/metodologias/condicionesReset", metodologiaController::reiniciar);
 
 	}
 }

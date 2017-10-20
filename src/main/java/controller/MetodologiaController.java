@@ -40,59 +40,45 @@ public class MetodologiaController extends Controller {
 	// ---------------------------Metodos ModelAndView---------------------------//
 
 	public static ModelAndView home(Request req, Response res) {
-		if (autenticar(req, res) != null) {
-			List<Metodologia> metodologiasObtenidas = RepositorioMetodologia.getSingletonInstance()
-					.allInstancesUser(autenticar(req, res));
+		autenticar(req, res);
+		
+		List<Metodologia> metodologiasObtenidas = RepositorioMetodologia.getSingletonInstance()
+				.allInstancesUser(autenticar(req, res));
 
-			HashMap<String, List<Metodologia>> mapMetodologias = new HashMap<>();
-			mapMetodologias.put("metodologias", metodologiasObtenidas);
+		HashMap<String, List<Metodologia>> mapMetodologias = new HashMap<>();
+		mapMetodologias.put("metodologias", metodologiasObtenidas);
 
-			return new ModelAndView(mapMetodologias, "homePage/metodologias.hbs");
-		} else {
-			res.redirect("/");
-			return null;
-		}
+		return new ModelAndView(mapMetodologias, "homePage/metodologias.hbs");
 	}
 
 	public static ModelAndView agregarNombreView(Request req, Response res) {
-		if (autenticar(req, res) != null) {
-			return new ModelAndView(null, "layoutMetodologiasAgregarNombre.hbs");
-		} else {
-			res.redirect("/");
-			return null;
-		}
+		autenticar(req, res);
+		condicionesCreadas = new ArrayList<SnapshotCondicion>();
+		return new ModelAndView(null, "layoutMetodologiasAgregarNombre.hbs");
 	}
 
 	public static ModelAndView agregarCondicionesView(Request req, Response res) {
 		errorAgregarCondicion = null;
+		autenticar(req, res);
+		
+		recuperoParametrosCondicion(req);
+		agregarCondicionCreada();
 
-		if (autenticar(req, res) != null) {
-			recuperoParametrosCondicion(req);
-			agregarCondicionCreada();
-
-			return new ModelAndView(mapeoCondiciones(autenticar(req, res)), "layoutMetodologiasAgregarCondiciones.hbs");
-		} else {
-			res.redirect("/");
-			return null;
-		}
+		return new ModelAndView(mapeoCondiciones(autenticar(req, res)), "layoutMetodologiasAgregarCondiciones.hbs");
 	}
 
 	public static ModelAndView consultarView(Request req, Response res) {
-		if (autenticar(req, res) != null) {
+		autenticar(req, res);
 
-			List<RankingEmpresa> rEmpresas = new ArrayList<RankingEmpresa>();
-			RepositorioEmpresa.getInstance().allInstancesUser(autenticar(req, res)).stream()
-					.forEach(empresa -> rEmpresas.add(new RankingEmpresa(empresa)));
+		List<RankingEmpresa> rEmpresas = new ArrayList<RankingEmpresa>();
+		RepositorioEmpresa.getInstance().allInstancesUser(autenticar(req, res)).stream()
+				.forEach(empresa -> rEmpresas.add(new RankingEmpresa(empresa)));
 
-			Metodologia metodologia = RepositorioMetodologia.getSingletonInstance()
-					.buscar(Long.parseLong(req.params("metodologiaId")));
+		Metodologia metodologia = RepositorioMetodologia.getSingletonInstance()
+				.buscar(Long.parseLong(req.params("metodologiaId")));
 
-			ControladorDeMetodologia contrMet = new ControladorDeMetodologia(metodologia, rEmpresas);
-			return new ModelAndView(mapeoConsultarMetodologia(contrMet), "layoutMetodologiasConsultar.hbs");
-		} else {
-			res.redirect("/");
-			return null;
-		}
+		ControladorDeMetodologia contrMet = new ControladorDeMetodologia(metodologia, rEmpresas);
+		return new ModelAndView(mapeoConsultarMetodologia(contrMet), "layoutMetodologiasConsultar.hbs");
 	}
 
 	// ---------------------------Metodos POST---------------------------//
@@ -102,9 +88,9 @@ public class MetodologiaController extends Controller {
 			nombreMetodologiaSeleccionado = Objects.isNull(req.queryParams("nombreMetodologiaSeleccionado"))
 					|| req.queryParams("nombreMetodologiaSeleccionado").isEmpty() ? null
 							: req.queryParams("nombreMetodologiaSeleccionado");
-			res.redirect("/metodologias/agregar/condiciones");
+			res.redirect("/metodologias/nuevaCondicion");
 		} catch (Exception e) {
-			res.redirect("/indicadores/agregar");
+			res.redirect("/metodologias/nuevaMetodologia");
 		}
 		return null;
 	}
@@ -113,7 +99,7 @@ public class MetodologiaController extends Controller {
 		condicionesCreadas = new ArrayList<SnapshotCondicion>();
 		errorAgregarCondicion = null;
 		errorCrearMetodologia = null;
-		res.redirect("/metodologias/agregar/condiciones");
+		res.redirect("/metodologias/nuevaCondicion");
 		return null;
 	}
 
@@ -132,7 +118,7 @@ public class MetodologiaController extends Controller {
 			res.redirect("/metodologias");
 		} catch (Exception e) {
 			res.cookie("errorCrearMetodologia", "Error al crear la metodologia: " + e.getMessage(), 5);
-			res.redirect("/metodologias/agregar/condiciones");
+			res.redirect("/metodologias/nuevaCondicion");
 		}
 		return null;
 	}
