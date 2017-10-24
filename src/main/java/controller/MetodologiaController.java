@@ -47,8 +47,9 @@ public class MetodologiaController extends Controller {
 		List<Metodologia> metodologiasObtenidas = RepositorioMetodologia.getSingletonInstance()
 				.allInstancesUser(autenticar(req, res));
 
-		HashMap<String, List<Metodologia>> mapMetodologias = new HashMap<>();
+		HashMap<String, Object> mapMetodologias = new HashMap<>();
 		mapMetodologias.put("metodologias", metodologiasObtenidas);
+		mapMetodologias.put("listaVacia", metodologiasObtenidas.isEmpty());
 
 		return new ModelAndView(mapMetodologias, "homePage/metodologias.hbs");
 	}
@@ -168,6 +169,7 @@ public class MetodologiaController extends Controller {
 		mapAMetod.put("tipoCondiciones", listaTiposCondiciones());
 		mapAMetod.put("indicadores", indicadores);
 		mapAMetod.put("condicionesCreadas", condicionesCreadas);
+		mapAMetod.put("condicionesCreadasEmpty", condicionesCreadas.isEmpty());
 		mapAMetod.put("nombreMetodologia", nombreMetodologiaSeleccionado);
 		mapAMetod.put("errorCrearMetodologia", errorCrearMetodologia);
 		mapAMetod.put("errorAgregarCondicion", errorAgregarCondicion);

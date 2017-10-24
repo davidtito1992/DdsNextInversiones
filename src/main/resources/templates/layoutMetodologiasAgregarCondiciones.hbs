@@ -124,6 +124,11 @@
 			            </tr>
 			            </thead>
 			            <tbody>
+			            {{#if condicionesCreadasEmpty}}
+				    	<td colspan="6">
+				    		Parece que no tienes ninguna condición cargada, llene el formulario y haga click en Agregar Condición para crear una. 
+				    	</td>
+	           			{{/if}}
 			            {{#each condicionesCreadas}}
 			                <tr>
 			                    <td>{{@index}}</td>

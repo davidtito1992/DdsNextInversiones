@@ -36,7 +36,7 @@ public class IndicadorController extends Controller{
 		List<SnapshotIndicador> snapshots = indicadorViewM
 				.allSnapshotIndicadores(autenticar(req,res));
 		mapIndicadores.put("snapshots", snapshots);
-		
+		mapIndicadores.put("listaVacia", snapshots.isEmpty());
 		mapIndicadores.put("errorAgregar", req.cookie("errorAgregarIndicador"));
 		
 

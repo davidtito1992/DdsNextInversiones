@@ -12,6 +12,11 @@
                 </tr>
                 </thead>
                 <tbody>
+	            {{#if listaVacia}}
+			    	<td colspan="4">
+			    		Oops! Parece que no tiene indicadores cargados, haga click en Agregar nuevo para crear uno.
+			    	</td>
+	            {{/if}}
                 {{#each indicadores}}
                 <tr>
                     <td>{{@index}}</td>
@@ -52,6 +57,11 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {{#if listaVacia}}
+			    	<td colspan="6">
+			    		No hay datos para mostrar.
+			    	</td>
+	            	{{/if}}
                     {{#each snapshots}}
                     <tr>
                         <td>{{@index}}</td>

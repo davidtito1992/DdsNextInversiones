@@ -2,6 +2,7 @@ package controller;
 
 import main.repositories.RepositorioEmpresa;
 import model.Empresa;
+import model.SnapshotEmpresa;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -42,9 +43,11 @@ public class EmpresaController extends Controller {
 				? RepositorioEmpresa.getInstance().filtrar(cuentaSeleccionada, nombreSeleccionado, semestreSeleccionado, anioSeleccionado,
 						idUsuario)
 				: new ArrayList<>();
+		List<SnapshotEmpresa> empresas = RepositorioEmpresa.getInstance().dameSnapshotEmpresas(empresasPorFiltros, nombreSeleccionado,
+				cuentaSeleccionada, anioSeleccionado, semestreSeleccionado);
 
-		mapEmpresas.put("empresas", RepositorioEmpresa.getInstance().dameSnapshotEmpresas(empresasPorFiltros, nombreSeleccionado,
-				cuentaSeleccionada, anioSeleccionado, semestreSeleccionado));
+		mapEmpresas.put("empresas", empresas);
+		mapEmpresas.put("listaVacia", empresas.isEmpty());
 		mapEmpresas.put("nombresCuentas",
 				RepositorioEmpresa.getInstance().todosLosNombresDeCuentas(todasLasEmpresasDelUsuario));
 		mapEmpresas.put("nombresEmpresas",

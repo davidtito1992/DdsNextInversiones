@@ -11,6 +11,11 @@
                 </tr>
                 </thead>
                 <tbody>
+                {{#if listaVacia}}
+			    	<td colspan="4">
+			    		Oops! Parece que no tienes metodologías creadas, haga click en Agregar nueva para crear una.
+			    	</td>
+	           	{{/if}}
                 {{#each metodologias}}
                 <tr>
                     <td>{{@index}}</td>
