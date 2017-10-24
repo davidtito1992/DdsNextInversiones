@@ -12,11 +12,16 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 
-public class LoginController {
+public class LoginController extends Controller{
 
 	
 	public static ModelAndView home(Request req, Response res) {
-		return new ModelAndView(null, "login/login.hbs");
+		if(!estaLogueado(req)){
+			return new ModelAndView(null, "login/login.hbs");
+		}else{
+			res.redirect("/empresas");
+			return new ModelAndView(null, "login/login.hbs");
+		}
 	}
 	
 	public Void login(Request req, Response res) {
@@ -44,5 +49,10 @@ public class LoginController {
 			res.redirect("/");
 		}
 		return null;
+	}
+	
+	public static ModelAndView logout(Request req, Response res){
+		res.removeCookie("authenticationToken");
+		return new ModelAndView(null, "login/login.hbs");
 	}
 }

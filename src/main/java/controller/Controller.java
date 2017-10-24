@@ -36,4 +36,24 @@ public class Controller {
 		}
 		return idUsuario;
 	}
+	
+	public static boolean estaLogueado(Request req){
+		String token = req.cookie("authenticationToken");
+		try {
+			Algorithm algorithm = Algorithm.HMAC256("secret");
+			JWTVerifier verifier = JWT.require(algorithm).withIssuer("auth0").build(); // Reusable verifier instance
+			verifier.verify(token);
+			DecodedJWT jwtDecoded = JWT.decode(token);
+			jwtDecoded.getClaim("userId");
+			return true;
+		} catch (JWTDecodeException exception) {
+			return false;
+		} catch (UnsupportedEncodingException exception) {
+			return false;
+		} catch (JWTVerificationException exception) {
+			return false;
+		} catch (NullPointerException exception) {
+			return false;
+		}
+	}
 }

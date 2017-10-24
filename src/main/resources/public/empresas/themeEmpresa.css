@@ -2155,7 +2155,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   padding-right: 0;
   padding-left: 0;
   border-radius: 0; }
-
+  
 .list-group {
   display: flex;
   flex-direction: column;

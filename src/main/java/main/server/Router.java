@@ -25,6 +25,9 @@ public class Router {
 		// Email - Password
 		Spark.get("/", LoginController::home, engine);
 		Spark.post("/login", loginController::login);
+		
+		// Logout
+		Spark.get("/cerrarSesion", LoginController::logout, engine);
 
 		// Empresas
 		Spark.get("/empresas", EmpresaController::home, engine);
