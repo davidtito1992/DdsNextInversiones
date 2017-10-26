@@ -17,15 +17,11 @@ public class Router {
 
 		staticFileLocation("/public");
 
-		LoginController loginController = new LoginController();
-		IndicadorController indicadorController = new IndicadorController();
-		MetodologiaController metodologiaController = new MetodologiaController();
-
 		// Login
 		// Email - Password
 		Spark.get("/", LoginController::home, engine);
-		Spark.post("/login", loginController::login);
-		
+		Spark.post("/login", LoginController::login);
+
 		// Logout
 		Spark.get("/cerrarSesion", LoginController::logout, engine);
 
@@ -34,21 +30,19 @@ public class Router {
 
 		// Indicadores
 		Spark.get("/indicadores", IndicadorController::home, engine);
-		Spark.post("/indicadores/nuevoIndicador", indicadorController::agregar);
-		Spark.post("/indicadores/baja/:indicadorId", indicadorController::delete);
+		Spark.post("/indicadores/nuevoIndicador", IndicadorController::agregar);
+		Spark.post("/indicadores/baja/:indicadorId", IndicadorController::delete);
 		Spark.get("/indicadores/nuevoIndicador", IndicadorController::agregarView, engine);
-
-
 
 		// Metodologias
 		Spark.get("/metodologias", MetodologiaController::home, engine);
-		Spark.post("/metodologias/baja/:metodologiaId", metodologiaController::delete);
+		Spark.post("/metodologias/baja/:metodologiaId", MetodologiaController::delete);
 		Spark.get("/metodologias/consultas/:metodologiaId", MetodologiaController::consultarView, engine);
 		Spark.get("/metodologias/nuevaMetodologia", MetodologiaController::agregarNombreView, engine);
-		Spark.post("/metodologias/nuevaMetodologia", metodologiaController::agregarNombre);
+		Spark.post("/metodologias/nuevaMetodologia", MetodologiaController::agregarNombre);
 		Spark.get("/metodologias/nuevaCondicion", MetodologiaController::agregarCondicionesView, engine);
-		Spark.post("/metodologias/nuevaCondicion", metodologiaController::agregarMetodologia);
-		Spark.post("/metodologias/condicionesReset", metodologiaController::reiniciar);
+		Spark.post("/metodologias/nuevaCondicion", MetodologiaController::agregarMetodologia);
+		Spark.post("/metodologias/condicionesReset", MetodologiaController::reiniciar);
 
 	}
 }

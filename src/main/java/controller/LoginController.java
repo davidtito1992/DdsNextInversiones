@@ -24,7 +24,7 @@ public class LoginController extends Controller{
 		}
 	}
 	
-	public Void login(Request req, Response res) {
+	public static Void login(Request req, Response res) {
 		String user = req.queryParams("email");
 		User usuario = RepositorioUsuario.getSingletonInstance().getUser(user);
 		if (usuario != null) {

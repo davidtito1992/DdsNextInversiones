@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class MetodologiaController extends Controller {
@@ -43,7 +42,7 @@ public class MetodologiaController extends Controller {
 
 	public static ModelAndView home(Request req, Response res) {
 		autenticar(req, res);
-		
+
 		List<Metodologia> metodologiasObtenidas = RepositorioMetodologia.getSingletonInstance()
 				.allInstancesUser(autenticar(req, res));
 
@@ -63,7 +62,7 @@ public class MetodologiaController extends Controller {
 	public static ModelAndView agregarCondicionesView(Request req, Response res) {
 		errorAgregarCondicion = null;
 		autenticar(req, res);
-		
+
 		recuperoParametrosCondicion(req);
 		agregarCondicionCreada();
 
@@ -86,7 +85,7 @@ public class MetodologiaController extends Controller {
 
 	// ---------------------------Metodos POST---------------------------//
 
-	public Void agregarNombre(Request req, Response res) {
+	public static Void agregarNombre(Request req, Response res) {
 		try {
 			nombreMetodologiaSeleccionado = Objects.isNull(req.queryParams("nombreMetodologiaSeleccionado"))
 					|| req.queryParams("nombreMetodologiaSeleccionado").isEmpty() ? null
@@ -98,7 +97,7 @@ public class MetodologiaController extends Controller {
 		return null;
 	}
 
-	public Void reiniciar(Request req, Response res) {
+	public static Void reiniciar(Request req, Response res) {
 		condicionesCreadas = new ArrayList<SnapshotCondicion>();
 		errorAgregarCondicion = null;
 		errorCrearMetodologia = null;
@@ -106,7 +105,7 @@ public class MetodologiaController extends Controller {
 		return null;
 	}
 
-	public Void agregarMetodologia(Request req, Response res) {
+	public static Void agregarMetodologia(Request req, Response res) {
 		try {
 			List<Condicion> condiciones = new ArrayList<Condicion>();
 			condicionesCreadas.stream()
@@ -126,7 +125,7 @@ public class MetodologiaController extends Controller {
 		return null;
 	}
 
-	public Void delete(Request req, Response res) {
+	public static Void delete(Request req, Response res) {
 		String idMetodologia = req.params("metodologiaId");
 		RepositorioMetodologia.getSingletonInstance().eliminar(Long.parseLong(idMetodologia));
 		res.redirect("/metodologias");
@@ -163,7 +162,8 @@ public class MetodologiaController extends Controller {
 	}
 
 	public static HashMap<String, Object> mapeoCondiciones(Long idUsuario) {
-		ArrayList<String> indicadores = repoInd.allInstancesUser(idUsuario).stream().map(indicador -> indicador.getNombre()).collect(Collectors.toCollection(ArrayList::new));
+		ArrayList<String> indicadores = repoInd.allInstancesUser(idUsuario).stream()
+				.map(indicador -> indicador.getNombre()).collect(Collectors.toCollection(ArrayList::new));
 		HashMap<String, Object> mapAMetod = new HashMap<>();
 		mapAMetod.put("condiciones", listaCondiciones());
 		mapAMetod.put("tipoCondiciones", listaTiposCondiciones());
