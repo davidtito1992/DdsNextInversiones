@@ -33,126 +33,128 @@
         <div class="row">
             <div class="col-md-12">
                 <h3>Agregar Metodología</h3>
-        	</div>
+            </div>
         </div>
         
         <div class="row">
             <div class="col-md-12 text-danger">
                 <h4>{{errorCrearMetodologia}} {{errorAgregarCondicion}}</h4>
-        	</div>
+            </div>
         </div>
         
         <div class="row">
             <div class="col-md-12">
                 <h2>Nombre de metodologia: {{nombreMetodologia}}</h2>
-        	</div>
+            </div>
         </div>
         
+        <div class="col-sm-12">
+            <form action="/metodologias/nuevaCondicion">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Indicadores</label>
+                    <div class="col-sm-5">
+                        <select name="indicadorSeleccionado" class="form-control" id="inlineFormCustomSelect">
+                            <option selected></option>
+                            {{#each indicadores}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Tipo de Condicion</label>
+                    <div class="col-sm-5">
+                        <select name="tipoCondicionSeleccionado" class="form-control" id="inlineFormCustomSelect">
+                            <option selected></option>
+                            {{#each tipoCondiciones}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Condicion</label>
+                    <div class="col-sm-5">
+                        <select name="condicionSeleccionada" class="form-control" id="inlineFormCustomSelect">
+                            <option selected></option>
+                            {{#each condiciones}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Peso/Comparar</label>
+                    <div class="col-sm-5">
+                        <input type="number" name="pesoOCompararSeleccionado" class="form-control" placeholder="Ingrese un valor numerico" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Ultimos años</label>
+                    <div class="col-sm-5">
+                        <input type="number" name="ultimosAniosSeleccionado" class="form-control" placeholder="Ingrese un valor numerico" required>
+                    </div>
+                </div>
+                  
+                <div class="row">
+                    <div class="btn-group col-md-3" role="group">
+                        <input type="submit" name="agregarView" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar Condición">
+                    </div>
+                </div>
+            </form>
+            <form action="/metodologias/condicionesReset" method=POST>
+                <div class="btn-group col-md-3" role="group">
+                    <input type="submit" name="reiniciar" class="btn btn-block btn-sm text-center my-3 btn-danger" value="Reiniciar Condiciones">
+                </div>
+                 <div class="btn-group col-md-3" role="group">
+                    <a class="btn btn-block btn-sm text-center my-3 btn-secondary" href="/metodologias/nuevaMetodologia">Atrás</a>
+                </div>
+            </form>
+        </div>  
+        
         <div class="col-sm-10">
-	        <form action="/metodologias/nuevaCondicion">
-	       		<div class="form-group row">
-	            	<label class="col-sm-2 col-form-label">Indicadores</label>
-	            	<div class="col-sm-5">
-	            		<select name="indicadorSeleccionado" class="form-control" id="inlineFormCustomSelect">
-	            			<option selected></option>
-	            			{{#each indicadores}}
-	        					<option value="{{this}}">{{this}}</option>
-	        				{{/each}}
-	     				</select>
-	     			</div>
-				</div>
-	       		<div class="form-group row">
-	            	<label class="col-sm-2 col-form-label">Tipo de Condicion</label>
-	            	<div class="col-sm-5">
-	            		<select name="tipoCondicionSeleccionado" class="form-control" id="inlineFormCustomSelect">
-	            			<option selected></option>
-	            			{{#each tipoCondiciones}}
-	        					<option value="{{this}}">{{this}}</option>
-	        				{{/each}}
-	     				</select>
-	     			</div>
-				</div>
-				<div class="form-group row">
-	            	<label class="col-sm-2 col-form-label">Condicion</label>
-	            	<div class="col-sm-5">
-	            		<select name="condicionSeleccionada" class="form-control" id="inlineFormCustomSelect">
-	            			<option selected></option>
-	            			{{#each condiciones}}
-	        					<option value="{{this}}">{{this}}</option>
-	        				{{/each}}
-	     				</select>
-	     			</div>
-				</div>
-				<div class="form-group row">
-	            	<label class="col-sm-2 col-form-label">Peso/Comparar</label>
-	            	<div class="col-sm-5">
-	            		<input type="number" name="pesoOCompararSeleccionado" class="form-control" placeholder="Ingrese un valor numerico" required>
-	     			</div>
-				</div>
-				<div class="form-group row">
-	            	<label class="col-sm-2 col-form-label">Ultimos años</label>
-	            	<div class="col-sm-5">
-	            		<input type="number" name="ultimosAniosSeleccionado" class="form-control" placeholder="Ingrese un valor numerico" required>
-	     			</div>
-				</div>
-	     		  
-	     		<div class="row">
-		        	<div class="btn-group col-md-3" role="group">
-						<input type="submit" name="agregarView" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar Condición">
-		    		</div>
-		        </div>
-	        </form>
-	        <form action="/metodologias/condicionesReset" method=POST>
-	        	<div class="btn-group col-md-3" role="group">
-	        		<input type="submit" name="reiniciar" class="btn btn-block btn-sm text-center my-3 btn-danger" value="Reiniciar Condiciones">
-	 				<a class="btn btn-block btn-sm text-center my-3 btn-secondary" href="/metodologias/nuevaMetodologia">Atrás</a>
-	 			</div>
-	 		</form>
-	 	</div>  
-	 	
-	 	<div class="col-sm-10">
-	 		<div class="row">
-			    <div class="col-md-12" style="">
-			        <table class="table">
-			            <thead>
-			            <tr>
-			                <th class="table-active">#</th>
-			                <th class="table-active">Indicador</th>
-			                <th class="table-active">Tipo de Condicion</th>
-			                <th class="table-active">Condicion</th>
-			                <th class="table-active">Peso/Comparar</th>
-			                <th class="table-active">Ultimos Años</th>
-			            </tr>
-			            </thead>
-			            <tbody>
-			            {{#if condicionesCreadasEmpty}}
-				    	<td colspan="6">
-				    		Parece que no tienes ninguna condición cargada, llene el formulario y haga click en Agregar Condición para crear una. 
-				    	</td>
-	           			{{/if}}
-			            {{#each condicionesCreadas}}
-			                <tr>
-			                    <td>{{@index}}</td>
-			                    <td>{{this.indicador}}</td>
-			                    <td>{{this.tipoCondicion}}</td>
-			                    <td>{{this.nombreCondicion}}</td>
-			                    <td>{{this.pesoOComparar}}</td>
-			                    <td>{{this.anios}}</td>
-			                </tr>
-			            {{/each}}
-			            </tbody>
-			        </table>
-			    </div>
-			</div>
-	 	</div>
-	 	
-	 	<form action="/metodologias/nuevaCondicion" method=POST>
-	 		<div class="row">
-				<div class="btn-group col-md-12" role="group">
-					<input type="submit" name="agregarMetodologia" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar Metodologia">
-		    	</div>
-			</div>
-		</form>
+            <div class="row">
+                <div class="col-md-12" style="">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="table-active">#</th>
+                            <th class="table-active">Indicador</th>
+                            <th class="table-active">Tipo de Condicion</th>
+                            <th class="table-active">Condicion</th>
+                            <th class="table-active">Peso/Comparar</th>
+                            <th class="table-active">Ultimos Años</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#if condicionesCreadasEmpty}}
+                        <td colspan="6">
+                            Parece que no tienes ninguna condición cargada, llene el formulario y haga click en Agregar Condición para crear una. 
+                        </td>
+                        {{/if}}
+                        {{#each condicionesCreadas}}
+                            <tr>
+                                <td>{{@index}}</td>
+                                <td>{{this.indicador}}</td>
+                                <td>{{this.tipoCondicion}}</td>
+                                <td>{{this.nombreCondicion}}</td>
+                                <td>{{this.pesoOComparar}}</td>
+                                <td>{{this.anios}}</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <form action="/metodologias/nuevaCondicion" method=POST>
+            <div class="row">
+                <div class="btn-group col-md-12" role="group">
+                    <input type="submit" name="agregarMetodologia" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar Metodologia">
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 
