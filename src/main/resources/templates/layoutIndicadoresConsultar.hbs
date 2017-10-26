@@ -43,7 +43,7 @@
           <p class="lead">Indicador seleccionado:&nbsp;</p>
         </div>
         <div class="col-md-6">
-          <p class="lead"></p>
+          <p class="lead">{{snapshots.0.registroIndicador.nombre}}</p>
         </div>
       </div>
       <div class="row">
@@ -51,25 +51,6 @@
           <p class="lead text-success">Resultados</p>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Empresa</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Facebook</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="row"></div>
       <div class="row">
         <div class="col-md-12">
           <table class="table">
@@ -86,7 +67,6 @@
                 {{#each snapshots}}
                 <tr>
                     <td>{{@index}}</td>
-                    <td>{{this.registroIndicador.nombre}}</td>
                     <td>{{this.nombreEmpresa}}</td>
                     <td>{{this.anio}}</td>
                     <td>{{this.semestre}}</td>

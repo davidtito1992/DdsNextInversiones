@@ -68,4 +68,19 @@ public class IndicadorController extends Controller {
 		return null;
 	}
 
+	public static ModelAndView consultarView(Request req, Response res) {
+
+		SnapshotIndicadorConverter snapshotIndicadorConverter = new SnapshotIndicadorConverter();
+		HashMap<String, Object> mapIndicadores = new HashMap<>();
+
+		RegistroIndicador indicador = RepositorioIndicador.getSingletonInstance()
+				.buscar(Long.parseLong(req.params("indicadorId")));
+
+		List<SnapshotIndicador> snapshots = snapshotIndicadorConverter.snapshotsOf(autenticar(req, res), indicador);
+		mapIndicadores.put("snapshots", snapshots);
+
+		return new ModelAndView(mapIndicadores, "layoutIndicadoresConsultar.hbs");
+
+	}
+
 }

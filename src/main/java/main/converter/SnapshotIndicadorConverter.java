@@ -21,6 +21,13 @@ public class SnapshotIndicadorConverter {
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
+	public List<SnapshotIndicador> snapshotsOf(Long idUser, RegistroIndicador indicador) {
+		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(idUser);
+		List<SnapshotIndicador> snapshots = new ArrayList<SnapshotIndicador>();
+		snapshots.addAll(resultadosIndicadores(indicador, empresas));
+		return snapshots.stream().distinct().collect(Collectors.toList());
+	}
+
 	public List<SnapshotIndicador> allSnapshotIndicadores(Long idUser) {
 
 		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(idUser);

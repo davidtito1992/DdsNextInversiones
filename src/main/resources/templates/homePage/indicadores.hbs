@@ -9,6 +9,7 @@
                     <th class="table-active">Indicador</th>
                     <th class="table-active">Fórmula</th>
                     <th class="table-active"></th>
+                    <th class="table-active"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,7 @@
                     <td>{{@index}}</td>
                     <td>{{this.nombre}}</td>
                     <td>{{this.formula}}</td>
+                    <td> <a class="btn btn-secondary btn-sm btn-block" href="/indicadores/consultas/{{url}}">Consultar</a></td>
                     {{#if puedeSerBorrado}}
                     	<td>
                     		<form action="/indicadores/baja/{{url}}" method="POST">

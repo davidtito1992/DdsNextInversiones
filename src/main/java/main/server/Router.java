@@ -33,6 +33,7 @@ public class Router {
 		Spark.post("/indicadores/nuevoIndicador", IndicadorController::agregar);
 		Spark.post("/indicadores/baja/:indicadorId", IndicadorController::delete);
 		Spark.get("/indicadores/nuevoIndicador", IndicadorController::agregarView, engine);
+		Spark.get("/indicadores/consultas/:indicadorId", IndicadorController::consultarView, engine);
 
 		// Metodologias
 		Spark.get("/metodologias", MetodologiaController::home, engine);
