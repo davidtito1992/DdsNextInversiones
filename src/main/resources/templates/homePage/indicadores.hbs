@@ -37,45 +37,6 @@
             </table>
         </div>
     </div>
-    
-    <div class="row">
-            <div class="col-md-12" style="">
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="lead">Resultados</p>
-                    </div>
-                </div>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th class="table-active">#</th>
-                        <th class="table-active">Indicador</th>
-                        <th class="table-active">Empresa</th>
-                        <th class="table-active">Año</th>
-                        <th class="table-active">Semestre</th>
-                        <th class="table-success">Resultado</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{#if listaVacia}}
-			    	<td colspan="6">
-			    		No hay datos para mostrar.
-			    	</td>
-	            	{{/if}}
-                    {{#each snapshots}}
-                    <tr>
-                        <td>{{@index}}</td>
-                        <td>{{this.registroIndicador.nombre}}</td>
-                        <td>{{this.nombreEmpresa}}</td>
-                        <td>{{this.anio}}</td>
-                        <td>{{this.semestre}}</td>
-                        <td class="">{{this.resultado}}</td>
-                    </tr>
-                    {{/each}}
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
 {{/partial}}
 {{>layoutIndicadores.hbs}}
