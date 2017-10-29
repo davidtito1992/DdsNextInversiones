@@ -19,7 +19,8 @@ public class Controller {
 		String token = req.cookie("authenticationToken");
 		try {
 			Algorithm algorithm = Algorithm.HMAC256("secret");
-			JWTVerifier verifier = JWT.require(algorithm).withIssuer("auth0").build(); // Reusable verifier instance
+			JWTVerifier verifier = JWT.require(algorithm).withIssuer("auth0")
+					.build(); // Reusable verifier instance
 			verifier.verify(token);
 			DecodedJWT jwtDecoded = JWT.decode(token);
 			Claim claim = jwtDecoded.getClaim("userId");
@@ -36,12 +37,13 @@ public class Controller {
 		}
 		return idUsuario;
 	}
-	
-	public static boolean estaLogueado(Request req){
+
+	public static boolean estaLogueado(Request req) {
 		String token = req.cookie("authenticationToken");
 		try {
 			Algorithm algorithm = Algorithm.HMAC256("secret");
-			JWTVerifier verifier = JWT.require(algorithm).withIssuer("auth0").build(); // Reusable verifier instance
+			JWTVerifier verifier = JWT.require(algorithm).withIssuer("auth0")
+					.build(); // Reusable verifier instance
 			verifier.verify(token);
 			DecodedJWT jwtDecoded = JWT.decode(token);
 			jwtDecoded.getClaim("userId");

@@ -7,27 +7,35 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class IndicadorController extends Controller {
+public class IndicadorController {
 
 	public IndicadorController() {
 	}
 
 	public static ModelAndView home(Request req, Response res) {
-		autenticar(req, res);
-		Map<String,Object> mapIndicadores = IndicadorService.homeView(autenticar(req, res), req.cookie("errorAgregarIndicador"));
+		Controller.autenticar(req, res);
+		Map<String, Object> mapIndicadores = IndicadorService.homeView(
+				Controller.autenticar(req, res),
+				req.cookie("errorAgregarIndicador"));
 		return new ModelAndView(mapIndicadores, "homePage/indicadores.hbs");
 	}
 
 	public static ModelAndView agregarView(Request req, Response res) {
-		autenticar(req, res);
+		Controller.autenticar(req, res);
 		return new ModelAndView(null, "homePage/nuevoIndicador.hbs");
 	}
 
 	public static Void agregar(Request req, Response res) {
 		try {
-			IndicadorService.agregar(req.queryParams("nombre"), req.queryParams("formula"), autenticar(req, res));
+			IndicadorService
+					.agregar(req.queryParams("nombre"),
+							req.queryParams("formula"),
+							Controller.autenticar(req, res));
 		} catch (Exception e) {
-			res.cookie("errorAgregarIndicador", "No se pudo guardar el indicador: '" + e.getMessage() + "'", 5);
+			res.cookie(
+					"errorAgregarIndicador",
+					"No se pudo guardar el indicador: '" + e.getMessage() + "'",
+					5);
 		}
 		res.redirect("/indicadores");
 		return null;
@@ -41,9 +49,10 @@ public class IndicadorController extends Controller {
 
 	public static ModelAndView consultarView(Request req, Response res) {
 
-		Map<String, Object> mapIndicadores = IndicadorService.consultarView(req.params("indicadorId"),
-				autenticar(req, res));
-		return new ModelAndView(mapIndicadores, "layoutIndicadoresConsultar.hbs");
+		Map<String, Object> mapIndicadores = IndicadorService.consultarView(
+				req.params("indicadorId"), Controller.autenticar(req, res));
+		return new ModelAndView(mapIndicadores,
+				"layoutIndicadoresConsultar.hbs");
 
 	}
 

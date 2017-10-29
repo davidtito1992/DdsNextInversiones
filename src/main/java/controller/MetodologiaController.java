@@ -7,35 +7,41 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class MetodologiaController extends Controller {
+public class MetodologiaController {
 
 	public static ModelAndView home(Request req, Response res) {
-		autenticar(req, res);
-		Map<String, Object> mapMetodologias = MetodologiaService.homeView(autenticar(req, res));
+		Controller.autenticar(req, res);
+		Map<String, Object> mapMetodologias = MetodologiaService
+				.homeView(Controller.autenticar(req, res));
 		return new ModelAndView(mapMetodologias, "homePage/metodologias.hbs");
 	}
 
 	public static ModelAndView agregarNombreView(Request req, Response res) {
-		autenticar(req, res);
+		Controller.autenticar(req, res);
 		return new ModelAndView(null, "layoutMetodologiasAgregarNombre.hbs");
 	}
 
 	public static ModelAndView agregarCondicionesView(Request req, Response res) {
-		autenticar(req, res);
+		Controller.autenticar(req, res);
 
-		MetodologiaService.agregarCondicion(req.cookie("errorCrearMetodologia"),
-				req.queryParams("indicadorSeleccionado"), req.queryParams("tipoCondicionSeleccionado"),
-				req.queryParams("condicionSeleccionada"), req.queryParams("pesoOCompararSeleccionado"),
+		MetodologiaService.agregarCondicion(
+				req.cookie("errorCrearMetodologia"),
+				req.queryParams("indicadorSeleccionado"),
+				req.queryParams("tipoCondicionSeleccionado"),
+				req.queryParams("condicionSeleccionada"),
+				req.queryParams("pesoOCompararSeleccionado"),
 				req.queryParams("ultimosAniosSeleccionado"));
-		Map<String, Object> condiciones = MetodologiaService.mapeoCondiciones(autenticar(req, res));
+		Map<String, Object> condiciones = MetodologiaService
+				.mapeoCondiciones(Controller.autenticar(req, res));
 
-		return new ModelAndView(condiciones, "layoutMetodologiasAgregarCondiciones.hbs");
+		return new ModelAndView(condiciones,
+				"layoutMetodologiasAgregarCondiciones.hbs");
 	}
 
 	public static ModelAndView consultarView(Request req, Response res) {
-		autenticar(req, res);
-		Map<String, Object> metodologias = MetodologiaService.consultarView(autenticar(req, res),
-				req.params("metodologiaId"));
+		Controller.autenticar(req, res);
+		Map<String, Object> metodologias = MetodologiaService.consultarView(
+				Controller.autenticar(req, res), req.params("metodologiaId"));
 		return new ModelAndView(metodologias, "layoutMetodologiasConsultar.hbs");
 	}
 
@@ -43,7 +49,8 @@ public class MetodologiaController extends Controller {
 
 	public static Void agregarNombre(Request req, Response res) {
 		try {
-			MetodologiaService.verificarNombreMetodologia(req.queryParams("nombreMetodologiaSeleccionado"));
+			MetodologiaService.verificarNombreMetodologia(req
+					.queryParams("nombreMetodologiaSeleccionado"));
 			res.redirect("/metodologias/nuevaCondicion");
 		} catch (Exception e) {
 			res.redirect("/metodologias/nuevaMetodologia");
@@ -59,10 +66,12 @@ public class MetodologiaController extends Controller {
 
 	public static Void agregarMetodologia(Request req, Response res) {
 		try {
-			MetodologiaService.agregarMetodologia(autenticar(req, res));
+			MetodologiaService.agregarMetodologia(Controller.autenticar(req,
+					res));
 			res.redirect("/metodologias");
 		} catch (Exception e) {
-			res.cookie("errorCrearMetodologia", "Error al crear la metodologia: " + e.getMessage(), 5);
+			res.cookie("errorCrearMetodologia",
+					"Error al crear la metodologia: " + e.getMessage(), 5);
 			res.redirect("/metodologias/nuevaCondicion");
 		}
 		return null;
