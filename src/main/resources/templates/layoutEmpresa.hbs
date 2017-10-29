@@ -38,16 +38,18 @@
             	<div class="col-md-4">
             		<h6>Empresa</h6>
             		<select name="nombreEmpresa" class="form-control" id="inlineFormCustomSelect">
-            			<option selected></option>
+            			<option selected>{{empresaSeleccionada}}</option>
+            			<option value=""></option>
             			{{#each nombresEmpresas}}
-        					<option value="{{this}}">{{this}}</option>
+    						<option value="{{this}}">{{this}}</option>
         				{{/each}}
      				</select>
      			</div>
             	<div class="col-md-4">
             	    <h6>Cuenta</h6>
             		<select name="nombreCuenta" class="form-control" id="inlineFormCustomSelect">
-            			<option selected></option>
+            			<option selected>{{cuentaSeleccionada}}</option>
+            			<option value=""></option>
             			{{#each nombresCuentas}}
         					<option value="{{this}}">{{this}}</option>
         				{{/each}}
@@ -56,7 +58,8 @@
             	<div class="col-md-2">
             		<h6>Año</h6>
             		<select name="anio" class="form-control" id="inlineFormCustomSelect">
-            			<option selected></option>
+            			<option selected>{{anioSeleccionado}}</option>
+            			<option value=""></option>
             			{{#each anios}}
         					<option value="{{this}}">{{this}}</option>
         				{{/each}}
@@ -65,7 +68,8 @@
             	<div class="col-md-1">
             		<h6>Semestre</h6>
             		<select name="semestre" class="form-control" id="inlineFormCustomSelect">
-            			<option selected></option>
+            			<option selected>{{semestreSeleccionado}}</option>
+            			<option value=""></option>
             			{{#each periodos}}
         					<option value="{{this}}">{{this}}</option>
         				{{/each}}

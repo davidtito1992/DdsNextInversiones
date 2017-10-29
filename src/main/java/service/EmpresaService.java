@@ -32,6 +32,10 @@ public class EmpresaService {
 				RepositorioEmpresa.getInstance().todosLosNombresDeEmpresas(todasLasEmpresasDelUsuario));
 		mapEmpresas.put("anios", RepositorioEmpresa.getInstance().todosLosAnios(todasLasEmpresasDelUsuario));
 		mapEmpresas.put("periodos", RepositorioEmpresa.getInstance().todosLosPeriodos(todasLasEmpresasDelUsuario));
+		mapEmpresas.put("empresaSeleccionada",nombreSeleccionado);
+		mapEmpresas.put("cuentaSeleccionada",cuentaSeleccionada);
+		mapEmpresas.put("anioSeleccionado",anioSeleccionado);
+		mapEmpresas.put("semestreSeleccionado",semestreSeleccionado);
 
 		return mapEmpresas;
 	}
