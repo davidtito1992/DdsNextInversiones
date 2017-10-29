@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Map;
 
+import main.app.Token;
 import service.MetodologiaService;
 import spark.ModelAndView;
 import spark.Request;
@@ -10,19 +11,19 @@ import spark.Response;
 public class MetodologiaController {
 
 	public static ModelAndView home(Request req, Response res) {
-		Controller.autenticar(req, res);
+		Token.autenticar(req, res);
 		Map<String, Object> mapMetodologias = MetodologiaService
-				.homeView(Controller.autenticar(req, res));
+				.homeView(Token.autenticar(req, res));
 		return new ModelAndView(mapMetodologias, "homePage/metodologias.hbs");
 	}
 
 	public static ModelAndView agregarNombreView(Request req, Response res) {
-		Controller.autenticar(req, res);
+		Token.autenticar(req, res);
 		return new ModelAndView(null, "layoutMetodologiasAgregarNombre.hbs");
 	}
 
 	public static ModelAndView agregarCondicionesView(Request req, Response res) {
-		Controller.autenticar(req, res);
+		Token.autenticar(req, res);
 
 		MetodologiaService.agregarCondicion(
 				req.cookie("errorCrearMetodologia"),
@@ -32,16 +33,16 @@ public class MetodologiaController {
 				req.queryParams("pesoOCompararSeleccionado"),
 				req.queryParams("ultimosAniosSeleccionado"));
 		Map<String, Object> condiciones = MetodologiaService
-				.mapeoCondiciones(Controller.autenticar(req, res));
+				.mapeoCondiciones(Token.autenticar(req, res));
 
 		return new ModelAndView(condiciones,
 				"layoutMetodologiasAgregarCondiciones.hbs");
 	}
 
 	public static ModelAndView consultarView(Request req, Response res) {
-		Controller.autenticar(req, res);
+		Token.autenticar(req, res);
 		Map<String, Object> metodologias = MetodologiaService.consultarView(
-				Controller.autenticar(req, res), req.params("metodologiaId"));
+				Token.autenticar(req, res), req.params("metodologiaId"));
 		return new ModelAndView(metodologias, "layoutMetodologiasConsultar.hbs");
 	}
 
@@ -66,7 +67,7 @@ public class MetodologiaController {
 
 	public static Void agregarMetodologia(Request req, Response res) {
 		try {
-			MetodologiaService.agregarMetodologia(Controller.autenticar(req,
+			MetodologiaService.agregarMetodologia(Token.autenticar(req,
 					res));
 			res.redirect("/metodologias");
 		} catch (Exception e) {

@@ -1,4 +1,4 @@
-package controller;
+package main.app;
 
 import java.io.UnsupportedEncodingException;
 
@@ -13,7 +13,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import spark.Request;
 import spark.Response;
 
-public class Controller {
+public class Token {
 	public static Long autenticar(Request req, Response res) {
 		Long idUsuario = null;
 		String token = req.cookie("authenticationToken");
@@ -58,4 +58,13 @@ public class Controller {
 			return false;
 		}
 	}
+
+	public static String getToken(Long userId) throws IllegalArgumentException,
+			UnsupportedEncodingException {
+
+		Algorithm algorithm = Algorithm.HMAC256("secret");
+		return JWT.create().withIssuer("auth0").withClaim("userId", userId)
+				.sign(algorithm);
+	}
+
 }

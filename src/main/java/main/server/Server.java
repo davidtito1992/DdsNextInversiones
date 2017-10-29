@@ -9,7 +9,7 @@ public class Server {
 
 		System.out.println("Iniciando servidor...");
 
-		Spark.port(8088);
+		Spark.port(8080);
 		DebugScreen.enableDebugScreen();
 		Router.configure();
 
