@@ -1,27 +1,17 @@
 package main.server;
 
-import main.app.AppData;
 import spark.Spark;
 import spark.debug.DebugScreen;
 
-import java.io.IOException;
-
 public class Server {
-    static AppData appData = new AppData();
 
-    public static void main() throws IOException {
-        Spark.port(8080);
+	public static void main(String[] args) {
+		
+	    System.out.println("Iniciando servidor...");
+		
+	    Spark.port(8088);
+		DebugScreen.enableDebugScreen();
+		Router.configure();
 
-        try {
-            appData.cargarUsuarios();
-            appData.cargarEmpresas();
-            appData.cargarIndicadores();
-            appData.cargarMetodologias();
-            DebugScreen.enableDebugScreen();
-            Router.configure();
-        } catch (Exception e) {
-            System.out.println("ERROR");
-            e.printStackTrace();
-        }
-    }
+	}
 }
