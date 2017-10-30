@@ -66,23 +66,22 @@ public class MetodologiaController {
 
 	public static Void reiniciar(Request req, Response res) {
 		MetodologiaService.reiniciar();
-		res.redirect("/metodologias/nuevaCondicion");
+		res.redirect("/metodologias/nuevaCondicion/" + req.params("nombreMetodologia"));
 		return null;
 	}
 
 	public static Void agregarMetodologia(Request req, Response res) {
+		String nombreMetodologia = Objects.isNull(req.params("nombreMetodologia"))
+				|| req.params("nombreMetodologia")
+						.isEmpty() ? null : req.params("nombreMetodologia");
 		try {
-			String nombreMetodologia = Objects.isNull(req.params("nombreMetodologia"))
-					|| req.params("nombreMetodologia")
-							.isEmpty() ? null : req.params("nombreMetodologia");
-			
 			MetodologiaService.agregarMetodologia(Token.autenticar(req,
 					res), nombreMetodologia);
 			res.redirect("/metodologias");
 		} catch (Exception e) {
 			res.cookie("errorCrearMetodologia",
 					"Error al crear la metodologia: " + e.getMessage(), 5);
-			res.redirect("/metodologias/nuevaCondicion");
+			res.redirect("/metodologias/nuevaCondicion/" + nombreMetodologia);
 		}
 		return null;
 	}

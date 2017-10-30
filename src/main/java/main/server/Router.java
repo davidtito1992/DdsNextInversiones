@@ -43,7 +43,7 @@ public class Router {
 		Spark.post("/metodologias/nuevaMetodologia", MetodologiaController::agregarNombre);
 		Spark.get("/metodologias/nuevaCondicion/:nombreMetodologia", MetodologiaController::agregarCondicionesView, engine);
 		Spark.post("/metodologias/nuevaCondicion/:nombreMetodologia", MetodologiaController::agregarMetodologia);
-		Spark.post("/metodologias/condicionesReset", MetodologiaController::reiniciar);
+		Spark.post("/metodologias/condicionesReset/:nombreMetodologia", MetodologiaController::reiniciar);
 
 	}
 }
