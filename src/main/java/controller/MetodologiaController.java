@@ -24,7 +24,8 @@ public class MetodologiaController {
 
 	public static ModelAndView agregarCondicionesView(Request req, Response res) {
 		Token.autenticar(req, res);
-
+		
+		String aaa = req.queryParams("nombreMetodologia");
 		MetodologiaService.agregarCondicion(
 				req.cookie("errorCrearMetodologia"),
 				req.queryParams("indicadorSeleccionado"),

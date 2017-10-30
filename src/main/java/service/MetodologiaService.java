@@ -22,32 +22,14 @@ import model.SnapshotRankingEmpresa;
 public class MetodologiaService {
 
 	static String nombreMetodologiaSeleccionado;
-	static String indicadorSeleccionado;
-	static String tipoCondicionSeleccionado;
-	static String condicionSeleccionada;
-	static BigDecimal pesoOCompararSeleccionado;
-	static int ultimosAniosSeleccionado;
 	static List<SnapshotCondicion> condicionesCreadas = new ArrayList<SnapshotCondicion>();
-	static RepositorioIndicador repoInd = RepositorioIndicador.getSingletonInstance();
-	static String errorCrearMetodologia;
-	static String errorAgregarCondicion;
-
-	public static void recuperoParametrosCondicion(String cookie, String indicador, String tipoCondicion,
-			String condicion, String pesoOComparar, String ultimosAnios) {
-
-		errorCrearMetodologia = cookie;
-
-		indicadorSeleccionado = Objects.isNull(indicador) || indicador.isEmpty() ? null : indicador;
-		tipoCondicionSeleccionado = Objects.isNull(tipoCondicion) || tipoCondicion.isEmpty() ? null : tipoCondicion;
-		condicionSeleccionada = Objects.isNull(condicion) || condicion.isEmpty() ? null : condicion;
-		pesoOCompararSeleccionado = Objects.isNull(pesoOComparar) || pesoOComparar.isEmpty() ? null
-				: BigDecimal.valueOf(Long.parseLong(pesoOComparar));
-		ultimosAniosSeleccionado = Objects.isNull(ultimosAnios) || ultimosAnios.isEmpty() ? 0
-				: Integer.parseInt(ultimosAnios);
-	}
+//	static String errorCrearMetodologia;
+//	static String errorAgregarCondicion;
 
 	@SuppressWarnings("static-access")
-	public static void validar() throws RuntimeException {
+	public static void validar(String indicadorSeleccionado, String condicionSeleccionada, 
+			String tipoCondicionSeleccionado, BigDecimal pesoOCompararSeleccionado, int ultimosAniosSeleccionado) 
+					throws RuntimeException {
 
 		if (condicionSeleccionada.equals(CondicionesBuilder.ANTIGUEDAD))
 			indicadorSeleccionado = CondicionesBuilder.VACIARINDICADOR;
@@ -114,31 +96,25 @@ public class MetodologiaService {
 	}
 
 	public static HashMap<String, Object> mapeoCondiciones(Long idUsuario) {
-		ArrayList<String> indicadores = repoInd.allInstancesUser(idUsuario).stream()
+		ArrayList<String> indicadores = RepositorioIndicador.getSingletonInstance().allInstancesUser(idUsuario).stream()
 				.map(indicador -> indicador.getNombre()).collect(Collectors.toCollection(ArrayList::new));
 		HashMap<String, Object> mapAMetod = new HashMap<>();
 		mapAMetod.put("condiciones", listaCondiciones());
 		mapAMetod.put("tipoCondiciones", listaTiposCondiciones());
 		mapAMetod.put("indicadores", indicadores);
-		mapAMetod.put("condicionesCreadas", condicionesCreadas);
+		mapAMetod.put("condicionesCreadas", crearListaCondiciones());
 		mapAMetod.put("condicionesCreadasEmpty", condicionesCreadas.isEmpty());
 		mapAMetod.put("nombreMetodologia", nombreMetodologiaSeleccionado);
-		mapAMetod.put("errorCrearMetodologia", errorCrearMetodologia);
-		mapAMetod.put("errorAgregarCondicion", errorAgregarCondicion);
+//		mapAMetod.put("errorCrearMetodologia", errorCrearMetodologia);
+//		mapAMetod.put("errorAgregarCondicion", errorAgregarCondicion);
 		return mapAMetod;
 	}
-
-	public static void agregarCondicionCreada() {
-		try {
-			validar();
-			condicionesCreadas.add(new SnapshotCondicion(tipoCondicionSeleccionado, condicionSeleccionada,
-					indicadorSeleccionado, pesoOCompararSeleccionado, ultimosAniosSeleccionado));
-		} catch (RuntimeException e) {
-			if (!(Objects.isNull(condicionSeleccionada) && Objects.isNull(indicadorSeleccionado)
-					&& Objects.isNull(tipoCondicionSeleccionado) && ultimosAniosSeleccionado == 0
-					&& Objects.isNull(pesoOCompararSeleccionado)))
-				errorAgregarCondicion = "La ultima condicion ingresada no cumple las validaciones necesarias. Intentelo nuevamente.";
-		}
+	
+	public static List<SnapshotCondicion> crearListaCondiciones(){
+		List<SnapshotCondicion> lCond = new ArrayList<SnapshotCondicion>();
+		//las tiene que agarrar de la lista que esta en la vista y meterlas en lCond,
+		//y ademas sumar la nueva de los combos e inputs
+		return lCond;
 	}
 
 	public static HashMap<String, Object> homeView(Long usuarioId) {
@@ -153,8 +129,26 @@ public class MetodologiaService {
 
 	public static void agregarCondicion(String cookie, String indicador, String tipoCondicion, String condicion,
 			String peso, String anios) {
-		recuperoParametrosCondicion(cookie, indicador, tipoCondicion, condicion, peso, anios);
-		agregarCondicionCreada();
+		//String errorCrearMetodologia = cookie;
+
+		String indicadorSeleccionado = Objects.isNull(indicador) || indicador.isEmpty() ? null : indicador;
+		String tipoCondicionSeleccionado = Objects.isNull(tipoCondicion) || tipoCondicion.isEmpty() ? null : tipoCondicion;
+		String condicionSeleccionada = Objects.isNull(condicion) || condicion.isEmpty() ? null : condicion;
+		BigDecimal pesoOCompararSeleccionado = Objects.isNull(peso) || peso.isEmpty() ? null
+				: BigDecimal.valueOf(Long.parseLong(peso));
+		int ultimosAniosSeleccionado = Objects.isNull(anios) || anios.isEmpty() ? 0
+				: Integer.parseInt(anios);
+		try {
+			validar(indicadorSeleccionado,condicionSeleccionada,
+					tipoCondicionSeleccionado,pesoOCompararSeleccionado,ultimosAniosSeleccionado);
+			condicionesCreadas.add(new SnapshotCondicion(tipoCondicionSeleccionado, condicionSeleccionada,
+					indicadorSeleccionado, pesoOCompararSeleccionado, ultimosAniosSeleccionado));
+		} catch (RuntimeException e) {
+//			if (!(Objects.isNull(condicionSeleccionada) && Objects.isNull(indicadorSeleccionado)
+//					&& Objects.isNull(tipoCondicionSeleccionado) && ultimosAniosSeleccionado == 0
+//					&& Objects.isNull(pesoOCompararSeleccionado)))
+//				errorAgregarCondicion = "La ultima condicion ingresada no cumple las validaciones necesarias. Intentelo nuevamente.";
+		}
 
 	}
 
@@ -175,8 +169,8 @@ public class MetodologiaService {
 
 	public static void reiniciar() {
 		condicionesCreadas = new ArrayList<SnapshotCondicion>();
-		errorAgregarCondicion = null;
-		errorCrearMetodologia = null;
+//		errorAgregarCondicion = null;
+//		errorCrearMetodologia = null;
 	}
 
 	public static void eliminar(String idMetodologia) {
@@ -187,7 +181,7 @@ public class MetodologiaService {
 		List<Condicion> condiciones = new ArrayList<Condicion>();
 		condicionesCreadas.stream()
 				.forEach(snapshotCondicion -> condiciones.add(new CondicionesBuilder().crear(snapshotCondicion)));
-		Metodologia metodologia = new Metodologia(nombreMetodologiaSeleccionado, condiciones,
+		Metodologia metodologia = new Metodologia(nombreMetodologiaSeleccionado, condiciones, 
 				RepositorioUsuario.getSingletonInstance().buscar(usuarioId));
 		RepositorioMetodologia.getSingletonInstance().agregar(metodologia);
 
