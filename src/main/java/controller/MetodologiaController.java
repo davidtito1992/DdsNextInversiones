@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.Map;
+import java.util.Objects;
 
 import main.app.Token;
 import service.MetodologiaService;
@@ -25,16 +26,16 @@ public class MetodologiaController {
 	public static ModelAndView agregarCondicionesView(Request req, Response res) {
 		Token.autenticar(req, res);
 		
-		String aaa = req.queryParams("nombreMetodologia");
 		MetodologiaService.agregarCondicion(
 				req.cookie("errorCrearMetodologia"),
 				req.queryParams("indicadorSeleccionado"),
 				req.queryParams("tipoCondicionSeleccionado"),
 				req.queryParams("condicionSeleccionada"),
 				req.queryParams("pesoOCompararSeleccionado"),
-				req.queryParams("ultimosAniosSeleccionado"));
+				req.queryParams("ultimosAniosSeleccionado"),
+				req.params("nombreMetodologia"));
 		Map<String, Object> condiciones = MetodologiaService
-				.mapeoCondiciones(Token.autenticar(req, res));
+				.mapeoCondiciones(Token.autenticar(req, res), req.params("nombreMetodologia"));
 
 		return new ModelAndView(condiciones,
 				"layoutMetodologiasAgregarCondiciones.hbs");
@@ -51,9 +52,12 @@ public class MetodologiaController {
 
 	public static Void agregarNombre(Request req, Response res) {
 		try {
-			MetodologiaService.verificarNombreMetodologia(req
-					.queryParams("nombreMetodologiaSeleccionado"));
-			res.redirect("/metodologias/nuevaCondicion");
+			String nombreMetodologia = Objects.isNull(req
+					.queryParams("nombreMetodologiaSeleccionado"))
+					|| req.queryParams("nombreMetodologiaSeleccionado")
+							.isEmpty() ? null : req
+					.queryParams("nombreMetodologiaSeleccionado");
+			res.redirect("/metodologias/nuevaCondicion/" + nombreMetodologia);
 		} catch (Exception e) {
 			res.redirect("/metodologias/nuevaMetodologia");
 		}
@@ -68,8 +72,12 @@ public class MetodologiaController {
 
 	public static Void agregarMetodologia(Request req, Response res) {
 		try {
+			String nombreMetodologia = Objects.isNull(req.params("nombreMetodologia"))
+					|| req.params("nombreMetodologia")
+							.isEmpty() ? null : req.params("nombreMetodologia");
+			
 			MetodologiaService.agregarMetodologia(Token.autenticar(req,
-					res));
+					res), nombreMetodologia);
 			res.redirect("/metodologias");
 		} catch (Exception e) {
 			res.cookie("errorCrearMetodologia",

@@ -21,7 +21,6 @@ import model.SnapshotRankingEmpresa;
 
 public class MetodologiaService {
 
-	static String nombreMetodologiaSeleccionado;
 	static List<SnapshotCondicion> condicionesCreadas = new ArrayList<SnapshotCondicion>();
 //	static String errorCrearMetodologia;
 //	static String errorAgregarCondicion;
@@ -95,7 +94,7 @@ public class MetodologiaService {
 		return mapConsultaMetodologias;
 	}
 
-	public static HashMap<String, Object> mapeoCondiciones(Long idUsuario) {
+	public static HashMap<String, Object> mapeoCondiciones(Long idUsuario, String nombreMetodologia) {
 		ArrayList<String> indicadores = RepositorioIndicador.getSingletonInstance().allInstancesUser(idUsuario).stream()
 				.map(indicador -> indicador.getNombre()).collect(Collectors.toCollection(ArrayList::new));
 		HashMap<String, Object> mapAMetod = new HashMap<>();
@@ -104,7 +103,7 @@ public class MetodologiaService {
 		mapAMetod.put("indicadores", indicadores);
 		mapAMetod.put("condicionesCreadas", crearListaCondiciones());
 		mapAMetod.put("condicionesCreadasEmpty", condicionesCreadas.isEmpty());
-		mapAMetod.put("nombreMetodologia", nombreMetodologiaSeleccionado);
+		mapAMetod.put("nombreMetodologia", nombreMetodologia);
 //		mapAMetod.put("errorCrearMetodologia", errorCrearMetodologia);
 //		mapAMetod.put("errorAgregarCondicion", errorAgregarCondicion);
 		return mapAMetod;
@@ -128,7 +127,7 @@ public class MetodologiaService {
 	}
 
 	public static void agregarCondicion(String cookie, String indicador, String tipoCondicion, String condicion,
-			String peso, String anios) {
+			String peso, String anios, String nombreMetodologia) {
 		//String errorCrearMetodologia = cookie;
 
 		String indicadorSeleccionado = Objects.isNull(indicador) || indicador.isEmpty() ? null : indicador;
@@ -163,10 +162,6 @@ public class MetodologiaService {
 		return mapeoConsultarMetodologia(contrMet);
 	}
 
-	public static void verificarNombreMetodologia(String nombre) throws Exception {
-		nombreMetodologiaSeleccionado = Objects.isNull(nombre) || nombre.isEmpty() ? null : nombre;
-	}
-
 	public static void reiniciar() {
 		condicionesCreadas = new ArrayList<SnapshotCondicion>();
 //		errorAgregarCondicion = null;
@@ -177,16 +172,15 @@ public class MetodologiaService {
 		RepositorioMetodologia.getSingletonInstance().eliminar(Long.parseLong(idMetodologia));
 	}
 
-	public static void agregarMetodologia(Long usuarioId) {
+	public static void agregarMetodologia(Long usuarioId, String nombreMetodologia) {
 		List<Condicion> condiciones = new ArrayList<Condicion>();
 		condicionesCreadas.stream()
 				.forEach(snapshotCondicion -> condiciones.add(new CondicionesBuilder().crear(snapshotCondicion)));
-		Metodologia metodologia = new Metodologia(nombreMetodologiaSeleccionado, condiciones, 
+		Metodologia metodologia = new Metodologia(nombreMetodologia, condiciones, 
 				RepositorioUsuario.getSingletonInstance().buscar(usuarioId));
 		RepositorioMetodologia.getSingletonInstance().agregar(metodologia);
 
 		condicionesCreadas = new ArrayList<SnapshotCondicion>();
-		nombreMetodologiaSeleccionado = null;
 
 	}
 
