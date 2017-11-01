@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import main.app.Token;
+import service.IndicadorService;
 import service.MetodologiaService;
 import spark.ModelAndView;
 import spark.Request;
@@ -33,9 +34,9 @@ public class MetodologiaController {
 				req.queryParams("condicionSeleccionada"),
 				req.queryParams("pesoOCompararSeleccionado"),
 				req.queryParams("ultimosAniosSeleccionado"),
-				req.params("nombreMetodologia"));
+				req.queryParams("nombreMetodologia"));
 		Map<String, Object> condiciones = MetodologiaService
-				.mapeoCondiciones(Token.autenticar(req, res), req.params("nombreMetodologia"));
+				.mapeoCondiciones(Token.autenticar(req, res), req.queryParams("nombreMetodologia"),req.cookie("Notificacion"));
 
 		return new ModelAndView(condiciones,
 				"layoutMetodologiasAgregarCondiciones.hbs");
@@ -66,7 +67,7 @@ public class MetodologiaController {
 
 	public static Void reiniciar(Request req, Response res) {
 		MetodologiaService.reiniciar();
-		res.redirect("/metodologias/nuevaCondicion/" + req.params("nombreMetodologia"));
+		res.redirect("/metodologias/nuevaCondicion");
 		return null;
 	}
 
@@ -74,16 +75,22 @@ public class MetodologiaController {
 		String nombreMetodologia = Objects.isNull(req.params("nombreMetodologia"))
 				|| req.params("nombreMetodologia")
 						.isEmpty() ? null : req.params("nombreMetodologia");
+
+		System.out.println( req.params("nombreMetodologia"));
 		try {
 			MetodologiaService.agregarMetodologia(Token.autenticar(req,
-					res), nombreMetodologia);
-			res.redirect("/metodologias");
+					res), req.params("nombreMetodologia"));
+			res.cookie("Notificacion",
+					"Metodologia :"+  req.params("nombreMetodologia")+ "creada exitosamente!", 5);	
+			
 		} catch (Exception e) {
-			res.cookie("errorCrearMetodologia",
-					"Error al crear la metodologia: " + e.getMessage(), 5);
-			res.redirect("/metodologias/nuevaCondicion/" + nombreMetodologia);
+			res.cookie("Notificacion",
+					"Error al crear la metodologia: " +  req.params("nombreMetodologia"), 5);
+		
 		}
-		return null;
+		res.redirect("/metodologias/nuevaCondicion");	
+		return null; 
+		
 	}
 
 	public static Void delete(Request req, Response res) {

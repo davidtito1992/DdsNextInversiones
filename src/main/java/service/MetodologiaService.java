@@ -94,7 +94,7 @@ public class MetodologiaService {
 		return mapConsultaMetodologias;
 	}
 
-	public static HashMap<String, Object> mapeoCondiciones(Long idUsuario, String nombreMetodologia) {
+	public static HashMap<String, Object> mapeoCondiciones(Long idUsuario, String nombreMetodologia,String cookie) {
 		ArrayList<String> indicadores = RepositorioIndicador.getSingletonInstance().allInstancesUser(idUsuario).stream()
 				.map(indicador -> indicador.getNombre()).collect(Collectors.toCollection(ArrayList::new));
 		HashMap<String, Object> mapAMetod = new HashMap<>();
@@ -104,8 +104,8 @@ public class MetodologiaService {
 		mapAMetod.put("condicionesCreadas", crearListaCondiciones());
 		mapAMetod.put("condicionesCreadasEmpty", condicionesCreadas.isEmpty());
 		mapAMetod.put("nombreMetodologia", nombreMetodologia);
-//		mapAMetod.put("errorCrearMetodologia", errorCrearMetodologia);
-//		mapAMetod.put("errorAgregarCondicion", errorAgregarCondicion);
+		mapAMetod.put("Notificacion", cookie);
+	//	mapAMetod.put("errorAgregarCondicion", errorAgregarCondicion);
 		return mapAMetod;
 	}
 	
