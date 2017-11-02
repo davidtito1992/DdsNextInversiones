@@ -34,7 +34,8 @@ public class MetodologiaController {
 				req.queryParams("condicionSeleccionada"),
 				req.queryParams("pesoOCompararSeleccionado"),
 				req.queryParams("ultimosAniosSeleccionado"),
-				req.queryParams("nombreMetodologia"));
+				req.queryParams("nombreMetodologia"),
+				req.queryParams("JSONCondiciones"));
 		Map<String, Object> condiciones = MetodologiaService
 				.mapeoCondiciones(Token.autenticar(req, res), req.queryParams("nombreMetodologia"),req.cookie("Notificacion"));
 

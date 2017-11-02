@@ -6,9 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 
 import main.condiciones.Condicion;
 import main.condiciones.CondicionesBuilder;
+import main.dataManagment.dataLoader.GsonFactory;
 import main.rankingEmpresa.RankingEmpresa;
 import main.repositories.RepositorioEmpresa;
 import main.repositories.RepositorioIndicador;
@@ -127,7 +130,7 @@ public class MetodologiaService {
 	}
 
 	public static void agregarCondicion(String cookie, String indicador, String tipoCondicion, String condicion,
-			String peso, String anios, String nombreMetodologia) {
+			String peso, String anios, String nombreMetodologia, String JSONCondiciones){
 		//String errorCrearMetodologia = cookie;
 
 		String indicadorSeleccionado = Objects.isNull(indicador) || indicador.isEmpty() ? null : indicador;
@@ -138,17 +141,40 @@ public class MetodologiaService {
 		int ultimosAniosSeleccionado = Objects.isNull(anios) || anios.isEmpty() ? 0
 				: Integer.parseInt(anios);
 		try {
+			List<SnapshotCondicion> condicionesCreadas = snapshotCondicionDesdeJSON(JSONCondiciones);
 			validar(indicadorSeleccionado,condicionSeleccionada,
 					tipoCondicionSeleccionado,pesoOCompararSeleccionado,ultimosAniosSeleccionado);
 			condicionesCreadas.add(new SnapshotCondicion(tipoCondicionSeleccionado, condicionSeleccionada,
 					indicadorSeleccionado, pesoOCompararSeleccionado, ultimosAniosSeleccionado));
+			String JSONCondicionesNuevo = crearJSONCondiciones(condicionesCreadas);
 		} catch (RuntimeException e) {
 //			if (!(Objects.isNull(condicionSeleccionada) && Objects.isNull(indicadorSeleccionado)
 //					&& Objects.isNull(tipoCondicionSeleccionado) && ultimosAniosSeleccionado == 0
 //					&& Objects.isNull(pesoOCompararSeleccionado)))
 //				errorAgregarCondicion = "La ultima condicion ingresada no cumple las validaciones necesarias. Intentelo nuevamente.";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
+	}
+	
+	public static String crearJSONCondiciones(List<SnapshotCondicion> condicionesCreadas){
+		String JSONCondiciones = "";
+		return JSONCondiciones;
+	}
+	
+	public static ArrayList<SnapshotCondicion> snapshotCondicionDesdeJSON(String snapshotCondiciones) throws Exception{
+		ArrayList<SnapshotCondicion> listaSnapshotCondicion = new ArrayList<SnapshotCondicion>();
+		try {
+			Type listType = new TypeToken<ArrayList<SnapshotCondicion>>() {
+			}.getType();
+			listaSnapshotCondicion = GsonFactory.getGson().fromJson(snapshotCondiciones, listType);
+
+		} catch (Exception e) {
+				throw new Exception("Hubo un error al recuperar las condiciones creadas. Debe ingresarlas nuevamente.");
+		}
+		return listaSnapshotCondicion;
 	}
 
 	public static HashMap<String, Object> consultarView(Long usuarioId, String metodologiaId) {
