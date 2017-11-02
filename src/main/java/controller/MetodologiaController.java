@@ -1,9 +1,11 @@
 package controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import main.app.Token;
+import model.SnapshotCondicion;
 import service.IndicadorService;
 import service.MetodologiaService;
 import spark.ModelAndView;
@@ -27,7 +29,7 @@ public class MetodologiaController {
 	public static ModelAndView agregarCondicionesView(Request req, Response res) {
 		Token.autenticar(req, res);
 		
-		MetodologiaService.agregarCondicion(
+		List<SnapshotCondicion> condicionesCreadas = MetodologiaService.agregarCondicion(
 				req.cookie("errorCrearMetodologia"),
 				req.queryParams("indicadorSeleccionado"),
 				req.queryParams("tipoCondicionSeleccionado"),
@@ -37,7 +39,7 @@ public class MetodologiaController {
 				req.queryParams("nombreMetodologia"),
 				req.queryParams("JSONCondiciones"));
 		Map<String, Object> condiciones = MetodologiaService
-				.mapeoCondiciones(Token.autenticar(req, res), req.queryParams("nombreMetodologia"),req.cookie("Notificacion"));
+				.mapeoCondiciones(Token.autenticar(req, res), req.queryParams("nombreMetodologia"),req.cookie("Notificacion"),condicionesCreadas);
 
 		return new ModelAndView(condiciones,
 				"layoutMetodologiasAgregarCondiciones.hbs");
@@ -80,7 +82,7 @@ public class MetodologiaController {
 		System.out.println( req.params("nombreMetodologia"));
 		try {
 			MetodologiaService.agregarMetodologia(Token.autenticar(req,
-					res), req.params("nombreMetodologia"));
+					res), req.params("nombreMetodologia"),req.queryParams("JSONCondiciones"));
 			res.cookie("Notificacion",
 					"Metodologia :"+  req.params("nombreMetodologia")+ "creada exitosamente!", 5);	
 			
