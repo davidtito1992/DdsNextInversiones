@@ -143,11 +143,11 @@ public class MetodologiaService {
 		int ultimosAniosSeleccionado = Objects.isNull(anios) || anios.isEmpty() ? 0
 				: Integer.parseInt(anios);
 		try {
+			if (!(Objects.isNull(JSONCondicionesInput)))
+				condicionesCreadas = snapshotCondicionDesdeJSON(JSONCondicionesInput);
 			validar(indicadorSeleccionado,condicionSeleccionada,
 					tipoCondicionSeleccionado,pesoOCompararSeleccionado,ultimosAniosSeleccionado);
 			
-			if (!(Objects.isNull(JSONCondicionesInput)))
-				condicionesCreadas = snapshotCondicionDesdeJSON(JSONCondicionesInput);
 			condicionesCreadas.add(new SnapshotCondicion(tipoCondicionSeleccionado, condicionSeleccionada,
 					indicadorSeleccionado, pesoOCompararSeleccionado, ultimosAniosSeleccionado));
 			
