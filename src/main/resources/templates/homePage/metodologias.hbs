@@ -1,5 +1,6 @@
 {{#partial "contenido"}}
     <div class="row">
+
         <div class="col-md-12">
             <table class="table">
                 <thead>
@@ -23,8 +24,19 @@
                     <td> <a class="btn btn-secondary btn-sm btn-block" href="/metodologias/consultas/{{url}}">Consultar</a></td>
                     <td>
                     	<form action="/metodologias/baja/{{url}}" method="POST">
-                    		<button class="btn btn-danger" type="submit">Borrar</button>
+                    		<button class="btn btn-danger" type="submit" onclick="borrarMet()">Borrar</button>
                     	</form>
+                    	   <script type="text/javascript">
+    
+    function borrarMet() {
+       
+     alert("Metodologia borrada exitosamente!");
+      }
+      
+      
+  </script>
+                    	
+                    	
                     </td>
                 </tr>
                 {{/each}}

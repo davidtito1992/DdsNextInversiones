@@ -44,7 +44,7 @@
         </div>
         
         <div class="col-sm-12">
-            <form action="/metodologias/nuevaCondicion">
+            <form action="/metodologias/nuevaMetodologia">
                       	
              <div class="row">
     <div class="col-md-2">
@@ -114,22 +114,30 @@
                     </div>
                 </div>
             </form>
-            <form action="/metodologias/condicionesReset/{{nombreMetodologia}}" method=POST>
+            <form action="/metodologias/nuevaMetodologia" method=POST>
                 <div class="btn-group col-md-3" role="group">
-                    <input type="submit" name="reiniciar" class="btn btn-block btn-sm text-center my-3 btn-danger" value="Reiniciar Condiciones">
+                    <input type="submit" name="reiniciar" class="btn btn-block btn-sm text-center my-3 btn-danger" value="Reiniciar">
                 </div>
                  <div class="btn-group col-md-3" role="group">
-                    <a class="btn btn-block btn-sm text-center my-3 btn-secondary" href="/metodologias/nuevaMetodologia">Atrás</a>
+                    <a class="btn btn-block btn-sm text-center my-3 btn-secondary" href="/metodologias">Atrás</a>
                 </div>
             </form>
               
     <script type="text/javascript">
-
-    function actualizar() {
     
-      document.getElementsByName("nombreMetodologia")[0].setAttribute("value",document.getElementsByName("nombreMetodologia")[0].value);
+    function agregarMet(form) {
     
-      }
+     if(document.getElementsByName("nombreMetodologia")[0].value == null || document.getElementsByName("nombreMetodologia")[0].value=="") {
+     
+     alert("Ingrese un nombre de metodologia por favor");
+     return false;    
+      }       
+     
+      form.action="/metodologias/nuevaMetodologia/"+document.getElementsByName("nombreMetodologia")[0].value ;
+      return true ;  
+      
+    }  
+      
   </script>
             
         </div>  
@@ -170,10 +178,10 @@
             </div>
         </div>
         
-        <form action="/metodologias/nuevaCondicion/{{nombreMetodologia}}" method=POST>
+        <form onsubmit="return agregarMet(this);" method=POST>
             <div class="row">
                 <div class="btn-group col-md-12" role="group">
-                    <input type="submit" name="agregarMetodologia" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar Metodologia" onclick="actualizar()">
+                    <input type="submit" name="agregarMetodologia" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar Metodologia">
                 </div>
             </div>
         </form>
