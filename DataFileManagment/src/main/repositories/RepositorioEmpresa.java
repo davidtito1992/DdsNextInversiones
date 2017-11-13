@@ -3,7 +3,6 @@ package main.repositories;
 import model.Cuenta;
 import model.Empresa;
 import model.Periodo;
-import model.SnapshotEmpresa;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -68,30 +67,6 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 
 		return (List<Empresa>) criteria.setResultTransformer(
 				Criteria.DISTINCT_ROOT_ENTITY).list();
-	}
-	
-	public ArrayList<SnapshotEmpresa> dameSnapshotEmpresas(
-			List<Empresa> empresasASnap, String nombreSeleccionado, String cuentaSeleccionada, 
-			Year anioSeleccionado, Integer semestreSeleccionado) {
-		ArrayList<SnapshotEmpresa> listSnapshot = new ArrayList<SnapshotEmpresa>();
-		empresasASnap.forEach(empresa -> {
-			empresa.getPeriodos().forEach(periodo -> {
-				periodo.getCuentas().forEach(cuenta -> {
-					SnapshotEmpresa snapshotempresa = new SnapshotEmpresa();
-					snapshotempresa.setCuenta(cuenta.getNombre());
-					snapshotempresa.setValor(cuenta.getValor());
-					snapshotempresa.setNombre(empresa.getNombre());
-					snapshotempresa.setSemestre(periodo.getSemestre());
-					snapshotempresa.setAnio(periodo.getAnio());
-
-					if (agregarALista(empresa, periodo, cuenta, nombreSeleccionado, 
-							cuentaSeleccionada, anioSeleccionado, semestreSeleccionado)) {
-						listSnapshot.add(snapshotempresa);
-					}
-				});
-			});
-		});
-		return listSnapshot;
 	}
 
 	// FILTRA EMPRESA PARA NO MOSTRAR TODOS SUS DATOS SEGUN FILTROS

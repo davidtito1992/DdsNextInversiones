@@ -25,7 +25,7 @@ public abstract class Repository<T> {
 
 	public void cargarListaDeElementos(List<T> lista) {
 		EntityManagerHelper.beginTransaction();
-		lista.forEach(elem -> entityManager.persist(elem));
+		lista.forEach(elem -> entityManager.merge(elem));
 		EntityManagerHelper.commit();
 
 	}
