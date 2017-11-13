@@ -2,7 +2,8 @@ package main.app;
 
 import java.io.File;
 
-import main.dataManagment.dataLoader.FileLoader;
+import main.dataManagment.dataLoader.DataLoader;
+import main.dataManagment.dataLoader.DataLoaderFactory;
 import main.repositories.RepositorioEmpresa;
 
 public class DataFileManagement {
@@ -12,6 +13,7 @@ public class DataFileManagement {
 		System.out.println("Iniciando programa...");
 		
 		RepositorioEmpresa repoEmpresa = RepositorioEmpresa.getInstance();
+		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
 		
 		String AbsolutePath = new File(".").getAbsolutePath();
 		String directorioEmpresas = AbsolutePath + CARPETAEMPRESAS;
@@ -19,7 +21,7 @@ public class DataFileManagement {
 		if (f.exists()){  
 			File[] ficheros = f.listFiles();
 			for (int x=0;x<ficheros.length;x++){
-				repoEmpresa.cargarListaDeElementos(new FileLoader().getDataEmpresas(directorioEmpresas + ficheros[x].getName()));
+				repoEmpresa.cargarListaDeElementos(cargador.getDataEmpresas(directorioEmpresas + ficheros[x].getName()));
 			}
 		}
 		else { 
