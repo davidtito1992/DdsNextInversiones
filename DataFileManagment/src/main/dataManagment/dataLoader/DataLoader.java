@@ -6,6 +6,6 @@ import model.Empresa;
 
 public interface DataLoader {
 
-	public ArrayList<Empresa> getDataEmpresas() throws Exception;
+	public ArrayList<Empresa> getDataEmpresas(String nombreArchivo) throws Exception;
 
 }

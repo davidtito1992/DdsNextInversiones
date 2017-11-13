@@ -1,0 +1,238 @@
+[
+  {
+    "user": {
+      "email": "admin@dominio",
+     "password": "admin",
+      "userId": "1"
+    },
+    "empresaId": "1",
+    "nombre": "Facebook",
+    "periodos": [
+      {
+        "anio": "2016",
+        "semestre": "1",
+        "cuentas": [
+          {
+            "nombre": "EBITDA",
+            "valor": "1"
+          },
+          {
+            "nombre": "FDS",
+            "valor": "2"
+          },
+          {
+            "nombre": "FreeCashFlow",
+            "valor": "3"
+          },
+          {
+            "nombre": "NetoDiscontinuas",
+            "valor": "5"
+          },
+          {
+            "nombre": "NetoContinuas",
+            "valor": "6"
+          }
+        ]
+      },
+      {
+        "anio": "2016",
+        "semestre": "2",
+        "cuentas": [
+          {
+            "nombre": "EBITDA",
+            "valor": "6"
+          },
+          {
+            "nombre": "FDS",
+            "valor": "7"
+          },
+          {
+            "nombre": "FreeCashFlow",
+            "valor": "8"
+          },
+          {
+            "nombre": "NetoDiscontinuas",
+            "valor": "9"
+          },
+          {
+            "nombre": "NetoContinuas",
+            "valor": "10"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "Twitter",
+    "user": {
+      "email": "admin@dominio",
+     "password": "admin",
+      "userId": "1"
+    },
+    "empresaId": "2",
+    "periodos": [
+      {
+        "anio": "2015",
+        "semestre": "1",
+        "cuentas": [
+          {
+            "nombre": "EBITDA",
+            "valor": "6"
+          },
+          {
+            "nombre": "FDS",
+            "valor": "7"
+          },
+          {
+            "nombre": "FreeCashFlow",
+            "valor": "789"
+          }
+        ]
+      },
+      {
+        "anio": "2015",
+        "semestre": "2",
+        "cuentas": [
+          {
+            "nombre": "EBITDA",
+            "valor": "1"
+          },
+          {
+            "nombre": "FDS",
+            "valor": "2"
+          },
+          {
+            "nombre": "FreeCashFlow",
+            "valor": "123"
+          }
+        ]
+      }
+    ]
+  },
+  {
+  	"empresaId": "3",
+    "nombre": "Google",
+    "user": {
+      "email": "admin@dominio",
+      "password": "admin",
+      "userId": "1"
+    },
+    "periodos": [
+      {
+        "anio": "2014",
+        "semestre": "1",
+        "cuentas": [
+          {
+            "nombre": "EBITDA",
+            "valor": "10"
+          },
+          {
+            "nombre": "FDS",
+            "valor": "20"
+          },
+          {
+            "nombre": "FreeCashFlow",
+            "valor": "99999"
+          },
+          {
+            "nombre": "NetoDiscontinuas",
+            "valor": "99999"
+          },
+          {
+            "nombre": "NetoContinuas",
+            "valor": "99999"
+          }
+        ]
+      },
+      {
+        "anio": "2014",
+        "semestre": "2",
+        "cuentas": [
+          {
+            "nombre": "EBITDA",
+            "valor": "990"
+          },
+          {
+            "nombre": "FDS",
+            "valor": "5"
+          },
+          {
+            "nombre": "FreeCashFlow",
+            "valor": "99999"
+          },
+          {
+            "nombre": "NetoDiscontinuas",
+            "valor": "99999"
+          },
+          {
+            "nombre": "NetoContinuas",
+            "valor": "99999"
+          }
+        ]
+      }
+    ]
+  },
+  {
+  	"empresaId": "4",
+    "nombre": "McDonalds",
+    "user": {
+      "email": "rferro@dominio",
+      "password": "rferro",
+      "userId": "2"
+    },
+    "periodos": [
+      {
+        "anio": "2017",
+        "semestre": "1",
+        "cuentas": [
+          {
+            "nombre": "EBITDA",
+            "valor": "123"
+          },
+          {
+            "nombre": "FDS",
+            "valor": "321"
+          },
+          {
+            "nombre": "FreeCashFlow",
+            "valor": "456"
+          },
+          {
+            "nombre": "NetoDiscontinuas",
+            "valor": "645"
+          },
+          {
+            "nombre": "NetoContinuas",
+            "valor": "789"
+          }
+        ]
+      },
+      {
+        "anio": "2017",
+        "semestre": "2",
+        "cuentas": [
+          {
+            "nombre": "EBITDA",
+            "valor": "987"
+          },
+          {
+            "nombre": "FDS",
+            "valor": "789"
+          },
+          {
+            "nombre": "FreeCashFlow",
+            "valor": "654"
+          },
+          {
+            "nombre": "NetoDiscontinuas",
+            "valor": "456"
+          },
+          {
+            "nombre": "NetoContinuas",
+            "valor": "321"
+          }
+        ]
+      }
+    ]
+  }
+]

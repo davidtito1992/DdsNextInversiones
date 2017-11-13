@@ -37,9 +37,8 @@ public class FileLoader implements DataLoader {
 		}
 	}
 
-	public ArrayList<Empresa> getDataEmpresas() throws Exception {
-		String AbsolutePath = new File(".").getAbsolutePath();
-		String archivoEmpresas = readFile(AbsolutePath + "/empresas.json");
+	public ArrayList<Empresa> getDataEmpresas(String rutaArchivo) throws Exception {
+		String archivoEmpresas = readFile(rutaArchivo);
 
 		DataAdapter adaptador = DataAdapterFactory
 				.adaptarData(DataAdapterFactory.JSON);
