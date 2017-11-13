@@ -37,17 +37,14 @@ public class FileLoader implements DataLoader {
 		}
 	}
 
-	public ArrayList<Empresa> getDataEmpresas(String rutaArchivo) {
-		try {
-			String archivoEmpresas;
-			archivoEmpresas = readFile(rutaArchivo);
+	public ArrayList<Empresa> getDataEmpresas(String rutaArchivo)
+			throws Exception {
+		String archivoEmpresas;
+		archivoEmpresas = readFile(rutaArchivo);
 
-			DataAdapter adaptador = DataAdapterFactory
-					.adaptarData(DataAdapterFactory.JSON);
-			return adaptador.adaptarEmpresas(archivoEmpresas);
-		} catch (Exception e) {
-			return new ArrayList<Empresa>(); 
-		}
+		DataAdapter adaptador = DataAdapterFactory
+				.adaptarData(DataAdapterFactory.JSON);
+		return adaptador.adaptarEmpresas(archivoEmpresas);
 
 	}
 
