@@ -13,7 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-public abstract class Repository<T> {
+public class Repository<T> {
 
 	public Repository(Class<T> clazz) {
 		this.clazz = clazz;

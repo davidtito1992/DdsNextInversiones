@@ -39,12 +39,9 @@ public class FileLoader implements DataLoader {
 
 	public ArrayList<Empresa> getDataEmpresas(String rutaArchivo)
 			throws Exception {
-		String archivoEmpresas;
-		archivoEmpresas = readFile(rutaArchivo);
-
 		DataAdapter adaptador = DataAdapterFactory
 				.adaptarData(DataAdapterFactory.JSON);
-		return adaptador.adaptarEmpresas(archivoEmpresas);
+		return adaptador.adaptarEmpresas(readFile(rutaArchivo));
 
 	}
 
