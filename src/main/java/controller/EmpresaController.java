@@ -11,7 +11,6 @@ import spark.Response;
 public class EmpresaController {
 
 	public static ModelAndView home(Request req, Response res) {
-		TokenUtils.autenticar(req, res);
 		Map<String, Object> mapEmpresas = EmpresaService.homeView(
 				req.queryParams("nombreCuenta"),
 				req.queryParams("nombreEmpresa"), req.queryParams("anio"),

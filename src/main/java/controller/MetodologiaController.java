@@ -13,7 +13,6 @@ import spark.Response;
 public class MetodologiaController {
 
 	public static ModelAndView home(Request req, Response res) {
-		TokenUtils.autenticar(req, res);
 		Map<String, Object> mapMetodologias = MetodologiaService.homeView(
 				TokenUtils.autenticar(req, res));
 		return new ModelAndView(mapMetodologias, "homePage/metodologias.hbs");
@@ -25,8 +24,6 @@ public class MetodologiaController {
 	}
 
 	public static ModelAndView agregarCondicionesView(Request req, Response res) {
-		TokenUtils.autenticar(req, res);
-
 		List<SnapshotCondicion> condicionesCreadas = MetodologiaService
 				.agregarCondicion(req.cookie("errorCrearMetodologia"),
 						req.queryParams("indicadorSeleccionado"),
@@ -46,7 +43,6 @@ public class MetodologiaController {
 	}
 
 	public static ModelAndView consultarView(Request req, Response res) {
-		TokenUtils.autenticar(req, res);
 		Map<String, Object> metodologias = MetodologiaService.consultarView(
 				TokenUtils.autenticar(req, res), req.params("metodologiaId"));
 		return new ModelAndView(metodologias, "layoutMetodologiasConsultar.hbs");
