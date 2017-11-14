@@ -3,7 +3,7 @@ package controller;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import main.app.Token;
+import main.app.TokenUtils;
 import model.SnapshotCondicion;
 import service.MetodologiaService;
 import spark.ModelAndView;
@@ -13,19 +13,19 @@ import spark.Response;
 public class MetodologiaController {
 
 	public static ModelAndView home(Request req, Response res) {
-		Token.autenticar(req, res);
+		TokenUtils.autenticar(req, res);
 		Map<String, Object> mapMetodologias = MetodologiaService.homeView(
-				Token.autenticar(req, res));
+				TokenUtils.autenticar(req, res));
 		return new ModelAndView(mapMetodologias, "homePage/metodologias.hbs");
 	}
 
 	public static ModelAndView agregarNombreView(Request req, Response res) {
-		Token.autenticar(req, res);
+		TokenUtils.autenticar(req, res);
 		return new ModelAndView(null, "layoutMetodologiasAgregarNombre.hbs");
 	}
 
 	public static ModelAndView agregarCondicionesView(Request req, Response res) {
-		Token.autenticar(req, res);
+		TokenUtils.autenticar(req, res);
 
 		List<SnapshotCondicion> condicionesCreadas = MetodologiaService
 				.agregarCondicion(req.cookie("errorCrearMetodologia"),
@@ -37,7 +37,7 @@ public class MetodologiaController {
 						req.queryParams("nombreMetodologia"),
 						req.queryParams("JSONCondiciones"));
 		Map<String, Object> condiciones = MetodologiaService.mapeoCondiciones(
-				Token.autenticar(req, res),
+				TokenUtils.autenticar(req, res),
 				req.queryParams("nombreMetodologia"),
 				req.cookie("Notificacion"), condicionesCreadas);
 
@@ -46,9 +46,9 @@ public class MetodologiaController {
 	}
 
 	public static ModelAndView consultarView(Request req, Response res) {
-		Token.autenticar(req, res);
+		TokenUtils.autenticar(req, res);
 		Map<String, Object> metodologias = MetodologiaService.consultarView(
-				Token.autenticar(req, res), req.params("metodologiaId"));
+				TokenUtils.autenticar(req, res), req.params("metodologiaId"));
 		return new ModelAndView(metodologias, "layoutMetodologiasConsultar.hbs");
 	}
 
@@ -77,7 +77,7 @@ public class MetodologiaController {
 	public static Void agregarMetodologia(Request req, Response res) {
 
 		try {
-			MetodologiaService.agregarMetodologia(Token.autenticar(req, res),
+			MetodologiaService.agregarMetodologia(TokenUtils.autenticar(req, res),
 					req.params("nombreMetodologia"),
 					req.queryParams("JSONCondiciones"));
 			res.cookie("Notificacion",

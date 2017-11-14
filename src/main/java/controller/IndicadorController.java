@@ -2,7 +2,7 @@ package controller;
 
 import java.util.Map;
 
-import main.app.Token;
+import main.app.TokenUtils;
 import service.IndicadorService;
 import spark.ModelAndView;
 import spark.Request;
@@ -14,16 +14,14 @@ public class IndicadorController {
 	}
 
 	public static ModelAndView home(Request req, Response res) {
-		Token.autenticar(req, res);
-		Map<String, Object> mapIndicadores = IndicadorService.homeView(Token
+		Map<String, Object> mapIndicadores = IndicadorService.homeView(TokenUtils
 				.autenticar(req, res));
 		return new ModelAndView(mapIndicadores, "homePage/indicadores.hbs");
 	}
 
 	public static ModelAndView agregarView(Request req, Response res) {
-		Token.autenticar(req, res);
 		Map<String, Object> mapIndicadores = IndicadorService
-				.homeAgregarIndicador(Token.autenticar(req, res),
+				.homeAgregarIndicador(TokenUtils.autenticar(req, res),
 						req.cookie("Notificacion"));
 		return new ModelAndView(mapIndicadores, "homePage/nuevoIndicador.hbs");
 	}
@@ -31,7 +29,7 @@ public class IndicadorController {
 	public static Void agregar(Request req, Response res) {
 		try {
 			IndicadorService.agregar(req.queryParams("nombre"),
-					req.queryParams("formula"), Token.autenticar(req, res));
+					req.queryParams("formula"), TokenUtils.autenticar(req, res));
 			res.cookie("Notificacion",
 					"Indicador: '" + req.queryParams("nombre")
 							+ "' creado exitosamente", 5);
@@ -60,7 +58,7 @@ public class IndicadorController {
 	public static ModelAndView consultarView(Request req, Response res) {
 
 		Map<String, Object> mapIndicadores = IndicadorService.consultarView(
-				req.params("indicadorId"), Token.autenticar(req, res));
+				req.params("indicadorId"), TokenUtils.autenticar(req, res));
 		return new ModelAndView(mapIndicadores,
 				"layoutIndicadoresConsultar.hbs");
 

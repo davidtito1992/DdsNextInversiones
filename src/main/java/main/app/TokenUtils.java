@@ -10,10 +10,11 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class Token {
+public class TokenUtils {
 	public static Long autenticar(Request req, Response res) {
 		Long idUsuario = null;
 		String token = req.cookie("authenticationToken");
@@ -26,15 +27,10 @@ public class Token {
 			Claim claim = jwtDecoded.getClaim("userId");
 
 			idUsuario = claim.asLong();
-		} catch (JWTDecodeException exception) {
-			res.redirect("/");
-		} catch (UnsupportedEncodingException exception) {
-			res.redirect("/");
-		} catch (JWTVerificationException exception) {
-			res.redirect("/");
-		} catch (NullPointerException exception) {
+		} catch (UnsupportedEncodingException | JWTVerificationException | NullPointerException exception) {
 			res.redirect("/");
 		}
+		
 		return idUsuario;
 	}
 
@@ -48,13 +44,7 @@ public class Token {
 			DecodedJWT jwtDecoded = JWT.decode(token);
 			jwtDecoded.getClaim("userId");
 			return true;
-		} catch (JWTDecodeException exception) {
-			return false;
-		} catch (UnsupportedEncodingException exception) {
-			return false;
-		} catch (JWTVerificationException exception) {
-			return false;
-		} catch (NullPointerException exception) {
+		} catch (UnsupportedEncodingException | JWTVerificationException | NullPointerException exception) {
 			return false;
 		}
 	}
@@ -65,6 +55,11 @@ public class Token {
 		Algorithm algorithm = Algorithm.HMAC256("secret");
 		return JWT.create().withIssuer("auth0").withClaim("userId", userId)
 				.sign(algorithm);
+	}
+	
+	public static ModelAndView logout(Request req,Response res){
+		res.removeCookie("authenticationToken");
+		return new ModelAndView(null, "login/login.hbs");
 	}
 
 }
