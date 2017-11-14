@@ -26,11 +26,7 @@ import model.SnapshotCondicion;
 import model.SnapshotRankingEmpresa;
 
 public class MetodologiaService {
-
-	//static List<SnapshotCondicion> condicionesCreadas = new ArrayList<SnapshotCondicion>();
-//	static String errorCrearMetodologia;
-//	static String errorAgregarCondicion;
-
+	
 	@SuppressWarnings("static-access")
 	public static void validar(String indicadorSeleccionado, String condicionSeleccionada, 
 			String tipoCondicionSeleccionado, BigDecimal pesoOCompararSeleccionado, int ultimosAniosSeleccionado) 
