@@ -39,8 +39,6 @@ public class Router {
 		Spark.get("/metodologias", MetodologiaController::home, engine);
 		Spark.post("/metodologias/baja/:metodologiaId", MetodologiaController::delete);
 		Spark.get("/metodologias/consultas/:metodologiaId", MetodologiaController::consultarView, engine);
-	//	Spark.get("/metodologias/nuevaMetodologia", MetodologiaController::agregarNombreView, engine);
-	//	Spark.post("/metodologias/nuevaMetodologia", MetodologiaController::agregarNombre);
 		Spark.get("/metodologias/nuevaMetodologia", MetodologiaController::agregarCondicionesView, engine);
 		Spark.post("/metodologias/nuevaMetodologia/:nombreMetodologia", MetodologiaController::agregarMetodologia);
 		Spark.post("/metodologias/nuevaMetodologia", MetodologiaController::reiniciar);

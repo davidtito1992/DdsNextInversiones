@@ -29,8 +29,7 @@ public class LoginController {
 			if (usuario.getPassword().equals(req.queryParams("password"))) {
 				try {
 
-					res.cookie("authenticationToken",
-							TokenUtils.getToken(usuario.getUserId()));
+					res.cookie("authenticationToken", TokenUtils.getToken(usuario.getUserId()));
 				} catch (UnsupportedEncodingException | JWTCreationException exception) {
 					res.redirect("/");
 				}
