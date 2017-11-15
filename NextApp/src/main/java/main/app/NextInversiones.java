@@ -12,7 +12,7 @@ public class NextInversiones {
 		// // AplicacionContexto.getInstance().getInstanceRepoUsuarios();
 		// //
 		// new NextInversiones().start();
-        System.out.println("Inicia en modo Servidor!!!\nAlguien borro las vistas de arena!!\nDespues lo rastreamos ;)");
+		System.out.println("Inicia en modo Servidor!!!\nAlguien borro las vistas de arena!!\nDespues lo rastreamos ;)");
 	}
 	// //
 	// // // @Override

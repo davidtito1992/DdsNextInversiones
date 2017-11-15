@@ -6,71 +6,63 @@ import java.util.List;
 
 import main.app.AppData;
 import main.app.DslIndicador;
-import main.converter.SnapshotIndicadorConverter;
+import main.dataManagment.dataLoader.JsonAdapter;
 import main.repositories.RepositorioIndicador;
 import main.repositories.RepositorioUsuario;
 import model.RegistroIndicador;
 import model.SnapshotIndicador;
+import redis.clients.jedis.Jedis;
 
 public class IndicadorService {
 
-	public static HashMap<String, Object> consultarView(String indicadorId,
-			Long usuarioId) {
-		SnapshotIndicadorConverter snapshotIndicadorConverter = new SnapshotIndicadorConverter();
+	private static Jedis jedisCache = new Jedis();
+
+	public static HashMap<String, Object> consultarView(String indicadorId, Long usuarioId) {
+
 		HashMap<String, Object> mapIndicadores = new HashMap<>();
+		String nombreIndicador = RepositorioIndicador.getSingletonInstance().buscar(Long.parseLong(indicadorId))
+				.getNombre();
 
-		RegistroIndicador indicador = RepositorioIndicador
-				.getSingletonInstance().buscar(Long.parseLong(indicadorId));
-
-		List<SnapshotIndicador> snapshots = snapshotIndicadorConverter
-				.snapshotsOf(usuarioId, indicador);
-		mapIndicadores.put("snapshots", snapshots);
-
+		mapIndicadores.put("snapshots", getIndicadoresPrecalculados(nombreIndicador));
 		return mapIndicadores;
 	}
 
 	public static void delete(String indicadorId) {
 		AppData appData = new AppData();
-		RegistroIndicador aBorrar = RepositorioIndicador.getSingletonInstance()
-				.buscar(Long.parseLong(indicadorId));
+		RegistroIndicador aBorrar = RepositorioIndicador.getSingletonInstance().buscar(Long.parseLong(indicadorId));
 		appData.borrarIndicador(aBorrar);
 	}
 
-	public static void agregar(String nombre, String formula, Long usuarioId)
-			throws Exception {
-		RegistroIndicador nuevoIndicador = new RegistroIndicador(nombre,
-				formula);
-		nuevoIndicador.setUser(RepositorioUsuario.getSingletonInstance()
-				.buscar(usuarioId));
+	public static void agregar(String nombre, String formula, Long usuarioId) throws Exception {
+		RegistroIndicador nuevoIndicador = new RegistroIndicador(nombre, formula);
+		nuevoIndicador.setUser(RepositorioUsuario.getSingletonInstance().buscar(usuarioId));
 		new DslIndicador().añadirIndicador(nuevoIndicador);
 	}
 
 	public static HashMap<String, Object> homeView(Long usuarioId) {
-		SnapshotIndicadorConverter snapshotIndicadorConverter = new SnapshotIndicadorConverter();
 
 		HashMap<String, Object> mapIndicadores = new HashMap<>();
 
-		List<RegistroIndicador> indicadoresObtenidas = usuarioId != null ? RepositorioIndicador
-				.getSingletonInstance().allInstancesUser(usuarioId)
+		List<RegistroIndicador> indicadoresObtenidas = usuarioId != null
+				? RepositorioIndicador.getSingletonInstance().allInstancesUser(usuarioId)
 				: new ArrayList<>();
-		mapIndicadores.put("indicadores", indicadoresObtenidas);
 
-		List<SnapshotIndicador> snapshots = snapshotIndicadorConverter
-				.allSnapshotIndicadores(usuarioId);
-		mapIndicadores.put("snapshots", snapshots);
-		mapIndicadores.put("listaVacia", snapshots.isEmpty());
-		// mapIndicadores.put("notificacion", cookie);
+		mapIndicadores.put("indicadores", indicadoresObtenidas);
+		mapIndicadores.put("listaVacia", indicadoresObtenidas.isEmpty());
 
 		return mapIndicadores;
 	}
 
-	public static HashMap<String, Object> homeAgregarIndicador(Long usuarioId,
-			String cookie) {
+	private static List<SnapshotIndicador> getIndicadoresPrecalculados(String nombreIndicador) {
+		JsonAdapter adapter = new JsonAdapter();
+		String json = jedisCache.get(nombreIndicador);
+		return adapter.adaptarSnapshotIndicadores(json);
 
+	}
+
+	public static HashMap<String, Object> homeAgregarIndicador(Long usuarioId, String cookie) {
 		HashMap<String, Object> mapIndicadores = new HashMap<>();
-
 		mapIndicadores.put("notificacion", cookie);
-
 		return mapIndicadores;
 	}
 }
