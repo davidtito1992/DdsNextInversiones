@@ -39,8 +39,7 @@ public class ConsultarIndicadorViewM {
 		return registroIndicadorElegido;
 	}
 
-	public void setRegistroIndicadorElegido(
-			RegistroIndicador registroIndicadorElegido) {
+	public void setRegistroIndicadorElegido(RegistroIndicador registroIndicadorElegido) {
 		this.registroIndicadorElegido = registroIndicadorElegido;
 	}
 
@@ -56,8 +55,7 @@ public class ConsultarIndicadorViewM {
 		return snapshotIndicadores;
 	}
 
-	public void setSnapshotIndicadores(
-			List<SnapshotIndicador> snapshotIndicadores) {
+	public void setSnapshotIndicadores(List<SnapshotIndicador> snapshotIndicadores) {
 		this.snapshotIndicadores = snapshotIndicadores;
 	}
 
@@ -65,8 +63,7 @@ public class ConsultarIndicadorViewM {
 		return snapshotIndicadorSeleccionado;
 	}
 
-	public void setSnapshotIndicadorSeleccionado(
-			SnapshotIndicador snapshotIndicadorSeleccionado) {
+	public void setSnapshotIndicadorSeleccionado(SnapshotIndicador snapshotIndicadorSeleccionado) {
 		this.snapshotIndicadorSeleccionado = snapshotIndicadorSeleccionado;
 	}
 
@@ -99,12 +96,10 @@ public class ConsultarIndicadorViewM {
 	public List<SnapshotIndicador> allSnapshotIndicadores(Long idUser) {
 
 		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(idUser);
-		List<RegistroIndicador> indicadores = getRepositorioIndicadores()
-				.allInstancesUser(idUser);
+		List<RegistroIndicador> indicadores = getRepositorioIndicadores().allInstancesUser(idUser);
 		List<SnapshotIndicador> snapshots = new ArrayList<SnapshotIndicador>();
 
-		indicadores.forEach(indicador -> snapshots
-				.addAll(resultadosIndicadores(indicador, empresas)));
+		indicadores.forEach(indicador -> snapshots.addAll(resultadosIndicadores(indicador, empresas)));
 
 		return snapshots.stream().distinct().collect(Collectors.toList());
 	}
@@ -113,40 +108,30 @@ public class ConsultarIndicadorViewM {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 
-	public List<SnapshotIndicador> resultadosIndicadores(
-			RegistroIndicador indicador, List<Empresa> listaDeEmpresas) {
+	public List<SnapshotIndicador> resultadosIndicadores(RegistroIndicador indicador, List<Empresa> listaDeEmpresas) {
 
-		List<SnapshotIndicador> listSnapshot = listaDeEmpresas
-				.stream()
-				.map(empresa -> empresa
-						.getPeriodos()
-						.stream()
-						.map(periodo -> {
-							return crearSnapshotIndicador(indicador,
-									empresa.getNombre(), periodo.getAnio(),
-									periodo.getSemestre());
-						}).collect(Collectors.toList()))
-				.flatMap(listaSnap -> listaSnap.stream())
-				.collect(Collectors.toList());
+		List<SnapshotIndicador> listSnapshot = listaDeEmpresas.stream()
+				.map(empresa -> empresa.getPeriodos().stream().map(periodo -> {
+					return crearSnapshotIndicador(indicador, empresa.getNombre(), periodo.getAnio(),
+							periodo.getSemestre());
+				}).collect(Collectors.toList())).flatMap(listaSnap -> listaSnap.stream()).collect(Collectors.toList());
 
 		return listSnapshot;
 	}
 
-	public SnapshotIndicador crearSnapshotIndicador(
-			RegistroIndicador indicador, String nombreEmpresa, Year anio,
+	public SnapshotIndicador crearSnapshotIndicador(RegistroIndicador indicador, String nombreEmpresa, Year anio,
 			int semestre) {
 
 		String resultado;
 		try {
-			resultado = new DslIndicador()
-					.prepararFormula(indicador, nombreEmpresa, anio, semestre)
-					.calcular().toPlainString();
+			resultado = new DslIndicador().prepararFormula(indicador, nombreEmpresa, anio, semestre).calcular()
+					.toPlainString();
 		} catch (Exception e) {
 			resultado = e.getMessage();
 		}
 
-		SnapshotIndicador snapshotIndicador = new SnapshotIndicador(indicador,
-				nombreEmpresa, anio.getValue(), semestre, resultado);
+		SnapshotIndicador snapshotIndicador = new SnapshotIndicador(indicador, nombreEmpresa, anio.getValue(), semestre,
+				resultado);
 		return snapshotIndicador;
 	}
 }

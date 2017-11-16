@@ -17,6 +17,7 @@ public class Bootstrap {
 		appData.cargarEmpresas();
 		appData.cargarIndicadores();
 		appData.cargarMetodologias();
+		appData.precalcularTodosLosIndicadores();
 	}
 
 }

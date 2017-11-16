@@ -8,9 +8,6 @@ import model.SnapshotIndicador;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 public class AdapterToJson implements AdapterToData {
 
@@ -31,14 +28,8 @@ public class AdapterToJson implements AdapterToData {
 	}
 
 	public String getStringListRegistroIndicador(List<SnapshotIndicador> snapshots) {
-		 final Gson gson = new Gson();
-		 return gson.toJson(snapshots);
-//		Gson gson = new GsonBuilder().create();
-//		JsonArray myCustomArray = gson.toJsonTree(snapshots).getAsJsonArray();
-//		JsonObject jsonObject = new JsonObject();
-//		jsonObject.add("snapshots", myCustomArray);
-//		return jsonObject.toString();
-
+		final Gson gson = new Gson();
+		return gson.toJson(snapshots);
 	}
 
 }

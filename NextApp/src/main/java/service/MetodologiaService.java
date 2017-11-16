@@ -24,6 +24,7 @@ import model.ControladorDeMetodologia;
 import model.Metodologia;
 import model.SnapshotCondicion;
 import model.SnapshotRankingEmpresa;
+import redis.clients.jedis.Jedis;
 
 public class MetodologiaService {
 

@@ -1,7 +1,5 @@
 package model;
 
-import java.time.Year;
-
 import javax.persistence.Convert;
 
 import org.uqbar.commons.utils.Observable;
@@ -22,8 +20,8 @@ public class SnapshotIndicador {
 
 	/********* GETTERS/SETTERS *********/
 
-	public SnapshotIndicador(RegistroIndicador registroIndicador,
-			String nombreEmpresa, Integer anio, int semestre, String resultado) {
+	public SnapshotIndicador(RegistroIndicador registroIndicador, String nombreEmpresa, Integer anio, int semestre,
+			String resultado) {
 		super();
 		this.registroIndicador = registroIndicador;
 		this.nombreEmpresa = nombreEmpresa;
