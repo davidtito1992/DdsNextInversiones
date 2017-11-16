@@ -1,5 +1,6 @@
 package main.converter;
 
+import java.math.BigDecimal;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,15 +85,16 @@ public class SnapshotIndicadorConverter {
 								nombreEmpresa, anio, semestre);
 
 			} else {
-				resultado = new DslIndicador()
+				 BigDecimal result= new DslIndicador()
 						.prepararFormula(indicador, nombreEmpresa, anio,
-								semestre).calcular().toPlainString();
-				/*CacheIndicador nuevoCacheIndicador = new CacheIndicador(idUser,
+								semestre).calcular();
+				CacheIndicador nuevoCacheIndicador = new CacheIndicador(idUser.longValue(),
 						indicador.getNombre(), nombreEmpresa, anio.getValue(),
-						semestre, Long.valueOf(resultado));
-
+						semestre, result.longValue());
+				
 				RepositorioCacheIndicador.getSingletonInstance().agregar(
-						nuevoCacheIndicador);*/
+						nuevoCacheIndicador);
+				resultado= result.toString();
 			}
 		} catch (Exception e) {
 			resultado = e.getMessage();

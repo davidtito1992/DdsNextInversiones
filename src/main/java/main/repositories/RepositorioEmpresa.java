@@ -211,7 +211,7 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 				+ "AND c.nombre = :nombreCuenta";
 		TypedQuery<Cuenta> q2 = entityManager.createQuery(query, Cuenta.class)
 				.setParameter("nombreEmpresa", nombreSeleccionado)
-				.setParameter("anio", anioSeleccionado)
+				.setParameter("anio", anioSeleccionado.getValue())
 				.setParameter("semestre", semestreSeleccionado)
 				.setParameter("nombreCuenta", nombreCuenta);
 		return q2.getSingleResult();

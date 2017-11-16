@@ -11,6 +11,8 @@ import org.uqbar.commons.utils.Observable;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 @Observable
 public class RepositorioIndicador extends Repository<RegistroIndicador> {
 
@@ -43,6 +45,18 @@ public class RepositorioIndicador extends Repository<RegistroIndicador> {
 			return false;
 		}
 		return true;
+		
+
+//		String query = "SELECT i.nombre FROM Indicadores i WHERE i.nombre = :nombreIndicador";
+//
+//		Query q2 = entityManager.createQuery(query).setParameter(
+//				"nombreIndicador", nombre);
+//
+//		if (!q2.getResultList().isEmpty()) {
+//			return true;
+//		}
+//		return false;
+		
 	}
 
 	public RegistroIndicador getRegistroIndicador(String nombreIndicador) {

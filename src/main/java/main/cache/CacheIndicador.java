@@ -24,21 +24,12 @@ public class CacheIndicador {
 	private Long cacheIndicadorId;
 
 	private long idUser;
+
 	private String registroIndicador;
 	private String nombreEmpresa;
 	private int anio;
 	private int semestre;
 	private long calculo;
-
-	/*
-	 * @ManyToOne(fetch= FetchType.LAZY)
-	 * 
-	 * @JoinColumn private Periodo periodo;
-	 * 
-	 * @ManyToOne(fetch= FetchType.LAZY)
-	 * 
-	 * @JoinColumn private RegistroIndicador indicador;
-	 */
 
 	public CacheIndicador() {
 	}
@@ -48,10 +39,66 @@ public class CacheIndicador {
 		this.idUser = idUser;
 		this.registroIndicador = registroIndicador;
 		this.nombreEmpresa = nombreEmpresa;
-		this.anio= anio ;
-		this.semestre= semestre ;
-		this.calculo= calculo ;
-		
+		this.anio = anio;
+		this.semestre = semestre;
+		this.calculo = calculo;
+
+	}
+
+	public Long getCacheIndicadorId() {
+		return cacheIndicadorId;
+	}
+
+	public void setCacheIndicadorId(Long cacheIndicadorId) {
+		this.cacheIndicadorId = cacheIndicadorId;
+	}
+
+	public long getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(long idUser) {
+		this.idUser = idUser;
+	}
+
+	public String getRegistroIndicador() {
+		return registroIndicador;
+	}
+
+	public void setRegistroIndicador(String registroIndicador) {
+		this.registroIndicador = registroIndicador;
+	}
+
+	public String getNombreEmpresa() {
+		return nombreEmpresa;
+	}
+
+	public void setNombreEmpresa(String nombreEmpresa) {
+		this.nombreEmpresa = nombreEmpresa;
+	}
+
+	public int getAnio() {
+		return anio;
+	}
+
+	public void setAnio(int anio) {
+		this.anio = anio;
+	}
+
+	public int getSemestre() {
+		return semestre;
+	}
+
+	public void setSemestre(int semestre) {
+		this.semestre = semestre;
+	}
+
+	public long getCalculo() {
+		return calculo;
+	}
+
+	public void setCalculo(long calculo) {
+		this.calculo = calculo;
 	}
 
 }
