@@ -13,11 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import main.converter.YearConverter;
+//import main.converter.YearConverter;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.uqbar.commons.utils.Observable;
+
+import main.converter.YearConverter;
 
 @Entity
 @Table(name = "Periodos")

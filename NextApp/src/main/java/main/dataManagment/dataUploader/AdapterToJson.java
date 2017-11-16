@@ -26,7 +26,7 @@ public class AdapterToJson implements AdapterToData {
 		final Gson gson = new Gson();
 		return gson.toJson(unaMetodologia);
 	}
-	
+
 	public String getStringListRegistroIndicador(List<SnapshotIndicador> snapshots) {
 		final Gson gson = new Gson();
 		return gson.toJson(snapshots);

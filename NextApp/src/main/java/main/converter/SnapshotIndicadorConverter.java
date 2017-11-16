@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 
 import main.app.AplicacionContexto;
 import main.app.DslIndicador;
-import main.cache.CacheIndicador;
-import main.repositories.RepositorioCacheIndicador;
 import main.repositories.RepositorioEmpresa;
 import main.repositories.RepositorioIndicador;
 import model.Empresa;
@@ -23,25 +21,20 @@ public class SnapshotIndicadorConverter {
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
-	public List<SnapshotIndicador> snapshotsOf(Long idUser,
-			RegistroIndicador indicador) {
-		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(
-				idUser);
+	public List<SnapshotIndicador> snapshotsOf(Long idUser, RegistroIndicador indicador) {
+		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(idUser);
 		List<SnapshotIndicador> snapshots = new ArrayList<SnapshotIndicador>();
-		snapshots.addAll(resultadosIndicadores(idUser, indicador, empresas));
+		snapshots.addAll(resultadosIndicadores(indicador, empresas));
 		return snapshots.stream().distinct().collect(Collectors.toList());
 	}
 
 	public List<SnapshotIndicador> allSnapshotIndicadores(Long idUser) {
 
-		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(
-				idUser);
-		List<RegistroIndicador> indicadores = getRepositorioIndicadores()
-				.allInstancesUser(idUser);
+		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(idUser);
+		List<RegistroIndicador> indicadores = getRepositorioIndicadores().allInstancesUser(idUser);
 		List<SnapshotIndicador> snapshots = new ArrayList<SnapshotIndicador>();
 
-		indicadores.forEach(indicador -> snapshots
-				.addAll(resultadosIndicadores(idUser, indicador, empresas)));
+		indicadores.forEach(indicador -> snapshots.addAll(resultadosIndicadores(indicador, empresas)));
 
 		return snapshots.stream().distinct().collect(Collectors.toList());
 	}
@@ -50,56 +43,30 @@ public class SnapshotIndicadorConverter {
 		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
 	}
 
-	public List<SnapshotIndicador> resultadosIndicadores(Long idUser,
-			RegistroIndicador indicador, List<Empresa> listaDeEmpresas) {
+	public List<SnapshotIndicador> resultadosIndicadores(RegistroIndicador indicador, List<Empresa> listaDeEmpresas) {
 
-		List<SnapshotIndicador> listSnapshot = listaDeEmpresas
-				.stream()
-				.map(empresa -> empresa
-						.getPeriodos()
-						.stream()
-						.map(periodo -> {
-							return crearSnapshotIndicador(idUser, indicador,
-									empresa.getNombre(), periodo.getAnio(),
-									periodo.getSemestre());
-						}).collect(Collectors.toList()))
-				.flatMap(listaSnap -> listaSnap.stream())
-				.collect(Collectors.toList());
+		List<SnapshotIndicador> listSnapshot = listaDeEmpresas.stream()
+				.map(empresa -> empresa.getPeriodos().stream().map(periodo -> {
+					return crearSnapshotIndicador(indicador, empresa.getNombre(), periodo.getAnio(),
+							periodo.getSemestre());
+				}).collect(Collectors.toList())).flatMap(listaSnap -> listaSnap.stream()).collect(Collectors.toList());
 
 		return listSnapshot;
 	}
 
-	public SnapshotIndicador crearSnapshotIndicador(Long idUser,
-			RegistroIndicador indicador, String nombreEmpresa, Year anio,
+	public SnapshotIndicador crearSnapshotIndicador(RegistroIndicador indicador, String nombreEmpresa, Year anio,
 			int semestre) {
 
 		String resultado;
 		try {
-			if (RepositorioCacheIndicador.getSingletonInstance()
-					.existeCacheIndicador(idUser, indicador.getNombre(),
-							nombreEmpresa, anio, semestre)) {
-
-				resultado = RepositorioCacheIndicador.getSingletonInstance()
-						.getValorCacheIndicador(idUser, indicador.getNombre(),
-								nombreEmpresa, anio, semestre);
-
-			} else {
-				resultado = new DslIndicador()
-						.prepararFormula(indicador, nombreEmpresa, anio,
-								semestre).calcular().toPlainString();
-				/*CacheIndicador nuevoCacheIndicador = new CacheIndicador(idUser,
-						indicador.getNombre(), nombreEmpresa, anio.getValue(),
-						semestre, Long.valueOf(resultado));
-
-				RepositorioCacheIndicador.getSingletonInstance().agregar(
-						nuevoCacheIndicador);*/
-			}
+			resultado = new DslIndicador().prepararFormula(indicador, nombreEmpresa, anio, semestre).calcular()
+					.toPlainString();
 		} catch (Exception e) {
 			resultado = e.getMessage();
 		}
 
-		SnapshotIndicador snapshotIndicador = new SnapshotIndicador(indicador,
-				nombreEmpresa, anio, semestre, resultado);
+		SnapshotIndicador snapshotIndicador = new SnapshotIndicador(indicador, nombreEmpresa, anio.getValue(), semestre,
+				resultado);
 		return snapshotIndicador;
 	}
 }
