@@ -47,12 +47,12 @@ public class JsonAdapter implements DataAdapter {
 	}
 
 	public List<SnapshotIndicador> adaptarSnapshotIndicadores(String snapshots) {
-		ArrayList<SnapshotIndicador> listaIndicadores = new ArrayList<SnapshotIndicador>();
-
+		ArrayList<SnapshotIndicador> lista = new ArrayList<SnapshotIndicador>();
 		Type listType = new TypeToken<ArrayList<SnapshotIndicador>>() {
 		}.getType();
-		listaIndicadores = gson.fromJson(snapshots, listType);
-		return listaIndicadores;
+		lista = gson.fromJson(snapshots, listType);
+
+		return lista;
 	}
 
 	public ArrayList<Metodologia> adaptarMetodologias(String metodologias) throws ParseException {

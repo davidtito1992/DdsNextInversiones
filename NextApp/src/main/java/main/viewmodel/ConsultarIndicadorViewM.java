@@ -146,7 +146,7 @@ public class ConsultarIndicadorViewM {
 		}
 
 		SnapshotIndicador snapshotIndicador = new SnapshotIndicador(indicador,
-				nombreEmpresa, anio, semestre, resultado);
+				nombreEmpresa, anio.getValue(), semestre, resultado);
 		return snapshotIndicador;
 	}
 }

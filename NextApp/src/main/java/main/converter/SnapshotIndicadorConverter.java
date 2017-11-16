@@ -65,7 +65,7 @@ public class SnapshotIndicadorConverter {
 			resultado = e.getMessage();
 		}
 
-		SnapshotIndicador snapshotIndicador = new SnapshotIndicador(indicador, nombreEmpresa, anio, semestre,
+		SnapshotIndicador snapshotIndicador = new SnapshotIndicador(indicador, nombreEmpresa, anio.getValue(), semestre,
 				resultado);
 		return snapshotIndicador;
 	}

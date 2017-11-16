@@ -72,6 +72,7 @@ public class LoginController {
 			String snapshotsJson = adapter.getStringListRegistroIndicador(snapshots);
 			jedisCache.set(indicador.getNombre(), snapshotsJson);
 		});
+	
 	}
 
 }

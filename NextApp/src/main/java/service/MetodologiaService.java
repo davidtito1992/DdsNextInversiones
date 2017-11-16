@@ -27,14 +27,10 @@ import model.SnapshotRankingEmpresa;
 
 public class MetodologiaService {
 
-	//static List<SnapshotCondicion> condicionesCreadas = new ArrayList<SnapshotCondicion>();
-//	static String errorCrearMetodologia;
-//	static String errorAgregarCondicion;
-
 	@SuppressWarnings("static-access")
-	public static void validar(String indicadorSeleccionado, String condicionSeleccionada, 
-			String tipoCondicionSeleccionado, BigDecimal pesoOCompararSeleccionado, int ultimosAniosSeleccionado) 
-					throws RuntimeException {
+	public static void validar(String indicadorSeleccionado, String condicionSeleccionada,
+			String tipoCondicionSeleccionado, BigDecimal pesoOCompararSeleccionado, int ultimosAniosSeleccionado)
+			throws RuntimeException {
 
 		if (condicionSeleccionada.equals(CondicionesBuilder.ANTIGUEDAD))
 			indicadorSeleccionado = CondicionesBuilder.VACIARINDICADOR;
@@ -100,22 +96,22 @@ public class MetodologiaService {
 		return mapConsultaMetodologias;
 	}
 
-	public static HashMap<String, Object> mapeoCondiciones(Long idUsuario, String nombreMetodologia,String cookie,
-				List<SnapshotCondicion> listaCondiciones) {
+	public static HashMap<String, Object> mapeoCondiciones(Long idUsuario, String nombreMetodologia, String cookie,
+			List<SnapshotCondicion> listaCondiciones) {
 		ArrayList<String> indicadores = RepositorioIndicador.getSingletonInstance().allInstancesUser(idUsuario).stream()
 				.map(indicador -> indicador.getNombre()).collect(Collectors.toCollection(ArrayList::new));
 		HashMap<String, Object> mapAMetod = new HashMap<>();
 		mapAMetod.put("condiciones", listaCondiciones());
 		mapAMetod.put("tipoCondiciones", listaTiposCondiciones());
 		mapAMetod.put("indicadores", indicadores);
-		
+
 		mapAMetod.put("condicionesCreadas", listaCondiciones);
 		mapAMetod.put("condicionesCreadasEmpty", listaCondiciones.isEmpty());
 		mapAMetod.put("JSONCondiciones", crearJSONCondiciones(listaCondiciones));
-		
+
 		mapAMetod.put("nombreMetodologia", nombreMetodologia);
 		mapAMetod.put("Notificacion", cookie);
-	//	mapAMetod.put("errorAgregarCondicion", errorAgregarCondicion);
+		// mapAMetod.put("errorAgregarCondicion", errorAgregarCondicion);
 		return mapAMetod;
 	}
 
@@ -129,50 +125,52 @@ public class MetodologiaService {
 		return mapMetodologias;
 	}
 
-	public static List<SnapshotCondicion> agregarCondicion(String cookie, String indicador, String tipoCondicion, String condicion,
-			String peso, String anios, String nombreMetodologia, String JSONCondiciones){
-		//String errorCrearMetodologia = cookie;
+	public static List<SnapshotCondicion> agregarCondicion(String cookie, String indicador, String tipoCondicion,
+			String condicion, String peso, String anios, String nombreMetodologia, String JSONCondiciones) {
+		// String errorCrearMetodologia = cookie;
 
 		List<SnapshotCondicion> condicionesCreadas = new ArrayList<SnapshotCondicion>();
-		String JSONCondicionesInput = Objects.isNull(JSONCondiciones) || JSONCondiciones.isEmpty() ? null : JSONCondiciones;
+		String JSONCondicionesInput = Objects.isNull(JSONCondiciones) || JSONCondiciones.isEmpty() ? null
+				: JSONCondiciones;
 		String indicadorSeleccionado = Objects.isNull(indicador) || indicador.isEmpty() ? null : indicador;
-		String tipoCondicionSeleccionado = Objects.isNull(tipoCondicion) || tipoCondicion.isEmpty() ? null : tipoCondicion;
+		String tipoCondicionSeleccionado = Objects.isNull(tipoCondicion) || tipoCondicion.isEmpty() ? null
+				: tipoCondicion;
 		String condicionSeleccionada = Objects.isNull(condicion) || condicion.isEmpty() ? null : condicion;
 		BigDecimal pesoOCompararSeleccionado = Objects.isNull(peso) || peso.isEmpty() ? null
 				: BigDecimal.valueOf(Long.parseLong(peso));
-		int ultimosAniosSeleccionado = Objects.isNull(anios) || anios.isEmpty() ? 0
-				: Integer.parseInt(anios);
+		int ultimosAniosSeleccionado = Objects.isNull(anios) || anios.isEmpty() ? 0 : Integer.parseInt(anios);
 		try {
 			if (!(Objects.isNull(JSONCondicionesInput)))
 				condicionesCreadas = snapshotCondicionDesdeJSON(JSONCondicionesInput);
-			validar(indicadorSeleccionado,condicionSeleccionada,
-					tipoCondicionSeleccionado,pesoOCompararSeleccionado,ultimosAniosSeleccionado);
-			
+			validar(indicadorSeleccionado, condicionSeleccionada, tipoCondicionSeleccionado, pesoOCompararSeleccionado,
+					ultimosAniosSeleccionado);
+
 			condicionesCreadas.add(new SnapshotCondicion(tipoCondicionSeleccionado, condicionSeleccionada,
 					indicadorSeleccionado, pesoOCompararSeleccionado, ultimosAniosSeleccionado));
-			
+
 		} catch (Exception e) {
-//			if (!(Objects.isNull(condicionSeleccionada) && Objects.isNull(indicadorSeleccionado)
-//					&& Objects.isNull(tipoCondicionSeleccionado) && ultimosAniosSeleccionado == 0
-//					&& Objects.isNull(pesoOCompararSeleccionado)))
-//				errorAgregarCondicion = "La ultima condicion ingresada no cumple las validaciones necesarias. Intentelo nuevamente.";
+			// if (!(Objects.isNull(condicionSeleccionada) &&
+			// Objects.isNull(indicadorSeleccionado)
+			// && Objects.isNull(tipoCondicionSeleccionado) && ultimosAniosSeleccionado == 0
+			// && Objects.isNull(pesoOCompararSeleccionado)))
+			// errorAgregarCondicion = "La ultima condicion ingresada no cumple las
+			// validaciones necesarias. Intentelo nuevamente.";
 		}
 		return condicionesCreadas;
 
 	}
-	
-	public static String crearJSONCondiciones(List<SnapshotCondicion> condicionesCreadas){
+
+	public static String crearJSONCondiciones(List<SnapshotCondicion> condicionesCreadas) {
 		Gson gson = new Gson();
 		String JSONCondiciones = gson.toJson(condicionesCreadas);
 		return JSONCondiciones;
 	}
-	
+
 	public static ArrayList<SnapshotCondicion> snapshotCondicionDesdeJSON(String snapshotCondiciones) {
 		ArrayList<SnapshotCondicion> listaSnapshotCondicion = new ArrayList<SnapshotCondicion>();
 		Type listType = new TypeToken<ArrayList<SnapshotCondicion>>() {
 		}.getType();
-		listaSnapshotCondicion = GsonFactory.getGson().fromJson(
-				snapshotCondiciones, listType);
+		listaSnapshotCondicion = GsonFactory.getGson().fromJson(snapshotCondiciones, listType);
 		return listaSnapshotCondicion;
 	}
 
@@ -188,9 +186,9 @@ public class MetodologiaService {
 	}
 
 	public static void reiniciar() {
-		//condicionesCreadas = new ArrayList<SnapshotCondicion>();
-//		errorAgregarCondicion = null;
-//		errorCrearMetodologia = null;
+		// condicionesCreadas = new ArrayList<SnapshotCondicion>();
+		// errorAgregarCondicion = null;
+		// errorCrearMetodologia = null;
 	}
 
 	public static void eliminar(String idMetodologia) {
@@ -200,13 +198,13 @@ public class MetodologiaService {
 	public static void agregarMetodologia(Long usuarioId, String nombreMetodologia, String JSONCondiciones) {
 		List<Condicion> condiciones = new ArrayList<Condicion>();
 		List<SnapshotCondicion> condicionesCreadas = new ArrayList<SnapshotCondicion>();
-		
+
 		if (!(Objects.isNull(JSONCondiciones) || JSONCondiciones.isEmpty()))
 			condicionesCreadas = snapshotCondicionDesdeJSON(JSONCondiciones);
-		
+
 		condicionesCreadas.stream()
 				.forEach(snapshotCondicion -> condiciones.add(new CondicionesBuilder().crear(snapshotCondicion)));
-		Metodologia metodologia = new Metodologia(nombreMetodologia, condiciones, 
+		Metodologia metodologia = new Metodologia(nombreMetodologia, condiciones,
 				RepositorioUsuario.getSingletonInstance().buscar(usuarioId));
 		RepositorioMetodologia.getSingletonInstance().agregar(metodologia);
 

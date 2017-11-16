@@ -2,7 +2,11 @@ package model;
 
 import java.time.Year;
 
+import javax.persistence.Convert;
+
 import org.uqbar.commons.utils.Observable;
+
+import main.converter.YearConverter;
 
 @Observable
 public class SnapshotIndicador {
@@ -11,14 +15,15 @@ public class SnapshotIndicador {
 
 	private RegistroIndicador registroIndicador;
 	private String nombreEmpresa;
-	private Year anio;
+	@Convert(converter = YearConverter.class)
+	private Integer anio;
 	private int semestre;
 	private String resultado;
 
 	/********* GETTERS/SETTERS *********/
 
 	public SnapshotIndicador(RegistroIndicador registroIndicador,
-			String nombreEmpresa, Year anio, int semestre, String resultado) {
+			String nombreEmpresa, Integer anio, int semestre, String resultado) {
 		super();
 		this.registroIndicador = registroIndicador;
 		this.nombreEmpresa = nombreEmpresa;
@@ -35,11 +40,11 @@ public class SnapshotIndicador {
 		this.nombreEmpresa = nombre;
 	}
 
-	public Year getAnio() {
+	public Integer getAnio() {
 		return anio;
 	}
 
-	public void setAnio(Year year) {
+	public void setAnio(Integer year) {
 		this.anio = year;
 	}
 
