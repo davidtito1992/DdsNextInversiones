@@ -2,7 +2,6 @@ package main.server;
 
 import spark.Spark;
 import spark.debug.DebugScreen;
-import main.server.Router;
 
 public class Server {
 
