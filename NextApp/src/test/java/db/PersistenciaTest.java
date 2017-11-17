@@ -179,7 +179,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		assertEquals(indicador2, indicador2Encontrado);
 	}
 
-	@Test
+	/*@Test
 	public void persistenciaDeMetodologias() {
 
 		EntityTransaction tx = em.getTransaction();
@@ -194,7 +194,7 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 
 		assertEquals(metodologia1, metodologia1Encontrada);
 		assertEquals(metodologia2, metodologia2Encontrada);
-	}
+	}*/
 
 	@After
 	public void tearDown() {
