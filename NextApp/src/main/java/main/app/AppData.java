@@ -21,6 +21,9 @@ import redis.clients.jedis.Jedis;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
+import org.hibernate.proxy.HibernateProxy;
+
 public class AppData {
 
 	private SnapshotIndicadorConverter snapshotIndicadorConverter = new SnapshotIndicadorConverter();
@@ -30,7 +33,7 @@ public class AppData {
 	public void precalcularIndicadorDeUsuario(Long usuarioId) {
 		List<RegistroIndicador> indicadoresObtenidas = usuarioId != null
 				? RepositorioIndicador.getSingletonInstance().allInstancesUser(usuarioId)
-				: new ArrayList<>();
+				: new ArrayList<>();		
 
 		indicadoresObtenidas.forEach(indicador -> {
 			List<SnapshotIndicador> snapshots = snapshotIndicadorConverter.snapshotsOf(usuarioId, indicador);

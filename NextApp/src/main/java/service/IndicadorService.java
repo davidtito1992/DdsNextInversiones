@@ -97,11 +97,9 @@ public class IndicadorService {
 				.getUserId()));
 		usuariosAfectados.stream().distinct();
 
+		AppData appData = new AppData();
 		usuariosAfectados.forEach(user -> {
-			List<RegistroIndicador> susIndicadores = RepositorioIndicador
-					.getSingletonInstance().allInstancesUser(user);
-			susIndicadores.forEach(indicador -> precalcularIndicador(user,
-					indicador));
+			appData.precalcularIndicadorDeUsuario(user);;
 		});
 
 	}

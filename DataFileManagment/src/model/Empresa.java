@@ -19,8 +19,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.uqbar.commons.utils.Observable;
+import org.uqbar.commons.utils.Transactional;
+
 @Entity
 @Table(name = "Empresas")
+@Transactional
+@Observable
 public class Empresa {
 
 	/********* ATRIBUTOS *********/
@@ -75,20 +80,6 @@ public class Empresa {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	/********* METODOS *********/
-
-	public int getAntiguedadEmpresa() {
-		Date date = new Date();
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(date);
-		int anioActual = calendar.get(Calendar.YEAR);
-
-		ArrayList<Year> aniosPeriodos = (ArrayList<Year>) this.getPeriodos().stream().map(periodo -> periodo.getAnio())
-				.distinct().sorted().collect(Collectors.toCollection(ArrayList::new));
-
-		return anioActual - aniosPeriodos.get(0).getValue();
 	}
 
 }

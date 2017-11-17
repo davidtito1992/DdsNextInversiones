@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
 
@@ -13,6 +14,7 @@ import org.uqbar.commons.utils.Transactional;
 @Observable
 @Table(name = "User")
 @Transactional
+@Proxy(lazy = false)
 public class User {
 
 	@Id

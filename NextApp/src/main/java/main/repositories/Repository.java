@@ -49,6 +49,11 @@ public abstract class Repository<T> {
 	public T buscar(long id) {
 		return entityManager.find(this.clazz, id);
 	}
+	
+	@Transactional
+	public T buscarRef(long id) {
+		return entityManager.getReference(this.clazz, id);
+	}
 
 	@Transactional
 	public void agregar(T elemento) {

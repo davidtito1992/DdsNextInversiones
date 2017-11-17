@@ -17,9 +17,11 @@ import main.converter.YearConverter;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.uqbar.commons.utils.Observable;
 
 @Entity
 @Table(name = "Periodos")
+@Observable
 public class Periodo {
 
 	/********* ATRIBUTOS *********/
