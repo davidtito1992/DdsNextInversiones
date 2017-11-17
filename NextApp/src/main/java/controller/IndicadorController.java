@@ -59,6 +59,7 @@ public class IndicadorController {
 	
 	public static Void actualizarPrecalculos(Request req, Response res) {
 		IndicadorService.actualizarPrecalculos(req.body());
+		res.status(201);
 		return null;
 	}
 

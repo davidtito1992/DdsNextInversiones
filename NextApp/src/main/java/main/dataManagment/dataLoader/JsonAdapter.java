@@ -31,6 +31,20 @@ public class JsonAdapter implements DataAdapter {
 		}
 		return listaEmpresas;
 	}
+	
+	public ArrayList<Long> adaptarIds(String empresas) throws ParseException {
+		ArrayList<Long> listaEmpresas = new ArrayList<Long>();
+		try {
+			Type listType = new TypeToken<ArrayList<Long>>() {
+			}.getType();
+			listaEmpresas = gson.fromJson(empresas, listType);
+
+		} catch (Exception e) {
+			throw new ParseException(
+					"El archivo no pudo ser leido correctamente, verifique la sintaxis y vuelva a intentarlo.");
+		}
+		return listaEmpresas;
+	}
 
 	public ArrayList<RegistroIndicador> adaptarIndicadores(String indicadores) throws ParseException {
 		ArrayList<RegistroIndicador> listaIndicadores = new ArrayList<RegistroIndicador>();

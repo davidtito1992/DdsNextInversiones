@@ -15,5 +15,8 @@ public interface DataAdapter {
 	
 	public ArrayList<Metodologia> adaptarMetodologias(String metodologias)
 			throws Exception;
+	
+	public ArrayList<Long> adaptarIds(String idsEmpresas)
+			throws Exception;
 
 }

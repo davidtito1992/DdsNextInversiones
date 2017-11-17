@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 import main.dataManagment.dataLoader.DataLoader;
 import main.dataManagment.dataLoader.DataLoaderFactory;
 import main.repositories.Repository;
@@ -35,9 +37,13 @@ public class DataFileManagement {
 					archivos[i].renameTo(new File(directorioEmpresasLeidas + archivos[i].getName()));
 
 					List<Long> empresasIds = getEmpresasId(empresas);
-					nextApp.enviarEmpresasActualizadas(empresasIds);
+					final Gson gson = new Gson();
+					String empreString = gson.toJson(empresasIds);
+					
+					nextApp.enviarEmpresasActualizadas(empreString);
 
 				} catch (Exception e) {
+					e.printStackTrace();
 					System.out.println("El archivo " + archivos[i].getName()
 							+ " no pudo ser leido correctamente. Es probable que no tenga datos referidos a empresas, o que contenga algun error.");
 				}
