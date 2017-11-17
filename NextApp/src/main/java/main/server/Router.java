@@ -34,12 +34,13 @@ public class Router {
 		Spark.post("/indicadores/baja/:indicadorId", IndicadorController::delete);
 		Spark.get("/indicadores/nuevoIndicador", IndicadorController::agregarView, engine);
 		Spark.get("/indicadores/consultas/:indicadorId", IndicadorController::consultarView, engine);
+		Spark.post("/indicadores/nuevosPrecalculos", IndicadorController::actualizarPrecalculos);
+
 
 		// Metodologias
 		Spark.get("/metodologias", MetodologiaController::home, engine);
 		Spark.post("/metodologias/baja/:metodologiaId", MetodologiaController::delete);
 		Spark.get("/metodologias/consultas/:metodologiaId", MetodologiaController::consultarView, engine);
-	//	Spark.get("/metodologias/nuevaMetodologia", MetodologiaController::agregarNombreView, engine);
 		Spark.post("/metodologias/nuevaMetodologia", MetodologiaController::agregarNombre);
 		Spark.get("/metodologias/nuevaCondicion", MetodologiaController::agregarCondicionesView, engine);
 		Spark.post("/metodologias/nuevaCondicion/:nombreMetodologia", MetodologiaController::agregarMetodologia);

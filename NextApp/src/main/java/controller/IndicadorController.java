@@ -56,6 +56,11 @@ public class IndicadorController {
 		res.redirect("/indicadores");
 		return null;
 	}
+	
+	public static Void actualizarPrecalculos(Request req, Response res) {
+		IndicadorService.actualizarPrecalculos(req.body());
+		return null;
+	}
 
 	public static ModelAndView consultarView(Request req, Response res) {
 

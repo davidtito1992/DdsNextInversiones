@@ -112,7 +112,6 @@ public class MetodologiaService {
 
 		mapAMetod.put("nombreMetodologia", nombreMetodologia);
 		mapAMetod.put("Notificacion", cookie);
-		// mapAMetod.put("errorAgregarCondicion", errorAgregarCondicion);
 		return mapAMetod;
 	}
 
@@ -128,7 +127,6 @@ public class MetodologiaService {
 
 	public static List<SnapshotCondicion> agregarCondicion(String cookie, String indicador, String tipoCondicion,
 			String condicion, String peso, String anios, String nombreMetodologia, String JSONCondiciones) {
-		// String errorCrearMetodologia = cookie;
 
 		List<SnapshotCondicion> condicionesCreadas = new ArrayList<SnapshotCondicion>();
 		String JSONCondicionesInput = Objects.isNull(JSONCondiciones) || JSONCondiciones.isEmpty() ? null
@@ -150,12 +148,7 @@ public class MetodologiaService {
 					indicadorSeleccionado, pesoOCompararSeleccionado, ultimosAniosSeleccionado));
 
 		} catch (Exception e) {
-			// if (!(Objects.isNull(condicionSeleccionada) &&
-			// Objects.isNull(indicadorSeleccionado)
-			// && Objects.isNull(tipoCondicionSeleccionado) && ultimosAniosSeleccionado == 0
-			// && Objects.isNull(pesoOCompararSeleccionado)))
-			// errorAgregarCondicion = "La ultima condicion ingresada no cumple las
-			// validaciones necesarias. Intentelo nuevamente.";
+			e.printStackTrace();
 		}
 		return condicionesCreadas;
 
@@ -184,12 +177,6 @@ public class MetodologiaService {
 
 		ControladorDeMetodologia contrMet = new ControladorDeMetodologia(metodologia, rEmpresas);
 		return mapeoConsultarMetodologia(contrMet);
-	}
-
-	public static void reiniciar() {
-		// condicionesCreadas = new ArrayList<SnapshotCondicion>();
-		// errorAgregarCondicion = null;
-		// errorCrearMetodologia = null;
 	}
 
 	public static void eliminar(String idMetodologia) {
