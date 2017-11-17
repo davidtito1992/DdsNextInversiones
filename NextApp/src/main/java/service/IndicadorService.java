@@ -3,6 +3,9 @@ package service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import org.eclipse.jface.bindings.keys.ParseException;
+
 import main.app.AppData;
 import main.app.DslIndicador;
 import main.converter.SnapshotIndicadorConverter;
@@ -10,6 +13,7 @@ import main.dataManagment.dataLoader.JsonAdapter;
 import main.dataManagment.dataUploader.AdapterToJson;
 import main.repositories.RepositorioIndicador;
 import main.repositories.RepositorioUsuario;
+import model.Empresa;
 import model.RegistroIndicador;
 import model.SnapshotIndicador;
 import redis.clients.jedis.Jedis;
@@ -36,10 +40,10 @@ public class IndicadorService {
 		RegistroIndicador nuevoIndicador = new RegistroIndicador(nombre, formula);
 		nuevoIndicador.setUser(RepositorioUsuario.getSingletonInstance().buscar(usuarioId));
 		new DslIndicador().añadirIndicador(nuevoIndicador);
-		precalcularNuevoIndicador(usuarioId, nuevoIndicador);
+		precalcularIndicador(usuarioId, nuevoIndicador);
 	}
 
-	public static void precalcularNuevoIndicador(Long usuarioId, RegistroIndicador nuevoIndicador) {
+	public static void precalcularIndicador(Long usuarioId, RegistroIndicador nuevoIndicador) {
 		SnapshotIndicadorConverter snapshotIndicadorConverter = new SnapshotIndicadorConverter();
 		AdapterToJson adapter = new AdapterToJson();
 		List<SnapshotIndicador> snapshots = snapshotIndicadorConverter.snapshotsOf(usuarioId, nuevoIndicador);
@@ -67,6 +71,30 @@ public class IndicadorService {
 		HashMap<String, Object> mapIndicadores = new HashMap<>();
 		mapIndicadores.put("notificacion", cookie);
 		return mapIndicadores;
+	}
+
+	public static void actualizarPrecalculos(String jsonEmpresas) {
+		List<Empresa> empresas = adaptarJsonAEmpresas(jsonEmpresas);
+		List<Long> usuariosAfectados = new ArrayList<>();
+		empresas.forEach(empresa -> usuariosAfectados.add(empresa.getUser().getUserId()));
+		usuariosAfectados.stream().distinct();
+
+		usuariosAfectados.forEach(user -> {
+			List<RegistroIndicador> susIndicadores = RepositorioIndicador.getSingletonInstance().allInstancesUser(user);
+			susIndicadores.forEach(indicador -> precalcularIndicador(user, indicador));
+		});
+
+	}
+
+	public static List<Empresa> adaptarJsonAEmpresas(String jsonEmpresas) {
+		JsonAdapter adapter = new JsonAdapter();
+		List<Empresa> empresas = null;
+		try {
+			empresas = adapter.adaptarEmpresas(jsonEmpresas);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return empresas;
 	}
 
 }
