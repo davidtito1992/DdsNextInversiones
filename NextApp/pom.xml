@@ -169,7 +169,7 @@
 	                </descriptorRefs>
 	                <archive>
 	                    <manifest>
-	                        <mainClass>Server</mainClass>
+	                        <mainClass>main.server.Server</mainClass>
 	                    </manifest>
 	                </archive>
 	            </configuration>
