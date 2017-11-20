@@ -1,7 +1,5 @@
 package main.app;
 
-import java.util.List;
-
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,12 +17,12 @@ public class NextAppExternalService {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
 		// httpEnitity
-		HttpEntity<Object> requestEntity = new HttpEntity<Object>(idsEmpresas, headers);
+		HttpEntity<Object> requestEntity = new HttpEntity<Object>(idsEmpresas,
+				headers);
 
-		try{
+		try {
 			restTemplate.postForEntity(url, requestEntity, String.class);
-		}
-		catch (HttpServerErrorException e){
+		} catch (HttpServerErrorException e) {
 			e.printStackTrace();
 		}
 	}

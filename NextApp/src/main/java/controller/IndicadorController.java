@@ -56,20 +56,18 @@ public class IndicadorController {
 		res.redirect("/indicadores");
 		return null;
 	}
-	
-	public static Void actualizarPrecalculos(Request req, Response res) {
+
+	public static String actualizarPrecalculos(Request req, Response res) {
 		IndicadorService.actualizarPrecalculos(req.body());
 		res.status(201);
-		return null;
+		return "OK";
 	}
 
 	public static ModelAndView consultarView(Request req, Response res) {
-
 		Map<String, Object> mapIndicadores = IndicadorService.consultarView(
 				req.params("indicadorId"), Token.autenticar(req, res));
 		return new ModelAndView(mapIndicadores,
 				"layoutIndicadoresConsultar.hbs");
-
 	}
 
 }

@@ -8,28 +8,25 @@ import org.eclipse.jface.bindings.keys.ParseException;
 
 import main.app.AppData;
 import main.app.DslIndicador;
-import main.converter.SnapshotIndicadorConverter;
 import main.dataManagment.dataLoader.JsonAdapter;
-import main.dataManagment.dataUploader.AdapterToJson;
-import main.repositories.RepositorioEmpresa;
 import main.repositories.RepositorioIndicador;
+import main.repositories.RepositorioPrecalculos;
 import main.repositories.RepositorioUsuario;
 import model.Empresa;
 import model.RegistroIndicador;
-import model.SnapshotIndicador;
-import redis.clients.jedis.Jedis;
 
 public class IndicadorService {
-
-	private static Jedis jedisCache = new Jedis();
 
 	public static HashMap<String, Object> consultarView(String indicadorId,
 			Long usuarioId) {
 		HashMap<String, Object> mapIndicadores = new HashMap<>();
 		String nombreIndicador = RepositorioIndicador.getSingletonInstance()
 				.buscar(Long.parseLong(indicadorId)).getNombre();
-		mapIndicadores.put("snapshots",
-				getIndicadoresPrecalculados(usuarioId, nombreIndicador));
+		mapIndicadores
+				.put("snapshots",
+						RepositorioPrecalculos.getSingletonInstance()
+								.getIndicadoresPrecalculados(usuarioId,
+										nombreIndicador));
 		return mapIndicadores;
 	}
 
@@ -47,18 +44,8 @@ public class IndicadorService {
 		nuevoIndicador.setUser(RepositorioUsuario.getSingletonInstance()
 				.buscar(usuarioId));
 		new DslIndicador().añadirIndicador(nuevoIndicador);
-		precalcularIndicador(usuarioId, nuevoIndicador);
-	}
-
-	public static void precalcularIndicador(Long usuarioId,
-			RegistroIndicador nuevoIndicador) {
-		SnapshotIndicadorConverter snapshotIndicadorConverter = new SnapshotIndicadorConverter();
-		AdapterToJson adapter = new AdapterToJson();
-		List<SnapshotIndicador> snapshots = snapshotIndicadorConverter
-				.snapshotsOf(usuarioId, nuevoIndicador);
-		String snapshotsJson = adapter
-				.getStringListRegistroIndicador(snapshots);
-		jedisCache.set(usuarioId + nuevoIndicador.getNombre(), snapshotsJson);
+		RepositorioPrecalculos.getSingletonInstance().precalcularIndicador(
+				usuarioId, nuevoIndicador);
 	}
 
 	public static HashMap<String, Object> homeView(Long usuarioId) {
@@ -71,13 +58,6 @@ public class IndicadorService {
 		return mapIndicadores;
 	}
 
-	private static List<SnapshotIndicador> getIndicadoresPrecalculados(
-			Long userId, String nombreIndicador) {
-		JsonAdapter adapter = new JsonAdapter();
-		String json = jedisCache.get(userId + nombreIndicador);
-		return adapter.adaptarSnapshotIndicadores(json);
-	}
-
 	public static HashMap<String, Object> homeAgregarIndicador(Long usuarioId,
 			String cookie) {
 		HashMap<String, Object> mapIndicadores = new HashMap<>();
@@ -86,22 +66,8 @@ public class IndicadorService {
 	}
 
 	public static void actualizarPrecalculos(String jsonEmpresas) {
-		List<Long> idsEmpresas = adaptarJsonAEmpresasId(jsonEmpresas);
-
-		List<Empresa> empresas = new ArrayList<Empresa>();
-		idsEmpresas.forEach(id -> empresas.add(RepositorioEmpresa.getInstance()
-				.buscar(id)));
-
-		List<Long> usuariosAfectados = new ArrayList<>();
-		empresas.forEach(empresa -> usuariosAfectados.add(empresa.getUser()
-				.getUserId()));
-		usuariosAfectados.stream().distinct();
-
-		AppData appData = new AppData();
-		usuariosAfectados.forEach(user -> {
-			appData.precalcularIndicadorDeUsuario(user);;
-		});
-
+		RepositorioPrecalculos.getSingletonInstance().actualizarPrecalculos(
+				jsonEmpresas);
 	}
 
 	public static List<Empresa> adaptarJsonAEmpresas(String jsonEmpresas) {
@@ -109,17 +75,6 @@ public class IndicadorService {
 		List<Empresa> empresas = null;
 		try {
 			empresas = adapter.adaptarEmpresas(jsonEmpresas);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return empresas;
-	}
-
-	public static List<Long> adaptarJsonAEmpresasId(String jsonEmpresas) {
-		JsonAdapter adapter = new JsonAdapter();
-		List<Long> empresas = null;
-		try {
-			empresas = adapter.adaptarIds(jsonEmpresas);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
