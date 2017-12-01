@@ -30,15 +30,15 @@ public class RepositorioPrecalculos {
 
 	/********* METODOS *********/
 
-	public static List<Long> adaptarJsonAEmpresasId(String jsonEmpresas) {
+	public static List<Long> adaptarJsonAUsuariosId(String jsonUsuarios) {
 		JsonAdapter adapter = new JsonAdapter();
-		List<Long> empresas = null;
+		List<Long> usuarios = null;
 		try {
-			empresas = adapter.adaptarIds(jsonEmpresas);
+			usuarios = adapter.adaptarIds(jsonUsuarios);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		return empresas;
+		return usuarios;
 	}
 	
 	public void precalcularIndicador(Long usuarioId,
@@ -88,19 +88,9 @@ public class RepositorioPrecalculos {
 		jedisCache.flushAll();
 	}
 	
-	public void actualizarPrecalculos(String jsonEmpresas){
-		List<Long> idsEmpresas = adaptarJsonAEmpresasId(jsonEmpresas);
-
-		List<Empresa> empresas = new ArrayList<Empresa>();
-		idsEmpresas.forEach(id -> empresas.add(RepositorioEmpresa.getInstance()
-				.buscar(id)));
-
-		List<Long> usuariosAfectados = new ArrayList<>();
-		empresas.forEach(empresa -> usuariosAfectados.add(empresa.getUser()
-				.getUserId()));
-		usuariosAfectados.stream().distinct();
-
-		usuariosAfectados.forEach(user -> {
+	public void actualizarPrecalculos(String jsonUsuarios){
+		List<Long> idsUsuarios = adaptarJsonAUsuariosId(jsonUsuarios);
+		idsUsuarios.forEach(user -> {
 			this.precalcularIndicadorDeUsuario(user);;
 		});
 	}

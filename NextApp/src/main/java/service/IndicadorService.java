@@ -65,9 +65,9 @@ public class IndicadorService {
 		return mapIndicadores;
 	}
 
-	public static void actualizarPrecalculos(String jsonEmpresas) {
+	public static void actualizarPrecalculos(String jsonUsuarios) {
 		RepositorioPrecalculos.getSingletonInstance().actualizarPrecalculos(
-				jsonEmpresas);
+				jsonUsuarios);
 	}
 
 	public static List<Empresa> adaptarJsonAEmpresas(String jsonEmpresas) {
