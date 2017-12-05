@@ -19,30 +19,40 @@ public class DataFileManagement {
 	public static void main(String[] args) throws Exception {
 		System.out.println("Iniciando programa...");
 		DataFileManagement dfm = new DataFileManagement();
-		NextAppExternalService nextApp = new NextAppExternalService();
-		
 		String AbsolutePath = new File(".").getAbsolutePath();
 		String directorioEmpresas = AbsolutePath + CARPETANUEVASEMPRESAS;
 		String directorioEmpresasLeidas = AbsolutePath + CARPETAEMPRESASLEIDAS;
-		final Gson gson = new Gson();
+//		Email.generateAndSendEmail("aaaa");
 		
-		List<Long> usuariosId = dfm.leerYGuardarArchivos(directorioEmpresas);
-		nextApp.enviarUsuariosARecalcular(gson.toJson(usuariosId));
-		dfm.redireccionarArchivos(directorioEmpresas,directorioEmpresasLeidas);
+		try{
+			dfm.guardarYEnviarAServer(directorioEmpresas);
+			dfm.redireccionarArchivos(directorioEmpresas,directorioEmpresasLeidas);
+		}
+		catch (Exception e){
+//			Email.generateAndSendEmail(e.getLocalizedMessage());//esta fallando el envio de mail
+		}
 	}
 	
-	public void redireccionarArchivos(String dEmpresas, String dEmpresasLeidas){
+
+	
+	public void redireccionarArchivos(String dEmpresas, String dEmpresasLeidas) throws Exception{
 		File f = new File(dEmpresas);
 		if (f.exists()) {
 			File[] archivos = f.listFiles();
 			for (int i = 0; i < archivos.length; i++) {
-				archivos[i].renameTo(new File(dEmpresasLeidas + archivos[i].getName()));
+				try{
+					archivos[i].renameTo(new File(dEmpresasLeidas + archivos[i].getName()));
+				} catch (Exception e){
+//					Email.generateAndSendEmail("El archivo " + archivos[i].getName()
+//							+ " no pudo ser movido de directorio");
+				}
 			}
 		}
 	}
 
-	public List<Long> leerYGuardarArchivos(String dEmpresas){
+	public void guardarYEnviarAServer(String dEmpresas) throws Exception{
 		Repository<Empresa> repoEmpresa = new Repository<Empresa>(Empresa.class);
+		NextAppExternalService na = new NextAppExternalService();
 		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
 		List<Empresa> empresas = new ArrayList<Empresa>();
 		
@@ -58,15 +68,17 @@ public class DataFileManagement {
 				});
 
 				} catch (Exception e) {
-					System.out.println("El archivo " + archivos[i].getName()
-							+ " no pudo ser leido correctamente. Es probable que no tenga datos referidos a empresas, o que contenga algun error.");
+//					Email.generateAndSendEmail("El archivo " + archivos[i].getName()
+//							+ " no pudo ser leido correctamente. Es probable que no tenga datos referidos a empresas, o que contenga algun error.");
 				}
 			}
 		} else {
-			System.out.println("El directorio de archivos a leer es inexistente.");
+//			Email.generateAndSendEmail("El directorio de archivos a leer es inexistente.");
 		}
+		
 		repoEmpresa.cargarListaDeElementos(empresas);
-		return getUsuariosId(empresas);
+		na.enviarUsuariosARecalcular(new Gson().toJson(getUsuariosId(empresas)));
+		
 	}
 	
 	public static List<Long> getUsuariosId(List<Empresa> empresas) {

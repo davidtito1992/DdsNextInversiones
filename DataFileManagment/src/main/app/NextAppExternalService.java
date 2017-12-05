@@ -3,7 +3,6 @@ package main.app;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 public class NextAppExternalService {
@@ -11,7 +10,8 @@ public class NextAppExternalService {
 	private final static String url = "http://localhost:8080/indicadores/nuevosPrecalculos";
 	private RestTemplate restTemplate = new RestTemplate();
 
-	public void enviarUsuariosARecalcular(String idsUsuarios) {
+	public void enviarUsuariosARecalcular(String idsUsuarios) throws Exception {
+		try{
 		// header
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -21,6 +21,9 @@ public class NextAppExternalService {
 				headers);
 
 		restTemplate.postForEntity(url, requestEntity, String.class);
+		} catch (Exception e){
+			throw new Exception("La aplicacion Server no pudo ser precalculada exitosamente.");
+		}
 	}
 
 }

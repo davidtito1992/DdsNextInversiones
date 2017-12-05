@@ -23,11 +23,15 @@ public class Repository<T> {
 	public EntityManager entityManager = EntityManagerHelper.entityManager();
 	private Class<T> clazz;
 
-	public void cargarListaDeElementos(List<T> lista) {
-		EntityManagerHelper.beginTransaction();
-		lista.forEach(elem -> entityManager.merge(elem));
-		EntityManagerHelper.commit();
-
+	public void cargarListaDeElementos(List<T> lista) throws Exception {
+		try {
+			EntityManagerHelper.beginTransaction();
+			lista.forEach(elem -> entityManager.merge(elem));
+			EntityManagerHelper.commit();
+		} catch (Exception e) {
+			throw new Exception(
+					"No se pudieron persistir los datos de Empresas.");
+		}
 	}
 
 	@SuppressWarnings("unchecked")
