@@ -8,6 +8,7 @@ import org.eclipse.jface.bindings.keys.ParseException;
 
 import main.app.AppData;
 import main.app.DslIndicador;
+import main.converter.SnapshotIndicadorConverter;
 import main.dataManagment.dataLoader.JsonAdapter;
 import main.repositories.RepositorioIndicador;
 import main.repositories.RepositorioPrecalculos;
@@ -20,13 +21,20 @@ public class IndicadorService {
 	public static HashMap<String, Object> consultarView(String indicadorId,
 			Long usuarioId) {
 		HashMap<String, Object> mapIndicadores = new HashMap<>();
-		String nombreIndicador = RepositorioIndicador.getSingletonInstance()
+		/*String nombreIndicador = RepositorioIndicador.getSingletonInstance()
 				.buscar(Long.parseLong(indicadorId)).getNombre();
 		mapIndicadores
 				.put("snapshots",
 						RepositorioPrecalculos.getSingletonInstance()
 								.getIndicadoresPrecalculados(usuarioId,
-										nombreIndicador));
+										nombreIndicador));*/
+		
+		RegistroIndicador indicador = RepositorioIndicador.getSingletonInstance()
+				.buscar(Long.parseLong(indicadorId));
+		
+		mapIndicadores
+		.put("snapshots", new SnapshotIndicadorConverter().snapshotsOf(usuarioId,indicador));
+		
 		return mapIndicadores;
 	}
 
@@ -66,8 +74,8 @@ public class IndicadorService {
 	}
 
 	public static void actualizarPrecalculos(String jsonUsuarios) {
-		RepositorioPrecalculos.getSingletonInstance().actualizarPrecalculos(
-				jsonUsuarios);
+//		RepositorioPrecalculos.getSingletonInstance().actualizarPrecalculos(
+//			jsonUsuarios);
 	}
 
 	public static List<Empresa> adaptarJsonAEmpresas(String jsonEmpresas) {

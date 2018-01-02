@@ -9,6 +9,7 @@ import main.app.AplicacionContexto;
 import main.app.DslIndicador;
 import main.repositories.RepositorioEmpresa;
 import main.repositories.RepositorioIndicador;
+import main.repositories.RepositorioPrecalculos;
 import model.Empresa;
 import model.RegistroIndicador;
 import model.SnapshotIndicador;
@@ -17,56 +18,84 @@ public class SnapshotIndicadorConverter {
 
 	/********* METODOS *********/
 
-	public RepositorioEmpresa getRepositorioEmpresas() {
+	private RepositorioEmpresa getRepositorioEmpresas() {
 		return AplicacionContexto.getInstance().getInstanceRepoEmpresas();
 	}
 
-	public List<SnapshotIndicador> snapshotsOf(Long idUser, RegistroIndicador indicador) {
-		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(idUser);
+	private RepositorioIndicador getRepositorioIndicadores() {
+		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
+	}
+
+	private RepositorioPrecalculos getRepositorioCacheIndicador() {
+		return AplicacionContexto.getInstance().getInstanceRepoPrecalculos();
+	}
+
+	public List<SnapshotIndicador> snapshotsOf(Long idUser,
+			RegistroIndicador indicador) {
+		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(
+				idUser);
 		List<SnapshotIndicador> snapshots = new ArrayList<SnapshotIndicador>();
-		snapshots.addAll(resultadosIndicadores(indicador, empresas));
+		snapshots.addAll(this.resultadosIndicadores(idUser,indicador, empresas));
 		return snapshots.stream().distinct().collect(Collectors.toList());
 	}
 
 	public List<SnapshotIndicador> allSnapshotIndicadores(Long idUser) {
 
-		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(idUser);
-		List<RegistroIndicador> indicadores = getRepositorioIndicadores().allInstancesUser(idUser);
+		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(
+				idUser);
+		List<RegistroIndicador> indicadores = getRepositorioIndicadores()
+				.allInstancesUser(idUser);
 		List<SnapshotIndicador> snapshots = new ArrayList<SnapshotIndicador>();
 
-		indicadores.forEach(indicador -> snapshots.addAll(resultadosIndicadores(indicador, empresas)));
+		indicadores.forEach(indicador -> snapshots.addAll(this
+				.resultadosIndicadores(idUser, indicador, empresas)));
 
 		return snapshots.stream().distinct().collect(Collectors.toList());
 	}
 
-	public RepositorioIndicador getRepositorioIndicadores() {
-		return AplicacionContexto.getInstance().getInstanceRepoIndicadores();
-	}
+	public List<SnapshotIndicador> resultadosIndicadores(Long userId,
+			RegistroIndicador indicador, List<Empresa> listaDeEmpresas) {
 
-	public List<SnapshotIndicador> resultadosIndicadores(RegistroIndicador indicador, List<Empresa> listaDeEmpresas) {
-
-		List<SnapshotIndicador> listSnapshot = listaDeEmpresas.stream()
-				.map(empresa -> empresa.getPeriodos().stream().map(periodo -> {
-					return crearSnapshotIndicador(indicador, empresa.getNombre(), periodo.getAnio(),
-							periodo.getSemestre());
-				}).collect(Collectors.toList())).flatMap(listaSnap -> listaSnap.stream()).collect(Collectors.toList());
+		List<SnapshotIndicador> listSnapshot = listaDeEmpresas
+				.stream()
+				.map(empresa -> empresa
+						.getPeriodos()
+						.stream()
+						.map(periodo -> {
+							return crearSnapshotIndicador(userId, indicador,
+									empresa.getNombre(), periodo.getAnio(),
+									periodo.getSemestre());
+						}).collect(Collectors.toList()))
+				.flatMap(listaSnap -> listaSnap.stream())
+				.collect(Collectors.toList());
 
 		return listSnapshot;
 	}
 
-	public SnapshotIndicador crearSnapshotIndicador(RegistroIndicador indicador, String nombreEmpresa, Year anio,
+	public SnapshotIndicador crearSnapshotIndicador(Long userId,
+			RegistroIndicador indicador, String nombreEmpresa, Year anio,
 			int semestre) {
 
 		String resultado;
-		try {
-			resultado = new DslIndicador().prepararFormula(indicador, nombreEmpresa, anio, semestre).calcular()
-					.toPlainString();
-		} catch (Exception e) {
-			resultado = e.getMessage();
-		}
+		//try {
+			resultado = this.getRepositorioCacheIndicador()
+					.getValorIndicadorPrecalculado(userId,
+							indicador.getNombre(), nombreEmpresa, anio,
+							semestre);
+			
+//			if (resultado == null) {
+//				resultado = new DslIndicador()
+//						.prepararFormula(indicador, nombreEmpresa, anio,
+//								semestre).calcular().toPlainString();
+//				this.getRepositorioCacheIndicador().setValorIndicadorPrecalculado(userId, indicador.getNombre(), nombreEmpresa, anio, semestre, resultado);
+		
+//			}
+//		} catch (Exception e) {
+//			resultado = e.getMessage();
+//		}
 
-		SnapshotIndicador snapshotIndicador = new SnapshotIndicador(indicador, nombreEmpresa, anio.getValue(), semestre,
-				resultado);
+		SnapshotIndicador snapshotIndicador = new SnapshotIndicador(indicador,
+				nombreEmpresa, anio.getValue(), semestre, resultado);
 		return snapshotIndicador;
 	}
 }
