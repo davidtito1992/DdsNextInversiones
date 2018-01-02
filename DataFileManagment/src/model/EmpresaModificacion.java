@@ -1,38 +1,22 @@
 package model;
 
-import java.time.Year;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-import org.uqbar.commons.utils.Observable;
-import org.uqbar.commons.utils.Transactional;
 
-@Entity
-@Table(name = "Empresas")
-@Transactional
-@Observable
-public class Empresa {
+import main.repositories.RepositorioUsuario;
 
+public class EmpresaModificacion {
 	/********* ATRIBUTOS *********/
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
-	private User user;
+	private String userMail;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,17 +30,10 @@ public class Empresa {
 
 	/********* GETTERS/SETTERS *********/
 
-	public Empresa() {
+	public EmpresaModificacion() {
 
 	}
 
-	public Empresa(Long empresaId,String nombre,List<Periodo> periodos, User user) {
-		this.empresaId = empresaId;
-		this.nombre = nombre;
-		this.periodos = periodos;
-		this.user = user;
-	}
-	
 	public Long getEmpresaId() {
 		return empresaId;
 	}
@@ -81,12 +58,18 @@ public class Empresa {
 		this.periodos = periodos;
 	}
 
-	public User getUser() {
-		return user;
+	public String getUser() {
+		return userMail;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(String user) {
+		this.userMail = user;
 	}
+	
+	/********* METODOS *********/
+	
+	public Long getUserId() {
+		return RepositorioUsuario.getSingletonInstance().getUser(this.userMail).getUserId();
 
+	}
 }

@@ -6,10 +6,13 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+import main.builder.EmpresaBuilder;
 import main.dataManagment.dataLoader.DataLoader;
 import main.dataManagment.dataLoader.DataLoaderFactory;
+import main.repositories.RepositorioEmpresa;
 import main.repositories.Repository;
 import model.Empresa;
+import model.EmpresaModificacion;
 
 
 public class DataFileManagement {
@@ -51,7 +54,6 @@ public class DataFileManagement {
 	}
 
 	public void guardarYEnviarAServer(String dEmpresas) throws Exception{
-		Repository<Empresa> repoEmpresa = new Repository<Empresa>(Empresa.class);
 		NextAppExternalService na = new NextAppExternalService();
 		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
 		List<Empresa> empresas = new ArrayList<Empresa>();
@@ -62,10 +64,11 @@ public class DataFileManagement {
 			for (int i = 0; i < archivos.length; i++) {
 				try {
 					cargador.getDataEmpresas(dEmpresas + archivos[i].getName())
-							.forEach(empresa -> {
+							.forEach(empresaMod -> {
+								Empresa empresa = EmpresaBuilder.build(empresaMod);
 								if(!empresas.contains(empresa))
 									empresas.add(empresa);
-				});
+							});
 
 				} catch (Exception e) {
 //					Email.generateAndSendEmail("El archivo " + archivos[i].getName()
@@ -76,7 +79,7 @@ public class DataFileManagement {
 //			Email.generateAndSendEmail("El directorio de archivos a leer es inexistente.");
 		}
 		
-		repoEmpresa.cargarListaDeElementos(empresas);
+		empresas.forEach(empresa -> RepositorioEmpresa.getInstance().guardarOActualizar(empresa));
 		na.enviarUsuariosARecalcular(new Gson().toJson(getUsuariosId(empresas)));
 		
 	}

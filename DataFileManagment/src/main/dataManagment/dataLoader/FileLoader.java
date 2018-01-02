@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import model.Empresa;
+import model.EmpresaModificacion;
 
 public class FileLoader implements DataLoader {
 
@@ -37,7 +37,7 @@ public class FileLoader implements DataLoader {
 		}
 	}
 
-	public ArrayList<Empresa> getDataEmpresas(String rutaArchivo)
+	public ArrayList<EmpresaModificacion> getDataEmpresas(String rutaArchivo)
 			throws Exception {
 		DataAdapter adaptador = DataAdapterFactory
 				.adaptarData(DataAdapterFactory.JSON);

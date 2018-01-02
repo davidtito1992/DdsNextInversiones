@@ -2,10 +2,10 @@ package main.dataManagment.dataLoader;
 
 import java.util.ArrayList;
 
-import model.Empresa;
+import model.EmpresaModificacion;
 
 public interface DataAdapter {
 
-	public ArrayList<Empresa> adaptarEmpresas(String empresas) throws Exception;
+	public ArrayList<EmpresaModificacion> adaptarEmpresas(String empresas) throws Exception;
 
 }
