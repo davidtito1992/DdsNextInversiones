@@ -1,5 +1,6 @@
 package main.dataManagment.dataUploader;
 
+import model.CacheIndicador;
 import model.Empresa;
 import model.Metodologia;
 import model.RegistroIndicador;
@@ -30,6 +31,11 @@ public class AdapterToJson implements AdapterToData {
 	public String getStringListRegistroIndicador(List<SnapshotIndicador> snapshots) {
 		final Gson gson = new Gson();
 		return gson.toJson(snapshots);
+	}
+
+	public String getStringCacheIndicador(CacheIndicador unaKeyCacheIndicador) {
+		Gson gson = new Gson();
+		return gson.toJson(unaKeyCacheIndicador);
 	}
 
 }
