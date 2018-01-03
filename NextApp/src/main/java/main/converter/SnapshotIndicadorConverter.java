@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import main.app.AplicacionContexto;
-import main.app.DslIndicador;
 import main.repositories.RepositorioEmpresa;
 import main.repositories.RepositorioIndicador;
 import main.repositories.RepositorioPrecalculos;
@@ -35,7 +34,8 @@ public class SnapshotIndicadorConverter {
 		List<Empresa> empresas = getRepositorioEmpresas().allInstancesUser(
 				idUser);
 		List<SnapshotIndicador> snapshots = new ArrayList<SnapshotIndicador>();
-		snapshots.addAll(this.resultadosIndicadores(idUser,indicador, empresas));
+		snapshots.addAll(this
+				.resultadosIndicadores(idUser, indicador, empresas));
 		return snapshots.stream().distinct().collect(Collectors.toList());
 	}
 
@@ -76,23 +76,9 @@ public class SnapshotIndicadorConverter {
 			RegistroIndicador indicador, String nombreEmpresa, Year anio,
 			int semestre) {
 
-		String resultado;
-		//try {
-			resultado = this.getRepositorioCacheIndicador()
-					.getValorIndicadorPrecalculado(userId,
-							indicador.getNombre(), nombreEmpresa, anio,
-							semestre);
-			
-//			if (resultado == null) {
-//				resultado = new DslIndicador()
-//						.prepararFormula(indicador, nombreEmpresa, anio,
-//								semestre).calcular().toPlainString();
-//				this.getRepositorioCacheIndicador().setValorIndicadorPrecalculado(userId, indicador.getNombre(), nombreEmpresa, anio, semestre, resultado);
-		
-//			}
-//		} catch (Exception e) {
-//			resultado = e.getMessage();
-//		}
+		String resultado = this.getRepositorioCacheIndicador()
+				.getValorIndicadorPrecalculado(userId, indicador.getNombre(),
+						nombreEmpresa, anio, semestre);
 
 		SnapshotIndicador snapshotIndicador = new SnapshotIndicador(indicador,
 				nombreEmpresa, anio.getValue(), semestre, resultado);

@@ -21,20 +21,19 @@ public class IndicadorService {
 	public static HashMap<String, Object> consultarView(String indicadorId,
 			Long usuarioId) {
 		HashMap<String, Object> mapIndicadores = new HashMap<>();
-		/*String nombreIndicador = RepositorioIndicador.getSingletonInstance()
-				.buscar(Long.parseLong(indicadorId)).getNombre();
-		mapIndicadores
-				.put("snapshots",
-						RepositorioPrecalculos.getSingletonInstance()
-								.getIndicadoresPrecalculados(usuarioId,
-										nombreIndicador));*/
-		
-		RegistroIndicador indicador = RepositorioIndicador.getSingletonInstance()
-				.buscar(Long.parseLong(indicadorId));
-		
-		mapIndicadores
-		.put("snapshots", new SnapshotIndicadorConverter().snapshotsOf(usuarioId,indicador));
-		
+		/*
+		 * String nombreIndicador = RepositorioIndicador.getSingletonInstance()
+		 * .buscar(Long.parseLong(indicadorId)).getNombre(); mapIndicadores
+		 * .put("snapshots", RepositorioPrecalculos.getSingletonInstance()
+		 * .getIndicadoresPrecalculados(usuarioId, nombreIndicador));
+		 */
+
+		RegistroIndicador indicador = RepositorioIndicador
+				.getSingletonInstance().buscar(Long.parseLong(indicadorId));
+
+		mapIndicadores.put("snapshots", new SnapshotIndicadorConverter()
+				.snapshotsOf(usuarioId, indicador));
+
 		return mapIndicadores;
 	}
 
@@ -74,8 +73,8 @@ public class IndicadorService {
 	}
 
 	public static void actualizarPrecalculos(String jsonUsuarios) {
-//		RepositorioPrecalculos.getSingletonInstance().actualizarPrecalculos(
-//			jsonUsuarios);
+		RepositorioPrecalculos.getSingletonInstance().actualizarPrecalculos(
+				jsonUsuarios);
 	}
 
 	public static List<Empresa> adaptarJsonAEmpresas(String jsonEmpresas) {

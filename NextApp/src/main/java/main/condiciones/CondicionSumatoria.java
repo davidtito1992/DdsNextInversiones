@@ -21,7 +21,8 @@ public abstract class CondicionSumatoria extends Condicion {
 	public CondicionSumatoria() {
 	}
 
-	public CondicionSumatoria(MenorOMayor criterio, RegistroIndicador indicador, int ultimosAnios) {
+	public CondicionSumatoria(MenorOMayor criterio,
+			RegistroIndicador indicador, int ultimosAnios) {
 		this.criterio = criterio;
 		this.indicador = indicador;
 		this.ultimosAnios = ultimosAnios;
@@ -36,8 +37,9 @@ public abstract class CondicionSumatoria extends Condicion {
 		BigDecimal acumulador = BigDecimal.ZERO;
 
 		for (int i = 0; i < periodos.size(); i++) {
-			acumulador = acumulador.add(this.aplicarIndicador(indicador, empresa.getNombre(), periodos.get(i).getAnio(),
-					periodos.get(i).getSemestre()));
+			acumulador = acumulador.add(this.aplicarIndicador(empresa.getUser()
+					.getUserId(), indicador, empresa.getNombre(),
+					periodos.get(i).getAnio(), periodos.get(i).getSemestre()));
 		}
 		return acumulador;
 	}

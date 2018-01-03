@@ -33,7 +33,7 @@ public class Metodologia {
 		this.condiciones = condiciones;
 		this.user = user;
 	}
-	
+
 	public Metodologia() {
 	}
 
@@ -44,7 +44,7 @@ public class Metodologia {
 
 	/********* ATRIBUTOS *********/
 
-	@ManyToOne(fetch= FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private User user;
 
@@ -110,10 +110,9 @@ public class Metodologia {
 		}
 		return rEmpresa;
 	}
-	
-	public String getUrl(){
+
+	public String getUrl() {
 		return this.metodologiaId.toString();
 	}
-	
 
 }

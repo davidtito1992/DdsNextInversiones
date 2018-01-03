@@ -21,8 +21,10 @@ public class CondicionCuantitativaAntiguedad extends Condicion {
 
 	private BigDecimal peso;
 
-	public RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException {
-		BigDecimal nuevoValor = new BigDecimal(rEmpresa.dameAntiguedadEmpresa()).multiply(peso);
+	public RankingEmpresa calcular(RankingEmpresa rEmpresa)
+			throws ParseException {
+		BigDecimal nuevoValor = new BigDecimal(rEmpresa.dameAntiguedadEmpresa())
+				.multiply(peso);
 		rEmpresa.acumularValor(nuevoValor);
 		return rEmpresa;
 	}

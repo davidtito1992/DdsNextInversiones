@@ -16,9 +16,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import main.app.AplicacionContexto;
 import main.app.DslIndicador;
 import main.parserIndicador.ParseException;
 import main.rankingEmpresa.RankingEmpresa;
+import main.repositories.RepositorioPrecalculos;
 import model.Empresa;
 import model.Periodo;
 import model.PeriodoComparator;
@@ -36,18 +38,30 @@ public abstract class Condicion {
 
 	protected int ultimosAnios;
 
-	public abstract RankingEmpresa calcular(RankingEmpresa rEmpresa) throws ParseException;
+	public abstract RankingEmpresa calcular(RankingEmpresa rEmpresa)
+			throws ParseException;
 
 	protected List<Periodo> periodosDesdexAnio(Empresa empresa) {
 		Year anioLimite = Year.of(LocalDate.now().getYear() - ultimosAnios);
 
-		return empresa.getPeriodos().stream().filter(periodo -> periodo.getAnio().isAfter(anioLimite))
+		return empresa.getPeriodos().stream()
+				.filter(periodo -> periodo.getAnio().isAfter(anioLimite))
 				.sorted(new PeriodoComparator()).collect(Collectors.toList());
 
 	}
 
-	protected BigDecimal aplicarIndicador(RegistroIndicador indicador, String nombreEmpresa, Year anio, int semestre)
-			throws ParseException {
-		return new DslIndicador().prepararFormula(indicador, nombreEmpresa, anio, semestre).calcular();
+	protected BigDecimal aplicarIndicador(Long userId,
+			RegistroIndicador indicador, String nombreEmpresa, Year anio,
+			int semestre) throws ParseException {
+		// return new DslIndicador().prepararFormula(indicador, nombreEmpresa,
+		// anio, semestre).calcular();
+		return new BigDecimal(this.getRepositorioCacheIndicador()
+				.getValorIndicadorPrecalculado(userId, indicador.getNombre(),
+						nombreEmpresa, anio, semestre));
 	}
+
+	private RepositorioPrecalculos getRepositorioCacheIndicador() {
+		return AplicacionContexto.getInstance().getInstanceRepoPrecalculos();
+	}
+
 }
