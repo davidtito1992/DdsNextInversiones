@@ -41,7 +41,9 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 	/********* METODOS 
 	 * @throws Exception *********/
 	
-	public void guardarOActualizar(Empresa empresa){
+	
+	
+	public void Actualizar(Empresa empresa){
 		if (existeEmpresa(empresa)){
 			actualizarPeriodos(empresa);
 		} else {
@@ -56,10 +58,14 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 			empresa.getPeriodos()
 			.forEach(periodo -> {
 				if(existePeriodo(empresa, periodo)){
-					actualizarCuentas(periodo, empresa.getNombre(), empresa.getUser().getEmail());
+					actualizarCuentas(empresa, periodo, empresa.getNombre(), empresa.getUser().getEmail());
 				}else{
 					EntityManagerHelper.beginTransaction();
-					entityManager.persist(periodo);//no se esta persisitiendo la relacion con la empresa padre, pero si esta guardando las cuentas hijas correctamente
+//					entityManager.persist(periodo);//no se esta persisitiendo la relacion con la empresa padre, pero si esta guardando las cuentas hijas correctamente	
+					Empresa empresaGuardada = this.buscar(empresa.getEmpresaId());
+					List<Periodo> periodosGuardados = empresaGuardada.getPeriodos();
+					periodosGuardados.add(periodo);
+					empresaGuardada.setPeriodos(periodosGuardados);
 					EntityManagerHelper.commit();
 				}
 			});
@@ -73,14 +79,19 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 		return !Objects.isNull(getPeriodo(empresa.getNombre(), empresa.getUser().getEmail(), periodo));
 	}
 	
-	public void actualizarCuentas(Periodo periodo, String nombreEmpresa, String userMail){
+	public void actualizarCuentas(Empresa empresa, Periodo periodo, String nombreEmpresa, String userMail){
 		periodo.getCuentas().forEach(cuenta -> {
 			Cuenta cuentaGuardada = this.getCuenta(nombreEmpresa, userMail, periodo.getAnio(), periodo.getSemestre(), cuenta);
 			if (!Objects.isNull(cuentaGuardada)){
-				cuentaGuardada.setValor(cuenta.getValor());//no se como se commitea en este punto
+				EntityManagerHelper.beginTransaction();
+				cuentaGuardada.setValor(cuenta.getValor());
+				EntityManagerHelper.commit();
 			}else{
 				EntityManagerHelper.beginTransaction();
-				entityManager.persist(cuenta);//se esta persistiendo sin mantere relacion con el periodo padre
+				Periodo periodoGuardado = getPeriodo(nombreEmpresa, userMail, periodo);
+				List<Cuenta> cuentasGuardadas = periodoGuardado.getCuentas();
+				cuentasGuardadas.add(cuenta);
+				periodoGuardado.setCuentas(cuentasGuardadas);
 				EntityManagerHelper.commit();
 			}
 		});
@@ -265,6 +276,25 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 				.setParameter("email", email);
 		return q2.getSingleResult();
 	}
-
+	
+	public Empresa getEmpresaIdUser(Long idEmpresa, String email) {
+		String query = "SELECT e FROM Empresa e INNER JOIN e.user u "
+				+ "WHERE e.nombre = :idEmpresa "
+				+ "AND u.email = :email ";
+		TypedQuery<Empresa> q2 = entityManager.createQuery(query, Empresa.class)
+				.setParameter("idEmpresa", idEmpresa)
+				.setParameter("email", email);
+		return q2.getSingleResult();
+	}
+	
+	public Empresa getEmpresaOtroUser(Long idEmpresa, String email) {
+		String query = "SELECT e FROM Empresa e INNER JOIN e.user u "
+				+ "WHERE e.nombre = :idEmpresa "
+				+ "AND u.email != :email ";
+		TypedQuery<Empresa> q2 = entityManager.createQuery(query, Empresa.class)
+				.setParameter("idEmpresa", idEmpresa)
+				.setParameter("email", email);
+		return q2.getSingleResult();
+	}
 
 }

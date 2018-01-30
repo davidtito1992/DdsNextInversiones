@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
 import com.google.gson.Gson;
 
 import main.builder.EmpresaBuilder;
@@ -18,69 +21,63 @@ import model.EmpresaModificacion;
 public class DataFileManagement {
 	static String CARPETANUEVASEMPRESAS = "/actualizacionesEmpresas/";
 	static String CARPETAEMPRESASLEIDAS = "/empresasYaLeidas/";
-
+	static String DIRECTORIOEMPRESAS = new File(".").getAbsolutePath() + CARPETANUEVASEMPRESAS;
+	static String DIRECTORIOEMPRESASLEIDAS = new File(".").getAbsolutePath() + CARPETAEMPRESASLEIDAS;
+	
 	public static void main(String[] args) throws Exception {
 		System.out.println("Iniciando programa...");
 		DataFileManagement dfm = new DataFileManagement();
-		String AbsolutePath = new File(".").getAbsolutePath();
-		String directorioEmpresas = AbsolutePath + CARPETANUEVASEMPRESAS;
-		String directorioEmpresasLeidas = AbsolutePath + CARPETAEMPRESASLEIDAS;
-//		Email.generateAndSendEmail("aaaa");
-		
+		NextAppExternalService na = new NextAppExternalService();
 		try{
-			dfm.guardarYEnviarAServer(directorioEmpresas);
-			dfm.redireccionarArchivos(directorioEmpresas,directorioEmpresasLeidas);
+			List<Long> usuariosARecalcular = dfm.actualizarEmpresas();
+			if (!usuariosARecalcular.isEmpty())
+				na.enviarUsuariosARecalcular(new Gson().toJson(usuariosARecalcular));
 		}
 		catch (Exception e){
 //			Email.generateAndSendEmail(e.getLocalizedMessage());//esta fallando el envio de mail
 		}
+		System.out.println("Finaliza programa.");
 	}
 	
 
 	
-	public void redireccionarArchivos(String dEmpresas, String dEmpresasLeidas) throws Exception{
-		File f = new File(dEmpresas);
-		if (f.exists()) {
-			File[] archivos = f.listFiles();
-			for (int i = 0; i < archivos.length; i++) {
-				try{
-					archivos[i].renameTo(new File(dEmpresasLeidas + archivos[i].getName()));
-				} catch (Exception e){
-//					Email.generateAndSendEmail("El archivo " + archivos[i].getName()
-//							+ " no pudo ser movido de directorio");
-				}
-			}
+	public void redireccionarArchivo(File archivo) {
+		try {
+			archivo.renameTo(new File(DIRECTORIOEMPRESASLEIDAS
+					+ archivo.getName()));
+		} catch (Exception e) {
+//			Email.generateAndSendEmail("El archivo " + archivo.getName() + " no pudo ser redireccionado, aunque fue leido correctamente.");
 		}
 	}
 
-	public void guardarYEnviarAServer(String dEmpresas) throws Exception{
-		NextAppExternalService na = new NextAppExternalService();
+	public List<Long> actualizarEmpresas() throws Exception{
 		DataLoader cargador = DataLoaderFactory.cargarData(DataLoaderFactory.ARCHIVO);
 		List<Empresa> empresas = new ArrayList<Empresa>();
 		
-		File f = new File(dEmpresas);
+		File f = new File(DIRECTORIOEMPRESAS);
 		if (f.exists()) {
 			File[] archivos = f.listFiles();
 			for (int i = 0; i < archivos.length; i++) {
 				try {
-					cargador.getDataEmpresas(dEmpresas + archivos[i].getName())
+					cargador.getDataEmpresas(DIRECTORIOEMPRESAS + archivos[i].getName())
 							.forEach(empresaMod -> {
-								Empresa empresa = EmpresaBuilder.build(empresaMod);
-								if(!empresas.contains(empresa))
-									empresas.add(empresa);
+								try{
+									empresas.add(EmpresaBuilder.build(empresaMod));
+								} catch (Exception e) {
+									//Email.generateAndSendEmail("No se puede guardar la empresa indicada con id: " + empresaMod.getEmpresaId()+ " y nombre: " + empresaMod.getNombre());
+								}
 							});
-
+					redireccionarArchivo(archivos[i]);
 				} catch (Exception e) {
-//					Email.generateAndSendEmail("El archivo " + archivos[i].getName()
-//							+ " no pudo ser leido correctamente. Es probable que no tenga datos referidos a empresas, o que contenga algun error.");
+//					Email.generateAndSendEmail("El archivo " + archivos[i].getName() + " no pudo ser leido correctamente.");
 				}
 			}
 		} else {
 //			Email.generateAndSendEmail("El directorio de archivos a leer es inexistente.");
 		}
 		
-		empresas.forEach(empresa -> RepositorioEmpresa.getInstance().guardarOActualizar(empresa));
-		na.enviarUsuariosARecalcular(new Gson().toJson(getUsuariosId(empresas)));
+		empresas.forEach(empresa -> RepositorioEmpresa.getInstance().Actualizar(empresa));
+		return getUsuariosId(empresas);
 		
 	}
 	
