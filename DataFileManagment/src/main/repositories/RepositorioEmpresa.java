@@ -4,6 +4,7 @@ import main.db.EntityManagerHelper;
 import model.Cuenta;
 import model.Empresa;
 import model.Periodo;
+import model.User;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -44,7 +45,7 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 	
 	
 	public void Actualizar(Empresa empresa){
-		if (existeEmpresa(empresa)){
+		if (!Objects.isNull(empresa.getEmpresaId())){ //En el constructor de Empresa asigno empresaId en null si la empresa no existe para el usuario
 			actualizarPeriodos(empresa);
 		} else {
 			EntityManagerHelper.beginTransaction();
@@ -116,11 +117,6 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 		catch (NoResultException e){
 			return null;
 		}
-	}
-
-	
-	public boolean existeEmpresa(Empresa empresa){
-		return !(Objects.isNull(getEmpresaUser(empresa.getNombre(), empresa.getUser().getEmail())));
 	}
 	
 	public Periodo getPeriodo(String nombreEmpresa, String userMail, Periodo periodo){
@@ -295,6 +291,16 @@ public class RepositorioEmpresa extends Repository<Empresa> {
 				.setParameter("idEmpresa", idEmpresa)
 				.setParameter("email", email);
 		return q2.getSingleResult();
+	}
+
+	public Long getEmpresaId(String nombre, User user) {
+		String query = "SELECT e FROM Empresa e INNER JOIN e.user u "
+				+ "WHERE e.nombre = :nombre "
+				+ "AND u.email = :email ";
+		TypedQuery<Empresa> q2 = entityManager.createQuery(query, Empresa.class)
+				.setParameter("nombre", nombre)
+				.setParameter("email", user.getEmail());
+		return q2.getSingleResult().getEmpresaId();
 	}
 
 }

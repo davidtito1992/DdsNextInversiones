@@ -19,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import main.repositories.RepositorioEmpresa;
+
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
 
@@ -50,13 +52,18 @@ public class Empresa {
 
 	}
 
-	public Empresa(Long empresaId,String nombre,List<Periodo> periodos, User user) {
-		this.empresaId = empresaId;
+	public Empresa(String nombre, List<Periodo> periodos, User user) {
+		try {
+			this.empresaId = RepositorioEmpresa.getInstance().getEmpresaId(
+					nombre, user);
+		} catch (Exception e) {
+			this.empresaId = null;
+		}
 		this.nombre = nombre;
 		this.periodos = periodos;
 		this.user = user;
 	}
-	
+
 	public Long getEmpresaId() {
 		return empresaId;
 	}

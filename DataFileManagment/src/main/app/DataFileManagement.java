@@ -64,7 +64,7 @@ public class DataFileManagement {
 								try{
 									empresas.add(EmpresaBuilder.build(empresaMod));
 								} catch (Exception e) {
-									//Email.generateAndSendEmail("No se puede guardar la empresa indicada con id: " + empresaMod.getEmpresaId()+ " y nombre: " + empresaMod.getNombre());
+									//Email.generateAndSendEmail("El usuario no existe");
 								}
 							});
 					redireccionarArchivo(archivos[i]);
