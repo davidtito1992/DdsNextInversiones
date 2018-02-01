@@ -1,16 +1,15 @@
 [
   {
     "userMail": "admin@dominio",
-    "empresaId": "1",
-    "nombre": "Facebook",
+    "nombre": "EmpresaInexistente",
     "periodos": [
       {
-        "anio": "2018",
+        "anio": "2016",
         "semestre": "1",
         "cuentas": [
           {
             "nombre": "EBITDA",
-            "valor": "5"
+            "valor": "9"
           }
         ]
       }
