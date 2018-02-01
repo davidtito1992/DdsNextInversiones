@@ -18,28 +18,14 @@ public class EmpresaModificacion {
 
 	private String userMail;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long empresaId;
-
 	private String nombre;
 
-	@JoinColumn
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
 
 	/********* GETTERS/SETTERS *********/
 
 	public EmpresaModificacion() {
 
-	}
-
-	public Long getEmpresaId() {
-		return empresaId;
-	}
-
-	public void setEmpresaId(Long empresaId) {
-		this.empresaId = empresaId;
 	}
 
 	public String getNombre() {
