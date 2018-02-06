@@ -23,14 +23,14 @@ public class SemanticaDeVariablesTest {
 	public void init() {
 	}
 
-	@Test
+	/*@Test
 	public void deberiaObtenerElValorDeUnaVariableCuenta() {
 
 		SemanticaVariable variable1 = new SemanticaVariable("Ebitda",
 				"FaceBook", Year.of(2016), 1);
 
 		assertEquals(new BigDecimal("1").setScale(2), variable1.valor());
-	}
+	}*/
 
 	/*@Test(expected = RuntimeException.class)
 	public void deberiaLanzarRuntimeExceptionNoSeEncontroElValorDeUnaVariableCuenta() {
@@ -41,7 +41,7 @@ public class SemanticaDeVariablesTest {
 		variable1.valor();
 	}*/
 
-	@Test
+	/*@Test
 	public void deberiaObtenerElValorDeUnaVariableIndicador()
 			throws ParseException {
 
@@ -49,6 +49,6 @@ public class SemanticaDeVariablesTest {
 				Year.of(2016), 2);
 
 		assertEquals(new BigDecimal("6").setScale(2), variable2.valor());
-	}
+	}*/
 
 }

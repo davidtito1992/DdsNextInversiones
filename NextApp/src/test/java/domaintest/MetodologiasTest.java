@@ -40,7 +40,7 @@ public class MetodologiasTest {
 
 	@Before
 	public void inicializar() throws Exception {
-		ingresoNeto = new AppData().getRepositorioIndicadores()
+		/*ingresoNeto = new AppData().getRepositorioIndicadores()
 				.getRegistroIndicador("IngresoNeto");
 		i4 = new AppData().getRepositorioIndicadores().getRegistroIndicador(
 				"i4");
@@ -59,10 +59,10 @@ public class MetodologiasTest {
 		rEmpresaGO = new RankingEmpresa(google);
 		rEmpresas.add(rEmpresaFB);
 		rEmpresas.add(rEmpresaGO);
-		rEmpresas.add(rEmpresaTW);
+		rEmpresas.add(rEmpresaTW);*/
 	}
 
-	@Test
+	/*@Test
 	public void metodologiaConCondicionCuantitativaMenorA() {
 		condicionesPrueba.add(new CondicionCuantitativaMayorOMenorA(
 				MenorOMayor.menorA, ingresoNeto, 5, new BigDecimal(10)));
@@ -241,6 +241,6 @@ public class MetodologiasTest {
 		esperado.add("Facebook"); // la unica que se encuentra es Facebook, por
 									// ser la unica con Margen creciente.
 		Assert.assertEquals(esperado, resultado);
-	}
+	}*/
 
 }

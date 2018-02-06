@@ -26,7 +26,7 @@ public class AnalizadorSemanticoTest {
 	
 	@Before
 	public void init() {
-	    variables = new ArrayList<Variable>();
+	    /*variables = new ArrayList<Variable>();
 	    analizador = new AnalizadorSemantico();
 	    i1 = new Variable("I1");
 	    i2 = new Variable("I2");
@@ -36,10 +36,10 @@ public class AnalizadorSemanticoTest {
 	    cuentaNueva1 = new Variable("cuentaNueva1");
 	    cuentaNueva2 = new Variable("cuentaNueva2");
 	    indicadorNuevo1 = new Variable("indicadorNuevo1");
-	    indicadorNuevo2 = new Variable("indicadorNuevo2");
+	    indicadorNuevo2 = new Variable("indicadorNuevo2");*/
 	    
 	}
-	
+	/*
 	@Test
 	public void nombreIndicadorNuevoIgualAIndicadorExistente(){
 		try{
@@ -128,6 +128,6 @@ public class AnalizadorSemanticoTest {
 		}catch(RuntimeException e){
 			assertEquals("El nombre de la variable: " + indicadorNuevo1.getNombre() + " no existe", e.getMessage());
 		}
-	}
+	}*/
 }
 	

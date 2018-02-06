@@ -31,7 +31,7 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 public class PersistenciaTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
-	EntityManagerFactory emf;
+	/*EntityManagerFactory emf;
 	EntityManager em;
 
 	Empresa faceb = new Empresa();
@@ -196,10 +196,10 @@ public class PersistenciaTest extends AbstractPersistenceTest implements WithGlo
 		assertEquals(metodologia2, metodologia2Encontrada);
 	}*/
 
-	@After
+	/*@After
 	public void tearDown() {
 		em.close();
 		emf.close();
-	}
+	}*/
 
 }
