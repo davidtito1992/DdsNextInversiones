@@ -29,7 +29,7 @@ public class CondicionesUnitariasTest {
 
 	@Before
 	public void inicializar() throws Exception {
-		ingresoNeto = new AppData().getRepositorioIndicadores()
+		/*ingresoNeto = new AppData().getRepositorioIndicadores()
 				.getRegistroIndicador("IngresoNeto");
 		facebook = new AppData().getRepositorioEmpresas()
 				.getEmpresa("Facebook");
@@ -37,10 +37,10 @@ public class CondicionesUnitariasTest {
 		google = new AppData().getRepositorioEmpresas().getEmpresa("Google");
 		rEmpresaFB = new RankingEmpresa(facebook);
 		rEmpresaTW = new RankingEmpresa(twitter);
-		rEmpresaGO = new RankingEmpresa(google);
+		rEmpresaGO = new RankingEmpresa(google);*/
 	}
 
-	@Test
+	/*@Test
 	public void cuantitativaMayorATest() throws Exception {
 		RankingEmpresa rEmpResul = new CondicionCuantitativaMayorOMenorA(
 				MenorOMayor.mayorA, ingresoNeto, 2, new BigDecimal(1))
