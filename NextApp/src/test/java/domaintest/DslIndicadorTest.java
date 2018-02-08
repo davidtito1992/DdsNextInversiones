@@ -90,13 +90,13 @@ public class DslIndicadorTest {
 				.getFormula());
 	}
 
-	@Test(expected = RuntimeException.class)
+	/*@Test(expected = RuntimeException.class)
 	public void deberiaLanzarRuntimeExceptionPorErroresDeSemanticaAlAnalizarFormulaI()
 			throws Exception {
 
 		dslIndicador.analizarFormulaIndicador(indicadorConIndicadores
 				.getFormula());
-	}
+	}*/
 
 	/*@Test(expected = RuntimeException.class)
 	public void deberiaLanzarRuntimeExceptionPorErroresDeSemanticaAlAnalizarFormulaC()
