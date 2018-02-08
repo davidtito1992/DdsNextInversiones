@@ -4,18 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-
 import com.google.gson.Gson;
 
 import main.builder.EmpresaBuilder;
 import main.dataManagment.dataLoader.DataLoader;
 import main.dataManagment.dataLoader.DataLoaderFactory;
 import main.repositories.RepositorioEmpresa;
-import main.repositories.Repository;
 import model.Empresa;
-import model.EmpresaModificacion;
 
 
 public class DataFileManagement {
