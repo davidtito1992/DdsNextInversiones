@@ -20,9 +20,9 @@
 	    <property name="hibernate.archive.autodetection" value="class"/>        
 
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/app-db" /> 
-            <property name="hibernate.connection.username" value="root" /> 
-            <property name="hibernate.connection.password" value="dds" /> 
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/db" /> 
+            <property name="hibernate.connection.username" value="gcloud" /> 
+            <property name="hibernate.connection.password" value="root" /> 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 
                             
