@@ -46,12 +46,12 @@ public class DslIndicadorTest {
 				.getNombre());
 	}
 
-	@Test(expected = RuntimeException.class)
+	/*@Test(expected = RuntimeException.class)
 	public void deberiaLanzarRuntimeExceptionPorErrorSemanticoAlAnalizarNombre()
 			throws ParseException {
 
 		dslIndicador.analizarNombreIndicador(indicadorConCuentas.getNombre());
-	}
+	}*/
 
 	/*@Test
 	public void deberiaPrepararUnaFormulaCorrectamente() throws ParseException {
