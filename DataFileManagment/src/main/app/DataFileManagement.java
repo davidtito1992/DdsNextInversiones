@@ -35,6 +35,7 @@ public class DataFileManagement {
 		}
 		catch (Exception e){
 //			Email.generateAndSendEmail(e.getLocalizedMessage());//esta fallando el envio de mail
+			e.printStackTrace();
 		}
 		System.out.println("Finaliza programa.");
 	}
