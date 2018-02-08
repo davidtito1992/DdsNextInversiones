@@ -1,10 +1,12 @@
 package controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 import main.app.Token;
 import main.repositories.RepositorioUsuario;
 import model.User;
+import service.EmpresaService;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -17,8 +19,13 @@ public class LoginController {
 		if (!Token.estaLogueado(req)) {
 			return new ModelAndView(null, "login/login.hbs");
 		} else {
-			res.redirect("/empresas");
-			return new ModelAndView(null, "login/login.hbs");
+			Token.autenticar(req, res);
+			Map<String, Object> mapEmpresas = EmpresaService.homeView(
+					req.queryParams("nombreCuenta"),
+					req.queryParams("nombreEmpresa"), req.queryParams("anio"),
+					req.queryParams("semestre"), Token.autenticar(req, res));
+
+			return new ModelAndView(mapEmpresas, "homePage/empresas.hbs");
 		}
 	}
 
