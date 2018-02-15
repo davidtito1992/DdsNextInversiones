@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class NextAppExternalService {
 
-	private final static String url = "http://localhost:8080/indicadores/nuevosPrecalculos";
+	private final static String url = "http://35.199.85.47/indicadores/nuevosPrecalculos";
 	private RestTemplate restTemplate = new RestTemplate();
 
 	public void enviarUsuariosARecalcular(String idsUsuarios) throws Exception {
