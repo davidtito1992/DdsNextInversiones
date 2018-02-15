@@ -14,8 +14,8 @@ import model.Empresa;
 
 
 public class DataFileManagement {
-	static String CARPETANUEVASEMPRESAS = "/actualizacionesEmpresas/";
-	static String CARPETAEMPRESASLEIDAS = "/empresasYaLeidas/";
+	static String CARPETANUEVASEMPRESAS = "/home/2017-vn-group-20/DataFileManagment/actualizacionesEmpresas/";
+	static String CARPETAEMPRESASLEIDAS = "/home/2017-vn-group-20/DataFileManagment/empresasYaLeidas/";
 	static String DIRECTORIOEMPRESAS = new File(".").getAbsolutePath() + CARPETANUEVASEMPRESAS;
 	static String DIRECTORIOEMPRESASLEIDAS = new File(".").getAbsolutePath() + CARPETAEMPRESASLEIDAS;
 	
