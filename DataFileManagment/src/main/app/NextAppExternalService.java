@@ -19,7 +19,7 @@ public class NextAppExternalService {
 		// httpEnitity
 		HttpEntity<Object> requestEntity = new HttpEntity<Object>(idsUsuarios,
 				headers);
-		System.out.println(requestEntity.getBody().toString());
+		System.out.println("Usuarios a actualizar" + requestEntity.getBody().toString());
 		restTemplate.postForEntity(url, requestEntity, String.class);
 		} catch (Exception e){
 			throw new Exception("La aplicacion Server no pudo ser precalculada exitosamente.");
