@@ -1,0 +1,36 @@
+{{#partial "contenido"}}
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="table-active">#</th>
+                    <th class="table-active">Nombre Metodología</th>
+                    <th class="table-active"></th>
+                    <th class="table-active"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#if listaVacia}}
+			    	<td colspan="4">
+			    		Oops! Parece que no tienes metodologías creadas, haga click en Agregar nueva para crear una.
+			    	</td>
+	           	{{/if}}
+                {{#each metodologias}}
+                <tr>
+                    <td>{{@index}}</td>
+                    <td>{{this.nombre}}</td>
+                    <td> <a class="btn btn-secondary btn-sm btn-block" href="/metodologias/consultas/{{url}}">Consultar</a></td>
+                    <td>
+                    	<form action="/metodologias/baja/{{url}}" method="POST">
+                    		<button class="btn btn-danger" type="submit">Borrar</button>
+                    	</form>
+                    </td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{{/partial}}
+{{>layoutMetodologias.hbs}}

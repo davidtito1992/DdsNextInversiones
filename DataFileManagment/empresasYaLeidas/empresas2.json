@@ -1,0 +1,18 @@
+[
+  {
+    "userMail": "admin@dominio",
+    "nombre": "Facebook",
+    "periodos": [
+      {
+        "anio": "2016",
+        "semestre": "1",
+        "cuentas": [
+          {
+            "nombre": "FDS",
+            "valor": "7"
+          }
+        ]
+      }
+    ]
+  }
+]

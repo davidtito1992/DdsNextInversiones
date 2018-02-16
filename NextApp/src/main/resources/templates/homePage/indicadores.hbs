@@ -1,0 +1,44 @@
+{{#partial "contenido"}}
+
+    <div class="row">
+        <div class="col-md-12" style="">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="table-active">#</th>
+                    <th class="table-active">Indicador</th>
+                    <th class="table-active">Fórmula</th>
+                    <th class="table-active"></th>
+                    <th class="table-active"></th>
+                </tr>
+                </thead>
+                <tbody>
+	            {{#if listaVacia}}
+			    	<td colspan="4">
+			    		Oops! Parece que no tiene indicadores cargados, haga click en Agregar nuevo para crear uno.
+			    	</td>
+	            {{/if}}
+                {{#each indicadores}}
+                <tr>
+                    <td>{{@index}}</td>
+                    <td>{{this.nombre}}</td>
+                    <td>{{this.formula}}</td>
+                    <td> <a class="btn btn-secondary btn-sm btn-block" href="/indicadores/consultas/{{url}}">Consultar</a></td>
+                    {{#if puedeSerBorrado}}
+                    	<td>
+                    		<form action="/indicadores/baja/{{url}}" method="POST">
+                    			<button class="btn btn-danger" type="submit">Borrar</button>
+                    		</form>
+                    	</td>
+  					{{else}}
+  						<td>No puede ser borrado</td>
+  					{{/if}}
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{{/partial}}
+{{>layoutIndicadores.hbs}}

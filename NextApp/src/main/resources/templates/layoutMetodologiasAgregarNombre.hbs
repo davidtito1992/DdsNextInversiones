@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/metodologiasAgregarTheme.css" type="text/css"> </head>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-secondary">
+    <div class="container">
+        <a class="navbar-brand" href="#">Next</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/empresas">Cuentas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/indicadores">Indicadores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/metodologias">Metodologías</a>
+                </li>
+                <a class="btn navbar-btn ml-2 text-white btn-secondary" href="/cerrarSesion"><i class="fa d-inline fa-lg fa-sign-out"></i> Cerrar sesión</a>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Agregar Metodología</h3>
+        	</div>
+        </div>
+        
+        <form action="/metodologias/nuevaMetodologia" method=POST>
+	        <div class="form-group row">
+		        <label class="col-sm-2 col-form-label">Nombre de Metodologia</label>
+		        <div class="col-sm-5">
+		            <input type="text" name="nombreMetodologiaSeleccionado" class="form-control" placeHolder="Ingrese nombre de Metodologia Valido" required>
+		     	</div>
+			</div>
+			
+			<div class="row">
+			    <div class="btn-group col-md-3" role="group">
+					<input type="submit" name="agregarView" class="btn btn-block btn-sm text-center my-3 btn-success" value="Guardar Nombre">
+			    </div>
+                <div class="btn-group col-md-3" role="group">
+                    <a class="btn btn-danger btn-sm text-center my-3" href="/metodologias">Atrás</a>
+			   	</div>
+			</div>
+		</form>
+        
+	</div>
+ </div>
+</body>
+</html>

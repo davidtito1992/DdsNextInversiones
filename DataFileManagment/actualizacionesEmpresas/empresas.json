@@ -1,0 +1,18 @@
+[
+  {
+    "userMail": "admin@dominio",
+    "nombre": "EmpresaInexistente",
+    "periodos": [
+      {
+        "anio": "2016",
+        "semestre": "1",
+        "cuentas": [
+          {
+            "nombre": "EBITDA",
+            "valor": "9"
+          }
+        ]
+      }
+    ]
+  }
+]

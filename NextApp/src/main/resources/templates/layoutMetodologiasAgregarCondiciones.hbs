@@ -1,0 +1,185 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/metodologiasAgregarTheme.css" type="text/css"> </head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-secondary">
+    <div class="container">
+        <a class="navbar-brand" href="#">Next</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/empresas">Cuentas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/indicadores">Indicadores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/metodologias">Metodologías</a>
+                </li>
+                <a class="btn navbar-btn ml-2 text-white btn-secondary" href="/cerrarSesion"><i class="fa d-inline fa-lg fa-sign-out"></i> Cerrar sesión</a>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Agregar Metodología</h3>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12 text-danger">
+                <h4>{{Notificacion}} {{errorAgregarCondicion}}</h4>
+            </div>
+        </div>
+        
+        <div class="col-sm-12">
+            <form action="/metodologias/nuevaCondicion">
+                      	
+             <div class="row">
+    <div class="col-md-2">
+        <p class="lead">Metodologia:&nbsp;</p>
+    </div>
+    <div class="col-md-3" style="">
+    	
+            <input type="text"  name="nombreMetodologia" value= "{{nombreMetodologia}}"  class="form-control" placeholder="Ingrese un nombre" required >
+   
+    </br> </br>     
+    </div>     
+    </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Indicadores</label>
+                    <div class="col-sm-5">
+                        <select name="indicadorSeleccionado" class="form-control" id="inlineFormCustomSelect">
+                            <option selected></option>
+                            {{#each indicadores}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Tipo de Condicion</label>
+                    <div class="col-sm-5">
+                        <select name="tipoCondicionSeleccionado" class="form-control" id="inlineFormCustomSelect">
+                            <option selected></option>
+                            {{#each tipoCondiciones}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Condicion</label>
+                    <div class="col-sm-5">
+                        <select name="condicionSeleccionada" class="form-control" id="inlineFormCustomSelect">
+                            <option selected></option>
+                            {{#each condiciones}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+               
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Peso/Comparar</label>
+                    <div class="col-sm-5">
+                        <input type="number" name="pesoOCompararSeleccionado" class="form-control" placeholder="Ingrese un valor numerico" required>
+                    
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Ultimos años</label>
+                    <div class="col-sm-5">
+                        <input type="number" name="ultimosAniosSeleccionado" class="form-control" placeholder="Ingrese un valor numerico" required>
+                    </div>
+                </div>
+                <div class="row">
+                	<input type="hidden" name="JSONCondiciones" value="{{JSONCondiciones}}">
+                </div>
+                <div class="row">
+                    <div class="btn-group col-md-3" role="group">
+                        <input type="submit" name="agregarView" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar Condición">
+                    </div>
+                </div>
+            </form>
+            <form action="/metodologias/condicionesReset/nombreMetodologia" method=POST>
+                <div class="btn-group col-md-3" role="group">
+                    <input type="submit" name="reiniciar" class="btn btn-block btn-sm text-center my-3 btn-danger" value="Reiniciar Condiciones">
+                </div>
+                 <div class="btn-group col-md-3" role="group">
+                    <a class="btn btn-block btn-sm text-center my-3 btn-secondary" href="/metodologias">Atrás</a>
+                </div>
+            </form>
+              
+    <script type="text/javascript">
+
+    function actualizar() {
+    
+      document.getElementsByName("nombreMetodologia")[0].setAttribute("value",document.getElementsByName("nombreMetodologia")[0].value);
+    
+      }
+  </script>
+            
+        </div>  
+        
+        <div class="col-sm-10">
+            <div class="row">
+                <div class="col-md-12" style="">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="table-active">#</th>
+                            <th class="table-active">Indicador</th>
+                            <th class="table-active">Tipo de Condicion</th>
+                            <th class="table-active">Condicion</th>
+                            <th class="table-active">Peso/Comparar</th>
+                            <th class="table-active">Ultimos Años</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#if condicionesCreadasEmpty}}
+                        <td colspan="6">
+                            Parece que no tienes ninguna condición cargada, llene el formulario y haga click en Agregar Condición para crear una. 
+                        </td>
+                        {{/if}}
+                        {{#each condicionesCreadas}}
+                            <tr>
+                                <td>{{@index}}</td>
+                                <td>{{this.indicador}}</td>
+                                <td>{{this.tipoCondicion}}</td>
+                                <td>{{this.nombreCondicion}}</td>
+                                <td>{{this.pesoOComparar}}</td>
+                                <td>{{this.anios}}</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <form action="/metodologias/nuevaCondicion/{{nombreMetodologia}}" method=POST>
+            <div class="row">
+                <div class="btn-group col-md-12" role="group">
+                    <input type="submit" name="agregarMetodologia" class="btn btn-block btn-sm text-center my-3 btn-success" value="Agregar Metodologia" onclick="actualizar()">
+                </div>
+            </div>
+        </form>
+ 
+    </div>
+</div>
+
+</body>
+</html>
